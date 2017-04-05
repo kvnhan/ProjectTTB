@@ -75,6 +75,6 @@ public class AccountsUtil {
 
     public void logOut(javafx.event.ActionEvent event){
         user_id = "";
-        screenUtil.pullUpScreen("Login.fxml", event);
+        screenUtil.pullUpScreen("Login.fxml", "Login", event);
     }
 }

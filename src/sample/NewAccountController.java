@@ -51,7 +51,7 @@ public class NewAccountController {
 
            /* if(!accountsUtil.contains(newUsername) && newUsername.length() >= 5){
                 accountsUtil.put(newUsername, new Account(newUsername,0));
-                screenUtil.pullUpScreen("Login.fxml", event);
+                screenUtil.pullUpScreen("Login.fxml", "Login", event);
             }else if(newUsername.length() < 5){
                 errorBox.setText("User name must be at least five character long");
             }else if(accountsUtil.contains(newUsername)){
