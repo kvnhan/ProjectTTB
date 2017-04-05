@@ -24,6 +24,8 @@ import java.util.Random;
  */
 public class NewLabelController {
 
+  //  ApplicationUtil appUtil = new ApplicationUtil();
+
     private FXMLLoader fxmlLoader;
     @FXML private TextField ID;
     @FXML private TextField RepID;
