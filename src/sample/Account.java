@@ -53,5 +53,4 @@ public class Account implements Serializable{
     public String getNextForm(){
         return inbox.get(0);
     }
-
 }
