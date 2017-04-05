@@ -52,7 +52,7 @@ public class LoginController {
              /*if(aUtil.contains(username)){*/
             if(databaseContainsUser(conn)){
                 aUtil.setUser_id(username);
-                screenUtil.pullUpScreen("MainMenu.fxml", event);
+                screenUtil.pullUpScreen("MainMenu.fxml", "Main Menu", event);
             }else{
                 errorBox.setText("Username does not exist!");
             }
@@ -64,12 +64,12 @@ public class LoginController {
 
     public void guestLogin(ActionEvent event){
            aUtil.setUser_id("guest");
-           screenUtil.pullUpScreen("MainMenu.fxml", event);
+           screenUtil.pullUpScreen("MainMenu.fxml", "Main Menu", event);
     }
 
     public void openCreateAccount(ActionEvent event){
 
-        screenUtil.pullUpScreen("NewAccount.fxml", event);
+        screenUtil.pullUpScreen("NewAccount.fxml", "New Account", event);
 
     }
 

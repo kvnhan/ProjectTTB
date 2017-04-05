@@ -63,7 +63,7 @@ public class NewAccountController {
            try {
                if (!databaseContainsUser(conn)) {
                    addToDatabase();
-                   screenUtil.pullUpScreen("Login.fxml", event);
+                   screenUtil.pullUpScreen("Login.fxml", "Login", event);
                }
            }catch(Exception e){
                e.printStackTrace();
