@@ -4,7 +4,7 @@ package sample;
  * Created by Kien Nhan on 4/3/2017.
  */
 public class SubmissionForm {
-    private String formID;
+    private int formID;
     private enum status{
         INCOMPLETE,
         SUBMITED,
@@ -14,16 +14,16 @@ public class SubmissionForm {
     }
     acceptanceInformation acceptanceInfo;
 
-    public SubmissionForm(String formID, acceptanceInformation acceptanceInfo) {
+    public SubmissionForm(int formID, acceptanceInformation acceptanceInfo) {
         this.formID = formID;
         this.acceptanceInfo = acceptanceInfo;
     }
 
-    public String getFormID() {
+    public int getFormID() {
         return formID;
     }
 
-    public void setFormID(String formID) {
+    public void setFormID(int formID) {
         this.formID = formID;
     }
 

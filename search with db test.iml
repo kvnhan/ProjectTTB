@@ -17,5 +17,15 @@
         <jarDirectory url="file://C:/Program Files/Java/jdk1.8.0_60/db/lib" recursive="false" />
       </library>
     </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="file://C:/Program Files/Java/jdk1.8.0_121/db/lib" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+        <jarDirectory url="file://C:/Program Files/Java/jdk1.8.0_121/db/lib" recursive="false" />
+      </library>
+    </orderEntry>
   </component>
 </module>

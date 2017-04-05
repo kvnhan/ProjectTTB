@@ -12,7 +12,7 @@ public class WineApplicationData extends ApplicationData{
     private int vintage_date;
     private double ph_level;
 
-    public WineApplicationData(String formID, acceptanceInformation acceptanceInfo, String id, String permit_no,
+    public WineApplicationData(int formID, acceptanceInformation acceptanceInfo, int id, int permit_no,
                                String brand_name, String source_of_product, String type_of_product, String address, String phone_number,
                                String email, Date date, String applicantName, String alcoholType, String alcoholContent,
                                int vintage_date, double ph_level) {

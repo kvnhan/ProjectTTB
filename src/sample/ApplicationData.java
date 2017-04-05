@@ -6,8 +6,8 @@ import java.util.Date;
  */
 public abstract class ApplicationData extends SubmissionForm{
 
-    private String id;
-    private String permit_no;
+    private int id;
+    private int permit_no;
     private String source_of_product;
     private String type_of_product;
     private String brand_name;
@@ -18,7 +18,19 @@ public abstract class ApplicationData extends SubmissionForm{
     private String alcoholType;
     private String alcoholContent;
 
-    public ApplicationData(String formID, acceptanceInformation acceptanceInfo, String id, String permit_no, String source_of_product, String type_of_product, String brand_name, String address, String phone_number,
+    public String getSource_of_product() {
+        return source_of_product;
+    }
+
+    public String getType_of_product() {
+        return type_of_product;
+    }
+
+    public String getAlcoholType() {
+        return alcoholType;
+    }
+
+    public ApplicationData(int formID, acceptanceInformation acceptanceInfo, int id, int permit_no, String source_of_product, String type_of_product, String brand_name, String address, String phone_number,
                            String email, Date date, String applicantName, String alcoholType, String alcoholContent) {
         super(formID, acceptanceInfo);
         this.id = id;
@@ -34,12 +46,12 @@ public abstract class ApplicationData extends SubmissionForm{
         this.alcoholContent = alcoholContent;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
 
-    public String getPermit_no() {
+    public int getPermit_no() {
         return permit_no;
     }
 
@@ -91,6 +103,7 @@ public abstract class ApplicationData extends SubmissionForm{
     public void setAlcoholContent(String alcoholContent) {
         this.alcoholContent = alcoholContent;
     }
+
 
 
 
