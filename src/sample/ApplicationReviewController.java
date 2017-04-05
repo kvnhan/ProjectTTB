@@ -105,7 +105,7 @@ public class ApplicationReviewController {
         while(unassAlc.next()){
             int i = 1;
             while(i <= columnCount){
-                unassforms.add(unassAlc.getString("id"));//TODO: replace with actual column name
+                unassforms.add(unassAlc.getString("id"));
             }
         }
         return unassforms;

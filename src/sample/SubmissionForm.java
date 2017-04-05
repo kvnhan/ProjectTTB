@@ -9,7 +9,9 @@ public class SubmissionForm {
         INCOMPLETE,
         SUBMITED,
         ACCEPTED,
-        REJECTED
+        REJECTED,
+        UNASSIGNED,
+        ASSIGNED,
 
     }
     acceptanceInformation acceptanceInfo;
