@@ -18,6 +18,6 @@ public class WorkFlowController {
         }
     }
     public void firstButton(ActionEvent event){
-        // work.pullUpScreen("ApplicationReview.fxml", "Application Review", event);
+        work.pullUpScreen("ApplicationReview.fxml", "Application Review", event);
     }
 }
