@@ -18,17 +18,7 @@ public abstract class ApplicationData extends SubmissionForm{
     private String alcoholType;
     private String alcoholContent;
 
-    public String getSource_of_product() {
-        return source_of_product;
-    }
 
-    public String getType_of_product() {
-        return type_of_product;
-    }
-
-    public String getAlcoholType() {
-        return alcoholType;
-    }
 
     public ApplicationData(int formID, acceptanceInformation acceptanceInfo, int id, int permit_no, String source_of_product, String type_of_product, String brand_name, String address, String phone_number,
                            String email, Date date, String applicantName, String alcoholType, String alcoholContent) {
@@ -46,6 +36,17 @@ public abstract class ApplicationData extends SubmissionForm{
         this.alcoholContent = alcoholContent;
     }
 
+    public String getSource_of_product() {
+        return source_of_product;
+    }
+
+    public String getType_of_product() {
+        return type_of_product;
+    }
+
+    public String getAlcoholType() {
+        return alcoholType;
+    }
     public int getId() {
         return id;
     }
@@ -103,6 +104,7 @@ public abstract class ApplicationData extends SubmissionForm{
     public void setAlcoholContent(String alcoholContent) {
         this.alcoholContent = alcoholContent;
     }
+
 
 
 

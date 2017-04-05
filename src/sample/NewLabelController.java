@@ -144,10 +144,6 @@ public class NewLabelController {
             type_of_product = "DISTILLED SPIRITS";
             alcoholType = "DISTILLED SPIRITS";
         }
-        if(!(dom.isSelected()) && !(imp.isSelected())){
-            type_of_product = "";
-            alcoholType = "";
-        }
 
         brand_name = BrandName.getText();
         phone_number = PhoneNumber.getText();
@@ -226,34 +222,25 @@ public class NewLabelController {
         String brand_name = d.getBrand_name();
         String phone_number = d.getPhone_number();
         String email = d.getEmail();
-        String address = null;
-        Date date = d.getDate();
+        String address = "";
+        Date date = null;
         String applicantName = d.getApplicantName();
         String alcoholType = d.getAlcoholType();
         String alcoholContent = d.getAlcoholContent();
-        int vintage = 0;
+        Date vintage = null;
         double pHLevel = 0;
         int formID = d.getFormID();
         int COMPLETE = 1;
-
+        System.out.println("Type: " + d.getAlcoholType());
         Statement sm = cn.createStatement();
-        if(d.getType_of_product().equals("WINE")){
-            sm.executeUpdate("INSERT INTO FORM (FID, DATECOMPLETED, AID, STATUS, ALCID, TTBID, PERMITNO, BRANDNAME, ADDRESS, " +
-                    "PHONENUMBER, EMAIL, PHLEVEL, " +
-                    "VINTAGEDATE, NAME_OF_APPLICANT) VALUE ('"+formID+"','"+date+"','"+id+"','"+COMPLETE+"','"+id+"','"+id+"','"+permit_no+"'" +
-                    ",'"+brand_name+"','"+address+"','"+phone_number+"','"+email+"','"+pHLevel+"','"+vintage+"','"+applicantName+"')");
+        if(d.getAlcoholType().equals("WINE")){
+            sm.executeUpdate("INSERT INTO FORM (FID, AID, STATUS, ALCID, TTBID, PERMITNO, BRANDNAME, ADDRESS,PHONENUMBER, EMAIL, PHLEVEL, NAME_OF_APPLICANT) VALUES ("+formID+","+id+","+COMPLETE+","+id+","+id+","+permit_no+",'"+brand_name+"','"+address+"','"+phone_number+"','"+email+"',"+pHLevel+",'"+applicantName+"')");
+
         }else{
-            sm.executeUpdate("INSERT INTO FORM (FID, DATECOMPLETED, AID, STATUS, ALCID, TTBID, PERMITNO, BRANDNAME, ADDRESS, " +
-                    "PHONENUMBER, EMAIL, PHLEVEL, " +
-                    "VINTAGEDATE, NAME_OF_APPLICANT) VALUE ('"+formID+"','"+date+"','"+id+"','"+COMPLETE+"','"+id+"','"+id+"','"+permit_no+"'" +
-                    ",'"+brand_name+"','"+address+"','"+phone_number+"','"+email+"','"+applicantName+"')");
-
-
-
-
-
+            sm.executeUpdate("INSERT INTO FORM (FID, AID, STATUS, ALCID, TTBID, PERMITNO, BRANDNAME, ADDRESS, PHONENUMBER, EMAIL, NAME_OF_APPLICANT) VALUES ("+formID+","+id+","+COMPLETE+","+id+""+id+","+permit_no+",'"+brand_name+"','"+address+"','"+phone_number+"','"+email+"','"+applicantName+"')");
 
         }
+
     }
 
 
