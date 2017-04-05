@@ -27,7 +27,6 @@ public class ScreenUtil {
             stage.setScene(new Scene(root1));
             stage.show();
             Stage oldStage = (Stage)((javafx.scene.Node)event.getSource()).getScene().getWindow();
-            System.out.println(event.getSource().getClass());
             oldStage.close();
         }
         catch(Exception e){

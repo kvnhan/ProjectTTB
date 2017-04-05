@@ -26,6 +26,7 @@ public class NewAccountController {
 
     private String newUsername;
     private String accountChoice;
+    private int accountType = 0;
 
     private AccountsUtil accountsUtil = new AccountsUtil();
     private ScreenUtil screenUtil = new ScreenUtil();
@@ -50,6 +51,14 @@ public class NewAccountController {
             newUsername = newUsernameField.getText();
             accountChoice = accountChoiceBox.getValue().toString();
 
+            if (accountChoice.equals("Government Agent")){
+                accountType = 1;
+            }else if(accountChoice.equals("Manufacturer")){
+                accountType = 2;
+            }else if(accountChoice.equals("Public User")){
+                accountType = 3;
+            }
+
            /* if(!accountsUtil.contains(newUsername) && newUsername.length() >= 5){
                 accountsUtil.put(newUsername, new Account(newUsername,0));
                 screenUtil.pullUpScreen("Login.fxml", "Login", event);
@@ -61,7 +70,7 @@ public class NewAccountController {
                 errorBox.setText("Unknown error!");
             }*/
 
-           if(!databaseContainsUser(conn) && newUsername.length() >= 5){
+            if(!databaseContainsUser(conn) && newUsername.length() >= 5){
                 addToDatabase();
                 screenUtil.pullUpScreen("Login.fxml", "Login", event);
             }else if(newUsername.length() < 5){
@@ -94,7 +103,7 @@ public class NewAccountController {
             ID = 1;
         }
 
-        uRows = stmt.executeUpdate("INSERT INTO ACCOUNT (AID, USERNAME) VALUES ("+ ID  + ", '" + newUsername + "' )");
+        uRows = stmt.executeUpdate("INSERT INTO ACCOUNT (AID, USERNAME, USER_TYPE) VALUES ("+ ID  + ", '" + newUsername + "', " + accountType + ")");
 
         System.out.println(uRows + " Row(s) Updated");
 
