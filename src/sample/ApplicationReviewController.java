@@ -50,6 +50,7 @@ public class ApplicationReviewController {
             email.setText("Sample@test");
             dateApp.setText("00/00/TEST");
             nameApp.setText("TEST");*/
+    Connection conn = connect();
 
     @FXML
     void setGoBack(ActionEvent event){
@@ -58,8 +59,9 @@ public class ApplicationReviewController {
     }
 
     @FXML
+
+    //TODO: Fix setApprove - needs correct query fields for sql
     void setApprove() throws SQLException{
-        Connection conn = connect();
         Statement stm;
         stm = conn.createStatement();
         //get comments
@@ -67,23 +69,24 @@ public class ApplicationReviewController {
         //update alcohol status
         String sql = "UPDATE ALCOHOL SET status = 'approved', comments = 'comments'  WHERE id = apptoassgn";
         stm.executeUpdate(sql);
-        //update inbox for worker
-        sql = "UPDATE REVIEWS SET inbox.remove(apptoassgn) WHERE id = w.id";
+        //update inbox for account
+        sql = "UPDATE REVIEWS SET w.inbox.remove(apptoassgn) WHERE username = w.username";
         stm.executeUpdate(sql);
     }
 
     @FXML
+
+    //TODO: fix setReject - needs correct query fields for sql
     void setReject() throws SQLException{
-        Connection conn = connect();
         Statement stm;
         stm = conn.createStatement();
         //get comments
         String comments = commentsField.getText();
         //update alcohol status
-        String sql = "UPDATE ALCOHOL SET status = 'rejected', comments = 'comments' WHERE id = 'apptoassgn'";
+        String sql = "UPDATE ALCOHOL SET status = 'rejected', comments = comments WHERE id = apptoassgn";
         stm.executeUpdate(sql);
         //update inbox for worker
-        sql = "UPDATE REVIEWS SET inbox.remove(apptoassgn) WHERE id = w.id";
+        sql = "UPDATE REVIEWS SET w.inbox.remove(apptoassgn) WHERE username = w.username";
         stm.executeUpdate(sql);
     }
 
@@ -111,7 +114,6 @@ public class ApplicationReviewController {
     //goes through a list of unassigned applications
     //finds worker with the least amount of applications
     Account getSmallWorker() throws ClassNotFoundException, SQLException{//TODO: find out fields + name for govt. worker
-        Connection conn = connect();
         Statement stm;
         stm = conn.createStatement();
         String sql = "SELECT AID.MIN(CNT(FID)) FROM REVIEWS";
@@ -134,7 +136,6 @@ public class ApplicationReviewController {
     //alters the status of the application to assigned
     //pushes the changes to the worker and the application
     void addToInbox(Account w, String apptoassgn) throws ClassNotFoundException, SQLException{
-        Connection conn = connect();
         Statement stm;
         stm = conn.createStatement();
         //update alcohol status
