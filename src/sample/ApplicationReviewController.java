@@ -41,23 +41,20 @@ public class ApplicationReviewController {
     @FXML
     TextArea commentsField;
     //for when switching to this scene from inbox
-    /*@FXML
-    void setViewedApplication(){
-        repID.setText("Sample ID");
-        registryNo.setText("0000");
-        prodSource.setText("TEST");
-        prodType.setText("TEST");
-        address.setText("00 Test Address");
-        phoneNo.setText("Test");
-        email.setText("Sample@test");
-        dateApp.setText("00/00/TEST");
-        nameApp.setText("TEST");
-    }*/
+    /*      repID.setText(application.ID);
+            registryNo.setText("0000");
+            prodSource.setText("TEST");
+            prodType.setText("TEST");
+            address.setText("00 Test Address");
+            phoneNo.setText("Test");
+            email.setText("Sample@test");
+            dateApp.setText("00/00/TEST");
+            nameApp.setText("TEST");*/
 
     @FXML
     void setGoBack(ActionEvent event){
         ScreenUtil work = new ScreenUtil();
-        work.pullUpScreen("MainMenu.fxml", "Main Menu", event);
+        work.pullUpScreen("WorkFlow.fxml", "Main Menu", event);
     }
 
     @FXML
@@ -68,7 +65,7 @@ public class ApplicationReviewController {
         //get comments
         String comments = commentsField.getText();
         //update alcohol status
-        String sql = "UPDATE ALCOHOL SET status = 'approved', comments = 'comments'  WHERE id = 'apptoassgn'";
+        String sql = "UPDATE ALCOHOL SET status = 'approved', comments = 'comments'  WHERE id = apptoassgn";
         stm.executeUpdate(sql);
         //update inbox for worker
         sql = "UPDATE REVIEWS SET inbox.remove(apptoassgn) WHERE id = w.id";
