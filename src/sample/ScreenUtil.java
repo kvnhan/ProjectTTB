@@ -14,17 +14,16 @@ import javafx.stage.Stage;
 public class ScreenUtil {
     FXMLLoader fxmlLoader;
 
-    public void pullUpScreen(String fxmlName, ActionEvent event){
+    public void pullUpScreen(String fxmlName,String title, ActionEvent event){
         fxmlLoader = new FXMLLoader(getClass().getResource(fxmlName));
 
         try{
             Parent root1 = fxmlLoader.load();
             Stage stage = new Stage();
             stage.initModality(Modality.WINDOW_MODAL);
-            stage.setTitle(fxmlName);
+            stage.setTitle(title);
             stage.setResizable(false);
-            Scene scene = new Scene(root1);
-            stage.setScene(scene);
+            stage.setScene(new Scene(root1));
             stage.show();
             ((Node)(event.getSource())).getScene().getWindow().hide();
         }

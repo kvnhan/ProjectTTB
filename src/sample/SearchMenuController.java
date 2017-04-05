@@ -99,7 +99,7 @@ public class SearchMenuController {
         }
         else if (Tags.getText() == null || Tags.getText().trim().isEmpty()) {
             System.out.println("ERROR");
-            screenUtil.pullUpScreen("ErrorState.fxml", event);
+            screenUtil.pullUpScreen("ErrorState.fxml","Error", event);
             System.out.println("ERROR");
         }
 
