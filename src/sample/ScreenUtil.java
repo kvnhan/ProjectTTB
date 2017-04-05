@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -25,7 +26,9 @@ public class ScreenUtil {
             stage.setResizable(false);
             stage.setScene(new Scene(root1));
             stage.show();
-            ((Node)(event.getSource())).getScene().getWindow().hide();
+            Stage oldStage = (Stage)((javafx.scene.Node)event.getSource()).getScene().getWindow();
+            System.out.println(event.getSource().getClass());
+            oldStage.close();
         }
         catch(Exception e){
             e.printStackTrace();

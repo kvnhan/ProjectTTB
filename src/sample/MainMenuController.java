@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
+import javafx.scene.text.Text;
 
 /**
  * Created by Adonay on 3/27/2017.
@@ -12,16 +13,16 @@ public class MainMenuController{
 
     private FXMLLoader fxmlLoader;
 
-    private String username;
-
-
-    public void setUsername(String username) {
-        this.username = username;
-
-    }
-
     @FXML private Button openSearchButton, openInboxButton, createNewApplicationButton, logOutButton;
+    @FXML private Text userIDText;
+
     ScreenUtil work = new ScreenUtil();
+    AccountsUtil accountsUtil = new AccountsUtil();
+
+    @FXML
+    public void initialize(){
+        userIDText.setText(accountsUtil.getUser_id());
+    }
 
     /**
      *This is the code that figures out where the UI will go when certain buttons are clicked. Right now, the only

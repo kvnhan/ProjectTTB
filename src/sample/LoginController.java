@@ -23,6 +23,8 @@ public class LoginController {
     private TextField usernameField, passwordField;
     @FXML
     private Label errorBox;
+    @FXML
+    private Button loginButton;
 
     ScreenUtil screenUtil = new ScreenUtil();
 
@@ -38,7 +40,7 @@ public class LoginController {
             @Override
             public void handle(KeyEvent event) {
                 if(event.getCode() == KeyCode.ENTER){
-                    login(new ActionEvent());
+                    login(new ActionEvent(loginButton, (Node) loginButton));
                 }
             }
         });

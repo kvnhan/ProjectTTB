@@ -3,6 +3,7 @@ package sample;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -37,7 +38,7 @@ public class NewAccountController {
             @Override
             public void handle(KeyEvent event) {
                 if(event.getCode() == KeyCode.ENTER){
-                    createAccount(new ActionEvent());
+                    createAccount(new ActionEvent(createAccountButton, (Node) createAccountButton));
                 }
             }
         });
@@ -60,14 +61,19 @@ public class NewAccountController {
                 errorBox.setText("Unknown error!");
             }*/
 
-           try {
-               if (!databaseContainsUser(conn)) {
-                   addToDatabase();
-                   screenUtil.pullUpScreen("Login.fxml", "Login", event);
-               }
-           }catch(Exception e){
-               e.printStackTrace();
-           }
+           if(!databaseContainsUser(conn) && newUsername.length() >= 5){
+                addToDatabase();
+                screenUtil.pullUpScreen("Login.fxml", "Login", event);
+            }else if(newUsername.length() < 5){
+                errorBox.setText("User name must be at least five character long");
+            }else if(accountsUtil.contains(newUsername)){
+                errorBox.setText("Username taken!");
+            }else{
+                errorBox.setText("Unknown error!");
+            }
+        }catch(SQLException e){
+            errorBox.setText("Database error");
+            e.printStackTrace();
 
         }catch(NullPointerException e){
             errorBox.setText("Please select an account type");
