@@ -7,6 +7,8 @@ import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
+import java.sql.*;
+
 /**
  * Created by Adonay on 3/27/2017.
  */
@@ -27,6 +29,8 @@ public class NewAccountController {
     private AccountsUtil accountsUtil = new AccountsUtil();
     private ScreenUtil screenUtil = new ScreenUtil();
 
+    private Connection conn = connect();
+
     @FXML
     public void initialize(){
         newUsernameField.setOnKeyPressed(new EventHandler<KeyEvent>() {
@@ -45,7 +49,7 @@ public class NewAccountController {
             newUsername = newUsernameField.getText();
             accountChoice = accountChoiceBox.getValue().toString();
 
-            if(!accountsUtil.contains(newUsername) && newUsername.length() >= 5){
+           /* if(!accountsUtil.contains(newUsername) && newUsername.length() >= 5){
                 accountsUtil.put(newUsername, new Account(newUsername,0));
                 screenUtil.pullUpScreen("Login.fxml", event);
             }else if(newUsername.length() < 5){
@@ -54,11 +58,84 @@ public class NewAccountController {
                 errorBox.setText("Username taken!");
             }else{
                 errorBox.setText("Unknown error!");
-            }
+            }*/
+
+           try {
+               if (!databaseContainsUser(conn)) {
+                   addToDatabase();
+                   screenUtil.pullUpScreen("Login.fxml", event);
+               }
+           }catch(Exception e){
+               e.printStackTrace();
+           }
+
         }catch(NullPointerException e){
             errorBox.setText("Please select an account type");
         }
+    }
 
+    public void addToDatabase() throws SQLException {
+        int ID;
+        Statement stmt;
+        int uRows = 0;
+        stmt = conn.createStatement();
 
+        ResultSet rset = stmt.executeQuery("SELECT * FROM ACCOUNT ORDER BY AID DESC");
+
+        if(rset.next()){
+            ID = rset.getInt("AID") + 1;
+        }else{
+            ID = 1;
+        }
+
+        uRows = stmt.executeUpdate("INSERT INTO ACCOUNT (AID, USERNAME) VALUES ("+ ID  + ", '" + newUsername + "' )");
+
+        System.out.println(uRows + " Row(s) Updated");
+
+        rset.close();
+        stmt.close();
+    }
+
+    private boolean databaseContainsUser(Connection conn) throws SQLException {
+        boolean contains = false;
+
+        ResultSet rset;
+        Statement stmt;
+
+        String usernameQuery = "SELECT * FROM ACCOUNT WHERE ACCOUNT.USERNAME = " + "'" + newUsername + "'";
+        stmt = conn.createStatement();
+
+        rset = stmt.executeQuery(usernameQuery);
+
+        contains = rset.next();
+
+        rset.close();
+        stmt.close();
+
+        return contains;
+    }
+
+    public static Connection connect(){
+        try {
+            Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
+        } catch (ClassNotFoundException e) {
+            System.out.println("Java DB Driver not found. Add the classpath to your module.");
+            e.printStackTrace();
+            return null;
+        }
+
+        System.out.println("Java DB driver registered!");
+        Connection connection = null;
+
+        try {
+            connection = DriverManager.getConnection("jdbc:derby:DATABASE\\ProjectC;create=true");
+        } catch (SQLException e) {
+            System.out.println("Connection failed. Check output console.");
+            e.printStackTrace();
+            return connection;
+        }
+        System.out.println("Java DB connection established!");
+
+        return connection;
     }
 }
