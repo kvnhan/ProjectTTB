@@ -9,6 +9,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
@@ -191,6 +193,76 @@ public class SearchMenuController {
         System.out.println("Java DB connection established!");
 
         return connection;
+    }
+
+    private static final String COMMA_DELIMITER = ",";
+    private static final String NEW_LINE_SEPARATOR = "\r\n";
+    //private String fileName = "CS3733_TeamA";
+    private String fileName = System.getProperty("user.home") + "/"+"CS3733_TeamA" + ".csv";
+    private File F = new File(fileName);
+    private int j = 1;
+
+
+    public void download(){
+
+
+        if(F.exists()) {
+            for (j = 1; F.exists(); j++) {
+                int fileNameLength = fileName.length();
+                fileName =  fileName.substring(0,fileNameLength-4) + String.valueOf(j) + ".csv";
+                F = new File(fileName);
+            }
+        }
+        FileWriter fileWriter = null;
+
+        try {
+            fileWriter = new FileWriter(fileName);
+
+            //Write the CSV file header
+
+            fileWriter.append("ID");
+            fileWriter.append(COMMA_DELIMITER);
+            fileWriter.append("Name");
+            fileWriter.append(COMMA_DELIMITER);
+            fileWriter.append("Brandname");
+            fileWriter.append(COMMA_DELIMITER);
+            fileWriter.append("App");
+            fileWriter.append(COMMA_DELIMITER);
+            fileWriter.append("Type");
+            fileWriter.append(NEW_LINE_SEPARATOR);
+
+            //AlcoholData(ID, name, brandname, app, type)
+            for (int i=0;i< AlcoholDataList.size(); i++) {
+                fileWriter.append(AlcoholDataList.get(i).getID());
+                fileWriter.append(COMMA_DELIMITER);
+                fileWriter.append(AlcoholDataList.get(i).getName());
+                fileWriter.append(COMMA_DELIMITER);
+                fileWriter.append(AlcoholDataList.get(i).getBrandName());
+                fileWriter.append(COMMA_DELIMITER);
+                fileWriter.append(AlcoholDataList.get(i).getAppellation());
+                fileWriter.append(COMMA_DELIMITER);
+                fileWriter.append(AlcoholDataList.get(i).getType());
+                //fileWriter.append(data[i].toString());
+                //fileWriter.append(COMMA_DELIMITER);
+                fileWriter.append(NEW_LINE_SEPARATOR);
+            }
+
+            System.out.println("CSV file was created successfully !!!");
+            System.out.println("CSV file name:"+fileName);
+        } catch (Exception e) {
+            System.out.println("Error in CsvFileWriter !!!");
+            e.printStackTrace();
+        } finally {
+
+            try {
+                fileWriter.flush();
+                fileWriter.close();
+            } catch (IOException e) {
+                System.out.println("Error while flushing/closing fileWriter !!!");
+                e.printStackTrace();
+            }
+
+        }
     }
 }
 
