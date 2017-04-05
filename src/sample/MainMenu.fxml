@@ -18,6 +18,6 @@
         <Font name="Segoe UI" size="20.0" />
       </font>
     </Text>
-    <Text fx:id="userID" layoutX="23.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="empty" />
+    <Text id="userID" fx:id="userIDText" layoutX="23.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="empty" />
   </children>
 </AnchorPane>
