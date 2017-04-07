@@ -41,6 +41,10 @@ public class ApplicationReviewController extends DatabaseUtil{
     @FXML
     TextArea commentsField;
     //for when switching to this scene from inbox
+    @FXML
+    public void initialize(){
+        approve.setText(accountsUtil.getInbox());
+    }
     /*      repID.setText(application.ID);
             registryNo.setText("0000");
             prodSource.setText("TEST");
