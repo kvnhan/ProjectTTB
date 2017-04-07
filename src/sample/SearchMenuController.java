@@ -28,8 +28,9 @@ public class SearchMenuController {
     @FXML TableView table;
 
     ScreenUtil screenUtil = new ScreenUtil();
+    DatabaseUtil dbUtil = new DatabaseUtil();
 
-    Connection conn = connect();
+    Connection conn = dbUtil.connect();
     int wob = 0;
     final int BEER = 1;
     final int WINE = 2;
@@ -132,30 +133,6 @@ public class SearchMenuController {
     }
 
 
-
-    public static Connection connect(){
-        try {
-            Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
-        } catch (ClassNotFoundException e) {
-            System.out.println("Java DB Driver not found. Add the classpath to your module.");
-            e.printStackTrace();
-            return null;
-        }
-
-        System.out.println("Java DB driver registered!");
-        Connection connection = null;
-
-        try {
-            connection = DriverManager.getConnection("jdbc:derby:DATABASE\\ProjectC;create=true");
-        } catch (SQLException e) {
-            System.out.println("Connection failed. Check output console.");
-            e.printStackTrace();
-            return connection;
-        }
-        System.out.println("Java DB connection established!");
-
-        return connection;
-    }
 
     private static final String COMMA_DELIMITER = ",";
     private static final String NEW_LINE_SEPARATOR = "\r\n";
