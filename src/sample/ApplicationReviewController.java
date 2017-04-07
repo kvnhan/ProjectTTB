@@ -83,10 +83,10 @@ public class ApplicationReviewController extends DatabaseUtil{
         //get comments
         String comments = commentsField.getText();
         //update alcohol status
-        String sql = "UPDATE ALCOHOL SET status = 'rejected', comments = comments WHERE id = apptoassgn";
+        String sql = "UPDATE ALCOHOL SET status = 'rejected', comments =" + comments + " WHERE id = apptoassgn";
         stm.executeUpdate(sql);
         //update inbox for worker
-        sql = "UPDATE REVIEWS SET w.inbox.remove(apptoassgn) WHERE username = w.username";
+        sql = "UPDATE REVIEWS SET " + w.getInbox().remove(apptoassgn) + " WHERE username = "+ w.getUsername() +" ";
         stm.executeUpdate(sql);
     }
 
@@ -139,10 +139,10 @@ public class ApplicationReviewController extends DatabaseUtil{
         Statement stm;
         stm = conn.createStatement();
         //update alcohol status
-        String sql = "UPDATE ALCOHOL SET status = 'assigned' WHERE id = 'apptoassgn'";
+        String sql = "UPDATE ALCOHOL SET status = 'assigned', aid = " + w.getUsername() + "WHERE id = "+ apptoassgn + "";
         stm.executeUpdate(sql);
         //update inbox for worker
-        sql = "UPDATE REVIEWS SET inbox.add(apptoassgn) WHERE id = w.id";
+        sql = "UPDATE REVIEWS SET inbox = " + w.getInbox().add(apptoassgn) +" WHERE id = " + w.getUsername() +"";//TODO: Check syntax on set inbox
         stm.executeUpdate(sql);
     }
 
