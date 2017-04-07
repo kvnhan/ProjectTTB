@@ -22,20 +22,21 @@ import java.util.List;
 import javafx.collections.ObservableList;
 
 public class SearchMenuController {
-    @FXML Button Back;
-    @FXML Button Search;
-    @FXML CheckBox IsWine;
-    @FXML CheckBox IsBeer;
-    @FXML CheckBox IsOther;
+    @FXML CheckBox IsWine, IsBeer, IsOther;
     @FXML TextField Tags;
-    @FXML TableColumn IDno;
-    @FXML TableColumn Name;
-    @FXML TableColumn BrandName;
-    @FXML TableColumn Type;
-    @FXML TableColumn Location;
-    @FXML Button downRes;
-    @FXML Button newSearch;
+    @FXML TableColumn IDno, Name, BrandName, Type, Location;
+    @FXML TableView table;
+
     ScreenUtil screenUtil = new ScreenUtil();
+
+    Connection conn = connect();
+    int wob = 0;
+    final int BEER = 1;
+    final int WINE = 2;
+
+    List<AlcoholData> AlcoholDataList = new ArrayList<AlcoholData>();
+    static ObservableList<AlcoholData> observableList;
+
 
 
     public void getResults(){
@@ -49,49 +50,16 @@ public class SearchMenuController {
         table.getColumns().addAll(IDno, Name, BrandName, Type, Location);
     }
 
-    public void buttonClicked (javafx.event.ActionEvent event){
-        try {
-            if(event.getSource() == Back){
-                fxmlLoader = new FXMLLoader(getClass().getResource("MainMenu.fxml"));
-                ((Node)(event.getSource())).getScene().getWindow().hide();
-            }
-            if(event.getSource() == Search){
-                Search(event);
-            }
-
-
-
-            Parent root1 = null;
-            root1 = fxmlLoader.load();
-            Stage stage = new Stage();
-            stage.setTitle("MainMenu");
-            stage.setScene(new Scene(root1));
-            stage.show();
-
-        }catch(Exception ex){
-            ex.printStackTrace();
-        }
+    public void back (ActionEvent event){
+        screenUtil.pullUpScreen("MainMenu.fxml", "Main Menu", event);
     }
-
-    @FXML TableView table;
-
-
-    private FXMLLoader fxmlLoader;
-
-    Connection conn = connect();
-    int wob = 0;
-    final int BEER = 1;
-    final int WINE = 2;
-
-    List<AlcoholData> AlcoholDataList = new ArrayList<AlcoholData>();
-    static ObservableList<AlcoholData> observableList;
 
     public static ObservableList<AlcoholData> getObservableList() {
         return observableList;
     }
 
 
-    public void Search(ActionEvent event) throws SQLException, NoSuchMethodException, IllegalAccessException, InstantiationException, IOException{
+    public void search(ActionEvent event) throws SQLException, NoSuchMethodException, IllegalAccessException, InstantiationException, IOException{
         AlcoholDataList.clear();
         if (IsBeer.isSelected()){
             wob = 1;
@@ -105,27 +73,23 @@ public class SearchMenuController {
             System.out.println("ERROR");
         }
 
-        search(conn);
+        searchDatabase(conn);
         observableList = FXCollections.observableList(AlcoholDataList);
         getResults();
     }
 
 
-    private void search(Connection conn) throws SQLException {
+    private void searchDatabase(Connection conn) throws SQLException {
         Scanner input = new Scanner(System.in);
         ResultSet rset;
         Statement stmt;
         String brand;
 
-        System.out.println("while loop executd");
-
         String qry = "SELECT * FROM ALCOHOL WHERE ALCOHOL.ALCOHOL_TYPE = ";
 
         stmt = conn.createStatement();
 
-        System.out.println("while loop executd");
         if (IsWine.isSelected() && IsBeer.isSelected()){
-            System.out.println("while loop executd");
             rset = stmt.executeQuery(qry + BEER);
             while(rset.next()){ //TODO Make this clean so that the while loop does not come up twice
                 String ID = String.format("%1$"+3+ "s", rset.getString("AID"));
@@ -147,10 +111,8 @@ public class SearchMenuController {
             brand = Tags.getText().trim();
             System.out.println("Hello");
             System.out.println(brand);
-            rset = stmt.executeQuery("SELECT * FROM ALCOHOL WHERE ALCOHOL.BRAND_NAME = '"+brand+"'");
+            rset = stmt.executeQuery("SELECT * FROM ALCOHOL WHERE ALCOHOL.BRAND_NAME LIKE '"+brand+"%'");
         }
-
-        System.out.println("while loop executd");
 
         while(rset.next()){
             String ID = String.format("%1$"+3+ "s", rset.getString("AID"));

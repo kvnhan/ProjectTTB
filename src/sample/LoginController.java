@@ -4,18 +4,12 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
-
-import javax.xml.crypto.Data;
 import java.sql.*;
-import java.util.Scanner;
-
 /**
  * Created by Adonay on 3/26/2017.
  */
