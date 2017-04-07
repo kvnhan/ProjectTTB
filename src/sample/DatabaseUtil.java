@@ -1,6 +1,8 @@
 package sample;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Adonay on 4/6/2017.
@@ -67,11 +69,20 @@ public class DatabaseUtil {
         return contains;
     }
 
+    // To check if string value exists in the table
     public boolean contains(String TABLENAME, String FIELDNAME, String value) throws SQLException {
         return containsQuery("SELECT * FROM " + TABLENAME+ " WHERE ACCOUNT." + FIELDNAME + " = '" + value + "'");
     }
 
+    //To check if an integer value exists in the table
     public boolean containsInt(String TABLENAME, String FIELDNAME, int value) throws SQLException {
+
+        return containsQuery("SELECT * FROM " + TABLENAME+ " WHERE ACCOUNT." + FIELDNAME + " = " + value);
+
+    }
+
+    //To check if a double value exists in the table
+    public boolean containsDouble(String TABLENAME, String FIELDNAME, double value) throws SQLException {
 
         return containsQuery("SELECT * FROM " + TABLENAME+ " WHERE ACCOUNT." + FIELDNAME + " = " + value);
 
@@ -126,7 +137,7 @@ public class DatabaseUtil {
 
 
 
-    // DOES NOT WORK
+    // DOES NOT WORK FOR NOW
     public void clearTable(String TABLENAME) throws SQLException{
 
         String query = "DELETE FROM " + TABLENAME;
@@ -183,5 +194,42 @@ public class DatabaseUtil {
         stmt.close();
 
         return isAdded;
+    }
+
+    // Code used to search Alcohol table based on alcohol type
+    public List<AlcoholData> searchAlcoholWithType(int alcoholType) throws SQLException{
+        String query = "SELECT * FROM ALCOHOL WHERE ALCOHOL.ALCOHOL_TYPE = " + alcoholType;
+
+        return searchAlcoholTable(query);
+    }
+
+    // Code used to search Alcohol table based on brand name. Uses partial search
+    public List<AlcoholData> searchAlcoholBrand(String brandName) throws SQLException{
+        String query = "SELECT * FROM ALCOHOL WHERE ALCOHOL.BRAND_NAME LIKE '"+brandName+"%'";
+
+        return searchAlcoholTable(query);
+    }
+
+    private List<AlcoholData> searchAlcoholTable(String query) throws SQLException{
+        List<AlcoholData> AlcoholDataList = new ArrayList<AlcoholData>();
+        AlcoholData a;
+
+        stmt = conn.createStatement();
+
+        rset = stmt.executeQuery(query);
+
+        while(rset.next()){
+            String ID = String.format("%1$"+3+ "s", rset.getString("AID"));
+            String name = String.format("%1$"+25+ "s", rset.getString("NAME"));
+            String brandname = String.format("%1$"+25+ "s", rset.getString("BRAND_NAME"));
+            String app = String.format("%1$"+22+ "s", rset.getString("APPELLATION"));
+            String type = String.format("%1$"+10+ "s", rset.getString("ALCOHOL_TYPE"));
+
+            a = new AlcoholData(ID, name, brandname, app, type);
+            AlcoholDataList.add(a);
+        }
+
+        return AlcoholDataList;
+
     }
 }
