@@ -78,7 +78,7 @@ public class ReviseMenuController {
     public void submitButtonClicked(javafx.event.ActionEvent event) {
 
         updateData(applicationID.getText());
-        screen.pullUpScreen("NewApp.fxml", "New Application", event);
+        screen.switchScene("NewApp.fxml", "New Application");
 
 
     }

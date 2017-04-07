@@ -49,12 +49,8 @@ public class LoginController {
         try {
             if (dbUtil.contains("ACCOUNT", "USERNAME", username)) {
 
-                //what do these do? removing them seems to fix the DB error
-                //dbUtil.addUserType("Government Agent");
-                //dbUtil.addUserType("Manufacturer");
-                //dbUtil.addUserType("Public User");
                 aUtil.setUser_id(username);
-                screenUtil.pullUpScreen("MainMenu.fxml", "Main Menu", event);
+                screenUtil.switchScene("MainMenu.fxml", "Main Menu");
             } else {
                 errorBox.setText("Username does not exist!");
             }
@@ -69,12 +65,12 @@ public class LoginController {
 
     public void guestLogin(ActionEvent event) {
         aUtil.setUser_id("guest");
-        screenUtil.pullUpScreen("MainMenu.fxml", "Main Menu", event);
+        screenUtil.switchScene("MainMenu.fxml", "Main Menu");
     }
 
     public void openCreateAccount(ActionEvent event) {
 
-        screenUtil.pullUpScreen("NewAccount.fxml", "New Account", event);
+        screenUtil.switchScene("NewAccount.fxml", "New Account");
 
     }
 

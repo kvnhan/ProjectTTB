@@ -55,7 +55,7 @@ public class ApplicationReviewController extends DatabaseUtil{
     @FXML
     void setGoBack(ActionEvent event){
         ScreenUtil work = new ScreenUtil();
-        work.pullUpScreen("WorkFlow.fxml", "Main Menu", event);
+        work.switchScene("WorkFlow.fxml", "Main Menu");
     }
 
     @FXML

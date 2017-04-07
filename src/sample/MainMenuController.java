@@ -32,19 +32,19 @@ public class MainMenuController{
     public void buttonClicked(ActionEvent event) {
 
         if(event.getSource() == openSearchButton){
-            work.pullUpScreen("SearchMenu.fxml", "Search", event);
+            work.switchScene("SearchMenu.fxml", "Search");
 
         }else if(event.getSource() == openInboxButton){
-            work.pullUpScreen("WorkFlow.fxml", "Inbox", event);
+            work.switchScene("WorkFlow.fxml", "Inbox");
 
         }else if(event.getSource() == createNewApplicationButton){
-            work.pullUpScreen("NewApp.fxml","New Application", event);
+            work.switchScene("NewApp.fxml","New Application");
 
         }else if(event.getSource() == logOutButton){
-            work.pullUpScreen("Login.fxml","Login", event);
+            work.switchScene("Login.fxml","Login");
 
         }else{
-            work.pullUpScreen("ErrorState.fxml","Error", event);
+            work.switchScene("ErrorState.fxml","Error");
         }
     }
 }

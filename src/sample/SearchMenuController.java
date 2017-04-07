@@ -20,24 +20,25 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import java.util.List;
 import javafx.collections.ObservableList;
+import org.apache.derby.iapi.db.Database;
 
 public class SearchMenuController {
-    @FXML CheckBox IsWine, IsBeer, IsOther;
-    @FXML TextField Tags;
-    @FXML TableColumn IDno, Name, BrandName, Type, Location;
-    @FXML TableView table;
 
-    ScreenUtil screenUtil = new ScreenUtil();
-    DatabaseUtil dbUtil = new DatabaseUtil();
+    private String brandName;
+    private @FXML CheckBox isWineBox, isBeerBox, isOtherBox;
+    private @FXML TextField brandField;
+    private @FXML TableColumn IDno, Name, BrandName, Type, Location;
+    private @FXML TableView table;
 
-    Connection conn = dbUtil.connect();
-    int wob = 0;
-    final int BEER = 1;
-    final int WINE = 2;
+    private ScreenUtil screenUtil = new ScreenUtil();
+    private int alcoholChoice = 0;
+    private final int BEER = 1;
+    private final int WINE = 2;
 
-    List<AlcoholData> AlcoholDataList = new ArrayList<AlcoholData>();
-    static ObservableList<AlcoholData> observableList;
+    private List<AlcoholData> AlcoholDataList = new ArrayList<AlcoholData>();
+    private static ObservableList<AlcoholData> observableList;
 
+    private DatabaseUtil dbUtil = new DatabaseUtil();
 
 
     public void getResults(){
@@ -52,7 +53,7 @@ public class SearchMenuController {
     }
 
     public void back (ActionEvent event){
-        screenUtil.pullUpScreen("MainMenu.fxml", "Main Menu", event);
+        screenUtil.switchScene("MainMenu.fxml", "Main Menu");
     }
 
     public static ObservableList<AlcoholData> getObservableList() {
@@ -62,77 +63,40 @@ public class SearchMenuController {
 
     public void search(ActionEvent event) throws SQLException, NoSuchMethodException, IllegalAccessException, InstantiationException, IOException{
         AlcoholDataList.clear();
-        if (IsBeer.isSelected()){
-            wob = 1;
+        if (isBeerBox.isSelected()){
+            alcoholChoice = 1;
         }
-        else if (IsWine.isSelected()){
-            wob = 2;
+        else if (isWineBox.isSelected()){
+            alcoholChoice = 2;
         }
-        else if (Tags.getText() == null || Tags.getText().trim().isEmpty()) {
-            System.out.println("ERROR");
-            screenUtil.pullUpScreen("ErrorState.fxml","Error", event);
-            System.out.println("ERROR");
+        else if (brandField.getText() == null || brandField.getText().trim().isEmpty()) {
+            System.out.println("BRAND NAME EMPTY");
+            screenUtil.switchScene("ErrorState.fxml","Error");
+            System.out.println("CHOOSE ALCOHOL TYPE OR BRANDNAME");
         }
 
-        searchDatabase(conn);
+        brandName = brandField.getText();
+
+        searchDatabase();
+
         observableList = FXCollections.observableList(AlcoholDataList);
         getResults();
     }
 
 
-    private void searchDatabase(Connection conn) throws SQLException {
-        Scanner input = new Scanner(System.in);
-        ResultSet rset;
-        Statement stmt;
-        String brand;
+    private void searchDatabase() throws SQLException {
 
-        String qry = "SELECT * FROM ALCOHOL WHERE ALCOHOL.ALCOHOL_TYPE = ";
-
-        stmt = conn.createStatement();
-
-        if (IsWine.isSelected() && IsBeer.isSelected()){
-            rset = stmt.executeQuery(qry + BEER);
-            while(rset.next()){ //TODO Make this clean so that the while loop does not come up twice
-                String ID = String.format("%1$"+3+ "s", rset.getString("AID"));
-                String name = String.format("%1$"+25+ "s", rset.getString("NAME"));
-                String brandname = String.format("%1$"+25+ "s", rset.getString("BRAND_NAME"));
-                String app = String.format("%1$"+22+ "s", rset.getString("APPELLATION"));
-                String type = String.format("%1$"+10+ "s", rset.getString("ALCOHOL_TYPE"));
-                // AlcoholData Constructor
-                AlcoholData a = new AlcoholData(ID, name, brandname, app, type);
-                AlcoholDataList.add(a);
-            }
-            rset = stmt.executeQuery(qry + WINE);//TODO MAKE IT NOT SET TWICE PLSPLSPLS
+        if (isWineBox.isSelected() && isBeerBox.isSelected()){
+            AlcoholDataList = dbUtil.searchAlcoholWithType(BEER);
+            AlcoholDataList.addAll(dbUtil.searchAlcoholWithType(WINE));
         }
-        else if(IsWine.isSelected() || IsBeer.isSelected()){
-            System.out.println("while loop executd");
-            rset = stmt.executeQuery(qry + wob);
+        else if(isWineBox.isSelected() || isBeerBox.isSelected()){
+            AlcoholDataList = dbUtil.searchAlcoholWithType(alcoholChoice);
         }
         else {
-            brand = Tags.getText().trim();
-            System.out.println("Hello");
-            System.out.println(brand);
-            rset = stmt.executeQuery("SELECT * FROM ALCOHOL WHERE ALCOHOL.BRAND_NAME LIKE '"+brand+"%'");
+            AlcoholDataList = dbUtil.searchAlcoholBrand(brandName);
         }
-
-        while(rset.next()){
-            String ID = String.format("%1$"+3+ "s", rset.getString("AID"));
-            String name = String.format("%1$"+25+ "s", rset.getString("NAME"));
-            String brandname = String.format("%1$"+25+ "s", rset.getString("BRAND_NAME"));
-            String app = String.format("%1$"+22+ "s", rset.getString("APPELLATION"));
-            String type = String.format("%1$"+10+ "s", rset.getString("ALCOHOL_TYPE"));
-            // AlcoholData Constructor
-            AlcoholData a = new AlcoholData(ID, name, brandname, app, type);
-            AlcoholDataList.add(a);
-            System.out.println("while loop executd");
-        }
-
-        rset.close();
-        stmt.close();
-        input.close();
     }
-
-
 
     private static final String COMMA_DELIMITER = ",";
     private static final String NEW_LINE_SEPARATOR = "\r\n";
