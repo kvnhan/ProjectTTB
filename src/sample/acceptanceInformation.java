@@ -1,9 +1,6 @@
 package sample;
 import java.util.Date;
 
-/**
- * Created by Kien Nhan on 4/3/2017.
- */
 public class acceptanceInformation {
 
     private String status;

@@ -13,7 +13,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class ApplicationReviewController {
+public class ApplicationReviewController extends DatabaseUtil{
     @FXML
     Button approve;
     @FXML
@@ -158,29 +158,5 @@ public class ApplicationReviewController {
         for (int i = 0; i < unassigForms.size(); i++) {
             addToInbox(getSmallWorker(), unassigForms.get(i));
         }
-    }
-
-    public static Connection connect(){
-        try {
-            Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
-        } catch (ClassNotFoundException e) {
-            System.out.println("Java DB Driver not found. Add the classpath to your module.");
-            e.printStackTrace();
-            return null;
-        }
-
-        System.out.println("Java DB driver registered!");
-        Connection connection = null;
-
-        try {
-            connection = DriverManager.getConnection("jdbc:derby:ProjectC;create=true");
-        } catch (SQLException e) {
-            System.out.println("Connection failed. Check output console.");
-            e.printStackTrace();
-            return connection;
-        }
-        System.out.println("Java DB connection established!");
-
-        return connection;
     }
 }
