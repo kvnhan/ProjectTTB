@@ -12,6 +12,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 
+import javax.xml.crypto.Data;
 import java.sql.*;
 import java.util.Scanner;
 
@@ -32,97 +33,65 @@ public class LoginController {
     private String password;
     private AccountsUtil aUtil = new AccountsUtil();
 
-    private Connection conn = connect();
+    // for database
+    private DatabaseUtil dbUtil = new DatabaseUtil();
 
     @FXML
-    public void initialize(){
+    public void initialize() {
         usernameField.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
-                if(event.getCode() == KeyCode.ENTER){
+                if (event.getCode() == KeyCode.ENTER) {
                     login(new ActionEvent(loginButton, (Node) loginButton));
                 }
             }
         });
     }
 
-    public void login(ActionEvent event){
-        username = usernameField.getText();
+    public void login(ActionEvent event) {
+        username = usernameField.getText().toLowerCase();
         password = passwordField.getText();
 
-        try{
-             /*if(aUtil.contains(username)){*/
-            if(databaseContainsUser(conn)){
+        try {
+            if (dbUtil.contains("ACCOUNT", "USERNAME", username)) {
+
+
+                dbUtil.addUserType("Government Agent");
+                dbUtil.addUserType("Manufacturer");
+                dbUtil.addUserType("Public User");
                 aUtil.setUser_id(username);
                 screenUtil.pullUpScreen("MainMenu.fxml", "Main Menu", event);
-            }else{
+            } else {
                 errorBox.setText("Username does not exist!");
             }
-        }catch(SQLException e) {
+        } catch (SQLException e) {
             errorBox.setText("Database Error");
+            e.printStackTrace();
+        }catch (Exception e) {
+            errorBox.setText("Unknown Exception");
             e.printStackTrace();
         }
     }
 
-    public void guestLogin(ActionEvent event){
-           aUtil.setUser_id("guest");
-           screenUtil.pullUpScreen("MainMenu.fxml", "Main Menu", event);
+    public void guestLogin(ActionEvent event) {
+        aUtil.setUser_id("guest");
+        screenUtil.pullUpScreen("MainMenu.fxml", "Main Menu", event);
     }
 
-    public void openCreateAccount(ActionEvent event){
+    public void openCreateAccount(ActionEvent event) {
 
         screenUtil.pullUpScreen("NewAccount.fxml", "New Account", event);
 
     }
 
-    public void clearData(){
-        aUtil.clearData();
-    }
-
-
-
-    private boolean databaseContainsUser(Connection conn) throws SQLException {
-        boolean contains = false;
-
-        ResultSet rset;
-        Statement stmt;
-
-            String usernameQuery = "SELECT * FROM ACCOUNT WHERE ACCOUNT.USERNAME = " + "'" + username + "'";
-            stmt = conn.createStatement();
-
-            rset = stmt.executeQuery(usernameQuery);
-
-            contains = rset.next();
-
-            rset.close();
-            stmt.close();
-
-        return contains;
-    }
-
-
-
-    public static Connection connect(){
-        try {
-            Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
-        } catch (ClassNotFoundException e) {
-            System.out.println("Java DB Driver not found. Add the classpath to your module.");
+    public void clearData() {
+        try{
+            dbUtil.clearTable("ACCOUNT");
+        }catch(Exception e){
+            errorBox.setText("Database Error!");
             e.printStackTrace();
-            return null;
         }
-
-        System.out.println("Java DB driver registered!");
-        Connection connection = null;
-
-        try {
-            connection = DriverManager.getConnection("jdbc:derby:DATABASE\\ProjectC;create=true");
-        } catch (SQLException e) {
-            System.out.println("Connection failed. Check output console.");
-            e.printStackTrace();
-            return connection;
-        }
-        System.out.println("Java DB connection established!");
-
-        return connection;
     }
 }
+
+

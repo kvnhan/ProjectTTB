@@ -325,7 +325,7 @@
       <Position>13</Position>
       <DataType>CHAR(200)|1</DataType>
     </column>
-    <column id="90" parent="19" name="SUFLITE">
+    <column id="90" parent="19" name="SULFITE">
       <Position>14</Position>
       <DataType>CHAR(200)|1</DataType>
     </column>

@@ -237,7 +237,7 @@ public class NewLabelController {
             sm.executeUpdate("INSERT INTO FORM (FID, AID, STATUS, ALCID, TTBID, PERMITNO, BRANDNAME, ADDRESS,PHONENUMBER, EMAIL, PHLEVEL, NAME_OF_APPLICANT) VALUES ("+formID+","+id+","+COMPLETE+","+id+","+id+","+permit_no+",'"+brand_name+"','"+address+"','"+phone_number+"','"+email+"',"+pHLevel+",'"+applicantName+"')");
 
         }else{
-            sm.executeUpdate("INSERT INTO FORM (FID, AID, STATUS, ALCID, TTBID, PERMITNO, BRANDNAME, ADDRESS, PHONENUMBER, EMAIL, NAME_OF_APPLICANT) VALUES ("+formID+","+id+","+COMPLETE+","+id+""+id+","+permit_no+",'"+brand_name+"','"+address+"','"+phone_number+"','"+email+"','"+applicantName+"')");
+            sm.executeUpdate("INSERT INTO FORM (FID, AID, STATUS, ALCID, TTBID, PERMITNO, BRANDNAME, ADDRESS, PHONENUMBER, EMAIL, NAME_OF_APPLICANT) VALUES ("+formID+","+id+","+COMPLETE+","+id+","+id+","+permit_no+",'"+brand_name+"','"+address+"','"+phone_number+"','"+email+"','"+applicantName+"')");
 
         }
 
