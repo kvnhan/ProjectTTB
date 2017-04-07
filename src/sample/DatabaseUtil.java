@@ -5,6 +5,7 @@ import java.sql.*;
 /**
  * Created by Adonay on 4/6/2017.
  */
+
 public class DatabaseUtil {
 
     private static String driver = "org.apache.derby.jdbc.EmbeddedDriver";

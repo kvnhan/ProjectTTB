@@ -49,10 +49,10 @@ public class LoginController {
         try {
             if (dbUtil.contains("ACCOUNT", "USERNAME", username)) {
 
-
-                dbUtil.addUserType("Government Agent");
-                dbUtil.addUserType("Manufacturer");
-                dbUtil.addUserType("Public User");
+                //what do these do? removing them seems to fix the DB error
+                //dbUtil.addUserType("Government Agent");
+                //dbUtil.addUserType("Manufacturer");
+                //dbUtil.addUserType("Public User");
                 aUtil.setUser_id(username);
                 screenUtil.pullUpScreen("MainMenu.fxml", "Main Menu", event);
             } else {

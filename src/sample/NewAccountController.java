@@ -58,10 +58,10 @@ public class NewAccountController {
                 userType = 3;
             }
 
-            if(!dbUtil.contains("ACCOUNT", "USERNAME", newUsername) && (newUsername.length() >= 5 || newUsername.length() <= 15)){
+            if(!dbUtil.contains("ACCOUNT", "USERNAME", newUsername) && usernameIsRightLength(newUsername)){
                dbUtil.addAccount(newUsername, "password", 1, 2);
                screenUtil.pullUpScreen("Login.fxml", "Login", event);
-            }else if(newUsername.length() < 5 || newUsername.length() > 15){
+            }else if (!usernameIsRightLength(newUsername)){
                 errorBox.setText("User name must be 5 - 15 characters long");
             }else if(dbUtil.contains("ACCOUNT", "USERNAME", newUsername)){
                 errorBox.setText("Username taken!");
@@ -75,5 +75,10 @@ public class NewAccountController {
         }catch(NullPointerException e){
             errorBox.setText("Please select an account type");
         }
+    }
+
+    //made to improve readability and find a bug in account creation
+    private boolean usernameIsRightLength(String username){
+        return (username.length() >= 5 && username.length() <= 15);
     }
 }
