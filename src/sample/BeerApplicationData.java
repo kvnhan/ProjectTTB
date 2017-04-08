@@ -3,10 +3,13 @@ package sample;
 import java.util.Date;
 
 /**
- * Created by Kien Nhan on 4/3/2017.
+ * Class containing specific information about applications for beers.
  */
 public class BeerApplicationData extends ApplicationData{
-
+    /**
+     * Constructor for beer application objects. Currently, all data fields are
+     * pulled directly from the ApplicationData abstract class.
+     */
     public BeerApplicationData(int formID, acceptanceInformation acceptanceInfo, int id, int permit_no, String source_of_product,
                                String type_of_product, String brand_name, String address, String phone_number,
                                String email, Date date, String applicantName, String alcoholType, String alcoholContent) {

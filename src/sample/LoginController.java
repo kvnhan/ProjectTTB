@@ -11,7 +11,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import java.sql.*;
 /**
- * Created by Adonay on 3/26/2017.
+ * Controller for Login screen.
  */
 public class LoginController {
     @FXML
@@ -22,15 +22,15 @@ public class LoginController {
     private Button loginButton;
 
     ScreenUtil screenUtil = new ScreenUtil();
-
     private String username;
     private String password;
     private AccountsUtil aUtil = new AccountsUtil();
-
-    // for database
     private DatabaseUtil dbUtil = new DatabaseUtil();
 
     @FXML
+    /**
+     * Initializes the Login screen.
+     */
     public void initialize() {
         usernameField.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
@@ -42,6 +42,12 @@ public class LoginController {
         });
     }
 
+    /**
+     * Logs in a user by checking the username and password, both of which are of type Text.
+     * If the username specified is not in the database, the screen displays an error message
+     * indicating that the username does not exist and will not log the user in.
+     * @param event Function is run when the user clicks the Login button in the User Interface.
+     */
     public void login(ActionEvent event) {
         username = usernameField.getText().toLowerCase();
         password = passwordField.getText();
@@ -63,11 +69,20 @@ public class LoginController {
         }
     }
 
+    /**
+     * Logs in a guest with limited accessibility to the rest of the application.
+     * @param event Triggers when the "Log in as Guest" button is pressed.
+     */
     public void guestLogin(ActionEvent event) {
         aUtil.setUser_id("guest");
         screenUtil.switchScene("MainMenu.fxml", "Main Menu");
     }
 
+    /**
+     * Opens the Create Account screen when the "Create Account" button is pressed
+     * in the user interface.
+     * @param event ActionEvent object representing the button click.
+     */
     public void openCreateAccount(ActionEvent event) {
 
         screenUtil.switchScene("NewAccount.fxml", "New Account");

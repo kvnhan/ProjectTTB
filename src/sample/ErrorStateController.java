@@ -9,7 +9,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 /**
- * Created by Adonay on 3/27/2017.
+ * Controller for ErrorState Screen.
  */
 public class ErrorStateController {
     ScreenUtil screenUtil = new ScreenUtil();

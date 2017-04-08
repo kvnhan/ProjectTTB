@@ -1,7 +1,7 @@
 package sample;
 
 /**
- * Created by Sam Winter on 4/2/2017.
+ * Contains data relating to specific alcoholic beverages stored in the database.
  */
 public class AlcoholData {
     private String ID;
@@ -10,7 +10,14 @@ public class AlcoholData {
     private String Appellation;
     private String Type;
 
-    //Constructor
+    /**
+     * Constructor for an AlcoholData object.
+     * @param IDC String representing the ID for the alcoholic beverage.
+     * @param NameC String representing the name of the alcoholic beverage.
+     * @param BrandNameC String representing the official brand name of the alcoholic beverage.
+     * @param AppellationC TODO: figure out what this is
+     * @param TypeC String representing the type of the alcoholic beverage.
+     */
     public AlcoholData(String IDC, String NameC, String BrandNameC, String AppellationC, String TypeC) {
         ID = IDC;
         Name = NameC;

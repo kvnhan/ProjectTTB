@@ -11,7 +11,7 @@ import javafx.scene.input.KeyEvent;
 import java.sql.*;
 
 /**
- * Created by Adonay on 3/27/2017.
+ * Controller for Create a New Account screen.
  */
 public class NewAccountController {
 

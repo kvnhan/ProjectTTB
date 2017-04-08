@@ -5,7 +5,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
- * Created by Adonay on 4/3/2017.
+ * Account class contains information for all types of account.
  */
 public class Account implements Serializable{
     private String username;
@@ -13,7 +13,15 @@ public class Account implements Serializable{
     private boolean isLoggedIn;
     private ArrayList<String> inbox = new ArrayList<>();
 
-
+    /**
+     * Constructor for Account class. Account is set to not logged in
+     * by default.
+     *
+     * @param usrnm String representing account username.
+     * @param accL Int representing access level for the account.
+     * @param inbox ArrayList of strings representing IDs of applications in the account
+     *              inbox.
+     */
     public Account(String usrnm, int accL, ArrayList<String> inbox){
         username = usrnm;
         accessLevel = accL;
@@ -39,19 +47,33 @@ public class Account implements Serializable{
 
     public ArrayList<String> getInbox(){return inbox;}
 
-    //returns the number of applications in the worker's inbox
+    /**
+     * Returns number of applications in an account's inbox.
+     * @return Returns the size of the inbox.
+     */
     public int numberOfApplications(){
         return inbox.size();
     }
-    //adds a specific application to the inbox
+    /**
+     * Adds a specific application to the inbox.
+     * @param sf String representing the ID for
+     *           the application to be added to the inbox.
+     */
     public void addToInbox(String sf){
         inbox.add(0, sf);
     }
-    //removes a specific appliation from the inbox
+    /**
+     * Removes a specific application from an account's inbox.
+     * @param formID String representing the ID of the application to be
+     *               removed.
+     */
     public void removeFromInbox(int formID){
         inbox.remove(formID);
     }
-    //gets a specific application from the inbox
+    /**
+     * Retrieves specific application ID from an account's inbox.
+     * @return Returns a string representing the application ID.
+     */
     public String getNextForm(){
         return inbox.get(0);
     }
