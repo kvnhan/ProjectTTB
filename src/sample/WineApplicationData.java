@@ -3,7 +3,7 @@ package sample;
 import java.util.Date;
 
 /**
- * Created by Kien Nhan on 4/3/2017.
+ * Contains data specific to wine applications.
  */
 public class WineApplicationData extends ApplicationData{
     private enum alcholType{
@@ -12,6 +12,12 @@ public class WineApplicationData extends ApplicationData{
     private int vintage_date;
     private double ph_level;
 
+    /**
+     * Constructor for a Wine Application. Inherits all fields from ApplicationData
+     * and contains extra data relating to wines.
+     * @param vintage_date Int representing the date of the vintage.
+     * @param ph_level Double representing the wine's pH.
+     */
     public WineApplicationData(int formID, acceptanceInformation acceptanceInfo, int id, int permit_no,
                                String brand_name, String source_of_product, String type_of_product, String address, String phone_number,
                                String email, Date date, String applicantName, String alcoholType, String alcoholContent,

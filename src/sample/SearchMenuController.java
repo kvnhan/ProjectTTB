@@ -22,6 +22,9 @@ import java.util.List;
 import javafx.collections.ObservableList;
 import org.apache.derby.iapi.db.Database;
 
+/**
+ * Controller for Search Menu Screen.
+ */
 public class SearchMenuController {
 
     private String brandName;
@@ -40,7 +43,9 @@ public class SearchMenuController {
 
     private DatabaseUtil dbUtil = new DatabaseUtil();
 
-
+    /**
+     * Displays results of a search.
+     */
     public void getResults(){
         table.getColumns().clear();
         IDno.setCellValueFactory(new PropertyValueFactory<>("ID"));
@@ -52,6 +57,10 @@ public class SearchMenuController {
         table.getColumns().addAll(IDno, Name, BrandName, Type, Location);
     }
 
+    /**
+     * Returns to MainMenu screen.
+     * @param event Back button press.
+     */
     public void back (ActionEvent event){
         screenUtil.switchScene("MainMenu.fxml", "Main Menu");
     }
@@ -60,7 +69,15 @@ public class SearchMenuController {
         return observableList;
     }
 
-
+    /**
+     * Executes a search of the database.
+     * @param event Search button pressed.
+     * @throws SQLException
+     * @throws NoSuchMethodException
+     * @throws IllegalAccessException
+     * @throws InstantiationException
+     * @throws IOException
+     */
     public void search(ActionEvent event) throws SQLException, NoSuchMethodException, IllegalAccessException, InstantiationException, IOException{
         AlcoholDataList.clear();
         if (isBeerBox.isSelected()){
@@ -83,7 +100,10 @@ public class SearchMenuController {
         getResults();
     }
 
-
+    /**
+     * Searches through the database for results.
+     * @throws SQLException
+     */
     private void searchDatabase() throws SQLException {
 
         if (isWineBox.isSelected() && isBeerBox.isSelected()){
@@ -105,7 +125,9 @@ public class SearchMenuController {
     private File F = new File(fileName);
     private int j = 1;
 
-
+    /**
+     * Allows a user to download search results as a CSV file.
+     */
     public void download(){
 
 
