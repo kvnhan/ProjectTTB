@@ -11,20 +11,12 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class Main extends Application{
+    ScreenUtil screenUtil = new ScreenUtil();
 
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
-        primaryStage.setTitle("Main Menu");
-        primaryStage.setScene(new Scene(root, 370, 400));
-        primaryStage.setMinHeight(400);
-        primaryStage.setMinWidth(370);
-        primaryStage.setMaxHeight(400);
-        primaryStage.setMaxWidth(370);
-        primaryStage.setMaximized(false);
-        primaryStage.show();
-
+        screenUtil.switchScene("Login.fxml", "Login");
    }
 
 

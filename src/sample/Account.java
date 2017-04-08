@@ -37,6 +37,8 @@ public class Account implements Serializable{
         isLoggedIn = loggedIn;
     }
 
+    public ArrayList<String> getInbox(){return inbox;}
+
     //returns the number of applications in the worker's inbox
     public int numberOfApplications(){
         return inbox.size();

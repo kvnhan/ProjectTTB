@@ -16,12 +16,12 @@ import java.sql.*;
 /**
  * Created by peternolan on 4/2/17.
  */
-//Change to a relevant path. Soecify the name of the subfolder in the path and that will help to connect the db.
+//Change to a relevant path. Specify the name of the subfolder in the path and that will help to connect the db.
     //Go back to the notes from the JDBC slides. One uses a prepared statemnt and one does not
     //Figure out how the Data is set up.
     //Find the attributes of the object to contain the information.
     //Create a program that does a search on the table and maps that to the resulting java object
-    //Have it be seperate for each class.
+    //Have it be separate for each class.
     //Quick Exercise: pick a small table, write the code that querys the table and query for one or several records and figure out how I would stick those records into a java class
     //After that, modify it to return the java object.
     //Also, might want to create code that updates the information in the database.
@@ -46,7 +46,9 @@ public class ReviseMenuController {
     final String choiceThree = "Change the mandatory statement of alcohol content (WINE ONLY)";
     final String choiceFour = "Add, delete, or change optional statement of alcohol content (MALT ONLY)";
 
-    Connection conn = connect();
+    DatabaseUtil dbUtil = new DatabaseUtil();
+
+    Connection conn = dbUtil.connect();
 
     ScreenUtil screen = new ScreenUtil();
 
@@ -76,7 +78,7 @@ public class ReviseMenuController {
     public void submitButtonClicked(javafx.event.ActionEvent event) {
 
         updateData(applicationID.getText());
-        screen.pullUpScreen("NewApp.fxml", "New Application", event);
+        screen.switchScene("NewApp.fxml", "New Application");
 
 
     }
@@ -142,30 +144,4 @@ public class ReviseMenuController {
 
         }*/
     }
-
-    public static Connection connect(){
-        try {
-            Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
-        } catch (ClassNotFoundException e) {
-            System.out.println("Java DB Driver not found. Add the classpath to your module.");
-            e.printStackTrace();
-            return null;
-        }
-
-        System.out.println("Java DB driver registered!");
-        Connection connection = null;
-
-        try {
-            connection = DriverManager.getConnection("jdbc:derby:DATABASE\\ProjectC;create=true");
-        } catch (SQLException e) {
-            System.out.println("Connection failed. Check output console.");
-            e.printStackTrace();
-            return connection;
-        }
-        System.out.println("Java DB connection established!");
-
-        return connection;
-    }
-
-
 }

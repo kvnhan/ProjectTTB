@@ -14,10 +14,10 @@ public class WorkFlowController {
 
     public void buttonClicked (ActionEvent event){
         if(event.getSource() == back){
-            work.pullUpScreen("MainMenu.fxml","Main Menu", event);
+            work.switchScene("MainMenu.fxml","Main Menu");
         }
     }
     public void firstButton(ActionEvent event){
-        work.pullUpScreen("ApplicationReview.fxml", "Application Review", event);
+        work.switchScene("ApplicationReview.fxml", "Application Review");
     }
 }
