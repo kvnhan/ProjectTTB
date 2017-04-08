@@ -145,8 +145,6 @@
       <RefTableName>PRODUCT_TYPE</RefTableName>
       <RefKeyName>SQL170330085503400</RefKeyName>
       <RefColNames>PID</RefColNames>
-      <OnDelete>no-action</OnDelete>
-      <OnUpdate>no-action</OnUpdate>
     </foreign-key>
     <foreign-key id="50" parent="15" name="ALCOHOLNEWC___FK">
       <ColNames>CLASS</ColNames>
@@ -154,8 +152,6 @@
       <RefTableName>CLASS</RefTableName>
       <RefKeyName>SQL170330085440790</RefKeyName>
       <RefColNames>CID</RefColNames>
-      <OnDelete>no-action</OnDelete>
-      <OnUpdate>no-action</OnUpdate>
     </foreign-key>
     <foreign-key id="51" parent="15" name="ALCOHOLNEWAT___FK">
       <ColNames>ALCOHOL_TYPE</ColNames>
@@ -163,8 +159,6 @@
       <RefTableName>ALCH_TYPE</RefTableName>
       <RefKeyName>SQL170330085521280</RefKeyName>
       <RefColNames>ATID</RefColNames>
-      <OnDelete>no-action</OnDelete>
-      <OnUpdate>no-action</OnUpdate>
     </foreign-key>
     <column id="52" parent="16" name="CID">
       <Position>1</Position>

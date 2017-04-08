@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="search with db test:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/search_with_db_test_jar</output-path>
+    <root id="archive" name="search with db test.jar">
+      <element id="module-output" name="search with db test" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/apache/derby/derby/10.13.1.1/derby-10.13.1.1.jar" path-in-jar="/" />
+      <element id="library" level="project" name="org.apache.derby:derby:10.13.1.1" />
+    </root>
+  </artifact>
+</component>
