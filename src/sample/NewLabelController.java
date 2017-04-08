@@ -20,12 +20,11 @@ import java.util.Date;
 import javafx.scene.control.TextField;
 import java.util.Random;
 /**
- * Created by Sam Winter on 3/28/2017.
+ * Controller for NewLabel screen.
  */
 public class NewLabelController {
 
   //  ApplicationUtil appUtil = new ApplicationUtil();
-
     private FXMLLoader fxmlLoader;
     @FXML private TextField ID;
     @FXML private TextField RepID;
@@ -48,16 +47,21 @@ public class NewLabelController {
     @FXML private Button back;
 
     DatabaseUtil dbUtil = new DatabaseUtil();
-
     Connection conn = dbUtil.connect();
 
     @FXML
+    /**
+     * Checks if the "Domestic" box has been checked.
+     */
     private void handledomBox(){
         if(dom.isSelected()){
             imp.setSelected(false);
         }
     }
     @FXML
+    /**
+     * Checks if the "Imported" box has been selected.
+     */
     private void handleimpBox(){
         if(imp.isSelected()){
             dom.setSelected(false);
@@ -65,6 +69,9 @@ public class NewLabelController {
     }
 
     @FXML
+    /**
+     * Checkis if "Wine" box has been checked.
+     */
     private void handlewineBox(){
         if(wine.isSelected()){
             beer.setSelected(false);
@@ -74,6 +81,9 @@ public class NewLabelController {
     }
 
     @FXML
+    /**
+     * Checks if "Beer" box has been selected.
+     */
     private void handlebeerBox(){
         if(beer.isSelected()){
             wine.setSelected(false);
@@ -82,12 +92,20 @@ public class NewLabelController {
     }
 
     @FXML
+    /**
+     * Checks if "Other" box has been selected.
+     */
     private void handleotherBox(){
         if(other.isSelected()){
             beer.setSelected(false);
             wine.setSelected(false);
         }
     }
+
+    /**
+     * Checks if the back button has been pressed.
+     * @param event ActionEvent representing a button press.
+     */
     public void buttonClicked (javafx.event.ActionEvent event){
         try {
             if(event.getSource() == back){
@@ -106,6 +124,10 @@ public class NewLabelController {
         }
     }
 
+    /**
+     * Function to fill out application data as entered into the NewLabel screen.
+     * @throws SQLException
+     */
     public void fillOutApplication() throws SQLException{
 
         int id;
@@ -192,7 +214,12 @@ public class NewLabelController {
         }
     }
 
-
+    /**
+     * Submits an application.
+     * @param d ApplicationData object representing the application to be submitted.
+     * @param cn Connection to the database.
+     * @throws SQLException
+     */
     public void submit(ApplicationData d, Connection cn)throws SQLException{
 
         int id = d.getId();

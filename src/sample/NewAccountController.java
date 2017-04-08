@@ -27,12 +27,14 @@ public class NewAccountController {
     private String newUsername;
     private String accountChoice;
     private int userType = 0;
-
     private AccountsUtil accountsUtil = new AccountsUtil();
     private ScreenUtil screenUtil = new ScreenUtil();
     private DatabaseUtil dbUtil = new DatabaseUtil();
 
     @FXML
+    /**
+     * Initializes the New Account screen.
+     */
     public void initialize(){
         newUsernameField.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
@@ -44,6 +46,10 @@ public class NewAccountController {
         });
     }
 
+    /**
+     * Creates a new account.
+     * @param event Takes in the ActionEvent for pressing the createAccount button.
+     */
     public void createAccount(ActionEvent event){
 
         try{

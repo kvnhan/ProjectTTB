@@ -14,7 +14,7 @@ import javafx.stage.Stage;
 import java.sql.*;
 
 /**
- * Created by peternolan on 4/2/17.
+ *ReviseMenu Controller class.
  */
 //Change to a relevant path. Specify the name of the subfolder in the path and that will help to connect the db.
     //Go back to the notes from the JDBC slides. One uses a prepared statemnt and one does not
@@ -45,17 +45,14 @@ public class ReviseMenuController {
     final String choiceTwo = "Add, change or delete the stated amount of acid and/or the pH level (WINE ONLY)";
     final String choiceThree = "Change the mandatory statement of alcohol content (WINE ONLY)";
     final String choiceFour = "Add, delete, or change optional statement of alcohol content (MALT ONLY)";
-
     DatabaseUtil dbUtil = new DatabaseUtil();
-
     Connection conn = dbUtil.connect();
-
     ScreenUtil screen = new ScreenUtil();
 
     /**
      * This is buttonClicked, the function that dictates events depending on which button has been clicked.
      *
-     * @param event
+     * @param event Represents a button press.
      */
     public void buttonClicked(javafx.event.ActionEvent event) {
         try {
@@ -75,6 +72,10 @@ public class ReviseMenuController {
         }
     }
 
+    /**
+     * Switches to the New Application Screen.
+     * @param event Submit button is clicked.
+     */
     public void submitButtonClicked(javafx.event.ActionEvent event) {
 
         updateData(applicationID.getText());
@@ -83,7 +84,9 @@ public class ReviseMenuController {
 
     }
 
-
+    /**
+     * Updates the database values.
+     */
     public void changeDbValue() {
         String dataToChange = changeToSubmit.getText();
         BeerApplicationData beerData = new BeerApplicationData(1234, null, 1111, 0, "hell", "carcinogen", "brewbrew",
@@ -108,6 +111,10 @@ public class ReviseMenuController {
         }
     }
 
+    /**
+     * Currently nonfunctional: Updates data in the database.
+     * @param data String representing data to be sent to the database.
+     */
     public void updateData(String data) {
        /* Statement stmt = null;
 
