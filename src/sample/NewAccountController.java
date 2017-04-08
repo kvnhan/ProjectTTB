@@ -30,6 +30,8 @@ public class NewAccountController {
 
     private AccountsUtil accountsUtil = new AccountsUtil();
     private ScreenUtil screenUtil = new ScreenUtil();
+    Connection cn;
+    Statement sm;
     private DatabaseUtil dbUtil = new DatabaseUtil();
 
     @FXML

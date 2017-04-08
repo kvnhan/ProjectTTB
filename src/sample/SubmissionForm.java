@@ -5,20 +5,16 @@ package sample;
  */
 public class SubmissionForm {
     private int formID;
-    private enum status{
-        INCOMPLETE,
-        SUBMITED,
-        ACCEPTED,
-        REJECTED,
-        UNASSIGNED,
-        ASSIGNED,
-
-    }
     acceptanceInformation acceptanceInfo;
 
     public SubmissionForm(int formID, acceptanceInformation acceptanceInfo) {
         this.formID = formID;
         this.acceptanceInfo = acceptanceInfo;
+    }
+
+
+    public  acceptanceInformation get_info(){
+        return acceptanceInfo;
     }
 
     public int getFormID() {

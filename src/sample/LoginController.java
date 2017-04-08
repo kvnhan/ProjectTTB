@@ -34,6 +34,8 @@ public class LoginController {
     private AccountsUtil aUtil = new AccountsUtil();
 
     // for database
+    Connection cn;
+    Statement sm;
     private DatabaseUtil dbUtil = new DatabaseUtil();
 
     @FXML

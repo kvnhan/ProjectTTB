@@ -83,6 +83,7 @@ public class ReviseMenuController {
 
 
     public void changeDbValue() {
+        /*
         String dataToChange = changeToSubmit.getText();
         BeerApplicationData beerData = new BeerApplicationData(1234, null, 1111, 0, "hell", "carcinogen", "brewbrew",
                 "100 institure", "555-867-5309", "Team65@wpi.edu", null, "wong", "distilled", "100");
@@ -104,6 +105,7 @@ public class ReviseMenuController {
             beerData.setApplicantName(dataToChange);
             System.out.println(beerData.getApplicantName());
         }
+        */
     }
 
     public void updateData(String data) {

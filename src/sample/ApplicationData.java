@@ -6,8 +6,15 @@ import java.util.Date;
  */
 public abstract class ApplicationData extends SubmissionForm{
 
-    private int id;
+    private int ttbid;
+    private int repid;
+    private String serial;
+    private String address;
+    private String fancyName;
+    private String formula;
+
     private int permit_no;
+    private String infoOnBottle;
     private String source_of_product;
     private String type_of_product;
     private String brand_name;
@@ -18,13 +25,20 @@ public abstract class ApplicationData extends SubmissionForm{
     private String alcoholType;
     private String alcoholContent;
 
-
-
-    public ApplicationData(int formID, acceptanceInformation acceptanceInfo, int id, int permit_no, String source_of_product, String type_of_product, String brand_name, String address, String phone_number,
-                           String email, Date date, String applicantName, String alcoholType, String alcoholContent) {
+    public ApplicationData(int formID, acceptanceInformation acceptanceInfo, int ttbid, int repid, String serial, String address, String fancyName,
+                           String formula, int permit_no,
+                           String infoOnBottle, String source_of_product, String type_of_product,
+                           String brand_name, String phone_number, String email, Date date,
+                           String applicantName, String alcoholType, String alcoholContent) {
         super(formID, acceptanceInfo);
-        this.id = id;
+        this.ttbid = ttbid;
+        this.repid = repid;
+        this.serial = serial;
+        this.address = address;
+        this.fancyName = fancyName;
+        this.formula = formula;
         this.permit_no = permit_no;
+        this.infoOnBottle = infoOnBottle;
         this.source_of_product = source_of_product;
         this.type_of_product = type_of_product;
         this.brand_name = brand_name;
@@ -48,7 +62,7 @@ public abstract class ApplicationData extends SubmissionForm{
         return alcoholType;
     }
     public int getId() {
-        return id;
+        return ttbid;
     }
 
 
@@ -105,8 +119,31 @@ public abstract class ApplicationData extends SubmissionForm{
         this.alcoholContent = alcoholContent;
     }
 
+    public int getTtbid() {
+        return ttbid;
+    }
 
+    public int getRepid() {
+        return repid;
+    }
 
+    public String getSerial() {
+        return serial;
+    }
 
+    public String getAddress() {
+        return address;
+    }
 
+    public String getFancyName() {
+        return fancyName;
+    }
+
+    public String getFormula() {
+        return formula;
+    }
+
+    public String getInfoOnBottle() {
+        return infoOnBottle;
+    }
 }
