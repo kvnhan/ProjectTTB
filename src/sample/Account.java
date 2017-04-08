@@ -8,15 +8,16 @@ import java.util.ArrayList;
  * Created by Adonay on 4/3/2017.
  */
 public class Account implements Serializable{
-    private String username;
-    private int accessLevel;
+    private String username;/*
+    private String password;*/
     private boolean isLoggedIn;
+    private int userType;
     private ArrayList<String> inbox = new ArrayList<>();
 
 
-    public Account(String usrnm, int accL, ArrayList<String> inbox){
+    public Account(String usrnm, int uType, ArrayList<String> inbox){
         username = usrnm;
-        accessLevel = accL;
+        userType = uType;
         isLoggedIn = false;
         this.inbox = inbox;
     }
@@ -26,7 +27,7 @@ public class Account implements Serializable{
     }
 
     public int getAccessLevel() {
-        return accessLevel;
+        return userType;
     }
 
     public boolean isLoggedIn() {

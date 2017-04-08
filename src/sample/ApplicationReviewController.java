@@ -70,7 +70,8 @@ public class ApplicationReviewController extends DatabaseUtil{
         String sql = "UPDATE ALCOHOL SET status = 'approved', comments = 'comments'  WHERE id = apptoassgn";
         stm.executeUpdate(sql);
         //update inbox for account
-        sql = "UPDATE REVIEWS SET w.inbox.remove(apptoassgn) WHERE username = w.username";
+        /*
+        sql = "UPDATE REVIEWS SET w.inbox.remove(apptoassgn) WHERE username = w.username";*/
         stm.executeUpdate(sql);
     }
 
@@ -86,7 +87,8 @@ public class ApplicationReviewController extends DatabaseUtil{
         String sql = "UPDATE ALCOHOL SET status = 'rejected', comments =" + comments + " WHERE id = apptoassgn";
         stm.executeUpdate(sql);
         //update inbox for worker
-        sql = "UPDATE REVIEWS SET " + w.getInbox().remove(apptoassgn) + " WHERE username = "+ w.getUsername() +" ";
+        /*
+        sql = "UPDATE REVIEWS SET " + w.getInbox().remove(apptoassgn) + " WHERE username = "+ w.getUsername() +" ";*/
         stm.executeUpdate(sql);
     }
 

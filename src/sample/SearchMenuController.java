@@ -3,10 +3,6 @@ package sample;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 
 import java.io.File;
@@ -20,7 +16,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import java.util.List;
 import javafx.collections.ObservableList;
-import org.apache.derby.iapi.db.Database;
 
 public class SearchMenuController {
 
