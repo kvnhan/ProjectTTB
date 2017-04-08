@@ -13,7 +13,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class ApplicationReviewController {
+public class ApplicationReviewController extends DatabaseUtil{
     @FXML
     Button approve;
     @FXML
@@ -55,7 +55,7 @@ public class ApplicationReviewController {
     @FXML
     void setGoBack(ActionEvent event){
         ScreenUtil work = new ScreenUtil();
-        work.pullUpScreen("WorkFlow.fxml", "Main Menu", event);
+        work.switchScene("WorkFlow.fxml", "Main Menu");
     }
 
     @FXML
@@ -83,10 +83,10 @@ public class ApplicationReviewController {
         //get comments
         String comments = commentsField.getText();
         //update alcohol status
-        String sql = "UPDATE ALCOHOL SET status = 'rejected', comments = comments WHERE id = apptoassgn";
+        String sql = "UPDATE ALCOHOL SET status = 'rejected', comments =" + comments + " WHERE id = apptoassgn";
         stm.executeUpdate(sql);
         //update inbox for worker
-        sql = "UPDATE REVIEWS SET w.inbox.remove(apptoassgn) WHERE username = w.username";
+        sql = "UPDATE REVIEWS SET " + w.getInbox().remove(apptoassgn) + " WHERE username = "+ w.getUsername() +" ";
         stm.executeUpdate(sql);
     }
 
@@ -139,10 +139,10 @@ public class ApplicationReviewController {
         Statement stm;
         stm = conn.createStatement();
         //update alcohol status
-        String sql = "UPDATE ALCOHOL SET status = 'assigned' WHERE id = 'apptoassgn'";
+        String sql = "UPDATE ALCOHOL SET status = 'assigned', aid = " + w.getUsername() + "WHERE id = "+ apptoassgn + "";
         stm.executeUpdate(sql);
         //update inbox for worker
-        sql = "UPDATE REVIEWS SET inbox.add(apptoassgn) WHERE id = w.id";
+        sql = "UPDATE REVIEWS SET inbox = " + w.getInbox().add(apptoassgn) +" WHERE id = " + w.getUsername() +"";//TODO: Check syntax on set inbox
         stm.executeUpdate(sql);
     }
 
@@ -158,29 +158,5 @@ public class ApplicationReviewController {
         for (int i = 0; i < unassigForms.size(); i++) {
             addToInbox(getSmallWorker(), unassigForms.get(i));
         }
-    }
-
-    public static Connection connect(){
-        try {
-            Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
-        } catch (ClassNotFoundException e) {
-            System.out.println("Java DB Driver not found. Add the classpath to your module.");
-            e.printStackTrace();
-            return null;
-        }
-
-        System.out.println("Java DB driver registered!");
-        Connection connection = null;
-
-        try {
-            connection = DriverManager.getConnection("jdbc:derby:ProjectC;create=true");
-        } catch (SQLException e) {
-            System.out.println("Connection failed. Check output console.");
-            e.printStackTrace();
-            return connection;
-        }
-        System.out.println("Java DB connection established!");
-
-        return connection;
     }
 }

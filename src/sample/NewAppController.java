@@ -13,11 +13,11 @@ public class NewAppController {
 
     public void buttonClicked (javafx.event.ActionEvent event){
         if(event.getSource() == back){
-            work.pullUpScreen("MainMenu.fxml","Main Menu", event);
+            work.switchScene("MainMenu.fxml","Main Menu");
         }else if (event.getSource() == newApp) {
-            work.pullUpScreen("NewLabel.fxml","New Application", event);
+            work.switchScene("NewLabel.fxml","New Application");
         } else if (event.getSource() == oldApp) {
-            work.pullUpScreen("ReviseMenu.fxml","Revise Application", event);
+            work.switchScene("ReviseMenu.fxml","Revise Application");
         }
 
     }

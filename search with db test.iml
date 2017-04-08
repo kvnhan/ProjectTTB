@@ -7,6 +7,15 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" exported="" name="org.apache.derby:derby:10.13.1.1" level="project" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="file://E:/Program Files/Java/jdk1.8.0_121/db/lib" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+        <jarDirectory url="file://E:/Program Files/Java/jdk1.8.0_121/db/lib" recursive="false" />
+      </library>
+    </orderEntry>
   </component>
 </module>

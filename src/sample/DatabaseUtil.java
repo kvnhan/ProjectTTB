@@ -1,7 +1,8 @@
 package sample;
 
 import java.sql.*;
-
+import java.util.ArrayList;
+import java.util.List;
 /**
  * Created by Adonay on 4/6/2017.
  */
@@ -13,28 +14,31 @@ public class DatabaseUtil {
     private String ALCH_TYPE_FIELDS = " (ATID, CLASS)";
     private String ALCOHOL_FIELDS = " (AID, NAME, APPELLATION, SULFITE_DESC, ALCH_CONTENT, NET_CONTENT, HEALTH_WARNING, PRODUCT_TYPE, CLASS, LABEL_LEGIBILLITY, LABEL_SIZE, FORMULAS, ALCOHOL_TYPE, BOTTLERS_INFO, BRAND_NAME)";
     private String CLASS_FIELDS = " (CID, CLASS)";
-    private String FORM_FIELDS = " (FID, DATECOMPLETED, AID, STATUS, ALCID, TTBID, PERMITNO, BRANDNAME, ADDRESS, PHONENUMBER, EMAIL, PHLEVEL, VINTAGEDATE, NAME_OF_APPLICANT)";
+    private String FORM_FIELDS = "(FID, TTBID, REPID, SERIAL, ADDRESS, FANCYNAME, FORMULA, GRAPEVAR, APPELLATION, PERMITNO, INFO_ON_BOTTLE, SOURCE, TYPE, BRANDNAME, PHONE, EMAIL" +
+            ", DATE, APPLICANTNAME, ALCOHOLTYPE, VINTAGE, PH, STATUS)";
     private String PRODUCT_TYPE_FIELDS = " (PID, TYPE)";
     private String REVIEWS_FIELDS = " (FID, STATUS, DECIDER, DATE, GENERAL, ORIGINCODE, BRANDNAME, FACIFULNAME, GRAPEVAR, WINEVINTAGE, APPELLATION, BOTTLER, FORMULA, SULFITE, LEGIBILITY, LABELSIZE, DESCRIP)";
     private String STATUS_FIELDS = " (SID, STATUS)";
     private String USER_TYPE_FIELDS = " (UID, TYPE)";
 
 
-    private Connection conn;
+    private Connection conn = null;
     private ResultSet rset;
-    private Statement stmt;
+    private Statement stmt = null;
 
     DatabaseUtil(){
         conn = connect();
+
     }
 
+    // Connect
     public static Connection connect(){
         try {
             Class.forName(driver);
         } catch (ClassNotFoundException e) {
             System.out.println("Java DB Driver not found. Add the classpath to your module.");
             e.printStackTrace();
-            return null;
+
         }
 
         System.out.println("Java DB driver registered!");
@@ -51,6 +55,7 @@ public class DatabaseUtil {
 
         return connection;
     }
+
 
     private boolean containsQuery(String query) throws SQLException {
         boolean contains = false;
@@ -77,6 +82,13 @@ public class DatabaseUtil {
 
     }
 
+    //To check if a double value exists in the table
+    public boolean containsDouble(String TABLENAME, String FIELDNAME, double value) throws SQLException {
+
+        return containsQuery("SELECT * FROM " + TABLENAME+ " WHERE ACCOUNT." + FIELDNAME + " = " + value);
+
+    }
+
 
     public void addAccount(String username, String password, int isLoggedIn, int userType) throws SQLException{
         String values = "'" + username + "', '" + password + "', " + isLoggedIn + "," + userType + " )";
@@ -98,9 +110,40 @@ public class DatabaseUtil {
         addToTable("CLASS", CLASS_FIELDS, values, "CID");
     }
 
-    public void addForm(String dateCompleted, int aid, int status, int alcid, int ttbid, int permitno, String brandName, String address, String phoneNumber, String email, double phLevel, String vintageDate, String nameOfApplicant) throws SQLException{
-        String values = "DATE('" + dateCompleted + "'), " + aid + ", " + status + ", " + alcid + ", " + ttbid + ", " + permitno + ", '" + brandName + "', '" + address + "', '"+ phoneNumber + "', '" + email + "', " + phLevel + ", DATE('" + vintageDate + "'), '" + nameOfApplicant + "')" ;
-        addToTable("FORM", FORM_FIELDS, values, "FID");
+    public void addBeerForm( int ttbid, int repid, String serial, String address, String fancyName, String formula, int permit_no, String infoOnBottle, String source_of_product,
+                            String type_of_product, String brand_name, String phone_number, String email, String dateFormat, String applicantName, String alcoholType, String alcoholContent, String status) throws  SQLException{
+        stmt = this.conn.createStatement();
+        int fid;
+        stmt = conn.createStatement();
+        rset = stmt.executeQuery("SELECT * FROM FORM ORDER BY FID DESC");
+        // checks if table is empty. adds one to previous row's ID for new one if it is not empty. sets ID = 1 if it is
+        if (rset.next()) {
+            fid = rset.getInt("FID") + 1;
+        } else {
+            fid = 1;
+        }
+        stmt.executeUpdate("INSERT INTO FORM (FID, TTBID, REPID, SERIAL, ADDRESS, FANCYNAME, FORMULA, PERMITNO, INFO_ON_BOTTLE, SOURCE, TYPE, BRANDNAME, PHONE, " +
+                "EMAIL, DATE, APPLICANTNAME, ALCOHOLTYPE, STATUS) " +
+                "VALUES ("+fid+","+ttbid+","+repid+",'"+serial+"','"+address+"', '"+fancyName+"', '"+formula+"', "+permit_no+", '"+infoOnBottle+"','"+source_of_product+"', '"+type_of_product+"'" +
+                ", '"+brand_name+"','"+phone_number+"', '"+email+"', '"+dateFormat+"', '"+applicantName+"', '"+alcoholType+"', '"+status+"')");
+    }
+
+    public void addWineForm( int ttbid, int repid, String serial, String address, String fancyName, String formula, String grapeVar, String appellation, int permit_no, String infoOnBottle, String source_of_product,
+                             String type_of_product, String brand_name, String phone_number, String email, String dateFormat, String applicantName, String alcoholType,
+                             int vintage, double ph, String alcoholContent, String status) throws  SQLException{
+        stmt = this.conn.createStatement();
+        int fid;
+        rset = stmt.executeQuery("SELECT * FROM FORM ORDER BY FID DESC");
+        // checks if table is empty. adds one to previous row's ID for new one if it is not empty. sets ID = 1 if it is
+        if (rset.next()) {
+            fid = rset.getInt("FID") + 1;
+        } else {
+            fid = 1;
+        }
+        stmt.executeUpdate("INSERT INTO FORM (FID, TTBID, REPID, SERIAL, ADDRESS, FANCYNAME, FORMULA, GRAPEVAR, APPELLATION, PERMITNO, INFO_ON_BOTTLE, SOURCE, TYPE, BRANDNAME, PHONE, EMAIL" +
+                ", DATE, APPLICANTNAME, ALCOHOLTYPE, VINTAGE, PH, STATUS) " +
+                "VALUES ("+fid+","+ttbid+","+repid+",'"+serial+"','"+address+"', '"+fancyName+"', '"+formula+"','"+grapeVar+"','"+appellation+"',"+permit_no+", '"+infoOnBottle+"','"+source_of_product+"', '"+type_of_product+"'" +
+                ", '"+brand_name+"','"+phone_number+"', '"+email+"', '"+dateFormat+"', '"+applicantName+"', '"+alcoholType+"', "+vintage+", "+ph+",'"+status+"')");
     }
 
     public void addProductType(String type) throws SQLException{
@@ -183,5 +226,52 @@ public class DatabaseUtil {
         stmt.close();
 
         return isAdded;
+    }
+
+    // Code used to search Alcohol table based on alcohol type
+    public List<AlcoholData> searchAlcoholWithType(int alcoholType) throws SQLException{
+        String query = "SELECT * FROM ALCOHOL WHERE ALCOHOL.ALCOHOL_TYPE = " + alcoholType;
+
+        return searchAlcoholTable(query);
+    }
+
+    // Code used to search Alcohol table based on brand name. Uses partial search
+    public List<AlcoholData> searchAlcoholBrand(String brandName) throws SQLException{
+        String query = "SELECT * FROM ALCOHOL WHERE ALCOHOL.BRAND_NAME LIKE '"+brandName+"%'";
+
+        return searchAlcoholTable(query);
+    }
+
+    private List<AlcoholData> searchAlcoholTable(String query) throws SQLException{
+        List<AlcoholData> AlcoholDataList = new ArrayList<AlcoholData>();
+        AlcoholData a;
+
+        stmt = conn.createStatement();
+
+        rset = stmt.executeQuery(query);
+
+        while(rset.next()){
+            String ID = String.format("%1$"+3+ "s", rset.getString("AID"));
+            String name = String.format("%1$"+25+ "s", rset.getString("NAME"));
+            String brandname = String.format("%1$"+25+ "s", rset.getString("BRAND_NAME"));
+            String app = String.format("%1$"+22+ "s", rset.getString("APPELLATION"));
+            String type = String.format("%1$"+10+ "s", rset.getString("ALCOHOL_TYPE"));
+
+            a = new AlcoholData(ID, name, brandname, app, type);
+            AlcoholDataList.add(a);
+        }
+
+        return AlcoholDataList;
+
+    }
+
+    // Change status after government agents finish reviewing an application
+    public void changeSatus(String newStatus, int fid) throws SQLException{
+        String query = "UPDATE FORM SET STATUS = ? WHERE FID = ?";
+
+        PreparedStatement pstmt = conn.prepareStatement(query);
+        pstmt.setString(1, newStatus);
+        pstmt.setInt(2, fid);
+        pstmt.executeUpdate();
     }
 }

@@ -1,9 +1,6 @@
 package sample;
 import java.util.Date;
 
-/**
- * Created by Kien Nhan on 4/3/2017.
- */
 public class acceptanceInformation {
 
     private String status;
@@ -41,5 +38,13 @@ public class acceptanceInformation {
 
     public void setExpirationDate(Date expirationDate) {
         this.expirationDate = expirationDate;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }
