@@ -35,6 +35,21 @@ public class SearchMenuController {
 
     private DatabaseUtil dbUtil = new DatabaseUtil();
 
+    @FXML
+    public void initialize(){
+        // to get information (alcohol data) from the double clicked row in the table
+        table.setRowFactory(tv -> {
+            TableRow<AlcoholData> row = new TableRow<AlcoholData>();
+            row.setOnMouseClicked(event -> {
+                if(event.getClickCount() == 2 && (! row.isEmpty())){
+                    AlcoholData rowData = row.getItem();
+                    screenUtil.createAlertBox("Information: " + rowData.getName(), "Alcohol ID: \t" + rowData.getID() + "\nName: \t" + rowData.getName() + "\nBrand Name: \t" + rowData.getBrandName() + "\nAppellation: \t" + rowData.getAppellation() + "\nType: \t" +rowData.getType());
+                }
+            });
+            return row;
+        });
+    }
+
 
     public void getResults(){
         table.getColumns().clear();
