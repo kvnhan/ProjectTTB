@@ -7,7 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 
 /**
- * Created by Adonay on 3/27/2017.
+ * Controller class for Main Menu screen.
  */
 public class MainMenuController{
 

@@ -20,12 +20,11 @@ import java.util.Date;
 import javafx.scene.control.TextField;
 import java.util.Random;
 /**
- * Created by Sam Winter on 3/28/2017.
+ * Controller for NewLabel screen.
  */
 public class NewLabelController {
 
   //  ApplicationUtil appUtil = new ApplicationUtil();
-
     private FXMLLoader fxmlLoader;
     @FXML private TextField ID;
     @FXML private TextField RepID;
@@ -47,17 +46,22 @@ public class NewLabelController {
     @FXML private Button Submit;
     @FXML private Button back;
 
-    Connection cn;
-    Statement sm;
-    DatabaseUtil db = new DatabaseUtil();
+    DatabaseUtil dbUtil = new DatabaseUtil();
+    Connection conn = dbUtil.connect();
 
     @FXML
+    /**
+     * Checks if the "Domestic" box has been checked.
+     */
     private void handledomBox(){
         if(dom.isSelected()){
             imp.setSelected(false);
         }
     }
     @FXML
+    /**
+     * Checks if the "Imported" box has been selected.
+     */
     private void handleimpBox(){
         if(imp.isSelected()){
             dom.setSelected(false);
@@ -65,6 +69,9 @@ public class NewLabelController {
     }
 
     @FXML
+    /**
+     * Checkis if "Wine" box has been checked.
+     */
     private void handlewineBox(){
         if(wine.isSelected()){
             beer.setSelected(false);
@@ -74,6 +81,9 @@ public class NewLabelController {
     }
 
     @FXML
+    /**
+     * Checks if "Beer" box has been selected.
+     */
     private void handlebeerBox(){
         if(beer.isSelected()){
             wine.setSelected(false);
@@ -82,12 +92,20 @@ public class NewLabelController {
     }
 
     @FXML
+    /**
+     * Checks if "Other" box has been selected.
+     */
     private void handleotherBox(){
         if(other.isSelected()){
             beer.setSelected(false);
             wine.setSelected(false);
         }
     }
+
+    /**
+     * Checks if the back button has been pressed.
+     * @param event ActionEvent representing a button press.
+     */
     public void buttonClicked (javafx.event.ActionEvent event){
         try {
             if(event.getSource() == back){
@@ -106,38 +124,30 @@ public class NewLabelController {
         }
     }
 
+    /**
+     * Function to fill out application data as entered into the NewLabel screen.
+     * @throws SQLException
+     */
     public void fillOutApplication() throws SQLException{
 
-         int fid;
-         int ttbid;
-         int repid;
-         String serial;
-         String address;
-         String fancyName = "";
-         String formula = "";
-         String grape_varietal = "";
-         String appellation = "";
-         int permit_no;
-         String infoOnBottle = "";
-         String source_of_product = "";
-         String type_of_product = "";
-         String brand_name;
-         String phone_number;
-         String email;
-         Date date = new Date();
-         String dateFormat = date.toString();
-         String applicantName;
-         String alcoholType = "";
-         String alcoholContent = "";
-         int vintage_date;
-         double ph_level;
+        int id;
+        int permit_no;
+        String source_of_product = "";
+        String type_of_product = "";
+        String brand_name;
+        String phone_number;
+        String email;
+        String address;
+        Date date = new Date();
+        String applicantName;
+        String alcoholType = "";
+        String alcoholContent = "";
+        int vintage;
+        double pHLevel;
+        int formID;
 
-        ttbid = Integer.parseInt(ID.getText());
-        repid = Integer.parseInt(RepID.getText());
-        permit_no = Integer.parseInt(PlantReg.getText());
-        formula = Formula.getText();
-        serial = (SerialNo.getText());
-
+        id = Integer.parseInt(ID.getText());
+        permit_no = Integer.parseInt(RepID.getText());
 
         if (dom.isSelected()) {
             source_of_product = "DOMESTIC";
@@ -147,6 +157,7 @@ public class NewLabelController {
             source_of_product = "";
 
         }
+
 
         if (wine.isSelected()) {
             type_of_product = "WINE";
@@ -164,97 +175,78 @@ public class NewLabelController {
         email = EmailAddress.getText();
         applicantName = Name.getText();
         address = Address.getText();
-        vintage_date = Integer.parseInt(Vintage.getText());
-        ph_level = Double.parseDouble(pH.getText());
-        fid = 1;
+        vintage = Integer.parseInt(Vintage.getText());
+        pHLevel = Double.parseDouble(pH.getText());
+
+        Random rn = new Random();
+        // May need to check is there are other forms in the database that has same form id
+        // If the the form ID exists in the database, rerun the rn()
+        formID = rn.nextInt(1000 - 1 + 1) + 1;
+
 
         acceptanceInformation acceptanceInfo = new acceptanceInformation(date, applicantName,
-                null, "IN PROGRESS");
+                null, "SUBMITED");
         if (wine.isSelected()) {
-            WineApplicationData Data = new WineApplicationData(fid, acceptanceInfo,ttbid, repid, serial,address,
-                    fancyName, formula, grape_varietal, appellation, permit_no, infoOnBottle,
-                    source_of_product, type_of_product, brand_name, phone_number, email, date, applicantName,
-                    alcoholType, alcoholContent, vintage_date, ph_level);
-            submitWine(Data);
+            ApplicationData Data = new WineApplicationData(formID, acceptanceInfo, id, permit_no,
+                    brand_name, source_of_product, type_of_product, address, phone_number,
+                    email, date, applicantName, alcoholType, alcoholContent,
+                    vintage, pHLevel);
+            submit(Data, conn);
             System.out.println("This somewhat works");
 
         } else if (beer.isSelected()) {
-            BeerApplicationData Data = new BeerApplicationData(fid, acceptanceInfo,ttbid, repid, serial,address,
-                    fancyName, formula, permit_no, infoOnBottle,
-                    source_of_product, type_of_product, brand_name, phone_number, email, date, applicantName,
-                    alcoholType, alcoholContent);
-            submitBeer(Data);
+            ApplicationData Data = new BeerApplicationData(formID, acceptanceInfo, id, permit_no, source_of_product, type_of_product, brand_name,
+                    address, phone_number, email, date, applicantName, alcoholType, alcoholContent);
+            submit(Data, conn);
             System.out.println("This works too");
 
         } else if (other.isSelected()) {
-            BeerApplicationData Data = new BeerApplicationData(fid, acceptanceInfo,ttbid, repid, serial,address,
-                    fancyName, formula, permit_no, infoOnBottle,
-                    source_of_product, type_of_product, brand_name, phone_number, email, date, applicantName,
-                    alcoholType, alcoholContent);
-            submitBeer(Data);
+            ApplicationData Data = new BeerApplicationData(formID, acceptanceInfo, id, permit_no, source_of_product, type_of_product, brand_name,
+                    address, phone_number, email, date, applicantName, alcoholType, alcoholContent);
+            submit(Data, conn);
             System.out.println("This works too");
 
+        }else{
+            ApplicationData Data = new BeerApplicationData(formID, acceptanceInfo, id, permit_no, source_of_product, type_of_product, brand_name,
+                    address, phone_number, email, date, applicantName, alcoholType, alcoholContent);
+            submit(Data, conn);
+            System.out.println("Hi");
         }
     }
 
-    public void submitWine(WineApplicationData wd)throws SQLException{
-        int fid = wd.getFormID();
-        int ttbid = wd.getId();
-        int repid = wd.getRepid();
-        String serial = wd.getSerial();
-        String address = wd.getAddress();
-        String fancyName = wd.getFancyName();
-        String formula = wd.getFormula();
-        String grape_varietal = wd.getGrape_varietal();
-        String appellation = wd.getAppellation();
-        int permit_no = wd.getPermit_no();
-        String infoOnBottle = wd.getInfoOnBottle();
-        String source_of_product = wd.getSource_of_product();
-        String type_of_product = wd.getType_of_product();
-        String brand_name = wd.getBrand_name();
-        String phone_number = wd.getPhone_number();
-        String email = wd.getEmail();
-        Date date = wd.getDate();
-        String dateFormat = date.toString();
-        String applicantName = wd.getApplicantName();
-        String alcoholType = wd.getAlcoholType();
-        String alcoholContent = wd.getAlcoholContent();
-        int vintage_date = wd.getVintage_date();
-        double ph_level = wd.getPh_level();
-        String status = wd.getAcceptanceInfo().getStatus();
+    /**
+     * Submits an application.
+     * @param d ApplicationData object representing the application to be submitted.
+     * @param cn Connection to the database.
+     * @throws SQLException
+     */
+    public void submit(ApplicationData d, Connection cn)throws SQLException{
 
+        int id = d.getId();
+        int permit_no = d.getPermit_no();
+        String source_of_product;
+        String type_of_product = "";
+        String brand_name = d.getBrand_name();
+        String phone_number = d.getPhone_number();
+        String email = d.getEmail();
+        String address = "";
+        Date date = null;
+        String applicantName = d.getApplicantName();
+        String alcoholType = d.getAlcoholType();
+        String alcoholContent = d.getAlcoholContent();
+        Date vintage = null;
+        double pHLevel = 0;
+        int formID = d.getFormID();
+        int COMPLETE = 1;
+        System.out.println("Type: " + d.getAlcoholType());
+        Statement sm = cn.createStatement();
+        if(d.getAlcoholType().equals("WINE")){
+            sm.executeUpdate("INSERT INTO FORM (FID, AID, STATUS, ALCID, TTBID, PERMITNO, BRANDNAME, ADDRESS,PHONENUMBER, EMAIL, PHLEVEL, NAME_OF_APPLICANT) VALUES ("+formID+","+id+","+COMPLETE+","+id+","+id+","+permit_no+",'"+brand_name+"','"+address+"','"+phone_number+"','"+email+"',"+pHLevel+",'"+applicantName+"')");
 
+        }else{
+            sm.executeUpdate("INSERT INTO FORM (FID, AID, STATUS, ALCID, TTBID, PERMITNO, BRANDNAME, ADDRESS, PHONENUMBER, EMAIL, NAME_OF_APPLICANT) VALUES ("+formID+","+id+","+COMPLETE+","+id+","+id+","+permit_no+",'"+brand_name+"','"+address+"','"+phone_number+"','"+email+"','"+applicantName+"')");
 
-        db.addWineForm(ttbid,repid, serial,address, fancyName, formula, grape_varietal, appellation, permit_no, infoOnBottle, source_of_product,
-                type_of_product, brand_name, phone_number, email, dateFormat, applicantName,alcoholType,
-        vintage_date, ph_level, alcoholContent, status);
-
-
-    }
-
-    public void submitBeer(BeerApplicationData bd) throws SQLException{
-        int ttbid = bd.getId();
-        int repid = bd.getRepid();
-        String serial = bd.getSerial();
-        String address = bd.getAddress();
-        String fancyName = bd.getFancyName();
-        String formula = bd.getFormula();
-        int permit_no = bd.getPermit_no();
-        String infoOnBottle = bd.getInfoOnBottle();
-        String source_of_product = bd.getSource_of_product();
-        String type_of_product = bd.getType_of_product();
-        String brand_name = bd.getBrand_name();
-        String phone_number = bd.getPhone_number();
-        String email = bd.getEmail();
-        Date date = bd.getDate();
-        String dateFormat = date.toString();
-        String applicantName = bd.getApplicantName();
-        String alcoholType = bd.getAlcoholType();
-        String alcoholContent = bd.getAlcoholContent();
-        String status = bd.getAcceptanceInfo().getStatus();
-
-        db.addBeerForm(ttbid, repid, serial, address, fancyName, formula, permit_no, infoOnBottle, source_of_product, type_of_product, brand_name, phone_number, email,
-                dateFormat, applicantName, alcoholType, alcoholContent, status);
+        }
 
     }
 

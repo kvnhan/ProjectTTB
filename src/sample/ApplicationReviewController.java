@@ -12,7 +12,9 @@ import java.lang.reflect.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Scanner;
-
+/**
+ * Controller for Application Review Screen.
+ */
 public class ApplicationReviewController extends DatabaseUtil{
     @FXML
     Button approve;
@@ -41,6 +43,10 @@ public class ApplicationReviewController extends DatabaseUtil{
     @FXML
     TextArea commentsField;
     //for when switching to this scene from inbox
+   // @FXML
+   // public void initialize(){
+    //    approve.setText(accountsUtil.getInbox());
+    //}
     /*      repID.setText(application.ID);
             registryNo.setText("0000");
             prodSource.setText("TEST");
@@ -59,8 +65,10 @@ public class ApplicationReviewController extends DatabaseUtil{
     }
 
     @FXML
-
     //TODO: Fix setApprove - needs correct query fields for sql
+    /**
+     * Sets an Application status to "APPROVED" and adds comments to the Application.
+     */
     void setApprove() throws SQLException{
         Statement stm;
         stm = conn.createStatement();
@@ -70,14 +78,15 @@ public class ApplicationReviewController extends DatabaseUtil{
         String sql = "UPDATE ALCOHOL SET status = 'approved', comments = 'comments'  WHERE id = apptoassgn";
         stm.executeUpdate(sql);
         //update inbox for account
-        /*
-        sql = "UPDATE REVIEWS SET w.inbox.remove(apptoassgn) WHERE username = w.username";*/
+        sql = "UPDATE REVIEWS SET w.inbox.remove(apptoassgn) WHERE username = w.username";
         stm.executeUpdate(sql);
     }
 
     @FXML
-
     //TODO: fix setReject - needs correct query fields for sql
+    /**
+     * Sets an Application status to "REJECTED" and adds comments to the Application.
+     */
     void setReject() throws SQLException{
         Statement stm;
         stm = conn.createStatement();
@@ -87,14 +96,18 @@ public class ApplicationReviewController extends DatabaseUtil{
         String sql = "UPDATE ALCOHOL SET status = 'rejected', comments =" + comments + " WHERE id = apptoassgn";
         stm.executeUpdate(sql);
         //update inbox for worker
-        /*
-        sql = "UPDATE REVIEWS SET " + w.getInbox().remove(apptoassgn) + " WHERE username = "+ w.getUsername() +" ";*/
+       // sql = "UPDATE REVIEWS SET " + w.getInbox().remove(apptoassgn) + " WHERE username = "+ w.getUsername() +" ";
         stm.executeUpdate(sql);
     }
 
-
-
-    //creates a list of unassigned applications
+    /**
+     * Gets a list of all Applications that have the status "UNASSIGNED".
+     *
+     * @return Returns an ArrayList of the IDs of the unassigned Applications. The IDs are represented
+     * by Strings.
+     * @throws ClassNotFoundException
+     * @throws SQLException
+     */
     private static ArrayList<String> getUnassigForms() throws ClassNotFoundException, SQLException {
         Connection conn = connect();
         Statement stm;
@@ -113,8 +126,15 @@ public class ApplicationReviewController extends DatabaseUtil{
         return unassforms;
     }
 
-    //goes through a list of unassigned applications
-    //finds worker with the least amount of applications
+    /**
+     * Finds the government account in the database with the least number of applications in its
+     * inbox.
+     *
+     * @return Returns the government Account with the smallest number of applications in its
+     * inbox.
+     * @throws ClassNotFoundException
+     * @throws SQLException
+     */
     Account getSmallWorker() throws ClassNotFoundException, SQLException{//TODO: find out fields + name for govt. worker
         Statement stm;
         stm = conn.createStatement();
@@ -125,6 +145,12 @@ public class ApplicationReviewController extends DatabaseUtil{
         return worker;
     }
 
+    /**
+     * Converts an Array object to an ArrayList object. The datatype stored is String.
+     *
+     * @param input The Array of Strings to be converted to an ArrayList.
+     * @return Returns an ArrayList of Strings.
+     */
     ArrayList<String> ArrayToArrayList(String[] input){
         ArrayList<String> returnThing = new ArrayList<String>();
         for(int i=0; i<input.length; i++){
@@ -133,10 +159,15 @@ public class ApplicationReviewController extends DatabaseUtil{
         return returnThing;
     }
 
-
-    //adds an application to a worker
-    //alters the status of the application to assigned
-    //pushes the changes to the worker and the application
+    /**
+     * Takes a government account and an application ID and assigns the application to
+     * the specified account by adding the ID string to the account's inbox.
+     *
+     * @param w          Government account that the application will be assigned to.
+     * @param apptoassgn String representing the ID of the application to be assigned.
+     * @throws ClassNotFoundException
+     * @throws SQLException
+     */
     void addToInbox(Account w, String apptoassgn) throws ClassNotFoundException, SQLException{
         Statement stm;
         stm = conn.createStatement();
@@ -154,7 +185,6 @@ public class ApplicationReviewController extends DatabaseUtil{
      * @throws ClassNotFoundException
      * @throws SQLException
      */
-    //adds all the unassigned forms to workers inboxes
     void addAllUnassigned() throws ClassNotFoundException, SQLException{
         ArrayList<String> unassigForms = getUnassigForms();
         for (int i = 0; i < unassigForms.size(); i++) {

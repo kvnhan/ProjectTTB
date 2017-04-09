@@ -2,7 +2,7 @@ package sample;
 import java.util.Date;
 
 /**
- * Created by Kien Nhan on 4/3/2017.
+ * Abstract Class for Application Data.
  */
 public abstract class ApplicationData extends SubmissionForm{
 

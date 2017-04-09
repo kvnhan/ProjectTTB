@@ -6,8 +6,15 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+/**
+ * Class for the NewLabel Menu.
+ */
 public class NewLabelMenu extends Application {
-
+    /**
+     * Initializes the NewLabelMenu screen.
+     * @param primaryStage Primary stage for the application.
+     * @throws Exception
+     */
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("../../../Project UI/src/sample/NewLabel.fxml"));
