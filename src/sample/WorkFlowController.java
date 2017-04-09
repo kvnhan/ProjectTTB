@@ -24,6 +24,7 @@ public class WorkFlowController {
         if(event.getSource() == back){
             work.switchScene("MainMenu.fxml","Main Menu");
         }
+
     }
 
     /**

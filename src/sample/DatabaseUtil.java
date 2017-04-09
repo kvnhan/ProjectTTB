@@ -9,7 +9,7 @@ import java.util.List;
 public class DatabaseUtil {
 
     private static String driver = "org.apache.derby.jdbc.EmbeddedDriver";
-    private static String connectionURL = "jdbc:derby:DATABASE\\ProjectC;create=true";
+    private static String connectionURL = "jdbc:derby:DATABASE/ProjectC;create=true";
     private String ACCOUNT_FIELDS = " (AID, USERNAME, PASSWORDHASH, ISLOGGEDIN, USER_TYPE)";
     private String ALCH_TYPE_FIELDS = " (ATID, CLASS)";
     private String ALCOHOL_FIELDS = " (AID, NAME, APPELLATION, SULFITE_DESC, ALCH_CONTENT, NET_CONTENT, HEALTH_WARNING, PRODUCT_TYPE, CLASS, LABEL_LEGIBILLITY, LABEL_SIZE, FORMULAS, ALCOHOL_TYPE, BOTTLERS_INFO, BRAND_NAME)";
@@ -162,7 +162,7 @@ public class DatabaseUtil {
     // DOES NOT WORK
     public void clearTable(String TABLENAME) throws SQLException{
 
-        String query = "DELETE FROM " + TABLENAME;
+        String query = "DROP TABLE " + TABLENAME;
         stmt = conn.createStatement();
 
         rset = stmt.executeQuery(query);

@@ -1,47 +1,81 @@
 package sample;
 
+
+
 import java.util.Date;
 
+
+
 /**
- * Contains data specific to wine applications.
+
+ * Created by Kien Nhan on 4/3/2017.
+
  */
+
 public class WineApplicationData extends ApplicationData{
-    private enum alcholType{
-        WINE
-    }
+
+
+
     private int vintage_date;
+
     private double ph_level;
 
-    /**
-     * Constructor for a Wine Application. Inherits all fields from ApplicationData
-     * and contains extra data relating to wines.
-     * @param vintage_date Int representing the date of the vintage.
-     * @param ph_level Double representing the wine's pH.
-     */
-    public WineApplicationData(int formID, acceptanceInformation acceptanceInfo, int id, int permit_no,
-                               String brand_name, String source_of_product, String type_of_product, String address, String phone_number,
-                               String email, Date date, String applicantName, String alcoholType, String alcoholContent,
-                               int vintage_date, double ph_level) {
-        super(formID, acceptanceInfo, id, permit_no, brand_name,source_of_product, type_of_product,
-                address, phone_number, email, date, applicantName, alcoholType, alcoholContent);
+    private String grape_varietal;
+
+    private String appellation;
+
+
+
+    public WineApplicationData(int formID, acceptanceInformation acceptanceInfo, int ttbid, int repid, String serial, String address,
+
+                               String fancyName, String formula, String grape_varietal, String appellation, int permit_no, String infoOnBottle,
+
+                               String source_of_product, String type_of_product, String brand_name, String phone_number, String email, Date date, String applicantName,
+
+                               String alcoholType, String alcoholContent, int vintage_date, double ph_level) {
+
+        super(formID, acceptanceInfo, ttbid, repid, serial, address, fancyName, formula,permit_no, infoOnBottle, source_of_product, type_of_product, brand_name, phone_number, email, date, applicantName, alcoholType, alcoholContent);
+
         this.vintage_date = vintage_date;
+
         this.ph_level = ph_level;
 
+        this.grape_varietal = grape_varietal;
+
+        this.appellation = appellation;
+
     }
+
+
 
     public int getVintage_date() {
+
         return vintage_date;
+
     }
 
-    public void setVintage_date(int vintage_date) {
-        this.vintage_date = vintage_date;
-    }
+
 
     public double getPh_level() {
+
         return ph_level;
+
     }
 
-    public void setPh_level(double ph_level) {
-        this.ph_level = ph_level;
+
+
+    public String getGrape_varietal() {
+
+        return grape_varietal;
+
     }
+
+
+
+    public String getAppellation() {
+
+        return appellation;
+
+    }
+
 }

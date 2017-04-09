@@ -14,17 +14,17 @@ import javafx.stage.Stage;
 import java.sql.*;
 
 /**
- *ReviseMenu Controller class.
+ * Created by peternolan on 4/2/17.
  */
 //Change to a relevant path. Specify the name of the subfolder in the path and that will help to connect the db.
-    //Go back to the notes from the JDBC slides. One uses a prepared statemnt and one does not
-    //Figure out how the Data is set up.
-    //Find the attributes of the object to contain the information.
-    //Create a program that does a search on the table and maps that to the resulting java object
-    //Have it be separate for each class.
-    //Quick Exercise: pick a small table, write the code that querys the table and query for one or several records and figure out how I would stick those records into a java class
-    //After that, modify it to return the java object.
-    //Also, might want to create code that updates the information in the database.
+//Go back to the notes from the JDBC slides. One uses a prepared statemnt and one does not
+//Figure out how the Data is set up.
+//Find the attributes of the object to contain the information.
+//Create a program that does a search on the table and maps that to the resulting java object
+//Have it be separate for each class.
+//Quick Exercise: pick a small table, write the code that querys the table and query for one or several records and figure out how I would stick those records into a java class
+//After that, modify it to return the java object.
+//Also, might want to create code that updates the information in the database.
 
 
 public class ReviseMenuController {
@@ -45,16 +45,19 @@ public class ReviseMenuController {
     final String choiceTwo = "Add, change or delete the stated amount of acid and/or the pH level (WINE ONLY)";
     final String choiceThree = "Change the mandatory statement of alcohol content (WINE ONLY)";
     final String choiceFour = "Add, delete, or change optional statement of alcohol content (MALT ONLY)";
+
     DatabaseUtil dbUtil = new DatabaseUtil();
+
     Connection conn = dbUtil.connect();
+
     ScreenUtil screen = new ScreenUtil();
 
     /**
      * This is buttonClicked, the function that dictates events depending on which button has been clicked.
      *
-     * @param event Represents a button press.
+     * @param event
      */
-    public void buttonClicked(javafx.event.ActionEvent event) {
+    public void buttonClicked(ActionEvent event) {
         try {
             if (event.getSource() == back) {
                 fxmlLoader = new FXMLLoader(getClass().getResource("NewApp.fxml"));
@@ -72,11 +75,7 @@ public class ReviseMenuController {
         }
     }
 
-    /**
-     * Switches to the New Application Screen.
-     * @param event Submit button is clicked.
-     */
-    public void submitButtonClicked(javafx.event.ActionEvent event) {
+    public void submitButtonClicked(ActionEvent event) {
 
         updateData(applicationID.getText());
         screen.switchScene("NewApp.fxml", "New Application");
@@ -84,14 +83,12 @@ public class ReviseMenuController {
 
     }
 
-    /**
-     * Updates the database values.
-     */
+
     public void changeDbValue() {
+        /*
         String dataToChange = changeToSubmit.getText();
         BeerApplicationData beerData = new BeerApplicationData(1234, null, 1111, 0, "hell", "carcinogen", "brewbrew",
                 "100 institure", "555-867-5309", "Team65@wpi.edu", null, "wong", "distilled", "100");
-
         if (dataToChange.isEmpty()) {
             System.out.println("Nothing Happens");
             return;
@@ -109,16 +106,11 @@ public class ReviseMenuController {
             beerData.setApplicantName(dataToChange);
             System.out.println(beerData.getApplicantName());
         }
+        */
     }
 
-    /**
-     * Currently nonfunctional: Updates data in the database.
-     * @param data String representing data to be sent to the database.
-     */
     public void updateData(String data) {
        /* Statement stmt = null;
-
-
         String query = "UPDATE ApplicationDB\n\r" +
                 "SET firstChoiceBox.getValue() = " + data + "\n\r" +
                 "WHERE (applicationID) = " + data;
@@ -145,8 +137,6 @@ public class ReviseMenuController {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
-
         }*/
     }
 }
