@@ -8,8 +8,8 @@ import java.util.ArrayList;
  * Created by Adonay on 4/3/2017.
  */
 public class Account implements Serializable{
-    private String username;/*
-    private String password;*/
+    private String username;
+    /*private String password;*/
     private boolean isLoggedIn;
     private int userType;
     private ArrayList<String> inbox = new ArrayList<>();
