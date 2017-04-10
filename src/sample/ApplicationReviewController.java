@@ -10,6 +10,8 @@ import sun.java2d.pipe.AlphaPaintPipe;
 
 import java.lang.reflect.*;
 import java.sql.*;
+import java.text.Format;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -53,18 +55,19 @@ public class ApplicationReviewController extends DatabaseUtil{
     @FXML
     public void initialize() throws SQLException{
         String aid = accountsUtil.getUser_id();
-        String query = "SELECT * FROM ALCOHOL";
-        List<AlcoholData> listAlc = dbUtil.searchAlcoholTable(query);
-        AlcoholData thisAlc = listAlc.get(0);
-        repID.setText(thisAlc.getID());
-        registryNo.setText("");
-        prodSource.setText("TEST");
-        prodType.setText(thisAlc.getType());
-        address.setText("");
-        phoneNo.setText("Test");
-        email.setText("Sample@test");
-        dateApp.setText("00/00/TEST");
-        nameApp.setText(thisAlc.getName());
+        String query = "SELECT * FROM FORM WHERE AID = " + aid + "";
+        List<ApplicationData> listForms = dbUtil.getForms(query);
+        ApplicationData thisForm = listForms.get(0);
+        repID.setText(Integer.toString(thisForm.getRepid()));
+        registryNo.setText(Integer.toString(thisForm.getPermit_no()));
+        prodSource.setText(thisForm.getSource_of_product());
+        prodType.setText(thisForm.getAlcoholType());
+        address.setText(thisForm.getAddress());
+        phoneNo.setText(thisForm.getPhone_number());
+        email.setText(thisForm.getEmail());
+        Format formatter = new SimpleDateFormat("dd-MM-yyyy");
+        dateApp.setText(formatter.format(thisForm.getDate()));
+        nameApp.setText(thisForm.getApplicantName());
     }
 
 

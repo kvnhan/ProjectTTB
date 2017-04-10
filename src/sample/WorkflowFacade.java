@@ -50,7 +50,7 @@ public class WorkflowFacade extends DatabaseUtil {
      * @throws ClassNotFoundException
      * @throws SQLException
      */
-    private static ArrayList<String> getUnassigForms() throws ClassNotFoundException, SQLException {
+    protected static ArrayList<String> getUnassigForms()throws SQLException{
         Connection conn = connect();
         Statement stm;
         stm = conn.createStatement();

@@ -4,7 +4,7 @@ import java.util.Date;
 /**
  * Abstract Class for Application Data.
  */
-public abstract class ApplicationData extends SubmissionForm{
+public class ApplicationData extends SubmissionForm{
 
     private int ttbid;
     private int repid;
