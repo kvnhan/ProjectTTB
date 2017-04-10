@@ -23,7 +23,7 @@ import java.util.Random;
 /**
  * Created by Sam Winter on 3/28/2017.
  */
-public class NewLabelController extends WorkflowFacade {
+public class NewLabelController{
 
     //  ApplicationUtil appUtil = new ApplicationUtil();
 
@@ -232,14 +232,15 @@ public class NewLabelController extends WorkflowFacade {
         roundRobin();
     }
 
-
+    //goes adds new applications to worker's inboxes
     public void roundRobin() {
-        int runThroughs = (int) super.getUnassigForm();
-        for(i = 0; i <= runThroughs; i++) {
-            ArrayList<String> forms = super.getUnassigForm();
-            for (j = 0; j <= 10; j++) {
-                Account worker = super.getSmallWorker();
-                super.addToInbox(worker, forms.get(j));
+        WorkflowFacade wff = new WorkflowFacade();
+        int runThroughs = (int)(wff.getUnassigForms().size())/10;
+        for(int i = 0; i <= runThroughs; i++) {
+            ArrayList<String> forms = wff.getUnassigForms();
+            for (int j = 0; j <= 10; j++) {
+                Account worker = wff.getSmallWorker();
+                wff.addToInbox(worker, forms.get(j));
             }
         }
     }
