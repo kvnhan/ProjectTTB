@@ -88,6 +88,11 @@ public class NewLabelController {
             wine.setSelected(false);
         }
     }
+
+    public void clearInfo(){
+        ID.clear();
+    }
+
     public void buttonClicked (javafx.event.ActionEvent event){
         try {
             if(event.getSource() == back){
