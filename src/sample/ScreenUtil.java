@@ -20,12 +20,14 @@ public class ScreenUtil {
     private static final Stage mainWindow = new Stage();
     private Stage alertWindow;
     private Parent root1;
+    private Scene previousScene;
 
     public void switchScene(String fxmlName,String title){
         fxmlLoader = new FXMLLoader(getClass().getResource(fxmlName));
 
         try{
             root1 = fxmlLoader.load();
+            previousScene = mainWindow.getScene();
             mainWindow.setTitle(title);
             mainWindow.setScene(new Scene(root1));
             mainWindow.setResizable(false);
@@ -55,5 +57,9 @@ public class ScreenUtil {
         Scene scene = new Scene(layout);
         alertWindow.setScene(scene);
         alertWindow.showAndWait();
+    }
+
+    public Scene getPreviousScene() {
+        return previousScene;
     }
 }

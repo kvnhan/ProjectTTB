@@ -90,6 +90,27 @@ public class NewLabelController{
             wine.setSelected(false);
         }
     }
+
+    public void clearInfo(){
+         ID.clear();
+         RepID.clear();
+         PlantReg.clear();
+         SerialNo.clear();
+         BrandName.clear();
+         Name.clear();
+         Formula.clear();
+         PhoneNumber.clear();
+         EmailAddress.clear();
+         dom.setSelected(false);
+         imp.setSelected(false);
+         wine.setSelected(false);
+         beer.setSelected(false);
+         other.setSelected(false);
+         Vintage.clear();
+         pH.clear();
+         Address.clear();
+    }
+
     public void buttonClicked (javafx.event.ActionEvent event){
         try {
             if(event.getSource() == back){
