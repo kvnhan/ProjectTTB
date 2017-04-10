@@ -232,7 +232,7 @@ public class DatabaseUtil {
         return searchAlcoholTable(query);
     }
 
-    private List<AlcoholData> searchAlcoholTable(String query) throws SQLException{
+    protected List<AlcoholData> searchAlcoholTable(String query) throws SQLException{
         List<AlcoholData> AlcoholDataList = new ArrayList<AlcoholData>();
         AlcoholData a;
 

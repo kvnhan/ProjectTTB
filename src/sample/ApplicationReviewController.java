@@ -11,6 +11,7 @@ import sun.java2d.pipe.AlphaPaintPipe;
 import java.lang.reflect.*;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 /**
  * Controller for Application Review Screen.
@@ -42,21 +43,30 @@ public class ApplicationReviewController extends DatabaseUtil{
     TextField nameApp;
     @FXML
     TextArea commentsField;
-    //for when switching to this scene from inbox
-   // @FXML
-   // public void initialize(){
-    //    approve.setText(accountsUtil.getInbox());
-    //}
-    /*      repID.setText(application.ID);
-            registryNo.setText("0000");
-            prodSource.setText("TEST");
-            prodType.setText("TEST");
-            address.setText("00 Test Address");
-            phoneNo.setText("Test");
-            email.setText("Sample@test");
-            dateApp.setText("00/00/TEST");
-            nameApp.setText("TEST");*/
+
     Connection conn = connect();
+    DatabaseUtil dbUtil = new DatabaseUtil();
+    ScreenUtil screenUtil = new ScreenUtil();
+    AccountsUtil accountsUtil = new AccountsUtil();
+
+    //for when switching to this scene from inbox
+    @FXML
+    public void initialize() throws SQLException{
+        String aid = accountsUtil.getUser_id();
+        String query = "SELECT * FROM ALCOHOL";
+        List<AlcoholData> listAlc = dbUtil.searchAlcoholTable(query);
+        AlcoholData thisAlc = listAlc.get(0);
+        repID.setText(thisAlc.getID());
+        registryNo.setText("");
+        prodSource.setText("TEST");
+        prodType.setText(thisAlc.getType());
+        address.setText("");
+        phoneNo.setText("Test");
+        email.setText("Sample@test");
+        dateApp.setText("00/00/TEST");
+        nameApp.setText(thisAlc.getName());
+    }
+
 
 
     @FXML
@@ -70,30 +80,32 @@ public class ApplicationReviewController extends DatabaseUtil{
     /**
      * Sets an Application status to "APPROVED" and adds comments to the Application.
      */
-     /*
+
     void setApprove() throws SQLException{
         Statement stm;
         stm = conn.createStatement();
         //get comments
         String comments = commentsField.getText();
         //update alcohol status
-        String sql = "UPDATE FORM SET status = 'approved' WHERE FID = " _apptoassgn";
+        String sql = "UPDATE FORM SET status = 'approved' WHERE FID =  _apptoassgn";
         stm.executeUpdate(sql);
         //update inbox for account
         sql = "UPDATE REVIEWS SET w.inbox.remove(apptoassgn) WHERE username = w.username";
         stm.executeUpdate(sql);
     }
-    */
-    //@FXML
+
+    @FXML
     //TODO: fix setReject - needs correct query fields for sql
 
 
     /**
      * Sets an Application status to "REJECTED" and adds comments to the Application.
      */
-    /*
-    void setReject() throws SQLException{
-        Statement stm;
+
+    void setReject() {
+        ScreenUtil work = new ScreenUtil();
+        work.switchScene("WorkFlow.fxml", "Main Menu");
+        /*Statement stm;
         stm = conn.createStatement();
         //get comments
         String comments = commentsField.getText();
@@ -102,9 +114,9 @@ public class ApplicationReviewController extends DatabaseUtil{
         stm.executeUpdate(sql);
         //update inbox for worker
        // sql = "UPDATE REVIEWS SET " + w.getInbox().remove(apptoassgn) + " WHERE username = "+ w.getUsername() +" ";
-        stm.executeUpdate(sql);
+        stm.executeUpdate(sql);*/
     }
-    */
+
     /**
      * Gets a list of all Applications that have the status "UNASSIGNED".
      *
