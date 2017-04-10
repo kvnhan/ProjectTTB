@@ -15,6 +15,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Date;
 
 import javafx.scene.control.TextField;
@@ -22,7 +23,7 @@ import java.util.Random;
 /**
  * Created by Sam Winter on 3/28/2017.
  */
-public class NewLabelController {
+public class NewLabelController extends WorkflowFacade {
 
     //  ApplicationUtil appUtil = new ApplicationUtil();
 
@@ -228,7 +229,19 @@ public class NewLabelController {
                 type_of_product, brand_name, phone_number, email, dateFormat, applicantName,alcoholType,
                 vintage_date, ph_level, alcoholContent, status);
 
+        roundRobin();
+    }
 
+
+    public void roundRobin() {
+        int runThroughs = (int) super.getUnassigForm();
+        for(i = 0; i <= runThroughs; i++) {
+            ArrayList<String> forms = super.getUnassigForm();
+            for (j = 0; j <= 10; j++) {
+                Account worker = super.getSmallWorker();
+                super.addToInbox(worker, forms.get(j));
+            }
+        }
     }
 
     public void submitBeer(BeerApplicationData bd) throws SQLException{
