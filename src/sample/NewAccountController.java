@@ -66,7 +66,7 @@ public class NewAccountController {
                 userType = 3;
             }
 
-            if(!dbUtil.contains("ACCOUNT", "USERNAME", newUsername) && (newUsername.length() >= 5 || newUsername.length() <= 15)){
+            if( (newUsername.length() >= 5 && newUsername.length() <= 15) && !dbUtil.contains("ACCOUNT", "USERNAME", newUsername)){
                dbUtil.addAccount(newUsername, "password", 1, 2);
                screenUtil.switchScene("Login.fxml", "Login");
             }else if(newUsername.length() < 5 || newUsername.length() > 15){
