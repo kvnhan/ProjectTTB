@@ -107,7 +107,7 @@ public class NewLabelController {
         }
     }
 
-    public void fillOutApplication() throws SQLException{
+    public void fillOutApplication() throws SQLException, ClassNotFoundException {
 
         int fid;
         int ttbid;
@@ -184,7 +184,13 @@ public class NewLabelController {
                     fancyName, formula, permit_no, infoOnBottle,
                     source_of_product, type_of_product, brand_name, phone_number, email, date, applicantName,
                     alcoholType, alcoholContent);
-            submitBeer(Data);
+            try {
+                submitBeer(Data);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
             System.out.println("This works too");
 
         } else if (other.isSelected()) {
@@ -192,9 +198,14 @@ public class NewLabelController {
                     fancyName, formula, permit_no, infoOnBottle,
                     source_of_product, type_of_product, brand_name, phone_number, email, date, applicantName,
                     alcoholType, alcoholContent);
-            submitBeer(Data);
+            try {
+                submitBeer(Data);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
             System.out.println("This works too");
-
         }
     }
 
@@ -231,7 +242,7 @@ public class NewLabelController {
 
     }
 
-    public void submitBeer(BeerApplicationData bd) throws SQLException{
+    public void submitBeer(BeerApplicationData bd) throws SQLException, ClassNotFoundException {
         int ttbid = bd.getId();
         int repid = bd.getRepid();
         String serial = bd.getSerial();
@@ -255,6 +266,7 @@ public class NewLabelController {
         db.addBeerForm(ttbid, repid, serial, address, fancyName, formula, permit_no, infoOnBottle, source_of_product, type_of_product, brand_name, phone_number, email,
                 dateFormat, applicantName, alcoholType, alcoholContent, status);
         facadeWork.addToInbox(ttbid);
+        facadeWork.getUnassigForms();
 
     }
 
