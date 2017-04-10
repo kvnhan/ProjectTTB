@@ -5,26 +5,19 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
- * Account class contains information for all types of account.
+ * Created by Adonay on 4/3/2017.
  */
 public class Account implements Serializable{
     private String username;
-    private int accessLevel;
+    /*private String password;*/
     private boolean isLoggedIn;
+    private int userType;
     private ArrayList<String> inbox = new ArrayList<>();
 
-    /**
-     * Constructor for Account class. Account is set to not logged in
-     * by default.
-     *
-     * @param usrnm String representing account username.
-     * @param accL Int representing access level for the account.
-     * @param inbox ArrayList of strings representing IDs of applications in the account
-     *              inbox.
-     */
-    public Account(String usrnm, int accL, ArrayList<String> inbox){
+
+    public Account(String usrnm, int uType, ArrayList<String> inbox){
         username = usrnm;
-        accessLevel = accL;
+        userType = uType;
         isLoggedIn = false;
         this.inbox = inbox;
     }
@@ -34,7 +27,7 @@ public class Account implements Serializable{
     }
 
     public int getAccessLevel() {
-        return accessLevel;
+        return userType;
     }
 
     public boolean isLoggedIn() {
@@ -47,33 +40,19 @@ public class Account implements Serializable{
 
     public ArrayList<String> getInbox(){return inbox;}
 
-    /**
-     * Returns number of applications in an account's inbox.
-     * @return Returns the size of the inbox.
-     */
+    //returns the number of applications in the worker's inbox
     public int numberOfApplications(){
         return inbox.size();
     }
-    /**
-     * Adds a specific application to the inbox.
-     * @param sf String representing the ID for
-     *           the application to be added to the inbox.
-     */
+    //adds a specific application to the inbox
     public void addToInbox(String sf){
         inbox.add(0, sf);
     }
-    /**
-     * Removes a specific application from an account's inbox.
-     * @param formID String representing the ID of the application to be
-     *               removed.
-     */
+    //removes a specific appliation from the inbox
     public void removeFromInbox(int formID){
         inbox.remove(formID);
     }
-    /**
-     * Retrieves specific application ID from an account's inbox.
-     * @return Returns a string representing the application ID.
-     */
+    //gets a specific application from the inbox
     public String getNextForm(){
         return inbox.get(0);
     }
