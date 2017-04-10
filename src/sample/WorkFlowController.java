@@ -26,7 +26,6 @@ public class WorkFlowController {
         if(event.getSource() == back){
             work.switchScene("MainMenu.fxml","Main Menu");
         }
-
     }
 
     /**
@@ -34,11 +33,12 @@ public class WorkFlowController {
      * @param event Button press representing the ViewFirst button.
      */
     public void firstButton(ActionEvent event){
+
         work.switchScene("ApplicationReview.fxml", "Application Review");
     }
     
 
-    public void roundRobin({
+    /*public void roundRobin({
         if (getUnassigForms().size() <= 10) {
             ArrayList<String> forms = getUnassigForms();
             for (i = 0; i < forms.size(); i++) {
@@ -53,6 +53,6 @@ public class WorkFlowController {
                 Account worker = getSmallWorker();
                 addToInbox(worker, forms.get(i));
         }
-    }
+    }*/
 }
 //Hello
