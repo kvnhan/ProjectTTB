@@ -210,7 +210,7 @@ public class NewLabelController{
         }
     }
 
-    public void submitWine(WineApplicationData wd)throws SQLException{
+    public void submitWine(WineApplicationData wd) throws SQLException, ClassNotFoundException {
         int fid = wd.getFormID();
         int ttbid = wd.getId();
         int repid = wd.getRepid();
@@ -244,14 +244,14 @@ public class NewLabelController{
     }
 
     //goes adds new applications to worker's inboxes
-    public void roundRobin() {
-        WorkflowFacade wff = new WorkflowFacade();
-        int runThroughs = (int)(wff.getUnassigForms().size())/10;
+    public void roundRobin() throws SQLException, ClassNotFoundException {
+       // WorkflowFacade facadeWor = new WorkflowFacade();
+        int runThroughs = (int)(facadeWork.getUnassigForms().size())/10;
         for(int i = 0; i <= runThroughs; i++) {
-            ArrayList<String> forms = wff.getUnassigForms();
+            ArrayList<String> forms = facadeWork.getUnassigForms();
             for (int j = 0; j <= 10; j++) {
-                Account worker = wff.getSmallWorker();
-                wff.addToInbox(worker, forms.get(j));
+                Account worker = facadeWork.getSmallWorker();
+                facadeWork.addToInbox(worker, forms.get(j));
             }
         }
     }

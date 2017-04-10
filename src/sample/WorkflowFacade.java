@@ -33,7 +33,7 @@ public class WorkflowFacade extends DatabaseUtil {
      * @param input The Array of Strings to be converted to an ArrayList.
      * @return Returns an ArrayList of Strings.
      */
-    /*
+
     ArrayList<String> ArrayToArrayList(String[] input){
         ArrayList<String> returnThing = new ArrayList<String>();
         for(int i=0; i<input.length; i++){
@@ -41,7 +41,7 @@ public class WorkflowFacade extends DatabaseUtil {
         }
         return returnThing;
     }
-    */
+
     /**
      * Gets a list of all Applications that have the status "UNASSIGNED".
      *
@@ -55,19 +55,25 @@ public class WorkflowFacade extends DatabaseUtil {
         Statement stm;
         stm = conn.createStatement();
         ArrayList<String> unassforms = new ArrayList<>();
+        try {
+            String sql = "SELECT * FROM FORM WHERE FORM.STATUS = 'IN PROGRESS'"; // Use Select _ from _ Where _ format and set this statement = sql
 
-        String sql = "SELECT * FROM FORM WHERE FORM.STATUS = 'IN PROGRESS'"; // Use Select _ from _ Where _ format and set this statement = sql
-
-        ResultSet unassAlc  = stm.executeQuery(sql);
-        ResultSetMetaData rsmd = unassAlc.getMetaData();
-        int columnCount = rsmd.getColumnCount();
-        while (unassAlc.next()) {
-            int i = 1;
-            unassforms.add(unassAlc.getString("FID"));
-            i++;
+            ResultSet unassAlc = stm.executeQuery(sql);
+            ResultSetMetaData rsmd = unassAlc.getMetaData();
+            int columnCount = rsmd.getColumnCount();
+            while (unassAlc.next()) {
+                int i = 1;
+                unassforms.add(unassAlc.getString("FID"));
+                i++;
             }
-        for (int i = 0; i <= unassforms.size() - 1; i++){
-            System.out.println(unassforms.get(i));
+            for (int i = 0; i <= unassforms.size() - 1; i++) {
+                System.out.println(unassforms.get(i));
+            }
+            unassAlc.close();
+            stm.close();
+            conn.close();
+        } catch (SQLException se){
+            se.printStackTrace();
         }
 
         return unassforms;
@@ -82,7 +88,7 @@ public class WorkflowFacade extends DatabaseUtil {
      * @throws ClassNotFoundException
      * @throws SQLException
      */
-    /*
+
     Account getSmallWorker() throws ClassNotFoundException, SQLException{//TODO: find out fields + name for govt. worker
         Statement stm;
         stm = conn.createStatement();
@@ -103,5 +109,5 @@ public class WorkflowFacade extends DatabaseUtil {
         //sql = "UPDATE REVIEWS SET inbox = " + w.getInbox().add(apptoassgn) +" WHERE id = " + w.getUsername();//TODO: Check syntax on set inbox
         stm.executeUpdate(sql);
     }
-    */
+
 }
