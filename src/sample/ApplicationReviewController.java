@@ -57,7 +57,7 @@ public class ApplicationReviewController extends DatabaseUtil{
     public void initialize() throws SQLException{
         String aid = accountsUtil.getUser_id();
         String query = "SELECT * FROM FORM WHERE AID = " + aid + "";
-        List<ApplicationData> listForms = dbUtil.getForms(query);
+        List<ApplicationData> listForms = dbUtil.searchForm(query);
     ApplicationData thisForm = listForms.get(0);
         repID.setText(Integer.toString(thisForm.getRepid()));
         registryNo.setText(Integer.toString(thisForm.getPermit_no()));
@@ -90,7 +90,7 @@ public class ApplicationReviewController extends DatabaseUtil{
         work.switchScene("WorkFlow.fxml", "Main Menu");
         String aid = accountsUtil.getUser_id();
         String query = "SELECT * FROM FORM WHERE AID = " + aid + "";
-        List<ApplicationData> listForms = dbUtil.getForms(query);
+        List<ApplicationData> listForms = dbUtil.searchForm(query);
         ApplicationData thisForm = listForms.get(0);
         Statement stm;
         String sql;
@@ -118,7 +118,7 @@ public class ApplicationReviewController extends DatabaseUtil{
         work.switchScene("WorkFlow.fxml", "Main Menu");
         String aid = accountsUtil.getUser_id();
         String query = "SELECT * FROM FORM WHERE AID = " + aid + "";
-        List<ApplicationData> listForms = dbUtil.getForms(query);
+        List<ApplicationData> listForms = dbUtil.searchForm(query);
         ApplicationData thisForm = listForms.get(0);
         Statement stm;
         String sql;
