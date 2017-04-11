@@ -26,11 +26,11 @@ public class WineApplicationData extends ApplicationData{
 
 
 
-    public WineApplicationData(int formID, acceptanceInformation acceptanceInfo, int ttbid, int repid, String serial, String address,
+    public WineApplicationData(int formID, AcceptanceInformation acceptanceInfo, int ttbid, int repid, String serial, String address,
 
                                String fancyName, String formula, String grape_varietal, String appellation, int permit_no, String infoOnBottle,
 
-                               String source_of_product, String type_of_product, String brand_name, String phone_number, String email, Date date, String applicantName,
+                               String source_of_product, String type_of_product, String brand_name, String phone_number, String email, String date, String applicantName,
 
                                String alcoholType, String alcoholContent, int vintage_date, double ph_level) {
 

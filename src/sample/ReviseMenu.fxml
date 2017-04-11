@@ -39,7 +39,7 @@
          </items>
       </ChoiceBox>
 
-      <Button fx:id="back" layoutX="23.0" layoutY="423.0" mnemonicParsing="false" onAction="#buttonClicked" text="Back" />
+      <Button fx:id="back" layoutX="23.0" layoutY="423.0" mnemonicParsing="false" onAction="#goBack" text="Back" />
       <Button fx:id="submit" layoutX="475.0" layoutY="423.0" mnemonicParsing="false" onAction="#submitButtonClicked" text="Submit" />
       <Label layoutX="44.0" layoutY="250.0" text="Request Change" />
       <TextField fx:id="applicationID" layoutX="172.0" layoutY="139.0" prefHeight="25.0" prefWidth="285.0" />

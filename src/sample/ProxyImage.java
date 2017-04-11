@@ -9,6 +9,7 @@ public class ProxyImage implements  Image {
 
      public ProxyImage(String fileName){
          this.fileName = fileName;
+
      }
 
      @Override

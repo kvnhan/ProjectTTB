@@ -13,6 +13,6 @@
         </Label>
         <TextField layoutX="393.0" layoutY="56.0" />
         <Button layoutX="242.0" layoutY="138.0" mnemonicParsing="false" onAction="#firstButton" prefHeight="56.0" prefWidth="116.0" text="View First" />
-        <Button fx:id="back" layoutX="265.0" layoutY="324.0" mnemonicParsing="false" onAction="#buttonClicked" prefHeight="35.0" prefWidth="70.0" text="Back" />
+        <Button fx:id="back" layoutX="265.0" layoutY="324.0" mnemonicParsing="false" onAction="#goBack" prefHeight="35.0" prefWidth="70.0" text="Back" />
     </children>
 </Pane>
