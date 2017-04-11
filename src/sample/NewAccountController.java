@@ -11,7 +11,7 @@ import javafx.scene.input.KeyEvent;
 import java.sql.*;
 
 /**
- * Controller for Create a New Account screen.
+ * Created by Adonay on 3/27/2017.
  */
 public class NewAccountController {
 
@@ -26,7 +26,8 @@ public class NewAccountController {
 
     private String newUsername;
     private String accountChoice;
-    private int userType = 0;
+    private Account.userTypes userType;
+
     private AccountsUtil accountsUtil = new AccountsUtil();
     private ScreenUtil screenUtil = new ScreenUtil();
     Connection cn;
@@ -34,9 +35,6 @@ public class NewAccountController {
     private DatabaseUtil dbUtil = new DatabaseUtil();
 
     @FXML
-    /**
-     * Initializes the New Account screen.
-     */
     public void initialize(){
         newUsernameField.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
@@ -48,10 +46,6 @@ public class NewAccountController {
         });
     }
 
-    /**
-     * Creates a new account.
-     * @param event Takes in the ActionEvent for pressing the createAccount button.
-     */
     public void createAccount(ActionEvent event){
 
         try{
@@ -59,11 +53,11 @@ public class NewAccountController {
             accountChoice = accountChoiceBox.getValue().toString();
 
             if (accountChoice.equals("Government Agent")){
-                userType = 1;
+                userType = Account.userTypes.GOVERNMENT_AGENT;
             }else if(accountChoice.equals("Manufacturer")){
-                userType = 2;
+                userType = Account.userTypes.MANUFACTURER;
             }else if(accountChoice.equals("Public User")){
-                userType = 3;
+                userType = Account.userTypes.PUBLIC_USER;
             }
 
             if( (newUsername.length() >= 5 && newUsername.length() <= 15) && !dbUtil.contains("ACCOUNT", "USERNAME", newUsername)){
