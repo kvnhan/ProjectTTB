@@ -113,7 +113,7 @@ public class ApplicationReviewController extends DatabaseUtil{
      * Sets an Application status to "REJECTED" and adds comments to the Application.
      */
 
-    void setReject(String apptoassgn) throws SQLException {
+    void setReject(ActionEvent event) throws SQLException {
         ScreenUtil work = new ScreenUtil();
         work.switchScene("WorkFlow.fxml", "Main Menu");
         String aid = accountsUtil.getUser_id();
