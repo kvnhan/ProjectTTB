@@ -619,18 +619,23 @@ public class DatabaseUtil {
      * @throws ClassNotFoundException
      * @throws SQLException
      */
-    /*Account searchSmallestWorkLoad() throws SQLException{//TODO: find out fields + name for govt. worker
+    public int searchMinWorkLoad() throws ClassNotFoundException, SQLException{//TODO: find out fields + name for govt. worker
         Statement stm;
         stm = conn.createStatement();
-        String sql = "SELECT AID FROM ALCOHOL HAVING MIN(COUNT(ForeignKeyForAccount))";
-        ResultSet smallWorker = stm.executeQuery(sql);
+        int neededWorker;
+        //NEED TO FIGURE OUT HOW TO FIND THE ACCOUNT WITH THE MINIMUM AMOUNT OF TIMES THE FORMS REFERENCE IT
+        String sql = "SELECT FORM.REPID FROM (SELECT FORM.REPID, COUNT(REPID) FROM FORM) HAVING MIN(mycount)";
+        ResultSet rs = stm.executeQuery(sql);
+        neededWorker = ((Number) rs.getObject(1)).intValue();
         //Creates a new Account Object based on the information found in the previous
-
+        /*
         Account worker = new Account(smallWorker.getString("id"), 0,
                 ArrayToArrayList((String[]) smallWorker.getArray("inbox").getArray()));
         return worker;
+        */
 
-    }*/
+        return neededWorker;
+    }
 
     public void assignForm(Account worker, ApplicationData unAssignedForm) throws SQLException{
         int repid = getAccountAid(worker.getUsername());
