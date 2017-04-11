@@ -233,12 +233,12 @@ public class NewLabelController{
     }
     //goes adds new applications to worker's inboxes
     public void roundRobin() throws  SQLException{
-        ArrayList<ApplicationData> unAssignedForms = databaseUtil.searchUnassigForms();
+        ArrayList<ApplicationData> unAssignedForms = databaseUtil.searchUnassignedForms();
         int runThroughs = (int)(unAssignedForms.size())/10;
         for(int i = 0; i <= runThroughs; i++) {;
             for (int j = 0; j <= 10; j++) {
-                Account worker = databaseUtil.searchMinWorkLoad();
-                databaseUtil.assignForm(worker, unAssignedForms.get(j));
+                int repid = databaseUtil.searchMinWorkLoad();
+                databaseUtil.assignForm(repid, unAssignedForms.get(j));
             }
         }
     }
