@@ -57,7 +57,7 @@ public class ApplicationReviewController extends DatabaseUtil{
         String aid = accountsUtil.getUser_id();
         String query = "SELECT * FROM FORM WHERE AID = " + aid + "";
         List<ApplicationData> listForms = dbUtil.getForms(query);
-        ApplicationData thisForm = listForms.get(0);
+    ApplicationData thisForm = listForms.get(0);
         repID.setText(Integer.toString(thisForm.getRepid()));
         registryNo.setText(Integer.toString(thisForm.getPermit_no()));
         prodSource.setText(thisForm.getSource_of_product());
@@ -65,10 +65,10 @@ public class ApplicationReviewController extends DatabaseUtil{
         address.setText(thisForm.getAddress());
         phoneNo.setText(thisForm.getPhone_number());
         email.setText(thisForm.getEmail());
-        Format formatter = new SimpleDateFormat("dd-MM-yyyy");
+    Format formatter = new SimpleDateFormat("dd-MM-yyyy");
         dateApp.setText(formatter.format(thisForm.getDate()));
         nameApp.setText(thisForm.getApplicantName());
-    }
+}
 
 
 
@@ -98,9 +98,6 @@ public class ApplicationReviewController extends DatabaseUtil{
     }
 
     @FXML
-    //TODO: fix setReject - needs correct query fields for sql
-
-
     /**
      * Sets an Application status to "REJECTED" and adds comments to the Application.
      */
