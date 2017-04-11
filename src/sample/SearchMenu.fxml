@@ -21,28 +21,28 @@
             <Font size="16.0" />
          </font>
       </Label>
-      <Button fx:id="Back" layoutX="13.0" layoutY="497.0" mnemonicParsing="false" onAction="#buttonClicked" text="Back" />
-      <Button fx:id="Search" layoutX="701.0" layoutY="478.0" mnemonicParsing="false" onAction="#Search" text="Search">
+      <Button fx:id="Back" layoutX="13.0" layoutY="497.0" mnemonicParsing="false" onAction="#back" text="Back" />
+      <Button fx:id="Search" layoutX="701.0" layoutY="478.0" mnemonicParsing="false" onAction="#search" text="Search">
          <font>
             <Font size="20.0" />
          </font>
       </Button>
-      <CheckBox fx:id="IsWine" layoutX="125.0" layoutY="16.0" mnemonicParsing="false" text="Wine">
+      <CheckBox fx:id="isWineBox" layoutX="125.0" layoutY="16.0" mnemonicParsing="false" text="Wine">
          <font>
             <Font size="16.0" />
          </font>
       </CheckBox>
-      <CheckBox fx:id="IsBeer" layoutX="197.0" layoutY="16.0" mnemonicParsing="false" text="Beer">
+      <CheckBox fx:id="isBeerBox" layoutX="197.0" layoutY="16.0" mnemonicParsing="false" text="Beer">
          <font>
             <Font size="16.0" />
          </font>
       </CheckBox>
-      <CheckBox fx:id="IsOther" layoutX="265.0" layoutY="16.0" mnemonicParsing="false" text="Distilled Spirits">
+      <CheckBox fx:id="isOtherBox" layoutX="265.0" layoutY="16.0" mnemonicParsing="false" text="Distilled Spirits">
          <font>
             <Font size="16.0" />
          </font>
       </CheckBox>
-      <TextField fx:id="Tags" layoutX="210.0" layoutY="42.0" />
+      <TextField fx:id="brandField" layoutX="210.0" layoutY="42.0" />
       <TableView fx:id="table" editable="true" layoutX="12.0" layoutY="81.0" prefHeight="387.0" prefWidth="777.0">
          <columns>
             <TableColumn fx:id="IDno" prefWidth="100.0" text="ID No." />
