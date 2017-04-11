@@ -10,7 +10,7 @@ import javafx.scene.control.Button;
 public class NewAppController {
 
     private FXMLLoader fxmlLoader;
-    @FXML Button back, newApp, oldApp;
+    @FXML Button back, newApp, oldApp, Updates;
     ScreenUtil work = new ScreenUtil();
 
     /**
@@ -26,8 +26,9 @@ public class NewAppController {
         }else if (event.getSource() == newApp) {
             work.switchScene("NewLabel.fxml","New Application");
         } else if (event.getSource() == oldApp) {
-            work.switchScene("ReviseMenu.fxml","Revise Application");
+            work.switchScene("ApplicationEdit.fxml","Revise Application");
+        } else if (event.getSource() == Updates) {
+            work.switchScene("ReviseMenu.fxml", "Revise Application");
         }
-
     }
 }

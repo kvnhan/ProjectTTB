@@ -122,7 +122,7 @@ public class DatabaseUtil {
     public void addBeerForm( int ttbid, int repid, String serial, String address, String fancyName, String formula, int permit_no, String infoOnBottle, String source_of_product,
                              String type_of_product, String brand_name, String phone_number, String email, String dateFormat, String applicantName, String alcoholType, String alcoholContent, String status) throws  SQLException{
 
-        int aid = 1;
+        int aid = 6;
         String values = ""+ttbid+","+repid+",'"+serial+"','"+address+"', '"+fancyName+"', '"+formula+"', "+permit_no+", '"+infoOnBottle+"','"+source_of_product+"', '"+type_of_product+"'" +
                 ", '"+brand_name+"','"+phone_number+"', '"+email+"', '"+dateFormat+"', '"+applicantName+"', '"+alcoholType+"', '"+status+"', "+aid+")";
 
@@ -132,7 +132,7 @@ public class DatabaseUtil {
     public void addWineForm( int ttbid, int repid, String serial, String address, String fancyName, String formula, String grapeVar, String appellation, int permit_no, String infoOnBottle, String source_of_product,
                              String type_of_product, String brand_name, String phone_number, String email, String dateFormat, String applicantName, String alcoholType,
                              int vintage, double ph, String alcoholContent, String status) throws  SQLException{
-        int aid = 1;
+        int aid = 6;
         String values = ""+ttbid+","+repid+",'"+serial+"','"+address+"', '"+fancyName+"', '"+formula+"','"+grapeVar+"','"+appellation+"',"+permit_no+", '"+infoOnBottle+"','"+source_of_product+"', '"+type_of_product+"'" +
                 ", '"+brand_name+"','"+phone_number+"', '"+email+"', '"+dateFormat+"', '"+applicantName+"', '"+alcoholType+"', "+vintage+", "+ph+",'"+status+"', "+aid+")";
         addToTable("FORM", FORM_FIELDS_WINE, values, "FID");
