@@ -14,6 +14,9 @@ public class Account implements Serializable{
     private int userType;
     private ArrayList<String> inbox = new ArrayList<>();
 
+    protected enum userTypes {
+        GOVERNMENT_AGENT, MANUFACTURER, PUBLIC_USER
+    };
 
     public Account(String usrnm, int uType, ArrayList<String> inbox){
         username = usrnm;
