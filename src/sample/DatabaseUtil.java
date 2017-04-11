@@ -568,6 +568,7 @@ public class DatabaseUtil {
      * @throws ClassNotFoundException
      * @throws SQLException
      */
+    /*
     protected static ArrayList<String> getUnassigForms()throws SQLException{
         Statement stm;
         //stm = conn.createStatement();
@@ -583,8 +584,9 @@ public class DatabaseUtil {
             }
         }
         return unassforms;
-    }
 
+    }
+    */
     /**
      * Finds the government account in the database with the least number of applications in its
      * inbox.
@@ -595,20 +597,25 @@ public class DatabaseUtil {
      * @throws SQLException
      */
 
-    /*
-    Account getSmallWorker() throws ClassNotFoundException, SQLException{//TODO: find out fields + name for govt. worker
+
+    public int searchMinWorkLoad() throws ClassNotFoundException, SQLException{//TODO: find out fields + name for govt. worker
         Statement stm;
         stm = conn.createStatement();
-        String sql = "SELECT AID FROM ALCOHOL HAVING MIN(COUNT(ForeignKeyForAccount))";
-        ResultSet smallWorker = stm.executeQuery(sql);
+        int neededWorker;
+        //NEED TO FIGURE OUT HOW TO FIND THE ACCOUNT WITH THE MINIMUM AMOUNT OF TIMES THE FORMS REFERENCE IT
+        String sql = "SELECT FORM.REPID FROM (SELECT FORM.REPID, COUNT(REPID) FROM FORM HAVING MIN(mycount))";
+        ResultSet rs = stm.executeQuery(sql);
+        neededWorker = ((Number) rs.getObject(1)).intValue();
         //Creates a new Account Object based on the information found in the previous
-
+        /*
         Account worker = new Account(smallWorker.getString("id"), 0,
                 ArrayToArrayList((String[]) smallWorker.getArray("inbox").getArray()));
         return worker;
+        */
 
+        return neededWorker;
     }
-    */
+
     void addToInbox(Account w, String apptoassgn) throws ClassNotFoundException, SQLException{
         Statement stm;
         stm = conn.createStatement();
@@ -616,7 +623,7 @@ public class DatabaseUtil {
         String sql = "UPDATE ALCOHOL SET status = 'assigned', ForeignKeyForAccount = apptoassgn WHERE ACCOUNT.AID = "+ w.getUsername();
         stm.executeUpdate(sql);
         //update inbox for worker
-        //sql = "UPDATE REVIEWS SET inbox = " + w.getInbox().add(apptoassgn) +" WHERE id = " + w.getUsername();//TODO: Check syntax on set inbox
+        //sql = "UPDATE REVIEWS SET inbox = " + w.getInbox().add(apptoassgn) +" WHERE id = " + w.getUsername();
         stm.executeUpdate(sql);
     }
 }
