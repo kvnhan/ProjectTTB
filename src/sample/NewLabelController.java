@@ -171,13 +171,13 @@ public class NewLabelController{
         fid = 1;
 
         acceptanceInformation acceptanceInfo = new acceptanceInformation(date, applicantName,
-                null, "IN PROGRESS");
+                null, "UNASSIGNED");
         if (wine.isSelected()) {
             WineApplicationData Data = new WineApplicationData(fid, acceptanceInfo,ttbid, repid, serial,address,
                     fancyName, formula, grape_varietal, appellation, permit_no, infoOnBottle,
                     source_of_product, type_of_product, brand_name, phone_number, email, date, applicantName,
                     alcoholType, alcoholContent, vintage_date, ph_level);
-            //submitWine(Data);
+            submitWine(Data);
             System.out.println("This somewhat works");
 
         } else if (beer.isSelected()) {
@@ -198,7 +198,7 @@ public class NewLabelController{
 
         }
     }
-/*
+
     public void submitWine(WineApplicationData wd)throws SQLException{
         int fid = wd.getFormID();
         int ttbid = wd.getId();
@@ -229,9 +229,9 @@ public class NewLabelController{
                 type_of_product, brand_name, phone_number, email, dateFormat, applicantName,alcoholType,
                 vintage_date, ph_level, alcoholContent, status);
 
-        roundRobin();
+        //roundRobin();
     }
-
+/*
     //goes adds new applications to worker's inboxes
     public void roundRobin() {
         WorkflowFacade wff = new WorkflowFacade();
@@ -243,8 +243,8 @@ public class NewLabelController{
                 wff.addToInbox(worker, forms.get(j));
             }
         }
-    }*/
-
+    }
+*/
     public void submitBeer(BeerApplicationData bd) throws SQLException{
         int ttbid = bd.getId();
         int repid = bd.getRepid();
