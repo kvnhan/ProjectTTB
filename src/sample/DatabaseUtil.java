@@ -604,7 +604,7 @@ public class DatabaseUtil {
      * @throws ClassNotFoundException
      * @throws SQLException
      */
-    public ArrayList<ApplicationData> searchUnassigForms() throws SQLException{
+    public ArrayList<ApplicationData> searchUnassignedForms() throws SQLException{
         String query = "SELECT * FROM FORM WHERE UPPER(FORM.STATUS) LIKE UPPER('UNASSIGNED')";
 
         return searchForm(query);
