@@ -5,13 +5,22 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 
-import java.util.ArrayList;
-
-/**
- * Controller for Workflow screen.
- */
-
 public class WorkFlowController {
+/*
+    private FXMLLoader fxmlLoader;
+    @FXML private Button back;
+    @FXML private Button first;
+    ScreenUtil work = new ScreenUtil();
+
+    public void buttonClicked (ActionEvent event){
+        if(event.getSource() == back){
+            work.switchScene("MainMenu.fxml","Main Menu");
+        }
+    }
+    public void firstButton(ActionEvent event){
+        work.switchScene("ApplicationReview.fxml", "Application Review");
+    }
+    */
 
     private FXMLLoader fxmlLoader;
     @FXML private Button back;
@@ -36,7 +45,7 @@ public class WorkFlowController {
 
         work.switchScene("ApplicationReview.fxml", "Application Review");
     }
-    
+
 
     /*public void roundRobin({
         if (getUnassigForms().size() <= 10) {
@@ -54,5 +63,5 @@ public class WorkFlowController {
                 addToInbox(worker, forms.get(i));
         }
     }*/
+
 }
-//Hello
