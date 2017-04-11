@@ -5,11 +5,11 @@ import java.util.Date;
  *
  *
  */
-public class acceptanceInformation {
+public class AcceptanceInformation {
     private String status;
-    private Date approvalDate;
+    private String approvalDate;
     private String name;
-    private Date expirationDate;
+    private String expirationDate;
 
     /**
      * Acceptance Information Constructor
@@ -18,18 +18,18 @@ public class acceptanceInformation {
      * @param expirationDate Date of expiration of approval
      * @param status String representing the status of the application
      */
-    public acceptanceInformation(Date approvalDate, String name, Date expirationDate, String status) {
+    public AcceptanceInformation(String approvalDate, String name, String expirationDate, String status) {
         this.approvalDate = approvalDate;
         this.name = name;
         this.expirationDate = expirationDate;
         this.status = status;
     }
 
-    public Date getApprovalDate() {
+    public String getApprovalDate() {
         return approvalDate;
     }
 
-    public void setApprovalDate(Date approvalDate) {
+    public void setApprovalDate(String approvalDate) {
         this.approvalDate = approvalDate;
     }
 
@@ -41,11 +41,11 @@ public class acceptanceInformation {
         this.name = name;
     }
 
-    public Date getExpirationDate() {
+    public String getExpirationDate() {
         return expirationDate;
     }
 
-    public void setExpirationDate(Date expirationDate) {
+    public void setExpirationDate(String expirationDate) {
         this.expirationDate = expirationDate;
     }
 

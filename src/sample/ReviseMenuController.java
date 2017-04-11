@@ -32,8 +32,6 @@ public class ReviseMenuController {
     private FXMLLoader fxmlLoader;
 
     @FXML
-    private Button back;
-    @FXML
     private Button submit;
     @FXML
     private TextField changeToSubmit;
@@ -57,22 +55,9 @@ public class ReviseMenuController {
      *
      * @param event
      */
-    public void buttonClicked(ActionEvent event) {
-        try {
-            if (event.getSource() == back) {
-                fxmlLoader = new FXMLLoader(getClass().getResource("NewApp.fxml"));
-                ((Node) (event.getSource())).getScene().getWindow().hide();
-            }
-            Parent root1 = null;
-            root1 = fxmlLoader.load();
-            Stage stage = new Stage();
-            stage.setTitle("Main Menu");
-            stage.setScene(new Scene(root1));
-            stage.show();
+    public void goBack(ActionEvent event){
+        screen.switchScene("MainMenu.fxml", "Main Menu");
 
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
     }
 
     public void submitButtonClicked(ActionEvent event) {

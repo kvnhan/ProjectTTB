@@ -31,10 +31,8 @@ public class WorkFlowController {
      * Checks if the back button has been clicked and returns user to Main Menu.
      * @param event ActionEvent representing a button press.
      */
-    public void buttonClicked (ActionEvent event){
-        if(event.getSource() == back){
-            work.switchScene("MainMenu.fxml","Main Menu");
-        }
+    public void goBack (ActionEvent event){
+        work.switchScene("MainMenu.fxml","Main Menu");
     }
 
     /**

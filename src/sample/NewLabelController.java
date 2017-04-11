@@ -26,6 +26,7 @@ import java.util.Random;
 public class NewLabelController{
 
     //  ApplicationUtil appUtil = new ApplicationUtil();
+    DatabaseUtil databaseUtil = new DatabaseUtil();
 
     WorkflowFacade facadeWork = new WorkflowFacade();
     private FXMLLoader fxmlLoader;
@@ -126,8 +127,7 @@ public class NewLabelController{
         String brand_name;
         String phone_number;
         String email;
-        Date date = new Date();
-        String dateFormat = date.toString();
+        String date = "";
         String applicantName;
         String alcoholType = "";
         String alcoholContent = "";
@@ -170,7 +170,7 @@ public class NewLabelController{
         ph_level = Double.parseDouble(pH.getText());
         fid = 1;
 
-        acceptanceInformation acceptanceInfo = new acceptanceInformation(date, applicantName,
+        AcceptanceInformation acceptanceInfo = new AcceptanceInformation(date, applicantName,
                 null, "UNASSIGNED");
         if (wine.isSelected()) {
             WineApplicationData Data = new WineApplicationData(fid, acceptanceInfo,ttbid, repid, serial,address,
@@ -216,7 +216,7 @@ public class NewLabelController{
         String brand_name = wd.getBrand_name();
         String phone_number = wd.getPhone_number();
         String email = wd.getEmail();
-        Date date = wd.getDate();
+        String date = wd.getDate();
         String dateFormat = date.toString();
         String applicantName = wd.getApplicantName();
         String alcoholType = wd.getAlcoholType();
@@ -231,20 +231,17 @@ public class NewLabelController{
 
         //roundRobin();
     }
-/*
     //goes adds new applications to worker's inboxes
-    public void roundRobin() {
-        WorkflowFacade wff = new WorkflowFacade();
-        int runThroughs = (int)(wff.getUnassigForms().size())/10;
-        for(int i = 0; i <= runThroughs; i++) {
-            ArrayList<String> forms = wff.getUnassigForms();
+    public void roundRobin() throws  SQLException{
+        ArrayList<ApplicationData> unAssignedForms = databaseUtil.searchUnassigForms();
+        int runThroughs = (int)(unAssignedForms.size())/10;
+        for(int i = 0; i <= runThroughs; i++) {;
             for (int j = 0; j <= 10; j++) {
-                Account worker = wff.getSmallWorker();
-                wff.addToInbox(worker, forms.get(j));
+                Account worker = databaseUtil.searchMinWorkLoad();
+                databaseUtil.assignForm(worker, unAssignedForms.get(j));
             }
         }
     }
-*/
     public void submitBeer(BeerApplicationData bd) throws SQLException{
         int ttbid = bd.getId();
         int repid = bd.getRepid();
@@ -259,7 +256,7 @@ public class NewLabelController{
         String brand_name = bd.getBrand_name();
         String phone_number = bd.getPhone_number();
         String email = bd.getEmail();
-        Date date = bd.getDate();
+        String date = bd.getDate();
         String dateFormat = date.toString();
         String applicantName = bd.getApplicantName();
         String alcoholType = bd.getAlcoholType();
