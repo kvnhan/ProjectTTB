@@ -90,27 +90,6 @@ public class NewLabelController{
             wine.setSelected(false);
         }
     }
-
-    public void clearInfo(){
-         ID.clear();
-         RepID.clear();
-         PlantReg.clear();
-         SerialNo.clear();
-         BrandName.clear();
-         Name.clear();
-         Formula.clear();
-         PhoneNumber.clear();
-         EmailAddress.clear();
-         dom.setSelected(false);
-         imp.setSelected(false);
-         wine.setSelected(false);
-         beer.setSelected(false);
-         other.setSelected(false);
-         Vintage.clear();
-         pH.clear();
-         Address.clear();
-    }
-
     public void buttonClicked (javafx.event.ActionEvent event){
         try {
             if(event.getSource() == back){
@@ -129,7 +108,7 @@ public class NewLabelController{
         }
     }
 
-    public void fillOutApplication() throws SQLException, ClassNotFoundException {
+    public void fillOutApplication() throws SQLException{
 
         int fid;
         int ttbid;
@@ -198,7 +177,7 @@ public class NewLabelController{
                     fancyName, formula, grape_varietal, appellation, permit_no, infoOnBottle,
                     source_of_product, type_of_product, brand_name, phone_number, email, date, applicantName,
                     alcoholType, alcoholContent, vintage_date, ph_level);
-            submitWine(Data);
+            //submitWine(Data);
             System.out.println("This somewhat works");
 
         } else if (beer.isSelected()) {
@@ -206,13 +185,7 @@ public class NewLabelController{
                     fancyName, formula, permit_no, infoOnBottle,
                     source_of_product, type_of_product, brand_name, phone_number, email, date, applicantName,
                     alcoholType, alcoholContent);
-            try {
-                submitBeer(Data);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-            }
+            submitBeer(Data);
             System.out.println("This works too");
 
         } else if (other.isSelected()) {
@@ -220,18 +193,13 @@ public class NewLabelController{
                     fancyName, formula, permit_no, infoOnBottle,
                     source_of_product, type_of_product, brand_name, phone_number, email, date, applicantName,
                     alcoholType, alcoholContent);
-            try {
-                submitBeer(Data);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-            }
+            submitBeer(Data);
             System.out.println("This works too");
+
         }
     }
-
-    public void submitWine(WineApplicationData wd) throws SQLException, ClassNotFoundException {
+/*
+    public void submitWine(WineApplicationData wd)throws SQLException{
         int fid = wd.getFormID();
         int ttbid = wd.getId();
         int repid = wd.getRepid();
@@ -265,19 +233,19 @@ public class NewLabelController{
     }
 
     //goes adds new applications to worker's inboxes
-    public void roundRobin() throws SQLException, ClassNotFoundException {
-       // WorkflowFacade facadeWor = new WorkflowFacade();
-        int runThroughs = (int)(facadeWork.getUnassigForms().size())/10;
+    public void roundRobin() {
+        WorkflowFacade wff = new WorkflowFacade();
+        int runThroughs = (int)(wff.getUnassigForms().size())/10;
         for(int i = 0; i <= runThroughs; i++) {
-            ArrayList<String> forms = facadeWork.getUnassigForms();
+            ArrayList<String> forms = wff.getUnassigForms();
             for (int j = 0; j <= 10; j++) {
-                Account worker = facadeWork.getSmallWorker();
-                facadeWork.addToInbox(worker, forms.get(j));
+                Account worker = wff.getSmallWorker();
+                wff.addToInbox(worker, forms.get(j));
             }
         }
-    }
+    }*/
 
-    public void submitBeer(BeerApplicationData bd) throws SQLException, ClassNotFoundException {
+    public void submitBeer(BeerApplicationData bd) throws SQLException{
         int ttbid = bd.getId();
         int repid = bd.getRepid();
         String serial = bd.getSerial();
@@ -301,7 +269,6 @@ public class NewLabelController{
         db.addBeerForm(ttbid, repid, serial, address, fancyName, formula, permit_no, infoOnBottle, source_of_product, type_of_product, brand_name, phone_number, email,
                 dateFormat, applicantName, alcoholType, alcoholContent, status);
         facadeWork.addToInbox(ttbid);
-        facadeWork.getUnassigForms();
 
     }
 

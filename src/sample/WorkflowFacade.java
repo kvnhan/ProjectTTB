@@ -50,32 +50,21 @@ public class WorkflowFacade extends DatabaseUtil {
      * @throws ClassNotFoundException
      * @throws SQLException
      */
-     static ArrayList<String> getUnassigForms() throws SQLException {
+    protected static ArrayList<String> getUnassigForms()throws SQLException{
         Connection conn = connect();
         Statement stm;
         stm = conn.createStatement();
+        String sql = "SELECT * FROM ALCOHOL WHERE ALCOHOL.STATUS = 'Unassigned'"; // Use Select _ from _ Where _ format and set this statement = sql
         ArrayList<String> unassforms = new ArrayList<>();
-        try {
-            String sql = "SELECT * FROM FORM WHERE FORM.STATUS = 'IN PROGRESS'"; // Use Select _ from _ Where _ format and set this statement = sql
-
-            ResultSet unassAlc = stm.executeQuery(sql);
-            ResultSetMetaData rsmd = unassAlc.getMetaData();
-            int columnCount = rsmd.getColumnCount();
-            while (unassAlc.next()) {
-                int i = 1;
-                unassforms.add(unassAlc.getString("FID"));
-                i++;
+        ResultSet unassAlc = stm.executeQuery(sql);
+        ResultSetMetaData rsmd = unassAlc.getMetaData();
+        int columnCount = rsmd.getColumnCount();
+        while (unassAlc.next()) {
+            int i = 1;
+            while (i <= columnCount) {
+                unassforms.add(unassAlc.getString("id"));
             }
-            for (int i = 0; i <= unassforms.size() - 1; i++) {
-                System.out.println(unassforms.get(i));
-            }
-            unassAlc.close();
-            stm.close();
-            conn.close();
-        } catch (SQLException se){
-            se.printStackTrace();
         }
-
         return unassforms;
     }
 
