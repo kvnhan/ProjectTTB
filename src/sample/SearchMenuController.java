@@ -51,7 +51,7 @@ public class SearchMenuController {
     }
 
 
-    public void getResults(){
+    public void displayResults(){
         table.getColumns().clear();
         IDno.setCellValueFactory(new PropertyValueFactory<>("ID"));
         Name.setCellValueFactory(new PropertyValueFactory<>("Name"));
@@ -90,7 +90,7 @@ public class SearchMenuController {
         searchDatabase();
 
         observableList = FXCollections.observableList(AlcoholDataList);
-        getResults();
+        displayResults();
     }
 
 
