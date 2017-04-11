@@ -124,136 +124,136 @@
             <font>
                 <Font name="Constantia" size="14.0" />
             </font></TextField>
-      <Label layoutX="15.0" layoutY="365.0" text="Fanciful Name:">
-         <font>
-            <Font name="Constantia" size="24.0" />
-         </font>
-      </Label>
-      <Label layoutX="15.0" layoutY="445.0" text="Mailing Address:">
-         <font>
-            <Font name="Constantia" size="24.0" />
-         </font>
-      </Label>
-      <Label layoutX="16.0" layoutY="170.0" text="Type of Application:">
-         <font>
-            <Font name="Constantia" size="24.0" />
-         </font>
-      </Label>
-      <Label layoutX="15.0" layoutY="600.0" text="Additional Information:">
-         <font>
-            <Font name="Constantia" size="24.0" />
-         </font>
-      </Label>
-      <CheckBox fx:id="dom1" layoutX="15.0" layoutY="200.0" mnemonicParsing="false" onAction="#handledomBox" text="Certificate of Label Approval.">
-         <font>
-            <Font name="Constantia" size="16.0" />
-         </font>
-      </CheckBox>
-      <CheckBox fx:id="dom11" layoutX="15.0" layoutY="225.0" mnemonicParsing="false" onAction="#handledomBox" text="Certificate of Exemption from Label Approval.">
-         <font>
-            <Font name="Constantia" size="16.0" />
-         </font>
-      </CheckBox>
-      <CheckBox fx:id="dom111" layoutX="15.0" layoutY="250.0" mnemonicParsing="false" onAction="#handledomBox" text="Distinctive Liquor Bottle Approval Total Bottle Capacity Before Closure">
-         <font>
-            <Font name="Constantia" size="16.0" />
-         </font>
-      </CheckBox>
-      <TextField layoutX="468.0" layoutY="225.0" prefHeight="25.0" prefWidth="35.0" promptText="ST" />
-      <Label layoutX="390.0" layoutY="228.0" text="For Sale in">
-         <font>
-            <Font name="Constantia" size="16.0" />
-         </font>
-      </Label>
-      <Label layoutX="508.0" layoutY="228.0" text="Only.">
-         <font>
-            <Font name="Constantia" size="16.0" />
-         </font>
-      </Label>
-      <Label layoutX="654.0" layoutY="252.0" text="(Fill in Amount)">
-         <font>
-            <Font name="Constantia" size="16.0" />
-         </font>
-      </Label>
-      <TextField layoutX="547.0" layoutY="249.0" prefHeight="25.0" prefWidth="100.0" />
-      <Label layoutX="557.0" layoutY="228.0" text="(Fill in State abbreviation)">
-         <font>
-            <Font name="Constantia" size="16.0" />
-         </font>
-      </Label>
-      <TextField fx:id="MailingAddress" layoutX="210.0" layoutY="445.0" prefWidth="250.0" promptText="Mailing Address">
-         <font>
-            <Font name="Constantia" size="14.0" />
-         </font>
-      </TextField>
-      <TitledPane animated="false" layoutX="15.0" layoutY="485.0" prefHeight="110.0" prefWidth="970.0" text="Wine Information">
-        <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefWidth="968.0">
-               <children>
-                    <Label layoutX="485.0" layoutY="10.0" prefHeight="29.0" prefWidth="104.0" text="pH Level:">
-                        <font>
-                            <Font name="Constantia" size="24.0" />
-                        </font>
-                  </Label>
-                    <TextField fx:id="pH" layoutX="685.0" layoutY="10.0" prefWidth="250.0" promptText="pH">
-                        <font>
-                            <Font name="Constantia" size="14.0" />
-                        </font>
-                  </TextField>
-                  <Label layoutY="10.0" text="Grape Varietal:">
-                     <font>
-                        <Font name="Constantia" size="24.0" />
-                     </font>
-                  </Label>
-                  <Label layoutY="50.0" text="Wine Appellation:">
-                     <font>
-                        <Font name="Constantia" size="24.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="Appellation" layoutX="195.0" layoutY="50.0" prefWidth="250.0" promptText="Wine Appellation">
-                     <font>
-                        <Font name="Constantia" size="14.0" />
-                     </font>
-                  </TextField>
-                    <Label layoutX="485.0" layoutY="50.0" prefHeight="29.0" prefWidth="140.0" text="VintageYear:">
-                        <font>
-                            <Font name="Constantia" size="24.0" />
-                        </font>
-                  </Label>
-                  <TextField fx:id="Varietal" layoutX="195.0" layoutY="11.0" prefWidth="250.0" promptText="Grape Varietal">
-                     <font>
-                        <Font name="Constantia" size="14.0" />
-                     </font>
-                  </TextField>
-                    <TextField fx:id="Vintage" layoutX="685.0" layoutY="50.0" prefWidth="250.0" promptText="eg. 1878">
-                        <font>
-                            <Font name="Constantia" size="14.0" />
-                        </font>
-                  </TextField>
-               </children>
-            </AnchorPane>
-        </content>
-      </TitledPane>
-      <TextArea layoutX="14.0" layoutY="629.0" prefHeight="110.0" prefWidth="970.0" />
-      <Label layoutX="500.0" layoutY="445.0" text="Alcohol Content:">
-         <font>
-            <Font name="Constantia" size="24.0" />
-         </font>
-      </Label>
-      <TextField fx:id="Content" layoutX="700.0" layoutY="445.0" prefWidth="250.0" promptText="\% of alcohol in drink">
-         <font>
-            <Font name="Constantia" size="14.0" />
-         </font>
-      </TextField>
+        <Label layoutX="15.0" layoutY="365.0" text="Fanciful Name:">
+            <font>
+                <Font name="Constantia" size="24.0" />
+            </font>
+        </Label>
+        <Label layoutX="15.0" layoutY="445.0" text="Mailing Address:">
+            <font>
+                <Font name="Constantia" size="24.0" />
+            </font>
+        </Label>
+        <Label layoutX="16.0" layoutY="170.0" text="Type of Application:">
+            <font>
+                <Font name="Constantia" size="24.0" />
+            </font>
+        </Label>
+        <Label layoutX="15.0" layoutY="600.0" text="Additional Information:">
+            <font>
+                <Font name="Constantia" size="24.0" />
+            </font>
+        </Label>
+        <CheckBox fx:id="dom1" layoutX="15.0" layoutY="200.0" mnemonicParsing="false" onAction="#handledomBox" text="Certificate of Label Approval.">
+            <font>
+                <Font name="Constantia" size="16.0" />
+            </font>
+        </CheckBox>
+        <CheckBox fx:id="dom11" layoutX="15.0" layoutY="225.0" mnemonicParsing="false" onAction="#handledomBox" text="Certificate of Exemption from Label Approval.">
+            <font>
+                <Font name="Constantia" size="16.0" />
+            </font>
+        </CheckBox>
+        <CheckBox fx:id="dom111" layoutX="15.0" layoutY="250.0" mnemonicParsing="false" onAction="#handledomBox" text="Distinctive Liquor Bottle Approval Total Bottle Capacity Before Closure">
+            <font>
+                <Font name="Constantia" size="16.0" />
+            </font>
+        </CheckBox>
+        <TextField layoutX="468.0" layoutY="225.0" prefHeight="25.0" prefWidth="35.0" promptText="ST" />
+        <Label layoutX="390.0" layoutY="228.0" text="For Sale in">
+            <font>
+                <Font name="Constantia" size="16.0" />
+            </font>
+        </Label>
+        <Label layoutX="508.0" layoutY="228.0" text="Only.">
+            <font>
+                <Font name="Constantia" size="16.0" />
+            </font>
+        </Label>
+        <Label layoutX="654.0" layoutY="252.0" text="(Fill in Amount)">
+            <font>
+                <Font name="Constantia" size="16.0" />
+            </font>
+        </Label>
+        <TextField layoutX="547.0" layoutY="249.0" prefHeight="25.0" prefWidth="100.0" />
+        <Label layoutX="557.0" layoutY="228.0" text="(Fill in State abbreviation)">
+            <font>
+                <Font name="Constantia" size="16.0" />
+            </font>
+        </Label>
+        <TextField fx:id="MailingAddress" layoutX="210.0" layoutY="445.0" prefWidth="250.0" promptText="Mailing Address">
+            <font>
+                <Font name="Constantia" size="14.0" />
+            </font>
+        </TextField>
+        <TitledPane animated="false" layoutX="15.0" layoutY="485.0" prefHeight="110.0" prefWidth="970.0" text="Wine Information">
+            <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefWidth="968.0">
+                    <children>
+                        <Label layoutX="485.0" layoutY="10.0" prefHeight="29.0" prefWidth="104.0" text="pH Level:">
+                            <font>
+                                <Font name="Constantia" size="24.0" />
+                            </font>
+                        </Label>
+                        <TextField fx:id="pH" layoutX="685.0" layoutY="10.0" prefWidth="250.0" promptText="pH">
+                            <font>
+                                <Font name="Constantia" size="14.0" />
+                            </font>
+                        </TextField>
+                        <Label layoutY="10.0" text="Grape Varietal:">
+                            <font>
+                                <Font name="Constantia" size="24.0" />
+                            </font>
+                        </Label>
+                        <Label layoutY="50.0" text="Wine Appellation:">
+                            <font>
+                                <Font name="Constantia" size="24.0" />
+                            </font>
+                        </Label>
+                        <TextField fx:id="Appellation" layoutX="195.0" layoutY="50.0" prefWidth="250.0" promptText="Wine Appellation">
+                            <font>
+                                <Font name="Constantia" size="14.0" />
+                            </font>
+                        </TextField>
+                        <Label layoutX="485.0" layoutY="50.0" prefHeight="29.0" prefWidth="140.0" text="VintageYear:">
+                            <font>
+                                <Font name="Constantia" size="24.0" />
+                            </font>
+                        </Label>
+                        <TextField fx:id="Varietal" layoutX="195.0" layoutY="11.0" prefWidth="250.0" promptText="Grape Varietal">
+                            <font>
+                                <Font name="Constantia" size="14.0" />
+                            </font>
+                        </TextField>
+                        <TextField fx:id="Vintage" layoutX="685.0" layoutY="50.0" prefWidth="250.0" promptText="eg. 1878">
+                            <font>
+                                <Font name="Constantia" size="14.0" />
+                            </font>
+                        </TextField>
+                    </children>
+                </AnchorPane>
+            </content>
+        </TitledPane>
+        <TextArea layoutX="14.0" layoutY="629.0" prefHeight="110.0" prefWidth="970.0" />
+        <Label layoutX="500.0" layoutY="445.0" text="Alcohol Content:">
+            <font>
+                <Font name="Constantia" size="24.0" />
+            </font>
+        </Label>
+        <TextField fx:id="Content" layoutX="700.0" layoutY="445.0" prefWidth="250.0" promptText="\% of alcohol in drink">
+            <font>
+                <Font name="Constantia" size="14.0" />
+            </font>
+        </TextField>
         <TextField fx:id="PhoneNumber" layoutX="210.0" layoutY="406.0" prefWidth="250.0" promptText="888-888-8888">
             <font>
                 <Font name="Constantia" size="14.0" />
             </font>
-      </TextField>
-      <TextField fx:id="ApplicantName" layoutX="210.0" layoutY="326.0" prefWidth="250.0" promptText="Joe Smith">
-         <font>
-            <Font name="Constantia" size="14.0" />
-         </font>
-      </TextField>
+        </TextField>
+        <TextField fx:id="ApplicantName" layoutX="210.0" layoutY="326.0" prefWidth="250.0" promptText="Joe Smith">
+            <font>
+                <Font name="Constantia" size="14.0" />
+            </font>
+        </TextField>
     </children>
 </Pane>
