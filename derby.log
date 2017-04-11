@@ -1,13 +1,13 @@
 ----------------------------------------------------------------
-Tue Apr 11 00:18:32 EDT 2017:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.13.1.1 - (1765088): instance a816c00e-015b-5b3c-0747-00000d4e74a8 
-on database directory C:\Users\Adonay\IdeaProjects\Iteration_1\Database\ProjectC with class loader sun.misc.Launcher$AppClassLoader@14dad5dc 
-Loaded from file:/C:/Users/Adonay/.m2/repository/org/apache/derby/derby/10.13.1.1/derby-10.13.1.1.jar
+Tue Apr 11 15:02:50 EDT 2017:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.13.1.1 - (1765088): instance a816c00e-015b-5e65-a118-000005faf230 
+on database directory C:\Users\Kien\Downloads\search with db test\Iteration\Database\ProjectC with class loader sun.misc.Launcher$AppClassLoader@18b4aac2 
+Loaded from file:/C:/Users/Kien/.m2/repository/org/apache/derby/derby/10.13.1.1/derby-10.13.1.1.jar
 java.vendor=Oracle Corporation
-java.runtime.version=1.8.0_60-b27
-user.dir=C:\Users\Adonay\IdeaProjects\Iteration_1
-os.name=Windows 10
+java.runtime.version=1.8.0_121-b13
+user.dir=C:\Users\Kien\Downloads\search with db test\Iteration
+os.name=Windows 8.1
 os.arch=amd64
-os.version=10.0
+os.version=6.3
 derby.system.home=null
 Database Class Loader started - derby.database.classpath=''
