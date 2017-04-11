@@ -51,6 +51,7 @@ public class ApplicationReviewController extends DatabaseUtil{
     ScreenUtil screenUtil = new ScreenUtil();
     AccountsUtil accountsUtil = new AccountsUtil();
 
+
     //for when switching to this scene from inbox
     @FXML
     public void initialize() throws SQLException{
@@ -85,16 +86,26 @@ public class ApplicationReviewController extends DatabaseUtil{
      */
 
     void setApprove() throws SQLException{
+        ScreenUtil work = new ScreenUtil();
+        work.switchScene("WorkFlow.fxml", "Main Menu");
+        String aid = accountsUtil.getUser_id();
+        String query = "SELECT * FROM FORM WHERE AID = " + aid + "";
+        List<ApplicationData> listForms = dbUtil.getForms(query);
+        ApplicationData thisForm = listForms.get(0);
         Statement stm;
+        String sql;
         stm = conn.createStatement();
         //get comments
         String comments = commentsField.getText();
         //update alcohol status
-        String sql = "UPDATE FORM SET status = 'approved' WHERE FID =  _apptoassgn";
+        int change = thisForm.getTtbid();
+        sql = "UPDATE FORM SET FORM.STATUS = 'approved' WHERE FORM.TTBID = " + change;
         stm.executeUpdate(sql);
         //update inbox for account
-        sql = "UPDATE REVIEWS SET w.inbox.remove(apptoassgn) WHERE username = w.username";
-        stm.executeUpdate(sql);
+        //sql = "UPDATE REVIEWS SET " + " w.inbox.remove(apptoassgn)" + " WHERE username = " + apptoassgn;
+        //stm.executeUpdate(sql);
+        stm.close();
+        conn.close();
     }
 
     @FXML
@@ -102,19 +113,27 @@ public class ApplicationReviewController extends DatabaseUtil{
      * Sets an Application status to "REJECTED" and adds comments to the Application.
      */
 
-    void setReject() {
+    void setReject(String apptoassgn) throws SQLException {
         ScreenUtil work = new ScreenUtil();
         work.switchScene("WorkFlow.fxml", "Main Menu");
-        /*Statement stm;
+        String aid = accountsUtil.getUser_id();
+        String query = "SELECT * FROM FORM WHERE AID = " + aid + "";
+        List<ApplicationData> listForms = dbUtil.getForms(query);
+        ApplicationData thisForm = listForms.get(0);
+        Statement stm;
+        String sql;
         stm = conn.createStatement();
         //get comments
         String comments = commentsField.getText();
         //update alcohol status
-        String sql = "UPDATE ALCOHOL SET status = 'rejected', comments =" + comments + " WHERE id = apptoassgn";
+        int change = thisForm.getTtbid();
+        sql = "UPDATE FORM SET FORM.STATUS = 'reject' WHERE FORM.TTBID = " + change;
         stm.executeUpdate(sql);
-        //update inbox for worker
-       // sql = "UPDATE REVIEWS SET " + w.getInbox().remove(apptoassgn) + " WHERE username = "+ w.getUsername() +" ";
-        stm.executeUpdate(sql);*/
+
+        stm.close();
+        conn.close();
+
+
     }
 
     /**
