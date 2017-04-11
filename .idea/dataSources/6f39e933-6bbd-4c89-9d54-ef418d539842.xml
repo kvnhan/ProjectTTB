@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dataSource name="ProjectC">
-  <database-model serializer="dbm" rdbms="DERBY" format-version="4.0">
+<dataSource name="Derby (Embedded) - ProjectC">
+  <database-model serializer="dbm" rdbms="DERBY" format-version="4.1">
     <root id="1"/>
     <schema id="2" parent="1" name="APP">
       <Current>1</Current>
@@ -149,8 +149,6 @@
       <RefTableName>PRODUCT_TYPE</RefTableName>
       <RefKeyName>SQL170330085503400</RefKeyName>
       <RefColNames>PID</RefColNames>
-      <OnDelete>no-action</OnDelete>
-      <OnUpdate>no-action</OnUpdate>
     </foreign-key>
     <foreign-key id="51" parent="15" name="ALCOHOLNEWC___FK">
       <ColNames>CLASS</ColNames>
@@ -158,8 +156,6 @@
       <RefTableName>CLASS</RefTableName>
       <RefKeyName>SQL170330085440790</RefKeyName>
       <RefColNames>CID</RefColNames>
-      <OnDelete>no-action</OnDelete>
-      <OnUpdate>no-action</OnUpdate>
     </foreign-key>
     <foreign-key id="52" parent="15" name="ALCOHOLNEWAT___FK">
       <ColNames>ALCOHOL_TYPE</ColNames>
@@ -167,8 +163,6 @@
       <RefTableName>ALCH_TYPE</RefTableName>
       <RefKeyName>SQL170330085521280</RefKeyName>
       <RefColNames>ATID</RefColNames>
-      <OnDelete>no-action</OnDelete>
-      <OnUpdate>no-action</OnUpdate>
     </foreign-key>
     <column id="53" parent="16" name="CID">
       <Position>1</Position>
@@ -273,166 +267,145 @@
       <Position>22</Position>
       <DataType>VARCHAR(100)|12</DataType>
     </column>
-    <column id="78" parent="17" name="AID">
-      <Position>23</Position>
-      <DataType>INTEGER(10)|4</DataType>
-    </column>
-    <column id="79" parent="17" name="REQUESTED_CHANGE">
-      <Position>24</Position>
-      <DataType>VARCHAR(2000)|12</DataType>
-    </column>
-    <key id="80" parent="17" name="SQL170408002506440">
+    <key id="78" parent="17" name="SQL170408002506440">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>FID</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="81" parent="17" name="FORM_ACCOUNT_AID_FK">
-      <ColNames>AID</ColNames>
-      <RefSchemaName>APP</RefSchemaName>
-      <RefTableName>ACCOUNT</RefTableName>
-      <RefKeyName>SQL170404222048220</RefKeyName>
-      <RefColNames>AID</RefColNames>
-      <OnDelete>no-action</OnDelete>
-      <OnUpdate>no-action</OnUpdate>
-    </foreign-key>
-    <column id="82" parent="18" name="PID">
+    <column id="79" parent="18" name="PID">
       <Position>1</Position>
       <DataType>INTEGER(10)|4</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="83" parent="18" name="TYPE">
+    <column id="80" parent="18" name="TYPE">
       <Position>2</Position>
       <DataType>CHAR(20)|1</DataType>
     </column>
-    <index id="84" parent="18" name="PRODUCT_TYPE_TYPE_UINDEX">
+    <index id="81" parent="18" name="PRODUCT_TYPE_TYPE_UINDEX">
       <ColNames>TYPE</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="85" parent="18" name="SQL170330085503400">
+    <key id="82" parent="18" name="SQL170330085503400">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>PID</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="86" parent="19" name="FID">
+    <column id="83" parent="19" name="FID">
       <Position>1</Position>
       <DataType>INTEGER(10)|4</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="87" parent="19" name="STATUS">
+    <column id="84" parent="19" name="STATUS">
       <Position>2</Position>
       <DataType>INTEGER(10)|4</DataType>
     </column>
-    <column id="88" parent="19" name="DECIDER">
+    <column id="85" parent="19" name="DECIDER">
       <Position>3</Position>
       <DataType>INTEGER(10)|4</DataType>
     </column>
-    <column id="89" parent="19" name="DATE">
+    <column id="86" parent="19" name="DATE">
       <Position>4</Position>
       <DataType>DATE(10)|91</DataType>
     </column>
-    <column id="90" parent="19" name="GENERAL">
+    <column id="87" parent="19" name="GENERAL">
       <Position>5</Position>
       <DataType>CHAR(250)|1</DataType>
     </column>
-    <column id="91" parent="19" name="ORIGINCODE">
+    <column id="88" parent="19" name="ORIGINCODE">
       <Position>6</Position>
       <DataType>CHAR(250)|1</DataType>
     </column>
-    <column id="92" parent="19" name="BRANDNAME">
+    <column id="89" parent="19" name="BRANDNAME">
       <Position>7</Position>
       <DataType>CHAR(250)|1</DataType>
     </column>
-    <column id="93" parent="19" name="FACIFULNAME">
+    <column id="90" parent="19" name="FACIFULNAME">
       <Position>8</Position>
       <DataType>CHAR(250)|1</DataType>
     </column>
-    <column id="94" parent="19" name="GRAPEVAR">
+    <column id="91" parent="19" name="GRAPEVAR">
       <Position>9</Position>
       <DataType>CHAR(200)|1</DataType>
     </column>
-    <column id="95" parent="19" name="WINEVINTAGE">
+    <column id="92" parent="19" name="WINEVINTAGE">
       <Position>10</Position>
       <DataType>CHAR(250)|1</DataType>
     </column>
-    <column id="96" parent="19" name="APPELLATION">
+    <column id="93" parent="19" name="APPELLATION">
       <Position>11</Position>
       <DataType>CHAR(200)|1</DataType>
     </column>
-    <column id="97" parent="19" name="BOTTLER">
+    <column id="94" parent="19" name="BOTTLER">
       <Position>12</Position>
       <DataType>CHAR(200)|1</DataType>
     </column>
-    <column id="98" parent="19" name="FORMULA">
+    <column id="95" parent="19" name="FORMULA">
       <Position>13</Position>
       <DataType>CHAR(200)|1</DataType>
     </column>
-    <column id="99" parent="19" name="SULFITE">
+    <column id="96" parent="19" name="SULFITE">
       <Position>14</Position>
       <DataType>CHAR(200)|1</DataType>
     </column>
-    <column id="100" parent="19" name="LEGIBILITY">
+    <column id="97" parent="19" name="LEGIBILITY">
       <Position>15</Position>
       <DataType>CHAR(200)|1</DataType>
     </column>
-    <column id="101" parent="19" name="LABELSIZE">
+    <column id="98" parent="19" name="LABELSIZE">
       <Position>16</Position>
       <DataType>CHAR(200)|1</DataType>
     </column>
-    <column id="102" parent="19" name="DESCRIP">
+    <column id="99" parent="19" name="DESCRIP">
       <Position>17</Position>
       <DataType>CHAR(200)|1</DataType>
     </column>
-    <key id="103" parent="19" name="SQL170404222551610">
+    <key id="100" parent="19" name="SQL170404222551610">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>FID</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="104" parent="19" name="REVIEWSSTATUS___FK">
+    <foreign-key id="101" parent="19" name="REVIEWSSTATUS___FK">
       <ColNames>STATUS</ColNames>
       <RefSchemaName>APP</RefSchemaName>
       <RefTableName>STATUS</RefTableName>
       <RefKeyName>SQL170404222526110</RefKeyName>
       <RefColNames>SID</RefColNames>
-      <OnDelete>no-action</OnDelete>
-      <OnUpdate>no-action</OnUpdate>
     </foreign-key>
-    <foreign-key id="105" parent="19" name="DECIDER__FK">
+    <foreign-key id="102" parent="19" name="DECIDER__FK">
       <ColNames>DECIDER</ColNames>
       <RefSchemaName>APP</RefSchemaName>
       <RefTableName>ACCOUNT</RefTableName>
       <RefKeyName>SQL170404222048220</RefKeyName>
       <RefColNames>AID</RefColNames>
-      <OnDelete>no-action</OnDelete>
-      <OnUpdate>no-action</OnUpdate>
     </foreign-key>
-    <column id="106" parent="20" name="SID">
+    <column id="103" parent="20" name="SID">
       <Position>1</Position>
       <DataType>INTEGER(10)|4</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="107" parent="20" name="STATUS">
+    <column id="104" parent="20" name="STATUS">
       <Position>2</Position>
       <DataType>CHAR(15)|1</DataType>
     </column>
-    <key id="108" parent="20" name="SQL170404222526110">
+    <key id="105" parent="20" name="SQL170404222526110">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>SID</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="109" parent="21" name="UID">
+    <column id="106" parent="21" name="UID">
       <Position>1</Position>
       <DataType>INTEGER(10)|4</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="110" parent="21" name="TYPE">
+    <column id="107" parent="21" name="TYPE">
       <Position>2</Position>
       <DataType>CHAR(20)|1</DataType>
     </column>
-    <index id="111" parent="21" name="User_Type_Type_uindex">
+    <index id="108" parent="21" name="User_Type_Type_uindex">
       <ColNames>TYPE</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="112" parent="21" name="SQL170404222601930">
+    <key id="109" parent="21" name="SQL170404222601930">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>UID</ColNames>
       <Primary>1</Primary>

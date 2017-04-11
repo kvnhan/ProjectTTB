@@ -229,7 +229,7 @@ public class DatabaseUtil {
 
     // Code used to search Alcohol table based on brand name. Uses partial search
     public List<AlcoholData> searchAlcoholBrand(String brandName) throws SQLException{
-        String query = "SELECT * FROM ALCOHOL WHERE ALCOHOL.BRAND_NAME LIKE '"+brandName+"%'";
+        String query = "SELECT * FROM ALCOHOL WHERE UPPER(ALCOHOL.BRAND_NAME) LIKE UPPER('"+brandName+"%')";
 
         return searchAlcoholTable(query);
     }
@@ -244,23 +244,21 @@ public class DatabaseUtil {
 
         while(rset.next()){
             int AID = rset.getInt("AID");
-            String name = String.format("%1$"+25+ "s", rset.getString("NAME"));
-            String brandname = String.format("%1$"+25+ "s", rset.getString("BRAND_NAME"));
-            String appelation = String.format("%1$"+22+ "s", rset.getString("APPELLATION"));
-            String sulfiteDesc = String.format("%1$"+22+ "s", rset.getString("SULFITE_DESC"));
+            String name = String.format("%1$"+25+ "s", rset.getString("NAME")).trim();
+            String brandname = String.format("%1$"+25+ "s", rset.getString("BRAND_NAME")).trim();
+            String appelation = String.format("%1$"+22+ "s", rset.getString("APPELLATION")).trim();
+            String sulfiteDesc = String.format("%1$"+22+ "s", rset.getString("SULFITE_DESC")).trim();
             double alchContent = rset.getDouble("ALCH_CONTENT");
             double netContent = rset.getDouble("NET_CONTENT");
-            String healthWarning = String.format("%1$"+22+ "s", rset.getString("HEALTH_WARNING"));
+            String healthWarning = String.format("%1$"+22+ "s", rset.getString("HEALTH_WARNING")).trim();
             int productType = rset.getInt("PRODUCT_TYPE");
             int classType = rset.getInt("CLASS");
-            String labelLegibility = String.format("%1$"+22+ "s", rset.getString("LABEL_LEGIBILLITY"));
+            String labelLegibility = String.format("%1$"+22+ "s", rset.getString("LABEL_LEGIBILLITY")).trim();
             int labelSize = rset.getInt("LABEL_SIZE");
-            String formulas = String.format("%1$"+22+ "s", rset.getString("FORMULAS"));
+            String formulas = String.format("%1$"+22+ "s", rset.getString("FORMULAS")).trim();
             int alchType = rset.getInt("ALCOHOL_TYPE");
-            String bottlersInfo = String.format("%1$"+22+ "s", rset.getString("BOTTLERS_INFO"));
-            String imageName = String.format("%1$"+22+ "s", rset.getString("PICTURE"));
-
-            String type = String.format("%1$"+10+ "s", rset.getString("ALCOHOL_TYPE"));
+            String bottlersInfo = String.format("%1$"+22+ "s", rset.getString("BOTTLERS_INFO")).trim();
+            String imageName = String.format("%1$"+22+ "s", rset.getString("PICTURE")).trim();
 
             a = new AlcoholData(AID, name, brandname, appelation, sulfiteDesc, alchContent, netContent, healthWarning, productType, classType, labelLegibility, labelSize, formulas, alchType, bottlersInfo, imageName);
             AlcoholDataList.add(a);
