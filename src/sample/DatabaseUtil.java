@@ -243,62 +243,32 @@ public class DatabaseUtil {
         rset = stmt.executeQuery(query);
 
         while(rset.next()){
-            String ID = String.format("%1$"+3+ "s", rset.getString("AID"));
+            int AID = rset.getInt("AID");
             String name = String.format("%1$"+25+ "s", rset.getString("NAME"));
             String brandname = String.format("%1$"+25+ "s", rset.getString("BRAND_NAME"));
-            String app = String.format("%1$"+22+ "s", rset.getString("APPELLATION"));
+            String appelation = String.format("%1$"+22+ "s", rset.getString("APPELLATION"));
+            String sulfiteDesc = String.format("%1$"+22+ "s", rset.getString("SULFITE_DESC"));
+            double alchContent = rset.getDouble("ALCH_CONTENT");
+            double netContent = rset.getDouble("NET_CONTENT");
+            String healthWarning = String.format("%1$"+22+ "s", rset.getString("HEALTH_WARNING"));
+            int productType = rset.getInt("PRODUCT_TYPE");
+            int classType = rset.getInt("CLASS");
+            String labelLegibility = String.format("%1$"+22+ "s", rset.getString("LABEL_LEGIBILLITY"));
+            int labelSize = rset.getInt("LABEL_SIZE");
+            String formulas = String.format("%1$"+22+ "s", rset.getString("FORMULAS"));
+            int alchType = rset.getInt("ALCOHOL_TYPE");
+            String bottlersInfo = String.format("%1$"+22+ "s", rset.getString("BOTTLERS_INFO"));
+            String imageName = String.format("%1$"+22+ "s", rset.getString("PICTURE"));
+
             String type = String.format("%1$"+10+ "s", rset.getString("ALCOHOL_TYPE"));
 
-            a = new AlcoholData(ID, name, brandname, app, type);
+            a = new AlcoholData(AID, name, brandname, appelation, sulfiteDesc, alchContent, netContent, healthWarning, productType, classType, labelLegibility, labelSize, formulas, alchType, bottlersInfo, imageName);
             AlcoholDataList.add(a);
         }
 
         return AlcoholDataList;
 
     }
-    public List<ApplicationData> getForms(String query) throws SQLException{
-        List<ApplicationData> AppDataList = new ArrayList<>();
-        ApplicationData a;
-
-        stmt = conn.createStatement();
-
-        rset = stmt.executeQuery(query);
-
-        while(rset.next()){
-            int fid = rset.getInt("FID");
-            int ttbid = rset.getInt("TTBID");
-            int repid = rset.getInt("REPID");
-            String serial = rset.getString("SERIAL");
-            String address = rset.getString("ADDRESS");
-            String fancyName = rset.getString("FANCYNAME");
-            String formula =  rset.getString("FORMULA");
-            String grape_varietal = rset.getString("GRAPEVAR");
-            String appellation = rset.getString("APPELLATION");
-            int permit_no = rset.getInt("PERMITNO");
-            String infoOnBottle = rset.getString("INFO_ON_BOTTLE");
-            String source_of_product = rset.getString("SOURCE");
-            String type_of_product = rset.getString("TYPE");
-            String brand_name = rset.getString("BRANDNAME");
-            String phone_number = rset.getString("PHONE");
-            String email = rset.getString("EMAIL");
-            String applicantName = rset.getString("APPLICANTNAME");
-            String alcoholType = rset.getString("ALCOHOLTYPE");
-            String alcoholContent = "";
-            String date = rset.getString("DATE");
-            String status = rset.getString("STATUS");
-            acceptanceInformation info = new acceptanceInformation(null, applicantName, null, status);
-
-            a = new ApplicationData(fid, info,ttbid, repid, serial,address,
-                    fancyName, formula, permit_no, infoOnBottle,
-                    source_of_product, type_of_product, brand_name, phone_number, email, null, applicantName,
-                    alcoholType, alcoholContent);
-            AppDataList.add(a);
-        }
-
-
-        return AppDataList;
-    }
-
     public List<ApplicationData> getWineForm(String name, String s)throws SQLException{
         List<ApplicationData> appData = new ArrayList<>();
         ApplicationData a;

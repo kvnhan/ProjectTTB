@@ -1,69 +1,171 @@
 package sample;
 
 /**
- * Contains data relating to specific alcoholic beverages stored in the database.
+ * Created by Sam Winter on 4/2/2017.
  */
 public class AlcoholData {
-    private String ID;
-    private String Name;
-    private String BrandName;
-    private String Appellation;
-    private String Type;
 
-    /**
-     * Constructor for an AlcoholData object.
-     * @param IDC String representing the ID for the alcoholic beverage.
-     * @param NameC String representing the name of the alcoholic beverage.
-     * @param BrandNameC String representing the official brand name of the alcoholic beverage.
-     * @param AppellationC TODO: figure out what this is
-     * @param TypeC String representing the type of the alcoholic beverage.
-     */
-    public AlcoholData(String IDC, String NameC, String BrandNameC, String AppellationC, String TypeC) {
-        ID = IDC;
-        Name = NameC;
-        BrandName = BrandNameC;
-        Appellation = AppellationC;
-        Type = TypeC;
+    private int aid;
+    private String name;
+    private String brandName;
+    private String appellation;
+    private String sulfiteDescription;
+    private double alchContent;
+    private double netContent;
+    private String healthWarning;
+    private int productType;
+    private int classType;
+    private String labelLegibility;
+    private int labelSize;
+    private String formulas;
+    private int alcoholType;
+    private String bottlersInfo;
+    private String imageFileName;
+
+    public AlcoholData(int aid, String name, String brandName, String appellation, String sulfiteDescription, double alchContent, double netContent, String healthWarning, int productType, int classType, String labelLegibility, int labelSize, String formulas, int alcoholType, String bottlersInfo, String imageFileName) {
+        this.aid = aid;
+        this.name = name;
+        this.brandName = brandName;
+        this.appellation = appellation;
+        this.sulfiteDescription = sulfiteDescription;
+        this.alchContent = alchContent;
+        this.netContent = netContent;
+        this.healthWarning = healthWarning;
+        this.productType = productType;
+        this.classType = classType;
+        this.labelLegibility = labelLegibility;
+        this.labelSize = labelSize;
+        this.formulas = formulas;
+        this.alcoholType = alcoholType;
+        this.bottlersInfo = bottlersInfo;
+        this.imageFileName = imageFileName;
     }
 
-
-    public String getID() {
-        return ID;
+    public int getAid() {
+        return aid;
     }
 
-    public void setID(String ID) {
-        this.ID = ID;
+    public void setAid(int aid) {
+        this.aid = aid;
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public void setName(String name) {
-        Name = name;
+        this.name = name;
     }
 
     public String getBrandName() {
-        return BrandName;
+        return brandName;
     }
 
     public void setBrandName(String brandName) {
-        BrandName = brandName;
+        this.brandName = brandName;
     }
 
     public String getAppellation() {
-        return Appellation;
+        return appellation;
     }
 
     public void setAppellation(String appellation) {
-        Appellation = appellation;
+        this.appellation = appellation;
     }
 
-    public String getType() {
-        return Type;
+    public String getSulfiteDescription() {
+        return sulfiteDescription;
     }
 
-    public void setType(String type) {
-        Type = type;
+    public void setSulfiteDescription(String sulfiteDescription) {
+        this.sulfiteDescription = sulfiteDescription;
+    }
+
+    public double getAlchContent() {
+        return alchContent;
+    }
+
+    public void setAlchContent(double alchContent) {
+        this.alchContent = alchContent;
+    }
+
+    public double getNetContent() {
+        return netContent;
+    }
+
+    public void setNetContent(double netContent) {
+        this.netContent = netContent;
+    }
+
+    public String getHealthWarning() {
+        return healthWarning;
+    }
+
+    public void setHealthWarning(String healthWarning) {
+        this.healthWarning = healthWarning;
+    }
+
+    public int getProductType() {
+        return productType;
+    }
+
+    public void setProductType(int productType) {
+        this.productType = productType;
+    }
+
+    public int getClassType() {
+        return classType;
+    }
+
+    public void setClassType(int classType) {
+        this.classType = classType;
+    }
+
+    public String getLabelLegibility() {
+        return labelLegibility;
+    }
+
+    public void setLabelLegibility(String labelLegibility) {
+        this.labelLegibility = labelLegibility;
+    }
+
+    public int getLabelSize() {
+        return labelSize;
+    }
+
+    public void setLabelSize(int labelSize) {
+        this.labelSize = labelSize;
+    }
+
+    public String getFormulas() {
+        return formulas;
+    }
+
+    public void setFormulas(String formulas) {
+        this.formulas = formulas;
+    }
+
+    public int getAlcoholType() {
+        return alcoholType;
+    }
+
+    public void setAlcoholType(int alcoholType) {
+        this.alcoholType = alcoholType;
+    }
+
+    public String getBottlersInfo() {
+        return bottlersInfo;
+    }
+
+    public void setBottlersInfo(String bottlersInfo) {
+        this.bottlersInfo = bottlersInfo;
+    }
+
+    public String getImageFileName() {
+        return imageFileName;
+    }
+
+    public void setImageFileName(String imageFileName) {
+        this.imageFileName = imageFileName;
     }
 }

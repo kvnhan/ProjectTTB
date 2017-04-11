@@ -43,7 +43,7 @@ public class SearchMenuController {
             row.setOnMouseClicked(event -> {
                 if(event.getClickCount() == 2 && (! row.isEmpty())){
                     AlcoholData rowData = row.getItem();
-                    screenUtil.createAlertBox("Information: " + rowData.getName(), "Alcohol ID: \t" + rowData.getID() + "\nName: \t" + rowData.getName() + "\nBrand Name: \t" + rowData.getBrandName() + "\nAppellation: \t" + rowData.getAppellation() + "\nType: \t" +rowData.getType());
+                    screenUtil.createAlertBox("Information: " + rowData.getName(), "Alcohol ID: \t" + rowData.getAid() + "\nName: \t" + rowData.getName() + "\nBrand Name: \t" + rowData.getBrandName() + "\nAppellation: \t" + rowData.getAppellation() + "\nType: \t" +rowData.getAlcoholType());
                 }
             });
             return row;
@@ -146,7 +146,7 @@ public class SearchMenuController {
 
             //AlcoholData(ID, name, brandname, app, type)
             for (int i=0;i< AlcoholDataList.size(); i++) {
-                fileWriter.append(AlcoholDataList.get(i).getID());
+                fileWriter.append(String.valueOf(AlcoholDataList.get(i).getAid()));
                 fileWriter.append(COMMA_DELIMITER);
                 fileWriter.append(AlcoholDataList.get(i).getName());
                 fileWriter.append(COMMA_DELIMITER);
@@ -154,7 +154,7 @@ public class SearchMenuController {
                 fileWriter.append(COMMA_DELIMITER);
                 fileWriter.append(AlcoholDataList.get(i).getAppellation());
                 fileWriter.append(COMMA_DELIMITER);
-                fileWriter.append(AlcoholDataList.get(i).getType());
+                fileWriter.append(String.valueOf(AlcoholDataList.get(i).getAlcoholType()));
                 //fileWriter.append(data[i].toString());
                 //fileWriter.append(COMMA_DELIMITER);
                 fileWriter.append(NEW_LINE_SEPARATOR);
