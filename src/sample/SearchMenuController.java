@@ -22,7 +22,7 @@ public class SearchMenuController {
     private String brandName;
     private @FXML CheckBox isWineBox, isBeerBox, isOtherBox;
     private @FXML TextField brandField;
-    private @FXML TableColumn IDno, Name, BrandName, Type, Location;
+    private @FXML TableColumn idColumn, nameColumn, brandNameColumn, alcoholTypeColumn, locationColumn;
     private @FXML TableView table;
 
     private ScreenUtil screenUtil = new ScreenUtil();
@@ -43,9 +43,10 @@ public class SearchMenuController {
             row.setOnMouseClicked(event -> {
                 if(event.getClickCount() == 2 && (! row.isEmpty())){
                     AlcoholData rowData = row.getItem();
-                    screenUtil.createAlertBox("Information: " + rowData.getName(), "Alcohol ID: \t" + rowData.getAid() + "\nName: \t" + rowData.getName() + "\nBrand Name: \t" + rowData.getBrandName() + "\nAppellation: \t" + rowData.getAppellation() + "\nType: \t" +rowData.getAlcoholType());
+                    screenUtil.showAlcoholDetail(rowData);
                 }
             });
+            row.setTooltip(new Tooltip("Double click to see more detail"));
             return row;
         });
     }
@@ -53,13 +54,13 @@ public class SearchMenuController {
 
     public void displayResults(){
         table.getColumns().clear();
-        IDno.setCellValueFactory(new PropertyValueFactory<>("ID"));
-        Name.setCellValueFactory(new PropertyValueFactory<>("Name"));
-        BrandName.setCellValueFactory(new PropertyValueFactory<>("BrandName"));
-        Type.setCellValueFactory(new PropertyValueFactory<>("Type"));
-        Location.setCellValueFactory(new PropertyValueFactory<>("Appellation"));
+        idColumn.setCellValueFactory(new PropertyValueFactory<>("aid"));
+        nameColumn.setCellValueFactory(new PropertyValueFactory<>("Name"));
+        brandNameColumn.setCellValueFactory(new PropertyValueFactory<>("BrandName"));
+        alcoholTypeColumn.setCellValueFactory(new PropertyValueFactory<>("AlcoholType"));
+        locationColumn.setCellValueFactory(new PropertyValueFactory<>("Appellation"));
         table.setItems(SearchMenuController.getObservableList());
-        table.getColumns().addAll(IDno, Name, BrandName, Type, Location);
+        table.getColumns().addAll(idColumn, nameColumn, brandNameColumn, alcoholTypeColumn, locationColumn);
     }
 
     public void back (ActionEvent event){

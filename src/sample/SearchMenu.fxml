@@ -45,11 +45,11 @@
       <TextField fx:id="brandField" layoutX="210.0" layoutY="42.0" />
       <TableView fx:id="table" editable="true" layoutX="12.0" layoutY="81.0" prefHeight="387.0" prefWidth="777.0">
          <columns>
-            <TableColumn fx:id="IDno" prefWidth="100.0" text="ID No." />
-            <TableColumn fx:id="Name" prefWidth="200.0" text="Name" />
-            <TableColumn fx:id="BrandName" prefWidth="200.0" text="BrandName" />
-            <TableColumn fx:id="Type" prefWidth="75.0" text="Type" />
-            <TableColumn fx:id="Location" prefWidth="200.0" text="Location" />
+            <TableColumn fx:id="idColumn" prefWidth="100.0" text="ID" />
+            <TableColumn fx:id="nameColumn" prefWidth="200.0" text="Name" />
+            <TableColumn fx:id="brandNameColumn" prefWidth="200.0" text="Brand Name" />
+            <TableColumn fx:id="alcoholTypeColumn" prefWidth="75.0" text="Type" />
+            <TableColumn fx:id="locationColumn" prefWidth="200.0" text="Location" />
          </columns>
       </TableView>
       <Button fx:id="downloadButton" layoutX="345.0" layoutY="497.0" mnemonicParsing="false" onMouseClicked="#download" text="Download Results" />
