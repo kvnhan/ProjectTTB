@@ -28,5 +28,15 @@
         <jarDirectory url="file:///Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/db/lib" recursive="false" />
       </library>
     </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="file://E:/Program Files/Java/jdk1.8.0_121/db/lib" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+        <jarDirectory url="file://E:/Program Files/Java/jdk1.8.0_121/db/lib" recursive="false" />
+      </library>
+    </orderEntry>
   </component>
 </module>
