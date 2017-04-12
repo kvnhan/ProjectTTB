@@ -101,6 +101,10 @@ public class ApplicationReviewController extends DatabaseUtil{
         stm.close();
         conn.close();
 
+        ApplicationData appData = dbUtil.searchFormWithFid(FID).get(0);
+
+        dbUtil.addAlcohol(appData.getBrand_name(), "", "", 0, 0, "", 0, 1, "", 0,"", 1, "", "");
+
         nextApplication();
     }
 

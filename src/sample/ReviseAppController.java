@@ -46,6 +46,64 @@ public class ReviseAppController {
     private FXMLLoader fxmlLoader;
 
     DatabaseUtil util =  new DatabaseUtil();
+    AccountsUtil accountsUtil = new AccountsUtil();
+    ScreenUtil screenUtil = new ScreenUtil();
+
+    @FXML
+    public void initialize()throws SQLException{
+        int fid = util.searchFormWithAid(util.getAccountAid(accountsUtil.getUsername())).get(0).getFormID();
+        String type;
+        WineApplicationData wine;
+        BeerApplicationData beer;
+            type = util.checkforType(fid);
+            if (type.equals("WINE")) {
+                wine = util.fillSubmittedWineForm(fid);
+                ID1.setText(Integer.toString(wine.getTtbid()));
+                RepID1.setText(Integer.toString(wine.getRepid()));
+                PlantReg1.setText(Integer.toString(wine.getPermit_no()));
+                SerialNo1.setText(wine.getSerial());
+                ApplicantName1.setText(wine.getApplicantName());
+                Varietal1.setText(wine.getGrape_varietal());
+                Appellation1.setText(wine.getAppellation());
+                BrandName1.setText(wine.getBrand_name());
+                Name1.setText(wine.getFancyName());
+                Formula1.setText(wine.getFormula());
+                PhoneNumber1.setText(wine.getPhone_number());
+                EmailAddress1.setText(wine.getEmail());
+                Vintage1.setText(Integer.toString(wine.getVintage_date()));
+                pH1.setText(Double.toString(wine.getPh_level()));
+                Address1.setText(wine.getAddress());
+                MailingAddress1.setText(wine.getAddress());
+            } else if (type.equals("BEER")) {
+                beer = util.fillSubmittedBeerForm(fid);
+                ID1.setText(Integer.toString(beer.getTtbid()));
+                RepID1.setText(Integer.toString(beer.getRepid()));
+                PlantReg1.setText(Integer.toString(beer.getPermit_no()));
+                SerialNo1.setText(beer.getSerial());
+                ApplicantName1.setText(beer.getApplicantName());
+                BrandName1.setText(beer.getBrand_name());
+                Name1.setText(beer.getFancyName());
+                Formula1.setText(beer.getFormula());
+                PhoneNumber1.setText(beer.getPhone_number());
+                EmailAddress1.setText(beer.getEmail());
+                Address1.setText(beer.getAddress());
+                MailingAddress1.setText(beer.getAddress());
+            } else {
+                beer = util.fillSubmittedBeerForm(fid);
+                ID1.setText(Integer.toString(beer.getTtbid()));
+                RepID1.setText(Integer.toString(beer.getRepid()));
+                PlantReg1.setText(Integer.toString(beer.getPermit_no()));
+                SerialNo1.setText(beer.getSerial());
+                ApplicantName1.setText(beer.getApplicantName());
+                BrandName1.setText(beer.getBrand_name());
+                Name1.setText(beer.getFancyName());
+                Formula1.setText(beer.getFormula());
+                PhoneNumber1.setText(beer.getPhone_number());
+                EmailAddress1.setText(beer.getEmail());
+                Address1.setText(beer.getAddress());
+                MailingAddress1.setText(beer.getAddress());
+            }
+    }
 
     @FXML
     private void handledomBox(){
@@ -84,25 +142,13 @@ public class ReviseAppController {
             wine1.setSelected(false);
         }
     }
-    public void buttonClicked (javafx.event.ActionEvent event){
-        try {
-            if(event.getSource() == back){
-                fxmlLoader = new FXMLLoader(getClass().getResource("MainMenu.fxml"));
-                ((Node)(event.getSource())).getScene().getWindow().hide();
-            }
-            Parent root1 = null;
-            root1 = fxmlLoader.load();
-            Stage stage = new Stage();
-            stage.setTitle("MainMenu");
-            stage.setScene(new Scene(root1));
-            stage.show();
+    public void goBack (javafx.event.ActionEvent event){
+        screenUtil.switchScene("MainMenu.fxml", "Main Menu");
 
-        }catch(Exception ex){
-            ex.printStackTrace();
-        }
     }
     @FXML public void resubmit(javafx.event.ActionEvent event)throws SQLException{
-        int fid = Integer.parseInt(form.getText());
+
+        int fid = util.searchFormWithAid(util.getAccountAid(accountsUtil.getUsername())).get(0).getFormID();
         String type;
         WineApplicationData wine;
         BeerApplicationData beer;

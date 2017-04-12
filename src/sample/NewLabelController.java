@@ -108,7 +108,7 @@ public class NewLabelController{
         }
     }
     public void goBack (ActionEvent event){
-        work.switchScene("Main","Menu");
+        work.switchScene("MainMenu.fxml","Main Menu");
     }
 
     public void fillOutApplication() throws SQLException{

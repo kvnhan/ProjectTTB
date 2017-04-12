@@ -366,6 +366,18 @@ public class DatabaseUtil {
         return searchForm(query);
     }
 
+    public ArrayList<ApplicationData> searchFormWithAid(int AID) throws SQLException{
+        String query = "SELECT * FROM FORM WHERE FORM.AID = " + AID;
+
+        return searchForm(query);
+    }
+
+    public ArrayList<ApplicationData> searchFormWithFid(int FID) throws SQLException{
+        String query = "SELECT * FROM FORM WHERE FORM.FID = " + FID;
+
+        return searchForm(query);
+    }
+
     public ArrayList<ApplicationData> searchForm(String query) throws SQLException{
         ArrayList<ApplicationData> AppDataList = new ArrayList<>();
         ApplicationData a;
