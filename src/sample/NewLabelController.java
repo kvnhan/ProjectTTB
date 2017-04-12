@@ -200,7 +200,7 @@ public class NewLabelController{
 
         if(!Appellation.getText().trim().isEmpty()){
             appellation = Appellation.getText();
-        }else{
+      }else if(wine.isSelected()){
             su.createAlertBox("ERROR", "Appellation is empty");
         }
 
@@ -212,7 +212,7 @@ public class NewLabelController{
 
         if(!Varietal.getText().trim().isEmpty()){
             grape_varietal = Varietal.getText();
-        }else{
+        }else if(wine.isSelected()){
             su.createAlertBox("ERROR", "Varietal is empty");
         }
 
@@ -292,7 +292,7 @@ public class NewLabelController{
             }catch (NumberFormatException e){
                 su.createAlertBox("ERROR", "Not a Number");
             }
-        }else {
+        }else if(wine.isSelected()){
             su.createAlertBox("ERROR", "Vintage is empty");
         }
         if(!pH.getText().trim().isEmpty()){
@@ -304,7 +304,7 @@ public class NewLabelController{
             }catch (NumberFormatException e){
                 su.createAlertBox("ERROR", "Not a Number");
             }
-        }else{
+        }else if(wine.isSelected()){
             su.createAlertBox("ERROR", "PH is empty");
         }
         fid = 1;
