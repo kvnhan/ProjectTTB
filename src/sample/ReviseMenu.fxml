@@ -1,53 +1,86 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.String?>
-<?import javafx.collections.FXCollections?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
-<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="478.0" maxWidth="544.0" minHeight="350.0" minWidth="350.0" prefHeight="478.0" prefWidth="544.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ReviseMenuController">
+<AnchorPane fx:id="uploadImageText" maxHeight="611.0" maxWidth="1106.0" minHeight="350.0" minWidth="350.0" prefHeight="611.0" prefWidth="1106.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ReviseMenuController">
    <children>
-      <Text layoutX="43.0" layoutY="209.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Category to Change:" wrappingWidth="133.21875" />
+      <Text layoutX="619.0" layoutY="157.0" strokeType="OUTSIDE" strokeWidth="0.0" text="New Information:" textAlignment="CENTER" wrappingWidth="439.0000077933073">
+         <font>
+            <Font size="19.0" />
+         </font></Text>
       <Text layoutX="14.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Revision:">
          <font>
             <Font size="33.0" />
          </font>
       </Text>
-      <ChoiceBox id="firstBox" fx:id="firstChoiceBox" layoutX="172.0" layoutY="192.0" prefHeight="25.0" prefWidth="200.0">
-         <items>
-            <FXCollections fx:factory="observableArrayList">
-               <String fx:value="Vintage date (WINE ONLY)" />
-               <String fx:value="The stated amount of acid and/or the pH level (WINE ONLY)" />
-               <String fx:value="The mandatory statement of alcohol content (WINE ONLY)" />
-               <String fx:value="The optional statement of alcohol content" />
-               <String fx:value="Non-mandatory label information" />
-               <String fx:value="Reposition label information" />
-               <String fx:value="Overall appearance of label" />
-               <String fx:value="The stated percentages for blends of grape varietals abd appellations of origin (WINE ONLY)" />
-               <String fx:value="Optional 'produced' or 'made' by statement (WINE ONLY)" />
-               <String fx:value="Bonded winery or taxpaid wine bottling house number (WINE ONLY)" />
-               <String fx:value="Net Content Statement" />
-               <String fx:value="The stated amounts of sugar (WINE ONLY)" />
-            </FXCollections>
-         </items>
-      </ChoiceBox>
 
-      <Button fx:id="back" layoutX="23.0" layoutY="423.0" mnemonicParsing="false" onAction="#goBack" text="Back" />
-      <Button fx:id="submit" layoutX="475.0" layoutY="423.0" mnemonicParsing="false" onAction="#submitButtonClicked" text="Submit" />
-      <Label layoutX="44.0" layoutY="250.0" text="Request Change" />
-      <TextField fx:id="applicationID" layoutX="172.0" layoutY="139.0" prefHeight="25.0" prefWidth="285.0" />
-      <Label layoutX="43.0" layoutY="143.0" text="Application ID" />
-      <TextArea fx:id="ChangeBox" layoutX="172.0" layoutY="279.0" prefHeight="128.0" prefWidth="285.0" />
-      <CheckBox fx:id="Add" layoutX="172.0" layoutY="250.0" mnemonicParsing="false" text="Add" />
-      <CheckBox fx:id="Delete" layoutX="278.0" layoutY="250.0" mnemonicParsing="false" text="Delete" />
-      <CheckBox fx:id="Change" layoutX="384.0" layoutY="250.0" mnemonicParsing="false" text="Change" />
-      
+      <Button fx:id="back" layoutX="21.0" layoutY="543.0" mnemonicParsing="false" onAction="#goBack" prefHeight="31.0" prefWidth="447.0" text="Back" />
+      <Button fx:id="submit" layoutX="634.0" layoutY="543.0" mnemonicParsing="false" onAction="#submitButtonClicked" prefHeight="31.0" prefWidth="447.0" text="Submit" />
+      <TextField fx:id="applicationID" layoutX="281.0" layoutY="49.0" prefHeight="25.0" prefWidth="285.0" />
+      <Label layoutX="166.0" layoutY="54.0" text="Application ID #" />
+      <Text layoutX="214.0" layoutY="157.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Revision Type:" textAlignment="CENTER" wrappingWidth="133.21875">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Text>
+      <Text layoutX="21.0" layoutY="129.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Click all that apply" textAlignment="CENTER" wrappingWidth="93.99999305605888">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Text>
+      <ScrollPane layoutX="15.0" layoutY="174.0" prefHeight="354.0" prefWidth="1075.0">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="792.0" prefWidth="1055.0">
+               <children>
+                  <TextArea fx:id="rev1Data" layoutX="602.0" layoutY="13.0" prefHeight="54.0" prefWidth="439.0" />
+                  <Label layoutX="69.0" layoutY="31.0" text="Vintage date (WINE ONLY)" />
+                  <CheckBox fx:id="rev1En" layoutX="42.0" layoutY="29.0" mnemonicParsing="false" />
+                  <TextArea fx:id="rev2Data" layoutX="602.0" layoutY="74.0" prefHeight="54.0" prefWidth="439.0" />
+                  <Label layoutX="72.0" layoutY="90.0" text="The stated amount of acid and/or the pH level (WINE ONLY)" />
+                  <CheckBox fx:id="rev2En" layoutX="42.0" layoutY="90.0" mnemonicParsing="false" />
+                  <TextArea fx:id="rev3Data" layoutX="602.0" layoutY="133.0" prefHeight="54.0" prefWidth="439.0" />
+                  <Label layoutX="72.0" layoutY="149.0" text="The mandatory statement of alcohol content (WINE ONLY)" />
+                  <CheckBox fx:id="rev3En" layoutX="42.0" layoutY="149.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="4.0" />
+                  <TextArea fx:id="rev4Data" layoutX="602.0" layoutY="195.0" prefHeight="54.0" prefWidth="439.0" />
+                  <Label layoutX="72.0" layoutY="211.0" text="The optional statement of alcohol content" />
+                  <CheckBox fx:id="rev4En" layoutX="41.0" layoutY="211.0" mnemonicParsing="false" />
+                  <TextArea fx:id="rev5Data" layoutX="602.0" layoutY="260.0" prefHeight="54.0" prefWidth="439.0" />
+                  <Label layoutX="69.0" layoutY="276.0" text="Non-mandatory label information" />
+                  <CheckBox fx:id="rev5En" layoutX="42.0" layoutY="276.0" mnemonicParsing="false" />
+                  <TextArea fx:id="rev6Data" layoutX="602.0" layoutY="323.0" prefHeight="54.0" prefWidth="439.0" />
+                  <Label layoutX="72.0" layoutY="339.0" text="Reposition label information" />
+                  <CheckBox fx:id="rev6En" layoutX="41.0" layoutY="339.0" mnemonicParsing="false" />
+                  <TextArea fx:id="rev7Data" layoutX="602.0" layoutY="387.0" prefHeight="54.0" prefWidth="439.0" />
+                  <Label layoutX="72.0" layoutY="403.0" text="Overall appearance of label" />
+                  <CheckBox fx:id="rev7En" layoutX="41.0" layoutY="403.0" mnemonicParsing="false" />
+                  <TextArea fx:id="rev8Data" layoutX="602.0" layoutY="450.0" prefHeight="54.0" prefWidth="439.0" />
+                  <Label layoutX="69.0" layoutY="466.0" text="Percentages for grape varietals and appellations of origin (WINE ONLY)" />
+                  <CheckBox fx:id="rev8En" layoutX="41.0" layoutY="466.0" mnemonicParsing="false" />
+                  <TextArea fx:id="rev9Data" layoutX="602.0" layoutY="513.0" prefHeight="54.0" prefWidth="439.0" />
+                  <Label layoutX="69.0" layoutY="530.0" text="Optional 'produced' or 'made' by statement (WINE ONLY)" />
+                  <CheckBox fx:id="rev9En" layoutX="41.0" layoutY="529.0" mnemonicParsing="false" />
+                  <TextArea fx:id="rev10Data" layoutX="602.0" layoutY="573.0" prefHeight="54.0" prefWidth="439.0" />
+                  <Label layoutX="72.0" layoutY="590.0" text="Bonded winery or taxpaid wine bottling house number (WINE ONLY)" />
+                  <CheckBox fx:id="rev10En" layoutX="41.0" layoutY="589.0" mnemonicParsing="false" />
+                  <TextArea fx:id="rev11Data" layoutX="602.0" layoutY="633.0" prefHeight="54.0" prefWidth="439.0" />
+                  <Label layoutX="69.0" layoutY="649.0" text="Net Content Statement" />
+                  <CheckBox fx:id="rev11En" layoutX="41.0" layoutY="649.0" mnemonicParsing="false" />
+                  <TextArea fx:id="rev12Data" layoutX="602.0" layoutY="695.0" prefHeight="54.0" prefWidth="439.0" />
+                  <Label layoutX="71.0" layoutY="711.0" text="The stated amounts of sugar (WINE ONLY)" />
+                  <CheckBox fx:id="rev12En" layoutX="41.0" layoutY="711.0" mnemonicParsing="false" />
+               </children></AnchorPane>
+         </content>
+      </ScrollPane>
+      <Button fx:id="uploadButton" layoutX="578.0" layoutY="49.0" mnemonicParsing="false" onAction="#uploadImage" text="UPLOAD IMAGE" />
+      <Label fx:id="UploadImageLabel" layoutX="716.0" layoutY="54.0" prefHeight="21.0" prefWidth="351.0" text="File Directory Here" />
+
    </children>
 </AnchorPane>
