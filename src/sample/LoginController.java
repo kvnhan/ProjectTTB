@@ -55,7 +55,7 @@ public class LoginController {
         try {
             if (dbUtil.contains("ACCOUNT", "USERNAME", username)) {
 
-                aUtil.setUser_id(username);
+                aUtil.setUsername(username);
                 screenUtil.switchScene("MainMenu.fxml", "Main Menu");
             } else {
                 errorBox.setText("Username does not exist!");
@@ -74,7 +74,7 @@ public class LoginController {
      * @param event Triggers when the "Log in as Guest" button is pressed.
      */
     public void guestLogin(ActionEvent event) {
-        aUtil.setUser_id("guest");
+        aUtil.setUsername("guest");
         screenUtil.switchScene("MainMenu.fxml", "Main Menu");
     }
 

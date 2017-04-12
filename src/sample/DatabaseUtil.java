@@ -358,6 +358,11 @@ public class DatabaseUtil {
     }
     */
 
+    public ArrayList<ApplicationData> searchFormWithRepId(int REPID) throws SQLException{
+        String query = "SELECT * FROM FORM WHERE FORM.REPID = " + REPID;
+
+        return searchForm(query);
+    }
 
     public ArrayList<ApplicationData> searchForm(String query) throws SQLException{
         ArrayList<ApplicationData> AppDataList = new ArrayList<>();

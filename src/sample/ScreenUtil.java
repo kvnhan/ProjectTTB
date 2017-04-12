@@ -10,10 +10,12 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
+import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.scene.image.*;
 
+import java.io.File;
 import java.io.InputStream;
 import java.net.URL;
 
@@ -150,5 +152,11 @@ public class ScreenUtil {
         Scene scene = new Scene(layout);
         alertWindow.setScene(scene);
         alertWindow.showAndWait();
+    }
+    public File openFileChooser(){
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Choose label picture");
+        File selectedFile = fileChooser.showOpenDialog(mainWindow);
+        return selectedFile;
     }
 }

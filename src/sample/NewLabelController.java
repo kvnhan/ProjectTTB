@@ -1,15 +1,18 @@
 package sample;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.scene.control.Button;
 
 import java.awt.*;
+import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -29,7 +32,10 @@ public class NewLabelController{
     DatabaseUtil databaseUtil = new DatabaseUtil();
 
     WorkflowFacade facadeWork = new WorkflowFacade();
+    ScreenUtil work = new ScreenUtil();
+
     private FXMLLoader fxmlLoader;
+    @FXML private TextField myFilePath;
     @FXML private TextField ID;
     @FXML private TextField RepID;
     @FXML private TextField PlantReg;
@@ -237,6 +243,14 @@ public class NewLabelController{
 
         //roundRobin();
     }
+
+    public void chooseFile(ActionEvent event){
+        File tempFile = work.openFileChooser();
+        if (tempFile != null && tempFile.getPath() !=null) {
+            myFilePath.setText(tempFile.getPath());
+        }
+    }
+
     //goes adds new applications to worker's inboxes
     public void roundRobin() throws  SQLException{
         ArrayList<ApplicationData> unAssignedForms = databaseUtil.searchUnassignedForms();
@@ -272,7 +286,6 @@ public class NewLabelController{
         db.addBeerForm(ttbid, repid, serial, address, fancyName, formula, permit_no, infoOnBottle, source_of_product, type_of_product, brand_name, phone_number, email,
                 dateFormat, applicantName, alcoholType, alcoholContent, status);
         facadeWork.addToInbox(ttbid);
-
     }
 
 

@@ -50,15 +50,15 @@ public class ApplicationReviewController extends DatabaseUtil{
     DatabaseUtil dbUtil = new DatabaseUtil();
     ScreenUtil screenUtil = new ScreenUtil();
     AccountsUtil accountsUtil = new AccountsUtil();
+    String username = accountsUtil.getUsername();
 
 
     //for when switching to this scene from inbox
     @FXML
     public void initialize() throws SQLException{
-        String aid = accountsUtil.getUser_id();
-        String query = "SELECT * FROM FORM WHERE AID = " + aid + "";
-        List<ApplicationData> listForms = dbUtil.searchForm(query);
-    ApplicationData thisForm = listForms.get(0);
+        dbUtil.searchFormWithRepId(dbUtil.getAccountAid(username)).size();
+        List<ApplicationData> listForms = dbUtil.searchFormWithRepId(dbUtil.getAccountAid(username));
+        ApplicationData thisForm = listForms.get(0);
         repID.setText(Integer.toString(thisForm.getRepid()));
         registryNo.setText(Integer.toString(thisForm.getPermit_no()));
         prodSource.setText(thisForm.getSource_of_product());
@@ -67,7 +67,7 @@ public class ApplicationReviewController extends DatabaseUtil{
         phoneNo.setText(thisForm.getPhone_number());
         email.setText(thisForm.getEmail());
     Format formatter = new SimpleDateFormat("dd-MM-yyyy");
-        dateApp.setText(formatter.format(thisForm.getDate()));
+        dateApp.setText(thisForm.getDate());
         nameApp.setText(thisForm.getApplicantName());
 }
 
@@ -88,8 +88,7 @@ public class ApplicationReviewController extends DatabaseUtil{
     void setApprove() throws SQLException{
         ScreenUtil work = new ScreenUtil();
         work.switchScene("WorkFlow.fxml", "Main Menu");
-        String aid = accountsUtil.getUser_id();
-        String query = "SELECT * FROM FORM WHERE AID = " + aid + "";
+        String query = "SELECT * FROM FORM WHERE USERNAME = " + username + "";
         List<ApplicationData> listForms = dbUtil.searchForm(query);
         ApplicationData thisForm = listForms.get(0);
         Statement stm;
@@ -116,8 +115,8 @@ public class ApplicationReviewController extends DatabaseUtil{
     void setReject(ActionEvent event) throws SQLException {
         ScreenUtil work = new ScreenUtil();
         work.switchScene("WorkFlow.fxml", "Main Menu");
-        String aid = accountsUtil.getUser_id();
-        String query = "SELECT * FROM FORM WHERE AID = " + aid + "";
+        String username = accountsUtil.getUsername();
+        String query = "SELECT * FROM FORM WHERE USERNAME = " + username + "";
         List<ApplicationData> listForms = dbUtil.searchForm(query);
         ApplicationData thisForm = listForms.get(0);
         Statement stm;
@@ -190,6 +189,7 @@ public class ApplicationReviewController extends DatabaseUtil{
      * @param input The Array of Strings to be converted to an ArrayList.
      * @return Returns an ArrayList of Strings.
      */
+/*
 
     ArrayList<String> ArrayToArrayList(String[] input){
         ArrayList<String> returnThing = new ArrayList<String>();
@@ -198,6 +198,7 @@ public class ApplicationReviewController extends DatabaseUtil{
         }
         return returnThing;
     }
+*/
 
     /**
      * Takes a government account and an application ID and assigns the application to
