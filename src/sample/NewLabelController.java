@@ -207,8 +207,9 @@ public class NewLabelController{
                     alcoholType, alcoholContent);
             submitBeer(Data);
             System.out.println("This works too");
-
         }
+        roundRobin();
+
     }
 
     public void submitWine(WineApplicationData wd)throws SQLException{
@@ -241,7 +242,6 @@ public class NewLabelController{
                 type_of_product, brand_name, phone_number, email, dateFormat, applicantName,alcoholType,
                 vintage_date, ph_level, alcoholContent, status);
 
-        //roundRobin();
     }
 
     public void chooseFile(ActionEvent event){
