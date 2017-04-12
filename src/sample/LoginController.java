@@ -49,7 +49,7 @@ public class LoginController {
      * @param event Function is run when the user clicks the Login button in the User Interface.
      */
     public void login(ActionEvent event) {
-        username = usernameField.getText().toLowerCase();
+        username = usernameField.getText().toLowerCase().trim();
         password = passwordField.getText();
 
         try {

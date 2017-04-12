@@ -400,7 +400,6 @@ public class NewLabelController{
 
         db.addBeerForm(ttbid, repid, serial, address, fancyName, formula, permit_no, infoOnBottle, source_of_product, type_of_product, brand_name, phone_number, email,
                 dateFormat, applicantName, alcoholType, alcoholContent, status);
-        facadeWork.addToInbox(ttbid);
     }
 
 
