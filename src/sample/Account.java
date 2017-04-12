@@ -20,6 +20,14 @@ public class Account implements Serializable{
         public int getValue() { return id; }
     };*/
 
+    public int getUserType() {
+        return userType;
+    }
+
+    public void setUserType(int userType) {
+        this.userType = userType;
+    }
+
     /**
      * Creates an account that is not logged in.
      * @param usrnm String representing the username of the account.

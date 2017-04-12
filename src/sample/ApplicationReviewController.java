@@ -87,6 +87,7 @@ public class ApplicationReviewController extends DatabaseUtil{
      */
 
     void setAccepted() throws SQLException{
+
         Statement stm;
         String sql;
         stm = conn.createStatement();
@@ -235,5 +236,6 @@ public class ApplicationReviewController extends DatabaseUtil{
         }
     }
     */
+
 
 }

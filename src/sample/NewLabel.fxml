@@ -116,7 +116,7 @@
             <font>
                 <Font name="Constantia" size="14.0" />
             </font></TextField>
-        <Button fx:id="back" layoutX="14.0" layoutY="750.0" mnemonicParsing="false" onAction="#buttonClicked" prefHeight="41.0" prefWidth="69.0" text="Back" />
+        <Button fx:id="back" layoutX="14.0" layoutY="750.0" mnemonicParsing="false" onAction="#goBack" prefHeight="41.0" prefWidth="69.0" text="Back" />
         <Label layoutX="500.0" layoutY="325.0" prefHeight="21.0" prefWidth="98.0" text="Address:">
             <font>
                 <Font name="Constantia" size="24.0" />

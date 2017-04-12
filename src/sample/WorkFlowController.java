@@ -36,15 +36,11 @@ public class WorkFlowController {
         ArrayList<ApplicationData> unAssignedForms = databaseUtil.searchUnassignedForms();
         System.out.println("Unassigned forms = "+ unAssignedForms.size());
         if(!(unAssignedForms.size() == 0)){
-            int runThroughs = (int)(unAssignedForms.size())/10;
-
-            for(int i = 0; i <= runThroughs; i++) {;
-                for (int j = 0; j <= 10; j++) {
+            for(int i = 0; i < unAssignedForms.size(); i++) {;
                     int GOVID = databaseUtil.searchMinWorkLoad();
                     System.out.println("Found govid with min workload = " + GOVID);
-                    databaseUtil.assignForm(GOVID, unAssignedForms.get(j));
-                    System.out.println("FORM ID "+ unAssignedForms.get(j) + " ASSIGNED");
-                }
+                    databaseUtil.assignForm(GOVID, unAssignedForms.get(i));
+                    System.out.println("FORM ID "+ unAssignedForms.get(i) + " ASSIGNED");
             }
         }
 

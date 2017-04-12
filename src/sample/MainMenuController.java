@@ -6,6 +6,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 
+import java.sql.SQLException;
+
 /**
  * Controller class for Main Menu screen.
  */
@@ -17,11 +19,30 @@ public class MainMenuController{
     @FXML private Text userIDText;
 
     ScreenUtil work = new ScreenUtil();
+    DatabaseUtil databaseUtil = new DatabaseUtil();
     AccountsUtil accountsUtil = new AccountsUtil();
+    private String username;
 
     @FXML
-    public void initialize(){
-        userIDText.setText(accountsUtil.getUsername());
+    public void initialize() throws SQLException{
+
+        username = accountsUtil.getUsername();
+        userIDText.setText(username);
+
+        if(username.toLowerCase().equals("guest")){
+            openInboxButton.setDisable(true);
+            createNewApplicationButton.setDisable(true);
+            logOutButton.setDisable(true);
+        }else if(databaseUtil.searchAccountWithUsername(username).get(0).getUserType() == 3){
+            openInboxButton.setDisable(true);
+            createNewApplicationButton.setDisable(true);
+        }else if(databaseUtil.searchAccountWithUsername(username).get(0).getUserType() == 2){
+            openInboxButton.setDisable(true);
+        }else if(databaseUtil.searchAccountWithUsername(username).get(0).getUserType() == 1){
+            createNewApplicationButton.setDisable(true);
+        }
+
+
     }
 
     /**

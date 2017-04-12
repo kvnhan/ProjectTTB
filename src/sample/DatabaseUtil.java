@@ -254,6 +254,11 @@ public class DatabaseUtil {
         return searchAccount(query);
     }
 
+    public ArrayList<Account> searchAccountWithUsername(String username) throws SQLException {
+        String query = "SELECT * FROM ACCOUNT WHERE ACCOUNT.USERNAME = '" + username + "'";
+        return searchAccount(query);
+    }
+
     // Code used to search Alcohol table based on alcohol type
     public List<AlcoholData> searchAlcoholWithType(int alcoholType) throws SQLException{
         String query = "SELECT * FROM ALCOHOL WHERE ALCOHOL.ALCOHOL_TYPE = " + alcoholType;
@@ -624,7 +629,7 @@ public class DatabaseUtil {
     public int searchMinWorkLoad() throws SQLException{//TODO: find out fields + name for govt. worker\
         stmt = conn.createStatement();
 
-        int GOVID;
+        int GOVID = 0;
 
         // CHECK IF ALL GOVERNMENT OFFICIALS ARE ASSIGNED TO A FORM, IF NOT ASSIGNS FORMS TO ONES WHICH DONT HAVE A FORM
         for(Account account: searchAccountWithUserType(1)){
@@ -635,22 +640,26 @@ public class DatabaseUtil {
         }
         //NEED TO FIGURE OUT HOW TO FIND THE ACCOUNT WITH THE MINIMUM AMOUNT OF TIMES THE FORMS REFERENCE IT
         String query = "SELECT GOVID, SUM(CNT) AS CNT\n" +
-                     "FROM\n" +
-                     "  (SELECT  AID AS GOVID, 0 AS CNT\n" +
-                     "  FROM ACCOUNT\n" +
-                     "  WHERE USER_TYPE = 1\n" +
-                         "UNION\n" +
-                     "  SELECT  FORM.GOVID, COUNT(GOVID) AS CNT\n" +
-                     "  FROM FORM\n" +
-                     "  WHERE STATUS ='UNASSIGNED'\n" +
-                     "  GROUP BY  GOVID) T\n" +
-                     "GROUP BY GOVID\n" +
-                     "ORDER BY CNT ASC\n";
+                "FROM\n" +
+                "  (SELECT  FORM.GOVID, COUNT(GOVID) AS CNT\n" +
+                "  FROM FORM\n" +
+                "  WHERE STATUS ='ASSIGNED'\n" +
+                "  GROUP BY  GOVID) T\n" +
+                "GROUP BY GOVID\n" +
+                "ORDER BY CNT ASC";
 
         rset = stmt.executeQuery(query);
 
         //Should give asc db of govid of government works id and the number of forms they have assigned to themrset = stm.executeQuery(sql);
 
+       /* int occ;
+        while(rset.next()){
+            GOVID = rset.getInt("GOVID");
+            occ = rset.getInt("CNT");
+
+            System.out.println("Gov ID: " + GOVID + "Occurences: " + occ);
+        }
+*/
         if(rset.next()){
             while ((rset.getInt("GOVID") == 0)){
                 rset.next();

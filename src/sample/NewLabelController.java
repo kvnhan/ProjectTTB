@@ -107,22 +107,8 @@ public class NewLabelController{
             wine.setSelected(false);
         }
     }
-    public void buttonClicked (javafx.event.ActionEvent event){
-        try {
-            if(event.getSource() == back){
-                fxmlLoader = new FXMLLoader(getClass().getResource("MainMenu.fxml"));
-                ((Node)(event.getSource())).getScene().getWindow().hide();
-            }
-            Parent root1 = null;
-            root1 = fxmlLoader.load();
-            Stage stage = new Stage();
-            stage.setTitle("MainMenu");
-            stage.setScene(new Scene(root1));
-            stage.show();
-
-        }catch(Exception ex){
-            ex.printStackTrace();
-        }
+    public void goBack (ActionEvent event){
+        work.switchScene("Main","Menu");
     }
 
     public void fillOutApplication() throws SQLException{
@@ -368,6 +354,8 @@ public class NewLabelController{
                 type_of_product, brand_name, phone_number, email, dateFormat, applicantName,alcoholType,
                 vintage_date, ph_level, alcoholContent, status);
 
+        roundRobin();
+
     }
 
     public void chooseFile(ActionEvent event){
@@ -400,6 +388,23 @@ public class NewLabelController{
 
         db.addBeerForm(ttbid, repid, serial, address, fancyName, formula, permit_no, infoOnBottle, source_of_product, type_of_product, brand_name, phone_number, email,
                 dateFormat, applicantName, alcoholType, alcoholContent, status);
+
+        roundRobin();
+    }
+
+    public void roundRobin() throws  SQLException{
+        System.out.println("Running roundrobin");
+        ArrayList<ApplicationData> unAssignedForms = databaseUtil.searchUnassignedForms();
+        System.out.println("Unassigned forms = "+ unAssignedForms.size());
+        if(!(unAssignedForms.size() == 0)){
+            for(int i = 0; i < unAssignedForms.size(); i++) {;
+                int GOVID = databaseUtil.searchMinWorkLoad();
+                System.out.println("Found govid with min workload = " + GOVID);
+                databaseUtil.assignForm(GOVID, unAssignedForms.get(i));
+                System.out.println("FORM ID "+ unAssignedForms.get(i) + " ASSIGNED");
+            }
+        }
+
     }
 
 
