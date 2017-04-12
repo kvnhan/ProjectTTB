@@ -632,17 +632,17 @@ public class DatabaseUtil {
 
         int REPID;
         //NEED TO FIGURE OUT HOW TO FIND THE ACCOUNT WITH THE MINIMUM AMOUNT OF TIMES THE FORMS REFERENCE IT
-        String sql = "SELECT REPID, SUM(CNT) AS CNT\n" +
+        String sql = "SELECT GOVID, SUM(CNT) AS CNT\n" +
                      "FROM\n" +
-                     "  (SELECT  AID AS REPID, 0 AS CNT\n" +
+                     "  (SELECT  AID AS GOVID, 0 AS CNT\n" +
                      "  FROM ACCOUNT\n" +
                      "  WHERE USER_TYPE = 1\n" +
                          "UNION\n" +
-                     "  SELECT  FORM.REPID, COUNT(REPID) AS CNT\n" +
+                     "  SELECT  FORM.GOVID, COUNT(GOVID) AS CNT\n" +
                      "  FROM FORM\n" +
-                     "  WHERE STATUS = 4\n" +
-                     "  GROUP BY  REPID) T\n" +
-                     "GROUP BY REPID\n" +
+                     "  WHERE STATUS ='Unassigned'\n" +
+                     "  GROUP BY  GOVID) T\n" +
+                     "GROUP BY GOVID\n" +
                      "ORDER BY CNT ASC\n";
         //Should give asc db of repid of government works id and the number of forms they have assigned to them
 
