@@ -5,7 +5,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
- * Created by Adonay on 4/3/2017.
+ *Account class holds information regarding user accounts.
  */
 public class Account implements Serializable{
     private String username;
@@ -17,6 +17,11 @@ public class Account implements Serializable{
         GOVERNMENT_AGENT, MANUFACTURER, PUBLIC_USER
     };
 
+    /**
+     * Creates an account that is not logged in.
+     * @param usrnm String representing the username of the account.
+     * @param uType int dfferentiating between different types of account.
+     */
     public Account(String usrnm, int uType){
         username = usrnm;
         userType = uType;
