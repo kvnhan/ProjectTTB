@@ -31,7 +31,7 @@
         <Font size="18.0" />
       </font>
     </Label>
-    <Button fx:id="approve" layoutX="516.0" layoutY="361.0" mnemonicParsing="false" onAction="#setApprove" text="Approve" />
+    <Button fx:id="approve" layoutX="516.0" layoutY="361.0" mnemonicParsing="false" onAction="#setAccepted" text="Approve" />
     <Button fx:id="reject" layoutX="452.0" layoutY="361.0" mnemonicParsing="false" onAction="#setReject" text="Reject" />
     <Label layoutX="15.0" layoutY="250.0" text="Comments:" />
     <TextArea fx:id="commentsField" layoutX="15.0" layoutY="270.0" prefHeight="85.0" prefWidth="576.0" />

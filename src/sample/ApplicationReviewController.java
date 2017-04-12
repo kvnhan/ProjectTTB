@@ -77,7 +77,6 @@ public class ApplicationReviewController extends DatabaseUtil{
 
     @FXML
     void setGoBack(ActionEvent event){
-        ScreenUtil work = new ScreenUtil();
         work.switchScene("WorkFlow.fxml", "Main Menu");
     }
 
@@ -87,7 +86,7 @@ public class ApplicationReviewController extends DatabaseUtil{
      * Sets an Application status to "APPROVED" and adds comments to the Application.
      */
 
-    void setApprove() throws SQLException{
+    void setAccepted() throws SQLException{
         Statement stm;
         String sql;
         stm = conn.createStatement();
@@ -95,11 +94,13 @@ public class ApplicationReviewController extends DatabaseUtil{
         String comments = commentsField.getText();
         //update alcohol status
         int FID = thisForm.getFormID();
-        sql = "UPDATE FORM SET FORM.STATUS = 'APPROVED' WHERE FORM.FID = " + FID;
+        sql = "UPDATE FORM SET FORM.STATUS = 'ACCEPTED' WHERE FORM.FID = " + FID;
         stm.executeUpdate(sql);
 
         stm.close();
         conn.close();
+
+        nextApplication();
     }
 
     @FXML
@@ -120,6 +121,12 @@ public class ApplicationReviewController extends DatabaseUtil{
 
         stm.close();
         conn.close();
+
+        nextApplication();
+    }
+
+    public void nextApplication(){
+        work.switchScene("ApplicationReview.fxml","Application Review");
     }
 
     /**
