@@ -1,272 +1,66 @@
-package sample;
+<?xml version="1.0" encoding="UTF-8"?>
 
-import javafx.collections.FXCollections;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.scene.control.*;
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.sql.*;
-import java.util.ArrayList;
-
-import javafx.scene.control.cell.PropertyValueFactory;
-
-import java.util.List;
-import javafx.collections.ObservableList;
-
-public class SearchMenuController {
-
-    private String brandName;
-    private @FXML CheckBox isWineBox, isBeerBox, isOtherBox;
-    private @FXML TextField brandField;
-    private @FXML TableColumn idColumn, nameColumn, brandNameColumn, alcoholTypeColumn, locationColumn;
-    private @FXML TableView table;
-    private @FXML RadioButton normalSearch, intersectSearch, unionSearch;
-
-    private ScreenUtil screenUtil = new ScreenUtil();
-    private int alcoholChoice = 0;
-    private final int BEER = 1;
-    private final int WINE = 2;
-
-    private List<AlcoholData> alcoholDataList = new ArrayList<AlcoholData>();
-    private static ObservableList<AlcoholData> observableList;
-
-    private DatabaseUtil dbUtil = new DatabaseUtil();
-
-    @FXML
-    public void initialize(){
-        // to get information (alcohol data) from the double clicked row in the table
-        table.setRowFactory(tv -> {
-            TableRow<AlcoholData> row = new TableRow<AlcoholData>();
-            row.setOnMouseClicked(event -> {
-                if(event.getClickCount() == 2 && (! row.isEmpty())){
-                    AlcoholData rowData = row.getItem();
-                    screenUtil.showAlcoholDetail(rowData);
-                }
-            });
-            row.setTooltip(new Tooltip("Double click to see more detail"));
-            return row;
-        });
-    }
-
-
-    public void displayResults(){
-        table.getColumns().clear();
-        idColumn.setCellValueFactory(new PropertyValueFactory<>("aid"));
-        nameColumn.setCellValueFactory(new PropertyValueFactory<>("Name"));
-        brandNameColumn.setCellValueFactory(new PropertyValueFactory<>("BrandName"));
-        alcoholTypeColumn.setCellValueFactory(new PropertyValueFactory<>("AlcoholType"));
-        locationColumn.setCellValueFactory(new PropertyValueFactory<>("Appellation"));
-        table.setItems(SearchMenuController.getObservableList());
-        table.getColumns().addAll(idColumn, nameColumn, brandNameColumn, alcoholTypeColumn, locationColumn);
-    }
-
-    public void back (ActionEvent event){
-        screenUtil.switchScene("MainMenu.fxml", "Main Menu");
-    }
-
-    public static ObservableList<AlcoholData> getObservableList() {
-        return observableList;
-    }
-
-    public void searchIntersect() throws SQLException
-    {
-        List<AlcoholData> alcoholDataListTemp = new ArrayList<AlcoholData>();
-        for(int i = 0; i< alcoholDataList.size(); i++){
-            alcoholDataListTemp.add(alcoholDataList.get(i));
-        }
-        alcoholDataList.clear();
-        if (isBeerBox.isSelected()){
-            isWineBox.setSelected(false);
-            alcoholChoice = 1;
-        }
-        else if (isWineBox.isSelected()){
-            alcoholChoice = 2;
-        }
-        else if (brandField.getText() == null || brandField.getText().trim().isEmpty()) {
-            brandName = " "; //TODO fix
-            //System.out.println("BRAND NAME EMPTY");
-            //screenUtil.switchScene("ErrorState.fxml","Error");
-            //System.out.println("CHOOSE ALCOHOL TYPE OR BRANDNAME");
-        }
-        else
-            brandName = brandField.getText();
-        searchDatabase();
-        boolean to_remove;
-        for(int i=0; i < alcoholDataList.size(); i++) {
-            to_remove = true;
-            for (int j = 0; j < alcoholDataListTemp.size(); j++) {
-                if (alcoholDataListTemp.get(j).myEquals(alcoholDataList.get(i))) {
-                    to_remove = false;
-                    break;
-                }
-            }
-            if(to_remove==true) {
-                alcoholDataList.remove(alcoholDataList.get(i));
-                i--;
-            }
-        }
-    }
-    public void searchUnion() throws SQLException
-    {
-        List<AlcoholData> alcoholDataListTemp = new ArrayList<AlcoholData>();
-        for(int i = 0; i< alcoholDataList.size(); i++){
-            alcoholDataListTemp.add(alcoholDataList.get(i));
-        }
-        alcoholDataList.clear();
-        if (isBeerBox.isSelected()){
-            alcoholChoice = 1;
-        }
-        else if (isWineBox.isSelected()){
-            alcoholChoice = 2;
-        }
-        else if (brandField.getText() == null || brandField.getText().trim().isEmpty()) {
-            brandName = " "; //TODO fix
-        //    System.out.println("BRAND NAME EMPTY");
-        //    screenUtil.switchScene("ErrorState.fxml","Error");
-        //    System.out.println("CHOOSE ALCOHOL TYPE OR BRANDNAME");
-        }
-        else
-            brandName = brandField.getText();
-        searchDatabase();
-        boolean to_add;
-        int temp_int = alcoholDataListTemp.size();
-        System.out.println((temp_int));
-        for(int i=0; i < alcoholDataListTemp.size(); i++) {
-            to_add = true;
-            System.out.println("Checking if item is in list");
-            for (int j = 0; j < alcoholDataList.size(); j++) {
-                if (alcoholDataList.get(j).myEquals(alcoholDataListTemp.get(i))) {
-                    to_add = false;
-                    break;
-                }
-            }
-            if(to_add==true) {
-                alcoholDataList.add(alcoholDataListTemp.get(i));
-            }
-        }
-    }
-    public void searchNormal() throws SQLException
-    {
-        alcoholDataList.clear();
-        if (isBeerBox.isSelected()){
-            alcoholChoice = 1;
-        }
-        else if (isWineBox.isSelected()){
-            alcoholChoice = 2;
-        }
-        else if (brandField.getText() == null || brandField.getText().trim().isEmpty()) {
-            brandName = " "; //TODO fix
-        //    System.out.println("BRAND NAME EMPTY");
-        //    screenUtil.switchScene("ErrorState.fxml","Error");
-         //   System.out.println("CHOOSE ALCOHOL TYPE OR BRANDNAME");
-        }
-        else
-            brandName = brandField.getText();
-        searchDatabase();
-    }
-
-
-    public void search(ActionEvent event) throws SQLException, NoSuchMethodException, IllegalAccessException, InstantiationException, IOException{
-        if(normalSearch.isSelected()){
-            searchNormal();
-        }
-        else if(intersectSearch.isSelected()){
-            searchIntersect();
-        }
-        else {
-            System.out.println("Entering Union");
-            searchUnion();
-        }
-        observableList = FXCollections.observableList(alcoholDataList);
-        displayResults();
-        System.out.println("FLAG 3");
-    }
-
-
-    private void searchDatabase() throws SQLException {
-
-        if (isWineBox.isSelected() && isBeerBox.isSelected()){
-            alcoholDataList = dbUtil.searchAlcoholWithType(BEER);
-            alcoholDataList.addAll(dbUtil.searchAlcoholWithType(WINE));
-        }
-        else if(isWineBox.isSelected() || isBeerBox.isSelected()){
-            alcoholDataList = dbUtil.searchAlcoholWithType(alcoholChoice);
-        }
-        else {
-            alcoholDataList = dbUtil.searchAlcoholBrand(brandName);
-        }
-    }
-
-    private static final String COMMA_DELIMITER = ",";
-    private static final String NEW_LINE_SEPARATOR = "\r\n";
-    //private String fileName = "CS3733_TeamA";
-    private String fileName = System.getProperty("user.home") + "/"+"CS3733_TeamA" + ".csv";
-    private File F = new File(fileName);
-    private int j = 1;
-
-
-    public void download(){
-
-
-        if(F.exists()) {
-            for (j = 1; F.exists(); j++) {
-                int fileNameLength = fileName.length();
-                fileName =  fileName.substring(0,fileNameLength-4) + String.valueOf(j) + ".csv";
-                F = new File(fileName);
-            }
-        }
-        FileWriter fileWriter = null;
-
-        try {
-            fileWriter = new FileWriter(fileName);
-
-            //Write the CSV file header
-
-            fileWriter.append("ID");
-            fileWriter.append(COMMA_DELIMITER);
-            fileWriter.append("Name");
-            fileWriter.append(COMMA_DELIMITER);
-            fileWriter.append("Brandname");
-            fileWriter.append(COMMA_DELIMITER);
-            fileWriter.append("App");
-            fileWriter.append(COMMA_DELIMITER);
-            fileWriter.append("Type");
-            fileWriter.append(NEW_LINE_SEPARATOR);
-
-            //AlcoholData(ID, name, brandname, app, type)
-            for (int i = 0; i< alcoholDataList.size(); i++) {
-                fileWriter.append(String.valueOf(alcoholDataList.get(i).getAid()));
-                fileWriter.append(COMMA_DELIMITER);
-                fileWriter.append(alcoholDataList.get(i).getName());
-                fileWriter.append(COMMA_DELIMITER);
-                fileWriter.append(alcoholDataList.get(i).getBrandName());
-                fileWriter.append(COMMA_DELIMITER);
-                fileWriter.append(alcoholDataList.get(i).getAppellation());
-                fileWriter.append(COMMA_DELIMITER);
-                fileWriter.append(String.valueOf(alcoholDataList.get(i).getAlcoholType()));
-                //fileWriter.append(data[i].toString());
-                //fileWriter.append(COMMA_DELIMITER);
-                fileWriter.append(NEW_LINE_SEPARATOR);
-            }
-
-            System.out.println("CSV file was created successfully !!!");
-            System.out.println("CSV file name:"+fileName);
-        } catch (Exception e) {
-            System.out.println("Error in CsvFileWriter !!!");
-            e.printStackTrace();
-        } finally {
-
-            try {
-                fileWriter.flush();
-                fileWriter.close();
-            } catch (IOException e) {
-                System.out.println("Error while flushing/closing fileWriter !!!");
-                e.printStackTrace();
-            }
-
-        }
-    }
-}
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="552.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.SearchMenuController">
+   <children>
+      <Label layoutX="14.0" layoutY="14.0" text="Alcohol Type:">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="14.0" layoutY="41.0" text="Tag/Brand name (optional):">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Button fx:id="Back" layoutX="13.0" layoutY="497.0" mnemonicParsing="false" onAction="#back" text="Back" />
+      <Button fx:id="Search" layoutX="701.0" layoutY="478.0" mnemonicParsing="false" onAction="#search" text="Search">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <CheckBox fx:id="isWineBox" layoutX="125.0" layoutY="16.0" mnemonicParsing="false" text="Wine">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </CheckBox>
+      <CheckBox fx:id="isBeerBox" layoutX="197.0" layoutY="16.0" mnemonicParsing="false" text="Beer">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </CheckBox>
+      <CheckBox fx:id="isOtherBox" layoutX="265.0" layoutY="16.0" mnemonicParsing="false" text="Distilled Spirits">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </CheckBox>
+      <TextField fx:id="brandField" layoutX="210.0" layoutY="42.0" />
+      <TableView fx:id="table" editable="true" layoutX="12.0" layoutY="81.0" prefHeight="387.0" prefWidth="777.0">
+         <columns>
+            <TableColumn fx:id="idColumn" prefWidth="100.0" text="ID" />
+            <TableColumn fx:id="nameColumn" prefWidth="200.0" text="Name" />
+            <TableColumn fx:id="brandNameColumn" prefWidth="200.0" text="Brand Name" />
+            <TableColumn fx:id="alcoholTypeColumn" prefWidth="75.0" text="Type" />
+            <TableColumn fx:id="locationColumn" prefWidth="200.0" text="Location" />
+         </columns>
+      </TableView>
+      <Button fx:id="downloadButton" layoutX="345.0" layoutY="497.0" mnemonicParsing="false" onMouseClicked="#download" text="Download Results" />
+      <RadioButton fx:id="normalSearch" layoutX="557.0" layoutY="468.0" mnemonicParsing="false" selected="true" text="Normal">
+         <toggleGroup>
+            <ToggleGroup fx:id="searchType" />
+         </toggleGroup>
+      </RadioButton>
+      <RadioButton fx:id="intersectSearch" layoutX="557.0" layoutY="493.0" mnemonicParsing="false" text="Intersect" toggleGroup="$searchType" />
+      <RadioButton fx:id="unionSearch" layoutX="557.0" layoutY="518.0" mnemonicParsing="false" text="Union" toggleGroup="$searchType" />
+   </children>
+</Pane>
