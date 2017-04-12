@@ -55,10 +55,16 @@ public class NewLabelController{
     @FXML private TextField Address;
     @FXML private Button Submit;
     @FXML private Button back;
-
+    @FXML private Button clear;
     Connection cn;
     Statement sm;
     DatabaseUtil db = new DatabaseUtil();
+
+    @FXML
+    private void setClear(){
+        ScreenUtil work = new ScreenUtil();
+        work.switchScene("NewLabel.fxml", "New Label");
+    }
 
     @FXML
     private void handledomBox(){

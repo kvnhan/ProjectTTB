@@ -1,18 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.text.Font?>
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.WorkFlowController">
-    <children>
-        <Label layoutX="116.0" layoutY="53.0" text="Number of Applications:">
-            <font>
-                <Font size="24.0" />
-            </font>
-        </Label>
-        <TextField layoutX="393.0" layoutY="56.0" />
-        <Button layoutX="242.0" layoutY="138.0" mnemonicParsing="false" onAction="#firstButton" prefHeight="56.0" prefWidth="116.0" text="View First" />
-        <Button fx:id="back" layoutX="265.0" layoutY="324.0" mnemonicParsing="false" onAction="#goBack" prefHeight="35.0" prefWidth="70.0" text="Back" />
-    </children>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="sample.WorkFlowController">
+  <children>
+    <Label layoutX="116.0" layoutY="53.0" text="Number of Applications:">
+      <font>
+        <Font size="24.0" fx:id="x1" />
+      </font>
+    </Label>
+    <Button layoutX="242.0" layoutY="138.0" mnemonicParsing="false" onAction="#viewFirstApplicationButton" prefHeight="56.0" prefWidth="116.0" text="View First" />
+    <Button fx:id="back" layoutX="265.0" layoutY="324.0" mnemonicParsing="false" onAction="#goBack" prefHeight="35.0" prefWidth="70.0" text="Back" />
+    <Label fx:id="numberOfApplicationsLabel" font="$x1" layoutX="383.0" layoutY="53.0" text="0" />
+  </children>
 </Pane>
