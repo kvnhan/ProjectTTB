@@ -8,7 +8,7 @@ public class AccountsUtil {
 
     private static HashMap usernameMap = new HashMap<String, Account>();
     private String saveFileName = "usernameMap";
-    private static String user_id = "";
+    private static String username = "";
     private ScreenUtil screenUtil = new ScreenUtil();
 
 
@@ -16,12 +16,12 @@ public class AccountsUtil {
         loadFile();
     }
 
-    public static String getUser_id() {
-        return user_id;
+    public static String getUsername() {
+        return username;
     }
 
-    public static void setUser_id(String user_id) {
-        AccountsUtil.user_id = user_id;
+    public static void setUsername(String username) {
+        AccountsUtil.username = username;
     }
 
     public void saveFile(){
@@ -74,7 +74,7 @@ public class AccountsUtil {
     }
 
     public void logOut(javafx.event.ActionEvent event){
-        user_id = "";
+        username = "";
         screenUtil.switchScene("Login.fxml", "Login");
     }
 }
