@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="611.0" maxWidth="1106.0" minHeight="350.0" minWidth="350.0" prefHeight="611.0" prefWidth="1106.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ReviseMenuController">
+<AnchorPane fx:id="uploadImageText" maxHeight="611.0" maxWidth="1106.0" minHeight="350.0" minWidth="350.0" prefHeight="611.0" prefWidth="1106.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ReviseMenuController">
    <children>
       <Text layoutX="619.0" layoutY="157.0" strokeType="OUTSIDE" strokeWidth="0.0" text="New Information:" textAlignment="CENTER" wrappingWidth="439.0000077933073">
          <font>
@@ -22,7 +22,7 @@
          </font>
       </Text>
 
-      <Button fx:id="back" layoutX="21.0" layoutY="543.0" mnemonicParsing="false" onAction="#buttonClicked" prefHeight="31.0" prefWidth="447.0" text="Back" />
+      <Button fx:id="back" layoutX="21.0" layoutY="543.0" mnemonicParsing="false" onAction="#goBack" prefHeight="31.0" prefWidth="447.0" text="Back" />
       <Button fx:id="submit" layoutX="634.0" layoutY="543.0" mnemonicParsing="false" onAction="#submitButtonClicked" prefHeight="31.0" prefWidth="447.0" text="Submit" />
       <TextField fx:id="applicationID" layoutX="281.0" layoutY="49.0" prefHeight="25.0" prefWidth="285.0" />
       <Label layoutX="166.0" layoutY="54.0" text="Application ID #" />
@@ -79,7 +79,8 @@
                </children></AnchorPane>
          </content>
       </ScrollPane>
-      <Button fx:id="uploadButton" layoutX="775.0" layoutY="65.0" mnemonicParsing="false" text="UPLOAD IMAGE" />
+      <Button fx:id="uploadButton" layoutX="578.0" layoutY="49.0" mnemonicParsing="false" onAction="#uploadImage" text="UPLOAD IMAGE" />
+      <Label fx:id="UploadImageLabel" layoutX="716.0" layoutY="54.0" prefHeight="21.0" prefWidth="351.0" text="File Directory Here" />
 
    </children>
 </AnchorPane>

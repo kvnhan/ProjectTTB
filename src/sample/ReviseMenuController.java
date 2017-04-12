@@ -3,13 +3,13 @@ package sample;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.sql.*;
+
 
 /**
  * Created by peternolan on 4/2/17.
@@ -38,6 +38,7 @@ public class ReviseMenuController {
     @FXML private Button back;
     @FXML private Button submit;
     @FXML private Button UploadImage;
+    @FXML private Label UploadImageLabel;
 
     String revisionData = "";
 
@@ -46,6 +47,7 @@ public class ReviseMenuController {
     Connection conn = dbUtil.connect();
 
     ScreenUtil screen = new ScreenUtil();
+    String revisionImagePath = "";
 
     /**
      * This is buttonClicked, the function that dictates events depending on which button has been clicked.
@@ -56,7 +58,17 @@ public class ReviseMenuController {
         screen.switchScene("MainMenu.fxml", "Main Menu");
 
     }
-
+    public void uploadImage(ActionEvent Event){
+        openFileChooser();
+        UploadImageLabel.setText(revisionImagePath);
+    }
+    public void openFileChooser(){
+        Stage ReviseMenu = new Stage();
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Choose label picture");
+        File selectedFile = fileChooser.showOpenDialog(ReviseMenu);
+        revisionImagePath = selectedFile.getPath();
+    }
     public void submitButtonClicked(ActionEvent event) {
         if (rev1En.isSelected()) {
             revisionData = rev1Data.getText() + "\n\r";
@@ -121,6 +133,7 @@ public class ReviseMenuController {
         }
 
         System.out.println(revisionData);
+        System.out.println(revisionImagePath);
         System.out.println(applicationID.getText());
         updateData(applicationID.getText());
         screen.switchScene("NewApp.fxml", "New Application");
