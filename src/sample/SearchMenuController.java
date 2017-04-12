@@ -24,6 +24,7 @@ public class SearchMenuController {
     private @FXML TextField brandField;
     private @FXML TableColumn idColumn, nameColumn, brandNameColumn, alcoholTypeColumn, locationColumn;
     private @FXML TableView table;
+    private @FXML RadioButton normalSearch, intersectSearch, unionSearch;
 
     private ScreenUtil screenUtil = new ScreenUtil();
     private int alcoholChoice = 0;
@@ -71,8 +72,10 @@ public class SearchMenuController {
         return observableList;
     }
 
-
-    public void search(ActionEvent event) throws SQLException, NoSuchMethodException, IllegalAccessException, InstantiationException, IOException{
+    public void searchIntersect(){}
+    public void searchUnion() throws SQLException
+    {
+        List<AlcoholData> AlcoholDataListTemp = AlcoholDataList;
         AlcoholDataList.clear();
         if (isBeerBox.isSelected()){
             alcoholChoice = 1;
@@ -85,13 +88,44 @@ public class SearchMenuController {
             screenUtil.switchScene("ErrorState.fxml","Error");
             System.out.println("CHOOSE ALCOHOL TYPE OR BRANDNAME");
         }
-
         brandName = brandField.getText();
-
         searchDatabase();
-
+        for(int i=0; i < AlcoholDataListTemp.size(); i++){
+            if(!AlcoholDataList.contains(AlcoholDataListTemp.get(i))){
+                AlcoholDataList.add(AlcoholDataListTemp.get(i));
+            }
+        }
+    }
+    public void searchNormal() throws SQLException
+    {
+        AlcoholDataList.clear();
+        if (isBeerBox.isSelected()){
+            alcoholChoice = 1;
+        }
+        else if (isWineBox.isSelected()){
+            alcoholChoice = 2;
+        }
+        else if (brandField.getText() == null || brandField.getText().trim().isEmpty()) {
+            System.out.println("BRAND NAME EMPTY");
+            screenUtil.switchScene("ErrorState.fxml","Error");
+            System.out.println("CHOOSE ALCOHOL TYPE OR BRANDNAME");
+        }
+        brandName = brandField.getText();
+        searchDatabase();
         observableList = FXCollections.observableList(AlcoholDataList);
         displayResults();
+    }
+
+
+    public void search(ActionEvent event) throws SQLException, NoSuchMethodException, IllegalAccessException, InstantiationException, IOException{
+        if(normalSearch.isSelected()){
+            searchNormal();
+        }
+        else if(intersectSearch.isSelected()){
+            searchIntersect();
+        }
+        else
+            searchUnion();
     }
 
 
