@@ -12,9 +12,9 @@ public class BeerApplicationData extends ApplicationData{
 
 
 
-    public BeerApplicationData(int formID, acceptanceInformation acceptanceInfo, int ttbid, int repid, String serial, String address, String fancyName, String formula, int permit_no,
+    public BeerApplicationData(int formID, AcceptanceInformation acceptanceInfo, int ttbid, int repid, String serial, String address, String fancyName, String formula, int permit_no,
 
-                               String infoOnBottle, String source_of_product, String type_of_product, String brand_name, String phone_number, String email, Date date, String applicantName,
+                               String infoOnBottle, String source_of_product, String type_of_product, String brand_name, String phone_number, String email, String date, String applicantName,
 
                                String alcoholType, String alcoholContent) {
 

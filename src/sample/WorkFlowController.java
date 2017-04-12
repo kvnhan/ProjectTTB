@@ -4,64 +4,48 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+
+import java.sql.SQLException;
 
 public class WorkFlowController {
-/*
-    private FXMLLoader fxmlLoader;
-    @FXML private Button back;
-    @FXML private Button first;
-    ScreenUtil work = new ScreenUtil();
-
-    public void buttonClicked (ActionEvent event){
-        if(event.getSource() == back){
-            work.switchScene("MainMenu.fxml","Main Menu");
-        }
-    }
-    public void firstButton(ActionEvent event){
-        work.switchScene("ApplicationReview.fxml", "Application Review");
-    }
-    */
 
     private FXMLLoader fxmlLoader;
+    @FXML private Label numberOfApplicationsLabel;
     @FXML private Button back;
     @FXML private Button first;
-    ScreenUtil work = new ScreenUtil();
+    private AccountsUtil accountsUtil = new AccountsUtil();
+    private ScreenUtil screenUtil = new ScreenUtil();
+    private DatabaseUtil dbUtil = new DatabaseUtil();
+
+    private String username = accountsUtil.getUsername();
+    private int numberOfApps;
+
+
+    @FXML
+    public void initialize() throws SQLException{
+        numberOfApps = dbUtil.searchFormWithRepId(dbUtil.getAccountAid(username)).size();
+        numberOfApplicationsLabel.setText(String.valueOf(numberOfApps));
+    }
 
     /**
      * Checks if the back button has been clicked and returns user to Main Menu.
      * @param event ActionEvent representing a button press.
      */
-    public void buttonClicked (ActionEvent event){
-        if(event.getSource() == back){
-            work.switchScene("MainMenu.fxml","Main Menu");
-        }
+    public void goBack (ActionEvent event){
+        screenUtil.switchScene("MainMenu.fxml","Main Menu");
     }
 
     /**
      * Switches to the ApplicationReview screen.
      * @param event Button press representing the ViewFirst button.
      */
-    public void firstButton(ActionEvent event){
+    public void viewFirstApplicationButton(ActionEvent event){
+        if(numberOfApps <= 0){
+            screenUtil.createAlertBox("No applications due","There are no applications assigned to you at the moment.");
 
-        work.switchScene("ApplicationReview.fxml", "Application Review");
+        }else{
+            screenUtil.switchScene("ApplicationReview.fxml", "Application Review");
+        }
     }
-
-
-    /*public void roundRobin({
-        if (getUnassigForms().size() <= 10) {
-            ArrayList<String> forms = getUnassigForms();
-            for (i = 0; i < forms.size(); i++) {
-                Account worker = getSmallWorker();
-                addToInbox(worker, forms.get(i));
-            }
-        }
-        //adds forms to workers 10 at a time
-        else{
-            ArrayList<String> forms = getUnassigForms();
-            for (i = 0; i < forms.size(); i++) {
-                Account worker = getSmallWorker();
-                addToInbox(worker, forms.get(i));
-        }
-    }*/
-
 }

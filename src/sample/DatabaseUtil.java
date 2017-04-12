@@ -30,7 +30,7 @@ public class DatabaseUtil {
     private ResultSet rset;
     private Statement stmt = null;
 
-    DatabaseUtil(){
+    public DatabaseUtil(){
         conn = connect();
 
     }
@@ -220,6 +220,43 @@ public class DatabaseUtil {
         return isAdded;
     }
 
+    public int getAccountAid(String username) throws SQLException{
+        int AID = 0;
+
+        stmt = conn.createStatement();
+
+        rset = stmt.executeQuery("SELECT * FROM ACCOUNT WHERE ACCOUNT.USERNAME = " + "'" + username + "'");
+
+        while(rset.next()) {
+            AID = rset.getInt("AID");
+        }
+
+        return AID;
+    }
+
+    public ArrayList<Account> searchAccounts(String query) throws SQLException{ // We should make username a key
+        ArrayList<Account> resultAccounts = new ArrayList<>();
+
+        stmt = conn.createStatement();
+
+        rset = stmt.executeQuery(query);
+
+        while(rset.next()) {
+            int AID = rset.getInt("AID");
+            String username = rset.getString("USERNAME");
+            String password = rset.getString("PASSWORDHASH");
+            int isLoggedIn = rset.getInt("ISLOGGEDIN");
+            int userType = rset.getInt("USER_TYPE");
+
+            Account account = new Account(username, userType);
+            resultAccounts.add(account);
+        }
+
+        return resultAccounts;
+
+
+    }
+
     // Code used to search Alcohol table based on alcohol type
     public List<AlcoholData> searchAlcoholWithType(int alcoholType) throws SQLException{
         String query = "SELECT * FROM ALCOHOL WHERE ALCOHOL.ALCOHOL_TYPE = " + alcoholType;
@@ -308,7 +345,7 @@ public class DatabaseUtil {
             int vintage_date = rset.getInt("VINTAGE");
             double ph_level = rset.getDouble("PH");
             String status = rset.getString("STATUS");
-            acceptanceInformation info = new acceptanceInformation(null, applicantName, null, status);
+            AcceptanceInformation info = new AcceptanceInformation(null, applicantName, null, status);
 
             a = new WineApplicationData(fid, info,ttbid, repid, serial,address,
                     fancyName, formula, grape_varietal, appellation, permit_no, infoOnBottle,
@@ -321,9 +358,14 @@ public class DatabaseUtil {
     }
     */
 
+    public ArrayList<ApplicationData> searchFormWithRepId(int REPID) throws SQLException{
+        String query = "SELECT * FROM FORM WHERE FORM.REPID = " + REPID;
 
-    public List<ApplicationData> searchForm(String query) throws SQLException{
-        List<ApplicationData> AppDataList = new ArrayList<>();
+        return searchForm(query);
+    }
+
+    public ArrayList<ApplicationData> searchForm(String query) throws SQLException{
+        ArrayList<ApplicationData> AppDataList = new ArrayList<>();
         ApplicationData a;
 
         stmt = conn.createStatement();
@@ -352,11 +394,11 @@ public class DatabaseUtil {
             String alcoholContent = "";
             String date = rset.getString("DATE");
             String status = rset.getString("STATUS");
-            acceptanceInformation info = new acceptanceInformation(null, applicantName, null, status);
+            AcceptanceInformation info = new AcceptanceInformation(null, applicantName, null, status);
 
             a = new ApplicationData(fid, info,ttbid, repid, serial,address,
                     fancyName, formula, permit_no, infoOnBottle,
-                    source_of_product, type_of_product, brand_name, phone_number, email, null, applicantName,
+                    source_of_product, type_of_product, brand_name, phone_number, email, date, applicantName,
                     alcoholType, alcoholContent);
             AppDataList.add(a);
         }
@@ -404,7 +446,7 @@ public class DatabaseUtil {
             String alcoholContent = "";
             String date = rset.getString("DATE");
             String status = rset.getString("STATUS");
-            acceptanceInformation info = new acceptanceInformation(null, applicantName, null, status);
+            AcceptanceInformation info = new AcceptanceInformation(null, applicantName, null, status);
 
             a = new BeerApplicationData(fid, info,ttbid, repid, serial,address,
                     fancyName, formula, permit_no, infoOnBottle,
@@ -453,7 +495,7 @@ public class DatabaseUtil {
         String alcoholContent = "";
         String date = "";
         String status = "";
-        acceptanceInformation info = new acceptanceInformation(null, "", null, status);
+        AcceptanceInformation info = new AcceptanceInformation(null, "", null, status);
 
         while(rset.next()){
             fid = rset.getInt("FID");
@@ -475,7 +517,7 @@ public class DatabaseUtil {
             alcoholContent = "";
             date = rset.getString("DATE");
             status = rset.getString("STATUS");
-            info = new acceptanceInformation(null, applicantName, null, status);
+            info = new AcceptanceInformation(null, applicantName, null, status);
 
         }
 
@@ -519,7 +561,7 @@ public class DatabaseUtil {
         String alcoholContent = "";
         String date = "";
         String status = "";
-        acceptanceInformation info = new acceptanceInformation(null, "", null, status);
+        AcceptanceInformation info = new AcceptanceInformation(null, "", null, status);
 
         while(rset.next()){
             fid = rset.getInt("FID");
@@ -545,17 +587,85 @@ public class DatabaseUtil {
             vintage_date = rset.getInt("VINTAGE");
             ph_level = rset.getDouble("PH");
             status = rset.getString("STATUS");
-            info = new acceptanceInformation(null, applicantName, null, status);
+            info = new AcceptanceInformation(null, applicantName, null, status);
 
         }
 
         a = new WineApplicationData(fid, info,ttbid, repid, serial,address,
                 fancyName, formula, grape_varietal, appellation, permit_no, infoOnBottle,
-                source_of_product, type_of_product, brand_name, phone_number, email, null, applicantName,
+                source_of_product, type_of_product, brand_name, phone_number, email, date, applicantName,
                 alcoholType, alcoholContent, vintage_date, ph_level);
 
         return a;
     }
 
     public void reviseAlcohol(int fid) throws SQLException{}
+
+    /**
+     * Gets a list of all Applications that have the status "UNASSIGNED".
+     *
+     * @return Returns an ArrayList of the IDs of the unassigned Applications. The IDs are represented
+     * by Strings.
+     * @throws ClassNotFoundException
+     * @throws SQLException
+     */
+    public ArrayList<ApplicationData> searchUnassignedForms() throws SQLException{
+        String query = "SELECT * FROM FORM WHERE UPPER(FORM.STATUS) LIKE UPPER('UNASSIGNED')";
+
+        return searchForm(query);
+    }
+
+    /**
+     * Finds the government account in the database with the least number of applications in its
+     * inbox.
+     *
+     * @return Returns the government Account with the smallest number of applications in its
+     * inbox.
+     * @throws ClassNotFoundException
+     * @throws SQLException
+     */
+    public int searchMinWorkLoad() throws SQLException{//TODO: find out fields + name for govt. worker
+        Statement stm;
+        stm = conn.createStatement();
+
+        // CHECK IF RESULT IS ZERO
+
+        int REPID;
+        //NEED TO FIGURE OUT HOW TO FIND THE ACCOUNT WITH THE MINIMUM AMOUNT OF TIMES THE FORMS REFERENCE IT
+        String sql = "SELECT REPID, SUM(CNT) AS CNT\n" +
+                     "FROM\n" +
+                     "  (SELECT  AID AS REPID, 0 AS CNT\n" +
+                     "  FROM ACCOUNT\n" +
+                     "  WHERE USER_TYPE = 1\n" +
+                         "UNION\n" +
+                     "  SELECT  FORM.REPID, COUNT(REPID) AS CNT\n" +
+                     "  FROM FORM\n" +
+                     "  WHERE STATUS = 4\n" +
+                     "  GROUP BY  REPID) T\n" +
+                     "GROUP BY REPID\n" +
+                     "ORDER BY CNT ASC\n";
+        //Should give asc db of repid of government works id and the number of forms they have assigned to them
+
+        ResultSet rs = stm.executeQuery(sql);
+        REPID = rset.getInt("REPID");
+        rset.close();
+        stm.close();
+
+        return REPID;
+    }
+
+    public void assignForm(int repid, ApplicationData unAssignedForm) throws SQLException{
+
+        stmt = conn.createStatement();
+
+        //update alcohol status
+        String setStatusQuery = "UPDATE FORM SET FORM.STATUS = 'ASSIGNED', WHERE FORM.FID = "+ unAssignedForm.getFormID();
+
+        rset = stmt.executeQuery(setStatusQuery);
+        //update inbox for worker
+
+        String assignWorkerQuery = "UPDATE FORM SET FORM.REPID = " + repid + ", WHERE FORM.FID = "+ unAssignedForm.getFormID();
+
+        rset = stmt.executeQuery(assignWorkerQuery);
+    }
 }

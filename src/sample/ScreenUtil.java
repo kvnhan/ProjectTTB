@@ -1,18 +1,25 @@
 package sample;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
+import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.scene.image.*;
+
+import java.io.File;
+import java.io.InputStream;
+import java.net.URL;
+
+import static com.sun.org.apache.xalan.internal.utils.SecuritySupport.getResourceAsStream;
 
 /**
  * Created by Adonay on 4/3/2017.
@@ -119,6 +126,17 @@ public class ScreenUtil {
         Label bottlersInfo = new Label();
         bottlersInfo.setText("Bottler's information: " + alcoholData.getName());
 
+        ImageView image = new ImageView();
+        try {
+            InputStream resource = ScreenUtil.class.getClassLoader().getResourceAsStream("labels/"  + alcoholData.getImageFileName() + ".jfif");
+            image.setImage(new Image(resource, 500.0, 0.0, true, true));
+        }
+        catch(NullPointerException nullPoint){
+            InputStream resource = ScreenUtil.class.getClassLoader().getResourceAsStream("labels/imageUnavailable.jpg");
+            image.setImage(new Image(resource, 100.0, 0.0, true, true));
+            System.out.println("Image Was Not Found For " + alcoholData.getBrandName() + "'s "+ alcoholData.getName());
+        }
+
 
         Button closeButton = new Button("Back");
         closeButton.setOnAction(e -> alertWindow.close());
@@ -128,11 +146,17 @@ public class ScreenUtil {
         layout.setSpacing(10);
         layout.getChildren().addAll(name, aid, brandName, alcoholType, appellation,
                 sulfiteDesc, alchContent, netContent, healthWarning, productType,
-                classType, labelLegibility, labelSize, formulas, bottlersInfo, closeButton);
+                classType, labelLegibility, labelSize, formulas, bottlersInfo, image, closeButton);
         layout.setAlignment(Pos.CENTER_LEFT);
 
         Scene scene = new Scene(layout);
         alertWindow.setScene(scene);
         alertWindow.showAndWait();
+    }
+    public File openFileChooser(){
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Choose label picture");
+        File selectedFile = fileChooser.showOpenDialog(mainWindow);
+        return selectedFile;
     }
 }

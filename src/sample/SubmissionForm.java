@@ -14,14 +14,14 @@ public class SubmissionForm {
         ASSIGNED,
 
     }
-    acceptanceInformation acceptanceInfo;
+    AcceptanceInformation acceptanceInfo;
 
     /**
      * Constructor for submission form object.
      * @param formID Int representing the ID of a form.
      * @param acceptanceInfo Information about the form's acceptance.
      */
-    public SubmissionForm(int formID, acceptanceInformation acceptanceInfo) {
+    public SubmissionForm(int formID, AcceptanceInformation acceptanceInfo) {
         this.formID = formID;
         this.acceptanceInfo = acceptanceInfo;
     }
@@ -34,11 +34,11 @@ public class SubmissionForm {
         this.formID = formID;
     }
 
-    public acceptanceInformation getAcceptanceInfo() {
+    public AcceptanceInformation getAcceptanceInfo() {
         return acceptanceInfo;
     }
 
-    public void setAcceptanceInfo(acceptanceInformation acceptanceInfo) {
+    public void setAcceptanceInfo(AcceptanceInformation acceptanceInfo) {
         this.acceptanceInfo = acceptanceInfo;
     }
 }

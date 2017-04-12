@@ -21,7 +21,7 @@ public class MainMenuController{
 
     @FXML
     public void initialize(){
-        userIDText.setText(accountsUtil.getUser_id());
+        userIDText.setText(accountsUtil.getUsername());
     }
 
     /**
