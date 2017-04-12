@@ -32,13 +32,18 @@ public class WorkFlowController {
 
     //goes adds new applications to worker's inboxes
     public void roundRobin() throws  SQLException{
+        System.out.println("Running roundrobin");
         ArrayList<ApplicationData> unAssignedForms = databaseUtil.searchUnassignedForms();
+        System.out.println("Unassigned forms = "+ unAssignedForms.size());
         if(!(unAssignedForms.size() == 0)){
             int runThroughs = (int)(unAssignedForms.size())/10;
+
             for(int i = 0; i <= runThroughs; i++) {;
                 for (int j = 0; j <= 10; j++) {
-                    int govid = databaseUtil.searchMinWorkLoad();
-                    databaseUtil.assignForm(govid, unAssignedForms.get(j));
+                    int GOVID = databaseUtil.searchMinWorkLoad();
+                    System.out.println("Found govid with min workload = " + GOVID);
+                    databaseUtil.assignForm(GOVID, unAssignedForms.get(j));
+                    System.out.println("FORM ID "+ unAssignedForms.get(j) + " ASSIGNED");
                 }
             }
         }
@@ -59,8 +64,8 @@ public class WorkFlowController {
      */
     public void viewFirstApplicationButton(ActionEvent event){
         if(numberOfApps <= 0){
+            screenUtil.switchScene("WorkFlowController.fxml", "Inbox");
             screenUtil.createAlertBox("No applications due","There are no applications assigned to you at the moment.");
-
         }else{
             screenUtil.switchScene("ApplicationReview.fxml", "Application Review");
         }

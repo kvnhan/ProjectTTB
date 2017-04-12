@@ -606,7 +606,7 @@ public class DatabaseUtil {
      * @throws SQLException
      */
     public ArrayList<ApplicationData> searchUnassignedForms() throws SQLException{
-        String query = "SELECT * FROM FORM WHERE UPPER(FORM.STATUS) LIKE UPPER('UNASSIGNED')";
+        String query = "SELECT * FROM FORM WHERE UPPER(FORM.STATUS) = 'UNASSIGNED'";
 
         return searchForm(query);
     }
@@ -651,6 +651,9 @@ public class DatabaseUtil {
         //Should give asc db of govid of government works id and the number of forms they have assigned to themrset = stm.executeQuery(sql);
 
         if(rset.next()){
+            while ((rset.getInt("GOVID") == 0)){
+                rset.next();
+            }
             GOVID = rset.getInt("GOVID");
         }else{
             GOVID = 0;

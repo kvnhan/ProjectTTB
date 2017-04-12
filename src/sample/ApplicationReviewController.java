@@ -48,7 +48,7 @@ public class ApplicationReviewController extends DatabaseUtil{
 
     Connection conn = connect();
     DatabaseUtil dbUtil = new DatabaseUtil();
-    ScreenUtil work = new ScreenUtil();
+    ScreenUtil screenUtil = new ScreenUtil();
     AccountsUtil accountsUtil = new AccountsUtil();
     String username = accountsUtil.getUsername();
     int numberOfApps;
@@ -58,8 +58,8 @@ public class ApplicationReviewController extends DatabaseUtil{
     //for when switching to this scene from inbox
     @FXML
     public void initialize() throws SQLException{
-        numberOfApps = dbUtil.searchFormWithGovId(dbUtil.getAccountAid(username)).size();
         List<ApplicationData> listForms = dbUtil.searchFormWithGovId(dbUtil.getAccountAid(username));
+        numberOfApps = listForms.size();
         thisForm = listForms.get(0);
         repID.setText(Integer.toString(thisForm.getRepid()));
         registryNo.setText(Integer.toString(thisForm.getPermit_no()));
@@ -77,7 +77,7 @@ public class ApplicationReviewController extends DatabaseUtil{
 
     @FXML
     void setGoBack(ActionEvent event){
-        work.switchScene("WorkFlow.fxml", "Main Menu");
+        screenUtil.switchScene("WorkFlow.fxml", "Main Menu");
     }
 
     @FXML
@@ -126,7 +126,12 @@ public class ApplicationReviewController extends DatabaseUtil{
     }
 
     public void nextApplication(){
-        work.switchScene("ApplicationReview.fxml","Application Review");
+
+        if(numberOfApps <= 1){
+           screenUtil.createAlertBox("No more assigned forms", "There are no more forms assigned to you.");
+        }else{
+           screenUtil.switchScene("ApplicationReview.fxml","Application Review");
+        }
     }
 
     /**
