@@ -4,6 +4,9 @@ import java.awt.event.ActionEvent;
 import java.io.*;
 import java.util.HashMap;
 
+/**
+ * Utility functions for accounts.
+ */
 public class AccountsUtil {
 
     private static HashMap usernameMap = new HashMap<String, Account>();
@@ -24,6 +27,9 @@ public class AccountsUtil {
         AccountsUtil.user_id = user_id;
     }
 
+    /**
+     *
+     */
     public void saveFile(){
 
         FileOutputStream fileOutputStream;
@@ -41,7 +47,9 @@ public class AccountsUtil {
 
     }
 
-
+    /**
+     * 
+     */
     public void loadFile(){
 
         FileInputStream fileInputStream;
