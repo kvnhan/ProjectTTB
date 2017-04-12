@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class WorkFlowController {
 
@@ -16,7 +17,7 @@ public class WorkFlowController {
     @FXML private Button first;
     private AccountsUtil accountsUtil = new AccountsUtil();
     private ScreenUtil screenUtil = new ScreenUtil();
-    private DatabaseUtil dbUtil = new DatabaseUtil();
+    private DatabaseUtil databaseUtil = new DatabaseUtil();
 
     private String username = accountsUtil.getUsername();
     private int numberOfApps;
@@ -24,8 +25,24 @@ public class WorkFlowController {
 
     @FXML
     public void initialize() throws SQLException{
-        numberOfApps = dbUtil.searchFormWithGovId(dbUtil.getAccountAid(username)).size();
+        roundRobin();
+        numberOfApps = databaseUtil.searchFormWithGovId(databaseUtil.getAccountAid(username)).size();
         numberOfApplicationsLabel.setText(String.valueOf(numberOfApps));
+    }
+
+    //goes adds new applications to worker's inboxes
+    public void roundRobin() throws  SQLException{
+        ArrayList<ApplicationData> unAssignedForms = databaseUtil.searchUnassignedForms();
+        if(!(unAssignedForms.size() == 0)){
+            int runThroughs = (int)(unAssignedForms.size())/10;
+            for(int i = 0; i <= runThroughs; i++) {;
+                for (int j = 0; j <= 10; j++) {
+                    int govid = databaseUtil.searchMinWorkLoad();
+                    databaseUtil.assignForm(govid, unAssignedForms.get(j));
+                }
+            }
+        }
+
     }
 
     /**

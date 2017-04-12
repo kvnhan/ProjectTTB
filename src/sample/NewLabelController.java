@@ -30,7 +30,7 @@ public class NewLabelController{
 
     //  ApplicationUtil appUtil = new ApplicationUtil();
     DatabaseUtil databaseUtil = new DatabaseUtil();
-
+    ScreenUtil su = new ScreenUtil();
     WorkflowFacade facadeWork = new WorkflowFacade();
     ScreenUtil work = new ScreenUtil();
 
@@ -40,6 +40,9 @@ public class NewLabelController{
     @FXML private TextField RepID;
     @FXML private TextField PlantReg;
     @FXML private TextField SerialNo;
+    @FXML private TextField ApplicantName;
+    @FXML private TextField Varietal;
+    @FXML private TextField Appellation;
     @FXML private TextField BrandName;
     @FXML private TextField Name;
     @FXML private TextField Formula;
@@ -53,6 +56,7 @@ public class NewLabelController{
     @FXML private TextField Vintage;
     @FXML private TextField pH;
     @FXML private TextField Address;
+    @FXML private TextField MailingAddress;
     @FXML private Button Submit;
     @FXML private Button back;
     @FXML private Button clear;
@@ -123,16 +127,16 @@ public class NewLabelController{
 
     public void fillOutApplication() throws SQLException{
 
-        int fid;
-        int ttbid;
-        int repid;
-        String serial;
+        int fid = 1;
+        int ttbid = 0;
+        int repid = 0;
+        String serial = "";
         String address;
         String fancyName = "";
         String formula = "";
         String grape_varietal = "";
         String appellation = "";
-        int permit_no;
+        int permit_no = 0;
         String infoOnBottle = "";
         String source_of_product = "";
         String type_of_product = "";
@@ -140,17 +144,89 @@ public class NewLabelController{
         String phone_number;
         String email;
         String date = "";
-        String applicantName;
+        String applicantName = "";
         String alcoholType = "";
         String alcoholContent = "";
-        int vintage_date;
-        double ph_level;
+        int vintage_date = 0;
+        double ph_level = 0;
+        int max = 999999999;
 
-        ttbid = Integer.parseInt(ID.getText());
-        repid = Integer.parseInt(RepID.getText());
-        permit_no = Integer.parseInt(PlantReg.getText());
-        formula = Formula.getText();
-        serial = (SerialNo.getText());
+
+        if(!ID.getText().trim().isEmpty()) {
+            try {
+                ttbid = Integer.parseInt(ID.getText());
+                if (ttbid > max) {
+                    su.createAlertBox("ERROR", "Input for TTBID is too big");
+                }
+            } catch (NumberFormatException e) {
+                su.createAlertBox("ERROR", "Invalid Input for TTBID");
+            }
+        }else{
+            su.createAlertBox("ERROR", "TTBID is empty");
+        }
+
+
+        if(!RepID.getText().trim().isEmpty()) {
+            try {
+                repid = Integer.parseInt(RepID.getText());
+                if (repid > max) {
+                    su.createAlertBox("ERROR", "Input for RepID is too big");
+                }
+            } catch (NumberFormatException e) {
+                su.createAlertBox("ERROR", "Invaid Input for RepID");
+            }
+        }else{
+            su.createAlertBox("ERROR", "Rep ID is empty");
+        }
+
+        if(!PlantReg.getText().trim().isEmpty()) {
+            try {
+                permit_no = Integer.parseInt(PlantReg.getText());
+                if (permit_no > max) {
+                    su.createAlertBox("ERROR", "Input for PlantReg is too big");
+                }
+            } catch (NumberFormatException e) {
+                su.createAlertBox("ERROR", "Invalid Input for PlantReg");
+            }
+        }else{
+            su.createAlertBox("ERROR", "Plant Reg is empty");
+        }
+
+        if(!Formula.getText().trim().isEmpty()){
+            formula = Formula.getText();
+        }else{
+            su.createAlertBox("ERROR", "Formula is empty");
+        }
+
+        if(!Appellation.getText().trim().isEmpty()){
+            appellation = Appellation.getText();
+        }else{
+            su.createAlertBox("ERROR", "Appellation is empty");
+        }
+
+        if(!MailingAddress.getText().trim().isEmpty()){
+            address = MailingAddress.getText();
+        }else{
+            su.createAlertBox("ERROR", "Mailling Address is empty");
+        }
+
+        if(!Varietal.getText().trim().isEmpty()){
+            grape_varietal = Varietal.getText();
+        }else{
+            su.createAlertBox("ERROR", "Varietal is empty");
+        }
+
+        if(!ApplicantName.getText().trim().isEmpty()){
+            applicantName = ApplicantName.getText();
+        }else{
+            su.createAlertBox("ERROR", "Applicant Name is empty");
+        }
+
+        if(!SerialNo.getText().trim().isEmpty()){
+            serial = (SerialNo.getText());
+        }else{
+            su.createAlertBox("ERROR", "Serial No is empty");
+        }
 
 
         if (dom.isSelected()) {
@@ -158,7 +234,7 @@ public class NewLabelController{
         } else if (imp.isSelected()) {
             source_of_product = "IMPORTED";
         }if(!(dom.isSelected()) && !(imp.isSelected())) {
-            source_of_product = "";
+            su.createAlertBox("ERROR", "Please select Domestic or Imported");
 
         }
 
@@ -171,15 +247,66 @@ public class NewLabelController{
         } else if (other.isSelected()) {
             type_of_product = "DISTILLED SPIRITS";
             alcoholType = "DISTILLED SPIRITS";
+        }else{
+            su.createAlertBox("ERROR", "Please selecct the type of product");
         }
 
-        brand_name = BrandName.getText();
-        phone_number = PhoneNumber.getText();
-        email = EmailAddress.getText();
-        applicantName = Name.getText();
-        address = Address.getText();
-        vintage_date = Integer.parseInt(Vintage.getText());
-        ph_level = Double.parseDouble(pH.getText());
+        if(!BrandName.getText().trim().isEmpty()) {
+            brand_name = BrandName.getText();
+        }else{
+            su.createAlertBox("ERROR", "BrandName is empty");
+            brand_name = "";
+        }
+        if(!PhoneNumber.getText().trim().isEmpty()){
+            phone_number = PhoneNumber.getText();
+        }else{
+            su.createAlertBox("ERROR", "PhoneNumber is empty");
+            phone_number = "";
+        }
+        if(!EmailAddress.getText().trim().isEmpty()){
+            email = EmailAddress.getText();
+        }else{
+            su.createAlertBox("ERROR", "Email is empty");
+            email = "";
+        }
+
+        if(!Name.getText().trim().isEmpty()){
+            fancyName = Name.getText();
+        }else{
+            su.createAlertBox("ERROR", "FancyName is empty");
+        }
+
+        if(!Address.getText().trim().isEmpty()){
+            address = Address.getText();
+        }else{
+            su.createAlertBox("ERROR", "Address is empty");
+            address = "";
+        }
+
+        if(!Vintage.getText().trim().isEmpty()){
+            try{
+                vintage_date = Integer.parseInt(Vintage.getText());
+                if(vintage_date > max || vintage_date < 0){
+                    su.createAlertBox("ERROR", "Invalid Input for VintageDate");
+                }
+            }catch (NumberFormatException e){
+                su.createAlertBox("ERROR", "Not a Number");
+            }
+        }else {
+            su.createAlertBox("ERROR", "Vintage is empty");
+        }
+        if(!pH.getText().trim().isEmpty()){
+            try{
+                ph_level = Double.parseDouble(pH.getText());
+                if(ph_level > max || ph_level > 12 || ph_level < 0){
+                    su.createAlertBox("ERROR", "Invalid Input");
+                }
+            }catch (NumberFormatException e){
+                su.createAlertBox("ERROR", "Not a Number");
+            }
+        }else{
+            su.createAlertBox("ERROR", "PH is empty");
+        }
         fid = 1;
 
         AcceptanceInformation acceptanceInfo = new AcceptanceInformation(date, applicantName,
@@ -208,7 +335,6 @@ public class NewLabelController{
             submitBeer(Data);
             System.out.println("This works too");
         }
-        roundRobin();
 
     }
 
@@ -251,17 +377,6 @@ public class NewLabelController{
         }
     }
 
-    //goes adds new applications to worker's inboxes
-    public void roundRobin() throws  SQLException{
-        ArrayList<ApplicationData> unAssignedForms = databaseUtil.searchUnassignedForms();
-        int runThroughs = (int)(unAssignedForms.size())/10;
-        for(int i = 0; i <= runThroughs; i++) {;
-            for (int j = 0; j <= 10; j++) {
-                int govid = databaseUtil.searchMinWorkLoad();
-                databaseUtil.assignForm(govid, unAssignedForms.get(j));
-            }
-        }
-    }
     public void submitBeer(BeerApplicationData bd) throws SQLException{
         int ttbid = bd.getId();
         int repid = bd.getRepid();

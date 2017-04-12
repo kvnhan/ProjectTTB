@@ -10,14 +10,14 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.NewLabelController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ReviseAppController">
     <children>
         <Label layoutX="15.0" layoutY="15.0" text="FormID :">
             <font>
                 <Font name="Constantia" size="24.0" />
             </font>
         </Label>
-        <Button fx:id="Submit" layoutX="900.0" layoutY="750.0" mnemonicParsing="false" onAction="#fillOutApplication" prefHeight="41.0" prefWidth="85.0" text="Submit" />
+        <Button fx:id="Submit" layoutX="900.0" layoutY="750.0" mnemonicParsing="false" onAction="#submitAgain" prefHeight="41.0" prefWidth="85.0" text="Submit" />
         <Button layoutX="800.0" layoutY="750.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="85.0" text="Clear" />
         <Label layoutX="15.0" layoutY="70.0" text="TTB ID:">
             <font>
@@ -63,55 +63,55 @@
             <font>
                 <Font name="Constantia" size="24.0" />
             </font></Label>
-        <CheckBox fx:id="dom" layoutX="100.0" layoutY="118.0" mnemonicParsing="false" onAction="#handledomBox" text="Domestic">
+        <CheckBox fx:id="dom1111" layoutX="100.0" layoutY="118.0" mnemonicParsing="false" onAction="#handledomBox" text="Domestic">
             <font>
                 <Font name="Constantia" size="24.0" />
             </font></CheckBox>
-        <CheckBox fx:id="imp" layoutX="250.0" layoutY="118.0" mnemonicParsing="false" onAction="#handleimpBox" text="Imported">
+        <CheckBox fx:id="imp1" layoutX="250.0" layoutY="118.0" mnemonicParsing="false" onAction="#handleimpBox" text="Imported">
             <font>
                 <Font name="Constantia" size="24.0" />
             </font></CheckBox>
-        <CheckBox fx:id="wine" layoutX="583.0" layoutY="118.0" mnemonicParsing="false" onAction="#handlewineBox" text="Wine">
+        <CheckBox fx:id="wine1" layoutX="583.0" layoutY="118.0" mnemonicParsing="false" onAction="#handlewineBox" text="Wine">
             <font>
                 <Font name="Constantia" size="24.0" />
             </font></CheckBox>
-        <CheckBox fx:id="beer" layoutX="693.0" layoutY="118.0" mnemonicParsing="false" onAction="#handlebeerBox" text="Beer">
+        <CheckBox fx:id="beer1" layoutX="693.0" layoutY="118.0" mnemonicParsing="false" onAction="#handlebeerBox" text="Beer">
             <font>
                 <Font name="Constantia" size="24.0" />
             </font></CheckBox>
-        <CheckBox fx:id="other" layoutX="788.0" layoutY="118.0" mnemonicParsing="false" onAction="#handleotherBox" text="Distilled Spirits">
+        <CheckBox fx:id="other1" layoutX="788.0" layoutY="118.0" mnemonicParsing="false" onAction="#handleotherBox" text="Distilled Spirits">
             <font>
                 <Font name="Constantia" size="24.0" />
             </font></CheckBox>
-        <TextField fx:id="ID" layoutX="103.0" layoutY="73.0" promptText="88888888">
+        <TextField fx:id="ID1" layoutX="103.0" layoutY="73.0" promptText="88888888">
             <font>
                 <Font name="Constantia" size="14.0" />
             </font></TextField>
-        <TextField fx:id="RepID" layoutX="473.0" layoutY="73.0" promptText="88888888">
+        <TextField fx:id="RepID1" layoutX="473.0" layoutY="73.0" promptText="88888888">
             <font>
                 <Font name="Constantia" size="14.0" />
             </font></TextField>
-        <TextField fx:id="PlantReg" layoutX="830.0" layoutY="73.0" prefHeight="28.0" prefWidth="165.0" promptText="88888888">
+        <TextField fx:id="PlantReg1" layoutX="830.0" layoutY="73.0" prefHeight="28.0" prefWidth="165.0" promptText="88888888">
             <font>
                 <Font name="Constantia" size="14.0" />
             </font></TextField>
-        <TextField fx:id="SerialNo" layoutX="210.0" layoutY="285.0" prefWidth="250.0" promptText="CaptainCrunch7">
+        <TextField fx:id="SerialNo1" layoutX="210.0" layoutY="285.0" prefWidth="250.0" promptText="CaptainCrunch7">
             <font>
                 <Font name="Constantia" size="14.0" />
             </font></TextField>
-        <TextField fx:id="BrandName" layoutX="700.0" layoutY="286.0" prefWidth="250.0" promptText="Brand Name">
+        <TextField fx:id="BrandName1" layoutX="700.0" layoutY="286.0" prefWidth="250.0" promptText="Brand Name">
             <font>
                 <Font name="Constantia" size="14.0" />
             </font></TextField>
-        <TextField fx:id="Name" layoutX="210.0" layoutY="365.0" prefWidth="250.0" promptText="Fanciful Name">
+        <TextField fx:id="Name1" layoutX="210.0" layoutY="365.0" prefWidth="250.0" promptText="Fanciful Name">
             <font>
                 <Font name="Constantia" size="14.0" />
             </font></TextField>
-        <TextField fx:id="Formula" layoutX="700.0" layoutY="366.0" prefWidth="250.0" promptText="Formula">
+        <TextField fx:id="Formula1" layoutX="700.0" layoutY="366.0" prefWidth="250.0" promptText="Formula">
             <font>
                 <Font name="Constantia" size="14.0" />
             </font></TextField>
-        <TextField fx:id="EmailAddress" layoutX="700.0" layoutY="406.0" prefWidth="250.0" promptText="Joe@example.com">
+        <TextField fx:id="EmailAddress1" layoutX="700.0" layoutY="406.0" prefWidth="250.0" promptText="Joe@example.com">
             <font>
                 <Font name="Constantia" size="14.0" />
             </font></TextField>
@@ -120,7 +120,7 @@
             <font>
                 <Font name="Constantia" size="24.0" />
             </font></Label>
-        <TextField fx:id="Address" layoutX="700.0" layoutY="326.0" prefWidth="250.0" promptText="Plant Address">
+        <TextField fx:id="Address1" layoutX="700.0" layoutY="326.0" prefWidth="250.0" promptText="Plant Address">
             <font>
                 <Font name="Constantia" size="14.0" />
             </font></TextField>
@@ -181,7 +181,7 @@
                 <Font name="Constantia" size="16.0" />
             </font>
         </Label>
-        <TextField fx:id="MailingAddress" layoutX="210.0" layoutY="445.0" prefWidth="250.0" promptText="Mailing Address">
+        <TextField fx:id="MailingAddress1" layoutX="210.0" layoutY="445.0" prefWidth="250.0" promptText="Mailing Address">
             <font>
                 <Font name="Constantia" size="14.0" />
             </font>
@@ -195,7 +195,7 @@
                                 <Font name="Constantia" size="24.0" />
                             </font>
                         </Label>
-                        <TextField fx:id="pH" layoutX="685.0" layoutY="10.0" prefWidth="250.0" promptText="pH">
+                        <TextField fx:id="pH1" layoutX="685.0" layoutY="10.0" prefWidth="250.0" promptText="pH">
                             <font>
                                 <Font name="Constantia" size="14.0" />
                             </font>
@@ -210,7 +210,7 @@
                                 <Font name="Constantia" size="24.0" />
                             </font>
                         </Label>
-                        <TextField fx:id="Appellation" layoutX="195.0" layoutY="50.0" prefWidth="250.0" promptText="Wine Appellation">
+                        <TextField fx:id="Appellation1" layoutX="195.0" layoutY="50.0" prefWidth="250.0" promptText="Wine Appellation">
                             <font>
                                 <Font name="Constantia" size="14.0" />
                             </font>
@@ -220,12 +220,12 @@
                                 <Font name="Constantia" size="24.0" />
                             </font>
                         </Label>
-                        <TextField fx:id="Varietal" layoutX="195.0" layoutY="11.0" prefWidth="250.0" promptText="Grape Varietal">
+                        <TextField fx:id="Varietal1" layoutX="195.0" layoutY="11.0" prefWidth="250.0" promptText="Grape Varietal">
                             <font>
                                 <Font name="Constantia" size="14.0" />
                             </font>
                         </TextField>
-                        <TextField fx:id="Vintage" layoutX="685.0" layoutY="50.0" prefWidth="250.0" promptText="eg. 1878">
+                        <TextField fx:id="Vintage1" layoutX="685.0" layoutY="50.0" prefWidth="250.0" promptText="eg. 1878">
                             <font>
                                 <Font name="Constantia" size="14.0" />
                             </font>
@@ -245,17 +245,17 @@
                 <Font name="Constantia" size="14.0" />
             </font>
         </TextField>
-        <TextField fx:id="PhoneNumber" layoutX="210.0" layoutY="406.0" prefWidth="250.0" promptText="888-888-8888">
+        <TextField fx:id="PhoneNumber1" layoutX="210.0" layoutY="406.0" prefWidth="250.0" promptText="888-888-8888">
             <font>
                 <Font name="Constantia" size="14.0" />
             </font>
         </TextField>
-        <TextField fx:id="ApplicantName" layoutX="210.0" layoutY="326.0" prefWidth="250.0" promptText="Joe Smith">
+        <TextField fx:id="ApplicantName1" layoutX="210.0" layoutY="326.0" prefWidth="250.0" promptText="Joe Smith">
             <font>
                 <Font name="Constantia" size="14.0" />
             </font>
         </TextField>
-      <TextField fx:id="form" layoutX="116.0" layoutY="17.0" />
-      <Button fx:id="find" layoutX="283.0" layoutY="17.0" mnemonicParsing="false" text="Find Form" />
+        <TextField fx:id="form" layoutX="116.0" layoutY="17.0" />
+        <Button fx:id="find" layoutX="283.0" layoutY="17.0" mnemonicParsing="false" onAction="#resubmit" text="Find Form" />
     </children>
 </Pane>

@@ -53,15 +53,15 @@ public class NewAccountController {
             accountChoice = accountChoiceBox.getValue().toString();
 
             if (accountChoice.equals("Government Agent")){
-                userType = Account.userTypes.GOVERNMENT_AGENT.getValue();
+                userType = 1;
             }else if(accountChoice.equals("Manufacturer")){
-                userType = Account.userTypes.MANUFACTURER.getValue();
+                userType = 2;
             }else if(accountChoice.equals("Public User")){
-                userType = Account.userTypes.PUBLIC_USER.getValue();
+                userType = 3;
             }
 
             if( (newUsername.length() >= 5 && newUsername.length() <= 15) && !dbUtil.contains("ACCOUNT", "USERNAME", newUsername)){
-               dbUtil.addAccount(newUsername, "password", 1, 2);
+               dbUtil.addAccount(newUsername, "password", 1, userType);
                screenUtil.switchScene("Login.fxml", "Login");
             }else if(newUsername.length() < 5 || newUsername.length() > 15){
                 errorBox.setText("User name must be 5 - 15 characters long");

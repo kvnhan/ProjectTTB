@@ -3,6 +3,7 @@ package sample;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Date;
 /**
  * Created by Adonay on 4/6/2017.
  */
@@ -29,14 +30,15 @@ public class DatabaseUtil {
     private Connection conn = null;
     private ResultSet rset;
     private Statement stmt = null;
+    private ScreenUtil screenUtil = new ScreenUtil();
 
-    public DatabaseUtil(){
+    public DatabaseUtil() {
         conn = connect();
 
     }
 
     // Connect
-    public static Connection connect(){
+    public static Connection connect() {
         try {
             Class.forName(driver);
         } catch (ClassNotFoundException e) {
@@ -70,46 +72,43 @@ public class DatabaseUtil {
 
         contains = rset.next();
 
-        rset.close();
-        stmt.close();
-
         return contains;
     }
 
     public boolean contains(String TABLENAME, String FIELDNAME, String value) throws SQLException {
-        return containsQuery("SELECT * FROM " + TABLENAME+ " WHERE ACCOUNT." + FIELDNAME + " = '" + value + "'");
+        return containsQuery("SELECT * FROM " + TABLENAME + " WHERE " + TABLENAME + "." + FIELDNAME + " = '" + value + "'");
     }
 
     public boolean containsInt(String TABLENAME, String FIELDNAME, int value) throws SQLException {
 
-        return containsQuery("SELECT * FROM " + TABLENAME+ " WHERE ACCOUNT." + FIELDNAME + " = " + value);
+        return containsQuery("SELECT * FROM " + TABLENAME + " WHERE " + TABLENAME + "." + FIELDNAME + " = " + value);
 
     }
 
     //To check if a double value exists in the table
     public boolean containsDouble(String TABLENAME, String FIELDNAME, double value) throws SQLException {
 
-        return containsQuery("SELECT * FROM " + TABLENAME+ " WHERE ACCOUNT." + FIELDNAME + " = " + value);
+        return containsQuery("SELECT * FROM " + TABLENAME + " WHERE " + TABLENAME + "." + FIELDNAME + " = " + value);
 
     }
 
 
-    public void addAccount(String username, String password, int isLoggedIn, int userType) throws SQLException{
+    public void addAccount(String username, String password, int isLoggedIn, int userType) throws SQLException {
         String values = "'" + username + "', '" + password + "', " + isLoggedIn + "," + userType + " )";
         addToTable("ACCOUNT", ACCOUNT_FIELDS, values, "AID");
     }
 
-    public void addAlcoholType(String classType) throws SQLException{
+    public void addAlcoholType(String classType) throws SQLException {
         String values = "'" + classType + "' )";
         addToTable("ALCH_TYPE", ALCH_TYPE_FIELDS, values, "ATID");
     }
 
-    public void addAlcohol(String name, String appellation, String sulfiteDesc, double alcoholContent, double netContent, String healthWarning, int productType, int classType, String labelLegibility, int labelSize, String formulas, int alcoholType, String bottlersInfo, String brandName) throws SQLException{
+    public void addAlcohol(String name, String appellation, String sulfiteDesc, double alcoholContent, double netContent, String healthWarning, int productType, int classType, String labelLegibility, int labelSize, String formulas, int alcoholType, String bottlersInfo, String brandName) throws SQLException {
         String values = "'" + name + "', '" + appellation + "', '" + sulfiteDesc + "', " + alcoholContent + "," + netContent + ",'" + healthWarning + "', " + productType + ", " + classType + ", '" + labelLegibility + "', " + labelSize + ", '" + formulas + "', " + alcoholType + ", '" + bottlersInfo + "', '" + brandName + "')";
         addToTable("ALCOHOL", ALCOHOL_FIELDS, values, "AID");
     }
 
-    public void addClass(String classType) throws SQLException{
+    public void addClass(String classType) throws SQLException {
         String values = "'" + classType + "' )";
         addToTable("CLASS", CLASS_FIELDS, values, "CID");
     }
@@ -119,50 +118,49 @@ public class DatabaseUtil {
         addToTable("FORM", FORM_FIELDS, values, "FID");
     }*/
 
-    public void addBeerForm( int ttbid, int repid, String serial, String address, String fancyName, String formula, int permit_no, String infoOnBottle, String source_of_product,
-                             String type_of_product, String brand_name, String phone_number, String email, String dateFormat, String applicantName, String alcoholType, String alcoholContent, String status) throws  SQLException{
+    public void addBeerForm(int ttbid, int repid, String serial, String address, String fancyName, String formula, int permit_no, String infoOnBottle, String source_of_product,
+                            String type_of_product, String brand_name, String phone_number, String email, String dateFormat, String applicantName, String alcoholType, String alcoholContent, String status) throws SQLException {
 
         int aid = 6;
-        String values = ""+ttbid+","+repid+",'"+serial+"','"+address+"', '"+fancyName+"', '"+formula+"', "+permit_no+", '"+infoOnBottle+"','"+source_of_product+"', '"+type_of_product+"'" +
-                ", '"+brand_name+"','"+phone_number+"', '"+email+"', '"+dateFormat+"', '"+applicantName+"', '"+alcoholType+"', '"+status+"', "+aid+")";
+        String values = "" + ttbid + "," + repid + ",'" + serial + "','" + address + "', '" + fancyName + "', '" + formula + "', " + permit_no + ", '" + infoOnBottle + "','" + source_of_product + "', '" + type_of_product + "'" +
+                ", '" + brand_name + "','" + phone_number + "', '" + email + "', '" + dateFormat + "', '" + applicantName + "', '" + alcoholType + "', '" + status + "', " + aid + ")";
 
         addToTable("FORM", FORM_FIELDS_BEER, values, "FID");
     }
 
-    public void addWineForm( int ttbid, int repid, String serial, String address, String fancyName, String formula, String grapeVar, String appellation, int permit_no, String infoOnBottle, String source_of_product,
-                             String type_of_product, String brand_name, String phone_number, String email, String dateFormat, String applicantName, String alcoholType,
-                             int vintage, double ph, String alcoholContent, String status) throws  SQLException{
+    public void addWineForm(int ttbid, int repid, String serial, String address, String fancyName, String formula, String grapeVar, String appellation, int permit_no, String infoOnBottle, String source_of_product,
+                            String type_of_product, String brand_name, String phone_number, String email, String dateFormat, String applicantName, String alcoholType,
+                            int vintage, double ph, String alcoholContent, String status) throws SQLException {
         int aid = 6;
-        String values = ""+ttbid+","+repid+",'"+serial+"','"+address+"', '"+fancyName+"', '"+formula+"','"+grapeVar+"','"+appellation+"',"+permit_no+", '"+infoOnBottle+"','"+source_of_product+"', '"+type_of_product+"'" +
-                ", '"+brand_name+"','"+phone_number+"', '"+email+"', '"+dateFormat+"', '"+applicantName+"', '"+alcoholType+"', "+vintage+", "+ph+",'"+status+"', "+aid+")";
+        String values = "" + ttbid + "," + repid + ",'" + serial + "','" + address + "', '" + fancyName + "', '" + formula + "','" + grapeVar + "','" + appellation + "'," + permit_no + ", '" + infoOnBottle + "','" + source_of_product + "', '" + type_of_product + "'" +
+                ", '" + brand_name + "','" + phone_number + "', '" + email + "', '" + dateFormat + "', '" + applicantName + "', '" + alcoholType + "', " + vintage + ", " + ph + ",'" + status + "', " + aid + ")";
         addToTable("FORM", FORM_FIELDS_WINE, values, "FID");
     }
 
-    public void addProductType(String type) throws SQLException{
+    public void addProductType(String type) throws SQLException {
         String values = "'" + type + "' )";
         addToTable("PRODUCT_TYPE", PRODUCT_TYPE_FIELDS, values, "PID");
     }
 
     // needs fid value to be the same as one row in form table
-    public void addReview(int fid, int status, int decider, String date, String general, String originCode, String brandName, String facifulName, String grapeVar, String wineVintage, String appellation, String bottler, String formula, String sulfite, String legibility, String labelSize, String description) throws SQLException{
-        String values = "" + status + ", "+ decider + ", DATE('" + date + "'), '" + general + "', '" + originCode + "', '"+ brandName + "', '" + facifulName + "', '" + grapeVar + "', '" + wineVintage + "', '"+ appellation + "', '" + bottler + "', '" + formula + "', '" + sulfite + "', '"+ legibility + "', '" + labelSize + "', '" + description + "')";
+    public void addReview(int fid, int status, int decider, String date, String general, String originCode, String brandName, String facifulName, String grapeVar, String wineVintage, String appellation, String bottler, String formula, String sulfite, String legibility, String labelSize, String description) throws SQLException {
+        String values = "" + status + ", " + decider + ", DATE('" + date + "'), '" + general + "', '" + originCode + "', '" + brandName + "', '" + facifulName + "', '" + grapeVar + "', '" + wineVintage + "', '" + appellation + "', '" + bottler + "', '" + formula + "', '" + sulfite + "', '" + legibility + "', '" + labelSize + "', '" + description + "')";
         addToTable("REVIEWS", REVIEWS_FIELDS, values, "FID", fid);
     }
 
-    public void addStatus(String status) throws SQLException{
+    public void addStatus(String status) throws SQLException {
         String values = "'" + status + "' )";
         addToTable("STATUS", STATUS_FIELDS, values, "SID");
     }
 
-    public void addUserType(String type) throws SQLException{
+    public void addUserType(String type) throws SQLException {
         String values = "'" + type + "' )";
         addToTable("USER_TYPE", USER_TYPE_FIELDS, values, "UID");
     }
 
 
-
     // DOES NOT WORK
-    public void clearTable(String TABLENAME) throws SQLException{
+    public void clearTable(String TABLENAME) throws SQLException {
 
         String query = "DELETE FROM " + TABLENAME;
         stmt = conn.createStatement();
@@ -172,7 +170,7 @@ public class DatabaseUtil {
 
 
     // Automatically gives primary ID  for row inserted by incrementing from previous row's ID in table
-    private boolean addToTable(String TABLENAME, String FIELDS, String values, String IDNAME) throws SQLException{
+    private boolean addToTable(String TABLENAME, String FIELDS, String values, String IDNAME) throws SQLException {
         boolean isAdded = false;
 
         int ID;
@@ -194,14 +192,11 @@ public class DatabaseUtil {
 
         System.out.println(uRows + " Row(s) Updated");
 
-        rset.close();
-        stmt.close();
-
         return isAdded;
     }
 
     // (METHOD OVERLOAD) Same method as before but requests input for value of primary ID for the row inserted
-    private boolean addToTable(String TABLENAME, String FIELDS, String values, String IDNAME, int ID) throws SQLException{
+    private boolean addToTable(String TABLENAME, String FIELDS, String values, String IDNAME, int ID) throws SQLException {
         boolean isAdded = false;
         int uRows = 0;
         stmt = conn.createStatement();
@@ -214,34 +209,31 @@ public class DatabaseUtil {
 
         System.out.println(uRows + " Row(s) Updated");
 
-        rset.close();
-        stmt.close();
-
         return isAdded;
     }
 
-    public int getAccountAid(String username) throws SQLException{
+    public int getAccountAid(String username) throws SQLException {
         int AID = 0;
 
         stmt = conn.createStatement();
 
         rset = stmt.executeQuery("SELECT * FROM ACCOUNT WHERE ACCOUNT.USERNAME = " + "'" + username + "'");
 
-        while(rset.next()) {
+        while (rset.next()) {
             AID = rset.getInt("AID");
         }
 
         return AID;
     }
 
-    public ArrayList<Account> searchAccounts(String query) throws SQLException{ // We should make username a key
+    public ArrayList<Account> searchAccount(String query) throws SQLException { // We should make username a key
         ArrayList<Account> resultAccounts = new ArrayList<>();
 
         stmt = conn.createStatement();
 
         rset = stmt.executeQuery(query);
 
-        while(rset.next()) {
+        while (rset.next()) {
             int AID = rset.getInt("AID");
             String username = rset.getString("USERNAME");
             String password = rset.getString("PASSWORDHASH");
@@ -254,7 +246,11 @@ public class DatabaseUtil {
 
         return resultAccounts;
 
+    }
 
+    public ArrayList<Account> searchAccountWithUserType(int userType) throws SQLException {
+        String query = "SELECT * FROM ACCOUNT WHERE ACCOUNT.USER_TYPE = " + userType;
+        return searchAccount(query);
     }
 
     // Code used to search Alcohol table based on alcohol type
@@ -468,10 +464,10 @@ public class DatabaseUtil {
         pstmt.executeUpdate();
     }
 
-    public ApplicationData fillSubmittedBeerForm(int fid) throws SQLException{
+    public BeerApplicationData fillSubmittedBeerForm(int fid) throws SQLException{
 
         String sql = "SELECT * FROM APP.FORM WHERE FID = ?";
-        ApplicationData a;
+        BeerApplicationData a;
         PreparedStatement sm;
         sm = conn.prepareStatement(sql);
         sm.setInt(1, fid);
@@ -530,10 +526,10 @@ public class DatabaseUtil {
 
     }
 
-    public ApplicationData fillSubmittedWineForm(int fid) throws SQLException{
+    public WineApplicationData fillSubmittedWineForm(int fid) throws SQLException{
 
         String sql = "SELECT * FROM APP.FORM WHERE FID = ?";
-        ApplicationData a;
+        WineApplicationData a;
         PreparedStatement sm;
         sm = conn.prepareStatement(sql);
         sm.setInt(1, fid);
@@ -627,11 +623,17 @@ public class DatabaseUtil {
     public int searchMinWorkLoad() throws SQLException{//TODO: find out fields + name for govt. worker\
         stmt = conn.createStatement();
 
-        // CHECK IF RESULT IS ZERO
-
         int GOVID;
+
+        // CHECK IF ALL GOVERNMENT OFFICIALS ARE ASSIGNED TO A FORM, IF NOT ASSIGNS FORMS TO ONES WHICH DONT HAVE A FORM
+        for(Account account: searchAccountWithUserType(1)){
+            if(!containsInt("FORM", "GOVID", getAccountAid(account.getUsername()))){
+                GOVID = getAccountAid(account.getUsername());
+                return GOVID;
+            }
+        }
         //NEED TO FIGURE OUT HOW TO FIND THE ACCOUNT WITH THE MINIMUM AMOUNT OF TIMES THE FORMS REFERENCE IT
-        String sql = "SELECT GOVID, SUM(CNT) AS CNT\n" +
+        String query = "SELECT GOVID, SUM(CNT) AS CNT\n" +
                      "FROM\n" +
                      "  (SELECT  AID AS GOVID, 0 AS CNT\n" +
                      "  FROM ACCOUNT\n" +
@@ -643,26 +645,122 @@ public class DatabaseUtil {
                      "  GROUP BY  GOVID) T\n" +
                      "GROUP BY GOVID\n" +
                      "ORDER BY CNT ASC\n";
-        //Should give asc db of repid of government works id and the number of forms they have assigned to themrset = stm.executeQuery(sql);
-        GOVID = rset.getInt("GOVID");
-        rset.close();
-        stmt.close();
+
+        rset = stmt.executeQuery(query);
+
+        //Should give asc db of govid of government works id and the number of forms they have assigned to themrset = stm.executeQuery(sql);
+
+        if(rset.next()){
+            GOVID = rset.getInt("GOVID");
+        }else{
+            GOVID = 0;
+            screenUtil.createAlertBox("Add a Government Official account to the system",
+                    "There are no government officials registered on the system. Therefore you cannot add a form because no one will review them.");
+        }
 
         return GOVID;
     }
 
     public void assignForm(int govid, ApplicationData unAssignedForm) throws SQLException{
+        int resultCount;
 
         stmt = conn.createStatement();
 
         //update alcohol status
-        String setStatusQuery = "UPDATE FORM SET FORM.STATUS = 'ASSIGNED', WHERE FORM.FID = "+ unAssignedForm.getFormID();
+        String query = "UPDATE FORM SET FORM.STATUS = 'ASSIGNED', FORM.GOVID = " + govid + " WHERE FID = "+ unAssignedForm.getFormID();
 
-        rset = stmt.executeQuery(setStatusQuery);
-        //update inbox for worker
 
-        String assignWorkerQuery = "UPDATE FORM SET FORM.GOVID = " + govid + ", WHERE FORM.FID = "+ unAssignedForm.getFormID();
+        resultCount = stmt.executeUpdate(query);
 
-        rset = stmt.executeQuery(assignWorkerQuery);
     }
+
+    public String checkforType(int fid) throws SQLException {
+        String type = "";
+        String sql = "SELECT * FROM APP.FORM WHERE FID = ?";
+        PreparedStatement sm;
+        sm = conn.prepareStatement(sql);
+        sm.setInt(1, fid);
+        rset = sm.executeQuery();
+        while (rset.next()) {
+            type = rset.getString("TYPE");
+            if (type.equals("WINE")) {
+                return "WINE";
+            }
+            if (type.equals("BEER")) {
+                return "BEER";
+            }
+        }
+        return "OTHER";
+    }
+
+    public void resubmitWine(int fid, WineApplicationData a) throws SQLException{
+
+        String status = "REVISED";
+        Date date = new Date();
+        String dateFormat = date.toString();
+        String sql = "UPDATE APP.FORM SET TTBID = ?, REPID = ?, SERIAL = ?, ADDRESS = ?, FANCYNAME = ?," +
+                "FORMULA = ?, GRAPEVAR = ?, APPELLATION = ?, PERMITNO = ?, SOURCE = ?, TYPE = ?, BRANDNAME = ?," +
+                "PHONE = ?, EMAIL = ?, DATE = ?, APPLICANTNAME = ?, ALCOHOLTYPE = ?, VINTAGE = ?, PH = ?, STATUS = ? WHERE FID = ?";
+
+        PreparedStatement sm;
+        sm = conn.prepareStatement(sql);
+        sm.setInt(1, a.getId());
+        sm.setInt(2, a.getRepid());
+        sm.setString(3, a.getSerial());
+        sm.setString(4, a.getAddress());
+        sm.setString(5, a.getFancyName());
+        sm.setString(6, a.getFormula());
+        sm.setString(7, a.getGrape_varietal());
+        sm.setString(8, a.getAppellation());
+        sm.setInt(9, a.getPermit_no());
+        sm.setString(10, a.getSource_of_product());
+        sm.setString(11, a.getType_of_product());
+        sm.setString(12, a.getBrand_name());
+        sm.setString(13, a.getPhone_number());
+        sm.setString(14, a.getEmail());
+        sm.setString(15, dateFormat);
+        sm.setString(16, a.getApplicantName());
+        sm.setString(17, a.getAlcoholType());
+        sm.setInt(18, a.getVintage_date());
+        sm.setDouble(19, a.getPh_level());
+        sm.setString(20, status);
+        sm.setInt(21, fid);
+
+        sm.executeUpdate();
+    }
+
+    public void resubmitBeer(int fid, BeerApplicationData a) throws SQLException{
+
+        String status = "REVISED";
+        Date date = new Date();
+        String dateFormat = date.toString();
+        String sql = "UPDATE APP.FORM SET TTBID = ?, REPID = ?, SERIAL = ?, ADDRESS = ?, FANCYNAME = ?," +
+                "FORMULA = ?,PERMITNO = ?, SOURCE = ?, TYPE = ?, BRANDNAME = ?," +
+                "PHONE = ?, EMAIL = ?, DATE = ?, APPLICANTNAME = ?, ALCOHOLTYPE = ?, STATUS = ? WHERE FID = ?";
+
+        PreparedStatement sm;
+        sm = conn.prepareStatement(sql);
+        sm.setInt(1, a.getId());
+        sm.setInt(2, a.getRepid());
+        sm.setString(3, a.getSerial());
+        sm.setString(4, a.getAddress());
+        sm.setString(5, a.getFancyName());
+        sm.setString(6, a.getFormula());
+        sm.setInt(7, a.getPermit_no());
+        sm.setString(8, a.getSource_of_product());
+        sm.setString(9, a.getType_of_product());
+        sm.setString(10, a.getBrand_name());
+        sm.setString(11, a.getPhone_number());
+        sm.setString(12, a.getEmail());
+        sm.setString(13, dateFormat);
+        sm.setString(14, a.getApplicantName());
+        sm.setString(15, a.getAlcoholType());
+        sm.setString(16, status);
+        sm.setInt(17, fid);
+
+        sm.executeUpdate();
+    }
+
+
 }
+
