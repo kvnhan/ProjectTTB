@@ -7,7 +7,6 @@ public class SubmissionForm {
     private int formID;
     private enum status{
         INCOMPLETE,
-        SUBMITTED,
         ACCEPTED,
         REJECTED,
         UNASSIGNED,

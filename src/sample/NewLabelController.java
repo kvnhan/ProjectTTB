@@ -207,8 +207,9 @@ public class NewLabelController{
                     alcoholType, alcoholContent);
             submitBeer(Data);
             System.out.println("This works too");
-
         }
+        roundRobin();
+
     }
 
     public void submitWine(WineApplicationData wd)throws SQLException{
@@ -241,7 +242,6 @@ public class NewLabelController{
                 type_of_product, brand_name, phone_number, email, dateFormat, applicantName,alcoholType,
                 vintage_date, ph_level, alcoholContent, status);
 
-        //roundRobin();
     }
 
     public void chooseFile(ActionEvent event){
@@ -257,8 +257,8 @@ public class NewLabelController{
         int runThroughs = (int)(unAssignedForms.size())/10;
         for(int i = 0; i <= runThroughs; i++) {;
             for (int j = 0; j <= 10; j++) {
-                int repid = databaseUtil.searchMinWorkLoad();
-                databaseUtil.assignForm(repid, unAssignedForms.get(j));
+                int govid = databaseUtil.searchMinWorkLoad();
+                databaseUtil.assignForm(govid, unAssignedForms.get(j));
             }
         }
     }

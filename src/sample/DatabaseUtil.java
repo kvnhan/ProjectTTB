@@ -359,7 +359,7 @@ public class DatabaseUtil {
     */
 
     public ArrayList<ApplicationData> searchFormWithGovId(int GOVID) throws SQLException{
-        String query = "SELECT * FROM FORM WHERE FORM.GOVID = " + GOVID;
+        String query = "SELECT * FROM FORM WHERE FORM.GOVID = " + GOVID + " AND (FORM.STATUS = 'ASSIGNED' OR FORM.STATUS = 'UNASSIGNED')";
 
         return searchForm(query);
     }
@@ -624,9 +624,8 @@ public class DatabaseUtil {
      * @throws ClassNotFoundException
      * @throws SQLException
      */
-    public int searchMinWorkLoad() throws SQLException{//TODO: find out fields + name for govt. worker
-        Statement stm;
-        stm = conn.createStatement();
+    public int searchMinWorkLoad() throws SQLException{//TODO: find out fields + name for govt. worker\
+        stmt = conn.createStatement();
 
         // CHECK IF RESULT IS ZERO
 
@@ -640,16 +639,14 @@ public class DatabaseUtil {
                          "UNION\n" +
                      "  SELECT  FORM.GOVID, COUNT(GOVID) AS CNT\n" +
                      "  FROM FORM\n" +
-                     "  WHERE STATUS ='Unassigned'\n" +
+                     "  WHERE STATUS ='UNASSIGNED'\n" +
                      "  GROUP BY  GOVID) T\n" +
                      "GROUP BY GOVID\n" +
                      "ORDER BY CNT ASC\n";
-        //Should give asc db of repid of government works id and the number of forms they have assigned to them
-
-        ResultSet rs = stm.executeQuery(sql);
+        //Should give asc db of repid of government works id and the number of forms they have assigned to themrset = stm.executeQuery(sql);
         GOVID = rset.getInt("GOVID");
         rset.close();
-        stm.close();
+        stmt.close();
 
         return GOVID;
     }

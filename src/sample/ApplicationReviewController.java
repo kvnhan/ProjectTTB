@@ -48,17 +48,19 @@ public class ApplicationReviewController extends DatabaseUtil{
 
     Connection conn = connect();
     DatabaseUtil dbUtil = new DatabaseUtil();
-    ScreenUtil screenUtil = new ScreenUtil();
+    ScreenUtil work = new ScreenUtil();
     AccountsUtil accountsUtil = new AccountsUtil();
     String username = accountsUtil.getUsername();
+    int numberOfApps;
+    ApplicationData thisForm;
 
 
     //for when switching to this scene from inbox
     @FXML
     public void initialize() throws SQLException{
-        dbUtil.searchFormWithGovId(dbUtil.getAccountAid(username)).size();
+        numberOfApps = dbUtil.searchFormWithGovId(dbUtil.getAccountAid(username)).size();
         List<ApplicationData> listForms = dbUtil.searchFormWithGovId(dbUtil.getAccountAid(username));
-        ApplicationData thisForm = listForms.get(0);
+        thisForm = listForms.get(0);
         repID.setText(Integer.toString(thisForm.getRepid()));
         registryNo.setText(Integer.toString(thisForm.getPermit_no()));
         prodSource.setText(thisForm.getSource_of_product());
@@ -66,7 +68,7 @@ public class ApplicationReviewController extends DatabaseUtil{
         address.setText(thisForm.getAddress());
         phoneNo.setText(thisForm.getPhone_number());
         email.setText(thisForm.getEmail());
-    Format formatter = new SimpleDateFormat("dd-MM-yyyy");
+        Format formatter = new SimpleDateFormat("dd-MM-yyyy");
         dateApp.setText(thisForm.getDate());
         nameApp.setText(thisForm.getApplicantName());
 }
@@ -75,7 +77,6 @@ public class ApplicationReviewController extends DatabaseUtil{
 
     @FXML
     void setGoBack(ActionEvent event){
-        ScreenUtil work = new ScreenUtil();
         work.switchScene("WorkFlow.fxml", "Main Menu");
     }
 
@@ -85,26 +86,21 @@ public class ApplicationReviewController extends DatabaseUtil{
      * Sets an Application status to "APPROVED" and adds comments to the Application.
      */
 
-    void setApprove() throws SQLException{
-        ScreenUtil work = new ScreenUtil();
-        work.switchScene("WorkFlow.fxml", "Main Menu");
-        String query = "SELECT * FROM FORM WHERE USERNAME = " + username + "";
-        List<ApplicationData> listForms = dbUtil.searchForm(query);
-        ApplicationData thisForm = listForms.get(0);
+    void setAccepted() throws SQLException{
         Statement stm;
         String sql;
         stm = conn.createStatement();
         //get comments
         String comments = commentsField.getText();
         //update alcohol status
-        int change = thisForm.getTtbid();
-        sql = "UPDATE FORM SET FORM.STATUS = 'approved' WHERE FORM.TTBID = " + change;
+        int FID = thisForm.getFormID();
+        sql = "UPDATE FORM SET FORM.STATUS = 'ACCEPTED' WHERE FORM.FID = " + FID;
         stm.executeUpdate(sql);
-        //update inbox for account
-        //sql = "UPDATE REVIEWS SET " + " w.inbox.remove(apptoassgn)" + " WHERE username = " + apptoassgn;
-        //stm.executeUpdate(sql);
+
         stm.close();
         conn.close();
+
+        nextApplication();
     }
 
     @FXML
@@ -112,27 +108,25 @@ public class ApplicationReviewController extends DatabaseUtil{
      * Sets an Application status to "REJECTED" and adds comments to the Application.
      */
 
-    void setReject(ActionEvent event) throws SQLException {
-        ScreenUtil work = new ScreenUtil();
-        work.switchScene("WorkFlow.fxml", "Main Menu");
-        String username = accountsUtil.getUsername();
-        String query = "SELECT * FROM FORM WHERE USERNAME = " + username + "";
-        List<ApplicationData> listForms = dbUtil.searchForm(query);
-        ApplicationData thisForm = listForms.get(0);
+    public void setReject(ActionEvent event) throws SQLException {
         Statement stm;
         String sql;
         stm = conn.createStatement();
         //get comments
         String comments = commentsField.getText();
         //update alcohol status
-        int change = thisForm.getTtbid();
-        sql = "UPDATE FORM SET FORM.STATUS = 'reject' WHERE FORM.TTBID = " + change;
+        int FID = thisForm.getFormID();
+        sql = "UPDATE FORM SET FORM.STATUS = 'REJECTED' WHERE FORM.FID = " + FID;
         stm.executeUpdate(sql);
 
         stm.close();
         conn.close();
 
+        nextApplication();
+    }
 
+    public void nextApplication(){
+        work.switchScene("ApplicationReview.fxml","Application Review");
     }
 
     /**

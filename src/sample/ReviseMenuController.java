@@ -3,15 +3,13 @@ package sample;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.sql.*;
+
 
 /**
  * Created by peternolan on 4/2/17.
@@ -31,24 +29,25 @@ public class ReviseMenuController {
 
     private FXMLLoader fxmlLoader;
 
-    @FXML
-    private Button submit;
-    @FXML
-    private TextField changeToSubmit;
-    @FXML
-    private TextField applicationID;
-    @FXML
-    private ChoiceBox<String> firstChoiceBox;
-    final String choiceOne = "Add, change, or delete vintage date (WINE ONLY)";
-    final String choiceTwo = "Add, change or delete the stated amount of acid and/or the pH level (WINE ONLY)";
-    final String choiceThree = "Change the mandatory statement of alcohol content (WINE ONLY)";
-    final String choiceFour = "Add, delete, or change optional statement of alcohol content (MALT ONLY)";
+    private @FXML CheckBox rev1En, rev2En, rev3En, rev4En, rev5En, rev6En, rev7En,rev8En, rev9En, rev10En, rev11En, rev12En;
+
+    private @FXML TextArea rev1Data, rev2Data, rev3Data, rev4Data, rev5Data, rev6Data, rev7Data, rev8Data, rev9Data,rev10Data, rev11Data, rev12Data;
+
+    private @FXML TextField applicationID;
+
+    @FXML private Button back;
+    @FXML private Button submit;
+    @FXML private Button UploadImage;
+    @FXML private Label UploadImageLabel;
+
+    String revisionData = "";
 
     DatabaseUtil dbUtil = new DatabaseUtil();
 
     Connection conn = dbUtil.connect();
 
     ScreenUtil screen = new ScreenUtil();
+    String revisionImagePath = "";
 
     /**
      * This is buttonClicked, the function that dictates events depending on which button has been clicked.
@@ -59,9 +58,83 @@ public class ReviseMenuController {
         screen.switchScene("MainMenu.fxml", "Main Menu");
 
     }
-
+    public void uploadImage(ActionEvent Event){
+        openFileChooser();
+        UploadImageLabel.setText(revisionImagePath);
+    }
+    public void openFileChooser(){
+        Stage ReviseMenu = new Stage();
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Choose label picture");
+        File selectedFile = fileChooser.showOpenDialog(ReviseMenu);
+        revisionImagePath = selectedFile.getPath();
+    }
     public void submitButtonClicked(ActionEvent event) {
+        if (rev1En.isSelected()) {
+            revisionData = rev1Data.getText() + "\n\r";
+        } else {
+            revisionData = "\n\r";
+        }
+        if (rev2En.isSelected()) {
+            revisionData = revisionData + rev2Data.getText() + "\n\r";
+        } else {
+            revisionData = revisionData + "\n\r";
+        }
+        if (rev3En.isSelected()) {
+            revisionData = revisionData + rev3Data.getText()+ "\n\r";
+        } else {
+            revisionData = revisionData + "\n\r";
+        }
+        if (rev4En.isSelected()) {
+            revisionData = revisionData + rev4Data.getText()+ "\n\r";
+        } else {
+            revisionData = revisionData + "\n\r";
+        }
+        if (rev5En.isSelected()) {
+            revisionData = revisionData + rev5Data.getText()+ "\n\r";
+        } else {
+            revisionData = revisionData + "\n\r";
+        }
+        if (rev6En.isSelected()) {
+            revisionData = revisionData + rev6Data.getText()+ "\n\r";
+        } else {
+            revisionData = revisionData + "\n\r";
+        }
+        if (rev7En.isSelected()) {
+            revisionData = revisionData + rev7Data.getText() + "\n\r";
+        } else {
+            revisionData = revisionData + "\n\r";
+        }
+        if (rev8En.isSelected()) {
+            revisionData = revisionData + rev8Data.getText()+ "\n\r";
+        } else {
+            revisionData = revisionData + "\n\r";
+        }
 
+        if (rev9En.isSelected()) {
+            revisionData = revisionData + rev9Data.getText()+ "\n\r";
+        } else {
+            revisionData = revisionData + "\n\r";
+        }
+        if (rev10En.isSelected()) {
+            revisionData = revisionData + rev10Data.getText()+ "\n\r";
+        } else {
+            revisionData = revisionData + "\n\r";
+        }
+        if (rev11En.isSelected()) {
+            revisionData = revisionData + rev11Data.getText()+ "\n\r";
+        } else {
+            revisionData = revisionData + "\n\r";
+        }
+        if (rev12En.isSelected()) {
+            revisionData = revisionData + rev12Data.getText()+ "\n\r";
+        } else {
+            revisionData = revisionData + "\n\r";
+        }
+
+        System.out.println(revisionData);
+        System.out.println(revisionImagePath);
+        System.out.println(applicationID.getText());
         updateData(applicationID.getText());
         screen.switchScene("NewApp.fxml", "New Application");
 
@@ -121,7 +194,7 @@ public class ReviseMenuController {
                 }
             } catch (Exception e) {
                 e.printStackTrace();
-            }
-        }*/
-    }
+            }*/
+        }
+
 }
