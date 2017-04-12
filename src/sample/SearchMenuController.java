@@ -86,9 +86,10 @@ public class SearchMenuController {
             alcoholChoice = 2;
         }
         else if (brandField.getText() == null || brandField.getText().trim().isEmpty()) {
-            System.out.println("BRAND NAME EMPTY");
-            screenUtil.switchScene("ErrorState.fxml","Error");
-            System.out.println("CHOOSE ALCOHOL TYPE OR BRANDNAME");
+            brandName = " ";
+           // System.out.println("BRAND NAME EMPTY");
+           // screenUtil.switchScene("ErrorState.fxml","Error");
+           // System.out.println("CHOOSE ALCOHOL TYPE OR BRANDNAME");
         }
         else
             brandName = brandField.getText();
@@ -122,11 +123,13 @@ public class SearchMenuController {
             alcoholChoice = 2;
         }
         else if (brandField.getText() == null || brandField.getText().trim().isEmpty()) {
-            System.out.println("BRAND NAME EMPTY");
-            screenUtil.switchScene("ErrorState.fxml","Error");
-            System.out.println("CHOOSE ALCOHOL TYPE OR BRANDNAME");
+            brandName = " ";
+            //System.out.println("BRAND NAME EMPTY");
+           // screenUtil.switchScene("ErrorState.fxml","Error");
+           // System.out.println("CHOOSE ALCOHOL TYPE OR BRANDNAME");
         }
-        brandName = brandField.getText();
+        else
+            brandName = brandField.getText();
         searchDatabase();
         boolean to_add;
         int temp_int = alcoholDataListTemp.size();
@@ -155,11 +158,13 @@ public class SearchMenuController {
             alcoholChoice = 2;
         }
         else if (brandField.getText() == null || brandField.getText().trim().isEmpty()) {
-            System.out.println("BRAND NAME EMPTY");
-            screenUtil.switchScene("ErrorState.fxml","Error");
-            System.out.println("CHOOSE ALCOHOL TYPE OR BRANDNAME");
+            brandName = " ";
+        //    System.out.println("BRAND NAME EMPTY");
+        //    screenUtil.switchScene("ErrorState.fxml","Error");
+         //   System.out.println("CHOOSE ALCOHOL TYPE OR BRANDNAME");
         }
-        brandName = brandField.getText();
+        else
+            brandName = brandField.getText();
         searchDatabase();
     }
 
