@@ -56,8 +56,8 @@ public class ApplicationReviewController extends DatabaseUtil{
     //for when switching to this scene from inbox
     @FXML
     public void initialize() throws SQLException{
-        dbUtil.searchFormWithRepId(dbUtil.getAccountAid(username)).size();
-        List<ApplicationData> listForms = dbUtil.searchFormWithRepId(dbUtil.getAccountAid(username));
+        dbUtil.searchFormWithGovId(dbUtil.getAccountAid(username)).size();
+        List<ApplicationData> listForms = dbUtil.searchFormWithGovId(dbUtil.getAccountAid(username));
         ApplicationData thisForm = listForms.get(0);
         repID.setText(Integer.toString(thisForm.getRepid()));
         registryNo.setText(Integer.toString(thisForm.getPermit_no()));

@@ -24,7 +24,7 @@ public class WorkFlowController {
 
     @FXML
     public void initialize() throws SQLException{
-        numberOfApps = dbUtil.searchFormWithRepId(dbUtil.getAccountAid(username)).size();
+        numberOfApps = dbUtil.searchFormWithGovId(dbUtil.getAccountAid(username)).size();
         numberOfApplicationsLabel.setText(String.valueOf(numberOfApps));
     }
 
