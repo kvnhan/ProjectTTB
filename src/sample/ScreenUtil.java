@@ -128,7 +128,7 @@ public class ScreenUtil {
 
         ImageView image = new ImageView();
         try {
-            InputStream resource = ScreenUtil.class.getClassLoader().getResourceAsStream("labels/"  + alcoholData.getImageFileName() + ".jfif");
+            InputStream resource = ScreenUtil.class.getClassLoader().getResourceAsStream("labels/"  + alcoholData.getAid() + ".jfif");
             image.setImage(new Image(resource, 500.0, 0.0, true, true));
         }
         catch(NullPointerException nullPoint){

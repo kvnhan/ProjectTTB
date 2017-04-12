@@ -1,11 +1,11 @@
 ----------------------------------------------------------------
-Tue Apr 11 22:01:25 EDT 2017:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.13.1.1 - (1765088): instance a816c00e-015b-5fe4-d94f-00000d4e3a58 
-on database directory C:\Users\Adonay\IdeaProjects\Iteration_1\Database\ProjectC with class loader sun.misc.Launcher$AppClassLoader@14dad5dc 
-Loaded from file:/C:/Users/Adonay/.m2/repository/org/apache/derby/derby/10.13.1.1/derby-10.13.1.1.jar
+Wed Apr 12 00:46:58 EDT 2017:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.13.1.1 - (1765088): instance a816c00e-015b-607c-69ed-00000d4cac78 
+on database directory D:\Quick Access\Desktop\Soft Eng\Project Repo's\Iteration2\Iteration_2\Database\ProjectC with class loader sun.misc.Launcher$AppClassLoader@14dad5dc 
+Loaded from file:/C:/Users/Chris/.m2/repository/org/apache/derby/derby/10.13.1.1/derby-10.13.1.1.jar
 java.vendor=Oracle Corporation
 java.runtime.version=1.8.0_60-b27
-user.dir=C:\Users\Adonay\IdeaProjects\Iteration_1
+user.dir=D:\Quick Access\Desktop\Soft Eng\Project Repo's\Iteration2\Iteration_2
 os.name=Windows 10
 os.arch=amd64
 os.version=10.0
