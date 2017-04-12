@@ -358,8 +358,8 @@ public class DatabaseUtil {
     }
     */
 
-    public ArrayList<ApplicationData> searchFormWithRepId(int REPID) throws SQLException{
-        String query = "SELECT * FROM FORM WHERE FORM.REPID = " + REPID;
+    public ArrayList<ApplicationData> searchFormWithGovId(int GOVID) throws SQLException{
+        String query = "SELECT * FROM FORM WHERE FORM.GOVID = " + GOVID;
 
         return searchForm(query);
     }
@@ -630,31 +630,31 @@ public class DatabaseUtil {
 
         // CHECK IF RESULT IS ZERO
 
-        int REPID;
+        int GOVID;
         //NEED TO FIGURE OUT HOW TO FIND THE ACCOUNT WITH THE MINIMUM AMOUNT OF TIMES THE FORMS REFERENCE IT
-        String sql = "SELECT REPID, SUM(CNT) AS CNT\n" +
+        String sql = "SELECT GOVID, SUM(CNT) AS CNT\n" +
                      "FROM\n" +
-                     "  (SELECT  AID AS REPID, 0 AS CNT\n" +
+                     "  (SELECT  AID AS GOVID, 0 AS CNT\n" +
                      "  FROM ACCOUNT\n" +
                      "  WHERE USER_TYPE = 1\n" +
                          "UNION\n" +
-                     "  SELECT  FORM.REPID, COUNT(REPID) AS CNT\n" +
+                     "  SELECT  FORM.GOVID, COUNT(GOVID) AS CNT\n" +
                      "  FROM FORM\n" +
-                     "  WHERE STATUS = 4\n" +
-                     "  GROUP BY  REPID) T\n" +
-                     "GROUP BY REPID\n" +
+                     "  WHERE STATUS ='Unassigned'\n" +
+                     "  GROUP BY  GOVID) T\n" +
+                     "GROUP BY GOVID\n" +
                      "ORDER BY CNT ASC\n";
         //Should give asc db of repid of government works id and the number of forms they have assigned to them
 
         ResultSet rs = stm.executeQuery(sql);
-        REPID = rset.getInt("REPID");
+        GOVID = rset.getInt("GOVID");
         rset.close();
         stm.close();
 
-        return REPID;
+        return GOVID;
     }
 
-    public void assignForm(int repid, ApplicationData unAssignedForm) throws SQLException{
+    public void assignForm(int govid, ApplicationData unAssignedForm) throws SQLException{
 
         stmt = conn.createStatement();
 
@@ -664,7 +664,7 @@ public class DatabaseUtil {
         rset = stmt.executeQuery(setStatusQuery);
         //update inbox for worker
 
-        String assignWorkerQuery = "UPDATE FORM SET FORM.REPID = " + repid + ", WHERE FORM.FID = "+ unAssignedForm.getFormID();
+        String assignWorkerQuery = "UPDATE FORM SET FORM.GOVID = " + govid + ", WHERE FORM.FID = "+ unAssignedForm.getFormID();
 
         rset = stmt.executeQuery(assignWorkerQuery);
     }
