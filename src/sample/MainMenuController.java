@@ -13,8 +13,6 @@ import java.sql.SQLException;
  */
 public class MainMenuController{
 
-    private FXMLLoader fxmlLoader;
-
     @FXML private Button openSearchButton, openInboxButton, createNewApplicationButton, logOutButton;
     @FXML private Text userIDText;
 

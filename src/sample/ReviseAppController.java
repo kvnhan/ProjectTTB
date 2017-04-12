@@ -1,5 +1,9 @@
 package sample;
 
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -7,10 +11,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import javax.swing.event.ChangeListener;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  * Created by Kien on 4/11/2017.
@@ -43,7 +50,10 @@ public class ReviseAppController {
     @FXML private Button Submit;
     @FXML private Button back;
     @FXML private Button find;
-    private FXMLLoader fxmlLoader;
+    @FXML private ChoiceBox formChoiceBox;
+
+    private ArrayList<ApplicationData> formsFound = new ArrayList<>();
+    private ObservableList<Integer> formsObservableList;
 
     DatabaseUtil util =  new DatabaseUtil();
     AccountsUtil accountsUtil = new AccountsUtil();
@@ -51,7 +61,26 @@ public class ReviseAppController {
 
     @FXML
     public void initialize()throws SQLException{
-        int fid = util.searchFormWithAid(util.getAccountAid(accountsUtil.getUsername())).get(0).getFormID();
+        formsObservableList = FXCollections.observableArrayList();
+        formsFound = util.searchFormWithAid(util.getAccountAid(accountsUtil.getUsername()));
+
+        for(int i = 0; i < formsFound.size(); i ++){
+            formsObservableList.add(formsFound.get(i).getFormID());
+        }
+
+        /*formChoiceBox.getSelectionModel().selectedIndexProperty().addListener(new javafx.beans.value.ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                autoFillSelectedForm(new ActionEvent(formChoiceBox, (Node) formChoiceBox));
+            }
+        });*/
+
+        formChoiceBox.setItems(formsObservableList);
+
+
+        formChoiceBox.getSelectionModel().selectFirst();
+
+        int fid = Integer.valueOf(formChoiceBox.getValue().toString().trim());
         String type;
         WineApplicationData wine;
         BeerApplicationData beer;
@@ -146,9 +175,9 @@ public class ReviseAppController {
         screenUtil.switchScene("MainMenu.fxml", "Main Menu");
 
     }
-    @FXML public void resubmit(javafx.event.ActionEvent event)throws SQLException{
+    @FXML public void autoFillSelectedForm(javafx.event.ActionEvent event)throws SQLException{
 
-        int fid = util.searchFormWithAid(util.getAccountAid(accountsUtil.getUsername())).get(0).getFormID();
+        int fid = Integer.valueOf(formChoiceBox.getValue().toString().trim());
         String type;
         WineApplicationData wine;
         BeerApplicationData beer;
@@ -205,9 +234,7 @@ public class ReviseAppController {
     }
 
     public void submitAgain()throws SQLException{
-
-
-        int fid = Integer.parseInt(form.getText());
+        int fid = Integer.valueOf(formChoiceBox.getValue().toString().trim());
         int ttbid = Integer.parseInt(ID1.getText());
         int repid = Integer.parseInt(RepID1.getText());
         String serial = SerialNo1.getText();
@@ -259,7 +286,7 @@ public class ReviseAppController {
                     source_of_product, type_of_product, brand_name, phone_number, email, date, applicantName, alcoholType, content);
             du.resubmitBeer(fid, a);
         }else{
-            su.createAlertBox("ERROR", "Please selecct the type of product");
+            su.createAlertBox("ERROR", "Please select the type of product");
         }
 
 

@@ -11,7 +11,6 @@ import java.util.ArrayList;
 
 public class WorkFlowController {
 
-    private FXMLLoader fxmlLoader;
     @FXML private Label numberOfApplicationsLabel;
     @FXML private Button back;
     @FXML private Button first;

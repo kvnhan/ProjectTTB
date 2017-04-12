@@ -27,8 +27,6 @@ import java.sql.*;
 
 public class ReviseMenuController {
 
-    private FXMLLoader fxmlLoader;
-
     private @FXML CheckBox rev1En, rev2En, rev3En, rev4En, rev5En, rev6En, rev7En,rev8En, rev9En, rev10En, rev11En, rev12En;
 
     private @FXML TextArea rev1Data, rev2Data, rev3Data, rev4Data, rev5Data, rev6Data, rev7Data, rev8Data, rev9Data,rev10Data, rev11Data, rev12Data;

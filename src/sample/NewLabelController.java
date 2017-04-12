@@ -34,7 +34,6 @@ public class NewLabelController{
     WorkflowFacade facadeWork = new WorkflowFacade();
     ScreenUtil work = new ScreenUtil();
 
-    private FXMLLoader fxmlLoader;
     @FXML private TextField myFilePath;
     @FXML private TextField ID;
     @FXML private TextField RepID;
@@ -326,7 +325,7 @@ public class NewLabelController{
 
     public void submitWine(WineApplicationData wd)throws SQLException{
         int fid = wd.getFormID();
-        int ttbid = wd.getId();
+        int ttbid = wd.getTtbid();
         int repid = wd.getRepid();
         String serial = wd.getSerial();
         String address = wd.getAddress();
@@ -366,7 +365,7 @@ public class NewLabelController{
     }
 
     public void submitBeer(BeerApplicationData bd) throws SQLException{
-        int ttbid = bd.getId();
+        int ttbid = bd.getTtbid();
         int repid = bd.getRepid();
         String serial = bd.getSerial();
         String address = bd.getAddress();

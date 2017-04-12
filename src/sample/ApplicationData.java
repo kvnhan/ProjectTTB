@@ -61,7 +61,7 @@ public class ApplicationData extends SubmissionForm{
     public String getAlcoholType() {
         return alcoholType;
     }
-    public int getId() {
+    public int getTTbId() {
         return ttbid;
     }
 

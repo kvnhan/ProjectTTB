@@ -9,9 +9,8 @@ import javafx.scene.control.Button;
  */
 public class NewAppController {
 
-    private FXMLLoader fxmlLoader;
-    @FXML Button back, newApp, oldApp, Updates;
-    ScreenUtil work = new ScreenUtil();
+    private @FXML Button back, newApp, oldApp, Updates;
+    private ScreenUtil screenUtil = new ScreenUtil();
 
     /**
      * Checks which button was pressed and switches scenes accordingly.
@@ -22,13 +21,13 @@ public class NewAppController {
      */
     public void buttonClicked (javafx.event.ActionEvent event){
         if(event.getSource() == back){
-            work.switchScene("MainMenu.fxml","Main Menu");
+            screenUtil.switchScene("MainMenu.fxml","Main Menu");
         }else if (event.getSource() == newApp) {
-            work.switchScene("NewLabel.fxml","New Application");
+            screenUtil.switchScene("NewLabel.fxml","New Application");
         } else if (event.getSource() == oldApp) {
-            work.switchScene("ApplicationEdit.fxml","Revise Application");
+            screenUtil.switchScene("ReviseApp.fxml","Revise Application");
         } else if (event.getSource() == Updates) {
-            work.switchScene("ReviseMenu.fxml", "Revise Application");
+            screenUtil.switchScene("ReviseMenu.fxml", "Revise Application");
         }
     }
 }

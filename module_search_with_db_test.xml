@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_search_with_db_test" default="compile.module.search_with_db_test">
+  <dirname property="module.search_with_db_test.basedir" file="${ant.file.module_search_with_db_test}"/>
+  
+  <property name="module.jdk.home.search_with_db_test" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.search_with_db_test" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.search_with_db_test" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.search_with_db_test" value="-encoding UTF-8 -source 8 -target 8 ${compiler.args}"/>
+  
+  <property name="search_with_db_test.output.dir" value="${module.search_with_db_test.basedir}/out/production/search with db test"/>
+  <property name="search_with_db_test.testoutput.dir" value="${module.search_with_db_test.basedir}/out/test/search with db test"/>
+  
+  <path id="search_with_db_test.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="search_with_db_test.module.production.classpath">
+    <path refid="${module.jdk.classpath.search_with_db_test}"/>
+    <fileset dir="E:/Program Files/Java/jdk1.8.0_121/db/lib">
+      <patternset refid="library.patterns"/>
+    </fileset>
+    <path refid="library.org.apache.derby:derby:10.13.1.11.classpath"/>
+  </path>
+  
+  <path id="search_with_db_test.runtime.production.module.classpath">
+    <pathelement location="${search_with_db_test.output.dir}"/>
+    <fileset dir="E:/Program Files/Java/jdk1.8.0_121/db/lib">
+      <patternset refid="library.patterns"/>
+    </fileset>
+    <path refid="library.org.apache.derby:derby:10.13.1.11.classpath"/>
+  </path>
+  
+  <path id="search_with_db_test.module.classpath">
+    <path refid="${module.jdk.classpath.search_with_db_test}"/>
+    <pathelement location="${search_with_db_test.output.dir}"/>
+    <fileset dir="E:/Program Files/Java/jdk1.8.0_121/db/lib">
+      <patternset refid="library.patterns"/>
+    </fileset>
+    <path refid="library.org.apache.derby:derby:10.13.1.11.classpath"/>
+  </path>
+  
+  <path id="search_with_db_test.runtime.module.classpath">
+    <pathelement location="${search_with_db_test.testoutput.dir}"/>
+    <pathelement location="${search_with_db_test.output.dir}"/>
+    <fileset dir="E:/Program Files/Java/jdk1.8.0_121/db/lib">
+      <patternset refid="library.patterns"/>
+    </fileset>
+    <path refid="library.org.apache.derby:derby:10.13.1.11.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.search_with_db_test">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.search_with_db_test">
+    <patternset refid="excluded.from.module.search_with_db_test"/>
+  </patternset>
+  
+  <path id="search_with_db_test.module.sourcepath">
+    <dirset dir="${module.search_with_db_test.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.search_with_db_test" depends="compile.module.search_with_db_test.production,compile.module.search_with_db_test.tests" description="Compile module search with db test"/>
+  
+  <target name="compile.module.search_with_db_test.production" depends="register.custom.compilers" description="Compile module search with db test; production classes">
+    <mkdir dir="${search_with_db_test.output.dir}"/>
+    <javac2 destdir="${search_with_db_test.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.search_with_db_test}/javac">
+      <compilerarg line="${compiler.args.search_with_db_test}"/>
+      <bootclasspath refid="search_with_db_test.module.bootclasspath"/>
+      <classpath refid="search_with_db_test.module.production.classpath"/>
+      <src refid="search_with_db_test.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.search_with_db_test"/>
+    </javac2>
+    
+    <copy todir="${search_with_db_test.output.dir}">
+      <fileset dir="${module.search_with_db_test.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.search_with_db_test.tests" depends="register.custom.compilers,compile.module.search_with_db_test.production" description="compile module search with db test; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.search_with_db_test" description="cleanup module">
+    <delete dir="${search_with_db_test.output.dir}"/>
+    <delete dir="${search_with_db_test.testoutput.dir}"/>
+  </target>
+</project>

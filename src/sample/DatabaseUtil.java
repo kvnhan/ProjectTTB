@@ -729,7 +729,7 @@ public class DatabaseUtil {
 
         PreparedStatement sm;
         sm = conn.prepareStatement(sql);
-        sm.setInt(1, a.getId());
+        sm.setInt(1, a.getTtbid());
         sm.setInt(2, a.getRepid());
         sm.setString(3, a.getSerial());
         sm.setString(4, a.getAddress());
@@ -765,7 +765,7 @@ public class DatabaseUtil {
 
         PreparedStatement sm;
         sm = conn.prepareStatement(sql);
-        sm.setInt(1, a.getId());
+        sm.setInt(1, a.getTtbid());
         sm.setInt(2, a.getRepid());
         sm.setString(3, a.getSerial());
         sm.setString(4, a.getAddress());

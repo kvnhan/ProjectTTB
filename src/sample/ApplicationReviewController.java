@@ -20,39 +20,18 @@ import java.util.Scanner;
  */
 public class ApplicationReviewController extends DatabaseUtil{
     @FXML
-    Button approve;
+    private Button approve, reject, goBack;
     @FXML
-    Button reject;
-    @FXML
-    Button goBack;
-    @FXML
-    TextField repID;
-    @FXML
-    TextField registryNo;
-    @FXML
-    TextField prodSource;
-    @FXML
-    TextField prodType;
-    @FXML
-    TextField address;
-    @FXML
-    TextField phoneNo;
-    @FXML
-    TextField email;
-    @FXML
-    TextField dateApp;
-    @FXML
-    TextField nameApp;
-    @FXML
-    TextArea commentsField;
+    private TextField repID, registryNo, prodSource, prodType, address,  phoneNo, email, dateApp, nameApp;
+    @FXML private  TextArea commentsField;
 
-    Connection conn = connect();
-    DatabaseUtil dbUtil = new DatabaseUtil();
-    ScreenUtil screenUtil = new ScreenUtil();
-    AccountsUtil accountsUtil = new AccountsUtil();
-    String username = accountsUtil.getUsername();
+    private Connection conn = connect();
+    private DatabaseUtil dbUtil = new DatabaseUtil();
+    private ScreenUtil screenUtil = new ScreenUtil();
+    private AccountsUtil accountsUtil = new AccountsUtil();
+    private String username = accountsUtil.getUsername();
     int numberOfApps;
-    ApplicationData thisForm;
+    private ApplicationData thisForm;
 
 
     //for when switching to this scene from inbox
