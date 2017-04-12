@@ -17,6 +17,7 @@
                 <Font name="Constantia" size="24.0" />
             </font>
         </Label>
+        <Button fx:id="ChooseFile" layoutX="226.0" layoutY="714.0" mnemonicParsing="false" onAction="#chooseFile" prefHeight="25.0" prefWidth="100.0" text="Choose File:" />
         <Button fx:id="Submit" layoutX="900.0" layoutY="750.0" mnemonicParsing="false" onAction="#fillOutApplication" prefHeight="41.0" prefWidth="85.0" text="Submit" />
         <Button layoutX="800.0" layoutY="750.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="85.0" text="Clear" />
         <Label layoutX="15.0" layoutY="70.0" text="TTB ID:">
@@ -234,7 +235,7 @@
             </AnchorPane>
         </content>
       </TitledPane>
-      <TextArea layoutX="14.0" layoutY="629.0" prefHeight="110.0" prefWidth="970.0" />
+      <TextArea layoutX="14.0" layoutY="629.0" prefHeight="75.0" prefWidth="970.0" />
       <Label layoutX="500.0" layoutY="445.0" text="Alcohol Content:">
          <font>
             <Font name="Constantia" size="24.0" />
@@ -255,5 +256,11 @@
             <Font name="Constantia" size="14.0" />
          </font>
       </TextField>
+      <Label layoutX="25.0" layoutY="714.0" prefWidth="249.0" text="Select Picture File:">
+         <font>
+            <Font name="Constantia" size="24.0" />
+         </font>
+      </Label>
+      <TextField fx:id="myFilePath" editable="false" layoutX="334.0" layoutY="714.0" prefHeight="31.0" prefWidth="463.0" promptText="JoseWong.jpg" />
     </children>
 </Pane>
