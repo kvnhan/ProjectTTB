@@ -26,7 +26,7 @@ public class NewAccountController {
 
     private String newUsername;
     private String accountChoice;
-    private Account.userTypes userType;
+    private int userType;
 
     private AccountsUtil accountsUtil = new AccountsUtil();
     private ScreenUtil screenUtil = new ScreenUtil();
@@ -53,11 +53,11 @@ public class NewAccountController {
             accountChoice = accountChoiceBox.getValue().toString();
 
             if (accountChoice.equals("Government Agent")){
-                userType = Account.userTypes.GOVERNMENT_AGENT;
+                userType = Account.userTypes.GOVERNMENT_AGENT.getValue();
             }else if(accountChoice.equals("Manufacturer")){
-                userType = Account.userTypes.MANUFACTURER;
+                userType = Account.userTypes.MANUFACTURER.getValue();
             }else if(accountChoice.equals("Public User")){
-                userType = Account.userTypes.PUBLIC_USER;
+                userType = Account.userTypes.PUBLIC_USER.getValue();
             }
 
             if( (newUsername.length() >= 5 && newUsername.length() <= 15) && !dbUtil.contains("ACCOUNT", "USERNAME", newUsername)){

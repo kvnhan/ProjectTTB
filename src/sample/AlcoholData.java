@@ -3,7 +3,7 @@ package sample;
 /**
  * Created by Sam Winter on 4/2/2017.
  */
-public class AlcoholData {
+public class AlcoholData{
 
     private int aid;
     private String name;
@@ -39,6 +39,11 @@ public class AlcoholData {
         this.alcoholType = alcoholType;
         this.bottlersInfo = bottlersInfo;
         this.imageFileName = imageFileName;
+    }
+
+    //TODO Finish, I am lazy.
+    public boolean myEquals(AlcoholData other) {
+        return this.getName()!=null && other.getName()!=null && this.getName().equals(other.getName());
     }
 
     public int getAid() {

@@ -359,7 +359,7 @@ public class DatabaseUtil {
     */
 
     public ArrayList<ApplicationData> searchFormWithGovId(int GOVID) throws SQLException{
-        String query = "SELECT * FROM FORM WHERE FORM.GOVID = " + GOVID + " AND FORM.STATUS = '' OR FORM.STATUS = ''";
+        String query = "SELECT * FROM FORM WHERE FORM.GOVID = " + GOVID + " AND (FORM.STATUS = 'ASSIGNED' OR FORM.STATUS = 'UNASSIGNED')";
 
         return searchForm(query);
     }
