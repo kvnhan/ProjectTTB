@@ -257,8 +257,8 @@ public class NewLabelController{
         int runThroughs = (int)(unAssignedForms.size())/10;
         for(int i = 0; i <= runThroughs; i++) {;
             for (int j = 0; j <= 10; j++) {
-                int repid = databaseUtil.searchMinWorkLoad();
-                databaseUtil.assignForm(repid, unAssignedForms.get(j));
+                int govid = databaseUtil.searchMinWorkLoad();
+                databaseUtil.assignForm(govid, unAssignedForms.get(j));
             }
         }
     }

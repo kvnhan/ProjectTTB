@@ -51,13 +51,14 @@ public class ApplicationReviewController extends DatabaseUtil{
     ScreenUtil screenUtil = new ScreenUtil();
     AccountsUtil accountsUtil = new AccountsUtil();
     String username = accountsUtil.getUsername();
+    int numberOfApps;
 
 
     //for when switching to this scene from inbox
     @FXML
     public void initialize() throws SQLException{
-        dbUtil.searchFormWithRepId(dbUtil.getAccountAid(username)).size();
-        List<ApplicationData> listForms = dbUtil.searchFormWithRepId(dbUtil.getAccountAid(username));
+        numberOfApps = dbUtil.searchFormWithGovId(dbUtil.getAccountAid(username)).size();
+        List<ApplicationData> listForms = dbUtil.searchFormWithGovId(dbUtil.getAccountAid(username));
         ApplicationData thisForm = listForms.get(0);
         repID.setText(Integer.toString(thisForm.getRepid()));
         registryNo.setText(Integer.toString(thisForm.getPermit_no()));
@@ -66,7 +67,7 @@ public class ApplicationReviewController extends DatabaseUtil{
         address.setText(thisForm.getAddress());
         phoneNo.setText(thisForm.getPhone_number());
         email.setText(thisForm.getEmail());
-    Format formatter = new SimpleDateFormat("dd-MM-yyyy");
+        Format formatter = new SimpleDateFormat("dd-MM-yyyy");
         dateApp.setText(thisForm.getDate());
         nameApp.setText(thisForm.getApplicantName());
 }
