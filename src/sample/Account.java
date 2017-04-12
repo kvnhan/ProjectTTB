@@ -14,7 +14,10 @@ public class Account implements Serializable{
     private int userType;
 
     protected enum userTypes {
-        GOVERNMENT_AGENT, MANUFACTURER, PUBLIC_USER
+        GOVERNMENT_AGENT(1), MANUFACTURER(2), PUBLIC_USER(3);
+        private final int id;
+        userTypes(int id) { this.id = id; }
+        public int getValue() { return id; }
     };
 
     /**

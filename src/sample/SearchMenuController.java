@@ -10,10 +10,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Stage;
+
 import java.util.List;
 import javafx.collections.ObservableList;
 
@@ -31,7 +30,7 @@ public class SearchMenuController {
     private final int BEER = 1;
     private final int WINE = 2;
 
-    private List<AlcoholData> AlcoholDataList = new ArrayList<AlcoholData>();
+    private List<AlcoholData> alcoholDataList = new ArrayList<AlcoholData>();
     private static ObservableList<AlcoholData> observableList;
 
     private DatabaseUtil dbUtil = new DatabaseUtil();
@@ -72,11 +71,50 @@ public class SearchMenuController {
         return observableList;
     }
 
-    public void searchIntersect(){}
+    public void searchIntersect() throws SQLException
+    {
+        List<AlcoholData> alcoholDataListTemp = new ArrayList<AlcoholData>();
+        for(int i = 0; i< alcoholDataList.size(); i++){
+            alcoholDataListTemp.add(alcoholDataList.get(i));
+        }
+        alcoholDataList.clear();
+        if (isBeerBox.isSelected()){
+            isWineBox.setSelected(false);
+            alcoholChoice = 1;
+        }
+        else if (isWineBox.isSelected()){
+            alcoholChoice = 2;
+        }
+        else if (brandField.getText() == null || brandField.getText().trim().isEmpty()) {
+            System.out.println("BRAND NAME EMPTY");
+            screenUtil.switchScene("ErrorState.fxml","Error");
+            System.out.println("CHOOSE ALCOHOL TYPE OR BRANDNAME");
+        }
+        else
+            brandName = brandField.getText();
+        searchDatabase();
+        boolean to_remove;
+        for(int i=0; i < alcoholDataList.size(); i++) {
+            to_remove = true;
+            for (int j = 0; j < alcoholDataListTemp.size(); j++) {
+                if (alcoholDataListTemp.get(j).myEquals(alcoholDataList.get(i))) {
+                    to_remove = false;
+                    break;
+                }
+            }
+            if(to_remove==true) {
+                alcoholDataList.remove(alcoholDataList.get(i));
+                i--;
+            }
+        }
+    }
     public void searchUnion() throws SQLException
     {
-        List<AlcoholData> AlcoholDataListTemp = AlcoholDataList;
-        AlcoholDataList.clear();
+        List<AlcoholData> alcoholDataListTemp = new ArrayList<AlcoholData>();
+        for(int i = 0; i< alcoholDataList.size(); i++){
+            alcoholDataListTemp.add(alcoholDataList.get(i));
+        }
+        alcoholDataList.clear();
         if (isBeerBox.isSelected()){
             alcoholChoice = 1;
         }
@@ -90,15 +128,26 @@ public class SearchMenuController {
         }
         brandName = brandField.getText();
         searchDatabase();
-        for(int i=0; i < AlcoholDataListTemp.size(); i++){
-            if(!AlcoholDataList.contains(AlcoholDataListTemp.get(i))){
-                AlcoholDataList.add(AlcoholDataListTemp.get(i));
+        boolean to_add;
+        int temp_int = alcoholDataListTemp.size();
+        System.out.println((temp_int));
+        for(int i=0; i < alcoholDataListTemp.size(); i++) {
+            to_add = true;
+            System.out.println("Checking if item is in list");
+            for (int j = 0; j < alcoholDataList.size(); j++) {
+                if (alcoholDataList.get(j).myEquals(alcoholDataListTemp.get(i))) {
+                    to_add = false;
+                    break;
+                }
+            }
+            if(to_add==true) {
+                alcoholDataList.add(alcoholDataListTemp.get(i));
             }
         }
     }
     public void searchNormal() throws SQLException
     {
-        AlcoholDataList.clear();
+        alcoholDataList.clear();
         if (isBeerBox.isSelected()){
             alcoholChoice = 1;
         }
@@ -112,8 +161,6 @@ public class SearchMenuController {
         }
         brandName = brandField.getText();
         searchDatabase();
-        observableList = FXCollections.observableList(AlcoholDataList);
-        displayResults();
     }
 
 
@@ -124,22 +171,27 @@ public class SearchMenuController {
         else if(intersectSearch.isSelected()){
             searchIntersect();
         }
-        else
+        else {
+            System.out.println("Entering Union");
             searchUnion();
+        }
+        observableList = FXCollections.observableList(alcoholDataList);
+        displayResults();
+        System.out.println("FLAG 3");
     }
 
 
     private void searchDatabase() throws SQLException {
 
         if (isWineBox.isSelected() && isBeerBox.isSelected()){
-            AlcoholDataList = dbUtil.searchAlcoholWithType(BEER);
-            AlcoholDataList.addAll(dbUtil.searchAlcoholWithType(WINE));
+            alcoholDataList = dbUtil.searchAlcoholWithType(BEER);
+            alcoholDataList.addAll(dbUtil.searchAlcoholWithType(WINE));
         }
         else if(isWineBox.isSelected() || isBeerBox.isSelected()){
-            AlcoholDataList = dbUtil.searchAlcoholWithType(alcoholChoice);
+            alcoholDataList = dbUtil.searchAlcoholWithType(alcoholChoice);
         }
         else {
-            AlcoholDataList = dbUtil.searchAlcoholBrand(brandName);
+            alcoholDataList = dbUtil.searchAlcoholBrand(brandName);
         }
     }
 
@@ -180,16 +232,16 @@ public class SearchMenuController {
             fileWriter.append(NEW_LINE_SEPARATOR);
 
             //AlcoholData(ID, name, brandname, app, type)
-            for (int i=0;i< AlcoholDataList.size(); i++) {
-                fileWriter.append(String.valueOf(AlcoholDataList.get(i).getAid()));
+            for (int i = 0; i< alcoholDataList.size(); i++) {
+                fileWriter.append(String.valueOf(alcoholDataList.get(i).getAid()));
                 fileWriter.append(COMMA_DELIMITER);
-                fileWriter.append(AlcoholDataList.get(i).getName());
+                fileWriter.append(alcoholDataList.get(i).getName());
                 fileWriter.append(COMMA_DELIMITER);
-                fileWriter.append(AlcoholDataList.get(i).getBrandName());
+                fileWriter.append(alcoholDataList.get(i).getBrandName());
                 fileWriter.append(COMMA_DELIMITER);
-                fileWriter.append(AlcoholDataList.get(i).getAppellation());
+                fileWriter.append(alcoholDataList.get(i).getAppellation());
                 fileWriter.append(COMMA_DELIMITER);
-                fileWriter.append(String.valueOf(AlcoholDataList.get(i).getAlcoholType()));
+                fileWriter.append(String.valueOf(alcoholDataList.get(i).getAlcoholType()));
                 //fileWriter.append(data[i].toString());
                 //fileWriter.append(COMMA_DELIMITER);
                 fileWriter.append(NEW_LINE_SEPARATOR);
