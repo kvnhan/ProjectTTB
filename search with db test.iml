@@ -9,36 +9,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="org.apache.derby:derby:10.13.1.11" level="project" />
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="file://C:/Program Files/Java/jdk1.8.0_121/db/lib" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-        <jarDirectory url="file://C:/Program Files/Java/jdk1.8.0_121/db/lib" recursive="false" />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="file:///Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/db/lib" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-        <jarDirectory url="file:///Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/db/lib" recursive="false" />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="file://E:/Program Files/Java/jdk1.8.0_121/db/lib" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-        <jarDirectory url="file://E:/Program Files/Java/jdk1.8.0_121/db/lib" recursive="false" />
-      </library>
-    </orderEntry>
     <orderEntry type="module-library" scope="TEST">
       <library name="JUnit4">
         <CLASSES>
@@ -47,6 +17,16 @@
         </CLASSES>
         <JAVADOC />
         <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="file://D:/Program Files (x86)/Java/JDK 8u60/db/lib" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+        <jarDirectory url="file://D:/Program Files (x86)/Java/JDK 8u60/db/lib" recursive="false" />
       </library>
     </orderEntry>
   </component>

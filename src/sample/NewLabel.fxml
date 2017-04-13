@@ -18,7 +18,7 @@
             </font>
         </Label>
         <Button fx:id="ChooseFile" layoutX="226.0" layoutY="714.0" mnemonicParsing="false" onAction="#chooseFile" prefHeight="25.0" prefWidth="100.0" text="Choose File:" />
-        <Button fx:id="Submit" layoutX="900.0" layoutY="750.0" mnemonicParsing="false" onAction="#fillOutApplication" prefHeight="41.0" prefWidth="85.0" text="Submit" />
+        <Button fx:id="Submit" layoutX="800.0" layoutY="164.0" mnemonicParsing="false" onAction="#fillOutApplication" prefHeight="41.0" prefWidth="85.0" text="Submit" />
         <Button layoutX="800.0" layoutY="750.0" mnemonicParsing="false" onAction="#setClear" prefHeight="41.0" prefWidth="85.0" text="Clear" />
         <Label layoutX="15.0" layoutY="70.0" text="TTB ID:">
             <font>

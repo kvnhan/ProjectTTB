@@ -5,7 +5,9 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
@@ -18,6 +20,7 @@ import javafx.scene.image.*;
 import java.io.File;
 import java.io.InputStream;
 import java.net.URL;
+import java.util.Optional;
 
 import static com.sun.org.apache.xalan.internal.utils.SecuritySupport.getResourceAsStream;
 
@@ -66,6 +69,20 @@ public class ScreenUtil {
         Scene scene = new Scene(layout);
         alertWindow.setScene(scene);
         alertWindow.showAndWait();
+    }
+
+    public boolean createConfirmBox(String title,String lowerMessage,String mainmessage){
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(mainmessage);
+        alert.setContentText(lowerMessage);
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK){
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public Scene getPreviousScene() {
@@ -153,6 +170,11 @@ public class ScreenUtil {
         alertWindow.setScene(scene);
         alertWindow.showAndWait();
     }
+
+    public void pullUpAlcoholDetails(AlcoholData alcData){
+        
+    }
+
     public File openFileChooser(){
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Choose label picture");

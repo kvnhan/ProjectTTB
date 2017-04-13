@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.AlcoholInfoController">
+   <children>
+      <Button layoutX="14.0" layoutY="361.0" mnemonicParsing="false" text="Close" />
+      <Label fx:id="alcName" alignment="CENTER" layoutX="122.0" layoutY="14.0" prefHeight="17.0" prefWidth="357.0" text="NAME" />
+      <ImageView fx:id="alcImage" fitHeight="327.0" fitWidth="300.0" layoutX="286.0" layoutY="52.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../../Pictures/RWBY/blake_by_lordtechmarine-d6l7ffl.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="23.0" layoutY="52.0" text="AID:" />
+      <Label layoutX="23.0" layoutY="69.0" text="Brand Name:" />
+      <Label layoutX="23.0" layoutY="86.0" text="Alcohol Type:" />
+      <Label layoutX="22.0" layoutY="103.0" text="Appelation:" />
+      <Label layoutX="22.0" layoutY="120.0" text="Sulfite Description:" />
+      <Label layoutX="22.0" layoutY="137.0" text="Alcohol Content:" />
+      <Label layoutX="21.0" layoutY="237.0" text="Label Size:" />
+      <Label layoutX="21.0" layoutY="220.0" text="Label Legibility:" />
+      <Label layoutX="21.0" layoutY="203.0" text="Class:" />
+      <Label layoutX="21.0" layoutY="188.0" text="Product Type:" />
+      <Label layoutX="21.0" layoutY="171.0" text="Health Warning:" />
+      <Label layoutX="21.0" layoutY="154.0" text="Net Content:" />
+      <Label layoutX="22.0" layoutY="254.0" text="Formula:" />
+      <Label layoutX="21.0" layoutY="271.0" text="Botteler's Information:" />
+      <Label fx:id="alcAID" layoutX="154.0" layoutY="53.0" text="AID" />
+      <Label fx:id="alcBrandName" layoutX="154.0" layoutY="70.0" text="Brand Name" />
+      <Label fx:id="alcType" layoutX="154.0" layoutY="87.0" text="Alcohol Type" />
+      <Label fx:id="alcAppelation" layoutX="153.0" layoutY="104.0" text="Appelation" />
+      <Label fx:id="alcSulfite" layoutX="153.0" layoutY="121.0" text="Sulfite Description" />
+      <Label fx:id="alcAlcoholContent" layoutX="153.0" layoutY="138.0" text="Alcohol Content" />
+      <Label fx:id="alcSize" layoutX="152.0" layoutY="238.0" text="Label Size" />
+      <Label fx:id="alcLegibility" layoutX="152.0" layoutY="221.0" text="Label Legibility" />
+      <Label fx:id="alcClass" layoutX="152.0" layoutY="204.0" text="Class" />
+      <Label fx:id="alcProductType" layoutX="152.0" layoutY="189.0" text="Product Type" />
+      <Label fx:id="alcHealthWarning" layoutX="152.0" layoutY="172.0" text="Health Warning" />
+      <Label fx:id="alcNetContent" layoutX="152.0" layoutY="155.0" text="Net Content" />
+      <Label fx:id="alcFormula" layoutX="153.0" layoutY="255.0" text="Formula" />
+      <Label fx:id="alcInfo" layoutX="152.0" layoutY="272.0" text="Botteler's Information" />
+   </children>
+</AnchorPane>
