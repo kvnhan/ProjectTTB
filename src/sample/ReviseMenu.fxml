@@ -78,14 +78,6 @@
     </ScrollPane>
     <Button fx:id="uploadButton" layoutX="578.0" layoutY="51.0" mnemonicParsing="false" onAction="#uploadImage" text="UPLOAD IMAGE" />
     <Label fx:id="UploadImageLabel" layoutX="716.0" layoutY="54.0" prefHeight="21.0" prefWidth="351.0" text="File Directory Here" />
-    <ChoiceBox fx:id="applicationIdChoiceBox" layoutX="287.0" layoutY="50.0" prefWidth="239.99990000000253">
-      <items>
-        <FXCollections fx:factory="observableArrayList">
-          <String fx:value="Item 1" />
-          <String fx:value="Item 2" />
-          <String fx:value="Item 3" />
-        </FXCollections>
-      </items>
-    </ChoiceBox>
+    <ChoiceBox fx:id="applicationChoiceBox" layoutX="287.0" layoutY="50.0" prefWidth="239.99990000000253"/>
   </children>
 </AnchorPane>

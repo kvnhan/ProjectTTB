@@ -1,5 +1,7 @@
 package sample;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,6 +11,7 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.sql.*;
+import java.util.ArrayList;
 
 
 /**
@@ -31,21 +34,35 @@ public class ReviseMenuController {
 
     private @FXML TextArea rev1Data, rev2Data, rev3Data, rev4Data, rev5Data, rev6Data, rev7Data, rev8Data, rev9Data,rev10Data, rev11Data, rev12Data;
 
-    private @FXML TextField applicationID;
-
     @FXML private Button back;
     @FXML private Button submit;
     @FXML private Button UploadImage;
     @FXML private Label UploadImageLabel;
+    @FXML private ChoiceBox applicationChoiceBox;
 
-    String revisionData = "";
+    private String revisionData = "";
 
-    DatabaseUtil dbUtil = new DatabaseUtil();
+    private DatabaseUtil databaseUtil = new DatabaseUtil();
+    private AccountsUtil accountsUtil = new AccountsUtil();
+    private ScreenUtil screenUtil = new ScreenUtil();
+    private String revisionImagePath = "";
 
-    Connection conn = dbUtil.connect();
 
-    ScreenUtil screen = new ScreenUtil();
-    String revisionImagePath = "";
+    private ArrayList<ApplicationData> formsFound = new ArrayList<>();
+    private ObservableList<Integer> formsObservableList;
+
+    @FXML
+    public void initialize() throws SQLException{
+        formsObservableList = FXCollections.observableArrayList();
+        formsFound = databaseUtil.searchFormWithAid(databaseUtil.getAccountAid(accountsUtil.getUsername()));
+
+        for(int i = 0; i < formsFound.size(); i ++){
+            formsObservableList.add(formsFound.get(i).getFormID());
+        }
+
+        applicationChoiceBox.setItems(formsObservableList);
+        applicationChoiceBox.getSelectionModel().selectFirst();
+    }
 
     /**
      * This is buttonClicked, the function that dictates events depending on which button has been clicked.
@@ -53,7 +70,7 @@ public class ReviseMenuController {
      * @param event
      */
     public void goBack(ActionEvent event){
-        screen.switchScene("MainMenu.fxml", "Main Menu");
+        screenUtil.switchScene("MainMenu.fxml", "Main Menu");
 
     }
     public void uploadImage(ActionEvent Event){
@@ -132,9 +149,9 @@ public class ReviseMenuController {
 
         System.out.println(revisionData);
         System.out.println(revisionImagePath);
-        System.out.println(applicationID.getText());
-        updateData(applicationID.getText());
-        screen.switchScene("NewApp.fxml", "New Application");
+        System.out.println(applicationChoiceBox.getValue().toString().trim());
+        updateData(Integer.valueOf(applicationChoiceBox.getValue().toString().trim()));
+        screenUtil.switchScene("NewApp.fxml", "New Application");
 
 
     }
@@ -165,7 +182,7 @@ public class ReviseMenuController {
         */
     }
 
-    public void updateData(String data) {
+    public void updateData(int FID) {
        /* Statement stmt = null;
         String query = "UPDATE ApplicationDB\n\r" +
                 "SET firstChoiceBox.getValue() = " + data + "\n\r" +

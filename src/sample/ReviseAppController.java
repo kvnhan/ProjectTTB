@@ -55,14 +55,14 @@ public class ReviseAppController {
     private ArrayList<ApplicationData> formsFound = new ArrayList<>();
     private ObservableList<Integer> formsObservableList;
 
-    DatabaseUtil util =  new DatabaseUtil();
-    AccountsUtil accountsUtil = new AccountsUtil();
-    ScreenUtil screenUtil = new ScreenUtil();
+    private DatabaseUtil databaseUtil =  new DatabaseUtil();
+    private AccountsUtil accountsUtil = new AccountsUtil();
+    private ScreenUtil screenUtil = new ScreenUtil();
 
     @FXML
     public void initialize()throws SQLException{
         formsObservableList = FXCollections.observableArrayList();
-        formsFound = util.searchFormWithAid(util.getAccountAid(accountsUtil.getUsername()));
+        formsFound = databaseUtil.searchFormWithAid(databaseUtil.getAccountAid(accountsUtil.getUsername()));
 
         for(int i = 0; i < formsFound.size(); i ++){
             formsObservableList.add(formsFound.get(i).getFormID());
@@ -84,9 +84,9 @@ public class ReviseAppController {
         String type;
         WineApplicationData wine;
         BeerApplicationData beer;
-            type = util.checkforType(fid);
+            type = databaseUtil.checkforType(fid);
             if (type.equals("WINE")) {
-                wine = util.fillSubmittedWineForm(fid);
+                wine = databaseUtil.fillSubmittedWineForm(fid);
                 ID1.setText(Integer.toString(wine.getTtbid()));
                 RepID1.setText(Integer.toString(wine.getRepid()));
                 PlantReg1.setText(Integer.toString(wine.getPermit_no()));
@@ -104,7 +104,7 @@ public class ReviseAppController {
                 Address1.setText(wine.getAddress());
                 MailingAddress1.setText(wine.getAddress());
             } else if (type.equals("BEER")) {
-                beer = util.fillSubmittedBeerForm(fid);
+                beer = databaseUtil.fillSubmittedBeerForm(fid);
                 ID1.setText(Integer.toString(beer.getTtbid()));
                 RepID1.setText(Integer.toString(beer.getRepid()));
                 PlantReg1.setText(Integer.toString(beer.getPermit_no()));
@@ -118,7 +118,7 @@ public class ReviseAppController {
                 Address1.setText(beer.getAddress());
                 MailingAddress1.setText(beer.getAddress());
             } else {
-                beer = util.fillSubmittedBeerForm(fid);
+                beer = databaseUtil.fillSubmittedBeerForm(fid);
                 ID1.setText(Integer.toString(beer.getTtbid()));
                 RepID1.setText(Integer.toString(beer.getRepid()));
                 PlantReg1.setText(Integer.toString(beer.getPermit_no()));
@@ -182,9 +182,9 @@ public class ReviseAppController {
         WineApplicationData wine;
         BeerApplicationData beer;
         if(event.getSource() == find) {
-            type = util.checkforType(fid);
+            type = databaseUtil.checkforType(fid);
             if (type.equals("WINE")) {
-                wine = util.fillSubmittedWineForm(fid);
+                wine = databaseUtil.fillSubmittedWineForm(fid);
                 ID1.setText(Integer.toString(wine.getTtbid()));
                 RepID1.setText(Integer.toString(wine.getRepid()));
                 PlantReg1.setText(Integer.toString(wine.getPermit_no()));
@@ -202,7 +202,7 @@ public class ReviseAppController {
                 Address1.setText(wine.getAddress());
                 MailingAddress1.setText(wine.getAddress());
             } else if (type.equals("BEER")) {
-                beer = util.fillSubmittedBeerForm(fid);
+                beer = databaseUtil.fillSubmittedBeerForm(fid);
                 ID1.setText(Integer.toString(beer.getTtbid()));
                 RepID1.setText(Integer.toString(beer.getRepid()));
                 PlantReg1.setText(Integer.toString(beer.getPermit_no()));
@@ -216,7 +216,7 @@ public class ReviseAppController {
                 Address1.setText(beer.getAddress());
                 MailingAddress1.setText(beer.getAddress());
             } else {
-                beer = util.fillSubmittedBeerForm(fid);
+                beer = databaseUtil.fillSubmittedBeerForm(fid);
                 ID1.setText(Integer.toString(beer.getTtbid()));
                 RepID1.setText(Integer.toString(beer.getRepid()));
                 PlantReg1.setText(Integer.toString(beer.getPermit_no()));
