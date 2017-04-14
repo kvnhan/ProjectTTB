@@ -33,6 +33,7 @@ public class ScreenUtil {
     private Stage alertWindow;
     private Parent root1;
     private Scene previousScene;
+    private DataPasser dataPass;
 
     public void switchScene(String fxmlName,String title){
         fxmlLoader = new FXMLLoader(getClass().getResource(fxmlName));
@@ -172,7 +173,18 @@ public class ScreenUtil {
     }
 
     public void pullUpAlcoholDetails(AlcoholData alcData){
-        
+        dataPass = new DataPasser();
+        dataPass.setAlcData(alcData);
+        fxmlLoader = new FXMLLoader(getClass().getResource("AlcoholInfo.fxml"));
+        alertWindow = new Stage();
+
+        alertWindow.initModality(Modality.NONE);
+        alertWindow.setTitle(alcData.getName() + " Details");
+        alertWindow.setMinWidth(1000);
+        try {
+            alertWindow.setScene(new Scene(fxmlLoader.load()));
+        }catch(Exception e){e.printStackTrace();}
+        alertWindow.showAndWait();
     }
 
     public File openFileChooser(){

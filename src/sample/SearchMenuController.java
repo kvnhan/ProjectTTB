@@ -43,7 +43,7 @@ public class SearchMenuController {
             row.setOnMouseClicked(event -> {
                 if(event.getClickCount() == 2 && (! row.isEmpty())){
                     AlcoholData rowData = row.getItem();
-                    screenUtil.showAlcoholDetail(rowData);
+                    screenUtil.pullUpAlcoholDetails(rowData);
                 }
             });
             row.setTooltip(new Tooltip("Double click to see more detail"));
