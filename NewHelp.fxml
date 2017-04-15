@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="641.0" prefWidth="611.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.NewHelpController">
+   <children>
+      <ImageView fitHeight="365.0" fitWidth="573.0" layoutX="20.0" layoutY="35.0" pickOnBounds="true">
+         <image>
+            <Image url="@../../../../Desktop/Screen%20Shot%202017-04-15%20at%204.45.57%20PM.png" />
+         </image>
+      </ImageView>
+      <TextArea layoutX="20.0" layoutY="417.0" prefHeight="183.0" prefWidth="573.0" text="REP ID: Third party COLA filers (consultants, label reps, trade associations, etc.) are given a unique ID number by TTB&#10; &#10;Brand Name: This is the name under which a product is sold. If the product is not sold under a brand name, the name of the bottler, packer, or importer becomes the brand name.&#10; &#10;TTB ID: This is a unique, 14 digit number assigned by TTB to track each COLA.  The first 5 digits represent the calendar year and Julian date the application was received by TTB. &#10; &#10;Plant Registry: When submitting an eApplication, please select the location(s) where this product will be bottled/imported. &#10; &#10;Source: Location of Label’s production.&#10; &#10;Type of Product: Whether the Label is a Wine, Beer, or Distilled Spirit.&#10; &#10;Type of Application: Please note, when completing an eApplication, select Certificate of Label Approval if this alcohol beverage will be sold within the state where the bottler is located and/or in interstate commerce (i.e., in states other than where the bottler is located).&#10;Select Certificate of Exemption from Label Approval if you will only sell this alcohol beverage intrastate (i.e., only within the state where the bottler is located), and you wish to be exempted from the labeling requirements of the Federal Alcohol Administration Act.&#10;&#10;Serial Number: When creating an eApplication you must assign a sequential and unique number to each application.  COLAs Online automatically assigns the first two characters, which represent the current calendar year.&#10;&#10;Applicant Name: Please enter your legal name.&#10;&#10;Fanciful Name: This is a name that may be used in addition to a brand name to further identify a product and is required for malt beverage and distilled spirit specialty products that must be labeled with a statement of composition.  It is optional for other products.&#10;&#10;Address: Please enter the legal address of your business.&#10;&#10;Formula: Please include the formula of your label.&#10;&#10;Email Address: Provide an email address in the event we need to reach you.&#10;&#10;Alcohol Content: An accurate statement of the alcohol content must appear on the brand label of all wine and distilled spirits products. Optional for distilled spirits.&#10;&#10;Grape Varietal: The names of the dominant grapes used in the wine. &#10;&#10;Mailing Address: Current mailing address of business.&#10;&#10;Wine Appellation: Location where the grapes were grown.&#10;&#10;Ph Level: Level of acidity in the wine.&#10;&#10;Vintage Year: Year when wine was bottled.&#10;&#10;Select Picure File:  Please include a copy of your label’s image for verification.&#10; &#10; &#10;Submit: Click this button when you are ready to submit your form.&#10;&#10;Reset: Click this button to erase all entries from the text boxes above.&#10;" wrapText="true" />
+      <Text layoutX="4.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Help: New application" wrappingWidth="278.21875">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Text>
+      <Separator layoutX="14.0" layoutY="35.0" orientation="VERTICAL" prefHeight="373.0" prefWidth="9.0" />
+      <Separator layoutX="18.0" layoutY="405.0" prefHeight="6.0" prefWidth="573.0" />
+      <Separator layoutX="589.0" layoutY="34.0" orientation="VERTICAL" prefHeight="375.0" prefWidth="6.0" />
+      <Separator layoutX="18.0" layoutY="33.0" prefHeight="6.0" prefWidth="573.0" />
+      <Button fx:id="backButton" layoutX="14.0" layoutY="600.0" mnemonicParsing="false" onAction="#goBack" text="Back" />
+   </children>
+</AnchorPane>

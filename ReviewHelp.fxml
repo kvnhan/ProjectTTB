@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="568.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ReviewHelpController">
+   <children>
+      <ImageView fitHeight="301.0" fitWidth="592.0" layoutX="4.0" layoutY="47.0" pickOnBounds="true">
+         <image>
+            <Image url="@../../../../Desktop/Screen%20Shot%202017-04-15%20at%205.18.42%20PM.png" />
+         </image>
+      </ImageView>
+      <TextArea layoutX="12.0" layoutY="354.0" prefHeight="164.0" prefWidth="577.0" text="On this Page, who will recieve the information that a Manufacturer has inputted into his most recent application. You will review this application and make sure that it is up to government regulations.&#10;&#10;Please Make sure that all fields have the correct information. If you see any discrepancies, please make note of them in the comments section, and press the &quot;Reject&quot; Button. This will send the form back to the Manufacturer for review.&#10;&#10;If everything is in order, then press the &quot;Approve&quot; button in order to accept this information and send the data into the COLA Registry." wrapText="true" />
+      <Button fx:id="back" layoutX="14.0" layoutY="527.0" mnemonicParsing="false" onAction="#goBack" text="Back" />
+      <Label layoutX="4.0" layoutY="4.0" text="Help: Label Review">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
