@@ -29,6 +29,7 @@ public class SearchMenuController {
     private int alcoholChoice = 0;
     private final int BEER = 1;
     private final int WINE = 2;
+    private final int DISTILLED = 3;
 
     private List<AlcoholData> alcoholDataList = new ArrayList<AlcoholData>();
     private static ObservableList<AlcoholData> observableList;
@@ -185,7 +186,16 @@ public class SearchMenuController {
         System.out.println("FLAG 3");
     }
 
+    public void displayAll(ActionEvent event) throws SQLException, NoSuchMethodException, IllegalAccessException, InstantiationException, IOException{
+        alcoholDataList.clear();
+        alcoholDataList = dbUtil.searchAlcoholWithType(BEER);
+        alcoholDataList.addAll(dbUtil.searchAlcoholWithType(WINE));
+        alcoholDataList.addAll(dbUtil.searchAlcoholWithType(DISTILLED));
+        observableList = FXCollections.observableList(alcoholDataList);
+        displayResults();
+    }
 
+    //TODO add other spirits
     private void searchDatabase() throws SQLException {
 
         if (isWineBox.isSelected() && isBeerBox.isSelected()){
