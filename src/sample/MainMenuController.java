@@ -30,7 +30,7 @@ public class MainMenuController{
         if(username.toLowerCase().equals("guest")){
             openInboxButton.setDisable(true);
             createNewApplicationButton.setDisable(true);
-            logOutButton.setDisable(true);
+            logOutButton.setDisable(false);
         }else if(databaseUtil.searchAccountWithUsername(username).get(0).getUserType() == 3){
             openInboxButton.setDisable(true);
             createNewApplicationButton.setDisable(true);
