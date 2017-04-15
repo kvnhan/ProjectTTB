@@ -24,6 +24,8 @@ public class NewAccountController {
     @FXML
     private Button createAccountButton;
 
+    ScreenUtil work = new ScreenUtil();
+
     private String newUsername;
     private String accountChoice;
     private int userType;
@@ -44,6 +46,10 @@ public class NewAccountController {
                 }
             }
         });
+    }
+
+    public void goBack(ActionEvent event){
+        work.switchScene("Login.fxml", "Login");
     }
 
     public void createAccount(ActionEvent event){
