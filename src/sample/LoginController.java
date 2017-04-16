@@ -89,6 +89,9 @@ public class LoginController {
 
     }
 
+    /**
+     * Clears account data from the system.
+     */
     public void clearData() {
         try{
             dbUtil.clearTable("ACCOUNT");

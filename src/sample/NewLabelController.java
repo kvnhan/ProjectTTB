@@ -24,7 +24,7 @@ import java.util.Date;
 import javafx.scene.control.TextField;
 import java.util.Random;
 /**
- * Created by Sam Winter on 3/28/2017.
+ * Controller for new label screen.
  */
 public class NewLabelController{
 
@@ -62,6 +62,9 @@ public class NewLabelController{
     Statement sm;
 
     @FXML
+    /**
+     * Clears information from the screen.
+     */
     private void setClear(){
         ScreenUtil work = new ScreenUtil();
         work.switchScene("NewLabel.fxml", "New Label");
@@ -108,6 +111,10 @@ public class NewLabelController{
         work.switchScene("MainMenu.fxml","Main Menu");
     }
 
+    /**
+     * Fills out an application in the database.
+     * @throws SQLException
+     */
     public void fillOutApplication() throws SQLException{
 
         boolean valid = true;
@@ -348,7 +355,7 @@ public class NewLabelController{
                     source_of_product, type_of_product, brand_name, phone_number, email, date, applicantName,
                     alcoholType, alcoholContent);
             if(valid && work.createConfirmBox("Confirm", "Would you like to submit the form?", "Form Submission Confirmation")){
-                submitDistilledSpirits(Data);
+                submitBeer(Data);
                 System.out.println("This works too");
                 work.switchScene("NewApp.fxml", "New Application");
             }
@@ -356,6 +363,11 @@ public class NewLabelController{
 
     }
 
+    /**
+     * Submits a wine to the database.
+     * @param wd Instance of WineApplicationData.
+     * @throws SQLException
+     */
     public void submitWine(WineApplicationData wd)throws SQLException{
         int fid = wd.getFormID();
         int ttbid = wd.getTtbid();
@@ -390,6 +402,10 @@ public class NewLabelController{
 
     }
 
+    /**
+     * Chooses an image file for the label.
+     * @param event "Choose File" button pressed.
+     */
     public void chooseFile(ActionEvent event){
         File tempFile = work.openFileChooser();
         if (tempFile != null && tempFile.getPath() !=null) {
@@ -397,6 +413,11 @@ public class NewLabelController{
         }
     }
 
+    /**
+     * Submits a beer application to the database.
+     * @param bd Instance of BeerApplicationData.
+     * @throws SQLException
+     */
     public void submitBeer(BeerApplicationData bd) throws SQLException{
         int ttbid = bd.getTtbid();
         int repid = bd.getRepid();
@@ -424,33 +445,10 @@ public class NewLabelController{
         roundRobin();
     }
 
-    public void submitDistilledSpirits(BeerApplicationData bd) throws SQLException{
-        int ttbid = bd.getTtbid();
-        int repid = bd.getRepid();
-        String serial = bd.getSerial();
-        String address = bd.getAddress();
-        String fancyName = bd.getFancyName();
-        String formula = bd.getFormula();
-        int permit_no = bd.getPermit_no();
-        String infoOnBottle = bd.getInfoOnBottle();
-        String source_of_product = bd.getSource_of_product();
-        String type_of_product = bd.getType_of_product();
-        String brand_name = bd.getBrand_name();
-        String phone_number = bd.getPhone_number();
-        String email = bd.getEmail();
-        String date = bd.getDate();
-        String dateFormat = date.toString();
-        String applicantName = bd.getApplicantName();
-        String alcoholType = bd.getAlcoholType();
-        String alcoholContent = bd.getAlcoholContent();
-        String status = bd.getAcceptanceInfo().getStatus();
-
-        db.addDistilledSpiritsForm(ttbid, repid, serial, address, fancyName, formula, permit_no, infoOnBottle, source_of_product, type_of_product, brand_name, phone_number, email,
-                dateFormat, applicantName, alcoholType, alcoholContent, status);
-
-        roundRobin();
-    }
-
+    /**
+     * Assigns new applications to government workers.
+     * @throws SQLException
+     */
     public void roundRobin() throws  SQLException{
         System.out.println("Running roundrobin");
         ArrayList<ApplicationData> unAssignedForms = db.searchUnassignedForms();
