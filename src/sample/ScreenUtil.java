@@ -25,7 +25,7 @@ import java.util.Optional;
 import static com.sun.org.apache.xalan.internal.utils.SecuritySupport.getResourceAsStream;
 
 /**
- * Created by Adonay on 4/3/2017.
+ * UI utility class.
  */
 public class ScreenUtil {
     private FXMLLoader fxmlLoader;
@@ -35,6 +35,11 @@ public class ScreenUtil {
     private Scene previousScene;
     private DataPasser dataPass;
 
+    /**
+     * Function to switch to a new screen.
+     * @param fxmlName Name of screen to switch to.
+     * @param title Title of screen to switch to.
+     */
     public void switchScene(String fxmlName,String title){
         fxmlLoader = new FXMLLoader(getClass().getResource(fxmlName));
 
@@ -51,6 +56,11 @@ public class ScreenUtil {
         }
     }
 
+    /**
+     * Creates an alert box.
+     * @param title Title of alert box.
+     * @param message Message contained in the alert box.
+     */
     public void createAlertBox(String title, String message){
         alertWindow = new Stage();
 
@@ -72,6 +82,13 @@ public class ScreenUtil {
         alertWindow.showAndWait();
     }
 
+    /**
+     * Creates a confirmation message.
+     * @param title Title of the message.
+     * @param lowerMessage Content of the confirmation message.
+     * @param mainmessage Header of the confirmation message.
+     * @return Returns true if successful.
+     */
     public boolean createConfirmBox(String title,String lowerMessage,String mainmessage){
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle(title);
@@ -86,6 +103,10 @@ public class ScreenUtil {
         }
     }
 
+    /**
+     * Gets the previously loaded screen.
+     * @return Returns the previously loaded screen.
+     */
     public Scene getPreviousScene() {
         return previousScene;
     }

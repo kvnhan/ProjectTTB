@@ -20,7 +20,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
- * Created by Kien on 4/11/2017.
+ * Application Revision Screen controller.
  */
 public class ReviseAppController {
     ScreenUtil su = new ScreenUtil();
@@ -60,6 +60,9 @@ public class ReviseAppController {
     private ScreenUtil screenUtil = new ScreenUtil();
 
     @FXML
+    /**
+     * Initializes the Application Revision Screen.
+     */
     public void initialize()throws SQLException{
         formsObservableList = FXCollections.observableArrayList();
         formsFound = databaseUtil.searchFormWithAid(databaseUtil.getAccountAid(accountsUtil.getUsername()));
@@ -175,7 +178,12 @@ public class ReviseAppController {
         screenUtil.switchScene("MainMenu.fxml", "Main Menu");
 
     }
-    @FXML public void autoFillSelectedForm(javafx.event.ActionEvent event)throws SQLException{
+    @FXML
+    /**
+     * Autofills a selected form into the screen.
+     *
+     */
+    public void autoFillSelectedForm(javafx.event.ActionEvent event)throws SQLException{
 
         int fid = Integer.valueOf(formChoiceBox.getValue().toString().trim());
         String type;
@@ -233,6 +241,10 @@ public class ReviseAppController {
         }
     }
 
+    /**
+     * Resubmits an application.
+     * @throws SQLException
+     */
     public void submitAgain()throws SQLException{
         int fid = Integer.valueOf(formChoiceBox.getValue().toString().trim());
         int ttbid = Integer.parseInt(ID1.getText());

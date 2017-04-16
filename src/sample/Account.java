@@ -32,6 +32,7 @@ public class Account implements Serializable{
      * Creates an account that is not logged in.
      * @param usrnm String representing the username of the account.
      * @param uType int dfferentiating between different types of account.
+     *
      */
     public Account(String usrnm, int uType){
         username = usrnm;

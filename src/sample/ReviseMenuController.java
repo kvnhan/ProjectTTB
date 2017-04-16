@@ -15,8 +15,8 @@ import java.util.ArrayList;
 
 
 /**
- * Created by peternolan on 4/2/17.
- */
+* Controller for the Revisions Menu screen.
+ *  */
 //Change to a relevant path. Specify the name of the subfolder in the path and that will help to connect the db.
 //Go back to the notes from the JDBC slides. One uses a prepared statemnt and one does not
 //Figure out how the Data is set up.
@@ -52,6 +52,9 @@ public class ReviseMenuController {
     private ObservableList<Integer> formsObservableList;
 
     @FXML
+    /**
+     * Initializes the screen.
+     */
     public void initialize() throws SQLException{
         formsObservableList = FXCollections.observableArrayList();
         formsFound = databaseUtil.searchFormWithAid(databaseUtil.getAccountAid(accountsUtil.getUsername()));
@@ -65,18 +68,27 @@ public class ReviseMenuController {
     }
 
     /**
-     * This is buttonClicked, the function that dictates events depending on which button has been clicked.
+     * Sends user back to the main menu.
      *
-     * @param event
+     * @param event Represents a press of the back button.
      */
     public void goBack(ActionEvent event){
         screenUtil.switchScene("MainMenu.fxml", "Main Menu");
 
     }
+
+    /**
+     * Uploads an image to the system.
+     * @param Event Upload Image button is pressed.
+     */
     public void uploadImage(ActionEvent Event){
         openFileChooser();
         UploadImageLabel.setText(revisionImagePath);
     }
+
+    /**
+     * Opens a file explorer to choose an image to upload.
+     */
     public void openFileChooser(){
         Stage ReviseMenu = new Stage();
         FileChooser fileChooser = new FileChooser();
@@ -84,6 +96,12 @@ public class ReviseMenuController {
         File selectedFile = fileChooser.showOpenDialog(ReviseMenu);
         revisionImagePath = selectedFile.getPath();
     }
+
+    /**
+     * Function that runs when the Submit button is clicked.
+     * Enters revisions to the database.
+     * @param event Submit button is pressed.
+     */
     public void submitButtonClicked(ActionEvent event) {
         if (rev1En.isSelected()) {
             revisionData = rev1Data.getText() + "\n\r";
@@ -182,6 +200,10 @@ public class ReviseMenuController {
         */
     }
 
+    /**
+     * Updates data for a form in the database.
+     * @param FID ID of form to update.
+     */
     public void updateData(int FID) {
        /* Statement stmt = null;
         String query = "UPDATE ApplicationDB\n\r" +
