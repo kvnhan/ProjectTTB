@@ -355,7 +355,7 @@ public class NewLabelController{
                     source_of_product, type_of_product, brand_name, phone_number, email, date, applicantName,
                     alcoholType, alcoholContent);
             if(valid && work.createConfirmBox("Confirm", "Would you like to submit the form?", "Form Submission Confirmation")){
-                submitBeer(Data);
+                submitDistilledSpirits(Data);
                 System.out.println("This works too");
                 work.switchScene("NewApp.fxml", "New Application");
             }
@@ -440,6 +440,33 @@ public class NewLabelController{
         String status = bd.getAcceptanceInfo().getStatus();
 
         db.addBeerForm(ttbid, repid, serial, address, fancyName, formula, permit_no, infoOnBottle, source_of_product, type_of_product, brand_name, phone_number, email,
+                dateFormat, applicantName, alcoholType, alcoholContent, status);
+
+        roundRobin();
+    }
+
+    public void submitDistilledSpirits(BeerApplicationData bd) throws SQLException{
+        int ttbid = bd.getTtbid();
+        int repid = bd.getRepid();
+        String serial = bd.getSerial();
+        String address = bd.getAddress();
+        String fancyName = bd.getFancyName();
+        String formula = bd.getFormula();
+        int permit_no = bd.getPermit_no();
+        String infoOnBottle = bd.getInfoOnBottle();
+        String source_of_product = bd.getSource_of_product();
+        String type_of_product = bd.getType_of_product();
+        String brand_name = bd.getBrand_name();
+        String phone_number = bd.getPhone_number();
+        String email = bd.getEmail();
+        String date = bd.getDate();
+        String dateFormat = date.toString();
+        String applicantName = bd.getApplicantName();
+        String alcoholType = bd.getAlcoholType();
+        String alcoholContent = bd.getAlcoholContent();
+        String status = bd.getAcceptanceInfo().getStatus();
+
+        db.addDistilledSpiritsForm(ttbid, repid, serial, address, fancyName, formula, permit_no, infoOnBottle, source_of_product, type_of_product, brand_name, phone_number, email,
                 dateFormat, applicantName, alcoholType, alcoholContent, status);
 
         roundRobin();
