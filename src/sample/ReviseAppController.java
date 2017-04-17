@@ -25,6 +25,7 @@ import java.util.ArrayList;
 public class ReviseAppController {
     ScreenUtil su = new ScreenUtil();
     DatabaseUtil du = new DatabaseUtil();
+
     @FXML private TextField form;
     @FXML private TextField ID1;
     @FXML private TextField RepID1;
@@ -51,13 +52,21 @@ public class ReviseAppController {
     @FXML private Button back;
     @FXML private Button find;
     @FXML private ChoiceBox formChoiceBox;
+    int fid;
 
     private ArrayList<ApplicationData> formsFound = new ArrayList<>();
     private ObservableList<Integer> formsObservableList;
-
+    private DataPasser dataPasser = new DataPasser();
     private DatabaseUtil databaseUtil =  new DatabaseUtil();
     private AccountsUtil accountsUtil = new AccountsUtil();
     private ScreenUtil screenUtil = new ScreenUtil();
+
+
+    @FXML
+    public void setFid(int fid)throws SQLException{
+        this.fid = fid;
+    }
+
 
     @FXML
     public void initialize()throws SQLException{
@@ -76,14 +85,14 @@ public class ReviseAppController {
         });*/
 
         formChoiceBox.setItems(formsObservableList);
-
-
-        formChoiceBox.getSelectionModel().selectFirst();
-
-        int fid = Integer.valueOf(formChoiceBox.getValue().toString().trim());
-        String type;
-        WineApplicationData wine;
-        BeerApplicationData beer;
+        System.out.println(dataPasser.isIsInvokebyReviseMenu());
+        if(dataPasser.isIsInvokebyReviseMenu() == 1) {
+            fid = dataPasser.getFormId();
+            formChoiceBox.setValue(fid);
+            formChoiceBox.setDisable(true);
+            String type;
+            WineApplicationData wine;
+            BeerApplicationData beer;
             type = databaseUtil.checkforType(fid);
             if (type.equals("WINE")) {
                 wine = databaseUtil.fillSubmittedWineForm(fid);
@@ -103,6 +112,36 @@ public class ReviseAppController {
                 pH1.setText(Double.toString(wine.getPh_level()));
                 Address1.setText(wine.getAddress());
                 MailingAddress1.setText(wine.getAddress());
+
+                if(dataPasser.getDisableVintageField() == 1){
+                    Vintage1.setEditable(false);
+                }
+                if(dataPasser.getDisablepHField() == 1){
+                    pH1.setEditable(false);
+                }
+                if(dataPasser.getDisableAppellationField() == 1){
+                    Appellation1.setEditable(false);
+                }
+                if(dataPasser.getDisableVarietalField() == 1){
+                    Varietal1.setEditable(false);
+                }
+                if(dataPasser.getDisableAlcoContentField() == 1){
+
+                }
+                if(dataPasser.getDisableRestField() == 1){
+                    ID1.setEditable(false);
+                    RepID1.setEditable(false);
+                    PlantReg1.setEditable(false);
+                    SerialNo1.setEditable(false);
+                    ApplicantName1.setEditable(false);
+                    BrandName1.setEditable(false);
+                    Name1.setEditable(false);
+                    Formula1.setEditable(false);
+                    PhoneNumber1.setEditable(false);
+                    EmailAddress1.setEditable(false);
+                    Address1.setEditable(false);
+                    MailingAddress1.setEditable(false);
+                }
             } else if (type.equals("BEER")) {
                 beer = databaseUtil.fillSubmittedBeerForm(fid);
                 ID1.setText(Integer.toString(beer.getTtbid()));
@@ -117,6 +156,26 @@ public class ReviseAppController {
                 EmailAddress1.setText(beer.getEmail());
                 Address1.setText(beer.getAddress());
                 MailingAddress1.setText(beer.getAddress());
+
+                Vintage1.setEditable(false);
+                pH1.setEditable(false);
+                Appellation1.setEditable(false);
+                Varietal1.setEditable(false);
+                if(dataPasser.getDisableRestField() == 1){
+                    ID1.setEditable(false);
+                    RepID1.setEditable(false);
+                    PlantReg1.setEditable(false);
+                    SerialNo1.setEditable(false);
+                    ApplicantName1.setEditable(false);
+                    BrandName1.setEditable(false);
+                    Name1.setEditable(false);
+                    Formula1.setEditable(false);
+                    PhoneNumber1.setEditable(false);
+                    EmailAddress1.setEditable(false);
+                    Address1.setEditable(false);
+                    MailingAddress1.setEditable(false);
+                }
+
             } else {
                 beer = databaseUtil.fillSubmittedBeerForm(fid);
                 ID1.setText(Integer.toString(beer.getTtbid()));
@@ -131,8 +190,40 @@ public class ReviseAppController {
                 EmailAddress1.setText(beer.getEmail());
                 Address1.setText(beer.getAddress());
                 MailingAddress1.setText(beer.getAddress());
+
+                Vintage1.setEditable(false);
+                pH1.setEditable(false);
+                Appellation1.setEditable(false);
+                Varietal1.setEditable(false);
+                if(dataPasser.getDisableAlcoContentField() == 1){
+
+                }
+                if(dataPasser.getDisableRestField() == 1){
+                    ID1.setEditable(false);
+                    RepID1.setEditable(false);
+                    PlantReg1.setEditable(false);
+                    SerialNo1.setEditable(false);
+                    ApplicantName1.setEditable(false);
+                    BrandName1.setEditable(false);
+                    Name1.setEditable(false);
+                    Formula1.setEditable(false);
+                    PhoneNumber1.setEditable(false);
+                    EmailAddress1.setEditable(false);
+                    Address1.setEditable(false);
+                    MailingAddress1.setEditable(false);
+                }
             }
+        }
+        dataPasser.setIsInvokebyReviseMenu(0);
+        dataPasser.setDisableRestField(0);
+        dataPasser.setDisableAppellationField(0);
+        dataPasser.setDisableVintageField(0);
+        dataPasser.setDisableVarietalField(0);
+        dataPasser.setDisablepHField(0);
+        dataPasser.setDisableAlcoContentField(0);
+        System.out.println(dataPasser.isIsInvokebyReviseMenu());
     }
+
 
     @FXML
     private void handledomBox(){
@@ -175,13 +266,13 @@ public class ReviseAppController {
         screenUtil.switchScene("MainMenu.fxml", "Main Menu");
 
     }
-    @FXML public void autoFillSelectedForm(javafx.event.ActionEvent event)throws SQLException{
+
+    @FXML public void autoFillSelectedForm()throws SQLException{
 
         int fid = Integer.valueOf(formChoiceBox.getValue().toString().trim());
         String type;
         WineApplicationData wine;
         BeerApplicationData beer;
-        if(event.getSource() == find) {
             type = databaseUtil.checkforType(fid);
             if (type.equals("WINE")) {
                 wine = databaseUtil.fillSubmittedWineForm(fid);
@@ -230,7 +321,7 @@ public class ReviseAppController {
                 Address1.setText(beer.getAddress());
                 MailingAddress1.setText(beer.getAddress());
             }
-        }
+
     }
 
     public void submitAgain()throws SQLException{
