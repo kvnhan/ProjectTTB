@@ -9,7 +9,9 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
@@ -41,8 +43,8 @@
             <Font size="16.0" />
          </font>
       </CheckBox>
-      <TextField fx:id="brandField" layoutX="172.0" layoutY="42.0" prefHeight="31.0" prefWidth="221.0" />
-      <TableView fx:id="table" editable="true" layoutX="12.0" layoutY="81.0" prefHeight="382.0" prefWidth="777.0">
+      <TextField fx:id="brandField" layoutX="565.0" layoutY="13.0" prefHeight="31.0" prefWidth="221.0" />
+      <TableView fx:id="table" editable="true" layoutX="12.0" layoutY="196.0" prefHeight="267.0" prefWidth="777.0">
          <columns>
             <TableColumn fx:id="idColumn" prefWidth="100.0" text="ID" />
             <TableColumn fx:id="nameColumn" prefWidth="200.0" text="Name" />
@@ -59,19 +61,7 @@
       </RadioButton>
       <RadioButton fx:id="intersectSearch" layoutX="557.0" layoutY="493.0" mnemonicParsing="false" text="Search Within" toggleGroup="$searchType" />
       <RadioButton fx:id="unionSearch" layoutX="557.0" layoutY="518.0" mnemonicParsing="false" text="Combine" toggleGroup="$searchType" />
-      <DatePicker fx:id="startDate" layoutX="432.0" layoutY="38.0" prefHeight="31.0" prefWidth="134.0" />
-      <DatePicker fx:id="endDate" layoutX="590.0" layoutY="38.0" prefHeight="31.0" prefWidth="134.0" />
-      <ChoiceBox layoutX="14.0" layoutY="42.0" prefWidth="150.0" />
-      <Label layoutX="432.0" layoutY="14.0" text="Submitted After:">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </Label>
-      <Label layoutX="590.0" layoutY="14.0" text="Submitted Before:">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </Label>
+      <ChoiceBox layoutX="407.0" layoutY="13.0" prefWidth="150.0" />
       <RadioButton fx:id="csvDownload" layoutX="71.0" layoutY="468.0" mnemonicParsing="false" selected="true" text="CSV">
          <toggleGroup>
             <ToggleGroup fx:id="download_type" />
@@ -79,5 +69,38 @@
       <RadioButton fx:id="tabDownload" layoutX="71.0" layoutY="493.0" mnemonicParsing="false" text="Tab-Delimited" toggleGroup="$download_type" />
       <RadioButton fx:id="customDownload" layoutX="71.0" layoutY="518.0" mnemonicParsing="false" text="Custom Delimitor:" toggleGroup="$download_type" />
       <TextField fx:id="CustomDelimiter" layoutX="227.0" layoutY="513.0" prefHeight="31.0" prefWidth="168.0" promptText="Insert Delimiter Here" />
+      <TitledPane expanded="false" layoutX="12.0" layoutY="50.0" prefHeight="140.0" prefWidth="777.0" text="Advanced Search">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="0.0" prefWidth="775.0">
+               <children>
+                  <DatePicker fx:id="startDate" layoutX="6.0" layoutY="36.0" prefHeight="31.0" prefWidth="134.0" />
+                  <Label layoutX="15.0" layoutY="8.0" text="Submitted After:">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="164.0" layoutY="8.0" text="Submitted Before:">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <DatePicker fx:id="endDate" layoutX="160.0" layoutY="36.0" prefHeight="31.0" prefWidth="134.0" />
+                  <Label layoutX="314.0" layoutY="26.0" text="Type of search:">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <RadioButton fx:id="normalSearch" layoutX="427.0" layoutY="9.0" mnemonicParsing="false" selected="true" text="Normal Search">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="searchType" />
+                     </toggleGroup>
+                  </RadioButton>
+                  <RadioButton fx:id="intersectSearch" layoutX="427.0" layoutY="31.0" mnemonicParsing="false" text="Search within current search list" toggleGroup="$searchType" />
+                  <RadioButton fx:id="unionSearch" layoutX="427.0" layoutY="54.0" mnemonicParsing="false" text="Add next search to the current search list" toggleGroup="$searchType" />
+               </children>
+            </AnchorPane>
+         </content>
+      </TitledPane>
+
    </children>
 </Pane>
