@@ -1,7 +1,7 @@
 package sample;
 
 /**
- * Created by Chris on 4/14/2017.
+ * passes data to the database. Contains an instance of AlcoholData.
  */
 public class DataPasser {
 

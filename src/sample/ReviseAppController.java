@@ -20,7 +20,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
- * Created by Kien on 4/11/2017.
+ * Application Revision Screen controller.
  */
 public class ReviseAppController {
     ScreenUtil su = new ScreenUtil();
@@ -69,6 +69,9 @@ public class ReviseAppController {
 
 
     @FXML
+    /**
+     * Initializes the Application Revision Screen.
+     */
     public void initialize()throws SQLException{
         formsObservableList = FXCollections.observableArrayList();
         formsFound = databaseUtil.searchFormWithAid(databaseUtil.getAccountAid(accountsUtil.getUsername()));
@@ -224,7 +227,6 @@ public class ReviseAppController {
         System.out.println(dataPasser.isIsInvokebyReviseMenu());
     }
 
-
     @FXML
     private void handledomBox(){
         if(dom1111.isSelected()){
@@ -266,13 +268,18 @@ public class ReviseAppController {
         screenUtil.switchScene("MainMenu.fxml", "Main Menu");
 
     }
-
-    @FXML public void autoFillSelectedForm()throws SQLException{
+    @FXML
+    /**
+     * Autofills a selected form into the screen.
+     *
+     */
+    public void autoFillSelectedForm(javafx.event.ActionEvent event)throws SQLException{
 
         int fid = Integer.valueOf(formChoiceBox.getValue().toString().trim());
         String type;
         WineApplicationData wine;
         BeerApplicationData beer;
+        if(event.getSource() == find) {
             type = databaseUtil.checkforType(fid);
             if (type.equals("WINE")) {
                 wine = databaseUtil.fillSubmittedWineForm(fid);
@@ -321,9 +328,13 @@ public class ReviseAppController {
                 Address1.setText(beer.getAddress());
                 MailingAddress1.setText(beer.getAddress());
             }
-
+        }
     }
 
+    /**
+     * Resubmits an application.
+     * @throws SQLException
+     */
     public void submitAgain()throws SQLException{
         int fid = Integer.valueOf(formChoiceBox.getValue().toString().trim());
         int ttbid = Integer.parseInt(ID1.getText());

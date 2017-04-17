@@ -18,8 +18,8 @@ import java.util.ArrayList;
 
 
 /**
- * Created by peternolan on 4/2/17.
- */
+* Controller for the Revisions Menu screen.
+ *  */
 //Change to a relevant path. Specify the name of the subfolder in the path and that will help to connect the db.
 //Go back to the notes from the JDBC slides. One uses a prepared statemnt and one does not
 //Figure out how the Data is set up.
@@ -34,7 +34,9 @@ import java.util.ArrayList;
 public class ReviseMenuController {
 
     private @FXML CheckBox rev1En, rev2En, rev3En, rev4En, rev5En, rev6En, rev7En,rev8En, rev9En, rev10En, rev11En, rev12En;
+
     private @FXML TextArea rev1Data, rev2Data, rev3Data, rev4Data, rev5Data, rev6Data, rev7Data, rev8Data, rev9Data,rev10Data, rev11Data, rev12Data;
+
     @FXML private Button back;
     @FXML private Button submit;
     @FXML private Button UploadImage;
@@ -54,6 +56,9 @@ public class ReviseMenuController {
     private ObservableList<Integer> formsObservableList;
 
     @FXML
+    /**
+     * Initializes the screen.
+     */
     public void initialize() throws SQLException{
         formsObservableList = FXCollections.observableArrayList();
         formsFound = databaseUtil.searchFormWithAid(databaseUtil.getAccountAid(accountsUtil.getUsername()));
@@ -63,22 +68,32 @@ public class ReviseMenuController {
         }
 
         applicationChoiceBox.setItems(formsObservableList);
+        applicationChoiceBox.getSelectionModel().selectFirst();
     }
 
 
     /**
-     * This is buttonClicked, the function that dictates events depending on which button has been clicked.
+     * Sends user back to the main menu.
      *
-     * @param event
+     * @param event Represents a press of the back button.
      */
     public void goBack(ActionEvent event){
         screenUtil.switchScene("MainMenu.fxml", "Main Menu");
 
     }
+
+    /**
+     * Uploads an image to the system.
+     * @param Event Upload Image button is pressed.
+     */
     public void uploadImage(ActionEvent Event){
         openFileChooser();
         UploadImageLabel.setText(revisionImagePath);
     }
+
+    /**
+     * Opens a file explorer to choose an image to upload.
+     */
     public void openFileChooser(){
         Stage ReviseMenu = new Stage();
         FileChooser fileChooser = new FileChooser();
@@ -86,6 +101,11 @@ public class ReviseMenuController {
         File selectedFile = fileChooser.showOpenDialog(ReviseMenu);
         revisionImagePath = selectedFile.getPath();
     }
+
+    /**
+     * Function that runs when the Submit button is clicked.
+     * Enters revisions to the database.
+     */
 
     public void submitButtonClicked() throws IOException, SQLException{
         int fid = Integer.valueOf(applicationChoiceBox.getValue().toString().trim());
@@ -202,8 +222,7 @@ public class ReviseMenuController {
         System.out.println(revisionImagePath);
         System.out.println(applicationChoiceBox.getValue().toString().trim());
         updateData(Integer.valueOf(applicationChoiceBox.getValue().toString().trim()));
-        */
-
+        screenUtil.switchScene("NewApp.fxml", "New Application");
 
 
     }
@@ -234,6 +253,10 @@ public class ReviseMenuController {
         */
     }
 
+    /**
+     * Updates data for a form in the database.
+     * @param FID ID of form to update.
+     */
     public void updateData(int FID) {
        /* Statement stmt = null;
         String query = "UPDATE ApplicationDB\n\r" +

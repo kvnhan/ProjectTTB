@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 import java.io.InputStream;
 
 /**
- * Created by Chris on 4/13/2017.
+ * Controller for the alcohol info page that appears when an alcohol is selected from a search.
  */
 public class AlcoholInfoController {
     DataPasser dataPass = new DataPasser();
