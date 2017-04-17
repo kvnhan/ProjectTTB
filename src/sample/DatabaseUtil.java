@@ -908,6 +908,22 @@ public class DatabaseUtil {
         return "OTHER";
     }
 
+    public String checkforSource(int fid) throws SQLException {
+        String type = "";
+        String sql = "SELECT * FROM APP.FORM WHERE FID = ?";
+        PreparedStatement sm;
+        sm = conn.prepareStatement(sql);
+        sm.setInt(1, fid);
+        rset = sm.executeQuery();
+        while (rset.next()) {
+            type = rset.getString("SOURCE");
+            if (type.equals("DOMESTIC")) {
+                return "DOMESTIC";
+            }
+        }
+        return "IMPORTED";
+    }
+
     public void resubmitWine(int fid, WineApplicationData a) throws SQLException{
 
         String status = "REVISED";

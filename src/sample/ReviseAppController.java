@@ -97,11 +97,20 @@ public class ReviseAppController {
             formChoiceBox.setValue(fid);
             formChoiceBox.setDisable(true);
             String type;
+            String source;
             WineApplicationData wine;
             BeerApplicationData beer;
             type = databaseUtil.checkforType(fid);
+            source = databaseUtil.checkforSource(fid);
             if (type.equals("WINE")) {
+                if(source.equals("DOMESTIC")){
+                    dom1111.setSelected(true);
+                }
+                if(source.equals("IMPORTED")){
+                    imp1.setSelected(true);
+                }
                 wine = databaseUtil.fillSubmittedWineForm(fid);
+                wine1.setSelected(true);
                 ID1.setText(Integer.toString(wine.getTtbid()));
                 RepID1.setText(Integer.toString(wine.getRepid()));
                 PlantReg1.setText(Integer.toString(wine.getPermit_no()));
@@ -135,6 +144,9 @@ public class ReviseAppController {
                     Content1.setEditable(false);
                 }
                 if(dataPasser.getDisableRestField() == 1){
+                    beer1.setDisable(true);
+                    wine1.setDisable(true);
+                    other1.setDisable(true);
                     ID1.setEditable(false);
                     RepID1.setEditable(false);
                     PlantReg1.setEditable(false);
@@ -148,9 +160,18 @@ public class ReviseAppController {
                     Address1.setEditable(false);
                     MailingAddress1.setEditable(false);
                     clearButton.setDisable(true);
+                    dom1111.setDisable(true);
+                    imp1.setDisable(true);
                 }
             } else if (type.equals("BEER")) {
+                if(source.equals("DOMESTIC")){
+                    dom1111.setSelected(true);
+                }
+                if(source.equals("IMPORTED")){
+                    imp1.setSelected(true);
+                }
                 beer = databaseUtil.fillSubmittedBeerForm(fid);
+                beer1.setSelected(true);
                 ID1.setText(Integer.toString(beer.getTtbid()));
                 RepID1.setText(Integer.toString(beer.getRepid()));
                 PlantReg1.setText(Integer.toString(beer.getPermit_no()));
@@ -163,12 +184,14 @@ public class ReviseAppController {
                 EmailAddress1.setText(beer.getEmail());
                 Address1.setText(beer.getAddress());
                 MailingAddress1.setText(beer.getAddress());
-
                 if(dataPasser.getDisableAlcoContentField() == 1){
                     Content1.setEditable(false);
                 }
 
                 if(dataPasser.getDisableRestField() == 1){
+                    beer1.setDisable(true);
+                    wine1.setDisable(true);
+                    other1.setDisable(true);
                     Vintage1.setEditable(false);
                     pH1.setEditable(false);
                     Appellation1.setEditable(false);
@@ -186,10 +209,19 @@ public class ReviseAppController {
                     Address1.setEditable(false);
                     MailingAddress1.setEditable(false);
                     clearButton.setDisable(true);
+                    dom1111.setDisable(true);
+                    imp1.setDisable(true);
                 }
 
             } else {
+                if(source.equals("DOMESTIC")){
+                    dom1111.setSelected(true);
+                }
+                if(source.equals("IMPORTED")){
+                    imp1.setSelected(true);
+                }
                 beer = databaseUtil.fillSubmittedBeerForm(fid);
+                other1.setSelected(true);
                 ID1.setText(Integer.toString(beer.getTtbid()));
                 RepID1.setText(Integer.toString(beer.getRepid()));
                 PlantReg1.setText(Integer.toString(beer.getPermit_no()));
@@ -208,6 +240,9 @@ public class ReviseAppController {
                     Content1.setEditable(false);
                 }
                 if(dataPasser.getDisableRestField() == 1){
+                    beer1.setDisable(true);
+                    wine1.setDisable(true);
+                    other1.setDisable(true);
                     ID1.setEditable(false);
                     RepID1.setEditable(false);
                     PlantReg1.setEditable(false);
@@ -225,6 +260,8 @@ public class ReviseAppController {
                     Appellation1.setEditable(false);
                     Varietal1.setEditable(false);
                     clearButton.setDisable(true);
+                    dom1111.setDisable(true);
+                    imp1.setDisable(true);
                 }
             }
         }
