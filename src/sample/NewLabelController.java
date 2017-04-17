@@ -332,10 +332,14 @@ public class NewLabelController{
                     fancyName, formula, grape_varietal, appellation, permit_no, infoOnBottle,
                     source_of_product, type_of_product, brand_name, phone_number, email, date, applicantName,
                     alcoholType, alcoholContent, vintage_date, ph_level);
-            if(valid && work.createConfirmBox("Confirm", "Would you like to submit the form?", "Form Submission Confirmation")){
-                submitWine(Data);
-                System.out.println("This somewhat works");
-                work.switchScene("NewApp.fxml", "New Application");
+            if(valid && work.createConfirmBox("Confirm", "Would you like to submit the form?")){
+                try{ submitWine(Data);
+                    System.out.println("It Works");
+                    work.switchScene("NewApp.fxml", "New Application");
+                }
+                catch(SQLException e){
+                    work.AlertBox("ERROR", "TTB-ID TAKEN");
+                }
             }
 
         } else if (beer.isSelected()) {
@@ -343,10 +347,14 @@ public class NewLabelController{
                     fancyName, formula, permit_no, infoOnBottle,
                     source_of_product, type_of_product, brand_name, phone_number, email, date, applicantName,
                     alcoholType, alcoholContent);
-            if(valid && work.createConfirmBox("Confirm", "Would you like to submit the form?", "Form Submission Confirmation")){
-                submitBeer(Data);
-                System.out.println("This works");
-                work.switchScene("NewApp.fxml", "New Application");
+            if(valid && work.createConfirmBox("Confirm", "Would you like to submit the form?")){
+                try{ submitBeer(Data);
+                    System.out.println("This works");
+                    work.switchScene("NewApp.fxml", "New Application");
+                }
+                catch(SQLException e){
+                    work.AlertBox("ERROR", "TTB-ID TAKEN");
+                }
             }
 
         } else if (other.isSelected()) {
@@ -354,10 +362,14 @@ public class NewLabelController{
                     fancyName, formula, permit_no, infoOnBottle,
                     source_of_product, type_of_product, brand_name, phone_number, email, date, applicantName,
                     alcoholType, alcoholContent);
-            if(valid && work.createConfirmBox("Confirm", "Would you like to submit the form?", "Form Submission Confirmation")){
-                submitDistilledSpirits(Data);
-                System.out.println("This works too");
-                work.switchScene("NewApp.fxml", "New Application");
+            if(valid && work.createConfirmBox("Confirm", "Would you like to submit the form?")){
+               try{ submitDistilledSpirits(Data);
+                   System.out.println("This works too");
+                   work.switchScene("NewApp.fxml", "New Application");
+               }
+               catch(SQLException e){
+                   work.AlertBox("ERROR", "TTB-ID TAKEN");
+               }
             }
         }
 

@@ -37,31 +37,32 @@ public class ScreenUtil {
 
     /**
      * Function to switch to a new screen.
+     *
      * @param fxmlName Name of screen to switch to.
-     * @param title Title of screen to switch to.
+     * @param title    Title of screen to switch to.
      */
-    public void switchScene(String fxmlName,String title){
+    public void switchScene(String fxmlName, String title) {
         fxmlLoader = new FXMLLoader(getClass().getResource(fxmlName));
 
-        try{
+        try {
             root1 = fxmlLoader.load();
             previousScene = mainWindow.getScene();
             mainWindow.setTitle(title);
             mainWindow.setScene(new Scene(root1));
             mainWindow.setResizable(false);
             mainWindow.show();
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     /**
      * Creates an alert box.
-     * @param title Title of alert box.
+     *
+     * @param title   Title of alert box.
      * @param message Message contained in the alert box.
      */
-    public void createAlertBox(String title, String message){
+    public void createAlertBox(String title, String message) {
         alertWindow = new Stage();
 
         alertWindow.initModality(Modality.APPLICATION_MODAL);
@@ -84,23 +85,39 @@ public class ScreenUtil {
 
     /**
      * Creates a confirmation message.
-     * @param title Title of the message.
-     * @param lowerMessage Content of the confirmation message.
-     * @param mainmessage Header of the confirmation message.
+     *
+     * @param Title        Title of the message.
+     * @param ContentText  Text of the confirmation message.
      * @return Returns true if successful.
      */
-    public boolean createConfirmBox(String title,String lowerMessage,String mainmessage){
+    public boolean createConfirmBox(String Title, String ContentText) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle(title);
-        alert.setHeaderText(mainmessage);
-        alert.setContentText(lowerMessage);
+        alert.setTitle(Title);
+        alert.setHeaderText(null);
+        alert.setContentText(ContentText);
 
         Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == ButtonType.OK){
+        if (result.get() == ButtonType.OK) {
             return true;
         } else {
             return false;
         }
+    }
+
+    /**
+     * Creates an Error message.
+     *
+     * @param Title        Title of the message.
+     * @param ContentText  Error Text.
+     */
+    public void AlertBox(String Title, String ContentText) {
+
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(Title);
+        alert.setHeaderText(null);
+        alert.setContentText(ContentText);
+
+        alert.showAndWait();
     }
 
     /**
