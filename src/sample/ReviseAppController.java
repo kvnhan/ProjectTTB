@@ -118,27 +118,23 @@ public class ReviseAppController {
             source = databaseUtil.checkforSource(fid);
 
             if(dataPasser.getDisableRestField() == 1){
-                state.setEditable(false);
-                amount.setEditable(false);
+                state.setDisable(true);
+                amount.setDisable(true);
                 beer1.setDisable(true);
                 wine1.setDisable(true);
                 other1.setDisable(true);
-                Vintage1.setEditable(false);
-                pH1.setEditable(false);
-                Appellation1.setEditable(false);
-                Varietal1.setEditable(false);
-                ID1.setEditable(false);
-                RepID1.setEditable(false);
-                PlantReg1.setEditable(false);
-                SerialNo1.setEditable(false);
-                ApplicantName1.setEditable(false);
-                BrandName1.setEditable(false);
-                Name1.setEditable(false);
-                Formula1.setEditable(false);
-                PhoneNumber1.setEditable(false);
-                EmailAddress1.setEditable(false);
-                Address1.setEditable(false);
-                MailingAddress1.setEditable(false);
+                ID1.setDisable(true);
+                RepID1.setDisable(true);
+                PlantReg1.setDisable(true);
+                SerialNo1.setDisable(true);
+                ApplicantName1.setDisable(true);
+                BrandName1.setDisable(true);
+                Name1.setDisable(true);
+                Formula1.setDisable(true);
+                PhoneNumber1.setDisable(true);
+                EmailAddress1.setDisable(true);
+                Address1.setDisable(true);
+                MailingAddress1.setDisable(true);
                 clearButton.setDisable(true);
                 dom1111.setDisable(true);
                 imp1.setDisable(true);
@@ -185,20 +181,22 @@ public class ReviseAppController {
                 MailingAddress1.setText(wine.getAddress());
 
                 if(dataPasser.getDisableVintageField() == 1){
-                    Vintage1.setEditable(false);
+                    Vintage1.setDisable(true);
                 }
                 if(dataPasser.getDisablepHField() == 1){
-                    pH1.setEditable(false);
+                    pH1.setDisable(true);
                 }
                 if(dataPasser.getDisableAppellationField() == 1){
-                    Appellation1.setEditable(false);
+                    Appellation1.setDisable(true);
                 }
                 if(dataPasser.getDisableVarietalField() == 1){
-                    Varietal1.setEditable(false);
+                    Varietal1.setDisable(true);
                 }
                 if(dataPasser.getDisableAlcoContentField() == 1){
-                    Content1.setEditable(false);
+                    Content1.setDisable(true);
                 }
+
+
             } else if (type.equals("BEER")) {
                 if(source.equals("DOMESTIC")){
                     dom1111.setSelected(true);
@@ -218,6 +216,12 @@ public class ReviseAppController {
                 if(type3 == 0){
                     dom1234.setSelected(true);
                     amount.setText(Integer.toString(beer.getType3()));
+                }
+                if(dataPasser.getDisableRestField() == 1){
+                    Vintage1.setDisable(true);
+                    pH1.setDisable(true);
+                    Appellation1.setDisable(true);
+                    Varietal1.setDisable(true);
                 }
                 beer1.setSelected(true);
                 ID1.setText(Integer.toString(beer.getTtbid()));
@@ -254,6 +258,12 @@ public class ReviseAppController {
                     dom1234.setSelected(true);
                     amount.setText(Integer.toString(beer.getType3()));
                 }
+                if(dataPasser.getDisableRestField() == 1){
+                    Vintage1.setDisable(true);
+                    pH1.setDisable(true);
+                    Appellation1.setDisable(true);
+                    Varietal1.setDisable(true);
+                }
 
                 other1.setSelected(true);
                 ID1.setText(Integer.toString(beer.getTtbid()));
@@ -269,9 +279,8 @@ public class ReviseAppController {
                 Address1.setText(beer.getAddress());
                 MailingAddress1.setText(beer.getAddress());
 
-
                 if(dataPasser.getDisableAlcoContentField() == 1){
-                    Content1.setEditable(false);
+                    Content1.setDisable(true);
                 }
             }
         }
@@ -343,8 +352,14 @@ public class ReviseAppController {
         WineApplicationData wine;
         BeerApplicationData beer;
         String type;
+        int type1;
+        int type2;
+        int type3;
         String source;
         type = databaseUtil.checkforType(fid);
+        type1 = databaseUtil.checkforType1(fid);
+        type2 = databaseUtil.checkforType2(fid);
+        type3 = databaseUtil.checkforType3(fid);
         source = databaseUtil.checkforSource(fid);
         if(source.equals("DOMESTIC")){
             dom1111.setSelected(true);
@@ -355,6 +370,17 @@ public class ReviseAppController {
         if(event.getSource() == find) {
             if (type.equals("WINE")) {
                 wine = databaseUtil.fillSubmittedWineForm(fid);
+                if(type1 == 0){
+                    dom12.setSelected(true);
+                }
+                if(type2 == 0){
+                    dom123.setSelected(true);
+                    state.setText(wine.getType2());
+                }
+                if(type3 == 0){
+                    dom1234.setSelected(true);
+                    amount.setText(Integer.toString(wine.getType3()));
+                }
                 wine1.setSelected(true);
                 ID1.setText(Integer.toString(wine.getTtbid()));
                 RepID1.setText(Integer.toString(wine.getRepid()));
@@ -374,6 +400,17 @@ public class ReviseAppController {
                 MailingAddress1.setText(wine.getAddress());
             } else if (type.equals("BEER")) {
                 beer = databaseUtil.fillSubmittedBeerForm(fid);
+                if(type1 == 0){
+                    dom12.setSelected(true);
+                }
+                if(type2 == 0){
+                    dom123.setSelected(true);
+                    state.setText(beer.getType2());
+                }
+                if(type3 == 0){
+                    dom1234.setSelected(true);
+                    amount.setText(Integer.toString(beer.getType3()));
+                }
                 beer1.setSelected(true);
                 ID1.setText(Integer.toString(beer.getTtbid()));
                 RepID1.setText(Integer.toString(beer.getRepid()));
@@ -389,6 +426,17 @@ public class ReviseAppController {
                 MailingAddress1.setText(beer.getAddress());
             } else {
                 beer = databaseUtil.fillSubmittedBeerForm(fid);
+                if(type1 == 0){
+                    dom12.setSelected(true);
+                }
+                if(type2 == 0){
+                    dom123.setSelected(true);
+                    state.setText(beer.getType2());
+                }
+                if(type3 == 0){
+                    dom1234.setSelected(true);
+                    amount.setText(Integer.toString(beer.getType3()));
+                }
                 other1.setSelected(true);
                 ID1.setText(Integer.toString(beer.getTtbid()));
                 RepID1.setText(Integer.toString(beer.getRepid()));
