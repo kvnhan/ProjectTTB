@@ -24,6 +24,7 @@ public class SearchMenuController {
     private @FXML TableColumn idColumn, nameColumn, brandNameColumn, alcoholTypeColumn, locationColumn;
     private @FXML TableView table;
     private @FXML RadioButton normalSearch, intersectSearch, unionSearch;
+    private @FXML Button helpSearchButton;
 
     private ScreenUtil screenUtil = new ScreenUtil();
     private int alcoholChoice = 0;
@@ -279,5 +280,10 @@ public class SearchMenuController {
 
         }
     }
+
+    public void buttonClicked (){
+            screenUtil.switchScene("SearchHelp.fxml","Help");
+    }
+
 }
 

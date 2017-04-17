@@ -5,7 +5,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
-
+import javafx.scene.image.ImageView;
+import java.io.InputStream;
 import java.sql.SQLException;
 
 /**
@@ -13,8 +14,10 @@ import java.sql.SQLException;
  */
 public class MainMenuController{
 
-    @FXML private Button openSearchButton, openInboxButton, createNewApplicationButton, logOutButton;
+    @FXML private Button openSearchButton, openInboxButton, createNewApplicationButton, logOutButton, aboutButton;
     @FXML private Text userIDText;
+    @FXML private ImageView colaImage;
+    @FXML private ImageView symbolImage;
 
     ScreenUtil work = new ScreenUtil();
     DatabaseUtil databaseUtil = new DatabaseUtil();
@@ -22,9 +25,6 @@ public class MainMenuController{
     private String username;
 
     @FXML
-    /**
-     * Initializes the main menu.
-     */
     public void initialize() throws SQLException{
 
         username = accountsUtil.getUsername();
@@ -42,6 +42,29 @@ public class MainMenuController{
         }else if(databaseUtil.searchAccountWithUsername(username).get(0).getUserType() == 1){
             createNewApplicationButton.setDisable(true);
         }
+
+
+
+        try {
+            InputStream resource = ScreenUtil.class.getClassLoader().getResourceAsStream("resources/COLARegistry.png");
+            colaImage.setImage(new javafx.scene.image.Image(resource, 500.0, 0.0, true, true));
+        }
+        catch(NullPointerException nullPoint){
+            InputStream resource = ScreenUtil.class.getClassLoader().getResourceAsStream("labels/imageUnavailable.jpg");
+            colaImage.setImage(new javafx.scene.image.Image(resource, 100.0, 0.0, true, true));
+            System.out.println("Image Was Not Found");
+        }
+
+        try {
+            InputStream resource = ScreenUtil.class.getClassLoader().getResourceAsStream("resources/Symbol.png");
+            symbolImage.setImage(new javafx.scene.image.Image(resource, 500.0, 0.0, true, true));
+        }
+        catch(NullPointerException nullPoint){
+            InputStream resource = ScreenUtil.class.getClassLoader().getResourceAsStream("labels/imageUnavailable.jpg");
+            symbolImage.setImage(new javafx.scene.image.Image(resource, 100.0, 0.0, true, true));
+            System.out.println("Image Was Not Found");
+        }
+
 
 
     }
@@ -65,8 +88,13 @@ public class MainMenuController{
         }else if(event.getSource() == logOutButton){
             work.switchScene("Login.fxml","Login");
 
-        }else{
+        } else if (event.getSource() == aboutButton){
+            work.switchScene("About.fxml","About");
+        } else{
             work.switchScene("ErrorState.fxml","Error");
         }
     }
+
+
+
 }

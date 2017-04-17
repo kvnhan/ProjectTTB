@@ -84,9 +84,7 @@ public class LoginController {
      * @param event ActionEvent object representing the button click.
      */
     public void openCreateAccount(ActionEvent event) {
-
         screenUtil.switchScene("NewAccount.fxml", "New Account");
-
     }
 
     /**

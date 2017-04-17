@@ -20,7 +20,7 @@ import java.util.Scanner;
  */
 public class ApplicationReviewController extends DatabaseUtil{
     @FXML
-    private Button approve, reject, goBack;
+    private Button approve, reject, goBack, ReviewHelpButton;
     @FXML
     private TextField repID, registryNo, prodSource, prodType, address,  phoneNo, email, dateApp, nameApp;
     @FXML private  TextArea commentsField;
@@ -33,10 +33,9 @@ public class ApplicationReviewController extends DatabaseUtil{
     int numberOfApps;
     private ApplicationData thisForm;
 
+
+    //for when switching to this scene from inbox
     @FXML
-    /**
-     * Initializes the ApplicationReview Screen.
-     */
     public void initialize() throws SQLException{
         List<ApplicationData> listForms = dbUtil.searchFormWithGovId(dbUtil.getAccountAid(username));
         numberOfApps = listForms.size();
@@ -110,9 +109,6 @@ public class ApplicationReviewController extends DatabaseUtil{
         nextApplication();
     }
 
-    /**
-     * Brings a worker to the next application in their inbox.
-     */
     public void nextApplication(){
 
         if(numberOfApps <= 1){
@@ -120,6 +116,11 @@ public class ApplicationReviewController extends DatabaseUtil{
         }else{
            screenUtil.switchScene("ApplicationReview.fxml","Application Review");
         }
+    }
+
+
+    public void helpClick () {
+            screenUtil.switchScene("ReviewHelp.fxml","Help");
     }
 
     /**
