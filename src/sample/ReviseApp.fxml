@@ -19,7 +19,8 @@
             </font>
         </Label>
         <Button fx:id="Submit" layoutX="900.0" layoutY="750.0" mnemonicParsing="false" onAction="#submitAgain" prefHeight="41.0" prefWidth="85.0" text="Submit" />
-        <Button layoutX="800.0" layoutY="750.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="85.0" text="Clear" />
+        <Button fx:id="clearButton" layoutX="800.0" layoutY="750.0" mnemonicParsing="false" onAction="#setClear" prefHeight="41.0" prefWidth="85.0" text="Clear" />
+        <Button fx:id="ChooseFile1" layoutX="226.0" layoutY="714.0" mnemonicParsing="false" onAction="#uploadImage" prefHeight="25.0" prefWidth="100.0" text="Choose File:" />
         <Label layoutX="15.0" layoutY="70.0" text="TTB ID:">
             <font>
                 <Font name="Constantia" size="24.0" />
@@ -145,22 +146,22 @@
                 <Font name="Constantia" size="24.0" />
             </font>
         </Label>
-        <CheckBox fx:id="dom1" layoutX="15.0" layoutY="200.0" mnemonicParsing="false" onAction="#handledomBox" text="Certificate of Label Approval.">
+        <CheckBox fx:id="dom12" layoutX="15.0" layoutY="200.0" mnemonicParsing="false" text="Certificate of Label Approval.">
             <font>
                 <Font name="Constantia" size="16.0" />
             </font>
         </CheckBox>
-        <CheckBox fx:id="dom11" layoutX="15.0" layoutY="225.0" mnemonicParsing="false" onAction="#handledomBox" text="Certificate of Exemption from Label Approval.">
+        <CheckBox fx:id="dom123" layoutX="15.0" layoutY="225.0" mnemonicParsing="false" text="Certificate of Exemption from Label Approval.">
             <font>
                 <Font name="Constantia" size="16.0" />
             </font>
         </CheckBox>
-        <CheckBox fx:id="dom111" layoutX="15.0" layoutY="250.0" mnemonicParsing="false" onAction="#handledomBox" text="Distinctive Liquor Bottle Approval Total Bottle Capacity Before Closure">
+        <CheckBox fx:id="dom1234" layoutX="15.0" layoutY="250.0" mnemonicParsing="false" text="Distinctive Liquor Bottle Approval Total Bottle Capacity Before Closure">
             <font>
                 <Font name="Constantia" size="16.0" />
             </font>
         </CheckBox>
-        <TextField layoutX="468.0" layoutY="225.0" prefHeight="25.0" prefWidth="35.0" promptText="ST" />
+        <TextField fx:id="state" layoutX="468.0" layoutY="225.0" prefHeight="25.0" prefWidth="35.0" promptText="ST" />
         <Label layoutX="390.0" layoutY="228.0" text="For Sale in">
             <font>
                 <Font name="Constantia" size="16.0" />
@@ -176,7 +177,7 @@
                 <Font name="Constantia" size="16.0" />
             </font>
         </Label>
-        <TextField layoutX="547.0" layoutY="249.0" prefHeight="25.0" prefWidth="100.0" />
+        <TextField fx:id="amount" layoutX="547.0" layoutY="249.0" prefHeight="25.0" prefWidth="100.0" />
         <Label layoutX="557.0" layoutY="228.0" text="(Fill in State abbreviation)">
             <font>
                 <Font name="Constantia" size="16.0" />
@@ -235,13 +236,13 @@
                 </AnchorPane>
             </content>
         </TitledPane>
-        <TextArea layoutX="14.0" layoutY="629.0" prefHeight="110.0" prefWidth="970.0" />
+        <TextArea layoutX="14.0" layoutY="629.0" prefHeight="75.0" prefWidth="970.0" />
         <Label layoutX="500.0" layoutY="445.0" text="Alcohol Content:">
             <font>
                 <Font name="Constantia" size="24.0" />
             </font>
         </Label>
-        <TextField fx:id="Content" layoutX="700.0" layoutY="445.0" prefWidth="250.0" promptText="\% of alcohol in drink">
+        <TextField fx:id="Content1" layoutX="700.0" layoutY="445.0" prefWidth="250.0" promptText="\% of alcohol in drink">
             <font>
                 <Font name="Constantia" size="14.0" />
             </font>
@@ -256,6 +257,12 @@
                 <Font name="Constantia" size="14.0" />
             </font>
         </TextField>
+        <Label layoutX="25.0" layoutY="714.0" prefWidth="249.0" text="Select Picture File:">
+            <font>
+                <Font name="Constantia" size="24.0" />
+            </font>
+        </Label>
+        <TextField fx:id="myFilePath1" editable="false" layoutX="334.0" layoutY="714.0" prefHeight="31.0" prefWidth="463.0" promptText="JoseWong.jpg" />
         <Button fx:id="find" layoutX="283.0" layoutY="17.0" mnemonicParsing="false" onAction="#autoFillSelectedForm" text="Find Form" />
       <ChoiceBox fx:id="formChoiceBox" layoutX="115.0" layoutY="17.0" prefWidth="150.0" />
     </children>

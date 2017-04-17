@@ -5,11 +5,14 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.*;
+import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -41,11 +44,12 @@ public class ReviseMenuController {
     @FXML private ChoiceBox applicationChoiceBox;
 
     private String revisionData = "";
-
+    private DataPasser dataPasser = new DataPasser();
     private DatabaseUtil databaseUtil = new DatabaseUtil();
     private AccountsUtil accountsUtil = new AccountsUtil();
     private ScreenUtil screenUtil = new ScreenUtil();
     private String revisionImagePath = "";
+    SubmissionForm submissionForm;
 
 
     private ArrayList<ApplicationData> formsFound = new ArrayList<>();
@@ -67,6 +71,7 @@ public class ReviseMenuController {
         applicationChoiceBox.getSelectionModel().selectFirst();
     }
 
+
     /**
      * Sends user back to the main menu.
      *
@@ -76,6 +81,7 @@ public class ReviseMenuController {
         screenUtil.switchScene("MainMenu.fxml", "Main Menu");
 
     }
+
 
     /**
      * Uploads an image to the system.
@@ -100,9 +106,57 @@ public class ReviseMenuController {
     /**
      * Function that runs when the Submit button is clicked.
      * Enters revisions to the database.
-     * @param event Submit button is pressed.
      */
-    public void submitButtonClicked(ActionEvent event) {
+
+    public void submitButtonClicked() throws IOException, SQLException{
+        int fid = Integer.valueOf(applicationChoiceBox.getValue().toString().trim());
+        dataPasser.setFormID(fid);
+        dataPasser.setIsInvokebyReviseMenu(1);
+        if(!rev1En.isSelected()){
+            dataPasser.setDisableVintageField(1);
+        }
+        if(!rev2En.isSelected()){
+            dataPasser.setDisablepHField(1);
+        }
+        if(!rev3En.isSelected()){
+            dataPasser.setDisableAlcoContentField(1);
+        }
+        if(!rev4En.isSelected()){
+            dataPasser.setDisableAlcoContentField(1);
+        }
+        if(!rev8En.isSelected()){
+            dataPasser.setDisableAppellationField(1);
+            dataPasser.setDisableVarietalField(1);
+        }
+        dataPasser.setDisableRestField(1);
+        /*
+        if(!rev5En.isSelected()){
+            dataPasser.setDisableImageField(1);
+            dataPasser.setDisableImageField(1);
+        }
+        if(!rev6En.isSelected()){
+
+        }
+        if(!rev7En.isSelected()){
+
+        }
+        if(!rev9En.isSelected()){
+
+        }
+        if(!rev10En.isSelected()){
+
+        }
+        if(!rev11En.isSelected()){
+
+        }
+        if(!rev12En.isSelected()){
+
+        }
+        */
+        screenUtil.switchScene("ReviseApp.fxml", "Revision Updates");
+        System.out.println(fid);
+
+        /*
         if (rev1En.isSelected()) {
             revisionData = rev1Data.getText() + "\n\r";
         } else {

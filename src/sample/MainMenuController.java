@@ -25,6 +25,9 @@ public class MainMenuController{
     private String username;
 
     @FXML
+    /**
+     * Initializes the main menu.
+     */
     public void initialize() throws SQLException{
 
         username = accountsUtil.getUsername();
