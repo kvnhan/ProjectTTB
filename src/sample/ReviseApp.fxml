@@ -19,7 +19,7 @@
             </font>
         </Label>
         <Button fx:id="Submit" layoutX="900.0" layoutY="750.0" mnemonicParsing="false" onAction="#submitAgain" prefHeight="41.0" prefWidth="85.0" text="Submit" />
-        <Button layoutX="800.0" layoutY="750.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="85.0" text="Clear" />
+        <Button fx:id="clearButton" layoutX="800.0" layoutY="750.0" mnemonicParsing="false" onAction="#setClear" prefHeight="41.0" prefWidth="85.0" text="Clear" />
         <Button fx:id="ChooseFile1" layoutX="226.0" layoutY="714.0" mnemonicParsing="false" onAction="#uploadImage" prefHeight="25.0" prefWidth="100.0" text="Choose File:" />
         <Label layoutX="15.0" layoutY="70.0" text="TTB ID:">
             <font>
@@ -242,7 +242,7 @@
                 <Font name="Constantia" size="24.0" />
             </font>
         </Label>
-        <TextField fx:id="Content" layoutX="700.0" layoutY="445.0" prefWidth="250.0" promptText="\% of alcohol in drink">
+        <TextField fx:id="Content1" layoutX="700.0" layoutY="445.0" prefWidth="250.0" promptText="\% of alcohol in drink">
             <font>
                 <Font name="Constantia" size="14.0" />
             </font>

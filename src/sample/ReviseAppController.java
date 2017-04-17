@@ -48,7 +48,9 @@ public class ReviseAppController {
     @FXML private TextField pH1;
     @FXML private TextField Address1;
     @FXML private TextField MailingAddress1;
+    @FXML private TextField Content1;
     @FXML private Button Submit;
+    @FXML private Button clearButton;
     @FXML private Button back;
     @FXML private Button find;
     @FXML private ChoiceBox formChoiceBox;
@@ -130,7 +132,7 @@ public class ReviseAppController {
                     Varietal1.setEditable(false);
                 }
                 if(dataPasser.getDisableAlcoContentField() == 1){
-
+                    Content1.setEditable(false);
                 }
                 if(dataPasser.getDisableRestField() == 1){
                     ID1.setEditable(false);
@@ -145,6 +147,7 @@ public class ReviseAppController {
                     EmailAddress1.setEditable(false);
                     Address1.setEditable(false);
                     MailingAddress1.setEditable(false);
+                    clearButton.setDisable(true);
                 }
             } else if (type.equals("BEER")) {
                 beer = databaseUtil.fillSubmittedBeerForm(fid);
@@ -161,11 +164,15 @@ public class ReviseAppController {
                 Address1.setText(beer.getAddress());
                 MailingAddress1.setText(beer.getAddress());
 
-                Vintage1.setEditable(false);
-                pH1.setEditable(false);
-                Appellation1.setEditable(false);
-                Varietal1.setEditable(false);
+                if(dataPasser.getDisableAlcoContentField() == 1){
+                    Content1.setEditable(false);
+                }
+
                 if(dataPasser.getDisableRestField() == 1){
+                    Vintage1.setEditable(false);
+                    pH1.setEditable(false);
+                    Appellation1.setEditable(false);
+                    Varietal1.setEditable(false);
                     ID1.setEditable(false);
                     RepID1.setEditable(false);
                     PlantReg1.setEditable(false);
@@ -178,6 +185,7 @@ public class ReviseAppController {
                     EmailAddress1.setEditable(false);
                     Address1.setEditable(false);
                     MailingAddress1.setEditable(false);
+                    clearButton.setDisable(true);
                 }
 
             } else {
@@ -195,12 +203,9 @@ public class ReviseAppController {
                 Address1.setText(beer.getAddress());
                 MailingAddress1.setText(beer.getAddress());
 
-                Vintage1.setEditable(false);
-                pH1.setEditable(false);
-                Appellation1.setEditable(false);
-                Varietal1.setEditable(false);
-                if(dataPasser.getDisableAlcoContentField() == 1){
 
+                if(dataPasser.getDisableAlcoContentField() == 1){
+                    Content1.setEditable(false);
                 }
                 if(dataPasser.getDisableRestField() == 1){
                     ID1.setEditable(false);
@@ -215,6 +220,11 @@ public class ReviseAppController {
                     EmailAddress1.setEditable(false);
                     Address1.setEditable(false);
                     MailingAddress1.setEditable(false);
+                    Vintage1.setEditable(false);
+                    pH1.setEditable(false);
+                    Appellation1.setEditable(false);
+                    Varietal1.setEditable(false);
+                    clearButton.setDisable(true);
                 }
             }
         }
@@ -404,6 +414,16 @@ public class ReviseAppController {
         openFileChooser();
         myFilePath1.setText(revisionImagePath);
     }
+
+    @FXML
+    /**
+     * Clears information from the screen.
+     */
+    private void setClear(){
+        ScreenUtil work = new ScreenUtil();
+        work.switchScene("ReviseApp.fxml", "Revise Application");
+    }
+
 
     /**
      * Opens a file explorer to choose an image to upload.
