@@ -221,7 +221,8 @@ public class SearchMenuController {
             alcoholDataList = dbUtil.searchAlcoholWithType(alcoholChoice);
         }
         else {
-            alcoholDataList = dbUtil.searchAlcoholBrand(brandName);
+           // alcoholDataList = dbUtil.searchAlcoholBrand(brandName);
+            alcoholDataList = dbUtil.searchAllFields(brandName);
         }
     }
     private static final String TAB_DELIMITER = "   ";

@@ -24,7 +24,7 @@ import java.util.Date;
 import javafx.scene.control.TextField;
 import java.util.Random;
 /**
- * Created by Sam Winter on 3/28/2017.
+ * Controller for new label screen.
  */
 public class NewLabelController{
 
@@ -55,6 +55,7 @@ public class NewLabelController{
     @FXML private TextField pH;
     @FXML private TextField Address;
     @FXML private TextField MailingAddress;
+    @FXML private TextField Content;
     @FXML private Button Submit;
     @FXML private Button back;
     @FXML private Button clear;
@@ -62,6 +63,9 @@ public class NewLabelController{
     Statement sm;
 
     @FXML
+    /**
+     * Clears information from the screen.
+     */
     private void setClear(){
         ScreenUtil work = new ScreenUtil();
         work.switchScene("NewLabel.fxml", "New Label");
@@ -108,6 +112,10 @@ public class NewLabelController{
         work.switchScene("MainMenu.fxml","Main Menu");
     }
 
+    /**
+     * Fills out an application in the database.
+     * @throws SQLException
+     */
     public void fillOutApplication() throws SQLException{
 
         boolean valid = true;
@@ -219,6 +227,12 @@ public class NewLabelController{
             valid = false;
         }
 
+        if(!Content.getText().trim().isEmpty()){
+            alcoholContent = Content.getText();
+        }else{
+            work.createAlertBox("ERROR", "Alcohol Content is empty");
+            valid = false;
+        }
         if(!SerialNo.getText().trim().isEmpty()){
             serial = (SerialNo.getText());
         }else{
@@ -325,10 +339,14 @@ public class NewLabelController{
                     fancyName, formula, grape_varietal, appellation, permit_no, infoOnBottle,
                     source_of_product, type_of_product, brand_name, phone_number, email, date, applicantName,
                     alcoholType, alcoholContent, vintage_date, ph_level);
-            if(valid && work.createConfirmBox("Confirm", "Would you like to submit the form?", "Form Submission Confirmation")){
-                submitWine(Data);
-                System.out.println("This somewhat works");
-                work.switchScene("NewApp.fxml", "New Application");
+            if(valid && work.createConfirmBox("Confirm", "Would you like to submit the form?")){
+                try{ submitWine(Data);
+                    System.out.println("It Works");
+                    work.switchScene("NewApp.fxml", "New Application");
+                }
+                catch(SQLException e){
+                    work.AlertBox("ERROR", "TTB-ID TAKEN");
+                }
             }
 
         } else if (beer.isSelected()) {
@@ -336,10 +354,14 @@ public class NewLabelController{
                     fancyName, formula, permit_no, infoOnBottle,
                     source_of_product, type_of_product, brand_name, phone_number, email, date, applicantName,
                     alcoholType, alcoholContent);
-            if(valid && work.createConfirmBox("Confirm", "Would you like to submit the form?", "Form Submission Confirmation")){
-                submitBeer(Data);
-                System.out.println("This works");
-                work.switchScene("NewApp.fxml", "New Application");
+            if(valid && work.createConfirmBox("Confirm", "Would you like to submit the form?")){
+                try{ submitBeer(Data);
+                    System.out.println("This works");
+                    work.switchScene("NewApp.fxml", "New Application");
+                }
+                catch(SQLException e){
+                    work.AlertBox("ERROR", "TTB-ID TAKEN");
+                }
             }
 
         } else if (other.isSelected()) {
@@ -347,15 +369,24 @@ public class NewLabelController{
                     fancyName, formula, permit_no, infoOnBottle,
                     source_of_product, type_of_product, brand_name, phone_number, email, date, applicantName,
                     alcoholType, alcoholContent);
-            if(valid && work.createConfirmBox("Confirm", "Would you like to submit the form?", "Form Submission Confirmation")){
-                submitDistilledSpirits(Data);
-                System.out.println("This works too");
-                work.switchScene("NewApp.fxml", "New Application");
+            if(valid && work.createConfirmBox("Confirm", "Would you like to submit the form?")){
+               try{ submitDistilledSpirits(Data);
+                   System.out.println("This works too");
+                   work.switchScene("NewApp.fxml", "New Application");
+               }
+               catch(SQLException e){
+                   work.AlertBox("ERROR", "TTB-ID TAKEN");
+               }
             }
         }
 
     }
 
+    /**
+     * Submits a wine to the database.
+     * @param wd Instance of WineApplicationData.
+     * @throws SQLException
+     */
     public void submitWine(WineApplicationData wd)throws SQLException{
         int fid = wd.getFormID();
         int ttbid = wd.getTtbid();
@@ -390,6 +421,10 @@ public class NewLabelController{
 
     }
 
+    /**
+     * Chooses an image file for the label.
+     * @param event "Choose File" button pressed.
+     */
     public void chooseFile(ActionEvent event){
         File tempFile = work.openFileChooser();
         if (tempFile != null && tempFile.getPath() !=null) {
@@ -397,6 +432,11 @@ public class NewLabelController{
         }
     }
 
+    /**
+     * Submits a beer application to the database.
+     * @param bd Instance of BeerApplicationData.
+     * @throws SQLException
+     */
     public void submitBeer(BeerApplicationData bd) throws SQLException{
         int ttbid = bd.getTtbid();
         int repid = bd.getRepid();
@@ -451,6 +491,10 @@ public class NewLabelController{
         roundRobin();
     }
 
+    /**
+     * Assigns new applications to government workers.
+     * @throws SQLException
+     */
     public void roundRobin() throws  SQLException{
         System.out.println("Running roundrobin");
         ArrayList<ApplicationData> unAssignedForms = db.searchUnassignedForms();

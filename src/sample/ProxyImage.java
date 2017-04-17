@@ -1,7 +1,7 @@
 package sample;
 
 /**
- * Created by Adonay on 4/10/2017.
+ * Displays image proxys in the system.
  */
 public class ProxyImage implements  Image {
      private RealImage realImage = null;
@@ -13,6 +13,9 @@ public class ProxyImage implements  Image {
      }
 
      @Override
+     /**
+      * Displays an image in the system.
+      */
     public void display(){
          if(realImage == null){
              realImage = new RealImage(fileName);

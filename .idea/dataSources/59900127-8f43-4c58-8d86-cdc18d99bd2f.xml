@@ -10,9 +10,7 @@
     <schema id="4" parent="1" name="SQLJ"/>
     <schema id="5" parent="1" name="SYS"/>
     <schema id="6" parent="1" name="SYSCAT"/>
-    <schema id="7" parent="1" name="SYSCS_DIAG">
-      <Visible>1</Visible>
-    </schema>
+    <schema id="7" parent="1" name="SYSCS_DIAG"/>
     <schema id="8" parent="1" name="SYSCS_UTIL"/>
     <schema id="9" parent="1" name="SYSFUN"/>
     <schema id="10" parent="1" name="SYSIBM"/>

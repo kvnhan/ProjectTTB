@@ -1,7 +1,7 @@
 package sample;
 
 /**
- * Created by Sam Winter on 4/2/2017.
+ * Contains data relating to different alcohols.
  */
 public class AlcoholData{
 
@@ -22,6 +22,25 @@ public class AlcoholData{
     private String bottlersInfo;
     private String imageFileName;
 
+    /**
+     * Creates an AlcoholData object.
+     * @param aid Account ID linked to the object.
+     * @param name Fanciful name of the alcohol.
+     * @param brandName Brand name for the alcohol.
+     * @param appellation For wines, the area of origination for the alcohol.
+     * @param sulfiteDescription Description of the sulfite content of the alcohol.
+     * @param alchContent Proof of the alcohol.
+     * @param netContent Net alcohol content.
+     * @param healthWarning Text of the alcohol's label's health warning.
+     * @param productType Type of product.
+     * @param classType Type of class? not sure
+     * @param labelLegibility Metric for legibility of the label.
+     * @param labelSize Actual size of the label.
+     * @param formulas Formulas for the alcoholic beverage.
+     * @param alcoholType Type of alcohol.
+     * @param bottlersInfo General information about the bottler.
+     * @param imageFileName Name of the image file for the label.
+     */
     public AlcoholData(int aid, String name, String brandName, String appellation, String sulfiteDescription, double alchContent, double netContent, String healthWarning, int productType, int classType, String labelLegibility, int labelSize, String formulas, int alcoholType, String bottlersInfo, String imageFileName) {
         this.aid = aid;
         this.name = name;

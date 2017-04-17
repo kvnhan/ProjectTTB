@@ -28,7 +28,7 @@ public class AccountsUtil {
     }
 
     /**
-     *
+     * Saves a file to the system.
      */
     public void saveFile(){
 
@@ -48,7 +48,7 @@ public class AccountsUtil {
     }
 
     /**
-     * 
+     * Loads a file that the account owns from the system.
      */
     public void loadFile(){
 
@@ -71,16 +71,28 @@ public class AccountsUtil {
         return usernameMap.containsKey(username.toLowerCase());
     }
 
+    /**
+     * Puts a username into the system and adds it to an account.
+     * @param username Username to be added.
+     * @param account Account to be added.
+     */
     public void put(String username, Account account){
         usernameMap.put(username.toLowerCase(), account);
         saveFile();
     }
 
+    /**
+     * Clears data from the username map.
+     */
     public void clearData(){
         usernameMap.clear();
         saveFile();
     }
 
+    /**
+     * Logs an account out of the system.
+     * @param event Represents a press of the log out button.
+     */
     public void logOut(javafx.event.ActionEvent event){
         username = "";
         screenUtil.switchScene("Login.fxml", "Login");

@@ -25,7 +25,7 @@ import java.util.Optional;
 import static com.sun.org.apache.xalan.internal.utils.SecuritySupport.getResourceAsStream;
 
 /**
- * Created by Adonay on 4/3/2017.
+ * UI utility class.
  */
 public class ScreenUtil {
     private FXMLLoader fxmlLoader;
@@ -35,23 +35,34 @@ public class ScreenUtil {
     private Scene previousScene;
     private DataPasser dataPass;
 
-    public void switchScene(String fxmlName,String title){
+    /**
+     * Function to switch to a new screen.
+     *
+     * @param fxmlName Name of screen to switch to.
+     * @param title    Title of screen to switch to.
+     */
+    public void switchScene(String fxmlName, String title) {
         fxmlLoader = new FXMLLoader(getClass().getResource(fxmlName));
 
-        try{
+        try {
             root1 = fxmlLoader.load();
             previousScene = mainWindow.getScene();
             mainWindow.setTitle(title);
             mainWindow.setScene(new Scene(root1));
             mainWindow.setResizable(false);
             mainWindow.show();
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void createAlertBox(String title, String message){
+    /**
+     * Creates an alert box.
+     *
+     * @param title   Title of alert box.
+     * @param message Message contained in the alert box.
+     */
+    public void createAlertBox(String title, String message) {
         alertWindow = new Stage();
 
         alertWindow.initModality(Modality.APPLICATION_MODAL);
@@ -72,20 +83,47 @@ public class ScreenUtil {
         alertWindow.showAndWait();
     }
 
-    public boolean createConfirmBox(String title,String lowerMessage,String mainmessage){
+    /**
+     * Creates a confirmation message.
+     *
+     * @param Title        Title of the message.
+     * @param ContentText  Text of the confirmation message.
+     * @return Returns true if successful.
+     */
+    public boolean createConfirmBox(String Title, String ContentText) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle(title);
-        alert.setHeaderText(mainmessage);
-        alert.setContentText(lowerMessage);
+        alert.setTitle(Title);
+        alert.setHeaderText(null);
+        alert.setContentText(ContentText);
 
         Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == ButtonType.OK){
+        if (result.get() == ButtonType.OK) {
             return true;
         } else {
             return false;
         }
     }
 
+    /**
+     * Creates an Error message.
+     *
+     * @param Title        Title of the message.
+     * @param ContentText  Error Text.
+     */
+    public void AlertBox(String Title, String ContentText) {
+
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(Title);
+        alert.setHeaderText(null);
+        alert.setContentText(ContentText);
+
+        alert.showAndWait();
+    }
+
+    /**
+     * Gets the previously loaded screen.
+     * @return Returns the previously loaded screen.
+     */
     public Scene getPreviousScene() {
         return previousScene;
     }

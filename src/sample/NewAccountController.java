@@ -11,7 +11,7 @@ import javafx.scene.input.KeyEvent;
 import java.sql.*;
 
 /**
- * Created by Adonay on 3/27/2017.
+ * Controller for new account screen.
  */
 public class NewAccountController {
 
@@ -37,6 +37,9 @@ public class NewAccountController {
     private DatabaseUtil dbUtil = new DatabaseUtil();
 
     @FXML
+    /**
+     * Initializes the New Account screen.
+     */
     public void initialize(){
         newUsernameField.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
@@ -52,6 +55,10 @@ public class NewAccountController {
         work.switchScene("Login.fxml", "Login");
     }
 
+    /**
+     * Creates an account in the database.
+     * @param event The "Create Account" button is pressed.
+     */
     public void createAccount(ActionEvent event){
 
         try{

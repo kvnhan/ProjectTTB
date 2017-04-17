@@ -5,18 +5,21 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.*;
+import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 
 
 /**
- * Created by peternolan on 4/2/17.
- */
+* Controller for the Revisions Menu screen.
+ *  */
 //Change to a relevant path. Specify the name of the subfolder in the path and that will help to connect the db.
 //Go back to the notes from the JDBC slides. One uses a prepared statemnt and one does not
 //Figure out how the Data is set up.
@@ -41,17 +44,21 @@ public class ReviseMenuController {
     @FXML private ChoiceBox applicationChoiceBox;
 
     private String revisionData = "";
-
+    private DataPasser dataPasser = new DataPasser();
     private DatabaseUtil databaseUtil = new DatabaseUtil();
     private AccountsUtil accountsUtil = new AccountsUtil();
     private ScreenUtil screenUtil = new ScreenUtil();
     private String revisionImagePath = "";
+    SubmissionForm submissionForm;
 
 
     private ArrayList<ApplicationData> formsFound = new ArrayList<>();
     private ObservableList<Integer> formsObservableList;
 
     @FXML
+    /**
+     * Initializes the screen.
+     */
     public void initialize() throws SQLException{
         formsObservableList = FXCollections.observableArrayList();
         formsFound = databaseUtil.searchFormWithAid(databaseUtil.getAccountAid(accountsUtil.getUsername()));
@@ -64,19 +71,30 @@ public class ReviseMenuController {
         applicationChoiceBox.getSelectionModel().selectFirst();
     }
 
+
     /**
-     * This is buttonClicked, the function that dictates events depending on which button has been clicked.
+     * Sends user back to the main menu.
      *
-     * @param event
+     * @param event Represents a press of the back button.
      */
     public void goBack(ActionEvent event){
         screenUtil.switchScene("MainMenu.fxml", "Main Menu");
 
     }
+
+
+    /**
+     * Uploads an image to the system.
+     * @param Event Upload Image button is pressed.
+     */
     public void uploadImage(ActionEvent Event){
         openFileChooser();
         UploadImageLabel.setText(revisionImagePath);
     }
+
+    /**
+     * Opens a file explorer to choose an image to upload.
+     */
     public void openFileChooser(){
         Stage ReviseMenu = new Stage();
         FileChooser fileChooser = new FileChooser();
@@ -84,7 +102,61 @@ public class ReviseMenuController {
         File selectedFile = fileChooser.showOpenDialog(ReviseMenu);
         revisionImagePath = selectedFile.getPath();
     }
-    public void submitButtonClicked(ActionEvent event) {
+
+    /**
+     * Function that runs when the Submit button is clicked.
+     * Enters revisions to the database.
+     */
+
+    public void submitButtonClicked() throws IOException, SQLException{
+        int fid = Integer.valueOf(applicationChoiceBox.getValue().toString().trim());
+        dataPasser.setFormID(fid);
+        dataPasser.setIsInvokebyReviseMenu(1);
+        if(!rev1En.isSelected()){
+            dataPasser.setDisableVintageField(1);
+        }
+        if(!rev2En.isSelected()){
+            dataPasser.setDisablepHField(1);
+        }
+        if(!rev3En.isSelected()){
+            dataPasser.setDisableAlcoContentField(1);
+        }
+        if(!rev4En.isSelected()){
+            dataPasser.setDisableAlcoContentField(1);
+        }
+        if(!rev8En.isSelected()){
+            dataPasser.setDisableAppellationField(1);
+            dataPasser.setDisableVarietalField(1);
+        }
+        dataPasser.setDisableRestField(1);
+        /*
+        if(!rev5En.isSelected()){
+            dataPasser.setDisableImageField(1);
+            dataPasser.setDisableImageField(1);
+        }
+        if(!rev6En.isSelected()){
+
+        }
+        if(!rev7En.isSelected()){
+
+        }
+        if(!rev9En.isSelected()){
+
+        }
+        if(!rev10En.isSelected()){
+
+        }
+        if(!rev11En.isSelected()){
+
+        }
+        if(!rev12En.isSelected()){
+
+        }
+        */
+        screenUtil.switchScene("ReviseApp.fxml", "Revision Updates");
+        System.out.println(fid);
+
+        /*
         if (rev1En.isSelected()) {
             revisionData = rev1Data.getText() + "\n\r";
         } else {
@@ -182,6 +254,10 @@ public class ReviseMenuController {
         */
     }
 
+    /**
+     * Updates data for a form in the database.
+     * @param FID ID of form to update.
+     */
     public void updateData(int FID) {
        /* Statement stmt = null;
         String query = "UPDATE ApplicationDB\n\r" +

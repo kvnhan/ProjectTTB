@@ -33,9 +33,10 @@ public class ApplicationReviewController extends DatabaseUtil{
     int numberOfApps;
     private ApplicationData thisForm;
 
-
-    //for when switching to this scene from inbox
     @FXML
+    /**
+     * Initializes the ApplicationReview Screen.
+     */
     public void initialize() throws SQLException{
         List<ApplicationData> listForms = dbUtil.searchFormWithGovId(dbUtil.getAccountAid(username));
         numberOfApps = listForms.size();
@@ -109,6 +110,9 @@ public class ApplicationReviewController extends DatabaseUtil{
         nextApplication();
     }
 
+    /**
+     * Brings a worker to the next application in their inbox.
+     */
     public void nextApplication(){
 
         if(numberOfApps <= 1){
