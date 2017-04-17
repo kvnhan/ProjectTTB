@@ -24,6 +24,9 @@ public class ApplicationData extends SubmissionForm{
     public String applicantName;
     private String alcoholType;
     private String alcoholContent;
+    private int type1;
+    private String type2;
+    private int type3;
 
     /**
      * Creates an instance of Application Data.
@@ -51,7 +54,7 @@ public class ApplicationData extends SubmissionForm{
                            String formula, int permit_no,
                            String infoOnBottle, String source_of_product, String type_of_product,
                            String brand_name, String phone_number, String email, String date,
-                           String applicantName, String alcoholType, String alcoholContent) {
+                           String applicantName, String alcoholType, String alcoholContent, int type1, String type2, int type3) {
         super(formID, acceptanceInfo);
         this.ttbid = ttbid;
         this.repid = repid;
@@ -70,6 +73,9 @@ public class ApplicationData extends SubmissionForm{
         this.applicantName = applicantName;
         this.alcoholType = alcoholType;
         this.alcoholContent = alcoholContent;
+        this.type1 = type1;
+        this.type2 = type2;
+        this.type3 = type3;
     }
 
     public String getSource_of_product() {
@@ -92,6 +98,17 @@ public class ApplicationData extends SubmissionForm{
         return permit_no;
     }
 
+    public int getType1() {
+        return type1;
+    }
+
+    public String getType2() {
+        return type2;
+    }
+
+    public int getType3() {
+        return type3;
+    }
 
     public String getBrand_name() {
         return brand_name;

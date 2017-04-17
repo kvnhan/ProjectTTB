@@ -46,6 +46,9 @@ public class NewLabelController{
     @FXML private TextField Formula;
     @FXML private TextField PhoneNumber;
     @FXML private TextField EmailAddress;
+    @FXML private CheckBox dom1;
+    @FXML private CheckBox dom11;
+    @FXML private CheckBox dom111;
     @FXML private CheckBox dom;
     @FXML private CheckBox imp;
     @FXML private CheckBox wine;
@@ -56,6 +59,8 @@ public class NewLabelController{
     @FXML private TextField Address;
     @FXML private TextField MailingAddress;
     @FXML private TextField Content;
+    @FXML private TextField type2Box;
+    @FXML private TextField type3box;
     @FXML private Button Submit;
     @FXML private Button back;
     @FXML private Button clear;
@@ -139,10 +144,32 @@ public class NewLabelController{
         String applicantName = "";
         String alcoholType = "";
         String alcoholContent = "";
+        int type1 = -1;
+        String type2 = "";
+        int type3 = -1;
         int vintage_date = 0;
         double ph_level = 0;
         int max = 999999999;
 
+        if(!dom1.isSelected() && !dom11.isSelected() && !dom111.isSelected()){
+            valid = false;
+            work.createAlertBox("ERROR", "Please choose applicable box(es)");
+        }else{
+            if(dom1.isSelected()){
+                type1 = 1;
+            }
+            if(dom11.isSelected()){
+                type2  = type2Box.getText();
+            }
+            if(dom111.isSelected()){
+                try {
+                    type3 = Integer.parseInt(type3box.getText());
+                }catch (NumberFormatException e){
+                    work.createAlertBox("ERROR", "Invalid Input for Amount");
+                    valid = false;
+                }
+            }
+        }
 
         if(!ID.getText().trim().isEmpty()) {
             try {
@@ -338,7 +365,7 @@ public class NewLabelController{
             WineApplicationData Data = new WineApplicationData(fid, acceptanceInfo,ttbid, repid, serial,address,
                     fancyName, formula, grape_varietal, appellation, permit_no, infoOnBottle,
                     source_of_product, type_of_product, brand_name, phone_number, email, date, applicantName,
-                    alcoholType, alcoholContent, vintage_date, ph_level);
+                    alcoholType, alcoholContent, type1, type2, type3, vintage_date, ph_level);
             if(valid && work.createConfirmBox("Confirm", "Would you like to submit the form?")){
                 try{ submitWine(Data);
                     System.out.println("It Works");
@@ -353,7 +380,7 @@ public class NewLabelController{
             BeerApplicationData Data = new BeerApplicationData(fid, acceptanceInfo,ttbid, repid, serial,address,
                     fancyName, formula, permit_no, infoOnBottle,
                     source_of_product, type_of_product, brand_name, phone_number, email, date, applicantName,
-                    alcoholType, alcoholContent);
+                    alcoholType, alcoholContent, type1, type2, type3);
             if(valid && work.createConfirmBox("Confirm", "Would you like to submit the form?")){
                 try{ submitBeer(Data);
                     System.out.println("This works");
@@ -368,7 +395,7 @@ public class NewLabelController{
             BeerApplicationData Data = new BeerApplicationData(fid, acceptanceInfo,ttbid, repid, serial,address,
                     fancyName, formula, permit_no, infoOnBottle,
                     source_of_product, type_of_product, brand_name, phone_number, email, date, applicantName,
-                    alcoholType, alcoholContent);
+                    alcoholType, alcoholContent, type1, type2, type3);
             if(valid && work.createConfirmBox("Confirm", "Would you like to submit the form?")){
                try{ submitDistilledSpirits(Data);
                    System.out.println("This works too");
@@ -412,10 +439,13 @@ public class NewLabelController{
         int vintage_date = wd.getVintage_date();
         double ph_level = wd.getPh_level();
         String status = wd.getAcceptanceInfo().getStatus();
+        int type1 = wd.getType1();
+        String type2 = wd.getType2();
+        int type3 = wd.getType3();
 
         db.addWineForm(ttbid,repid, serial,address, fancyName, formula, grape_varietal, appellation, permit_no, infoOnBottle, source_of_product,
                 type_of_product, brand_name, phone_number, email, dateFormat, applicantName,alcoholType,
-                vintage_date, ph_level, alcoholContent, status);
+                vintage_date, ph_level, alcoholContent, status, type1, type2, type3);
 
         roundRobin();
 
@@ -457,9 +487,12 @@ public class NewLabelController{
         String alcoholType = bd.getAlcoholType();
         String alcoholContent = bd.getAlcoholContent();
         String status = bd.getAcceptanceInfo().getStatus();
+        int type1 = bd.getType1();
+        String type2 = bd.getType2();
+        int type3 = bd.getType3();
 
         db.addBeerForm(ttbid, repid, serial, address, fancyName, formula, permit_no, infoOnBottle, source_of_product, type_of_product, brand_name, phone_number, email,
-                dateFormat, applicantName, alcoholType, alcoholContent, status);
+                dateFormat, applicantName, alcoholType, alcoholContent, status, type1, type2, type3);
 
         roundRobin();
     }
@@ -484,9 +517,12 @@ public class NewLabelController{
         String alcoholType = bd.getAlcoholType();
         String alcoholContent = bd.getAlcoholContent();
         String status = bd.getAcceptanceInfo().getStatus();
+        int type1 = bd.getType1();
+        String type2 = bd.getType2();
+        int type3 = bd.getType3();
 
         db.addDistilledSpiritsForm(ttbid, repid, serial, address, fancyName, formula, permit_no, infoOnBottle, source_of_product, type_of_product, brand_name, phone_number, email,
-                dateFormat, applicantName, alcoholType, alcoholContent, status);
+                dateFormat, applicantName, alcoholType, alcoholContent, status, type1, type2, type3);
 
         roundRobin();
     }

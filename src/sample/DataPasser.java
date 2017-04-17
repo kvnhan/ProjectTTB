@@ -6,6 +6,7 @@ package sample;
 public class DataPasser {
 
     private static AlcoholData alcData;
+    private static int isRevised;
     private static int formID;
     private static int isInvokebyReviseMenu;
     private static int disableVintageField;
@@ -19,6 +20,14 @@ public class DataPasser {
 
     public static int getFormID() {
         return formID;
+    }
+
+    public int isIsRevised() {
+        return isRevised;
+    }
+
+    public void setIsRevised(int isRevised) {
+        this.isRevised = isRevised;
     }
 
     public int getDisableAlcoContentField() {
