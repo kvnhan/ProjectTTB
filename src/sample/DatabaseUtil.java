@@ -452,6 +452,17 @@ public class DatabaseUtil {
         return searchAlcoholTable(query);
     }
 
+    //TODO: make a new search function which takes a String (query) and int (column) so we only need 2 functions: search column, and search all
+
+    //TODO Make this search all fields
+    // Code used to search Alcohol table based on brand name. Uses partial search
+    public List<AlcoholData> searchAllFields(String brandName) throws SQLException{
+        String query = "SELECT * FROM ALCOHOL WHERE UPPER(ALCOHOL.BRAND_NAME) LIKE UPPER('"+brandName+"%')";
+
+        return searchAlcoholTable(query);
+    }
+
+
     private List<AlcoholData> searchAlcoholTable(String query) throws SQLException{
         List<AlcoholData> AlcoholDataList = new ArrayList<AlcoholData>();
         AlcoholData a;

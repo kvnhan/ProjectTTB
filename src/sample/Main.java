@@ -15,8 +15,6 @@ public class Main extends Application{
         screenUtil.switchScene("Login.fxml", "Login");
    }
 
-
-
     public static void main(String[] args) {
         launch(args);
     }
