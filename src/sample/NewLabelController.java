@@ -64,6 +64,7 @@ public class NewLabelController{
     @FXML private Button Submit;
     @FXML private Button back;
     @FXML private Button clear;
+    @FXML private Button helpNewButton;
     Connection cn;
     Statement sm;
 
@@ -544,6 +545,10 @@ public class NewLabelController{
             }
         }
 
+    }
+
+    public void buttonClicked (){
+            work.switchScene("NewHelp.fxml","Help");
     }
 
 

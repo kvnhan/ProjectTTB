@@ -20,7 +20,7 @@ import java.util.Scanner;
  */
 public class ApplicationReviewController extends DatabaseUtil{
     @FXML
-    private Button approve, reject, goBack;
+    private Button approve, reject, goBack, ReviewHelpButton;
     @FXML
     private TextField repID, registryNo, prodSource, prodType, address,  phoneNo, email, dateApp, nameApp;
     @FXML private  TextArea commentsField;
@@ -138,6 +138,11 @@ public class ApplicationReviewController extends DatabaseUtil{
         }else{
            screenUtil.switchScene("ApplicationReview.fxml","Application Review");
         }
+    }
+
+
+    public void helpClick () {
+            screenUtil.switchScene("ReviewHelp.fxml","Help");
     }
 
     /**

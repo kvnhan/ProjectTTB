@@ -262,5 +262,6 @@
          </font>
       </Label>
       <TextField fx:id="myFilePath" editable="false" layoutX="334.0" layoutY="714.0" prefHeight="31.0" prefWidth="463.0" promptText="JoseWong.jpg" />
+      <Button fx:id="helpNewButton" layoutX="937.0" layoutY="14.0" mnemonicParsing="false" onAction="#buttonClicked" text="Help" />
     </children>
 </Pane>

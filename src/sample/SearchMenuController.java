@@ -35,6 +35,7 @@ public class SearchMenuController {
     private @FXML TableColumn idColumn, nameColumn, brandNameColumn, alcoholTypeColumn, locationColumn;
     private @FXML TableView table;
     private @FXML RadioButton normalSearch, intersectSearch, unionSearch;
+    private @FXML Button helpSearchButton;
 
     private @FXML RadioButton csvDownload, tabDownload, customDownload;
     private @FXML TextField CustomDelimiter;// customDirectoryField;
@@ -450,5 +451,10 @@ public class SearchMenuController {
         }
 
     }
+
+    public void buttonClicked (){
+            screenUtil.switchScene("SearchHelp.fxml","Help");
+    }
+
 }
 
