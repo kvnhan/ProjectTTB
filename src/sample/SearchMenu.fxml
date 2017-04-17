@@ -15,15 +15,15 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.SearchMenuController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="552.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.SearchMenuController">
    <children>
-      <Label layoutX="14.0" layoutY="16.0" text="Alcohol Type:">
+      <Label layoutX="14.0" layoutY="14.0" text="Alcohol Type:">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <Button fx:id="Back" layoutX="9.0" layoutY="571.0" mnemonicParsing="false" onAction="#back" text="Back" />
-      <Button fx:id="Search" layoutX="701.0" layoutY="552.0" mnemonicParsing="false" onAction="#search" prefHeight="44.0" prefWidth="87.0" text="Search">
+      <Button fx:id="Back" layoutX="13.0" layoutY="497.0" mnemonicParsing="false" onAction="#back" text="Back" />
+      <Button fx:id="Search" layoutX="701.0" layoutY="478.0" mnemonicParsing="false" onAction="#search" text="Search">
          <font>
             <Font size="20.0" />
          </font>
@@ -33,7 +33,7 @@
             <Font size="16.0" />
          </font>
       </CheckBox>
-      <CheckBox fx:id="isBeerBox" layoutX="195.0" layoutY="16.0" mnemonicParsing="false" text="Beer">
+      <CheckBox fx:id="isBeerBox" layoutX="197.0" layoutY="16.0" mnemonicParsing="false" text="Beer">
          <font>
             <Font size="16.0" />
          </font>
@@ -43,8 +43,8 @@
             <Font size="16.0" />
          </font>
       </CheckBox>
-      <TextField fx:id="brandField" layoutX="565.0" layoutY="12.0" prefHeight="31.0" prefWidth="221.0" />
-      <TableView fx:id="table" editable="true" layoutX="12.0" layoutY="153.0" prefHeight="394.0" prefWidth="777.0">
+      <TextField fx:id="brandField" layoutX="565.0" layoutY="13.0" prefHeight="31.0" prefWidth="221.0" />
+      <TableView fx:id="table" editable="true" layoutX="12.0" layoutY="196.0" prefHeight="267.0" prefWidth="777.0">
          <columns>
             <TableColumn fx:id="idColumn" prefWidth="100.0" text="ID" />
             <TableColumn fx:id="nameColumn" prefWidth="200.0" text="Name" />
@@ -53,12 +53,25 @@
             <TableColumn fx:id="locationColumn" prefWidth="200.0" text="Location" />
          </columns>
       </TableView>
-      <Button fx:id="downloadButton" layoutX="510.0" layoutY="572.0" mnemonicParsing="false" onAction="#download" text="Download Results" />
-      <ChoiceBox layoutX="407.0" layoutY="16.0" prefWidth="150.0" />
-      <Button fx:id="displayAll" layoutX="175.0" layoutY="571.0" mnemonicParsing="false" onAction="#displayAll" text="Display Entire Database" />
-      <TitledPane expanded="false" layoutX="12.0" layoutY="48.0" prefHeight="102.0" prefWidth="777.0" text="Advanced Search">
-        <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="67.0" prefWidth="775.0">
+      <Button fx:id="downloadButton" layoutX="403.0" layoutY="513.0" mnemonicParsing="false" onMouseClicked="#download2" prefHeight="31.0" prefWidth="146.0" text="Download Results" />
+      <RadioButton fx:id="normalSearch" layoutX="557.0" layoutY="468.0" mnemonicParsing="false" selected="true" text="Clear and Search">
+         <toggleGroup>
+            <ToggleGroup fx:id="searchType" />
+         </toggleGroup>
+      </RadioButton>
+      <RadioButton fx:id="intersectSearch" layoutX="557.0" layoutY="493.0" mnemonicParsing="false" text="Search Within" toggleGroup="$searchType" />
+      <RadioButton fx:id="unionSearch" layoutX="557.0" layoutY="518.0" mnemonicParsing="false" text="Combine" toggleGroup="$searchType" />
+      <ChoiceBox layoutX="407.0" layoutY="13.0" prefWidth="150.0" />
+      <RadioButton fx:id="csvDownload" layoutX="71.0" layoutY="468.0" mnemonicParsing="false" selected="true" text="CSV">
+         <toggleGroup>
+            <ToggleGroup fx:id="download_type" />
+         </toggleGroup></RadioButton>
+      <RadioButton fx:id="tabDownload" layoutX="71.0" layoutY="493.0" mnemonicParsing="false" text="Tab-Delimited" toggleGroup="$download_type" />
+      <RadioButton fx:id="customDownload" layoutX="71.0" layoutY="518.0" mnemonicParsing="false" text="Custom Delimitor:" toggleGroup="$download_type" />
+      <TextField fx:id="CustomDelimiter" layoutX="227.0" layoutY="513.0" prefHeight="31.0" prefWidth="168.0" promptText="Insert Delimiter Here" />
+      <TitledPane expanded="false" layoutX="12.0" layoutY="50.0" prefHeight="140.0" prefWidth="777.0" text="Advanced Search">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="0.0" prefWidth="775.0">
                <children>
                   <DatePicker fx:id="startDate" layoutX="6.0" layoutY="36.0" prefHeight="31.0" prefWidth="134.0" />
                   <Label layoutX="15.0" layoutY="8.0" text="Submitted After:">
@@ -86,7 +99,8 @@
                   <RadioButton fx:id="unionSearch" layoutX="427.0" layoutY="54.0" mnemonicParsing="false" text="Add next search to the current search list" toggleGroup="$searchType" />
                </children>
             </AnchorPane>
-        </content>
+         </content>
       </TitledPane>
+
    </children>
 </Pane>
