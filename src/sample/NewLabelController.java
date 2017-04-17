@@ -55,6 +55,7 @@ public class NewLabelController{
     @FXML private TextField pH;
     @FXML private TextField Address;
     @FXML private TextField MailingAddress;
+    @FXML private TextField Content;
     @FXML private Button Submit;
     @FXML private Button back;
     @FXML private Button clear;
@@ -226,6 +227,12 @@ public class NewLabelController{
             valid = false;
         }
 
+        if(!Content.getText().trim().isEmpty()){
+            alcoholContent = Content.getText();
+        }else{
+            work.createAlertBox("ERROR", "Alcohol Content is empty");
+            valid = false;
+        }
         if(!SerialNo.getText().trim().isEmpty()){
             serial = (SerialNo.getText());
         }else{
