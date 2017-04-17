@@ -9,13 +9,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import javax.swing.event.ChangeListener;
+import java.io.File;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -26,6 +25,7 @@ public class ReviseAppController {
     ScreenUtil su = new ScreenUtil();
     DatabaseUtil du = new DatabaseUtil();
 
+    @FXML private TextField myFilePath1;
     @FXML private TextField form;
     @FXML private TextField ID1;
     @FXML private TextField RepID1;
@@ -52,6 +52,7 @@ public class ReviseAppController {
     @FXML private Button back;
     @FXML private Button find;
     @FXML private ChoiceBox formChoiceBox;
+    private String revisionImagePath = "";
     int fid;
 
     private ArrayList<ApplicationData> formsFound = new ArrayList<>();
@@ -393,6 +394,26 @@ public class ReviseAppController {
 
 
 
+    }
+
+    /**
+     * Uploads an image to the system.
+     * @param Event Upload Image button is pressed.
+     */
+    public void uploadImage(ActionEvent Event){
+        openFileChooser();
+        myFilePath1.setText(revisionImagePath);
+    }
+
+    /**
+     * Opens a file explorer to choose an image to upload.
+     */
+    public void openFileChooser(){
+        Stage ReviseMenu = new Stage();
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Choose label picture");
+        File selectedFile = fileChooser.showOpenDialog(ReviseMenu);
+        revisionImagePath = selectedFile.getPath();
     }
 
 
