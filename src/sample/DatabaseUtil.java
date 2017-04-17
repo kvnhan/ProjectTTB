@@ -451,6 +451,28 @@ public class DatabaseUtil {
 
         return searchAlcoholTable(query);
     }
+    public List<AlcoholData> searchAlcoholID(String number) throws SQLException{
+        int value = Integer.parseInt(number);
+        String query = "SELECT * FROM ALCOHOL WHERE UPPER(ALCOHOL.AID) LIKE UPPER('"+value+"%')";
+
+        return searchAlcoholTable(query);
+    }
+    public List<AlcoholData> searchAlcoholName(String name) throws SQLException{
+        String query = "SELECT * FROM ALCOHOL WHERE UPPER(ALCOHOL.NAME) LIKE UPPER('"+name+"%')";
+
+        return searchAlcoholTable(query);
+    }
+    public List<AlcoholData> searchAlcoholAppellation(String appellation) throws SQLException{
+        String query = "SELECT * FROM ALCOHOL WHERE UPPER(ALCOHOL.APPELLATION) LIKE UPPER('"+appellation+"%')";
+
+        return searchAlcoholTable(query);
+    }
+    public List<AlcoholData> searchAlcoholContent(String alcCont) throws SQLException{
+        double value = Double.parseDouble(alcCont);
+        String query = "SELECT * FROM ALCOHOL WHERE UPPER(ALCOHOL.ALC_CONTENT) LIKE UPPER('"+value+"%')";
+
+        return searchAlcoholTable(query);
+    }
 
     //TODO: make a new search function which takes a String (query) and int (column) so we only need 2 functions: search column, and search all
 
