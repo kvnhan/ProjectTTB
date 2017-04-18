@@ -462,9 +462,8 @@ public class DatabaseUtil {
 
         return searchAlcoholTable(query);
     }
-    public List<AlcoholData> searchAlcoholID(String number) throws SQLException{
-        int value = Integer.parseInt(number);
-        String query = "SELECT * FROM ALCOHOL WHERE ALCOHOL.AID = " + value;
+    public List<AlcoholData> searchAlcoholID(int number) throws SQLException{
+        String query = "SELECT * FROM ALCOHOL WHERE ALCOHOL.AID = " + number;
 
         return searchAlcoholTable(query);
     }
@@ -478,9 +477,8 @@ public class DatabaseUtil {
 
         return searchAlcoholTable(query);
     }
-    public List<AlcoholData> searchAlcoholContent(String alcCont) throws SQLException{
-        double value = Double.parseDouble(alcCont);
-        String query = "SELECT * FROM ALCOHOL WHERE ALCOHOL.ALC_CONTENT = " + value;
+    public List<AlcoholData> searchAlcoholContent(double alcCont) throws SQLException{
+        String query = "SELECT * FROM ALCOHOL WHERE ALCOHOL.ALC_CONTENT = " + alcCont;
 
         return searchAlcoholTable(query);
     }
@@ -785,7 +783,7 @@ public class DatabaseUtil {
         return a;
 
     }
-
+    /*
     public WineApplicationData fillSubmittedWineForm(int fid) throws SQLException{
 
         String sql = "SELECT * FROM APP.FORM WHERE FID = ?";
@@ -860,6 +858,7 @@ public class DatabaseUtil {
 
         return a;
     }
+    */
 
     public void reviseAlcohol(int fid) throws SQLException{}
 

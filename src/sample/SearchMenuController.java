@@ -139,7 +139,8 @@ public class SearchMenuController {
         List<AlcoholData> adl = new ArrayList<>();
         //fills a new list of alcohol data with elements that only match the search
         if (choiceSearch.equals("ID")) {
-            adl = dbUtil.searchAlcoholID(searchText);
+            int alcID = Integer.getInteger(searchText);
+            adl = dbUtil.searchAlcoholID(alcID);
         } else if (choiceSearch.equals("Name")) {
             adl = dbUtil.searchAlcoholName(searchText);
         } else if (choiceSearch.equals("Brand Name")) {
@@ -147,7 +148,8 @@ public class SearchMenuController {
         } else if (choiceSearch.equals("Location Name")) {
             adl = dbUtil.searchAlcoholAppellation(searchText);
         } else if (choiceSearch.equals("Alcohol Content")) {
-            adl = dbUtil.searchAlcoholContent(searchText);
+            double alcCont = Double.parseDouble(searchText);
+            adl = dbUtil.searchAlcoholContent(alcCont);
         } else {
             adl = dbUtil.searchAllFields(searchText);
         }
