@@ -856,7 +856,7 @@ public class DatabaseUtil {
         a = new WineApplicationData(fid, info,ttbid, repid, serial,address,
                 fancyName, formula, grape_varietal, appellation, permit_no, infoOnBottle,
                 source_of_product, type_of_product, brand_name, phone_number, email, date, applicantName,
-                alcoholType, alcoholContent, vintage_date, ph_level);
+                alcoholType, alcoholContent, type1, type2, type3, vintage_date, ph_level);
 
         return a;
     }

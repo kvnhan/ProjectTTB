@@ -31,7 +31,7 @@ public class SearchMenuController {
 
     private String searchText;
     private @FXML CheckBox isWineBox, isBeerBox, isOtherBox;
-    private @FXML TextField brandField;
+    private @FXML TextField searchTextField;
     private @FXML TableColumn idColumn, nameColumn, brandNameColumn, alcoholTypeColumn, locationColumn;
     private @FXML TableView table;
     private @FXML RadioButton normalSearch, intersectSearch, unionSearch;
@@ -108,14 +108,14 @@ public class SearchMenuController {
         else if (isWineBox.isSelected()){
             alcoholChoice = 2;
         }
-        else if (brandField.getText() == null || brandField.getText().trim().isEmpty()) {
+        else if (searchTextField.getText() == null || searchTextField.getText().trim().isEmpty()) {
             searchText = " ";
            // System.out.println("BRAND NAME EMPTY");
            // screenUtil.switchScene("ErrorState.fxml","Error");
            // System.out.println("CHOOSE ALCOHOL TYPE OR searchText");
         }
         else
-            searchText = brandField.getText();
+            searchText = searchTextField.getText();
         searchByChoice();
         boolean to_remove;
         for(int i=0; i < alcoholDataList.size(); i++) {
@@ -126,27 +126,27 @@ public class SearchMenuController {
                     break;
                 }
             }
-            if(to_remove==true) {
+            if(to_remove) {
                 alcoholDataList.remove(alcoholDataList.get(i));
                 i--;
             }
         }
     }
 
-//"All Fields", "ID", "Name", "Brand Name", "Location", "Alcohol Content"
+    //"All Fields", "ID", "Name", "Brand Name", "Location", "Alcohol Content"
     public void searchByChoice() throws SQLException {
         choiceSearch = choiceBox.getValue();
         List<AlcoholData> adl = new ArrayList<>();
         //fills a new list of alcohol data with elements that only match the search
-        if (choiceSearch == "ID") {
+        if (choiceSearch.equals("ID")) {
             adl = dbUtil.searchAlcoholID(searchText);
-        } else if (choiceSearch == "Name") {
+        } else if (choiceSearch.equals("Name")) {
             adl = dbUtil.searchAlcoholName(searchText);
-        } else if (choiceSearch == "Brand Name") {
+        } else if (choiceSearch.equals("Brand Name")) {
             adl = dbUtil.searchAlcoholBrand(searchText);
-        } else if (choiceSearch == "Location Name") {
+        } else if (choiceSearch.equals("Location Name")) {
             adl = dbUtil.searchAlcoholAppellation(searchText);
-        } else if (choiceSearch == "Alcohol Content") {
+        } else if (choiceSearch.equals("Alcohol Content")) {
             adl = dbUtil.searchAlcoholContent(searchText);
         } else {
             adl = dbUtil.searchAllFields(searchText);
@@ -160,11 +160,11 @@ public class SearchMenuController {
         else if (isWineBox.isSelected()){
             alcoholChoice = 2;
         }
-        else if (brandField.getText() == null || brandField.getText().trim().isEmpty()) {
+        else if (searchTextField.getText() == null || searchTextField.getText().trim().isEmpty()) {
             searchText = " ";
         }
         else {
-            searchText = brandField.getText();
+            searchText = searchTextField.getText();
         }
         //makes a list of all the elements that are beer or wine
         searchDatabase();
@@ -193,14 +193,14 @@ public class SearchMenuController {
         else if (isWineBox.isSelected()){
             alcoholChoice = 2;
         }
-        else if (brandField.getText() == null || brandField.getText().trim().isEmpty()) {
+        else if (searchTextField.getText() == null || searchTextField.getText().trim().isEmpty()) {
             searchText = " ";
             //System.out.println("BRAND NAME EMPTY");
            // screenUtil.switchScene("ErrorState.fxml","Error");
            // System.out.println("CHOOSE ALCOHOL TYPE OR BRANDNAME");
         }
         else
-            searchText = brandField.getText();
+            searchText = searchTextField.getText();
         searchByChoice();
         boolean to_add;
         int temp_int = alcoholDataListTemp.size();
@@ -214,10 +214,49 @@ public class SearchMenuController {
                     break;
                 }
             }
-            if(to_add==true) {
+            if(to_add){
                 alcoholDataList.add(alcoholDataListTemp.get(i));
             }
         }
+    }
+
+    public void searchAll(String searchText) throws SQLException{
+        List<AlcoholData> finalResultList = new ArrayList<AlcoholData>();
+
+        /*if(){
+            List<AlcoholData> alcoholTypeResults = dbUtil.searchAlcoholWithType(searchText);
+        }*/
+        List<AlcoholData> alcoholBrandResults = dbUtil.searchAlcoholBrand(searchText);
+        List<AlcoholData> alcoholIDResults = dbUtil.searchAlcoholID(searchText);
+        List<AlcoholData> alcoholNameResults = dbUtil.searchAlcoholName(searchText);
+        List<AlcoholData> alcoholAppelationResults = dbUtil.searchAlcoholAppellation(searchText) ;
+        List<AlcoholData> alcoholContentResults = dbUtil.searchAlcoholContent(searchText);
+
+    }
+
+    public List<AlcoholData> mergeAlcoholData(List<AlcoholData> listToAdd, List<AlcoholData> originalList){
+        boolean toAdd;
+
+        if(originalList.size() == 0){
+            return listToAdd;
+        }
+
+        for(int i=0; i < listToAdd.size(); i++) {
+            toAdd = true;
+
+            for(int j=0; j < originalList.size(); j++) {
+                if(originalList.get(j).getAid() == listToAdd.get(i).getAid()){
+                    toAdd = false;
+                    break;
+                }
+            }
+
+            if(toAdd) {
+                originalList.add(listToAdd.get(i));
+            }
+        }
+
+        return originalList;
     }
 
     /* we do not really need this anymore since we have search by choice
@@ -230,14 +269,14 @@ public class SearchMenuController {
         else if (isWineBox.isSelected()){
             alcoholChoice = 2;
         }
-        else if (brandField.getText() == null || brandField.getText().trim().isEmpty()) {
+        else if (searchTextField.getText() == null || searchTextField.getText().trim().isEmpty()) {
             brandName = " ";
         //    System.out.println("BRAND NAME EMPTY");
         //    screenUtil.switchScene("ErrorState.fxml","Error");
          //   System.out.println("CHOOSE ALCOHOL TYPE OR BRANDNAME");
         }
         else
-            brandName = brandField.getText();
+            brandName = searchTextField.getText();
         searchDatabase();
     }
     */
