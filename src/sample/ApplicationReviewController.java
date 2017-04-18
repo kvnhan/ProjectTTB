@@ -121,7 +121,27 @@ public class ApplicationReviewController extends DatabaseUtil{
         int FID = thisForm.getFormID();
         sql = "UPDATE FORM SET FORM.STATUS = 'REJECTED' WHERE FORM.FID = " + FID;
         stm.executeUpdate(sql);
+        stm = conn.createStatement();
+        String ReviewerUsername = AccountsUtil.getUsername();
+        int ReviewerID = getAccountAid(ReviewerUsername);
+        changeSatus("REJECTED", FID);
+        int Status = 0;
+        int Decider = ReviewerID;
+        String Date = thisForm.getDate();
+        String General = comments;
+        String OriginCode = thisForm.getSource_of_product();
+        String BrandName = thisForm.getBrand_name();
+        String FancifulName = thisForm.getFancyName();
+        String Grapevar = "";
+        String Winevintage = "";
+        String Appellation = "";
+        String Bottler = "";
+        String Formula = thisForm.getFormula();
+        String Sulfite = "";
+        String Legibility = "0";
+        String Descrip = thisForm.getInfoOnBottle();
 
+        sql = "INSERT INTO REVIEWS";
         stm.close();
         conn.close();
 
