@@ -78,6 +78,20 @@ public class ApplicationData extends SubmissionForm{
         this.type3 = type3;
     }
 
+    //#######################################GETTERS IN PROGRESS################################
+    public String getSulfite(){return "";}
+
+    public String getGrapevar(){return "";}
+
+    public String getVintage(){return "";}
+
+    public String getAppellation(){return "";}
+
+    public String getBottler(){return "";}
+
+    public String getHealthWarning(){return "";}
+    //##########################################################################################
+
     public String getSource_of_product() {
         return source_of_product;
     }

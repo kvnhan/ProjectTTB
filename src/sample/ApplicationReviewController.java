@@ -62,20 +62,20 @@ public class ApplicationReviewController extends DatabaseUtil{
     }
 
     @FXML
-    //TODO: Fix setApprove - needs correct query fields for sql
     /**
      * Sets an Application status to "APPROVED" and adds comments to the Application.
      */
-
     void setAccepted() throws SQLException{
-
         Statement stm;
         String sql;
         stm = conn.createStatement();
+
         String ReviewerUsername = AccountsUtil.getUsername();
         int ReviewerID = getAccountAid(ReviewerUsername);
+
         //get comments
         String comments = commentsField.getText();
+
         //update alcohol status
         int FID = thisForm.getFormID();
         changeSatus("ACCEPTED", FID);
@@ -86,24 +86,46 @@ public class ApplicationReviewController extends DatabaseUtil{
         String OriginCode = thisForm.getSource_of_product();
         String BrandName = thisForm.getBrand_name();
         String FancifulName = thisForm.getFancyName();
-        String Grapevar = "";
-        String Winevintage = "";
-        String Appellation = "";
-        String Bottler = "";
+        String Grapevar;
+        String Winevintage;
+        String Appellation;
+        if(thisForm.getAlcoholType() == "Wine") {
+            Grapevar = thisForm.getGrapevar();
+            Winevintage = thisForm.getVintage();
+            Appellation = thisForm.getAppellation();
+        }
+        else{
+            Grapevar = "This type of alcohol does not have a varietal.";
+            Winevintage = "This type of alcohol does not have a vintage.";
+            Appellation = "This type of alcohol does not have an appellation.";
+        }
+        String Bottler = thisForm.getBottler();
         String Formula = thisForm.getFormula();
-        String Sulfite = "";
+        String Sulfite = thisForm.getSulfite();
         String Legibility = "0";
         String Descrip = thisForm.getInfoOnBottle();
 
-        sql = "INSERT INTO REVIEWS ";
+        //add review
+        String values = Integer.toString(FID) + Integer.toString(Status) +
+                Integer.toString(Decider) + Date + General + OriginCode + BrandName + FancifulName
+                + Grapevar + Winevintage + Appellation + Bottler + Formula + Sulfite + Legibility
+                + Descrip;
+        String FIELDS = " (FID, STATUS, DECIDER, DATE, GENERAL, ORIGINCODE, BRANDNAME, FACIFULNAME, " +
+                "GRAPEVAR, WINEVINTAGE, APPELLATION, BOTTLER, FORMULA, SULFITE," +
+                " LEGIBILITY, LABELSIZE, DESCRIP)";
+        sql = "INSERT INTO " + "REVIEWS" + FIELDS + " VALUES (" + Integer.toString(FID) +
+                ", " + values;
+        stm.executeUpdate(sql);
+
+        //add alcohol
+        ApplicationData appData = dbUtil.searchFormWithFid(FID).get(0);
+        dbUtil.addAlcohol(appData.getBrand_name(), Appellation, Sulfite, Double.parseDouble(thisForm.getAlcoholContent()),
+                0, thisForm.getHealthWarning(), Integer.parseInt(thisForm.getType_of_product()),
+                1, Legibility, 0,Formula,
+                1, Bottler, BrandName);
+
         stm.close();
         conn.close();
-
-        ApplicationData appData = dbUtil.searchFormWithFid(FID).get(0);
-        dbUtil.addAlcohol(appData.getBrand_name(), "", "", Double.parseDouble(thisForm.getAlcoholContent()),
-                0, "", Integer.parseInt(thisForm.getType_of_product()),
-                1, Legibility, 0,Formula,
-                1, "", BrandName);
         nextApplication();
     }
 
@@ -126,26 +148,45 @@ public class ApplicationReviewController extends DatabaseUtil{
         String ReviewerUsername = AccountsUtil.getUsername();
         int ReviewerID = getAccountAid(ReviewerUsername);
         changeSatus("REJECTED", FID);
-        int Status = 0;
+        int Status = 0;//TODO: change to correct enum for status
         int Decider = ReviewerID;
         String Date = thisForm.getDate();
         String General = comments;
         String OriginCode = thisForm.getSource_of_product();
         String BrandName = thisForm.getBrand_name();
         String FancifulName = thisForm.getFancyName();
-        String Grapevar = "";
-        String Winevintage = "";
-        String Appellation = "";
-        String Bottler = "";
+        String Grapevar;
+        String Winevintage;
+        String Appellation;
+        if(thisForm.getAlcoholType() == "Wine") {
+            Grapevar = thisForm.getGrapevar();
+            Winevintage = thisForm.getVintage();
+            Appellation = thisForm.getAppellation();
+        }
+        else{
+            Grapevar = "This type of alcohol does not have a varietal.";
+            Winevintage = "This type of alcohol does not have a vintage.";
+            Appellation = "This type of alcohol does not have an appellation.";
+        }
+        String Bottler = thisForm.getBottler();
         String Formula = thisForm.getFormula();
-        String Sulfite = "";
+        String Sulfite = thisForm.getSulfite();
         String Legibility = "0";
         String Descrip = thisForm.getInfoOnBottle();
 
-        sql = "INSERT INTO REVIEWS";
+        String values = Integer.toString(FID) + Integer.toString(Status) +
+                Integer.toString(Decider) + Date + General + OriginCode + BrandName + FancifulName
+                 + Grapevar + Winevintage + Appellation + Bottler + Formula + Sulfite + Legibility
+                 + Descrip;
+        String FIELDS = " (FID, STATUS, DECIDER, DATE, GENERAL, ORIGINCODE, BRANDNAME, FACIFULNAME, " +
+                "GRAPEVAR, WINEVINTAGE, APPELLATION, BOTTLER, FORMULA, SULFITE," +
+                " LEGIBILITY, LABELSIZE, DESCRIP)";
+        sql = "INSERT INTO " + "REVIEWS" + FIELDS + " VALUES (" + Integer.toString(FID) +
+                ", " + values;
+        stm.executeUpdate(sql);
+
         stm.close();
         conn.close();
-
         nextApplication();
     }
 
