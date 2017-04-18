@@ -61,7 +61,7 @@
       </RadioButton>
       <RadioButton fx:id="intersectSearch" layoutX="557.0" layoutY="493.0" mnemonicParsing="false" text="Search Within" toggleGroup="$searchType" />
       <RadioButton fx:id="unionSearch" layoutX="557.0" layoutY="518.0" mnemonicParsing="false" text="Combine" toggleGroup="$searchType" />
-      <ChoiceBox layoutX="407.0" layoutY="13.0" prefWidth="150.0" />
+      <ChoiceBox fx:id="choiceBox" layoutX="407.0" layoutY="13.0" prefWidth="150.0" />
       <RadioButton fx:id="csvDownload" layoutX="71.0" layoutY="468.0" mnemonicParsing="false" selected="true" text="CSV">
          <toggleGroup>
             <ToggleGroup fx:id="download_type" />
