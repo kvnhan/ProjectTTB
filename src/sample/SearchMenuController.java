@@ -139,7 +139,8 @@ public class SearchMenuController {
         List<AlcoholData> adl = new ArrayList<>();
         //fills a new list of alcohol data with elements that only match the search
         if (choiceSearch.equals("ID")) {
-            adl = dbUtil.searchAlcoholID(searchText);
+            int searchIntegerValue = Integer.parseInt(searchText);
+            adl = dbUtil.searchAlcoholID(searchIntegerValue);
         } else if (choiceSearch.equals("Name")) {
             adl = dbUtil.searchAlcoholName(searchText);
         } else if (choiceSearch.equals("Brand Name")) {
@@ -147,9 +148,10 @@ public class SearchMenuController {
         } else if (choiceSearch.equals("Location Name")) {
             adl = dbUtil.searchAlcoholAppellation(searchText);
         } else if (choiceSearch.equals("Alcohol Content")) {
-            adl = dbUtil.searchAlcoholContent(searchText);
+            double searchDoubleValue = Double.parseDouble(searchText);
+            adl = dbUtil.searchAlcoholContent(searchDoubleValue);
         } else {
-            adl = dbUtil.searchAllFields(searchText);
+            adl = searchAllAlcoholFields(searchText);
         }
 
         //checks to see if the user wants beer or wine
@@ -220,17 +222,38 @@ public class SearchMenuController {
         }
     }
 
-    public void searchAll(String searchText) throws SQLException{
+    public List<AlcoholData> searchAllAlcoholFields(String searchText) throws SQLException{
         List<AlcoholData> finalResultList = new ArrayList<AlcoholData>();
 
-        /*if(){
-            List<AlcoholData> alcoholTypeResults = dbUtil.searchAlcoholWithType(searchText);
-        }*/
+        try{
+            int searchAlcTypeInput = Integer.parseInt(searchText);
+            List<AlcoholData> alcoholTypeResults = dbUtil.searchAlcoholWithType(searchAlcTypeInput);
+            finalResultList = mergeAlcoholData(alcoholTypeResults, finalResultList);
+        }catch (Exception e){
+            System.out.println("Could not search type field using input");
+        }
         List<AlcoholData> alcoholBrandResults = dbUtil.searchAlcoholBrand(searchText);
-        List<AlcoholData> alcoholIDResults = dbUtil.searchAlcoholID(searchText);
+        finalResultList = mergeAlcoholData(alcoholBrandResults, finalResultList);
+        try{
+            int searchIDInput = Integer.parseInt(searchText);
+            List<AlcoholData> alcoholIDResults = dbUtil.searchAlcoholID(searchIDInput);
+            finalResultList = mergeAlcoholData(alcoholIDResults, finalResultList);
+        }catch (Exception e){
+            System.out.println("Could not search id field using input");
+        }
         List<AlcoholData> alcoholNameResults = dbUtil.searchAlcoholName(searchText);
-        List<AlcoholData> alcoholAppelationResults = dbUtil.searchAlcoholAppellation(searchText) ;
-        List<AlcoholData> alcoholContentResults = dbUtil.searchAlcoholContent(searchText);
+        finalResultList = mergeAlcoholData(alcoholNameResults, finalResultList);
+        List<AlcoholData> alcoholAppelationResults = dbUtil.searchAlcoholAppellation(searchText);
+        finalResultList = mergeAlcoholData(alcoholAppelationResults, finalResultList);
+        try {
+            double searchAlcContInput = Double.parseDouble(searchText);
+            List<AlcoholData> alcoholContentResults = dbUtil.searchAlcoholContent(searchAlcContInput);
+            finalResultList = mergeAlcoholData(alcoholContentResults, finalResultList);
+        }catch (Exception e){
+            System.out.println("Could not search alcohol content field using input");
+        }
+        
+        return finalResultList;
 
     }
 
