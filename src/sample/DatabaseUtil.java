@@ -1,6 +1,8 @@
 package sample;
 
 import java.sql.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Date;
@@ -30,15 +32,28 @@ public class DatabaseUtil {
     private Connection conn = null;
     private ResultSet rset;
     private Statement stmt = null;
-    private ScreenUtil screenUtil = new ScreenUtil();
-    private AccountsUtil accountsUtil = new AccountsUtil();
+    private ScreenUtil screenUtil;
+    private AccountsUtil accountsUtil;
 
     /**
      * Creates a connection to the database.
      */
     public DatabaseUtil() {
         conn = connect();
+        screenUtil = new ScreenUtil();
+        accountsUtil = new AccountsUtil();
+    }
 
+    /**
+     * Used for headless client testing
+     * @param accounts
+     * @param screen
+     */
+    @Deprecated
+    public DatabaseUtil(AccountsUtil accounts, ScreenUtil screen){
+        conn = connect();
+        screenUtil = screen;
+        accountsUtil = accounts;
     }
 
     /**
@@ -1100,6 +1115,74 @@ public class DatabaseUtil {
         sm.setInt(17, fid);
 
         sm.executeUpdate();
+    }
+
+    /**
+     * Creates a new TTBID
+     * @return String representation of the TTBID
+     * @throws SQLException
+     */
+    synchronized public String getNewTTBID() throws SQLException {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        DateFormat year = new SimpleDateFormat("yyyy");
+        DateFormat day = new SimpleDateFormat("D");
+        Date date = new Date();
+        String curDate = dateFormat.format(date);
+        PreparedStatement addDate = null;
+        PreparedStatement incrementDate = null;
+        PreparedStatement checkDate = null;
+        ResultSet rs;
+        String ttbid = "";
+        int id = 0;
+
+        checkDate = conn.prepareStatement("SELECT * FROM TTBID WHERE CURRENTDATE = ?");
+        checkDate.setString(1,curDate);
+        rs = checkDate.executeQuery();
+
+
+        if(rs.next() == false){
+            addDate = conn.prepareStatement("INSERT INTO TTBID(CURRENTDATE) VALUES(?)");
+            addDate.setString(1,curDate);
+            addDate.executeUpdate();
+
+        }
+        else{
+            id = rs.getInt("CURRENTCOUNT");
+        }
+
+        incrementDate = conn.prepareStatement("UPDATE TTBID SET CURRENTCOUNT = ? WHERE CURRENTDATE = ?");
+        incrementDate.setInt(1,id+1);
+        incrementDate.setString(2, curDate);
+        incrementDate.executeUpdate();
+
+
+        ttbid += year.format(date).substring(2,4);
+
+        if(day.format(date).length() < 3){
+            ttbid += "0" + day.format(date);
+        }
+        else{
+            ttbid += day.format(date);
+        }
+        ttbid += "001";
+
+        for(int i = 0; i < 6 - (id+"").length(); i++) { //Gets length of id and determines number of spaces needed to added
+            ttbid += "0";
+        }
+        ttbid +=  id+"";
+
+
+
+
+
+        checkDate.close();
+        incrementDate.close();
+
+        if(addDate != null){
+            addDate.close();
+        }
+
+        return ttbid;
     }
 
 
