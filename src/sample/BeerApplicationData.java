@@ -38,9 +38,9 @@ public class BeerApplicationData extends ApplicationData{
 
                                String infoOnBottle, String source_of_product, String type_of_product, String brand_name, String phone_number, String email, String date, String applicantName,
 
-                               String alcoholType, String alcoholContent) {
+                               String alcoholType, String alcoholContent, int type1, String type2, int type3) {
 
-        super(formID, acceptanceInfo, ttbid, repid, serial, address, fancyName, formula, permit_no, infoOnBottle, source_of_product, type_of_product, brand_name, phone_number, email, date, applicantName, alcoholType, alcoholContent);
+        super(formID, acceptanceInfo, ttbid, repid, serial, address, fancyName, formula, permit_no, infoOnBottle, source_of_product, type_of_product, brand_name, phone_number, email, date, applicantName, alcoholType, alcoholContent, type1, type2, type3);
 
     }
 

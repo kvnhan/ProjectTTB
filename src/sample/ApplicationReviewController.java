@@ -20,7 +20,7 @@ import java.util.Scanner;
  */
 public class ApplicationReviewController extends DatabaseUtil{
     @FXML
-    private Button approve, reject, goBack;
+    private Button approve, reject, goBack, ReviewHelpButton;
     @FXML
     private TextField repID, registryNo, prodSource, prodType, address,  phoneNo, email, dateApp, nameApp;
     @FXML private  TextArea commentsField;
@@ -30,8 +30,9 @@ public class ApplicationReviewController extends DatabaseUtil{
     private ScreenUtil screenUtil = new ScreenUtil();
     private AccountsUtil accountsUtil = new AccountsUtil();
     private String username = accountsUtil.getUsername();
-    int numberOfApps;
+    private int numberOfApps;
     private ApplicationData thisForm;
+    private static int appReviewMode = 1; // 1 = view all forms, 2 = choose form highlighted in inbox then return, 3 choose form highlighted in inbox then go to next available form;
 
     @FXML
     /**
@@ -71,20 +72,38 @@ public class ApplicationReviewController extends DatabaseUtil{
         Statement stm;
         String sql;
         stm = conn.createStatement();
+        String ReviewerUsername = AccountsUtil.getUsername();
+        int ReviewerID = getAccountAid(ReviewerUsername);
         //get comments
         String comments = commentsField.getText();
         //update alcohol status
         int FID = thisForm.getFormID();
-        sql = "UPDATE FORM SET FORM.STATUS = 'ACCEPTED' WHERE FORM.FID = " + FID;
-        stm.executeUpdate(sql);
+        changeSatus("ACCEPTED", FID);
+        int Status = 1;
+        int Decider = ReviewerID;
+        String Date = thisForm.getDate();
+        String General = comments;
+        String OriginCode = thisForm.getSource_of_product();
+        String BrandName = thisForm.getBrand_name();
+        String FancifulName = thisForm.getFancyName();
+        String Grapevar = "";
+        String Winevintage = "";
+        String Appellation = "";
+        String Bottler = "";
+        String Formula = thisForm.getFormula();
+        String Sulfite = "";
+        String Legibility = "0";
+        String Descrip = thisForm.getInfoOnBottle();
 
+        sql = "INSERT INTO REVIEWS ";
         stm.close();
         conn.close();
 
         ApplicationData appData = dbUtil.searchFormWithFid(FID).get(0);
-
-        dbUtil.addAlcohol(appData.getBrand_name(), "", "", 0, 0, "", 0, 1, "", 0,"", 1, "", "");
-
+        dbUtil.addAlcohol(appData.getBrand_name(), "", "", Double.parseDouble(thisForm.getAlcoholContent()),
+                0, "", Integer.parseInt(thisForm.getType_of_product()),
+                1, Legibility, 0,Formula,
+                1, "", BrandName);
         nextApplication();
     }
 
@@ -120,6 +139,11 @@ public class ApplicationReviewController extends DatabaseUtil{
         }else{
            screenUtil.switchScene("ApplicationReview.fxml","Application Review");
         }
+    }
+
+
+    public void helpClick () {
+            screenUtil.switchScene("ReviewHelp.fxml","Help");
     }
 
     /**
@@ -224,5 +248,11 @@ public class ApplicationReviewController extends DatabaseUtil{
     }
     */
 
+    public static int getAppReviewMode() {
+        return appReviewMode;
+    }
 
+    public static void setAppReviewMode(int appReviewMode) {
+        ApplicationReviewController.appReviewMode = appReviewMode;
+    }
 }

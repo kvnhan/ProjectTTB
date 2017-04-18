@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.NewLabelController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.NewLabelController">
     <children>
         <Label layoutX="15.0" layoutY="15.0" text="Info:">
             <font>
@@ -145,12 +145,12 @@
             <Font name="Constantia" size="24.0" />
          </font>
       </Label>
-      <CheckBox fx:id="dom1" layoutX="15.0" layoutY="200.0" mnemonicParsing="false" onAction="#handledomBox" text="Certificate of Label Approval.">
+      <CheckBox fx:id="dom1" layoutX="15.0" layoutY="200.0" mnemonicParsing="false" text="Certificate of Label Approval.">
          <font>
             <Font name="Constantia" size="16.0" />
          </font>
       </CheckBox>
-      <CheckBox fx:id="dom11" layoutX="15.0" layoutY="225.0" mnemonicParsing="false" onAction="#handledomBox" text="Certificate of Exemption from Label Approval.">
+      <CheckBox fx:id="dom11" layoutX="15.0" layoutY="225.0" mnemonicParsing="false" text="Certificate of Exemption from Label Approval.">
          <font>
             <Font name="Constantia" size="16.0" />
          </font>
@@ -160,7 +160,7 @@
             <Font name="Constantia" size="16.0" />
          </font>
       </CheckBox>
-      <TextField layoutX="468.0" layoutY="225.0" prefHeight="25.0" prefWidth="35.0" promptText="ST" />
+      <TextField fx:id="type2Box" layoutX="468.0" layoutY="225.0" prefHeight="25.0" prefWidth="35.0" promptText="ST" />
       <Label layoutX="390.0" layoutY="228.0" text="For Sale in">
          <font>
             <Font name="Constantia" size="16.0" />
@@ -176,7 +176,7 @@
             <Font name="Constantia" size="16.0" />
          </font>
       </Label>
-      <TextField layoutX="547.0" layoutY="249.0" prefHeight="25.0" prefWidth="100.0" />
+      <TextField fx:id="type3box" layoutX="547.0" layoutY="249.0" prefHeight="25.0" prefWidth="100.0" />
       <Label layoutX="557.0" layoutY="228.0" text="(Fill in State abbreviation)">
          <font>
             <Font name="Constantia" size="16.0" />
@@ -262,5 +262,6 @@
          </font>
       </Label>
       <TextField fx:id="myFilePath" editable="false" layoutX="334.0" layoutY="714.0" prefHeight="31.0" prefWidth="463.0" promptText="JoseWong.jpg" />
+      <Button fx:id="helpNewButton" layoutX="937.0" layoutY="14.0" mnemonicParsing="false" onAction="#buttonClicked" text="Help" />
     </children>
 </Pane>

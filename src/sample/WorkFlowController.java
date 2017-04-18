@@ -1,10 +1,12 @@
 package sample;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -12,8 +14,8 @@ import java.util.ArrayList;
 public class WorkFlowController {
 
     @FXML private Label numberOfApplicationsLabel;
-    @FXML private Button back;
-    @FXML private Button first;
+    private @FXML TableView inboxTable;
+    private @FXML TableColumn ttbIDColumn, fancifulNameColumn, brandNameColumn, alcoholTypeColumn, submissionDateColumn;
     private AccountsUtil accountsUtil = new AccountsUtil();
     private ScreenUtil screenUtil = new ScreenUtil();
     private DatabaseUtil databaseUtil = new DatabaseUtil();
@@ -21,12 +23,33 @@ public class WorkFlowController {
     private String username = accountsUtil.getUsername();
     private int numberOfApps;
 
+    private ObservableList<ApplicationData> observableFormsList;
 
     @FXML
     public void initialize() throws SQLException{
         roundRobin();
-        numberOfApps = databaseUtil.searchFormWithGovId(databaseUtil.getAccountAid(username)).size();
+
+        ArrayList<ApplicationData> formsList = databaseUtil.searchFormWithGovId(databaseUtil.getAccountAid(username));
+
+        numberOfApps = formsList.size();
         numberOfApplicationsLabel.setText(String.valueOf(numberOfApps));
+
+        observableFormsList = FXCollections.observableList(formsList);
+
+        inboxTable.setRowFactory(tv -> {
+            TableRow<ApplicationData> row = new TableRow<ApplicationData>();
+            row.setOnMouseClicked(event -> {
+                if(event.getClickCount() == 2 && (! row.isEmpty())){
+                    ApplicationData rowData = row.getItem();
+                    /*screenUtil.switchScene();*/
+                }
+            });
+            row.getItem();
+            row.setTooltip(new Tooltip("Double click to see more detail"));
+            return row;
+        });
+
+        displayResults();
     }
 
     //goes adds new applications to worker's inboxes
@@ -43,6 +66,17 @@ public class WorkFlowController {
             }
         }
 
+    }
+
+    public void displayResults(){
+        inboxTable.getColumns().clear();
+        ttbIDColumn.setCellValueFactory(new PropertyValueFactory<>("Ttbid"));
+        fancifulNameColumn.setCellValueFactory(new PropertyValueFactory<>("FancyName"));
+        brandNameColumn.setCellValueFactory(new PropertyValueFactory<>("Brand_name"));
+        alcoholTypeColumn.setCellValueFactory(new PropertyValueFactory<>("AlcoholType"));
+        submissionDateColumn.setCellValueFactory(new PropertyValueFactory<>("Date"));
+        inboxTable.setItems(this.getObservableFormsList());
+        inboxTable.getColumns().addAll(ttbIDColumn, fancifulNameColumn, brandNameColumn, alcoholTypeColumn, submissionDateColumn);
     }
 
     /**
@@ -64,5 +98,9 @@ public class WorkFlowController {
         }else{
             screenUtil.switchScene("ApplicationReview.fxml", "Application Review");
         }
+    }
+
+    public ObservableList<ApplicationData> getObservableFormsList() {
+        return observableFormsList;
     }
 }

@@ -4,12 +4,16 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 
+import javafx.scene.image.ImageView;
+import java.io.InputStream;
+
 /**
  * Controller for the New Application screen.
  */
 public class NewAppController {
 
     private @FXML Button back, newApp, oldApp, Updates;
+    private @FXML ImageView symbolImage;
     private ScreenUtil screenUtil = new ScreenUtil();
 
     /**
@@ -30,4 +34,20 @@ public class NewAppController {
             screenUtil.switchScene("ReviseMenu.fxml", "Revise Application");
         }
     }
+
+    public void initialize(){
+
+        try {
+            InputStream resource = ScreenUtil.class.getClassLoader().getResourceAsStream("resources/Symbol.png");
+            symbolImage.setImage(new javafx.scene.image.Image(resource, 500.0, 0.0, true, true));
+        }
+        catch(NullPointerException nullPoint){
+            InputStream resource = ScreenUtil.class.getClassLoader().getResourceAsStream("labels/imageUnavailable.jpg");
+            symbolImage.setImage(new javafx.scene.image.Image(resource, 100.0, 0.0, true, true));
+            System.out.println("Image Was Not Found");
+        }
+
+    }
+
+
 }

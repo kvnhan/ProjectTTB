@@ -32,9 +32,9 @@ public class WineApplicationData extends ApplicationData{
 
                                String source_of_product, String type_of_product, String brand_name, String phone_number, String email, String date, String applicantName,
 
-                               String alcoholType, String alcoholContent, int vintage_date, double ph_level) {
+                               String alcoholType, String alcoholContent, int type1, String type2, int type3, int vintage_date, double ph_level) {
 
-        super(formID, acceptanceInfo, ttbid, repid, serial, address, fancyName, formula,permit_no, infoOnBottle, source_of_product, type_of_product, brand_name, phone_number, email, date, applicantName, alcoholType, alcoholContent);
+        super(formID, acceptanceInfo, ttbid, repid, serial, address, fancyName, formula,permit_no, infoOnBottle, source_of_product, type_of_product, brand_name, phone_number, email, date, applicantName, alcoholType, alcoholContent, type1, type2, type3);
 
         this.vintage_date = vintage_date;
 

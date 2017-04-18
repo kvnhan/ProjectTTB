@@ -146,22 +146,22 @@
                 <Font name="Constantia" size="24.0" />
             </font>
         </Label>
-        <CheckBox fx:id="dom1" layoutX="15.0" layoutY="200.0" mnemonicParsing="false" onAction="#handledomBox" text="Certificate of Label Approval.">
+        <CheckBox fx:id="dom12" layoutX="15.0" layoutY="200.0" mnemonicParsing="false" text="Certificate of Label Approval.">
             <font>
                 <Font name="Constantia" size="16.0" />
             </font>
         </CheckBox>
-        <CheckBox fx:id="dom11" layoutX="15.0" layoutY="225.0" mnemonicParsing="false" onAction="#handledomBox" text="Certificate of Exemption from Label Approval.">
+        <CheckBox fx:id="dom123" layoutX="15.0" layoutY="225.0" mnemonicParsing="false" text="Certificate of Exemption from Label Approval.">
             <font>
                 <Font name="Constantia" size="16.0" />
             </font>
         </CheckBox>
-        <CheckBox fx:id="dom111" layoutX="15.0" layoutY="250.0" mnemonicParsing="false" onAction="#handledomBox" text="Distinctive Liquor Bottle Approval Total Bottle Capacity Before Closure">
+        <CheckBox fx:id="dom1234" layoutX="15.0" layoutY="250.0" mnemonicParsing="false" text="Distinctive Liquor Bottle Approval Total Bottle Capacity Before Closure">
             <font>
                 <Font name="Constantia" size="16.0" />
             </font>
         </CheckBox>
-        <TextField layoutX="468.0" layoutY="225.0" prefHeight="25.0" prefWidth="35.0" promptText="ST" />
+        <TextField fx:id="state" layoutX="468.0" layoutY="225.0" prefHeight="25.0" prefWidth="35.0" promptText="ST" />
         <Label layoutX="390.0" layoutY="228.0" text="For Sale in">
             <font>
                 <Font name="Constantia" size="16.0" />
@@ -177,7 +177,7 @@
                 <Font name="Constantia" size="16.0" />
             </font>
         </Label>
-        <TextField layoutX="547.0" layoutY="249.0" prefHeight="25.0" prefWidth="100.0" />
+        <TextField fx:id="amount" layoutX="547.0" layoutY="249.0" prefHeight="25.0" prefWidth="100.0" />
         <Label layoutX="557.0" layoutY="228.0" text="(Fill in State abbreviation)">
             <font>
                 <Font name="Constantia" size="16.0" />
