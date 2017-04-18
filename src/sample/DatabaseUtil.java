@@ -440,7 +440,7 @@ public class DatabaseUtil {
     }
 
     public ArrayList<Account> searchAccountWithUserType(int userType) throws SQLException {
-        String query = "SELECT * FROM ACCOUNT WHERE ACCOUNT.USER_TYPE = " + userType;
+        String query = "SELECT * FROM ACCOUNT WHERE ACCOUNT.USER_TYPE = '" + userType + "'";
         return searchAccount(query);
     }
 
@@ -451,14 +451,36 @@ public class DatabaseUtil {
 
     // Code used to search Alcohol table based on alcohol type
     public List<AlcoholData> searchAlcoholWithType(int alcoholType) throws SQLException{
-        String query = "SELECT * FROM ALCOHOL WHERE ALCOHOL.ALCOHOL_TYPE = " + alcoholType;
+        String query = "SELECT * FROM ALCOHOL WHERE ALCOHOL.ALCOHOL_TYPE = '" + alcoholType + "'";
 
         return searchAlcoholTable(query);
     }
 
     // Code used to search Alcohol table based on brand name. Uses partial search
     public List<AlcoholData> searchAlcoholBrand(String brandName) throws SQLException{
-        String query = "SELECT * FROM ALCOHOL WHERE UPPER(ALCOHOL.BRAND_NAME) LIKE UPPER('%"+brandName+"%')";
+        String query = "SELECT * FROM ALCOHOL WHERE ALCOHOL.BRAND_NAME = '" + brandName + "'";
+
+        return searchAlcoholTable(query);
+    }
+    public List<AlcoholData> searchAlcoholID(String number) throws SQLException{
+        int value = Integer.parseInt(number);
+        String query = "SELECT * FROM ALCOHOL WHERE ALCOHOL.AID = " + value;
+
+        return searchAlcoholTable(query);
+    }
+    public List<AlcoholData> searchAlcoholName(String name) throws SQLException{
+        String query = "SELECT * FROM ALCOHOL WHERE ALCOHOL.NAME = '" + name + "'";
+
+        return searchAlcoholTable(query);
+    }
+    public List<AlcoholData> searchAlcoholAppellation(String appellation) throws SQLException{
+        String query = "SELECT * FROM ALCOHOL WHERE ALCOHOL.APPELLATION = '" + appellation + "'";
+
+        return searchAlcoholTable(query);
+    }
+    public List<AlcoholData> searchAlcoholContent(String alcCont) throws SQLException{
+        double value = Double.parseDouble(alcCont);
+        String query = "SELECT * FROM ALCOHOL WHERE ALCOHOL.ALC_CONTENT = " + value;
 
         return searchAlcoholTable(query);
     }
@@ -468,11 +490,21 @@ public class DatabaseUtil {
     //TODO Make this search all fields
     // Code used to search Alcohol table based on brand name. Uses partial search
     public List<AlcoholData> searchAllFields(String brandName) throws SQLException{
-        String query = "SELECT * FROM ALCOHOL WHERE UPPER(ALCOHOL.BRAND_NAME) LIKE UPPER('%"+brandName+"%')";
+        String query = "SELECT * FROM ALCOHOL WHERE ACCOUNT.USER_TYPE = '" + brandName + "'" +
+                "OR ALCOHOL.ALCOHOL_TYPE = '" + brandName + "'" +
+                "OR ALCOHOL.BRAND_NAME = '" + brandName + "'" +
+                "OR ALCOHOL.NAME = '" + brandName + "'" +
+                "OR ALCOHOL.APPELLATION = '" + brandName + "'";
+        return searchAlcoholTable(query);
+    }
+    /*
+    public List<AlcoholData> searchAllFields(double brandName) throws SQLException{
+        int value = Integer.valueOf(brandName);
+        String query = "SELECT * FROM ALCOHOL WHERE ALCOHOL.AID = '" + value + "OR ALCOHOL.ALC_CONTENT = '" + brandName;
 
         return searchAlcoholTable(query);
     }
-
+    */
 
     private List<AlcoholData> searchAlcoholTable(String query) throws SQLException{
         List<AlcoholData> AlcoholDataList = new ArrayList<AlcoholData>();
@@ -824,7 +856,7 @@ public class DatabaseUtil {
         a = new WineApplicationData(fid, info,ttbid, repid, serial,address,
                 fancyName, formula, grape_varietal, appellation, permit_no, infoOnBottle,
                 source_of_product, type_of_product, brand_name, phone_number, email, date, applicantName,
-                alcoholType, alcoholContent, type1, type2, type3, vintage_date, ph_level);
+                alcoholType, alcoholContent, vintage_date, ph_level);
 
         return a;
     }
@@ -933,6 +965,7 @@ public class DatabaseUtil {
         }
         return "OTHER";
     }
+
 
     public String checkforSource(int fid) throws SQLException {
         String type = "";
