@@ -17,9 +17,8 @@ import java.util.ArrayList;
 public class WorkFlowController {
 
     @FXML private Label numberOfApplicationsLabel;
-    private @FXML TableView table;
+    private @FXML TableView inboxTable;
     private @FXML TableColumn ttbIDColumn, fancifulNameColumn, brandNameColumn, alcoholTypeColumn, submissionDateColumn;
-
     private AccountsUtil accountsUtil = new AccountsUtil();
     private ScreenUtil screenUtil = new ScreenUtil();
     private DatabaseUtil databaseUtil = new DatabaseUtil();
@@ -38,10 +37,8 @@ public class WorkFlowController {
         numberOfApps = formsList.size();
         numberOfApplicationsLabel.setText(String.valueOf(numberOfApps));
 
-        if(numberOfApps > 0){
-            observableFormsList = FXCollections.observableList(formsList);
-            displayResults();
-        }
+        observableFormsList = FXCollections.observableList(formsList);
+        displayResults();
     }
 
     //goes adds new applications to worker's inboxes
@@ -61,13 +58,14 @@ public class WorkFlowController {
     }
 
     public void displayResults(){
-        ttbIDColumn.setCellValueFactory(new PropertyValueFactory<>("ttbid"));
-        fancifulNameColumn.setCellValueFactory(new PropertyValueFactory<>("fancyName"));
-        brandNameColumn.setCellValueFactory(new PropertyValueFactory<>("brand_name"));
-        alcoholTypeColumn.setCellValueFactory(new PropertyValueFactory<>("alcoholType"));
-        submissionDateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
-        table.setItems(this.getObservableFormsList());
-        table.getColumns().addAll(ttbIDColumn, fancifulNameColumn, brandNameColumn, alcoholTypeColumn, submissionDateColumn);
+        inboxTable.getColumns().clear();
+        ttbIDColumn.setCellValueFactory(new PropertyValueFactory<>("Ttbid"));
+        fancifulNameColumn.setCellValueFactory(new PropertyValueFactory<>("FancyName"));
+        brandNameColumn.setCellValueFactory(new PropertyValueFactory<>("Brand_name"));
+        alcoholTypeColumn.setCellValueFactory(new PropertyValueFactory<>("AlcoholType"));
+        submissionDateColumn.setCellValueFactory(new PropertyValueFactory<>("Date"));
+        inboxTable.setItems(this.getObservableFormsList());
+        inboxTable.getColumns().addAll(ttbIDColumn, fancifulNameColumn, brandNameColumn, alcoholTypeColumn, submissionDateColumn);
     }
 
     /**
