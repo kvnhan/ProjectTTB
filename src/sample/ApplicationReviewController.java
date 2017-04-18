@@ -30,8 +30,9 @@ public class ApplicationReviewController extends DatabaseUtil{
     private ScreenUtil screenUtil = new ScreenUtil();
     private AccountsUtil accountsUtil = new AccountsUtil();
     private String username = accountsUtil.getUsername();
-    int numberOfApps;
+    private int numberOfApps;
     private ApplicationData thisForm;
+    private static int appReviewMode = 1; // 1 = view all forms, 2 = choose form highlighted in inbox then return, 3 choose form highlighted in inbox then go to next available form;
 
     @FXML
     /**
@@ -247,5 +248,11 @@ public class ApplicationReviewController extends DatabaseUtil{
     }
     */
 
+    public static int getAppReviewMode() {
+        return appReviewMode;
+    }
 
+    public static void setAppReviewMode(int appReviewMode) {
+        ApplicationReviewController.appReviewMode = appReviewMode;
+    }
 }
