@@ -447,7 +447,7 @@ public class DatabaseUtil {
 
     // Code used to search Alcohol table based on brand name. Uses partial search
     public List<AlcoholData> searchAlcoholBrand(String brandName) throws SQLException{
-        String query = "SELECT * FROM ALCOHOL WHERE UPPER(ALCOHOL.BRAND_NAME) LIKE UPPER('"+brandName+"%')";
+        String query = "SELECT * FROM ALCOHOL WHERE UPPER(ALCOHOL.BRAND_NAME) LIKE UPPER('%"+brandName+"%')";
 
         return searchAlcoholTable(query);
     }
@@ -457,7 +457,7 @@ public class DatabaseUtil {
     //TODO Make this search all fields
     // Code used to search Alcohol table based on brand name. Uses partial search
     public List<AlcoholData> searchAllFields(String brandName) throws SQLException{
-        String query = "SELECT * FROM ALCOHOL WHERE UPPER(ALCOHOL.BRAND_NAME) LIKE UPPER('"+brandName+"%')";
+        String query = "SELECT * FROM ALCOHOL WHERE UPPER(ALCOHOL.BRAND_NAME) LIKE UPPER('%"+brandName+"%')";
 
         return searchAlcoholTable(query);
     }

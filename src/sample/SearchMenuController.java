@@ -47,7 +47,7 @@ public class SearchMenuController {
     private final int DISTILLED = 3;
 
     private List<AlcoholData> alcoholDataList = new ArrayList<AlcoholData>();
-    private static ObservableList<AlcoholData> observableList;
+    private ObservableList<AlcoholData> observableList;
 
     private DatabaseUtil dbUtil = new DatabaseUtil();
 
@@ -75,7 +75,7 @@ public class SearchMenuController {
         brandNameColumn.setCellValueFactory(new PropertyValueFactory<>("BrandName"));
         alcoholTypeColumn.setCellValueFactory(new PropertyValueFactory<>("AlcoholType"));
         locationColumn.setCellValueFactory(new PropertyValueFactory<>("Appellation"));
-        table.setItems(SearchMenuController.getObservableList());
+        table.setItems(this.getObservableList());
         table.getColumns().addAll(idColumn, nameColumn, brandNameColumn, alcoholTypeColumn, locationColumn);
     }
 
@@ -83,7 +83,7 @@ public class SearchMenuController {
         screenUtil.switchScene("MainMenu.fxml", "Main Menu");
     }
 
-    public static ObservableList<AlcoholData> getObservableList() {
+    public ObservableList<AlcoholData> getObservableList() {
         return observableList;
     }
 
