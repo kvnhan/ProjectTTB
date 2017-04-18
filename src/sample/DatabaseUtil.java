@@ -798,7 +798,7 @@ public class DatabaseUtil {
         return a;
 
     }
-    /*
+
     public WineApplicationData fillSubmittedWineForm(int fid) throws SQLException{
 
         String sql = "SELECT * FROM APP.FORM WHERE FID = ?";
@@ -873,7 +873,7 @@ public class DatabaseUtil {
 
         return a;
     }
-    */
+
 
     public void reviseAlcohol(int fid) throws SQLException{}
 
