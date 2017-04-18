@@ -5,10 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.sql.SQLException;
@@ -22,7 +19,6 @@ public class WorkFlowController {
     private AccountsUtil accountsUtil = new AccountsUtil();
     private ScreenUtil screenUtil = new ScreenUtil();
     private DatabaseUtil databaseUtil = new DatabaseUtil();
-
     private String username = accountsUtil.getUsername();
     private int numberOfApps;
 
@@ -38,6 +34,20 @@ public class WorkFlowController {
         numberOfApplicationsLabel.setText(String.valueOf(numberOfApps));
 
         observableFormsList = FXCollections.observableList(formsList);
+
+        inboxTable.setRowFactory(tv -> {
+            TableRow<ApplicationData> row = new TableRow<ApplicationData>();
+            final ApplicationData[] rowData = new ApplicationData[1];
+            row.setOnMouseClicked(event -> {
+                rowData[0] = row.getItem();
+                if(event.getClickCount() == 2 && (! row.isEmpty())){
+                    /*screenUtil.switchScene();*/
+                }
+            });
+            row.setTooltip(new Tooltip("Double click to open application" + rowData[0].getFormID()));
+            return row;
+        });
+
         displayResults();
     }
 

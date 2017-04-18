@@ -1,6 +1,8 @@
 package sample;
 
 import java.sql.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Date;
@@ -30,15 +32,28 @@ public class DatabaseUtil {
     private Connection conn = null;
     private ResultSet rset;
     private Statement stmt = null;
-    private ScreenUtil screenUtil = new ScreenUtil();
-    private AccountsUtil accountsUtil = new AccountsUtil();
+    private ScreenUtil screenUtil;
+    private AccountsUtil accountsUtil;
 
     /**
      * Creates a connection to the database.
      */
     public DatabaseUtil() {
         conn = connect();
+        screenUtil = new ScreenUtil();
+        accountsUtil = new AccountsUtil();
+    }
 
+    /**
+     * Used for headless client testing
+     * @param accounts
+     * @param screen
+     */
+    @Deprecated
+    public DatabaseUtil(AccountsUtil accounts, ScreenUtil screen){
+        conn = connect();
+        screenUtil = screen;
+        accountsUtil = accounts;
     }
 
     /**
@@ -440,7 +455,7 @@ public class DatabaseUtil {
     }
 
     public ArrayList<Account> searchAccountWithUserType(int userType) throws SQLException {
-        String query = "SELECT * FROM ACCOUNT WHERE ACCOUNT.USER_TYPE = " + userType;
+        String query = "SELECT * FROM ACCOUNT WHERE ACCOUNT.USER_TYPE = '" + userType + "'";
         return searchAccount(query);
     }
 
@@ -451,14 +466,34 @@ public class DatabaseUtil {
 
     // Code used to search Alcohol table based on alcohol type
     public List<AlcoholData> searchAlcoholWithType(int alcoholType) throws SQLException{
-        String query = "SELECT * FROM ALCOHOL WHERE ALCOHOL.ALCOHOL_TYPE = " + alcoholType;
+        String query = "SELECT * FROM ALCOHOL WHERE ALCOHOL.ALCOHOL_TYPE = '" + alcoholType + "'";
 
         return searchAlcoholTable(query);
     }
 
     // Code used to search Alcohol table based on brand name. Uses partial search
     public List<AlcoholData> searchAlcoholBrand(String brandName) throws SQLException{
-        String query = "SELECT * FROM ALCOHOL WHERE UPPER(ALCOHOL.BRAND_NAME) LIKE UPPER('%"+brandName+"%')";
+        String query = "SELECT * FROM ALCOHOL WHERE ALCOHOL.BRAND_NAME = '" + brandName + "'";
+
+        return searchAlcoholTable(query);
+    }
+    public List<AlcoholData> searchAlcoholID(int number) throws SQLException{
+        String query = "SELECT * FROM ALCOHOL WHERE ALCOHOL.AID = " + number;
+
+        return searchAlcoholTable(query);
+    }
+    public List<AlcoholData> searchAlcoholName(String name) throws SQLException{
+        String query = "SELECT * FROM ALCOHOL WHERE ALCOHOL.NAME = '" + name + "'";
+
+        return searchAlcoholTable(query);
+    }
+    public List<AlcoholData> searchAlcoholAppellation(String appellation) throws SQLException{
+        String query = "SELECT * FROM ALCOHOL WHERE ALCOHOL.APPELLATION = '" + appellation + "'";
+
+        return searchAlcoholTable(query);
+    }
+    public List<AlcoholData> searchAlcoholContent(double alcCont) throws SQLException{
+        String query = "SELECT * FROM ALCOHOL WHERE ALCOHOL.ALC_CONTENT = " + alcCont;
 
         return searchAlcoholTable(query);
     }
@@ -468,11 +503,21 @@ public class DatabaseUtil {
     //TODO Make this search all fields
     // Code used to search Alcohol table based on brand name. Uses partial search
     public List<AlcoholData> searchAllFields(String brandName) throws SQLException{
-        String query = "SELECT * FROM ALCOHOL WHERE UPPER(ALCOHOL.BRAND_NAME) LIKE UPPER('%"+brandName+"%')";
+        String query = "SELECT * FROM ALCOHOL WHERE ACCOUNT.USER_TYPE = '" + brandName + "'" +
+                "OR ALCOHOL.ALCOHOL_TYPE = '" + brandName + "'" +
+                "OR ALCOHOL.BRAND_NAME = '" + brandName + "'" +
+                "OR ALCOHOL.NAME = '" + brandName + "'" +
+                "OR ALCOHOL.APPELLATION = '" + brandName + "'";
+        return searchAlcoholTable(query);
+    }
+    /*
+    public List<AlcoholData> searchAllFields(double brandName) throws SQLException{
+        int value = Integer.valueOf(brandName);
+        String query = "SELECT * FROM ALCOHOL WHERE ALCOHOL.AID = '" + value + "OR ALCOHOL.ALC_CONTENT = '" + brandName;
 
         return searchAlcoholTable(query);
     }
-
+    */
 
     private List<AlcoholData> searchAlcoholTable(String query) throws SQLException{
         List<AlcoholData> AlcoholDataList = new ArrayList<AlcoholData>();
@@ -753,7 +798,7 @@ public class DatabaseUtil {
         return a;
 
     }
-
+    /*
     public WineApplicationData fillSubmittedWineForm(int fid) throws SQLException{
 
         String sql = "SELECT * FROM APP.FORM WHERE FID = ?";
@@ -828,6 +873,7 @@ public class DatabaseUtil {
 
         return a;
     }
+    */
 
     public void reviseAlcohol(int fid) throws SQLException{}
 
@@ -933,6 +979,7 @@ public class DatabaseUtil {
         }
         return "OTHER";
     }
+
 
     public String checkforSource(int fid) throws SQLException {
         String type = "";
@@ -1067,6 +1114,74 @@ public class DatabaseUtil {
         sm.setInt(17, fid);
 
         sm.executeUpdate();
+    }
+
+    /**
+     * Creates a new TTBID
+     * @return String representation of the TTBID
+     * @throws SQLException
+     */
+    synchronized public String getNewTTBID() throws SQLException {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        DateFormat year = new SimpleDateFormat("yyyy");
+        DateFormat day = new SimpleDateFormat("D");
+        Date date = new Date();
+        String curDate = dateFormat.format(date);
+        PreparedStatement addDate = null;
+        PreparedStatement incrementDate = null;
+        PreparedStatement checkDate = null;
+        ResultSet rs;
+        String ttbid = "";
+        int id = 0;
+
+        checkDate = conn.prepareStatement("SELECT * FROM TTBID WHERE CURRENTDATE = ?");
+        checkDate.setString(1,curDate);
+        rs = checkDate.executeQuery();
+
+
+        if(rs.next() == false){
+            addDate = conn.prepareStatement("INSERT INTO TTBID(CURRENTDATE) VALUES(?)");
+            addDate.setString(1,curDate);
+            addDate.executeUpdate();
+
+        }
+        else{
+            id = rs.getInt("CURRENTCOUNT");
+        }
+
+        incrementDate = conn.prepareStatement("UPDATE TTBID SET CURRENTCOUNT = ? WHERE CURRENTDATE = ?");
+        incrementDate.setInt(1,id+1);
+        incrementDate.setString(2, curDate);
+        incrementDate.executeUpdate();
+
+
+        ttbid += year.format(date).substring(2,4);
+
+        if(day.format(date).length() < 3){
+            ttbid += "0" + day.format(date);
+        }
+        else{
+            ttbid += day.format(date);
+        }
+        ttbid += "001";
+
+        for(int i = 0; i < 6 - (id+"").length(); i++) { //Gets length of id and determines number of spaces needed to added
+            ttbid += "0";
+        }
+        ttbid +=  id+"";
+
+
+
+
+
+        checkDate.close();
+        incrementDate.close();
+
+        if(addDate != null){
+            addDate.close();
+        }
+
+        return ttbid;
     }
 
 

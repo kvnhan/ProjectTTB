@@ -9,15 +9,29 @@ import java.util.HashMap;
  */
 public class AccountsUtil {
 
-    private static HashMap usernameMap = new HashMap<String, Account>();
+    private static HashMap usernameMap;
     private String saveFileName = "usernameMap";
     private static String username = "";
-    private ScreenUtil screenUtil = new ScreenUtil();
+    private ScreenUtil screenUtil;
 
 
-    AccountsUtil(){
+    public AccountsUtil(){
         loadFile();
+        usernameMap = new HashMap<String, Account>();
+        screenUtil = new ScreenUtil();
     }
+
+    /**
+     * Used for testing
+     * @param screen
+     */
+    @Deprecated
+    public AccountsUtil(ScreenUtil screen){
+        loadFile();
+        usernameMap = new HashMap<String, Account>();
+        screenUtil = screen;
+    }
+
 
     public static String getUsername() {
         return username;
