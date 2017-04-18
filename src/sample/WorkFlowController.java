@@ -19,7 +19,6 @@ public class WorkFlowController {
     private AccountsUtil accountsUtil = new AccountsUtil();
     private ScreenUtil screenUtil = new ScreenUtil();
     private DatabaseUtil databaseUtil = new DatabaseUtil();
-
     private String username = accountsUtil.getUsername();
     private int numberOfApps;
 
@@ -38,14 +37,14 @@ public class WorkFlowController {
 
         inboxTable.setRowFactory(tv -> {
             TableRow<ApplicationData> row = new TableRow<ApplicationData>();
+            final ApplicationData[] rowData = new ApplicationData[1];
             row.setOnMouseClicked(event -> {
+                rowData[0] = row.getItem();
                 if(event.getClickCount() == 2 && (! row.isEmpty())){
-                    ApplicationData rowData = row.getItem();
                     /*screenUtil.switchScene();*/
                 }
             });
-            row.getItem();
-            row.setTooltip(new Tooltip("Double click to see more detail"));
+            row.setTooltip(new Tooltip("Double click to open application" + rowData[0].getFormID()));
             return row;
         });
 
