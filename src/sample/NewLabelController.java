@@ -7,6 +7,8 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
+import javafx.scene.image.*;
+import javafx.scene.image.Image;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.scene.control.Button;
@@ -35,7 +37,6 @@ public class NewLabelController{
 
     @FXML private TextField myFilePath;
     @FXML private ImageView image;
-    @FXML private TextField ID;
     @FXML private TextField RepID;
     @FXML private TextField PlantReg;
     @FXML private TextField SerialNo;
@@ -62,6 +63,13 @@ public class NewLabelController{
     @FXML private TextField Content;
     @FXML private TextField type2Box;
     @FXML private TextField type3box;
+
+    @FXML private TextField originField;
+    @FXML private TextField netContentField;
+    @FXML private TextField sulfiteField;
+    @FXML private TextField bottlerField;
+    @FXML private TextField healthWarningField;
+
     @FXML private Button Submit;
     @FXML private Button back;
     @FXML private Button clear;
@@ -147,12 +155,20 @@ public class NewLabelController{
         String applicantName = "";
         String alcoholType = "";
         String alcoholContent = "";
+        double alcoholContentDouble = 0;
         int type1 = -1;
         String type2 = "";
         int type3 = -1;
         int vintage_date = 0;
         double ph_level = 0;
         int max = 999999999;
+
+        int originCode = 0;
+        double netContentDouble = 0;
+        String sulfiteDesc= "";
+        String bottlerInfo= "";
+        String healthWarningText= "";
+
 
         if(!dom1.isSelected() && !dom11.isSelected() && !dom111.isSelected()){
             valid = false;
@@ -219,12 +235,12 @@ public class NewLabelController{
             valid = false;
         }
 
-        if(!MailingAddress.getText().trim().isEmpty()){
+        /*if(!MailingAddress.getText().trim().isEmpty()){
             address = MailingAddress.getText();
         }else{
             work.createAlertBox("ERROR", "Mailling Address is empty");
             valid = false;
-        }
+        }*/
 
         if(!Varietal.getText().trim().isEmpty()){
             grape_varietal = Varietal.getText();
@@ -241,11 +257,19 @@ public class NewLabelController{
         }
 
         if(!Content.getText().trim().isEmpty()){
+            try {
+                alcoholContentDouble = Double.parseDouble(Content.getText());
+
+            } catch (NumberFormatException e) {
+                work.createAlertBox("ERROR", "Invaid Input for Alcohol content");
+                valid = false;
+            }
             alcoholContent = Content.getText();
         }else{
             work.createAlertBox("ERROR", "Alcohol Content is empty");
             valid = false;
         }
+
         if(!SerialNo.getText().trim().isEmpty()){
             serial = (SerialNo.getText());
         }else{
@@ -343,43 +367,86 @@ public class NewLabelController{
             work.createAlertBox("ERROR", "PH is empty");
             valid = false;
         }
-        fid = 1;
+
+        if(!originField.getText().trim().isEmpty()) {
+            try {
+                originCode = Integer.parseInt(originField.getText());
+
+            } catch (NumberFormatException e) {
+                work.createAlertBox("ERROR", "Invaid Input for Origin Code");
+                valid = false;
+            }
+        }else{
+            work.createAlertBox("ERROR", "Origin Code is empty");
+            valid = false;
+        }
+
+        if(!netContentField.getText().trim().isEmpty()) {
+            try {
+                netContentDouble = Double.parseDouble(netContentField.getText());
+
+            } catch (NumberFormatException e) {
+                work.createAlertBox("ERROR", "Invalid Input for Net Content");
+                valid = false;
+            }
+        }else{
+            work.createAlertBox("ERROR", "Net content is empty");
+            valid = false;
+        }
+
+        sulfiteDesc= sulfiteField.getText();
+        bottlerInfo= bottlerField.getText();
+        healthWarningText= healthWarningField.getText();
 
         AcceptanceInformation acceptanceInfo = new AcceptanceInformation(date, applicantName,
                 null, "UNASSIGNED");
 
-        if (wine.isSelected()) {
-            WineApplicationData Data = new WineApplicationData(fid, acceptanceInfo,ttbid, repid, serial,address,
-                    fancyName, formula, grape_varietal, appellation, permit_no, infoOnBottle,
-                    source_of_product, type_of_product, brand_name, phone_number, email, date, applicantName,
-                    alcoholType, alcoholContent, type1, type2, type3,vintage_date, ph_level);
-            if(valid && work.createConfirmBox("Confirm", "Would you like to submit the form?")){
-                 submitWine(Data);
+        if(valid){
+            if (wine.isSelected()) {
+                if(work.createConfirmBox("Confirm", "Would you like to submit the form?")){
+                    WineApplicationData Data = new WineApplicationData(fid, acceptanceInfo,ttbid, repid, serial,address,
+                            fancyName, formula, grape_varietal, appellation, permit_no, infoOnBottle,
+                            source_of_product, type_of_product, brand_name, phone_number, email, date, applicantName,
+                            alcoholType, alcoholContent, type1, type2, type3,vintage_date, ph_level);
+                    submitWine(Data);
+
+                    // Add to alcohol
+                    db.addAlcohol(fancyName, appellation, sulfiteDesc, alcoholContentDouble, netContentDouble, healthWarningText, type1, 0, "n/a", 0, "n/a", 2, bottlerInfo, brand_name);
+
                     System.out.println("It Works");
                     work.switchScene("NewApp.fxml", "New Application");
-            }
+                }
 
-        } else if (beer.isSelected()) {
-            BeerApplicationData Data = new BeerApplicationData(fid, acceptanceInfo,ttbid, repid, serial,address,
-                    fancyName, formula, permit_no, infoOnBottle,
-                    source_of_product, type_of_product, brand_name, phone_number, email, date, applicantName,
-                    alcoholType, alcoholContent, type1, type2, type3);
-            if(valid && work.createConfirmBox("Confirm", "Would you like to submit the form?")){
-                submitBeer(Data);
+            } else if (beer.isSelected()) {
+                if(work.createConfirmBox("Confirm", "Would you like to submit the form?")){
+                    BeerApplicationData Data = new BeerApplicationData(fid, acceptanceInfo,ttbid, repid, serial,address,
+                            fancyName, formula, permit_no, infoOnBottle,
+                            source_of_product, type_of_product, brand_name, phone_number, email, date, applicantName,
+                            alcoholType, alcoholContent, type1, type2, type3);
+                    submitBeer(Data);
+
+                    // Add to alcohol
+                    db.addAlcohol(fancyName, appellation, sulfiteDesc, alcoholContentDouble, netContentDouble, healthWarningText, type1, 0, "n/a", 0, "n/a", 1, bottlerInfo, brand_name);
+
                     System.out.println("This works");
                     work.switchScene("NewApp.fxml", "New Application");
-            }
+                }
 
-        } else if (other.isSelected()) {
-            BeerApplicationData Data = new BeerApplicationData(fid, acceptanceInfo,ttbid, repid, serial,address,
-                    fancyName, formula, permit_no, infoOnBottle,
-                    source_of_product, type_of_product, brand_name, phone_number, email, date, applicantName,
-                    alcoholType, alcoholContent, type1, type2, type3);
-            if(valid && work.createConfirmBox("Confirm", "Would you like to submit the form?")){
-               submitDistilledSpirits(Data);
-                   System.out.println("This works too");
-                   work.switchScene("NewApp.fxml", "New Application");
+            } else if (other.isSelected()) {
+                if(work.createConfirmBox("Confirm", "Would you like to submit the form?")){
+                    BeerApplicationData Data = new BeerApplicationData(fid, acceptanceInfo,ttbid, repid, serial,address,
+                            fancyName, formula, permit_no, infoOnBottle,
+                            source_of_product, type_of_product, brand_name, phone_number, email, date, applicantName,
+                            alcoholType, alcoholContent, type1, type2, type3);
+                    submitDistilledSpirits(Data);
 
+                    // Add to alcohol
+                    db.addAlcohol(fancyName, appellation, sulfiteDesc, alcoholContentDouble, netContentDouble, healthWarningText, type1, 0, "n/a", 0, "n/a", 3, bottlerInfo, brand_name);
+
+                    System.out.println("This works too");
+                    work.switchScene("NewApp.fxml", "New Application");
+
+                }
             }
         }
 
@@ -391,7 +458,7 @@ public class NewLabelController{
      * @throws SQLException
      */
     public void submitWine(WineApplicationData wd)throws SQLException{
-        String ttbid = wd.getTtbid();
+        String ttbid = db.getNewTTBID();
         int repid = wd.getRepid();
         String serial = wd.getSerial();
         String address = wd.getAddress();
@@ -433,14 +500,14 @@ public class NewLabelController{
 
     public void chooseFile(ActionEvent event)throws Exception{
             File tempFile = work.openFileChooser();
-            if (tempFile != null && tempFile.getPath() != null) {
+            if (tempFile != null) {
                 //myFilePath.setText(tempFile.getPath());
-                filepath = tempFile.toURI().toURL().toString();
-                Image img = new Image(tempFile.toURI().toURL().toString());
+                filepath = tempFile.toURI().toString();
+                System.out.println(filepath);
+                javafx.scene.image.Image img = new Image(filepath);
                 image.setImage(img);
             }
 
-            System.out.println(filepath);
     }
 
     /**
@@ -449,7 +516,7 @@ public class NewLabelController{
      * @throws SQLException
      */
     public void submitBeer(BeerApplicationData bd) throws SQLException{
-        String ttbid = bd.getTtbid();
+        String ttbid = db.getNewTTBID();
         int repid = bd.getRepid();
         String serial = bd.getSerial();
         String address = bd.getAddress();
@@ -480,7 +547,7 @@ public class NewLabelController{
     }
 
     public void submitDistilledSpirits(BeerApplicationData bd) throws SQLException{
-        String ttbid = bd.getTtbid();
+        String ttbid = db.getNewTTBID();
         int repid = bd.getRepid();
         String serial = bd.getSerial();
         String address = bd.getAddress();

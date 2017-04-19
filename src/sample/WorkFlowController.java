@@ -23,7 +23,7 @@ public class WorkFlowController {
     private Account activeUser;
     private int numberOfApps;
     private static ApplicationData rowChosen;
-    private ArrayList<ApplicationData> formsList;
+    private ArrayList<ApplicationData> formsList = new ArrayList<>();
 
     private ObservableList<ApplicationData> observableFormsList;
 

@@ -37,7 +37,7 @@ public class RealImage implements Image{
      */
     private void loadImage(String fileName){
         try {
-            img = ImageIO.read(new File("/label_images/"+fileName));
+            img = ImageIO.read(new File("/labels/"+fileName));
         } catch (IOException e) {
         }
     }

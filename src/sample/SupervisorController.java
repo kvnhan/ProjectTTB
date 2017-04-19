@@ -30,7 +30,7 @@ public class SupervisorController {
     @FXML TreeView<TItem> view;
 
 
-    public void initialize() throws SQLException {
+    /*public void initialize() throws SQLException {
         screenUtil = new ScreenUtil();
         databaseUtil = new DatabaseUtil();
         accountsUtil = new AccountsUtil();
@@ -59,7 +59,7 @@ public class SupervisorController {
             }
         });
 
-    }
+    }*/
 
 
 }
