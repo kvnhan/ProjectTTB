@@ -5,10 +5,12 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ManufacturerInboxController">
+<AnchorPane prefHeight="606.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ManufacturerInboxController">
    <children>
       <Button layoutX="14.0" layoutY="561.0" mnemonicParsing="false" text="Back" />
       <TableView layoutX="14.0" layoutY="53.0" prefHeight="507.0" prefWidth="770.0">
@@ -21,10 +23,30 @@
             <TableColumn prefWidth="100.0" text="Current Status" />
         </columns>
       </TableView>
-      <Label layoutX="370.0" layoutY="14.0" text="Inbox">
+      <Label layoutX="370.0" layoutY="17.0" text="Inbox">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="17.0" layoutX="-1.0" stroke="TRANSPARENT" strokeType="INSIDE" width="800.0">
+         <fill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop color="#1f1fffdc" />
+                  <Stop color="WHITE" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Rectangle>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="17.0" layoutX="2.0" layoutY="589.0" stroke="#ffffff00" strokeType="INSIDE" width="800.0">
+         <fill>
+            <LinearGradient endX="0.08173076923076923" endY="1.0" startX="1.0" startY="1.0">
+               <stops>
+                  <Stop color="#ff2121fe" />
+                  <Stop color="WHITE" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Rectangle>
    </children>
 </AnchorPane>

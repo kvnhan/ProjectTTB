@@ -6,6 +6,9 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="525.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.SearchHelpController">
@@ -29,11 +32,31 @@
       <Label layoutX="265.0" layoutY="332.0" text="6." />
       <Label layoutX="379.0" layoutY="329.0" text="7." />
       <Label layoutX="533.0" layoutY="329.0" text="8." />
-      <TextArea editable="false" layoutX="63.0" layoutY="379.0" prefHeight="130.0" prefWidth="466.0" text="1. Alcohol Type Selection: Select wether you are looking for Wine, Beer or Distilled Spirits.&#10;2. Date Range: Select the range of dates from which the form(s) was/were submitted.&#10;3. Additional Info: Select another Unique Identitfier to search with.&#10;4. Search Results Box: Will display links to Alcohol Information Pages that match your search.&#10;5. Display Entire Database: Will display the entire database of all registered Alcohol Labels on the COLA Registry.&#10;6. Download Results: Download your search results into an CSV file.&#10;7. Advanced Search: Provides options for more indepth search into items from search results.&#10;8. Search: Initiate Search of Database.&#10;9. Return to Search Page." wrapText="true" />
+      <TextArea editable="false" layoutX="63.0" layoutY="373.0" prefHeight="130.0" prefWidth="466.0" text="1. Alcohol Type Selection: Select wether you are looking for Wine, Beer or Distilled Spirits.&#10;2. Date Range: Select the range of dates from which the form(s) was/were submitted.&#10;3. Additional Info: Select another Unique Identitfier to search with.&#10;4. Search Results Box: Will display links to Alcohol Information Pages that match your search.&#10;5. Display Entire Database: Will display the entire database of all registered Alcohol Labels on the COLA Registry.&#10;6. Download Results: Download your search results into an CSV file.&#10;7. Advanced Search: Provides options for more indepth search into items from search results.&#10;8. Search: Initiate Search of Database.&#10;9. Return to Search Page." wrapText="true" />
       <Separator layoutX="37.0" layoutY="50.0" orientation="VERTICAL" prefHeight="321.0" prefWidth="7.0" />
       <Separator layoutX="40.0" layoutY="368.0" prefHeight="6.0" prefWidth="512.0" />
       <Separator layoutX="546.0" layoutY="50.0" orientation="VERTICAL" prefHeight="321.0" prefWidth="13.0" />
       <Separator layoutX="39.0" layoutY="47.0" prefHeight="9.0" prefWidth="513.0" />
-      <Button fx:id="backButton" layoutX="5.0" layoutY="489.0" mnemonicParsing="false" onAction="#goBack" text="Back" />
+      <Button fx:id="backButton" layoutX="5.0" layoutY="474.0" mnemonicParsing="false" onAction="#goBack" text="Back" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="17.0" layoutX="2.0" layoutY="508.0" stroke="#ffffff00" strokeType="INSIDE" width="600.0">
+         <fill>
+            <LinearGradient endX="0.08173076923076923" endY="1.0" startX="1.0" startY="1.0">
+               <stops>
+                  <Stop color="#ff2121fe" />
+                  <Stop color="WHITE" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Rectangle>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="17.0" layoutY="-2.0" stroke="TRANSPARENT" strokeType="INSIDE" width="600.0">
+         <fill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop color="#1f1fffdc" />
+                  <Stop color="WHITE" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Rectangle>
    </children>
 </AnchorPane>
