@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.NewLabelController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.NewLabelController">
     <children>
         <Label layoutX="15.0" layoutY="15.0" text="Info:">
             <font>
@@ -18,8 +18,8 @@
             </font>
         </Label>
         <Button fx:id="ChooseFile" layoutX="226.0" layoutY="915.0" mnemonicParsing="false" onAction="#chooseFile" prefHeight="25.0" prefWidth="100.0" text="Choose File:" />
-        <Button fx:id="Submit" layoutX="899.0" layoutY="951.0" mnemonicParsing="false" onAction="#fillOutApplication" prefHeight="41.0" prefWidth="85.0" text="Submit" />
-        <Button layoutX="800.0" layoutY="951.0" mnemonicParsing="false" onAction="#setClear" prefHeight="41.0" prefWidth="85.0" text="Clear" />
+        <Button fx:id="Submit" layoutX="908.0" layoutY="951.0" mnemonicParsing="false" onAction="#fillOutApplication" prefHeight="41.0" prefWidth="85.0" text="Submit" />
+        <Button layoutX="658.0" layoutY="951.0" mnemonicParsing="false" onAction="#setClear" prefHeight="41.0" prefWidth="85.0" text="Clear" />
         <Label layoutX="17.0" layoutY="73.0" text="Rep ID Number:">
             <font>
                 <Font name="Constantia" size="24.0" />
@@ -301,5 +301,6 @@
          </font>
       </Label>
       <TextArea layoutX="14.0" layoutY="714.0" prefHeight="75.0" prefWidth="970.0" />
+      <Button fx:id="exportButton" layoutX="788.0" layoutY="951.0" mnemonicParsing="false" onAction="#exportPDF" prefHeight="41.0" prefWidth="113.0" text="Export to PDF" />
     </children>
 </Pane>

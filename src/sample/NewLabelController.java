@@ -532,5 +532,10 @@ public class NewLabelController{
             work.switchScene("NewHelp.fxml","Help");
     }
 
+    public void exportPDF () {
+
+
+    }
+
 
 }
