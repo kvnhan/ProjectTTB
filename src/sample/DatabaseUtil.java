@@ -1292,6 +1292,55 @@ public class DatabaseUtil {
         return ttbid;
     }
 
+    /**
+     * Returns a list of TItem Accounts with children of the forms assigned to them
+     * @return
+     * @throws SQLException
+     */
+    public ArrayList<TreeItem<TItem>> getAccountItems() throws SQLException {
+        ArrayList<TreeItem<TItem>> list = new ArrayList<>();
+        PreparedStatement getAccs = conn.prepareStatement("SELECT AID, USERNAME, USER_TYPE FROM ACCOUNT WHERE USER_TYPE = 1");
+
+        ResultSet rs =  getAccs.executeQuery();
+
+        while(rs.next()){
+            int aid = rs.getInt("AID");
+            TreeItem<TItem> item = new TreeItem<TItem>(new AccountItem(aid,rs.getString("USERNAME")));
+            item.getChildren().addAll(getFormItems(aid));
+            list.add(item);
+        }
+
+        rs.close();
+        getAccs.close();
+
+        return list;
+    }
+
+    /**
+     * Returns a list of TItem forms that are assigned to government worker with aid
+     * @param aid
+     * @return
+     * @throws SQLException
+     */
+    public ArrayList<TreeItem<TItem>> getFormItems(int aid) throws SQLException {
+        ArrayList<TreeItem<TItem>> list = new ArrayList<>();
+        PreparedStatement getForms = conn.prepareStatement("SELECT TTBID, BRANDNAME, FANCYNAME FROM FORM WHERE GOVID = ?");
+        getForms.setInt(1,aid);
+
+        ResultSet rs =  getForms.executeQuery();
+
+        while(rs.next()){
+            list.add(new TreeItem<TItem>(new FormItem(rs.getString("FANCYNAME"), rs.getString("TTBID"),rs.getString("BRANDNAME"))));
+        }
+
+        return list;
+    }
+
 
 }
+
+
+
+
+
 
