@@ -34,7 +34,7 @@ public class NewAppController {
             screenUtil.switchScene("ReviseMenu.fxml", "Revise Application");
         }
     }
-
+/*
     public void initialize(){
 
         try {
@@ -48,6 +48,6 @@ public class NewAppController {
         }
 
     }
-
+*/
 
 }
