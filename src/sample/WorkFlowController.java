@@ -21,6 +21,7 @@ public class WorkFlowController {
     private DatabaseUtil databaseUtil = new DatabaseUtil();
     private String username = accountsUtil.getUsername();
     private int numberOfApps;
+    private static ApplicationData rowChosen;
 
     private ObservableList<ApplicationData> observableFormsList;
 
@@ -34,19 +35,23 @@ public class WorkFlowController {
         numberOfApplicationsLabel.setText(String.valueOf(numberOfApps));
 
         observableFormsList = FXCollections.observableList(formsList);
-
-        inboxTable.setRowFactory(tv -> {
-            TableRow<ApplicationData> row = new TableRow<ApplicationData>();
-            final ApplicationData[] rowData = new ApplicationData[1];
-            row.setOnMouseClicked(event -> {
-                rowData[0] = row.getItem();
-                if(event.getClickCount() == 2 && (! row.isEmpty())){
-                    /*screenUtil.switchScene();*/
-                }
+        if(numberOfApps > 0){
+            inboxTable.setRowFactory(tv -> {
+                TableRow<ApplicationData> row = new TableRow<ApplicationData>();
+                final ApplicationData[] rowData = new ApplicationData[1];
+                row.setOnMouseClicked(event -> {
+                    rowData[0] = row.getItem();
+                    rowChosen = rowData[0];
+                    if(event.getClickCount() == 2 && (! row.isEmpty())){
+                        ApplicationReviewController.setAppReviewMode(2);
+                        screenUtil.switchScene("ApplicationReview.fxml", "Application Review");
+                    }
+                });
+                row.setTooltip(new Tooltip("Double click to open application"));
+                return row;
             });
-            row.setTooltip(new Tooltip("Double click to open application" + rowData[0].getFormID()));
-            return row;
-        });
+        }
+
 
         displayResults();
     }
@@ -90,16 +95,25 @@ public class WorkFlowController {
      * Switches to the ApplicationReview screen.
      * @param event Button press representing the ViewFirst button.
      */
-    public void viewFirstApplicationButton(ActionEvent event){
+    public void viewAllApplicationsButton(ActionEvent event){
         if(numberOfApps <= 0){
             screenUtil.switchScene("WorkFlowController.fxml", "Inbox");
             screenUtil.createAlertBox("No applications due","There are no applications assigned to you at the moment.");
         }else{
+            ApplicationReviewController.setAppReviewMode(1);
             screenUtil.switchScene("ApplicationReview.fxml", "Application Review");
         }
     }
 
     public ObservableList<ApplicationData> getObservableFormsList() {
         return observableFormsList;
+    }
+
+    public static ApplicationData getRowChosen() {
+        return rowChosen;
+    }
+
+    public static void setRowChosen(ApplicationData rowChosen) {
+        WorkFlowController.rowChosen = rowChosen;
     }
 }
