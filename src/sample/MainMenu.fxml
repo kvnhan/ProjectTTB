@@ -22,6 +22,7 @@
     <Button fx:id="aboutButton" layoutX="277.0" layoutY="30.0" mnemonicParsing="false" onAction="#buttonClicked" prefHeight="27.0" prefWidth="59.0" text="About" />
       <ImageView fx:id="colaImage" fitHeight="59.0" fitWidth="206.0" layoutX="130.0" layoutY="60.0" pickOnBounds="true" />
       <ImageView fx:id="symbolImage" fitHeight="59.0" fitWidth="81.0" layoutX="30.0" layoutY="57.0" pickOnBounds="true" preserveRatio="true" />
+      <Button fx:id="superUserButton" layoutX="256.0" layoutY="139.0" mnemonicParsing="false" onAction="#SuperUser" text="SuperUser" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" height="17.0" layoutY="347.0" stroke="#ffffff00" strokeType="INSIDE" width="372.0">
          <fill>
             <LinearGradient endX="0.08173076923076923" endY="1.0" startX="1.0" startY="1.0">
