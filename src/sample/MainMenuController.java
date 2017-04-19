@@ -34,17 +34,17 @@ public class MainMenuController{
         userIDText.setText(username);
 
         if(username.toLowerCase().equals("guest")){
-            openInboxButton.setDisable(true);
+            openInboxButton.setVisible(false);
             superUserButton.setVisible(false);
             createNewApplicationButton.setDisable(true);
             logOutButton.setDisable(false);
             superUserButton.setVisible(false);
         }else if(databaseUtil.searchAccountWithUsername(username).get(0).getUserType() == 3){
-            openInboxButton.setDisable(true);
+            openInboxButton.setVisible(false);
             superUserButton.setVisible(false);
             createNewApplicationButton.setDisable(true);
         }else if(databaseUtil.searchAccountWithUsername(username).get(0).getUserType() == 2){
-            openInboxButton.setDisable(true);
+            openInboxButton.setVisible(false);
             superUserButton.setVisible(false);
         }else if(databaseUtil.searchAccountWithUsername(username).get(0).getUserType() == 1){
             createNewApplicationButton.setDisable(true);
