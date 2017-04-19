@@ -13,7 +13,7 @@
   <children>
     <Button id="toSearchButton" fx:id="openSearchButton" layoutX="107.0" layoutY="151.0" maxWidth="140.0" minWidth="140.0" mnemonicParsing="false" onAction="#buttonClicked" prefHeight="47.0" prefWidth="140.0" text="Search" />
     <Button id="toInbox" fx:id="openInboxButton" layoutX="107.0" layoutY="295.0" maxWidth="140.0" minWidth="140.0" mnemonicParsing="false" onAction="#buttonClicked" prefWidth="140.0" text="Inbox" />
-    <Button id="toNewApplication" fx:id="createNewApplicationButton" layoutX="107.0" layoutY="221.0" maxWidth="140.0" minWidth="140.0" mnemonicParsing="false" onAction="#buttonClicked" prefHeight="47.0" prefWidth="140.0" text="New Application" />
+    <Button id="toNewApplication" fx:id="createNewApplicationButton" layoutX="107.0" layoutY="221.0" maxWidth="140.0" minWidth="140.0" mnemonicParsing="false" onAction="#buttonClicked" prefHeight="47.0" prefWidth="140.0" text="Application Menu" />
     <Button fx:id="logOutButton" layoutX="17.0" layoutY="34.0" maxWidth="140.0" minWidth="59.0" mnemonicParsing="false" onAction="#buttonClicked" prefHeight="17.0" prefWidth="59.0" text="Log Out">
          <font>
             <Font size="11.0" />
