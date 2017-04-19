@@ -103,7 +103,7 @@ public class MainMenuController{
     }
 
     public void SuperUser(ActionEvent event){
-
+      work.switchScene("SuperUser.fxml", "Super User");
     }
 
 
