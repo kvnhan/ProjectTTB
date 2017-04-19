@@ -525,25 +525,27 @@ public class DatabaseUtil {
         rset = stmt.executeQuery(query);
 
         while(rset.next()){
-            int AID = rset.getInt("AID");
-            String name = String.format("%1$"+25+ "s", rset.getString("NAME")).trim();
-            String brandname = String.format("%1$"+25+ "s", rset.getString("BRAND_NAME")).trim();
-            String appelation = String.format("%1$"+22+ "s", rset.getString("APPELLATION")).trim();
-            String sulfiteDesc = String.format("%1$"+22+ "s", rset.getString("SULFITE_DESC")).trim();
-            double alchContent = rset.getDouble("ALCH_CONTENT");
-            double netContent = rset.getDouble("NET_CONTENT");
-            String healthWarning = String.format("%1$"+22+ "s", rset.getString("HEALTH_WARNING")).trim();
-            int productType = rset.getInt("PRODUCT_TYPE");
-            int classType = rset.getInt("CLASS");
-            String labelLegibility = String.format("%1$"+22+ "s", rset.getString("LABEL_LEGIBILLITY")).trim();
-            int labelSize = rset.getInt("LABEL_SIZE");
-            String formulas = String.format("%1$"+22+ "s", rset.getString("FORMULAS")).trim();
-            int alchType = rset.getInt("ALCOHOL_TYPE");
-            String bottlersInfo = String.format("%1$"+22+ "s", rset.getString("BOTTLERS_INFO")).trim();
-            String imageName = String.format("%1$"+22+ "s", rset.getString("PICTURE")).trim();
+            if(rset.getString("STATUS").toUpperCase().equals("")){
+                int AID = rset.getInt("AID");
+                String name = String.format("%1$"+25+ "s", rset.getString("NAME")).trim();
+                String brandname = String.format("%1$"+25+ "s", rset.getString("BRAND_NAME")).trim();
+                String appelation = String.format("%1$"+22+ "s", rset.getString("APPELLATION")).trim();
+                String sulfiteDesc = String.format("%1$"+22+ "s", rset.getString("SULFITE_DESC")).trim();
+                double alchContent = rset.getDouble("ALCH_CONTENT");
+                double netContent = rset.getDouble("NET_CONTENT");
+                String healthWarning = String.format("%1$"+22+ "s", rset.getString("HEALTH_WARNING")).trim();
+                int productType = rset.getInt("PRODUCT_TYPE");
+                int classType = rset.getInt("CLASS");
+                String labelLegibility = String.format("%1$"+22+ "s", rset.getString("LABEL_LEGIBILLITY")).trim();
+                int labelSize = rset.getInt("LABEL_SIZE");
+                String formulas = String.format("%1$"+22+ "s", rset.getString("FORMULAS")).trim();
+                int alchType = rset.getInt("ALCOHOL_TYPE");
+                String bottlersInfo = String.format("%1$"+22+ "s", rset.getString("BOTTLERS_INFO")).trim();
+                String imageName = String.format("%1$"+22+ "s", rset.getString("PICTURE")).trim();
 
-            a = new AlcoholData(AID, name, brandname, appelation, sulfiteDesc, alchContent, netContent, healthWarning, productType, classType, labelLegibility, labelSize, formulas, alchType, bottlersInfo, imageName);
-            AlcoholDataList.add(a);
+                a = new AlcoholData(AID, name, brandname, appelation, sulfiteDesc, alchContent, netContent, healthWarning, productType, classType, labelLegibility, labelSize, formulas, alchType, bottlersInfo, imageName);
+                AlcoholDataList.add(a);
+            }
         }
 
         return AlcoholDataList;

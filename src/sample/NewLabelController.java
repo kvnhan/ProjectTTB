@@ -75,9 +75,6 @@ public class NewLabelController{
     @FXML private Button clear;
     @FXML private Button helpNewButton;
     private String filepath;
-    Connection cn;
-    Statement sm;
-
     @FXML
     /**
      * Clears information from the screen.
@@ -355,8 +352,8 @@ public class NewLabelController{
         if(!pH.getText().trim().isEmpty()){
             try{
                 ph_level = Double.parseDouble(pH.getText());
-                if(ph_level > max || ph_level > 12 || ph_level < 0){
-                    work.createAlertBox("ERROR", "Invalid Input");
+                if(ph_level > 14 || ph_level < 0){
+                    work.createAlertBox("ERROR", "Invalid Input for PH ");
                     valid = false;
                 }
             }catch (NumberFormatException e){
@@ -411,7 +408,7 @@ public class NewLabelController{
                     submitWine(Data);
 
                     // Add to alcohol
-                    db.addAlcohol(fancyName, appellation, sulfiteDesc, alcoholContentDouble, netContentDouble, healthWarningText, type1, 0, "n/a", 0, "n/a", 2, bottlerInfo, brand_name);
+                    db.addAlcohol(fancyName, appellation, sulfiteDesc, alcoholContentDouble, netContentDouble, healthWarningText, 0, 0, "n/a", 0, "n/a", 2, bottlerInfo, brand_name);
 
                     System.out.println("It Works");
                     work.switchScene("NewApp.fxml", "New Application");
