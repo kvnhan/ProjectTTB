@@ -23,10 +23,10 @@
       <TableView fx:id="inboxTable" layoutX="11.0" layoutY="94.0" prefHeight="234.0" prefWidth="575.0">
         <columns>
           <TableColumn fx:id="ttbIDColumn" prefWidth="75.0" text="TTB ID" />
-          <TableColumn fx:id="fancifulNameColumn" prefWidth="150.0" text="Name" />
-          <TableColumn fx:id="brandNameColumn" prefWidth="150.0" text="Brand Name" />
-          <TableColumn fx:id="alcoholTypeColumn" prefWidth="75.0" text="Type" />
-          <TableColumn fx:id="submissionDateColumn" prefWidth="125.0" text="Date Submitted" />
+          <TableColumn fx:id="fancifulNameColumn" prefWidth="100.0" text="Name" />
+          <TableColumn fx:id="brandNameColumn" prefWidth="100.0" text="Brand Name" />
+          <TableColumn fx:id="alcoholTypeColumn" prefWidth="100.0" text="Type" />
+          <TableColumn fx:id="submissionDateColumn" prefWidth="200.0" text="Date Submitted" />
         </columns>
       </TableView>
       <Rectangle arcHeight="5.0" arcWidth="5.0" height="17.0" layoutY="400.0" stroke="#ffffff00" strokeType="INSIDE" width="600.0">

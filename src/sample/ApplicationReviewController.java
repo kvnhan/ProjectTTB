@@ -71,12 +71,14 @@ public class ApplicationReviewController{
      */
     void setAccepted(ActionEvent event) throws SQLException{
         dbUtil.decideApplicationAction("ACCEPTED", thisForm, commentsField);
+        nextApplication();
     }
 
 
     @FXML
     void setIncomplete(ActionEvent event) throws SQLException{
         dbUtil.decideApplicationAction("INCOMPLETE", thisForm, commentsField);
+        nextApplication();
     }
 
     @FXML
@@ -86,6 +88,7 @@ public class ApplicationReviewController{
 
     public void setReject(ActionEvent event) throws SQLException {
         dbUtil.decideApplicationAction("ACCEPTED", thisForm, commentsField);
+        nextApplication();
     }
 
     /**

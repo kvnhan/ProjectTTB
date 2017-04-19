@@ -49,7 +49,6 @@ public class ScreenUtil {
             previousScene = mainWindow.getScene();
             mainWindow.setTitle(title);
             mainWindow.setScene(new Scene(root1));
-            mainWindow.setResizable(false);
             mainWindow.show();
         } catch (Exception e) {
             e.printStackTrace();

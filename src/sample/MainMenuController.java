@@ -43,7 +43,6 @@ public class MainMenuController{
             superUserButton.setVisible(false);
             createNewApplicationButton.setVisible(false);
         }else if(databaseUtil.searchAccountWithUsername(username).get(0).getUserType() == 2){
-            openInboxButton.setVisible(false);
             superUserButton.setVisible(false);
         }else if(databaseUtil.searchAccountWithUsername(username).get(0).getUserType() == 1){
             createNewApplicationButton.setVisible(false);

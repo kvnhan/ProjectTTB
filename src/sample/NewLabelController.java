@@ -34,7 +34,6 @@ public class NewLabelController{
     ScreenUtil work = new ScreenUtil();
 
     @FXML private TextField myFilePath;
-    @FXML private TextField ID;
     @FXML private TextField RepID;
     @FXML private TextField PlantReg;
     @FXML private TextField SerialNo;
@@ -125,8 +124,8 @@ public class NewLabelController{
     public void fillOutApplication() throws SQLException{
 
         boolean valid = true;
-        int fid = 1;
-        int ttbid = 0;
+        int fid;
+        String ttbid = db.getNewTTBID();
         int repid = 0;
         String serial = "";
         String address;
@@ -171,23 +170,6 @@ public class NewLabelController{
                 }
             }
         }
-
-        if(!ID.getText().trim().isEmpty()) {
-            try {
-                ttbid = Integer.parseInt(ID.getText());
-                if (ttbid > max) {
-                    work.createAlertBox("ERROR", "Input for TTBID is too big");
-                    valid = false;
-                }
-            } catch (NumberFormatException e) {
-                work.createAlertBox("ERROR", "Invalid Input for TTBID");
-                valid = false;
-            }
-        }else{
-            work.createAlertBox("ERROR", "TTBID is empty");
-            valid = false;
-        }
-
 
         if(!RepID.getText().trim().isEmpty()) {
             try {
@@ -362,6 +344,7 @@ public class NewLabelController{
 
         AcceptanceInformation acceptanceInfo = new AcceptanceInformation(date, applicantName,
                 null, "UNASSIGNED");
+
         if (wine.isSelected()) {
             WineApplicationData Data = new WineApplicationData(fid, acceptanceInfo,ttbid, repid, serial,address,
                     fancyName, formula, grape_varietal, appellation, permit_no, infoOnBottle,
@@ -416,8 +399,7 @@ public class NewLabelController{
      * @throws SQLException
      */
     public void submitWine(WineApplicationData wd)throws SQLException{
-        int fid = wd.getFormID();
-        int ttbid = wd.getTtbid();
+        String ttbid = wd.getTtbid();
         int repid = wd.getRepid();
         String serial = wd.getSerial();
         String address = wd.getAddress();
@@ -469,7 +451,7 @@ public class NewLabelController{
      * @throws SQLException
      */
     public void submitBeer(BeerApplicationData bd) throws SQLException{
-        int ttbid = bd.getTtbid();
+        String ttbid = bd.getTtbid();
         int repid = bd.getRepid();
         String serial = bd.getSerial();
         String address = bd.getAddress();
@@ -495,11 +477,12 @@ public class NewLabelController{
         db.addBeerForm(ttbid, repid, serial, address, fancyName, formula, permit_no, infoOnBottle, source_of_product, type_of_product, brand_name, phone_number, email,
                 dateFormat, applicantName, alcoholType, alcoholContent, status, type1, type2, type3);
 
+
         roundRobin();
     }
 
     public void submitDistilledSpirits(BeerApplicationData bd) throws SQLException{
-        int ttbid = bd.getTtbid();
+        String ttbid = bd.getTtbid();
         int repid = bd.getRepid();
         String serial = bd.getSerial();
         String address = bd.getAddress();

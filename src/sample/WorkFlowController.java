@@ -43,7 +43,7 @@ public class WorkFlowController {
         numberOfApplicationsLabel.setText(String.valueOf(numberOfApps));
 
         observableFormsList = FXCollections.observableList(formsList);
-        if(numberOfApps > 0){
+        if(numberOfApps > 0 && activeUser.getUserType() == 1){
             inboxTable.setRowFactory(tv -> {
                 TableRow<ApplicationData> row = new TableRow<ApplicationData>();
                 final ApplicationData[] rowData = new ApplicationData[1];
@@ -82,10 +82,16 @@ public class WorkFlowController {
 
     public void displayResults(){
         inboxTable.getColumns().clear();
+
+        if(activeUser.getUserType() == 2) {
+            alcoholTypeColumn.setText("Status");
+            alcoholTypeColumn.setCellValueFactory(new PropertyValueFactory<>("Status"));
+        }else{
+                alcoholTypeColumn.setCellValueFactory(new PropertyValueFactory<>("AlcoholType"));
+        }
         ttbIDColumn.setCellValueFactory(new PropertyValueFactory<>("Ttbid"));
         fancifulNameColumn.setCellValueFactory(new PropertyValueFactory<>("FancyName"));
         brandNameColumn.setCellValueFactory(new PropertyValueFactory<>("Brand_name"));
-        alcoholTypeColumn.setCellValueFactory(new PropertyValueFactory<>("AlcoholType"));
         submissionDateColumn.setCellValueFactory(new PropertyValueFactory<>("Date"));
         inboxTable.setItems(this.getObservableFormsList());
         inboxTable.getColumns().addAll(ttbIDColumn, fancifulNameColumn, brandNameColumn, alcoholTypeColumn, submissionDateColumn);
