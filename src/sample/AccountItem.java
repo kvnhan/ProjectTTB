@@ -3,7 +3,7 @@ package sample;
 /**
  * Created by John on 4/19/2017.
  */
-public class AccountItem implements  TreeItem{
+public class AccountItem implements TItem {
     private int aid;
     private String username;
     private String userType;
@@ -16,7 +16,12 @@ public class AccountItem implements  TreeItem{
 
     @Override
     public String getData1() {
-        return aid+"";
+        if(aid == 0){
+            return "";
+        }
+        else{
+            return aid+"";
+        }
     }
 
     @Override
