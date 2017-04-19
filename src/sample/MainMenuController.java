@@ -35,20 +35,20 @@ public class MainMenuController{
 
         if(username.toLowerCase().equals("guest")){
             openInboxButton.setDisable(true);
-            superUserButton.setDisable(true);
+            superUserButton.setVisible(false);
             createNewApplicationButton.setDisable(true);
             logOutButton.setDisable(false);
-            superUserButton.setDisable(true);
+            superUserButton.setVisible(false);
         }else if(databaseUtil.searchAccountWithUsername(username).get(0).getUserType() == 3){
             openInboxButton.setDisable(true);
-            superUserButton.setDisable(true);
+            superUserButton.setVisible(false);
             createNewApplicationButton.setDisable(true);
         }else if(databaseUtil.searchAccountWithUsername(username).get(0).getUserType() == 2){
             openInboxButton.setDisable(true);
-            superUserButton.setDisable(true);
+            superUserButton.setVisible(false);
         }else if(databaseUtil.searchAccountWithUsername(username).get(0).getUserType() == 1){
             createNewApplicationButton.setDisable(true);
-            superUserButton.setDisable(true);
+            superUserButton.setVisible(false);
         }
 
 
