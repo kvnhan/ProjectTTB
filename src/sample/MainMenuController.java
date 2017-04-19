@@ -51,6 +51,8 @@ public class MainMenuController{
 
 
 
+
+        /*
         try {
             InputStream resource = ScreenUtil.class.getClassLoader().getResourceAsStream("resources/COLARegistry.png");
             colaImage.setImage(new javafx.scene.image.Image(resource, 500.0, 0.0, true, true));
@@ -70,7 +72,7 @@ public class MainMenuController{
             symbolImage.setImage(new javafx.scene.image.Image(resource, 100.0, 0.0, true, true));
             System.out.println("Image Was Not Found");
         }
-
+        */
 
 
     }
@@ -102,7 +104,7 @@ public class MainMenuController{
     }
 
     public void SuperUser(ActionEvent event){
-      work.switchScene("SuperUser.fxml", "Super User");
+      work.switchScene("supervisorView.fxml", "Super User");
     }
 
 
