@@ -29,6 +29,21 @@ public class FormItem implements TItem {
         return fancyName;
     }
 
+    @Override
+    public String getText1() {
+        return "TTBID";
+    }
+
+    @Override
+    public String getText2() {
+        return "Brandname";
+    }
+
+    @Override
+    public String getText3() {
+        return "Fanciful Name";
+    }
+
     public String toString(){
         return ttbid;
     }

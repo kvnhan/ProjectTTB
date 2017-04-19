@@ -34,6 +34,21 @@ public class AccountItem implements TItem {
         return userType;
     }
 
+    @Override
+    public String getText1() {
+        return "Account ID";
+    }
+
+    @Override
+    public String getText2() {
+        return "Username";
+    }
+
+    @Override
+    public String getText3() {
+        return "UserType";
+    }
+
     public String toString(){
         return username;
     }

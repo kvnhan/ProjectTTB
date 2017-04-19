@@ -1,5 +1,7 @@
 package sample;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TreeItem;
@@ -36,13 +38,28 @@ public class SupervisorController {
         view = new TreeView<>();
         TreeItem<TItem> root = new TreeItem<TItem>(new AccountItem(0,accountsUtil.getUsername()));
         ArrayList<TreeItem<TItem>> list = databaseUtil.getAccountItems();
-
         root.getChildren().addAll(list);
 
 
+        view.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<TreeItem<TItem>>() {
+            @Override
+            public void changed(ObservableValue<? extends TreeItem<TItem>> observable, TreeItem<TItem> oldValue, TreeItem<TItem> newValue) {
+                if(newValue == null){
+                    return;
+                }
+                else{
+                    TItem value = newValue.getValue();
+                    text1.setText(value.getText1());
+                    text2.setText(value.getText2());
+                    text3.setText(value.getText3());
+                    field1.setText(value.getData1());
+                    field2.setText(value.getData2());
+                    field3.setText(value.getData3());
+                }
+            }
+        });
+
     }
 
-    private void addAccount(TreeItem<TItem> root) {
 
-    }
 }
