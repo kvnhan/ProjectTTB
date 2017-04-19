@@ -29,7 +29,7 @@
           <String fx:value="Government Agent" />
           <String fx:value="Manufacturer" />
           <String fx:value="Public User" />
-          <String fx:value="Supa Usa" />
+          <String fx:value="SuperUser" />
         </FXCollections>
       </items>
     </ChoiceBox>

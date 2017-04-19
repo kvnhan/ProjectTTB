@@ -36,18 +36,17 @@ public class MainMenuController{
         if(username.toLowerCase().equals("guest")){
             openInboxButton.setVisible(false);
             superUserButton.setVisible(false);
-            createNewApplicationButton.setDisable(true);
-            logOutButton.setDisable(false);
+            createNewApplicationButton.setVisible(false);
             superUserButton.setVisible(false);
         }else if(databaseUtil.searchAccountWithUsername(username).get(0).getUserType() == 3){
             openInboxButton.setVisible(false);
             superUserButton.setVisible(false);
-            createNewApplicationButton.setDisable(true);
+            createNewApplicationButton.setVisible(false);
         }else if(databaseUtil.searchAccountWithUsername(username).get(0).getUserType() == 2){
             openInboxButton.setVisible(false);
             superUserButton.setVisible(false);
         }else if(databaseUtil.searchAccountWithUsername(username).get(0).getUserType() == 1){
-            createNewApplicationButton.setDisable(true);
+            createNewApplicationButton.setVisible(false);
             superUserButton.setVisible(false);
         }
 
@@ -103,7 +102,7 @@ public class MainMenuController{
         }
     }
 
-    public void supaUsa(ActionEvent event){
+    public void SuperUser(ActionEvent event){
 
     }
 

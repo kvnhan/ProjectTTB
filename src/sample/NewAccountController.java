@@ -71,7 +71,7 @@ public class NewAccountController {
                 userType = 2;
             }else if(accountChoice.equals("Public User")){
                 userType = 3;
-            }else if(accountChoice.equals("Supa Usa")){
+            }else if(accountChoice.equals("SuperUser")){
                 userType = 0;
             }
 

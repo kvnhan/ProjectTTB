@@ -19,6 +19,6 @@
     <Button fx:id="aboutButton" layoutX="277.0" layoutY="12.0" mnemonicParsing="false" onAction="#buttonClicked" prefHeight="27.0" prefWidth="59.0" text="About" />
       <ImageView fx:id="colaImage" fitHeight="59.0" fitWidth="188.0" layoutX="133.0" layoutY="43.0" pickOnBounds="true" />
       <ImageView fx:id="symbolImage" fitHeight="59.0" fitWidth="81.0" layoutX="40.0" layoutY="43.0" pickOnBounds="true" preserveRatio="true" />
-      <Button fx:id="superUserButton" layoutX="256.0" layoutY="139.0" mnemonicParsing="false" onAction="#supaUsa" text="Supa Usa" />
+      <Button fx:id="superUserButton" layoutX="256.0" layoutY="139.0" mnemonicParsing="false" onAction="#SuperUser" text="SuperUser" />
   </children>
 </AnchorPane>
