@@ -127,10 +127,12 @@ public class SearchMenuController {
         else if (isOtherBox.isSelected() && isBeerBox.isSelected()) {
             alcoholDataList = dbUtil.searchAlcoholWithType(BEER);
             alcoholDataList.addAll(dbUtil.searchAlcoholWithType(DISTILLED));
+            alcoholDataList = interesectAlcoholData(searchByChoice(), alcoholDataList);
         }
         else if (isOtherBox.isSelected() && isWineBox.isSelected()) {
             alcoholDataList = dbUtil.searchAlcoholWithType(WINE);
             alcoholDataList.addAll(dbUtil.searchAlcoholWithType(DISTILLED));
+            alcoholDataList = interesectAlcoholData(searchByChoice(), alcoholDataList);
         }
         else if(isWineBox.isSelected() || isBeerBox.isSelected() || isOtherBox.isSelected()){
             if (isBeerBox.isSelected()){
