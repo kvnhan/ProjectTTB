@@ -9,7 +9,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="411.0" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.NewAppController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="411.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.NewAppController">
     <children>
         <Label layoutX="88.0" layoutY="65.0" text="Application Update">
             <font>
@@ -17,9 +17,9 @@
             </font>
         </Label>
         <Button fx:id="back" layoutX="14.0" layoutY="348.0" mnemonicParsing="false" onAction="#buttonClicked" text="Back" />
-        <Button fx:id="newApp" layoutX="135.0" layoutY="120.0" mnemonicParsing="false" onAction="#buttonClicked" prefHeight="51.0" prefWidth="141.0" text="Create New Application" textAlignment="CENTER" wrapText="true" />
-        <Button fx:id="oldApp" layoutX="135.0" layoutY="267.0" mnemonicParsing="false" onAction="#buttonClicked" prefHeight="44.0" prefWidth="141.0" text="Revise Old Application" textAlignment="CENTER" wrapText="true" />
-      <Button fx:id="Updates" layoutX="135.0" layoutY="189.0" mnemonicParsing="false" onAction="#buttonClicked" prefHeight="51.0" prefWidth="141.0" text="Label Revisions Update" textAlignment="CENTER" wrapText="true" />
+        <Button fx:id="newApp" layoutX="109.0" layoutY="120.0" mnemonicParsing="false" onAction="#buttonClicked" prefHeight="51.0" prefWidth="180.0" text="Create New Application" textAlignment="CENTER" wrapText="true" />
+        <Button fx:id="oldApp" layoutX="109.0" layoutY="268.0" mnemonicParsing="false" onAction="#buttonClicked" prefHeight="44.0" prefWidth="180.0" text="Revise Old Application" textAlignment="CENTER" wrapText="true" />
+      <Button fx:id="Updates" layoutX="109.0" layoutY="189.0" mnemonicParsing="false" onAction="#buttonClicked" prefHeight="51.0" prefWidth="180.0" text="Label Revisions Update" textAlignment="CENTER" wrapText="true" />
       <ImageView fx:id="symbolImage" fitHeight="67.0" fitWidth="66.0" layoutX="5.0" layoutY="22.0" pickOnBounds="true" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" height="17.0" layoutY="-1.0" stroke="TRANSPARENT" strokeType="INSIDE" width="387.0">
          <fill>

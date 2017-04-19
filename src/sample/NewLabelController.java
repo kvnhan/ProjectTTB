@@ -29,11 +29,13 @@ import java.util.Random;
 public class NewLabelController{
 
     //  ApplicationUtil appUtil = new ApplicationUtil();
-        DatabaseUtil db = new DatabaseUtil();
+    DatabaseUtil db = new DatabaseUtil();
     WorkflowFacade facadeWork = new WorkflowFacade();
     ScreenUtil work = new ScreenUtil();
 
     @FXML private TextField myFilePath;
+    @FXML private ImageView image;
+    @FXML private TextField ID;
     @FXML private TextField RepID;
     @FXML private TextField PlantReg;
     @FXML private TextField SerialNo;
@@ -64,6 +66,7 @@ public class NewLabelController{
     @FXML private Button back;
     @FXML private Button clear;
     @FXML private Button helpNewButton;
+    private String filepath;
     Connection cn;
     Statement sm;
 
@@ -124,8 +127,8 @@ public class NewLabelController{
     public void fillOutApplication() throws SQLException{
 
         boolean valid = true;
-        int fid;
-        String ttbid = db.getNewTTBID();
+        int fid = 1;
+        String ttbid = "";
         int repid = 0;
         String serial = "";
         String address;
@@ -349,15 +352,11 @@ public class NewLabelController{
             WineApplicationData Data = new WineApplicationData(fid, acceptanceInfo,ttbid, repid, serial,address,
                     fancyName, formula, grape_varietal, appellation, permit_no, infoOnBottle,
                     source_of_product, type_of_product, brand_name, phone_number, email, date, applicantName,
-                    alcoholType, alcoholContent, type1, type2, type3, vintage_date, ph_level);
+                    alcoholType, alcoholContent, type1, type2, type3,vintage_date, ph_level);
             if(valid && work.createConfirmBox("Confirm", "Would you like to submit the form?")){
-                try{ submitWine(Data);
+                 submitWine(Data);
                     System.out.println("It Works");
                     work.switchScene("NewApp.fxml", "New Application");
-                }
-                catch(SQLException e){
-                    work.AlertBox("ERROR", "TTB-ID TAKEN");
-                }
             }
 
         } else if (beer.isSelected()) {
@@ -366,13 +365,9 @@ public class NewLabelController{
                     source_of_product, type_of_product, brand_name, phone_number, email, date, applicantName,
                     alcoholType, alcoholContent, type1, type2, type3);
             if(valid && work.createConfirmBox("Confirm", "Would you like to submit the form?")){
-                try{ submitBeer(Data);
+                submitBeer(Data);
                     System.out.println("This works");
                     work.switchScene("NewApp.fxml", "New Application");
-                }
-                catch(SQLException e){
-                    work.AlertBox("ERROR", "TTB-ID TAKEN");
-                }
             }
 
         } else if (other.isSelected()) {
@@ -381,13 +376,10 @@ public class NewLabelController{
                     source_of_product, type_of_product, brand_name, phone_number, email, date, applicantName,
                     alcoholType, alcoholContent, type1, type2, type3);
             if(valid && work.createConfirmBox("Confirm", "Would you like to submit the form?")){
-               try{ submitDistilledSpirits(Data);
+               submitDistilledSpirits(Data);
                    System.out.println("This works too");
                    work.switchScene("NewApp.fxml", "New Application");
-               }
-               catch(SQLException e){
-                   work.AlertBox("ERROR", "TTB-ID TAKEN");
-               }
+
             }
         }
 
@@ -438,11 +430,17 @@ public class NewLabelController{
      * Chooses an image file for the label.
      * @param event "Choose File" button pressed.
      */
-    public void chooseFile(ActionEvent event){
-        File tempFile = work.openFileChooser();
-        if (tempFile != null && tempFile.getPath() !=null) {
-            myFilePath.setText(tempFile.getPath());
-        }
+
+    public void chooseFile(ActionEvent event)throws Exception{
+            File tempFile = work.openFileChooser();
+            if (tempFile != null && tempFile.getPath() != null) {
+                //myFilePath.setText(tempFile.getPath());
+                filepath = tempFile.toURI().toURL().toString();
+                Image img = new Image(tempFile.toURI().toURL().toString());
+                image.setImage(img);
+            }
+
+            System.out.println(filepath);
     }
 
     /**

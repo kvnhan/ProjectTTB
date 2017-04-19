@@ -236,6 +236,7 @@ public class ReviseAppController {
                 EmailAddress1.setText(beer.getEmail());
                 Address1.setText(beer.getAddress());
                 MailingAddress1.setText(beer.getAddress());
+
                 if(dataPasser.getDisableAlcoContentField() == 1){
                     Content1.setEditable(false);
                 }
