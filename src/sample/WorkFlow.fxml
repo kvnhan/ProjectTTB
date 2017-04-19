@@ -14,13 +14,13 @@
         <Font size="24.0" fx:id="x1" />
       </font>
     </Label>
-    <Button layoutX="516.0" layoutY="352.0" mnemonicParsing="false" onAction="#viewFirstApplicationButton" prefHeight="35.0" prefWidth="70.0" text="View First" />
+    <Button layoutX="516.0" layoutY="352.0" mnemonicParsing="false" onAction="#viewAllApplicationsButton" prefHeight="35.0" prefWidth="70.0" text="View All Aplications" />
     <Button fx:id="back" layoutX="10.0" layoutY="352.0" mnemonicParsing="false" onAction="#goBack" prefHeight="35.0" prefWidth="70.0" text="Back" />
     <Label fx:id="numberOfApplicationsLabel" font="$x1" layoutX="412.0" layoutY="53.0" text="0" />
       <TableView fx:id="inboxTable" layoutX="11.0" layoutY="94.0" prefHeight="234.0" prefWidth="575.0">
         <columns>
           <TableColumn fx:id="ttbIDColumn" prefWidth="75.0" text="TTB ID" />
-          <TableColumn fx:id="fancifulNameColumn" prefWidth="150.0" text="Fanciful Name" />
+          <TableColumn fx:id="fancifulNameColumn" prefWidth="150.0" text="Name" />
           <TableColumn fx:id="brandNameColumn" prefWidth="150.0" text="Brand Name" />
           <TableColumn fx:id="alcoholTypeColumn" prefWidth="75.0" text="Type" />
           <TableColumn fx:id="submissionDateColumn" prefWidth="125.0" text="Date Submitted" />

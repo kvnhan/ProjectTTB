@@ -455,25 +455,25 @@ public class DatabaseUtil {
     }
 
     public ArrayList<Account> searchAccountWithUserType(int userType) throws SQLException {
-        String query = "SELECT * FROM ACCOUNT WHERE ACCOUNT.USER_TYPE = '" + userType + "'";
+        String query = "SELECT * FROM ACCOUNT WHERE ACCOUNT.USER_TYPE = " + userType + "";
         return searchAccount(query);
     }
 
     public ArrayList<Account> searchAccountWithUsername(String username) throws SQLException {
-        String query = "SELECT * FROM ACCOUNT WHERE ACCOUNT.USERNAME = '" + username + "'";
+        String query = "SELECT * FROM ACCOUNT WHERE UPPER(ACCOUNT.USERNAME) LIKE UPPER('%" + username + "%')";
         return searchAccount(query);
     }
 
     // Code used to search Alcohol table based on alcohol type
     public List<AlcoholData> searchAlcoholWithType(int alcoholType) throws SQLException{
-        String query = "SELECT * FROM ALCOHOL WHERE ALCOHOL.ALCOHOL_TYPE = '" + alcoholType + "'";
+        String query = "SELECT * FROM ALCOHOL WHERE ALCOHOL.ALCOHOL_TYPE = " + alcoholType;
 
         return searchAlcoholTable(query);
     }
 
     // Code used to search Alcohol table based on brand name. Uses partial search
     public List<AlcoholData> searchAlcoholBrand(String brandName) throws SQLException{
-        String query = "SELECT * FROM ALCOHOL WHERE ALCOHOL.BRAND_NAME = '" + brandName + "'";
+        String query = "SELECT * FROM ALCOHOL WHERE UPPER(ALCOHOL.BRAND_NAME) LIKE UPPER('%" + brandName + "%')";
 
         return searchAlcoholTable(query);
     }
@@ -483,12 +483,12 @@ public class DatabaseUtil {
         return searchAlcoholTable(query);
     }
     public List<AlcoholData> searchAlcoholName(String name) throws SQLException{
-        String query = "SELECT * FROM ALCOHOL WHERE ALCOHOL.NAME = '" + name + "'";
+        String query = "SELECT * FROM ALCOHOL WHERE UPPER(ALCOHOL.NAME) LIKE UPPER('%" + name + "%')";
 
         return searchAlcoholTable(query);
     }
     public List<AlcoholData> searchAlcoholAppellation(String appellation) throws SQLException{
-        String query = "SELECT * FROM ALCOHOL WHERE ALCOHOL.APPELLATION = '" + appellation + "'";
+        String query = "SELECT * FROM ALCOHOL WHERE UPPER(ALCOHOL.APPELLATION) LIKE UPPER('%" + appellation + "%')";
 
         return searchAlcoholTable(query);
     }
@@ -498,18 +498,12 @@ public class DatabaseUtil {
         return searchAlcoholTable(query);
     }
 
-    //TODO: make a new search function which takes a String (query) and int (column) so we only need 2 functions: search column, and search all
+    public List<AlcoholData> getAllAlcoholEntries() throws SQLException{
+        String query = "SELECT * FROM ALCOHOL";
 
-    //TODO Make this search all fields
-    // Code used to search Alcohol table based on brand name. Uses partial search
-    public List<AlcoholData> searchAllFields(String brandName) throws SQLException{
-        String query = "SELECT * FROM ALCOHOL WHERE ACCOUNT.USER_TYPE = '" + brandName + "'" +
-                "OR ALCOHOL.ALCOHOL_TYPE = '" + brandName + "'" +
-                "OR ALCOHOL.BRAND_NAME = '" + brandName + "'" +
-                "OR ALCOHOL.NAME = '" + brandName + "'" +
-                "OR ALCOHOL.APPELLATION = '" + brandName + "'";
         return searchAlcoholTable(query);
     }
+
     /*
     public List<AlcoholData> searchAllFields(double brandName) throws SQLException{
         int value = Integer.valueOf(brandName);
@@ -798,7 +792,6 @@ public class DatabaseUtil {
         return a;
 
     }
-    /*
     public WineApplicationData fillSubmittedWineForm(int fid) throws SQLException{
 
         String sql = "SELECT * FROM APP.FORM WHERE FID = ?";
@@ -873,7 +866,6 @@ public class DatabaseUtil {
 
         return a;
     }
-    */
 
     public void reviseAlcohol(int fid) throws SQLException{}
 

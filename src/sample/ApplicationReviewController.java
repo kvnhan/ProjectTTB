@@ -32,6 +32,7 @@ public class ApplicationReviewController extends DatabaseUtil{
     private String username = accountsUtil.getUsername();
     private int numberOfApps;
     private ApplicationData thisForm;
+    List<ApplicationData> listForms = new ArrayList<ApplicationData>();
     private static int appReviewMode = 1; // 1 = view all forms, 2 = choose form highlighted in inbox then return, 3 choose form highlighted in inbox then go to next available form;
 
     @FXML
@@ -39,7 +40,11 @@ public class ApplicationReviewController extends DatabaseUtil{
      * Initializes the ApplicationReview Screen.
      */
     public void initialize() throws SQLException{
-        List<ApplicationData> listForms = dbUtil.searchFormWithGovId(dbUtil.getAccountAid(username));
+        listForms = dbUtil.searchFormWithGovId(dbUtil.getAccountAid(username));
+        if(appReviewMode == 2){
+            listForms = new ArrayList<ApplicationData>();
+            listForms.add(WorkFlowController.getRowChosen());
+        }
         numberOfApps = listForms.size();
         thisForm = listForms.get(0);
         repID.setText(Integer.toString(thisForm.getRepid()));
@@ -134,10 +139,15 @@ public class ApplicationReviewController extends DatabaseUtil{
      */
     public void nextApplication(){
 
-        if(numberOfApps <= 1){
-           screenUtil.createAlertBox("No more assigned forms", "There are no more forms assigned to you.");
-        }else{
-           screenUtil.switchScene("ApplicationReview.fxml","Application Review");
+        if(appReviewMode == 1){
+            if(numberOfApps <= 1){
+                screenUtil.switchScene("WorkFlow.fxml", "Inbox");
+                screenUtil.createAlertBox("No more assigned forms", "There are no more forms assigned to you.");
+            }else{
+                screenUtil.switchScene("ApplicationReview.fxml","Application Review");
+            }
+        }else if(appReviewMode == 2){
+            screenUtil.switchScene("WorkFlow.fxml", "Inbox");
         }
     }
 
