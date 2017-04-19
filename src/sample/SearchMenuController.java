@@ -113,21 +113,36 @@ public class SearchMenuController {
     //"All Fields", "ID", "Name", "Brand Name", "Location", "Alcohol Content"
     //TODO add other spirits
     private void searchDatabase() throws SQLException {
-        if (isWineBox.isSelected() && isBeerBox.isSelected()){
+        if (isWineBox.isSelected() && isBeerBox.isSelected() && isOtherBox.isSelected()){
             alcoholDataList = dbUtil.searchAlcoholWithType(BEER);
             alcoholDataList.addAll(dbUtil.searchAlcoholWithType(WINE));
-
+            alcoholDataList.addAll(dbUtil.searchAlcoholWithType(DISTILLED));
             alcoholDataList = interesectAlcoholData(searchByChoice(), alcoholDataList);
         }
-        else if(isWineBox.isSelected() || isBeerBox.isSelected()){
+        else if (isWineBox.isSelected() && isBeerBox.isSelected()){
+            alcoholDataList = dbUtil.searchAlcoholWithType(BEER);
+            alcoholDataList.addAll(dbUtil.searchAlcoholWithType(WINE));
+            alcoholDataList = interesectAlcoholData(searchByChoice(), alcoholDataList);
+        }
+        else if (isOtherBox.isSelected() && isBeerBox.isSelected()) {
+            alcoholDataList = dbUtil.searchAlcoholWithType(BEER);
+            alcoholDataList.addAll(dbUtil.searchAlcoholWithType(DISTILLED));
+        }
+        else if (isOtherBox.isSelected() && isWineBox.isSelected()) {
+            alcoholDataList = dbUtil.searchAlcoholWithType(WINE);
+            alcoholDataList.addAll(dbUtil.searchAlcoholWithType(DISTILLED));
+        }
+        else if(isWineBox.isSelected() || isBeerBox.isSelected() || isOtherBox.isSelected()){
             if (isBeerBox.isSelected()){
                 alcoholChoice = 1;
             }
             else if (isWineBox.isSelected()){
                 alcoholChoice = 2;
             }
+            else if (isOtherBox.isSelected()){
+                alcoholChoice = 3;
+            }
             alcoholDataList = dbUtil.searchAlcoholWithType(alcoholChoice);
-
             alcoholDataList = interesectAlcoholData(searchByChoice(), alcoholDataList);
         }
         else {
