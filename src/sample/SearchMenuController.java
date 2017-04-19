@@ -521,7 +521,7 @@ public class SearchMenuController {
             DELIMITER = CUSTOM_DELIMITER;
             fileType = ".txt";
         }
-
+        fileContents = "";
         fileContents = fileContents +"ID";
         fileContents = fileContents + (DELIMITER);
         fileContents = fileContents + ("Name");
@@ -531,7 +531,7 @@ public class SearchMenuController {
         fileContents = fileContents + ("App");
         fileContents = fileContents + (DELIMITER);
         fileContents = fileContents + ("Type");
-        fileContents = fileContents + (DELIMITER);
+        fileContents = fileContents + (NEW_LINE_SEPARATOR);
 
         //AlcoholData(ID, name, brandname, app, type)
         for (int i = 0; i< alcoholDataList.size(); i++) {
