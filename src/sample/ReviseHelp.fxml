@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="518.0" prefWidth="587.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ReviseHelpController">
+   <children>
+      <Label layoutX="4.0" layoutY="7.0" prefHeight="36.0" prefWidth="203.0" text="Help: Revisions">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Label>
+      <TextArea editable="false" layoutX="14.0" layoutY="274.0" prefHeight="196.0" prefWidth="561.0" text="In order to begin making Revisions, please select the applicationID of the application you would like to change.&#10;For making Revisions, simply find the Field that you would like to edit and make the necessary edits.&#10;When you are done, hit the Submit button, and all fields that you selected for editing will be automatically edited." wrapText="true" />
+      <Button fx:id="backButton" layoutX="14.0" layoutY="474.0" mnemonicParsing="false" onAction="#goBack" text="Back" />
+      <ImageView fx:id="screenImage" fitHeight="216.0" fitWidth="554.0" layoutX="16.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+         </image>
+      </ImageView>
+      <Separator layoutX="13.0" layoutY="40.0" orientation="VERTICAL" prefHeight="223.0" prefWidth="6.0" />
+      <Separator layoutX="13.0" layoutY="267.0" prefHeight="2.0" prefWidth="561.0" />
+      <Separator layoutX="572.0" layoutY="45.0" orientation="VERTICAL" prefHeight="223.0" prefWidth="6.0" />
+      <Separator layoutX="13.0" layoutY="39.0" prefHeight="3.0" prefWidth="561.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="17.0" layoutY="504.0" stroke="#ffffff00" strokeType="INSIDE" width="587.0">
+         <fill>
+            <LinearGradient endX="0.08173076923076923" endY="1.0" startX="1.0" startY="1.0">
+               <stops>
+                  <Stop color="#ff2121fe" />
+                  <Stop color="WHITE" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Rectangle>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="17.0" layoutY="-2.0" stroke="TRANSPARENT" strokeType="INSIDE" width="587.0">
+         <fill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop color="#1f1fffdc" />
+                  <Stop color="WHITE" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Rectangle>
+   </children>
+</AnchorPane>

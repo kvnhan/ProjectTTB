@@ -71,7 +71,7 @@ public class WorkFlowController {
         System.out.println("Unassigned forms = "+ unAssignedForms.size());
         if(!(unAssignedForms.size() == 0)){
             for(int i = 0; i < unAssignedForms.size(); i++) {;
-                    int GOVID = databaseUtil.searchMinWorkLoad();
+                    int GOVID = (int) databaseUtil.searchMinWorkLoad();
                     System.out.println("Found govid with min workload = " + GOVID);
                     databaseUtil.assignForm(GOVID, unAssignedForms.get(i));
                     System.out.println("FORM ID "+ unAssignedForms.get(i) + " ASSIGNED");
