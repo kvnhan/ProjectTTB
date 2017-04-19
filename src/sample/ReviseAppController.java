@@ -163,7 +163,7 @@ public class ReviseAppController {
                     amount.setText(Integer.toString(wine.getType3()));
                 }
                 wine1.setSelected(true);
-                ID1.setText(Integer.toString(wine.getTtbid()));
+                ID1.setText(wine.getTtbid());
                 RepID1.setText(Integer.toString(wine.getRepid()));
                 PlantReg1.setText(Integer.toString(wine.getPermit_no()));
                 SerialNo1.setText(wine.getSerial());
@@ -224,7 +224,7 @@ public class ReviseAppController {
                     Varietal1.setDisable(true);
                 }
                 beer1.setSelected(true);
-                ID1.setText(Integer.toString(beer.getTtbid()));
+                ID1.setText(beer.getTtbid());
                 RepID1.setText(Integer.toString(beer.getRepid()));
                 PlantReg1.setText(Integer.toString(beer.getPermit_no()));
                 SerialNo1.setText(beer.getSerial());
@@ -266,7 +266,7 @@ public class ReviseAppController {
                 }
 
                 other1.setSelected(true);
-                ID1.setText(Integer.toString(beer.getTtbid()));
+                ID1.setText(beer.getTtbid());
                 RepID1.setText(Integer.toString(beer.getRepid()));
                 PlantReg1.setText(Integer.toString(beer.getPermit_no()));
                 SerialNo1.setText(beer.getSerial());
@@ -382,7 +382,7 @@ public class ReviseAppController {
                     amount.setText(Integer.toString(wine.getType3()));
                 }
                 wine1.setSelected(true);
-                ID1.setText(Integer.toString(wine.getTtbid()));
+                ID1.setText(wine.getTtbid());
                 RepID1.setText(Integer.toString(wine.getRepid()));
                 PlantReg1.setText(Integer.toString(wine.getPermit_no()));
                 SerialNo1.setText(wine.getSerial());
@@ -412,7 +412,7 @@ public class ReviseAppController {
                     amount.setText(Integer.toString(beer.getType3()));
                 }
                 beer1.setSelected(true);
-                ID1.setText(Integer.toString(beer.getTtbid()));
+                ID1.setText(beer.getTtbid());
                 RepID1.setText(Integer.toString(beer.getRepid()));
                 PlantReg1.setText(Integer.toString(beer.getPermit_no()));
                 SerialNo1.setText(beer.getSerial());
@@ -438,7 +438,7 @@ public class ReviseAppController {
                     amount.setText(Integer.toString(beer.getType3()));
                 }
                 other1.setSelected(true);
-                ID1.setText(Integer.toString(beer.getTtbid()));
+                ID1.setText(beer.getTtbid());
                 RepID1.setText(Integer.toString(beer.getRepid()));
                 PlantReg1.setText(Integer.toString(beer.getPermit_no()));
                 SerialNo1.setText(beer.getSerial());
@@ -460,7 +460,7 @@ public class ReviseAppController {
      */
     public void submitAgain()throws SQLException{
         int fid = Integer.valueOf(formChoiceBox.getValue().toString().trim());
-        int ttbid = Integer.parseInt(ID1.getText());
+        String ttbid = ID1.getText();
         int repid = Integer.parseInt(RepID1.getText());
         String serial = SerialNo1.getText();
         String address = Address1.getText();
