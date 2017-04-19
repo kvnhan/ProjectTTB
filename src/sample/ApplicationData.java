@@ -6,7 +6,7 @@ import java.util.Date;
  */
 public class ApplicationData extends SubmissionForm{
 
-    private int ttbid;
+    private String ttbid;
     private int repid;
     private String serial;
     private String address;
@@ -50,7 +50,7 @@ public class ApplicationData extends SubmissionForm{
      * @param alcoholType Type of alcohol.
      * @param alcoholContent Alcohol content metric.
      */
-    public ApplicationData(int formID, AcceptanceInformation acceptanceInfo, int ttbid, int repid, String serial, String address, String fancyName,
+    public ApplicationData(int formID, AcceptanceInformation acceptanceInfo, String ttbid, int repid, String serial, String address, String fancyName,
                            String formula, int permit_no,
                            String infoOnBottle, String source_of_product, String type_of_product,
                            String brand_name, String phone_number, String email, String date,
@@ -169,7 +169,7 @@ public class ApplicationData extends SubmissionForm{
         this.alcoholContent = alcoholContent;
     }
 
-    public int getTtbid() {
+    public String getTtbid() {
         return ttbid;
     }
 

@@ -10,6 +10,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -17,6 +18,7 @@ import javax.swing.event.ChangeListener;
 import java.io.File;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import javafx.scene.image.Image;
 
 /**
  * Application Revision Screen controller.
@@ -59,6 +61,10 @@ public class ReviseAppController {
     @FXML private Button back;
     @FXML private Button find;
     @FXML private ChoiceBox formChoiceBox;
+    @FXML private ImageView image1;
+    private String filepath2;
+
+
     private String revisionImagePath = "";
     int fid;
 
@@ -163,7 +169,7 @@ public class ReviseAppController {
                     amount.setText(Integer.toString(wine.getType3()));
                 }
                 wine1.setSelected(true);
-                ID1.setText(Integer.toString(wine.getTtbid()));
+                ID1.setText(wine.getTtbid());
                 RepID1.setText(Integer.toString(wine.getRepid()));
                 PlantReg1.setText(Integer.toString(wine.getPermit_no()));
                 SerialNo1.setText(wine.getSerial());
@@ -224,7 +230,7 @@ public class ReviseAppController {
                     Varietal1.setDisable(true);
                 }
                 beer1.setSelected(true);
-                ID1.setText(Integer.toString(beer.getTtbid()));
+                ID1.setText((beer.getTtbid()));
                 RepID1.setText(Integer.toString(beer.getRepid()));
                 PlantReg1.setText(Integer.toString(beer.getPermit_no()));
                 SerialNo1.setText(beer.getSerial());
@@ -236,6 +242,7 @@ public class ReviseAppController {
                 EmailAddress1.setText(beer.getEmail());
                 Address1.setText(beer.getAddress());
                 MailingAddress1.setText(beer.getAddress());
+
                 if(dataPasser.getDisableAlcoContentField() == 1){
                     Content1.setEditable(false);
                 }
@@ -266,7 +273,7 @@ public class ReviseAppController {
                 }
 
                 other1.setSelected(true);
-                ID1.setText(Integer.toString(beer.getTtbid()));
+                ID1.setText((beer.getTtbid()));
                 RepID1.setText(Integer.toString(beer.getRepid()));
                 PlantReg1.setText(Integer.toString(beer.getPermit_no()));
                 SerialNo1.setText(beer.getSerial());
@@ -361,6 +368,7 @@ public class ReviseAppController {
         type2 = databaseUtil.checkforType2(fid);
         type3 = databaseUtil.checkforType3(fid);
         source = databaseUtil.checkforSource(fid);
+
         if(source.equals("DOMESTIC")){
             dom1111.setSelected(true);
         }
@@ -382,7 +390,7 @@ public class ReviseAppController {
                     amount.setText(Integer.toString(wine.getType3()));
                 }
                 wine1.setSelected(true);
-                ID1.setText(Integer.toString(wine.getTtbid()));
+                ID1.setText((wine.getTtbid()));
                 RepID1.setText(Integer.toString(wine.getRepid()));
                 PlantReg1.setText(Integer.toString(wine.getPermit_no()));
                 SerialNo1.setText(wine.getSerial());
@@ -398,6 +406,7 @@ public class ReviseAppController {
                 pH1.setText(Double.toString(wine.getPh_level()));
                 Address1.setText(wine.getAddress());
                 MailingAddress1.setText(wine.getAddress());
+                Content1.setText(wine.getAlcoholContent());
             } else if (type.equals("BEER")) {
                 beer = databaseUtil.fillSubmittedBeerForm(fid);
                 if(type1 == 0){
@@ -412,7 +421,7 @@ public class ReviseAppController {
                     amount.setText(Integer.toString(beer.getType3()));
                 }
                 beer1.setSelected(true);
-                ID1.setText(Integer.toString(beer.getTtbid()));
+                ID1.setText((beer.getTtbid()));
                 RepID1.setText(Integer.toString(beer.getRepid()));
                 PlantReg1.setText(Integer.toString(beer.getPermit_no()));
                 SerialNo1.setText(beer.getSerial());
@@ -424,6 +433,7 @@ public class ReviseAppController {
                 EmailAddress1.setText(beer.getEmail());
                 Address1.setText(beer.getAddress());
                 MailingAddress1.setText(beer.getAddress());
+                Content1.setText(beer.getAlcoholContent());
             } else {
                 beer = databaseUtil.fillSubmittedBeerForm(fid);
                 if(type1 == 0){
@@ -438,7 +448,7 @@ public class ReviseAppController {
                     amount.setText(Integer.toString(beer.getType3()));
                 }
                 other1.setSelected(true);
-                ID1.setText(Integer.toString(beer.getTtbid()));
+                ID1.setText((beer.getTtbid()));
                 RepID1.setText(Integer.toString(beer.getRepid()));
                 PlantReg1.setText(Integer.toString(beer.getPermit_no()));
                 SerialNo1.setText(beer.getSerial());
@@ -450,6 +460,7 @@ public class ReviseAppController {
                 EmailAddress1.setText(beer.getEmail());
                 Address1.setText(beer.getAddress());
                 MailingAddress1.setText(beer.getAddress());
+                Content1.setText(beer.getAlcoholContent());
             }
         }
     }
@@ -460,7 +471,7 @@ public class ReviseAppController {
      */
     public void submitAgain()throws SQLException{
         int fid = Integer.valueOf(formChoiceBox.getValue().toString().trim());
-        int ttbid = Integer.parseInt(ID1.getText());
+        String ttbid = ID1.getText();
         int repid = Integer.parseInt(RepID1.getText());
         String serial = SerialNo1.getText();
         String address = Address1.getText();
@@ -477,10 +488,11 @@ public class ReviseAppController {
         String date ="";
         AcceptanceInformation ac = null;
         String info = "";
-        String content = "";
+        String content = Content1.getText();
         int type1 = 0;
         String type2 = "";
         int type3 = 0;
+        System.out.println("hi " + filepath2);
 
 
         if (dom1111.isSelected()) {
@@ -541,9 +553,16 @@ public class ReviseAppController {
      * Uploads an image to the system.
      * @param Event Upload Image button is pressed.
      */
-    public void uploadImage(ActionEvent Event){
-        openFileChooser();
-        myFilePath1.setText(revisionImagePath);
+    public void uploadImage(ActionEvent Event) throws Exception{
+        File tempFile = screenUtil.openFileChooser();
+        if (tempFile != null && tempFile.getPath() != null) {
+            //myFilePath.setText(tempFile.getPath());
+            filepath2 = tempFile.toURI().toURL().toString();
+            Image img = new Image(tempFile.toURI().toURL().toString());
+            image1.setImage(img);
+        }
+
+        System.out.println(filepath2);
     }
 
     @FXML
