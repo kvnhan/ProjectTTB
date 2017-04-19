@@ -9,7 +9,6 @@
 <AnchorPane prefHeight="400.0" prefWidth="741.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.AlcoholInfoController">
    <children>
       <Button fx:id="close" layoutX="14.0" layoutY="361.0" mnemonicParsing="false" onAction="#closeWindow" text="Close" />
-      <Label fx:id="alcName" alignment="CENTER" layoutX="122.0" layoutY="14.0" prefHeight="17.0" prefWidth="357.0" text="NAME" />
       <ImageView fx:id="alcImage" fitHeight="327.0" fitWidth="300.0" layoutX="452.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../../../../Pictures/RWBY/blake_by_lordtechmarine-d6l7ffl.png" />
