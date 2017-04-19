@@ -39,7 +39,7 @@ public class SearchMenuController {
 
     private @FXML RadioButton csvDownload, tabDownload, customDownload;
     private @FXML TextField CustomDelimiter;// customDirectoryField;
-  //  private @FXML CheckBox CustomDirectoryCheckBox;
+    //  private @FXML CheckBox CustomDirectoryCheckBox;
     private @FXML ChoiceBox<String> choiceBox;
 
     private ScreenUtil screenUtil = new ScreenUtil();
@@ -311,7 +311,7 @@ public class SearchMenuController {
         }catch (Exception e){
             System.out.println("Could not search alcohol content field using input");
         }
-        
+
         return finalResultList;
 
     }
@@ -415,10 +415,10 @@ public class SearchMenuController {
 
 
     //public void updateCustomDir(){
-       // customDirectoryString = customDirectoryField.getText();
-   ///     System.out.println(customDirectoryString);
-   //     System.out.println("dasdfjjsafs");
-  //  }
+    // customDirectoryString = customDirectoryField.getText();
+    ///     System.out.println(customDirectoryString);
+    //     System.out.println("dasdfjjsafs");
+    //  }
 
 //    public void download(){
 //        if(CustomDirectoryCheckBox.isSelected())
@@ -568,40 +568,40 @@ public class SearchMenuController {
     }
 
 
-//////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////
     //@Override
     public void start(Stage primaryStage) {
         //primaryStage.setTitle("java-buddy.blogspot.com");
-       // Group root = new Group();
+        // Group root = new Group();
 
-       // TextArea textArea = new TextArea();
+        // TextArea textArea = new TextArea();
 
-       // Button buttonSave = new Button("Save");
+        // Button buttonSave = new Button("Save");
 
-      //  buttonSave.setOnAction((ActionEvent event) -> {
-            FileChooser fileChooser = new FileChooser();
+        //  buttonSave.setOnAction((ActionEvent event) -> {
+        FileChooser fileChooser = new FileChooser();
 
-            //Set extension filter
-            FileChooser.ExtensionFilter extFilter =
-                    new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt");
-                    new FileChooser.ExtensionFilter("CSV files (*.csv)", "*.csv");
-            fileChooser.getExtensionFilters().add(extFilter);
+        //Set extension filter
+        FileChooser.ExtensionFilter extFilter =
+                new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt");
+        new FileChooser.ExtensionFilter("CSV files (*.csv)", "*.csv");
+        fileChooser.getExtensionFilters().add(extFilter);
 
-            //Show save file dialog
-            File file = fileChooser.showSaveDialog(primaryStage);
+        //Show save file dialog
+        File file = fileChooser.showSaveDialog(primaryStage);
 
-            if(file != null){
-                SaveFile(fileContents, file);
-            }
-        }//);
+        if(file != null){
+            SaveFile(fileContents, file);
+        }
+    }//);
 
-       // VBox vBox = new VBox();
-        //vBox.getChildren().addAll(textArea, buttonSave);
+    // VBox vBox = new VBox();
+    //vBox.getChildren().addAll(textArea, buttonSave);
 
-      // root.getChildren().add(vBox);
+    // root.getChildren().add(vBox);
 
-       // primaryStage.setScene(new Scene(root, 500, 400));
-        //primaryStage.show();
+    // primaryStage.setScene(new Scene(root, 500, 400));
+    //primaryStage.show();
     //}
 
     public static void main(String[] args) {
@@ -625,7 +625,7 @@ public class SearchMenuController {
     }
 
     public void buttonClicked (){
-            screenUtil.switchScene("SearchHelp.fxml","Help");
+        screenUtil.switchScene("SearchHelp.fxml","Help");
     }
 
 }
