@@ -6,11 +6,11 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.AlcoholInfoController">
+<AnchorPane prefHeight="400.0" prefWidth="741.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.AlcoholInfoController">
    <children>
-      <Button fx:id="close" layoutX="14.0" layoutY="361.0" mnemonicParsing="false" text="Close" onAction="#closeWindow"/>
+      <Button fx:id="close" layoutX="14.0" layoutY="361.0" mnemonicParsing="false" onAction="#closeWindow" text="Close" />
       <Label fx:id="alcName" alignment="CENTER" layoutX="122.0" layoutY="14.0" prefHeight="17.0" prefWidth="357.0" text="NAME" />
-      <ImageView fx:id="alcImage" fitHeight="327.0" fitWidth="300.0" layoutX="286.0" layoutY="52.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="alcImage" fitHeight="327.0" fitWidth="300.0" layoutX="452.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../../../../Pictures/RWBY/blake_by_lordtechmarine-d6l7ffl.png" />
          </image>
@@ -35,13 +35,13 @@
       <Label fx:id="alcAppelation" layoutX="153.0" layoutY="104.0" text="Appelation" />
       <Label fx:id="alcSulfite" layoutX="153.0" layoutY="121.0" text="Sulfite Description" />
       <Label fx:id="alcAlcoholContent" layoutX="153.0" layoutY="138.0" text="Alcohol Content" />
-      <Label fx:id="alcSize" layoutX="152.0" layoutY="238.0" text="Label Size" />
-      <Label fx:id="alcLegibility" layoutX="152.0" layoutY="221.0" text="Label Legibility" />
-      <Label fx:id="alcClass" layoutX="152.0" layoutY="204.0" text="Class" />
-      <Label fx:id="alcProductType" layoutX="152.0" layoutY="189.0" text="Product Type" />
-      <Label fx:id="alcHealthWarning" layoutX="152.0" layoutY="172.0" text="Health Warning" />
-      <Label fx:id="alcNetContent" layoutX="152.0" layoutY="155.0" text="Net Content" />
-      <Label fx:id="alcFormula" layoutX="153.0" layoutY="255.0" text="Formula" />
-      <Label fx:id="alcInfo" layoutX="152.0" layoutY="272.0" text="Botteler's Information" />
+      <Label fx:id="alcSize" layoutX="240.0" layoutY="237.0" prefHeight="21.0" prefWidth="144.0" text="Label Size" />
+      <Label fx:id="alcLegibility" layoutX="240.0" layoutY="220.0" prefHeight="21.0" prefWidth="144.0" text="Label Legibility" />
+      <Label fx:id="alcClass" layoutX="240.0" layoutY="203.0" prefHeight="21.0" prefWidth="144.0" text="Class" />
+      <Label fx:id="alcProductType" layoutX="274.0" layoutY="188.0" prefHeight="21.0" prefWidth="144.0" text="Product Type" />
+      <Label fx:id="alcHealthWarning" layoutX="274.0" layoutY="171.0" prefHeight="21.0" prefWidth="144.0" text="Health Warning" />
+      <Label fx:id="alcNetContent" layoutX="292.0" layoutY="154.0" prefHeight="21.0" prefWidth="144.0" text="Net Content" />
+      <Label fx:id="alcFormula" layoutX="240.0" layoutY="254.0" prefHeight="21.0" prefWidth="144.0" text="Formula" />
+      <Label fx:id="alcInfo" layoutX="240.0" layoutY="271.0" text="Botteler's Information" />
    </children>
 </AnchorPane>

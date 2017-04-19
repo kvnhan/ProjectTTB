@@ -19,9 +19,9 @@
             <Font size="11.0" />
          </font></Button>
     <Text id="userID" fx:id="userIDText" layoutX="26.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="empty" />
-    <Button fx:id="aboutButton" layoutX="255.0" layoutY="30.0" mnemonicParsing="false" onAction="#buttonClicked" prefHeight="31.0" prefWidth="81.0" text="About" />
-      <ImageView fx:id="colaImage" fitHeight="59.0" fitWidth="206.0" layoutX="144.0" layoutY="61.0" pickOnBounds="true" />
-      <ImageView fx:id="symbolImage" fitHeight="59.0" fitWidth="81.0" layoutX="27.0" layoutY="61.0" pickOnBounds="true" preserveRatio="true" />
+    <Button fx:id="aboutButton" layoutX="255.0" layoutY="30.0" mnemonicParsing="false" onAction="#buttonClicked" prefHeight="31.0" prefWidth="89.0" text="About" />
+      <ImageView fx:id="colaImage" fitHeight="59.0" fitWidth="206.0" layoutX="144.0" layoutY="70.0" pickOnBounds="true" />
+      <ImageView fx:id="symbolImage" fitHeight="59.0" fitWidth="81.0" layoutX="27.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true" />
       <Button fx:id="superUserButton" layoutX="256.0" layoutY="139.0" mnemonicParsing="false" onAction="#SuperUser" text="SuperUser" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" height="17.0" layoutY="347.0" stroke="#ffffff00" strokeType="INSIDE" width="372.0">
          <fill>
