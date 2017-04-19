@@ -14,7 +14,7 @@ import java.sql.SQLException;
  */
 public class MainMenuController{
 
-    @FXML private Button openSearchButton, openInboxButton, createNewApplicationButton, logOutButton, aboutButton;
+    @FXML private Button openSearchButton, openInboxButton, createNewApplicationButton, logOutButton, aboutButton, superUserButton;
     @FXML private Text userIDText;
     @FXML private ImageView colaImage;
     @FXML private ImageView symbolImage;
@@ -35,15 +35,20 @@ public class MainMenuController{
 
         if(username.toLowerCase().equals("guest")){
             openInboxButton.setDisable(true);
+            superUserButton.setDisable(true);
             createNewApplicationButton.setDisable(true);
             logOutButton.setDisable(false);
+            superUserButton.setDisable(true);
         }else if(databaseUtil.searchAccountWithUsername(username).get(0).getUserType() == 3){
             openInboxButton.setDisable(true);
+            superUserButton.setDisable(true);
             createNewApplicationButton.setDisable(true);
         }else if(databaseUtil.searchAccountWithUsername(username).get(0).getUserType() == 2){
             openInboxButton.setDisable(true);
+            superUserButton.setDisable(true);
         }else if(databaseUtil.searchAccountWithUsername(username).get(0).getUserType() == 1){
             createNewApplicationButton.setDisable(true);
+            superUserButton.setDisable(true);
         }
 
 
@@ -98,6 +103,9 @@ public class MainMenuController{
         }
     }
 
+    public void supaUsa(ActionEvent event){
+
+    }
 
 
 }

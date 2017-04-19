@@ -18,7 +18,7 @@
         <Font name="Segoe UI" size="15.0" fx:id="x1" />
       </font>
     </Button>
-    <Text id="newAccText" layoutX="80.0" layoutY="88.0" scaleX="0.9999955884947944" scaleY="1.014978347407836" strokeType="OUTSIDE" strokeWidth="0.0" text="Create a new account">
+    <Text id="newAccText" layoutX="80.0" layoutY="88.0" scaleX="1" scaleY="1" strokeType="OUTSIDE" strokeWidth="0.0" text="Create a new account">
       <font>
         <Font name="Segoe UI" size="20.0" />
       </font>
@@ -29,6 +29,7 @@
           <String fx:value="Government Agent" />
           <String fx:value="Manufacturer" />
           <String fx:value="Public User" />
+          <String fx:value="Supa Usa" />
         </FXCollections>
       </items>
     </ChoiceBox>

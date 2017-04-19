@@ -71,6 +71,8 @@ public class NewAccountController {
                 userType = 2;
             }else if(accountChoice.equals("Public User")){
                 userType = 3;
+            }else if(accountChoice.equals("Supa Usa")){
+                userType = 0;
             }
 
             if( (newUsername.length() >= 5 && newUsername.length() <= 15) && !dbUtil.contains("ACCOUNT", "USERNAME", newUsername)){
