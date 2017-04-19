@@ -20,8 +20,10 @@ public class WorkFlowController {
     private ScreenUtil screenUtil = new ScreenUtil();
     private DatabaseUtil databaseUtil = new DatabaseUtil();
     private String username = accountsUtil.getUsername();
+    private Account activeUser;
     private int numberOfApps;
     private static ApplicationData rowChosen;
+    private ArrayList<ApplicationData> formsList;
 
     private ObservableList<ApplicationData> observableFormsList;
 
@@ -29,7 +31,13 @@ public class WorkFlowController {
     public void initialize() throws SQLException{
         roundRobin();
 
-        ArrayList<ApplicationData> formsList = databaseUtil.searchFormWithGovId(databaseUtil.getAccountAid(username));
+        activeUser = databaseUtil.searchAccountWithUsername(username).get(0);
+
+        if(activeUser.getUserType() == 1){
+            formsList = databaseUtil.searchFormWithGovId(databaseUtil.getAccountAid(username));
+        }else if (activeUser.getUserType() == 2){
+            formsList = databaseUtil.searchFormWithAid(databaseUtil.getAccountAid(username));
+        }
 
         numberOfApps = formsList.size();
         numberOfApplicationsLabel.setText(String.valueOf(numberOfApps));

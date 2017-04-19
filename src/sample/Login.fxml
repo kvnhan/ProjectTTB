@@ -28,6 +28,5 @@
       </font>
     </Hyperlink>
     <Label fx:id="errorBox" alignment="CENTER" layoutX="0.0" layoutY="283.0" prefWidth="350.0" text="" textAlignment="CENTER" textFill="#cc0000" />
-    <Button fx:id="clearData" layoutX="241.0" layoutY="310.0" mnemonicParsing="false" onAction="#clearData" text="Clear Data" />
-  </children>
+   </children>
 </AnchorPane>

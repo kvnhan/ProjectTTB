@@ -20,13 +20,6 @@ public class Account implements Serializable{
         public int getValue() { return id; }
     };*/
 
-    public int getUserType() {
-        return userType;
-    }
-
-    public void setUserType(int userType) {
-        this.userType = userType;
-    }
 
     /**
      * Creates an account that is not logged in.
@@ -44,10 +37,6 @@ public class Account implements Serializable{
         return username;
     }
 
-    public int getAccessLevel() {
-        return userType;
-    }
-
     public boolean isLoggedIn() {
         return isLoggedIn;
     }
@@ -55,4 +44,13 @@ public class Account implements Serializable{
     public void setLoggedIn(boolean loggedIn) {
         isLoggedIn = loggedIn;
     }
+
+    public int getUserType() {
+        return userType;
+    }
+
+    public void setUserType(int userType) {
+        this.userType = userType;
+    }
+
 }

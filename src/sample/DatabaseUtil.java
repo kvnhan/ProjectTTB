@@ -1,5 +1,8 @@
 package sample;
 
+import javafx.scene.control.*;
+
+import java.awt.*;
 import java.sql.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -460,7 +463,7 @@ public class DatabaseUtil {
     }
 
     public ArrayList<Account> searchAccountWithUsername(String username) throws SQLException {
-        String query = "SELECT * FROM ACCOUNT WHERE UPPER(ACCOUNT.USERNAME) LIKE UPPER('%" + username + "%')";
+        String query = "SELECT * FROM ACCOUNT WHERE UPPER(ACCOUNT.USERNAME) = UPPER('" + username + "')";
         return searchAccount(query);
     }
 
@@ -716,7 +719,7 @@ public class DatabaseUtil {
     }
     */
     // Change status after government agents finish reviewing an application
-    public void changeSatus(String newStatus, int fid) throws SQLException{
+    public void changeStatus(String newStatus, int fid) throws SQLException{
         String query = "UPDATE FORM SET STATUS = ? WHERE FID = ?";
 
         PreparedStatement pstmt = conn.prepareStatement(query);
@@ -724,6 +727,74 @@ public class DatabaseUtil {
         pstmt.setInt(2, fid);
         pstmt.executeUpdate();
     }
+
+    /*public void decideApplicationAction(String status, ApplicationData thisForm, javafx.scene.control.TextArea commentsField) throws  SQLException{
+
+        String ReviewerUsername = AccountsUtil.getUsername();
+        int ReviewerID = getAccountAid(ReviewerUsername);
+
+        //get comments
+        String comments = commentsField.getText();
+
+        //update alcohol status
+        int FID = thisForm.getFormID();
+        changeStatus(status, FID);
+        int Decider = ReviewerID;
+        String Date = thisForm.getDate();
+        String General = comments;
+        String OriginCode = thisForm.getSource_of_product();
+        String BrandName = thisForm.getBrand_name();
+        String FancifulName = thisForm.getFancyName();
+        String Grapevar;
+        String Winevintage;
+        String Appellation;
+
+
+        int alcoholType;
+        if(thisForm.getAlcoholType().equals("Beer")){
+            alcoholType = 1;
+        }else if(thisForm.getAlcoholType().equals("Wine")){
+            alcoholType = 2;
+        }else{
+            alcoholType = 3;
+        }
+
+        if(alcoholType == 2) {
+            Grapevar = thisForm.getGrapevar();
+            Winevintage = thisForm.getVintage();
+            Appellation = thisForm.getAppellation();
+        }
+        else{
+            Grapevar = "This type of alcohol does not have a varietal.";
+            Winevintage = "This type of alcohol does not have a vintage.";
+            Appellation = "This type of alcohol does not have an appellation.";
+        }
+        String Bottler = thisForm.getBottler();
+        String Formula = thisForm.getFormula();
+        String Sulfite = thisForm.getSulfite();
+        String Legibility = "0";
+        String Descrip = thisForm.getInfoOnBottle();
+
+        //add review
+        String values = Integer.toString(FID) + Integer.toString(Status) +
+                Integer.toString(Decider) + Date + General + OriginCode + BrandName + FancifulName
+                + Grapevar + Winevintage + Appellation + Bottler + Formula + Sulfite + Legibility
+                + Descrip;
+        String FIELDS = " (FID, STATUS, DECIDER, DATE, GENERAL, ORIGINCODE, BRANDNAME, FACIFULNAME, " +
+                "GRAPEVAR, WINEVINTAGE, APPELLATION, BOTTLER, FORMULA, SULFITE," +
+                " LEGIBILITY, LABELSIZE, DESCRIP)";
+        String sql = "INSERT INTO " + "REVIEWS" + FIELDS + " VALUES (" + Integer.toString(FID) +
+                ", " + values;
+        stmt.executeUpdate(sql);
+
+        //add alcohol
+        ApplicationData appData = searchFormWithFid(FID).get(0);
+        addAlcohol(appData.getBrand_name(), Appellation, Sulfite, Double.parseDouble(thisForm.getAlcoholContent()),
+                0, thisForm.getHealthWarning(), Integer.parseInt(thisForm.getType_of_product()),
+                1, Legibility, 0,Formula,
+                alcoholType, Bottler, BrandName);
+
+    }*/
 
     public BeerApplicationData fillSubmittedBeerForm(int fid) throws SQLException{
 
