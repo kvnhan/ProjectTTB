@@ -14,7 +14,7 @@ import java.sql.SQLException;
  */
 public class MainMenuController{
 
-    @FXML private Button openSearchButton, openInboxButton, createNewApplicationButton, logOutButton, aboutButton;
+    @FXML private Button openSearchButton, openInboxButton, createNewApplicationButton, logOutButton, aboutButton, superUserButton;
     @FXML private Text userIDText;
     @FXML private ImageView colaImage;
     @FXML private ImageView symbolImage;
@@ -34,16 +34,20 @@ public class MainMenuController{
         userIDText.setText(username);
 
         if(username.toLowerCase().equals("guest")){
-            openInboxButton.setDisable(true);
-            createNewApplicationButton.setDisable(true);
-            logOutButton.setDisable(false);
+            openInboxButton.setVisible(false);
+            superUserButton.setVisible(false);
+            createNewApplicationButton.setVisible(false);
+            superUserButton.setVisible(false);
         }else if(databaseUtil.searchAccountWithUsername(username).get(0).getUserType() == 3){
-            openInboxButton.setDisable(true);
-            createNewApplicationButton.setDisable(true);
+            openInboxButton.setVisible(false);
+            superUserButton.setVisible(false);
+            createNewApplicationButton.setVisible(false);
         }else if(databaseUtil.searchAccountWithUsername(username).get(0).getUserType() == 2){
-            openInboxButton.setDisable(true);
+            openInboxButton.setVisible(false);
+            superUserButton.setVisible(false);
         }else if(databaseUtil.searchAccountWithUsername(username).get(0).getUserType() == 1){
-            createNewApplicationButton.setDisable(true);
+            createNewApplicationButton.setVisible(false);
+            superUserButton.setVisible(false);
         }
 
 
@@ -98,6 +102,9 @@ public class MainMenuController{
         }
     }
 
+    public void SuperUser(ActionEvent event){
+      work.switchScene("SuperUser.fxml", "Super User");
+    }
 
 
 }
