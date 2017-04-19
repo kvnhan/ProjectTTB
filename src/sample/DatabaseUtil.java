@@ -525,7 +525,6 @@ public class DatabaseUtil {
         rset = stmt.executeQuery(query);
 
         while(rset.next()){
-            if(rset.getString("STATUS").toUpperCase().equals("")){
                 int AID = rset.getInt("AID");
                 String name = String.format("%1$"+25+ "s", rset.getString("NAME")).trim();
                 String brandname = String.format("%1$"+25+ "s", rset.getString("BRAND_NAME")).trim();
@@ -546,7 +545,6 @@ public class DatabaseUtil {
                 a = new AlcoholData(AID, name, brandname, appelation, sulfiteDesc, alchContent, netContent, healthWarning, productType, classType, labelLegibility, labelSize, formulas, alchType, bottlersInfo, imageName);
                 AlcoholDataList.add(a);
             }
-        }
 
         return AlcoholDataList;
 

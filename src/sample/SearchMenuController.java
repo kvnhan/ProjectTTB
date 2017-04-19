@@ -2,8 +2,10 @@ package sample;
 
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 
@@ -19,6 +21,8 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -36,6 +40,7 @@ public class SearchMenuController {
     private @FXML TableView table;
     private @FXML RadioButton normalSearch, intersectSearch, unionSearch;
     private @FXML Button helpSearchButton;
+    private @FXML Button searchButton;
 
     private @FXML RadioButton csvDownload, tabDownload, customDownload;
     private @FXML TextField CustomDelimiter;// customDirectoryField;
@@ -56,6 +61,27 @@ public class SearchMenuController {
 
     @FXML
     public void initialize(){
+        searchTextField.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                if (event.getCode() == KeyCode.ENTER) {
+                    try {
+                        search(new ActionEvent(searchButton, (Node) searchButton));
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    } catch (NoSuchMethodException e) {
+                        e.printStackTrace();
+                    } catch (IllegalAccessException e) {
+                        e.printStackTrace();
+                    } catch (InstantiationException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+
         // to get information (alcohol data) from the double clicked row in the table
         table.setRowFactory(tv -> {
             TableRow<AlcoholData> row = new TableRow<AlcoholData>();
