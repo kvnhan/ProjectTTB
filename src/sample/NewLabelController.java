@@ -410,6 +410,9 @@ public class NewLabelController{
                     // Add to alcohol
                     db.addAlcohol(fancyName, appellation, sulfiteDesc, alcoholContentDouble, netContentDouble, healthWarningText, 0, 0, "n/a", 0, "n/a", 2, bottlerInfo, brand_name);
 
+                    //connect form and alcohol
+                    db.updateAlcoholIDForForm(Data.getAssociatedAlchID(), Data.getFormID());
+
                     System.out.println("It Works");
                     work.switchScene("NewApp.fxml", "New Application");
                 }
@@ -420,10 +423,14 @@ public class NewLabelController{
                             fancyName, formula, permit_no, infoOnBottle,
                             source_of_product, type_of_product, brand_name, phone_number, email, date, applicantName,
                             alcoholType, alcoholContent, type1, type2, type3);
+
                     submitBeer(Data);
 
                     // Add to alcohol
                     db.addAlcohol(fancyName, appellation, sulfiteDesc, alcoholContentDouble, netContentDouble, healthWarningText, type1, 0, "n/a", 0, "n/a", 1, bottlerInfo, brand_name);
+
+                    //connect form and alcohol
+                    db.updateAlcoholIDForForm(Data.getAssociatedAlchID(), Data.getFormID());
 
                     System.out.println("This works");
                     work.switchScene("NewApp.fxml", "New Application");
@@ -439,6 +446,9 @@ public class NewLabelController{
 
                     // Add to alcohol
                     db.addAlcohol(fancyName, appellation, sulfiteDesc, alcoholContentDouble, netContentDouble, healthWarningText, type1, 0, "n/a", 0, "n/a", 3, bottlerInfo, brand_name);
+
+                    //connect form and alcohol
+                    db.updateAlcoholIDForForm(Data.getAssociatedAlchID(), Data.getFormID());
 
                     System.out.println("This works too");
                     work.switchScene("NewApp.fxml", "New Application");

@@ -192,4 +192,5 @@ public class AlcoholData{
     public void setImageFileName(String imageFileName) {
         this.imageFileName = imageFileName;
     }
+
 }

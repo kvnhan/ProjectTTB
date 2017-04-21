@@ -24,6 +24,7 @@ public class WorkFlowController {
     private int numberOfApps;
     private static ApplicationData rowChosen;
     private ArrayList<ApplicationData> formsList = new ArrayList<>();
+    @FXML private Button viewAllButton;
 
     private ObservableList<ApplicationData> observableFormsList;
 
@@ -36,6 +37,7 @@ public class WorkFlowController {
         if(activeUser.getUserType() == 1){
             formsList = databaseUtil.searchFormWithGovId(databaseUtil.getAccountAid(username));
         }else if (activeUser.getUserType() == 2){
+            viewAllButton.setDisable(true);
             formsList = databaseUtil.searchFormWithAid(databaseUtil.getAccountAid(username));
         }
 

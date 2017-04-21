@@ -7,6 +7,7 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.paint.LinearGradient?>
@@ -14,15 +15,15 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="816.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ReviseAppController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="901.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ReviseAppController">
     <children>
         <Label layoutX="15.0" layoutY="15.0" text="FormID :">
             <font>
                 <Font name="Constantia" size="24.0" />
             </font>
         </Label>
-        <Button fx:id="Submit" layoutX="900.0" layoutY="750.0" mnemonicParsing="false" onAction="#submitAgain" prefHeight="41.0" prefWidth="85.0" text="Submit" />
-        <Button fx:id="clearButton" layoutX="800.0" layoutY="750.0" mnemonicParsing="false" onAction="#setClear" prefHeight="41.0" prefWidth="85.0" text="Clear" />
+        <Button fx:id="Submit" layoutX="899.0" layoutY="835.0" mnemonicParsing="false" onAction="#submitAgain" prefHeight="41.0" prefWidth="85.0" text="Submit" />
+        <Button fx:id="clearButton" layoutX="797.0" layoutY="835.0" mnemonicParsing="false" onAction="#setClear" prefHeight="41.0" prefWidth="85.0" text="Clear" />
         <Button fx:id="ChooseFile1" layoutX="226.0" layoutY="714.0" mnemonicParsing="false" onAction="#uploadImage" prefHeight="25.0" prefWidth="100.0" text="Choose File:" />
         <Label layoutX="15.0" layoutY="70.0" text="TTB ID:">
             <font>
@@ -120,7 +121,7 @@
             <font>
                 <Font name="Constantia" size="14.0" />
             </font></TextField>
-        <Button fx:id="back" layoutX="14.0" layoutY="750.0" mnemonicParsing="false" onAction="#goBack" prefHeight="41.0" prefWidth="69.0" text="Back" />
+        <Button fx:id="back" layoutX="14.0" layoutY="846.0" mnemonicParsing="false" onAction="#goBack" prefHeight="41.0" prefWidth="69.0" text="Back" />
         <Label layoutX="500.0" layoutY="325.0" prefHeight="21.0" prefWidth="98.0" text="Address:">
             <font>
                 <Font name="Constantia" size="24.0" />
@@ -265,7 +266,6 @@
                 <Font name="Constantia" size="24.0" />
             </font>
         </Label>
-        <TextField fx:id="myFilePath1" editable="false" layoutX="334.0" layoutY="714.0" prefHeight="31.0" prefWidth="463.0" promptText="JoseWong.jpg" />
         <Button fx:id="find" layoutX="283.0" layoutY="17.0" mnemonicParsing="false" onAction="#autoFillSelectedForm" text="Find Form" />
       <ChoiceBox fx:id="formChoiceBox" layoutX="115.0" layoutY="17.0" prefWidth="150.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" height="17.0" layoutX="-3.0" stroke="TRANSPARENT" strokeType="INSIDE" width="1000.0">
@@ -278,7 +278,7 @@
             </LinearGradient>
          </fill>
       </Rectangle>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" height="17.0" layoutX="-6.0" layoutY="800.0" stroke="#ffffff00" strokeType="INSIDE" width="1007.0">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="17.0" layoutX="-4.0" layoutY="887.0" stroke="#ffffff00" strokeType="INSIDE" width="1007.0">
          <fill>
             <LinearGradient endX="0.08173076923076923" endY="1.0" startX="1.0" startY="1.0">
                <stops>
@@ -288,5 +288,6 @@
             </LinearGradient>
          </fill>
       </Rectangle>
+      <ImageView fx:id="image1" fitHeight="150.0" fitWidth="200.0" layoutX="360.0" layoutY="714.0" pickOnBounds="true" preserveRatio="true" />
     </children>
 </Pane>

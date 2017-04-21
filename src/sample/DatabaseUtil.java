@@ -330,7 +330,13 @@ public class DatabaseUtil {
      * @throws SQLException
      */
     public void addReview(int fid, int status, int decider, String date, String general, String originCode, String brandName, String facifulName, String grapeVar, String wineVintage, String appellation, String bottler, String formula, String sulfite, String legibility, String labelSize, String description) throws SQLException {
-        String values = "" + status + ", " + decider + ", DATE('" + date + "'), '" + general + "', '" + originCode + "', '" + brandName + "', '" + facifulName + "', '" + grapeVar + "', '" + wineVintage + "', '" + appellation + "', '" + bottler + "', '" + formula + "', '" + sulfite + "', '" + legibility + "', '" + labelSize + "', '" + description + "')";
+        String values;
+        if(date.trim().isEmpty()){
+            values = "" + status + ", " + decider + ", NULL, '" + general + "', '" + originCode + "', '" + brandName + "', '" + facifulName + "', '" + grapeVar + "', '" + wineVintage + "', '" + appellation + "', '" + bottler + "', '" + formula + "', '" + sulfite + "', '" + legibility + "', '" + labelSize + "', '" + description + "')";
+        }
+        else{
+            values = "" + status + ", " + decider + ", DATE('" + date + "'), '" + general + "', '" + originCode + "', '" + brandName + "', '" + facifulName + "', '" + grapeVar + "', '" + wineVintage + "', '" + appellation + "', '" + bottler + "', '" + formula + "', '" + sulfite + "', '" + legibility + "', '" + labelSize + "', '" + description + "')";
+        }
         addToTable("REVIEWS", REVIEWS_FIELDS, values, "FID", fid);
     }
 
@@ -728,6 +734,15 @@ public class DatabaseUtil {
         pstmt.executeUpdate();
     }
 
+    public void updateAlcoholIDForForm(int aid, int fid) throws SQLException{
+        String query = "UPDATE FORM SET ALCHID = ? WHERE FID = ?";
+
+        PreparedStatement pstmt = conn.prepareStatement(query);
+        pstmt.setInt(1, aid);
+        pstmt.setInt(2, fid);
+        pstmt.executeUpdate();
+    }
+
     public void changeAlcoholStatus(String newStatus, int alcoholID) throws SQLException{
         String query = "UPDATE ALCOHOL SET STATUS = ? WHERE AID = ?";
 
@@ -774,9 +789,9 @@ public class DatabaseUtil {
 
 
         int alcoholType;
-        if(thisForm.getAlcoholType().equals("Beer")){
+        if(thisForm.getAlcoholType().equals("MALT BEVERAGES")){
             alcoholType = 1;
-        }else if(thisForm.getAlcoholType().equals("Wine")){
+        }else if(thisForm.getAlcoholType().equals("WINE")){
             alcoholType = 2;
         }else{
             alcoholType = 3;
@@ -801,8 +816,8 @@ public class DatabaseUtil {
 
         //add review
 
-        addReview(FID, statusInInteger, GOVID, date, general, originCode, brandName, fancifulName, grapevar, wineVintage, appellation, bottler, formula, sulfite, legibility, labelSize, descrip);
-
+       /* addReview(FID, statusInInteger, GOVID, date, general, originCode, brandName, fancifulName, grapevar, wineVintage, appellation, bottler, formula, sulfite, legibility, labelSize, descrip);
+*/
         // change alcohol status to approved
         changeAlcoholStatus("APPROVED", thisForm.getAssociatedAlchID());
     }
@@ -1053,7 +1068,7 @@ public class DatabaseUtil {
             if (type.equals("WINE")) {
                 return "WINE";
             }
-            if (type.equals("BEER")) {
+            if (type.equals("MALT BEVERAGES")) {
                 return "BEER";
             }
         }
