@@ -13,69 +13,11 @@ import java.util.Date;
  */
 
 public class WineApplicationData extends ApplicationData{
-
-
-
-    private int vintage_date;
-
-    private double ph_level;
-
-    private String grape_varietal;
-
-    private String appellation;
-
-
-
-    public WineApplicationData(int formID, AcceptanceInformation acceptanceInfo, String ttbid, int repid, String serial, String address,
-
-                               String fancyName, String formula, String grape_varietal, String appellation, int permit_no, String infoOnBottle,
-
-                               String source_of_product, String type_of_product, String brand_name, String phone_number, String email, String date, String applicantName,
-
-                               String alcoholType, String alcoholContent, int type1, String type2, int type3, int vintage_date, double ph_level) {
-
-        super(formID, acceptanceInfo, ttbid, repid, serial, address, fancyName, formula,permit_no, infoOnBottle, source_of_product, type_of_product, brand_name, phone_number, email, date, applicantName, alcoholType, alcoholContent, type1, type2, type3);
-
-        this.vintage_date = vintage_date;
-
-        this.ph_level = ph_level;
-
-        this.grape_varietal = grape_varietal;
-
-        this.appellation = appellation;
-
+    /**
+     * Constructs a wine application data object. All parameters are taken from
+     * ApplicationData; see the ApplicationData class for more information.
+     */
+    public WineApplicationData(String ttbID, int repid, String serial, String address, int permitNo, String phoneNumber, String email, String applicantName, int type1, String type2, int type3, java.sql.Date submittedDate) {
+        super(ttbID, repid, serial, address, permitNo, phoneNumber, email, applicantName, type1, type2, type3, submittedDate);
     }
-
-
-
-    public int getVintage_date() {
-
-        return vintage_date;
-
-    }
-
-
-
-    public double getPh_level() {
-
-        return ph_level;
-
-    }
-
-
-
-    public String getGrape_varietal() {
-
-        return grape_varietal;
-
-    }
-
-
-
-    public String getAppellation() {
-
-        return appellation;
-
-    }
-
 }

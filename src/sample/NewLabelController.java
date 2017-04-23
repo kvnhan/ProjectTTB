@@ -32,43 +32,41 @@ public class NewLabelController{
 
     //  ApplicationUtil appUtil = new ApplicationUtil();
     DatabaseUtil db = new DatabaseUtil();
-    WorkflowFacade facadeWork = new WorkflowFacade();
-    ScreenUtil work = new ScreenUtil();
+    ScreenUtil screenUtil = new ScreenUtil();
 
-    @FXML private TextField myFilePath;
     @FXML private ImageView image;
     @FXML private TextField RepID;
     @FXML private TextField PlantReg;
     @FXML private TextField SerialNo;
     @FXML private TextField ApplicantName;
-    @FXML private TextField Varietal;
-    @FXML private TextField Appellation;
-    @FXML private TextField BrandName;
     @FXML private TextField Name;
-    @FXML private TextField Formula;
     @FXML private TextField PhoneNumber;
+    @FXML private TextField MailingAddress;
+    @FXML private TextField originField;
+    @FXML private TextField BrandName;
+    @FXML private TextField Address;
+    @FXML private TextField Formula;
     @FXML private TextField EmailAddress;
+    @FXML private TextField alcoholContent;
+    @FXML private TextField netContentField;
+    @FXML private TextField grapeVarietal;
+    @FXML private TextField Appellation;
+    @FXML private TextField sulfiteField;
+    @FXML private TextField Vintage;
+    @FXML private TextField bottlerField;
+    @FXML private TextField healthWarningField;
+    @FXML private TextField pH;
+
     @FXML private CheckBox dom1;
     @FXML private CheckBox dom11;
     @FXML private CheckBox dom111;
     @FXML private CheckBox dom;
     @FXML private CheckBox imp;
-    @FXML private CheckBox wine;
-    @FXML private CheckBox beer;
-    @FXML private CheckBox other;
-    @FXML private TextField Vintage;
-    @FXML private TextField pH;
-    @FXML private TextField Address;
-    @FXML private TextField MailingAddress;
-    @FXML private TextField Content;
+    @FXML private CheckBox wineCheckBox;
+    @FXML private CheckBox beerCheckBox;
+    @FXML private CheckBox distilledCheckBox;
     @FXML private TextField type2Box;
     @FXML private TextField type3box;
-
-    @FXML private TextField originField;
-    @FXML private TextField netContentField;
-    @FXML private TextField sulfiteField;
-    @FXML private TextField bottlerField;
-    @FXML private TextField healthWarningField;
 
     @FXML private Button Submit;
     @FXML private Button back;
@@ -80,8 +78,7 @@ public class NewLabelController{
      * Clears information from the screen.
      */
     private void setClear(){
-        ScreenUtil work = new ScreenUtil();
-        work.switchScene("NewLabel.fxml", "New Label");
+        screenUtil.switchScene("NewLabel.fxml", "New Label");
     }
 
     @FXML
@@ -99,44 +96,44 @@ public class NewLabelController{
 
     @FXML
     private void handlewineBox(){
-        if(wine.isSelected()){
-            beer.setSelected(false);
-            other.setSelected(false);
+        if(wineCheckBox.isSelected()){
+            beerCheckBox.setSelected(false);
+            distilledCheckBox.setSelected(false);
 
         }
     }
 
     @FXML
     private void handlebeerBox(){
-        if(beer.isSelected()){
-            wine.setSelected(false);
-            other.setSelected(false);
+        if(beerCheckBox.isSelected()){
+            wineCheckBox.setSelected(false);
+            distilledCheckBox.setSelected(false);
         }
     }
 
     @FXML
     private void handleotherBox(){
-        if(other.isSelected()){
-            beer.setSelected(false);
-            wine.setSelected(false);
+        if(distilledCheckBox.isSelected()){
+            beerCheckBox.setSelected(false);
+            wineCheckBox.setSelected(false);
         }
     }
     public void goBack (ActionEvent event){
-        work.switchScene("MainMenu.fxml","Main Menu");
+        screenUtil.switchScene("MainMenu.fxml","Main Menu");
     }
 
     /**
      * Fills out an application in the database.
      * @throws SQLException
      */
-    public void fillOutApplication() throws SQLException{
+    @FXML
+    public void fillOutApplication(ActionEvent event) throws SQLException{
+        System.out.print("Submitting");
 
         boolean valid = true;
-        int fid = 1;
-        String ttbid = "";
         int repid = 0;
         String serial = "";
-        String address;
+        String address = "";
         String fancyName = "";
         String formula = "";
         String grape_varietal = "";
@@ -146,12 +143,10 @@ public class NewLabelController{
         String source_of_product = "";
         String type_of_product = "";
         String brand_name;
-        String phone_number;
-        String email;
+        String phone_number = "";
+        String email = "";
         String date = "";
         String applicantName = "";
-        String alcoholType = "";
-        String alcoholContent = "";
         double alcoholContentDouble = 0;
         int type1 = -1;
         String type2 = "";
@@ -169,7 +164,7 @@ public class NewLabelController{
 
         if(!dom1.isSelected() && !dom11.isSelected() && !dom111.isSelected()){
             valid = false;
-            work.createAlertBox("ERROR", "Please choose applicable box(es)");
+            screenUtil.createAlertBox("ERROR", "Please choose applicable box(es)");
         }else{
             if(dom1.isSelected()){
                 type1 = 1;
@@ -181,7 +176,7 @@ public class NewLabelController{
                 try {
                     type3 = Integer.parseInt(type3box.getText());
                 }catch (NumberFormatException e){
-                    work.createAlertBox("ERROR", "Invalid Input for Amount");
+                    screenUtil.createAlertBox("ERROR", "Invalid Input for Amount");
                     valid = false;
                 }
             }
@@ -191,15 +186,15 @@ public class NewLabelController{
             try {
                 repid = Integer.parseInt(RepID.getText());
                 if (repid > max) {
-                    work.createAlertBox("ERROR", "Input for RepID is too big");
+                    screenUtil.createAlertBox("ERROR", "Input for RepID is too big");
                     valid = false;
                 }
             } catch (NumberFormatException e) {
-                work.createAlertBox("ERROR", "Invaid Input for RepID");
+                screenUtil.createAlertBox("ERROR", "Invaid Input for RepID");
                 valid = false;
             }
         }else{
-            work.createAlertBox("ERROR", "Rep ID is empty");
+            screenUtil.createAlertBox("ERROR", "Rep ID is empty");
             valid = false;
         }
 
@@ -207,70 +202,73 @@ public class NewLabelController{
             try {
                 permit_no = Integer.parseInt(PlantReg.getText());
                 if (permit_no > max) {
-                    work.createAlertBox("ERROR", "Input for PlantReg is too big");
+                    screenUtil.createAlertBox("ERROR", "Input for PlantReg is too big");
                     valid = false;
                 }
             } catch (NumberFormatException e) {
-                work.createAlertBox("ERROR", "Invalid Input for PlantReg");
+                screenUtil.createAlertBox("ERROR", "Invalid Input for PlantReg");
                 valid = false;
             }
         }else{
-            work.createAlertBox("ERROR", "Plant Reg is empty");
+            screenUtil.createAlertBox("ERROR", "Plant Reg is empty");
             valid = false;
         }
 
         if(!Formula.getText().trim().isEmpty()){
             formula = Formula.getText();
         }else{
-            work.createAlertBox("ERROR", "Formula is empty");
+            screenUtil.createAlertBox("ERROR", "Formula is empty");
         }
 
         if(!Appellation.getText().trim().isEmpty()){
             appellation = Appellation.getText();
-      }else if(wine.isSelected()){
-            work.createAlertBox("ERROR", "Appellation is empty");
+      }else if(wineCheckBox.isSelected()){
+            screenUtil.createAlertBox("ERROR", "Appellation is empty");
             valid = false;
         }
 
-        /*if(!MailingAddress.getText().trim().isEmpty()){
+        if(!MailingAddress.getText().trim().isEmpty()){
             address = MailingAddress.getText();
         }else{
-            work.createAlertBox("ERROR", "Mailling Address is empty");
+            screenUtil.createAlertBox("ERROR", "Mailling Address is empty");
             valid = false;
-        }*/
+        }
 
-        if(!Varietal.getText().trim().isEmpty()){
-            grape_varietal = Varietal.getText();
-        }else if(wine.isSelected()){
-            work.createAlertBox("ERROR", "Varietal is empty");
+        if(!grapeVarietal.getText().trim().isEmpty()){
+            grape_varietal = grapeVarietal.getText();
+        }else if(wineCheckBox.isSelected()){
+            screenUtil.createAlertBox("ERROR", "Varietal is empty");
             valid = false;
         }
 
         if(!ApplicantName.getText().trim().isEmpty()){
             applicantName = ApplicantName.getText();
         }else{
-            work.createAlertBox("ERROR", "Applicant Name is empty");
+            screenUtil.createAlertBox("ERROR", "Applicant Name is empty");
             valid = false;
         }
 
-        if(!Content.getText().trim().isEmpty()){
+        if(!alcoholContent.getText().trim().isEmpty()){
             try {
-                alcoholContentDouble = Double.parseDouble(Content.getText());
 
+                alcoholContentDouble = Double.parseDouble(alcoholContent.getText());
+                if(alcoholContentDouble > 99999){
+                    screenUtil.createAlertBox("ERROR", "Alcohol Content is above the allowed input limit");
+                    valid = false;
+                }
             } catch (NumberFormatException e) {
-                work.createAlertBox("ERROR", "Invaid Input for Alcohol content");
+                screenUtil.createAlertBox("ERROR", "Invaid Input for Alcohol content");
                 valid = false;
             }
-            alcoholContent = Content.getText();
         }else{
-            work.createAlertBox("ERROR", "Alcohol Content is empty");
+            screenUtil.createAlertBox("ERROR", "Alcohol Content is empty");
             valid = false;
         }
 
         if(!SerialNo.getText().trim().isEmpty()){
             serial = (SerialNo.getText());
         }else{
-            work.createAlertBox("ERROR", "Serial No is empty");
+            screenUtil.createAlertBox("ERROR", "Serial No is empty");
             valid = false;
         }
 
@@ -280,10 +278,10 @@ public class NewLabelController{
         } else if (imp.isSelected()) {
             source_of_product = "IMPORTED";
         }if(!(dom.isSelected()) && !(imp.isSelected())) {
-            work.createAlertBox("ERROR", "Please select Domestic or Imported");
+            screenUtil.createAlertBox("ERROR", "Please select Domestic or Imported");
             valid = false;
         }
-
+/*
         if (wine.isSelected()) {
             type_of_product = "WINE";
             alcoholType = "WINE";
@@ -294,28 +292,27 @@ public class NewLabelController{
             type_of_product = "DISTILLED SPIRITS";
             alcoholType = "DISTILLED SPIRITS";
         }else{
-            work.createAlertBox("ERROR", "Please selecct the type of product");
+            screenUtil.createAlertBox("ERROR", "Please selecct the type of product");
             valid = false;
-        }
-
+        }*/
         if(!BrandName.getText().trim().isEmpty()) {
             brand_name = BrandName.getText();
         }else{
-            work.createAlertBox("ERROR", "BrandName is empty");
+            screenUtil.createAlertBox("ERROR", "BrandName is empty");
             valid = false;
             brand_name = "";
         }
         if(!PhoneNumber.getText().trim().isEmpty()){
             phone_number = PhoneNumber.getText();
         }else{
-            work.createAlertBox("ERROR", "PhoneNumber is empty");
+            screenUtil.createAlertBox("ERROR", "PhoneNumber is empty");
             valid = false;
             phone_number = "";
         }
         if(!EmailAddress.getText().trim().isEmpty()){
             email = EmailAddress.getText();
         }else{
-            work.createAlertBox("ERROR", "Email is empty");
+            screenUtil.createAlertBox("ERROR", "Email is empty");
             valid = false;
             email = "";
         }
@@ -323,14 +320,17 @@ public class NewLabelController{
         if(!Name.getText().trim().isEmpty()){
             fancyName = Name.getText();
         }else{
-            work.createAlertBox("ERROR", "FancyName is empty");
+            screenUtil.createAlertBox("ERROR", "FancyName is empty");
             valid = false;
         }
+
+
+
 
         if(!Address.getText().trim().isEmpty()){
             address = Address.getText();
         }else{
-            work.createAlertBox("ERROR", "Address is empty");
+            screenUtil.createAlertBox("ERROR", "Address is empty");
             address = "";
         }
 
@@ -338,30 +338,30 @@ public class NewLabelController{
             try{
                 vintage_date = Integer.parseInt(Vintage.getText());
                 if(vintage_date > max || vintage_date < 0){
-                    work.createAlertBox("ERROR", "Invalid Input for VintageDate");
+                    screenUtil.createAlertBox("ERROR", "Invalid Input for VintageDate");
                     valid = false;
                 }
             }catch (NumberFormatException e){
-                work.createAlertBox("ERROR", "Not a Number");
+                screenUtil.createAlertBox("ERROR", "Not a Number");
                 valid = false;
             }
-        }else if(wine.isSelected()){
-            work.createAlertBox("ERROR", "Vintage is empty");
+        }else if(wineCheckBox.isSelected()){
+            screenUtil.createAlertBox("ERROR", "Vintage is empty");
             valid = false;
         }
         if(!pH.getText().trim().isEmpty()){
             try{
                 ph_level = Double.parseDouble(pH.getText());
                 if(ph_level > 14 || ph_level < 0){
-                    work.createAlertBox("ERROR", "Invalid Input for PH ");
+                    screenUtil.createAlertBox("ERROR", "Invalid Input for PH ");
                     valid = false;
                 }
             }catch (NumberFormatException e){
-                work.createAlertBox("ERROR", "Not a Number");
+                screenUtil.createAlertBox("ERROR", "Not a Number");
                 valid = false;
             }
-        }else if(wine.isSelected()){
-            work.createAlertBox("ERROR", "PH is empty");
+        }else if(wineCheckBox.isSelected()){
+            screenUtil.createAlertBox("ERROR", "PH is empty");
             valid = false;
         }
 
@@ -370,24 +370,28 @@ public class NewLabelController{
                 originCode = Integer.parseInt(originField.getText());
 
             } catch (NumberFormatException e) {
-                work.createAlertBox("ERROR", "Invaid Input for Origin Code");
+                screenUtil.createAlertBox("ERROR", "Invaid Input for Origin Code");
                 valid = false;
             }
         }else{
-            work.createAlertBox("ERROR", "Origin Code is empty");
+            screenUtil.createAlertBox("ERROR", "Origin Code is empty");
             valid = false;
         }
 
         if(!netContentField.getText().trim().isEmpty()) {
             try {
                 netContentDouble = Double.parseDouble(netContentField.getText());
+                if(netContentDouble > 99999){
+                    screenUtil.createAlertBox("ERROR", "Net content is above the allowed input limit");
+                    valid = false;
+                }
 
             } catch (NumberFormatException e) {
-                work.createAlertBox("ERROR", "Invalid Input for Net Content");
+                screenUtil.createAlertBox("ERROR", "Invalid Input for Net Content");
                 valid = false;
             }
         }else{
-            work.createAlertBox("ERROR", "Net content is empty");
+            screenUtil.createAlertBox("ERROR", "Net content is empty");
             valid = false;
         }
 
@@ -395,108 +399,53 @@ public class NewLabelController{
         bottlerInfo= bottlerField.getText();
         healthWarningText= healthWarningField.getText();
 
-        AcceptanceInformation acceptanceInfo = new AcceptanceInformation(date, applicantName,
-                null, "UNASSIGNED");
-
         if(valid){
-            if (wine.isSelected()) {
-                if(work.createConfirmBox("Confirm", "Would you like to submit the form?")){
-                    WineApplicationData Data = new WineApplicationData(fid, acceptanceInfo,ttbid, repid, serial,address,
-                            fancyName, formula, grape_varietal, appellation, permit_no, infoOnBottle,
-                            source_of_product, type_of_product, brand_name, phone_number, email, date, applicantName,
-                            alcoholType, alcoholContent, type1, type2, type3,vintage_date, ph_level);
-                    submitWine(Data);
+            if(screenUtil.createConfirmBox("Confirm", "Would you like to submit the form?")) {
+                String newTTBID;
+                int alcoholID;
+                java.sql.Date currentDate = new java.sql.Date((new java.util.Date()).getTime());
+
+                if (wineCheckBox.isSelected()) {
+                    newTTBID = db.addForm(db.getNewTTBID(), repid, serial, address, permit_no, phone_number, email, applicantName, "UNASSIGNED", type1, type2, type3, currentDate);
 
                     // Add to alcohol
-                    db.addAlcohol(fancyName, appellation, sulfiteDesc, alcoholContentDouble, netContentDouble, healthWarningText, 0, 0, "n/a", 0, "n/a", 2, bottlerInfo, brand_name);
+                    alcoholID = db.addAlcohol(fancyName, appellation, sulfiteDesc, alcoholContentDouble, netContentDouble, healthWarningText, 0, 0, "n/a", "n/a", formula, 2, bottlerInfo, brand_name, "PROCESSING",vintage_date, ph_level, grape_varietal, infoOnBottle, source_of_product, null, originCode);
 
                     //connect form and alcohol
-                    db.updateAlcoholIDForForm(Data.getAssociatedAlchID(), Data.getFormID());
+                    db.updateAlcoholIDForForm(alcoholID, newTTBID);
 
                     System.out.println("It Works");
-                    work.switchScene("NewApp.fxml", "New Application");
-                }
+                    screenUtil.switchScene("NewApp.fxml", "New Application");
 
-            } else if (beer.isSelected()) {
-                if(work.createConfirmBox("Confirm", "Would you like to submit the form?")){
-                    BeerApplicationData Data = new BeerApplicationData(fid, acceptanceInfo,ttbid, repid, serial,address,
-                            fancyName, formula, permit_no, infoOnBottle,
-                            source_of_product, type_of_product, brand_name, phone_number, email, date, applicantName,
-                            alcoholType, alcoholContent, type1, type2, type3);
 
-                    submitBeer(Data);
+                } else if (beerCheckBox.isSelected()) {
+                    newTTBID = db.addForm(db.getNewTTBID(), repid, serial, address, permit_no, phone_number, email, applicantName, "UNASSIGNED", type1, type2, type3, currentDate);
 
                     // Add to alcohol
-                    db.addAlcohol(fancyName, appellation, sulfiteDesc, alcoholContentDouble, netContentDouble, healthWarningText, type1, 0, "n/a", 0, "n/a", 1, bottlerInfo, brand_name);
+                    alcoholID = db.addAlcohol(fancyName, appellation, sulfiteDesc, alcoholContentDouble, netContentDouble, healthWarningText, 0, 0, "n/a", "n/a", formula, 2, bottlerInfo, brand_name, "PROCESSING",vintage_date, ph_level, grape_varietal, infoOnBottle, source_of_product, null, originCode);
 
                     //connect form and alcohol
-                    db.updateAlcoholIDForForm(Data.getAssociatedAlchID(), Data.getFormID());
+                    db.updateAlcoholIDForForm(alcoholID, newTTBID);
 
                     System.out.println("This works");
-                    work.switchScene("NewApp.fxml", "New Application");
-                }
+                    screenUtil.switchScene("NewApp.fxml", "New Application");
 
-            } else if (other.isSelected()) {
-                if(work.createConfirmBox("Confirm", "Would you like to submit the form?")){
-                    BeerApplicationData Data = new BeerApplicationData(fid, acceptanceInfo,ttbid, repid, serial,address,
-                            fancyName, formula, permit_no, infoOnBottle,
-                            source_of_product, type_of_product, brand_name, phone_number, email, date, applicantName,
-                            alcoholType, alcoholContent, type1, type2, type3);
-                    submitDistilledSpirits(Data);
+                } else if (distilledCheckBox.isSelected()) {
+                    newTTBID = db.addForm(db.getNewTTBID(), repid, serial, address, permit_no, phone_number, email, applicantName, "UNASSIGNED", type1, type2, type3, currentDate);
 
                     // Add to alcohol
-                    db.addAlcohol(fancyName, appellation, sulfiteDesc, alcoholContentDouble, netContentDouble, healthWarningText, type1, 0, "n/a", 0, "n/a", 3, bottlerInfo, brand_name);
+                    alcoholID = db.addAlcohol(fancyName, appellation, sulfiteDesc, alcoholContentDouble, netContentDouble, healthWarningText, 0, 0, "n/a", "n/a", formula, 2, bottlerInfo, brand_name, "PROCESSING",vintage_date, ph_level, grape_varietal, infoOnBottle, source_of_product, null, originCode);
 
                     //connect form and alcohol
-                    db.updateAlcoholIDForForm(Data.getAssociatedAlchID(), Data.getFormID());
+                    db.updateAlcoholIDForForm(alcoholID, newTTBID);
 
                     System.out.println("This works too");
-                    work.switchScene("NewApp.fxml", "New Application");
+                    screenUtil.switchScene("NewApp.fxml", "New Application");
 
                 }
+                db.roundRobin();
             }
         }
-
-    }
-
-    /**
-     * Submits a wine to the database.
-     * @param wd Instance of WineApplicationData.
-     * @throws SQLException
-     */
-    public void submitWine(WineApplicationData wd)throws SQLException{
-        String ttbid = db.getNewTTBID();
-        int repid = wd.getRepid();
-        String serial = wd.getSerial();
-        String address = wd.getAddress();
-        String fancyName = wd.getFancyName();
-        String formula = wd.getFormula();
-        String grape_varietal = wd.getGrape_varietal();
-        String appellation = wd.getAppellation();
-        int permit_no = wd.getPermit_no();
-        String infoOnBottle = wd.getInfoOnBottle();
-        String source_of_product = wd.getSource_of_product();
-        String type_of_product = wd.getType_of_product();
-        String brand_name = wd.getBrand_name();
-        String phone_number = wd.getPhone_number();
-        String email = wd.getEmail();
-        String date = wd.getDate();
-        String dateFormat = date.toString();
-        String applicantName = wd.getApplicantName();
-        String alcoholType = wd.getAlcoholType();
-        String alcoholContent = wd.getAlcoholContent();
-        int vintage_date = wd.getVintage_date();
-        double ph_level = wd.getPh_level();
-        String status = wd.getAcceptanceInfo().getStatus();
-        int type1 = wd.getType1();
-        String type2 = wd.getType2();
-        int type3 = wd.getType3();
-
-        db.addWineForm(ttbid,repid, serial,address, fancyName, formula, grape_varietal, appellation, permit_no, infoOnBottle, source_of_product,
-                type_of_product, brand_name, phone_number, email, dateFormat, applicantName,alcoholType,
-                vintage_date, ph_level, alcoholContent, status, type1, type2, type3);
-
-        roundRobin();
 
     }
 
@@ -506,7 +455,7 @@ public class NewLabelController{
      */
 
     public void chooseFile(ActionEvent event)throws Exception{
-            File tempFile = work.openFileChooser();
+            File tempFile = screenUtil.openFileChooser();
             if (tempFile != null) {
                 //myFilePath.setText(tempFile.getPath());
                 filepath = tempFile.toURI().toString();
@@ -517,93 +466,8 @@ public class NewLabelController{
 
     }
 
-    /**
-     * Submits a beer application to the database.
-     * @param bd Instance of BeerApplicationData.
-     * @throws SQLException
-     */
-    public void submitBeer(BeerApplicationData bd) throws SQLException{
-        String ttbid = db.getNewTTBID();
-        int repid = bd.getRepid();
-        String serial = bd.getSerial();
-        String address = bd.getAddress();
-        String fancyName = bd.getFancyName();
-        String formula = bd.getFormula();
-        int permit_no = bd.getPermit_no();
-        String infoOnBottle = bd.getInfoOnBottle();
-        String source_of_product = bd.getSource_of_product();
-        String type_of_product = bd.getType_of_product();
-        String brand_name = bd.getBrand_name();
-        String phone_number = bd.getPhone_number();
-        String email = bd.getEmail();
-        String date = bd.getDate();
-        String dateFormat = date.toString();
-        String applicantName = bd.getApplicantName();
-        String alcoholType = bd.getAlcoholType();
-        String alcoholContent = bd.getAlcoholContent();
-        String status = bd.getAcceptanceInfo().getStatus();
-        int type1 = bd.getType1();
-        String type2 = bd.getType2();
-        int type3 = bd.getType3();
-
-        db.addBeerForm(ttbid, repid, serial, address, fancyName, formula, permit_no, infoOnBottle, source_of_product, type_of_product, brand_name, phone_number, email,
-                dateFormat, applicantName, alcoholType, alcoholContent, status, type1, type2, type3);
-
-
-        roundRobin();
-    }
-
-    public void submitDistilledSpirits(BeerApplicationData bd) throws SQLException{
-        String ttbid = db.getNewTTBID();
-        int repid = bd.getRepid();
-        String serial = bd.getSerial();
-        String address = bd.getAddress();
-        String fancyName = bd.getFancyName();
-        String formula = bd.getFormula();
-        int permit_no = bd.getPermit_no();
-        String infoOnBottle = bd.getInfoOnBottle();
-        String source_of_product = bd.getSource_of_product();
-        String type_of_product = bd.getType_of_product();
-        String brand_name = bd.getBrand_name();
-        String phone_number = bd.getPhone_number();
-        String email = bd.getEmail();
-        String date = bd.getDate();
-        String dateFormat = date.toString();
-        String applicantName = bd.getApplicantName();
-        String alcoholType = bd.getAlcoholType();
-        String alcoholContent = bd.getAlcoholContent();
-        String status = bd.getAcceptanceInfo().getStatus();
-        int type1 = bd.getType1();
-        String type2 = bd.getType2();
-        int type3 = bd.getType3();
-
-        db.addDistilledSpiritsForm(ttbid, repid, serial, address, fancyName, formula, permit_no, infoOnBottle, source_of_product, type_of_product, brand_name, phone_number, email,
-                dateFormat, applicantName, alcoholType, alcoholContent, status, type1, type2, type3);
-
-        roundRobin();
-    }
-
-    /**
-     * Assigns new applications to government workers.
-     * @throws SQLException
-     */
-    public void roundRobin() throws  SQLException{
-        System.out.println("Running roundrobin");
-        ArrayList<ApplicationData> unAssignedForms = db.searchUnassignedForms();
-        System.out.println("Unassigned forms = "+ unAssignedForms.size());
-        if(!(unAssignedForms.size() == 0)){
-            for(int i = 0; i < unAssignedForms.size(); i++) {;
-                int GOVID = db.searchMinWorkLoad();
-                System.out.println("Found govid with min workload = " + GOVID);
-                db.assignForm(GOVID, unAssignedForms.get(i));
-                System.out.println("FORM ID "+ unAssignedForms.get(i) + " ASSIGNED");
-            }
-        }
-
-    }
-
     public void buttonClicked (){
-            work.switchScene("NewHelp.fxml","Help");
+            screenUtil.switchScene("NewHelp.fxml","Help");
     }
 
     public void exportPDF () {

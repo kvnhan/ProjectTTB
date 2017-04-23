@@ -7,7 +7,7 @@ public class DataPasser {
 
     private static AlcoholData alcData;
     private static int isRevised;
-    private static int formID;
+    private static String ttbidID;
     private static int isInvokebyReviseMenu;
     private static int disableVintageField;
     private static int disablepHField;
@@ -18,8 +18,12 @@ public class DataPasser {
     private static int disableImageButton;
     private static int disableAlcoContentField;
 
-    public static int getFormID() {
-        return formID;
+    public static String getTtbID() {
+        return ttbidID;
+    }
+
+    public void setTtbID(String ttbidID){
+        this.ttbidID = ttbidID;
     }
 
     public int isIsRevised() {
@@ -94,13 +98,6 @@ public class DataPasser {
         this.disableImageButton = disableImageButton;
     }
 
-    public int getFormId(){
-        return formID;
-    }
-
-    public void setFormID(int id){
-        this.formID = id;
-    }
 
     public int isIsInvokebyReviseMenu() {
         return isInvokebyReviseMenu;

@@ -41,7 +41,7 @@
             <Font size="16.0" />
          </font>
       </CheckBox>
-      <CheckBox fx:id="isOtherBox" layoutX="265.0" layoutY="16.0" mnemonicParsing="false" text="Distilled Spirits">
+      <CheckBox fx:id="isDistilledBox" layoutX="265.0" layoutY="16.0" mnemonicParsing="false" text="Distilled Spirits">
          <font>
             <Font size="16.0" />
          </font>

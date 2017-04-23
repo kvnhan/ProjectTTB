@@ -21,7 +21,7 @@
     </Text>
     <Button fx:id="back" layoutX="21.0" layoutY="543.0" mnemonicParsing="false" onAction="#goBack" prefHeight="31.0" prefWidth="447.0" text="Back" />
     <Button fx:id="submit" layoutX="634.0" layoutY="543.0" mnemonicParsing="false" onAction="#submitButtonClicked" prefHeight="31.0" prefWidth="447.0" text="Submit" />
-    <Label layoutX="166.0" layoutY="54.0" text="Application ID #:" />
+    <Label layoutX="166.0" layoutY="54.0" text="TTBID ID #:" />
     <Text layoutX="214.0" layoutY="157.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Revision Type:" textAlignment="CENTER" wrappingWidth="133.21875">
          <font>
         <Font size="19.0" fx:id="x1" />

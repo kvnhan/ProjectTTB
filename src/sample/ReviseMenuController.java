@@ -49,11 +49,10 @@ public class ReviseMenuController {
     private AccountsUtil accountsUtil = new AccountsUtil();
     private ScreenUtil screenUtil = new ScreenUtil();
     private String revisionImagePath = "";
-    SubmissionForm submissionForm;
 
 
     private ArrayList<ApplicationData> formsFound = new ArrayList<>();
-    private ObservableList<Integer> formsObservableList;
+    private ObservableList<String> formsObservableList;
 
     @FXML
     /**
@@ -64,7 +63,7 @@ public class ReviseMenuController {
         formsFound = databaseUtil.searchFormWithAid(databaseUtil.getAccountAid(accountsUtil.getUsername()));
 
         for(int i = 0; i < formsFound.size(); i ++){
-            formsObservableList.add(formsFound.get(i).getFormID());
+            formsObservableList.add(formsFound.get(i).getTtbID());
         }
 
         applicationChoiceBox.setItems(formsObservableList);
@@ -109,8 +108,8 @@ public class ReviseMenuController {
      */
 
     public void submitButtonClicked() throws IOException, SQLException{
-        int fid = Integer.valueOf(applicationChoiceBox.getValue().toString().trim());
-        dataPasser.setFormID(fid);
+        String ttbid = applicationChoiceBox.getValue().toString().trim();
+        dataPasser.setTtbID(ttbid);
         dataPasser.setIsInvokebyReviseMenu(1);
         if(!rev1En.isSelected()){
             dataPasser.setDisableVintageField(1);
@@ -154,7 +153,7 @@ public class ReviseMenuController {
         }
         */
         screenUtil.switchScene("ReviseApp.fxml", "Revision Updates");
-        System.out.println(fid);
+        System.out.println("TTBID: " + ttbid);
 
         /*
         if (rev1En.isSelected()) {
@@ -256,9 +255,9 @@ public class ReviseMenuController {
 
     /**
      * Updates data for a form in the database.
-     * @param FID ID of form to update.
+     * @param TTBID of form to update.
      */
-    public void updateData(int FID) {
+    public void updateData(String TTBID) {
        /* Statement stmt = null;
         String query = "UPDATE ApplicationDB\n\r" +
                 "SET firstChoiceBox.getValue() = " + data + "\n\r" +

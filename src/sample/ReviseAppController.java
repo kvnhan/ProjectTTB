@@ -22,7 +22,7 @@ import java.util.ArrayList;
  * Application Revision Screen controller.
  */
 public class ReviseAppController {
-    ScreenUtil su = new ScreenUtil();
+    /*ScreenUtil su = new ScreenUtil();
     DatabaseUtil du = new DatabaseUtil();
 
     @FXML private TextField myFilePath1;
@@ -60,40 +60,35 @@ public class ReviseAppController {
     @FXML private Button find;
     @FXML private ChoiceBox formChoiceBox;
     private String revisionImagePath = "";
-    int fid;
+    private String ttbid;
 
     private ArrayList<ApplicationData> formsFound = new ArrayList<>();
-    private ObservableList<Integer> formsObservableList;
+    private ObservableList<String> formsObservableList;
     private DataPasser dataPasser = new DataPasser();
     private DatabaseUtil databaseUtil =  new DatabaseUtil();
     private AccountsUtil accountsUtil = new AccountsUtil();
     private ScreenUtil screenUtil = new ScreenUtil();
 
 
-    @FXML
-    public void setFid(int fid)throws SQLException{
-        this.fid = fid;
-    }
-
 
     @FXML
-    /**
+    *//**
      * Initializes the Application Revision Screen.
-     */
+     *//*
     public void initialize()throws SQLException{
         formsObservableList = FXCollections.observableArrayList();
         formsFound = databaseUtil.searchFormWithAid(databaseUtil.getAccountAid(accountsUtil.getUsername()));
 
         for(int i = 0; i < formsFound.size(); i ++){
-            formsObservableList.add(formsFound.get(i).getFormID());
+            formsObservableList.add(formsFound.get(i).getTtbID());
         }
 
-        /*formChoiceBox.getSelectionModel().selectedIndexProperty().addListener(new javafx.beans.value.ChangeListener<Number>() {
+        *//*formChoiceBox.getSelectionModel().selectedIndexProperty().addListener(new javafx.beans.value.ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
                 autoFillSelectedForm(new ActionEvent(formChoiceBox, (Node) formChoiceBox));
             }
-        });*/
+        });*//*
 
         formChoiceBox.setItems(formsObservableList);
 
@@ -101,8 +96,8 @@ public class ReviseAppController {
         if(dataPasser.isIsInvokebyReviseMenu() == 1) {
             dataPasser.setIsRevised(1);
             find.setDisable(true);
-            fid = dataPasser.getFormId();
-            formChoiceBox.setValue(fid);
+            ttbid = dataPasser.getTtbID();
+            formChoiceBox.setValue(ttbid);
             formChoiceBox.setDisable(true);
             int type1;
             int type2;
@@ -111,11 +106,11 @@ public class ReviseAppController {
             String source;
             WineApplicationData wine;
             BeerApplicationData beer;
-            type = databaseUtil.checkforType(fid);
-            type1 = databaseUtil.checkforType1(fid);
-            type2 = databaseUtil.checkforType2(fid);
-            type3 = databaseUtil.checkforType3(fid);
-            source = databaseUtil.checkforSource(fid);
+            type = databaseUtil.checkforType(ttbid);
+            type1 = databaseUtil.checkforType1(ttbid);
+            type2 = databaseUtil.checkforType2(ttbid);
+            type3 = databaseUtil.checkforType3(ttbid);
+            source = databaseUtil.checkforSource(ttbid);
 
             if(dataPasser.getDisableRestField() == 1){
                 state.setDisable(true);
@@ -149,7 +144,7 @@ public class ReviseAppController {
                 if(source.equals("IMPORTED")){
                     imp1.setSelected(true);
                 }
-                wine = databaseUtil.fillSubmittedWineForm(fid);
+                wine = databaseUtil.fillSubmittedWineForm(ttbid);
 
                 if(type1 == 0){
                     dom12.setSelected(true);
@@ -163,15 +158,15 @@ public class ReviseAppController {
                     amount.setText(Integer.toString(wine.getType3()));
                 }
                 wine1.setSelected(true);
-                ID1.setText(wine.getTtbid());
+                ID1.setText(wine.getTtbID());
                 RepID1.setText(Integer.toString(wine.getRepid()));
                 PlantReg1.setText(Integer.toString(wine.getPermit_no()));
                 SerialNo1.setText(wine.getSerial());
                 ApplicantName1.setText(wine.getApplicantName());
                 Varietal1.setText(wine.getGrape_varietal());
                 Appellation1.setText(wine.getAppellation());
-                BrandName1.setText(wine.getBrand_name());
-                Name1.setText(wine.getFancyName());
+                BrandName1.setText(wine.getAssociatedAlcoholData().getBrandName());
+                Name1.setText(wine.getAssociatedAlcoholData().getName());
                 Formula1.setText(wine.getFormula());
                 PhoneNumber1.setText(wine.getPhone_number());
                 EmailAddress1.setText(wine.getEmail());
@@ -205,7 +200,7 @@ public class ReviseAppController {
                     imp1.setSelected(true);
                 }
 
-                beer = databaseUtil.fillSubmittedBeerForm(fid);
+                beer = databaseUtil.fillSubmittedBeerForm(ttbid);
                 if(type1 == 0){
                     dom12.setSelected(true);
                 }
@@ -224,13 +219,13 @@ public class ReviseAppController {
                     Varietal1.setDisable(true);
                 }
                 beer1.setSelected(true);
-                ID1.setText(beer.getTtbid());
+                ID1.setText(beer.getTtbID());
                 RepID1.setText(Integer.toString(beer.getRepid()));
                 PlantReg1.setText(Integer.toString(beer.getPermit_no()));
                 SerialNo1.setText(beer.getSerial());
                 ApplicantName1.setText(beer.getApplicantName());
-                BrandName1.setText(beer.getBrand_name());
-                Name1.setText(beer.getFancyName());
+                BrandName1.setText(beer.getAssociatedAlcoholData().getBrandName());
+                Name1.setText(beer.getAssociatedAlcoholData().getName());
                 Formula1.setText(beer.getFormula());
                 PhoneNumber1.setText(beer.getPhone_number());
                 EmailAddress1.setText(beer.getEmail());
@@ -247,7 +242,7 @@ public class ReviseAppController {
                 if(source.equals("IMPORTED")){
                     imp1.setSelected(true);
                 }
-                beer = databaseUtil.fillSubmittedBeerForm(fid);
+                beer = databaseUtil.fillSubmittedBeerForm(ttbid);
                 if(type1 == 0){
                     dom12.setSelected(true);
                 }
@@ -267,13 +262,13 @@ public class ReviseAppController {
                 }
 
                 other1.setSelected(true);
-                ID1.setText(beer.getTtbid());
+                ID1.setText(beer.getTtbID());
                 RepID1.setText(Integer.toString(beer.getRepid()));
                 PlantReg1.setText(Integer.toString(beer.getPermit_no()));
                 SerialNo1.setText(beer.getSerial());
                 ApplicantName1.setText(beer.getApplicantName());
-                BrandName1.setText(beer.getBrand_name());
-                Name1.setText(beer.getFancyName());
+                BrandName1.setText(beer.getAssociatedAlcoholData().getBrandName());
+                Name1.setText(beer.getAssociatedAlcoholData().getName());
                 Formula1.setText(beer.getFormula());
                 PhoneNumber1.setText(beer.getPhone_number());
                 EmailAddress1.setText(beer.getEmail());
@@ -343,13 +338,13 @@ public class ReviseAppController {
 
     }
     @FXML
-    /**
+    *//**
      * Autofills a selected form into the screen.
      *
-     */
+     *//*
     public void autoFillSelectedForm(javafx.event.ActionEvent event)throws SQLException{
 
-        int fid = Integer.valueOf(formChoiceBox.getValue().toString().trim());
+        String ttbid = formChoiceBox.getValue().toString().trim();
         WineApplicationData wine;
         BeerApplicationData beer;
         String type;
@@ -357,11 +352,11 @@ public class ReviseAppController {
         int type2;
         int type3;
         String source;
-        type = databaseUtil.checkforType(fid);
-        type1 = databaseUtil.checkforType1(fid);
-        type2 = databaseUtil.checkforType2(fid);
-        type3 = databaseUtil.checkforType3(fid);
-        source = databaseUtil.checkforSource(fid);
+        type = databaseUtil.checkforType(ttbid);
+        type1 = databaseUtil.checkforType1(ttbid);
+        type2 = databaseUtil.checkforType2(ttbid);
+        type3 = databaseUtil.checkforType3(ttbid);
+        source = databaseUtil.checkforSource(ttbid);
         if(source.equals("DOMESTIC")){
             dom1111.setSelected(true);
         }
@@ -370,7 +365,7 @@ public class ReviseAppController {
         }
         if(event.getSource() == find) {
             if (type.equals("WINE")) {
-                wine = databaseUtil.fillSubmittedWineForm(fid);
+                wine = databaseUtil.fillSubmittedWineForm(ttbid);
                 if(type1 == 0){
                     dom12.setSelected(true);
                 }
@@ -383,15 +378,15 @@ public class ReviseAppController {
                     amount.setText(Integer.toString(wine.getType3()));
                 }
                 wine1.setSelected(true);
-                ID1.setText(wine.getTtbid());
+                ID1.setText(wine.getTtbID());
                 RepID1.setText(Integer.toString(wine.getRepid()));
                 PlantReg1.setText(Integer.toString(wine.getPermit_no()));
                 SerialNo1.setText(wine.getSerial());
                 ApplicantName1.setText(wine.getApplicantName());
                 Varietal1.setText(wine.getGrape_varietal());
                 Appellation1.setText(wine.getAppellation());
-                BrandName1.setText(wine.getBrand_name());
-                Name1.setText(wine.getFancyName());
+                BrandName1.setText(wine.getAssociatedAlcoholData().getBrandName());
+                Name1.setText(wine.getAssociatedAlcoholData().getName());
                 Formula1.setText(wine.getFormula());
                 PhoneNumber1.setText(wine.getPhone_number());
                 EmailAddress1.setText(wine.getEmail());
@@ -400,7 +395,7 @@ public class ReviseAppController {
                 Address1.setText(wine.getAddress());
                 MailingAddress1.setText(wine.getAddress());
             } else if (type.equals("BEER")) {
-                beer = databaseUtil.fillSubmittedBeerForm(fid);
+                beer = databaseUtil.fillSubmittedBeerForm(ttbid);
                 if(type1 == 0){
                     dom12.setSelected(true);
                 }
@@ -413,20 +408,20 @@ public class ReviseAppController {
                     amount.setText(Integer.toString(beer.getType3()));
                 }
                 beer1.setSelected(true);
-                ID1.setText(beer.getTtbid());
+                ID1.setText(beer.getTtbID());
                 RepID1.setText(Integer.toString(beer.getRepid()));
                 PlantReg1.setText(Integer.toString(beer.getPermit_no()));
                 SerialNo1.setText(beer.getSerial());
                 ApplicantName1.setText(beer.getApplicantName());
-                BrandName1.setText(beer.getBrand_name());
-                Name1.setText(beer.getFancyName());
+                BrandName1.setText(beer.getAssociatedAlcoholData().getBrandName());
+                Name1.setText(beer.getName());
                 Formula1.setText(beer.getFormula());
                 PhoneNumber1.setText(beer.getPhone_number());
                 EmailAddress1.setText(beer.getEmail());
                 Address1.setText(beer.getAddress());
                 MailingAddress1.setText(beer.getAddress());
             } else {
-                beer = databaseUtil.fillSubmittedBeerForm(fid);
+                beer = databaseUtil.fillSubmittedBeerForm(ttbid);
                 if(type1 == 0){
                     dom12.setSelected(true);
                 }
@@ -439,13 +434,13 @@ public class ReviseAppController {
                     amount.setText(Integer.toString(beer.getType3()));
                 }
                 other1.setSelected(true);
-                ID1.setText(beer.getTtbid());
+                ID1.setText(beer.getTtbID());
                 RepID1.setText(Integer.toString(beer.getRepid()));
                 PlantReg1.setText(Integer.toString(beer.getPermit_no()));
                 SerialNo1.setText(beer.getSerial());
                 ApplicantName1.setText(beer.getApplicantName());
-                BrandName1.setText(beer.getBrand_name());
-                Name1.setText(beer.getFancyName());
+                BrandName1.setText(beer.getAssociatedAlcoholData().getBrandName());
+                Name1.setText(beer.getAssociatedAlcoholData().getName());
                 Formula1.setText(beer.getFormula());
                 PhoneNumber1.setText(beer.getPhone_number());
                 EmailAddress1.setText(beer.getEmail());
@@ -455,13 +450,12 @@ public class ReviseAppController {
         }
     }
 
-    /**
+    *//**
      * Resubmits an application.
      * @throws SQLException
-     */
+     *//*
     public void submitAgain()throws SQLException{
-        int fid = Integer.valueOf(formChoiceBox.getValue().toString().trim());
-        String ttbid = ID1.getText();
+        String ttbid = formChoiceBox.getValue().toString().trim();
         int repid = Integer.parseInt(RepID1.getText());
         String serial = SerialNo1.getText();
         String address = Address1.getText();
@@ -476,7 +470,6 @@ public class ReviseAppController {
         String applicantName = ApplicantName1.getText();
         String alcoholType = "";
         String date ="";
-        AcceptanceInformation ac = null;
         String info = "";
         String content = "";
         int type1 = 0;
@@ -510,26 +503,26 @@ public class ReviseAppController {
             double ph_level = Double.parseDouble(pH1.getText());
             String grape_varietal = Varietal1.getText();
             String appellation = Appellation1.getText();
-            WineApplicationData a = new WineApplicationData(fid, ac, ttbid, repid, serial, address, fancyName, formula, grape_varietal, appellation, permit_no, info,
-                    source_of_product, type_of_product, brand_name, phone_number, email, date, applicantName, alcoholType, content, type1, type2, type3, vintage_date, ph_level);
-            du.resubmitWine(fid, a);
+            WineApplicationData a = new WineApplicationData(ttbid, ac, repid, serial, address, formula, grape_varietal, appellation, permit_no, info,
+                    source_of_product, type_of_product, phone_number, email, date, applicantName, type1, type2, type3, vintage_date, ph_level);
+            du.resubmitWine(a);
             su.switchScene("NewApp.fxml", "Application Menu");
             su.createAlertBox("Notification", "Update is successful");
 
         } else if (beer1.isSelected()) {
             type_of_product = "MALT BEVERAGES";
             alcoholType = "MALT BEVERAGES";
-            BeerApplicationData a = new BeerApplicationData(fid, ac, ttbid, repid, serial, address, fancyName, formula, permit_no, info,
-                    source_of_product, type_of_product, brand_name, phone_number, email, date, applicantName, alcoholType, content, type1, type2, type3);
-            du.resubmitBeer(fid, a);
+            BeerApplicationData a = new BeerApplicationData(ttbid, ac, repid, serial, address, formula, permit_no, info,
+                    source_of_product, type_of_product, phone_number, email, date, applicantName, type1, type2, type3);
+            du.resubmitBeer(a);
             su.switchScene("NewApp.fxml", "Application Menu");
             su.createAlertBox("Notification", "Update is successful");
         } else if (other1.isSelected()) {
             type_of_product = "DISTILLED SPIRITS";
             alcoholType = "DISTILLED SPIRITS";
-            BeerApplicationData a = new BeerApplicationData(fid, ac, ttbid, repid, serial, address, fancyName, formula, permit_no, info,
-                    source_of_product, type_of_product, brand_name, phone_number, email, date, applicantName, alcoholType, content, type1, type2, type3);
-            du.resubmitBeer(fid, a);
+            BeerApplicationData a = new BeerApplicationData(ttbid, ac, repid, serial, address, formula, permit_no, info,
+                    source_of_product, type_of_product, phone_number, email, date, applicantName, type1, type2, type3);
+            du.resubmitBeer(a);
             su.switchScene("NewApp.fxml", "Application Menu");
             su.createAlertBox("Notification", "Update is successful");
         }else{
@@ -538,28 +531,28 @@ public class ReviseAppController {
 
     }
 
-    /**
+    *//**
      * Uploads an image to the system.
      * @param Event Upload Image button is pressed.
-     */
+     *//*
     public void uploadImage(ActionEvent Event){
         openFileChooser();
         myFilePath1.setText(revisionImagePath);
     }
 
     @FXML
-    /**
+    *//**
      * Clears information from the screen.
-     */
+     *//*
     private void setClear(){
         ScreenUtil work = new ScreenUtil();
         work.switchScene("ReviseApp.fxml", "Revise Application");
     }
 
 
-    /**
+    *//**
      * Opens a file explorer to choose an image to upload.
-     */
+     *//*
     public void openFileChooser(){
         Stage ReviseMenu = new Stage();
         FileChooser fileChooser = new FileChooser();
@@ -569,5 +562,5 @@ public class ReviseAppController {
     }
 
 
-
+*/
 }

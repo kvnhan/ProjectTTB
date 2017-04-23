@@ -30,7 +30,7 @@ public class WorkFlowController {
 
     @FXML
     public void initialize() throws SQLException{
-        roundRobin();
+        databaseUtil.roundRobin();
 
         activeUser = databaseUtil.searchAccountWithUsername(username).get(0);
 
@@ -66,22 +66,6 @@ public class WorkFlowController {
         displayResults();
     }
 
-    //goes adds new applications to worker's inboxes
-    public void roundRobin() throws  SQLException{
-        System.out.println("Running roundrobin");
-        ArrayList<ApplicationData> unAssignedForms = databaseUtil.searchUnassignedForms();
-        System.out.println("Unassigned forms = "+ unAssignedForms.size());
-        if(!(unAssignedForms.size() == 0)){
-            for(int i = 0; i < unAssignedForms.size(); i++) {;
-                    int GOVID = (int) databaseUtil.searchMinWorkLoad();
-                    System.out.println("Found govid with min workload = " + GOVID);
-                    databaseUtil.assignForm(GOVID, unAssignedForms.get(i));
-                    System.out.println("FORM ID "+ unAssignedForms.get(i) + " ASSIGNED");
-            }
-        }
-
-    }
-
     public void displayResults(){
         inboxTable.getColumns().clear();
 
@@ -91,7 +75,7 @@ public class WorkFlowController {
         }else{
                 alcoholTypeColumn.setCellValueFactory(new PropertyValueFactory<>("AlcoholType"));
         }
-        ttbIDColumn.setCellValueFactory(new PropertyValueFactory<>("Ttbid"));
+        ttbIDColumn.setCellValueFactory(new PropertyValueFactory<>("TtbID"));
         fancifulNameColumn.setCellValueFactory(new PropertyValueFactory<>("FancyName"));
         brandNameColumn.setCellValueFactory(new PropertyValueFactory<>("Brand_name"));
         submissionDateColumn.setCellValueFactory(new PropertyValueFactory<>("Date"));
@@ -129,7 +113,4 @@ public class WorkFlowController {
         return rowChosen;
     }
 
-    public static void setRowChosen(ApplicationData rowChosen) {
-        WorkFlowController.rowChosen = rowChosen;
-    }
 }

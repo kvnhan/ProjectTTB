@@ -1,13 +1,14 @@
 package sample;
 
+import java.sql.Date;
+
 /**
  * Contains data relating to different alcohols.
  */
-public class AlcoholData{
+public class AlcoholData {
 
     private int aid;
     private String name;
-    private String brandName;
     private String appellation;
     private String sulfiteDescription;
     private double alchContent;
@@ -16,11 +17,20 @@ public class AlcoholData{
     private int productType;
     private int classType;
     private String labelLegibility;
-    private int labelSize;
+    private String labelSize;
     private String formulas;
     private int alcoholType;
     private String bottlersInfo;
-    private String imageFileName;
+    private String brandName;
+    private String status;
+    private int wineVintage;
+    private double phLevel;
+    private String grapeVarietal;
+    private String infoOnBottle;
+    private String sourceOfProduct;
+    private Date dateApproved;
+    private int originCode;
+
 
     /**
      * Creates an AlcoholData object.
@@ -39,12 +49,10 @@ public class AlcoholData{
      * @param formulas Formulas for the alcoholic beverage.
      * @param alcoholType Type of alcohol.
      * @param bottlersInfo General information about the bottler.
-     * @param imageFileName Name of the image file for the label.
      */
-    public AlcoholData(int aid, String name, String brandName, String appellation, String sulfiteDescription, double alchContent, double netContent, String healthWarning, int productType, int classType, String labelLegibility, int labelSize, String formulas, int alcoholType, String bottlersInfo, String imageFileName) {
+    public AlcoholData(int aid, String name, String appellation, String sulfiteDescription, double alchContent, double netContent, String healthWarning, int productType, int classType, String labelLegibility, String labelSize, String formulas, int alcoholType, String bottlersInfo, String brandName, String status, int wineVintage, double phLevel, String grapeVarietal, String infoOnBottle, String sourceOfProduct, Date dateApproved, int originCode) {
         this.aid = aid;
         this.name = name;
-        this.brandName = brandName;
         this.appellation = appellation;
         this.sulfiteDescription = sulfiteDescription;
         this.alchContent = alchContent;
@@ -57,13 +65,17 @@ public class AlcoholData{
         this.formulas = formulas;
         this.alcoholType = alcoholType;
         this.bottlersInfo = bottlersInfo;
-        this.imageFileName = imageFileName;
+        this.brandName = brandName;
+        this.status = status;
+        this.wineVintage = wineVintage;
+        this.phLevel = phLevel;
+        this.grapeVarietal = grapeVarietal;
+        this.infoOnBottle = infoOnBottle;
+        this.sourceOfProduct = sourceOfProduct;
+        this.dateApproved = dateApproved;
+        this.originCode = originCode;
     }
 
-    //TODO Finish, I am lazy.
-    public boolean myEquals(AlcoholData other) {
-        return this.getName()!=null && other.getName()!=null && this.getName().equals(other.getName());
-    }
 
     public int getAid() {
         return aid;
@@ -79,14 +91,6 @@ public class AlcoholData{
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getBrandName() {
-        return brandName;
-    }
-
-    public void setBrandName(String brandName) {
-        this.brandName = brandName;
     }
 
     public String getAppellation() {
@@ -153,11 +157,11 @@ public class AlcoholData{
         this.labelLegibility = labelLegibility;
     }
 
-    public int getLabelSize() {
+    public String getLabelSize() {
         return labelSize;
     }
 
-    public void setLabelSize(int labelSize) {
+    public void setLabelSize(String labelSize) {
         this.labelSize = labelSize;
     }
 
@@ -185,12 +189,75 @@ public class AlcoholData{
         this.bottlersInfo = bottlersInfo;
     }
 
-    public String getImageFileName() {
-        return imageFileName;
+    public String getBrandName() {
+        return brandName;
     }
 
-    public void setImageFileName(String imageFileName) {
-        this.imageFileName = imageFileName;
+    public void setBrandName(String brandName) {
+        this.brandName = brandName;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public int getWineVintage() {
+        return wineVintage;
+    }
+
+    public void setWineVintage(int wineVintage) {
+        this.wineVintage = wineVintage;
+    }
+
+    public double getPhLevel() {
+        return phLevel;
+    }
+
+    public void setPhLevel(double phLevel) {
+        this.phLevel = phLevel;
+    }
+
+    public String getGrapeVarietal() {
+        return grapeVarietal;
+    }
+
+    public void setGrapeVarietal(String grapeVarietal) {
+        this.grapeVarietal = grapeVarietal;
+    }
+
+    public String getInfoOnBottle() {
+        return infoOnBottle;
+    }
+
+    public void setInfoOnBottle(String infoOnBottle) {
+        this.infoOnBottle = infoOnBottle;
+    }
+
+    public String getSourceOfProduct() {
+        return sourceOfProduct;
+    }
+
+    public void setSourceOfProduct(String sourceOfProduct) {
+        this.sourceOfProduct = sourceOfProduct;
+    }
+
+    public Date getDateApproved() {
+        return dateApproved;
+    }
+
+    public void setDateApproved(Date dateApproved) {
+        this.dateApproved = dateApproved;
+    }
+
+    public int getOriginCode() {
+        return originCode;
+    }
+
+    public void setOriginCode(int originCode) {
+        this.originCode = originCode;
+    }
 }
