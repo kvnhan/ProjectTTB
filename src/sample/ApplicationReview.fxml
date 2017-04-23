@@ -10,7 +10,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="429.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ApplicationReviewController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="429.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ApplicationReviewController">
   <children>
     <Label layoutX="15.0" layoutY="61.0" text="Rep. ID. No.:">
       <font>
@@ -65,5 +65,7 @@
             </LinearGradient>
          </fill>
       </Rectangle>
+      <Button fx:id="FwdButton" layoutX="153.0" layoutY="361.0" mnemonicParsing="false" onAction="#forwardApp" text="Forward To:" />
+      <TextField fx:id="IDtoForward" layoutX="242.0" layoutY="361.0" prefHeight="25.0" prefWidth="174.0" promptText="GovID" />
   </children>
 </Pane>
