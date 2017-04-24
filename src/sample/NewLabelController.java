@@ -14,8 +14,12 @@ import javafx.stage.Stage;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URL;
+import java.net.URLDecoder;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -24,6 +28,8 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import javafx.scene.control.TextField;
+
+import javax.imageio.ImageIO;
 import java.util.Random;
 /**
  * Controller for new label screen.
@@ -73,6 +79,7 @@ public class NewLabelController{
     @FXML private Button clear;
     @FXML private Button helpNewButton;
     private String filepath;
+    private File tempFile;
     @FXML
     /**
      * Clears information from the screen.
@@ -150,7 +157,7 @@ public class NewLabelController{
         double alcoholContentDouble = 0;
         int type1 = -1;
         String type2 = "";
-        int type3 = -1;
+        int type3 = 0;
         int vintage_date = 0;
         double ph_level = 0;
         int max = 999999999;
@@ -179,6 +186,8 @@ public class NewLabelController{
                     screenUtil.createAlertBox("ERROR", "Invalid Input for Amount");
                     valid = false;
                 }
+            }else{
+                type3 = -1;
             }
         }
 
@@ -281,20 +290,8 @@ public class NewLabelController{
             screenUtil.createAlertBox("ERROR", "Please select Domestic or Imported");
             valid = false;
         }
-/*
-        if (wine.isSelected()) {
-            type_of_product = "WINE";
-            alcoholType = "WINE";
-        } else if (beer.isSelected()) {
-            type_of_product = "MALT BEVERAGES";
-            alcoholType = "MALT BEVERAGES";
-        } else if (other.isSelected()) {
-            type_of_product = "DISTILLED SPIRITS";
-            alcoholType = "DISTILLED SPIRITS";
-        }else{
-            screenUtil.createAlertBox("ERROR", "Please selecct the type of product");
-            valid = false;
-        }*/
+
+
         if(!BrandName.getText().trim().isEmpty()) {
             brand_name = BrandName.getText();
         }else{
@@ -410,7 +407,7 @@ public class NewLabelController{
 
                     // Add to alcohol
                     alcoholID = db.addAlcohol(fancyName, appellation, sulfiteDesc, alcoholContentDouble, netContentDouble, healthWarningText, 0, 0, "n/a", "n/a", formula, 2, bottlerInfo, brand_name, "PROCESSING",vintage_date, ph_level, grape_varietal, infoOnBottle, source_of_product, null, originCode);
-
+                    saveImage(newTTBID, alcoholID);
                     //connect form and alcohol
                     db.updateAlcoholIDForForm(alcoholID, newTTBID);
 
@@ -422,8 +419,8 @@ public class NewLabelController{
                     newTTBID = db.addForm(db.getNewTTBID(), repid, serial, address, permit_no, phone_number, email, applicantName, "UNASSIGNED", type1, type2, type3, currentDate);
 
                     // Add to alcohol
-                    alcoholID = db.addAlcohol(fancyName, appellation, sulfiteDesc, alcoholContentDouble, netContentDouble, healthWarningText, 0, 0, "n/a", "n/a", formula, 2, bottlerInfo, brand_name, "PROCESSING",vintage_date, ph_level, grape_varietal, infoOnBottle, source_of_product, null, originCode);
-
+                    alcoholID = db.addAlcohol(fancyName, appellation, sulfiteDesc, alcoholContentDouble, netContentDouble, healthWarningText, 0, 0, "n/a", "n/a", formula, 1, bottlerInfo, brand_name, "PROCESSING",vintage_date, ph_level, grape_varietal, infoOnBottle, source_of_product, null, originCode);
+                    saveImage(newTTBID, alcoholID);
                     //connect form and alcohol
                     db.updateAlcoholIDForForm(alcoholID, newTTBID);
 
@@ -434,14 +431,16 @@ public class NewLabelController{
                     newTTBID = db.addForm(db.getNewTTBID(), repid, serial, address, permit_no, phone_number, email, applicantName, "UNASSIGNED", type1, type2, type3, currentDate);
 
                     // Add to alcohol
-                    alcoholID = db.addAlcohol(fancyName, appellation, sulfiteDesc, alcoholContentDouble, netContentDouble, healthWarningText, 0, 0, "n/a", "n/a", formula, 2, bottlerInfo, brand_name, "PROCESSING",vintage_date, ph_level, grape_varietal, infoOnBottle, source_of_product, null, originCode);
-
+                    alcoholID = db.addAlcohol(fancyName, appellation, sulfiteDesc, alcoholContentDouble, netContentDouble, healthWarningText, 0, 0, "n/a", "n/a", formula, 3, bottlerInfo, brand_name, "PROCESSING",vintage_date, ph_level, grape_varietal, infoOnBottle, source_of_product, null, originCode);
+                    saveImage(newTTBID, alcoholID);
                     //connect form and alcohol
                     db.updateAlcoholIDForForm(alcoholID, newTTBID);
 
                     System.out.println("This works too");
                     screenUtil.switchScene("NewApp.fxml", "New Application");
 
+                }else{
+                    screenUtil.createAlertBox("ERROR", "Please selecct the type of product");
                 }
                 db.roundRobin();
             }
@@ -455,7 +454,7 @@ public class NewLabelController{
      */
 
     public void chooseFile(ActionEvent event)throws Exception{
-            File tempFile = screenUtil.openFileChooser();
+        tempFile = screenUtil.openFileChooser();
             if (tempFile != null) {
                 //myFilePath.setText(tempFile.getPath());
                 filepath = tempFile.toURI().toString();
@@ -473,6 +472,35 @@ public class NewLabelController{
     public void exportPDF () {
 
 
+    }
+
+    public String getPath() throws UnsupportedEncodingException {
+
+
+        URL url = this.getClass().getProtectionDomain().getCodeSource().getLocation();
+        String jarPath = URLDecoder.decode(url.getFile(), "UTF-8");
+        String parentPath = new File(jarPath).getParentFile().getPath();
+
+        String fileSeparator = System.getProperty("file.separator");
+        String newDir = parentPath + fileSeparator + "images" + fileSeparator;
+
+        System.out.println(newDir);
+
+        return newDir;
+    }
+
+    public void saveImage(String id, int aid){
+        BufferedImage image2 = null;
+        BufferedImage image3 = null;
+        try {
+            String path = getPath();
+            image2 = ImageIO.read(tempFile);
+            image3 = ImageIO.read(tempFile);
+            ImageIO.write(image2, "jpg", new File(path + "/" + id + ".jpg"));
+            ImageIO.write(image3, "jpg", new File(path + "/" + aid + ".jpg"));
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
 
