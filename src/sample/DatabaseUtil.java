@@ -741,6 +741,7 @@ public class DatabaseUtil {
     public void decideApplicationAction(String status, ApplicationData thisForm, javafx.scene.control.TextArea commentsField) throws  SQLException{
         // change alcohol status to approved
         changeAlcoholStatus(status, thisForm.getAssociatedAlchID());
+        changeStatus(status.toUpperCase(), thisForm.getTtbID());
 
 
         //AlcoholData associatedAlcohol = thisForm.getAssociatedAlcoholData();
