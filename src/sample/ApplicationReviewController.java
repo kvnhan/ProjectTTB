@@ -20,9 +20,9 @@ import java.util.Scanner;
  */
 public class ApplicationReviewController{
     @FXML
-    private Button approve, reject, goBack, ReviewHelpButton;
+    private Button approve, reject, goBack, ReviewHelpButton, forwardApp;
     @FXML
-    private TextField repID, registryNo, prodSource, prodType, address,  phoneNo, email, dateApp, nameApp;
+    private TextField repID, registryNo, prodSource, prodType, address,  phoneNo, email, dateApp, nameApp, IDtoForward;
     @FXML private  TextArea commentsField;
 
     private DatabaseUtil dbUtil = new DatabaseUtil();
@@ -87,6 +87,13 @@ public class ApplicationReviewController{
 
     public void setReject(ActionEvent event) throws SQLException {
         dbUtil.decideApplicationAction("REJECTED", thisForm, commentsField);
+        nextApplication();
+    }
+
+    @FXML
+    public void forwardApp(ActionEvent event) throws SQLException{
+        int newGovID = Integer.parseInt(IDtoForward.getText());
+        dbUtil.assignForm(newGovID, thisForm);
         nextApplication();
     }
 

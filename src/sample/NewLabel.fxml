@@ -3,7 +3,6 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.image.ImageView?>
@@ -96,7 +95,7 @@
                 <Font name="Constantia" size="16.0" />
             </font>
         </Label>
-        <CheckBox fx:id="dom111" layoutX="15.0" layoutY="250.0" mnemonicParsing="false" onAction="#handledomBox" text="Distinctive Liquor Bottle Approval Total Bottle Capacity Before Closure">
+        <CheckBox fx:id="dom111" layoutX="15.0" layoutY="250.0" mnemonicParsing="false" text="Distinctive Liquor Bottle Approval Total Bottle Capacity Before Closure">
             <font>
                 <Font name="Constantia" size="16.0" />
             </font>
