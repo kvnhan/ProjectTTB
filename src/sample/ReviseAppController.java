@@ -595,6 +595,8 @@ public class ReviseAppController {
             su.createAlertBox("ERROR", "Please select the type of product");
         }
 
+        databaseUtil.roundRobin();
+
     }
 
     /**

@@ -20,6 +20,7 @@ import javafx.scene.control.Hyperlink;
  */
 public class AlcoholInfoController {
     DataPasser dataPass = new DataPasser();
+
     @FXML
     Label alcAID, alcBrandName, alcType, alcAppelation, alcSulfite, alcAlcoholContent, alcNetContent,alcHealthWarning,
           alcProductType, alcClass, alcLegibility, alcSize, alcFormula, alcInfo;
