@@ -42,8 +42,6 @@ public class SearchMenuController {
     private @FXML RadioButton normalSearchRadio, intersectSearchRadio, unionSearchRadio;
     private @FXML Button helpSearchButton;
     private @FXML Button searchButton;
-    private @FXML DatePicker startDate;
-    private  @FXML DatePicker endDate;
 
     private @FXML RadioButton csvDownload, tabDownload, customDownload;
     private @FXML TextField CustomDelimiter;// customDirectoryField;
