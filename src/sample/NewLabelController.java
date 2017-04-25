@@ -7,6 +7,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.TitledPane;
 import javafx.scene.image.*;
 import javafx.scene.image.Image;
 import javafx.stage.FileChooser;
@@ -62,6 +63,7 @@ public class NewLabelController{
     @FXML private TextField bottlerField;
     @FXML private TextField healthWarningField;
     @FXML private TextField pH;
+    @FXML private TitledPane WinePane;
 
     @FXML private CheckBox dom1;
     @FXML private CheckBox dom11;
@@ -107,6 +109,13 @@ public class NewLabelController{
             beerCheckBox.setSelected(false);
             distilledCheckBox.setSelected(false);
 
+        }
+
+        if (wineCheckBox.isSelected()){
+            WinePane.setExpanded(true);
+        }
+        else {
+            WinePane.setExpanded(false);
         }
     }
 
@@ -501,6 +510,5 @@ public class NewLabelController{
             e.printStackTrace();
         }
     }
-
 
 }
