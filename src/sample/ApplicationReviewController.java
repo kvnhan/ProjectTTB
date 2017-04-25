@@ -1,8 +1,11 @@
 package sample;
 
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextArea;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
@@ -22,8 +25,9 @@ public class ApplicationReviewController{
     @FXML
     private Button approve, reject, goBack, ReviewHelpButton, forwardApp;
     @FXML
-    private TextField repID, registryNo, prodSource, prodType, address,  phoneNo, email, dateApp, nameApp, IDtoForward;
+    private TextField repID, registryNo, prodSource, prodType, address,  phoneNo, email, dateApp, nameApp;
     @FXML private  TextArea commentsField;
+    @FXML private ChoiceBox acctToChoose;
 
     private DatabaseUtil dbUtil = new DatabaseUtil();
     private ScreenUtil screenUtil = new ScreenUtil();
@@ -33,6 +37,9 @@ public class ApplicationReviewController{
     private ApplicationData thisForm;
     List<ApplicationData> listForms = new ArrayList<ApplicationData>();
     private static int appReviewMode = 1; // 1 = view all forms, 2 = choose form highlighted in inbox then return, 3 choose form highlighted in inbox then go to next available form;
+
+    private ArrayList<Account> acctsFound = new ArrayList<>();
+    private ObservableList<String> acctsObservableList;
 
     @FXML
     /**
@@ -55,7 +62,14 @@ public class ApplicationReviewController{
         email.setText(thisForm.getEmail());
         dateApp.setText(thisForm.getSubmittedDate().toString());
         nameApp.setText(thisForm.getApplicantName());
-}
+
+        acctsObservableList = FXCollections.observableArrayList();
+        acctsFound = dbUtil.searchAccountWithUserType(1);
+        for(int i = 0; i < acctsFound.size(); i++){
+            acctsObservableList.add(acctsFound.get(i).getUsername());
+        }
+        acctToChoose.setItems(acctsObservableList);
+    }
 
 
 
@@ -92,7 +106,8 @@ public class ApplicationReviewController{
 
     @FXML
     public void forwardApp(ActionEvent event) throws SQLException{
-        int newGovID = Integer.parseInt(IDtoForward.getText());
+        String govUsernm = acctToChoose.getValue().toString().trim();
+        int newGovID = dbUtil.getAccountAid(govUsernm);
         dbUtil.assignForm(newGovID, thisForm);
         nextApplication();
     }
