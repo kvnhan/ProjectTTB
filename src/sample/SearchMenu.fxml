@@ -18,7 +18,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="581.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.SearchMenuController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="581.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.SearchMenuController">
    <children>
       <Label layoutX="14.0" layoutY="14.0" text="Alcohol Type:">
          <font>
@@ -46,7 +46,7 @@
             <Font size="16.0" />
          </font>
       </CheckBox>
-      <TextField fx:id="searchTextField" layoutX="565.0" layoutY="13.0" prefHeight="31.0" prefWidth="221.0" />
+      <TextField fx:id="searchTextField" layoutX="565.0" layoutY="13.0" prefHeight="31.0" prefWidth="150.0" />
       <TableView fx:id="table" editable="true" layoutX="12.0" layoutY="165.0" prefHeight="311.0" prefWidth="777.0">
          <columns>
             <TableColumn fx:id="idColumn" prefWidth="100.0" text="ID" />
@@ -117,6 +117,7 @@
             </LinearGradient>
          </fill>
       </Rectangle>
+      <Button fx:id="helpSearchButton" layoutX="746.0" layoutY="11.0" mnemonicParsing="false" onAction="#needHelp" prefHeight="27.0" prefWidth="48.0" text="Help" />
 
    </children>
 </Pane>

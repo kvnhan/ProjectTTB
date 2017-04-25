@@ -289,5 +289,6 @@
          </fill>
       </Rectangle>
       <ImageView fx:id="image1" fitHeight="150.0" fitWidth="200.0" layoutX="360.0" layoutY="714.0" pickOnBounds="true" preserveRatio="true" />
+      <Button fx:id="helpButton" layoutX="942.0" layoutY="17.0" mnemonicParsing="false" onAction="#needHelp" text="Help" />
     </children>
 </Pane>
