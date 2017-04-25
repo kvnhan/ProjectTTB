@@ -1,5 +1,7 @@
 package sample;
 
+import javafx.application.Application;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -11,6 +13,7 @@ import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.net.URLDecoder;
+import javafx.scene.control.Hyperlink;
 
 /**
  * Controller for the alcohol info page that appears when an alcohol is selected from a search.
@@ -24,6 +27,9 @@ public class AlcoholInfoController {
     @FXML
     ImageView alcImage;
     @FXML
+    Hyperlink buy, review;
+    @FXML
+
     Button close;
     private boolean foundImage = false;
 
@@ -70,10 +76,30 @@ public class AlcoholInfoController {
         Stage stage = (Stage) close.getScene().getWindow();
         stage.close();
     }
+    @FXML
+    public void buy(ActionEvent event){
+        Application a = new Application() {
+            @Override
+            public void start(Stage primaryStage) throws Exception {
+
+            }
+        };
+        a.getHostServices().showDocument("http://www.wine-searcher.com/find/" + alcBrandName.getText());
+    }
+    @FXML
+    public void review(ActionEvent event){
+        Application a = new Application() {
+            @Override
+            public void start(Stage primaryStage) throws Exception {
+
+            }
+        };
+        a.getHostServices().showDocument("https://www.google.com/search?q=" + alcBrandName.getText() + " reviews");
+        // a.getHostServices().showDocument("https://www.tripadvisor.com/Search?geo=&pid=3825&redirect=&startTime=&uiOrigin=&q=" + alcBrandName.getText());
+    }
+
 
     public String getPath() throws UnsupportedEncodingException {
-
-
         URL url = this.getClass().getProtectionDomain().getCodeSource().getLocation();
         String jarPath = URLDecoder.decode(url.getFile(), "UTF-8");
         String parentPath = new File(jarPath).getParentFile().getPath();

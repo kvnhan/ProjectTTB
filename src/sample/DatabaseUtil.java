@@ -748,14 +748,14 @@ public class DatabaseUtil {
 
         //String ReviewerUsername = AccountsUtil.getUsername();
 
-        /*int GOVID = getAccountAid(ReviewerUsername);
+        //int GOVID = getAccountAid(ReviewerUsername);
 
         //get comments
         String comments = commentsField.getText();
 
         //update alcohol status
         changeStatus(status.toUpperCase(), thisForm.getTtbID());
-
+/*
         int statusInInteger;
 
         if(status.toUpperCase().equals("INCOMPLETE")){

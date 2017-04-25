@@ -407,7 +407,7 @@ public class NewLabelController{
 
                     // Add to alcohol
                     alcoholID = db.addAlcohol(fancyName, appellation, sulfiteDesc, alcoholContentDouble, netContentDouble, healthWarningText, 0, 0, "n/a", "n/a", formula, 2, bottlerInfo, brand_name, "PROCESSING",vintage_date, ph_level, grape_varietal, infoOnBottle, source_of_product, null, originCode);
-                    saveImage(newTTBID, alcoholID);
+                    saveImage(alcoholID);
                     //connect form and alcohol
                     db.updateAlcoholIDForForm(alcoholID, newTTBID);
 
@@ -420,7 +420,7 @@ public class NewLabelController{
 
                     // Add to alcohol
                     alcoholID = db.addAlcohol(fancyName, appellation, sulfiteDesc, alcoholContentDouble, netContentDouble, healthWarningText, 0, 0, "n/a", "n/a", formula, 1, bottlerInfo, brand_name, "PROCESSING",vintage_date, ph_level, grape_varietal, infoOnBottle, source_of_product, null, originCode);
-                    saveImage(newTTBID, alcoholID);
+                    saveImage(alcoholID);
                     //connect form and alcohol
                     db.updateAlcoholIDForForm(alcoholID, newTTBID);
 
@@ -432,7 +432,7 @@ public class NewLabelController{
 
                     // Add to alcohol
                     alcoholID = db.addAlcohol(fancyName, appellation, sulfiteDesc, alcoholContentDouble, netContentDouble, healthWarningText, 0, 0, "n/a", "n/a", formula, 3, bottlerInfo, brand_name, "PROCESSING",vintage_date, ph_level, grape_varietal, infoOnBottle, source_of_product, null, originCode);
-                    saveImage(newTTBID, alcoholID);
+                    saveImage(alcoholID);
                     //connect form and alcohol
                     db.updateAlcoholIDForForm(alcoholID, newTTBID);
 
@@ -489,14 +489,13 @@ public class NewLabelController{
         return newDir;
     }
 
-    public void saveImage(String id, int aid){
+    public void saveImage(int aid){
         BufferedImage image2 = null;
         BufferedImage image3 = null;
         try {
             String path = getPath();
-            image2 = ImageIO.read(tempFile);
+
             image3 = ImageIO.read(tempFile);
-            ImageIO.write(image2, "jpg", new File(path + "/" + id + ".jpg"));
             ImageIO.write(image3, "jpg", new File(path + "/" + aid + ".jpg"));
         }catch (Exception e){
             e.printStackTrace();

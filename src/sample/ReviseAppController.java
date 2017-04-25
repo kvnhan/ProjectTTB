@@ -116,6 +116,11 @@ public class ReviseAppController {
             String source;
             ApplicationData data;
             AlcoholData a;
+            dom12.setSelected(false);
+            dom123.setSelected(false);
+            dom1234.setSelected(false);
+            amount.clear();
+            state.clear();
             type = databaseUtil.checkforType(ttbid);
             type1 = databaseUtil.checkforType1(ttbid);
             type2 = databaseUtil.checkforType2(ttbid);
@@ -372,6 +377,11 @@ public class ReviseAppController {
         int type2;
         int type3;
         String source;
+        dom12.setSelected(false);
+        dom123.setSelected(false);
+        dom1234.setSelected(false);
+        amount.clear();
+        state.clear();
         type = databaseUtil.checkforType(ttbid);
         type1 = databaseUtil.checkforType1(ttbid);
         type2 = databaseUtil.checkforType2(ttbid);
@@ -387,19 +397,25 @@ public class ReviseAppController {
             if (type.equals("WINE")) {
                 data = databaseUtil.fillSubmittedForm(ttbid);
                 a = databaseUtil.getAlcohoforWine(ttbid);
+                System.out.println(dom12.isSelected());
                 if(type1 == 0){
                     dom12.setSelected(true);
                 }
+                System.out.println(dom123.isSelected());
                 if(type2 == 0){
                     dom123.setSelected(true);
                     state.setText(data.getType2());
+
                 }
+                System.out.println(dom1234.isSelected());
                 if(type3 == 0){
                     dom1234.setSelected(true);
                     amount.setText(Integer.toString(data.getType3()));
                 }
                 wine1.setSelected(true);
-                setImage(ttbid);
+                beer1.setSelected(false);
+                other1.setSelected(false);
+                setImage(a.getAid());
                 ID1.setText(data.getTtbID());
                 RepID1.setText(Integer.toString(data.getRepid()));
                 PlantReg1.setText(Integer.toString(data.getPermitNo()));
@@ -418,20 +434,26 @@ public class ReviseAppController {
                 MailingAddress1.setText(data.getAddress());
             } else if (type.equals("BEER")) {
                 data = databaseUtil.fillSubmittedForm(ttbid);
-                a = databaseUtil.getAlcohoforWine(ttbid);
+                a = databaseUtil.getAlcohoforBeer(ttbid);
+                System.out.println(dom12.isSelected());
                 if(type1 == 0){
                     dom12.setSelected(true);
                 }
+                System.out.println(dom123.isSelected());
                 if(type2 == 0){
                     dom123.setSelected(true);
                     state.setText(data.getType2());
+
                 }
+                System.out.println(dom1234.isSelected());
                 if(type3 == 0){
                     dom1234.setSelected(true);
                     amount.setText(Integer.toString(data.getType3()));
                 }
                 beer1.setSelected(true);
-                setImage(ttbid);
+                wine1.setSelected(false);
+                other1.setSelected(false);
+                setImage(a.getAid());
                 ID1.setText(data.getTtbID());
                 RepID1.setText(Integer.toString(data.getRepid()));
                 PlantReg1.setText(Integer.toString(data.getPermitNo()));
@@ -446,20 +468,26 @@ public class ReviseAppController {
                 MailingAddress1.setText(data.getAddress());
             } else {
                 data = databaseUtil.fillSubmittedForm(ttbid);
-                a = databaseUtil.getAlcohoforWine(ttbid);
+                a = databaseUtil.getAlcohoforBeer(ttbid);
+                System.out.println(dom12.isSelected());
                 if(type1 == 0){
                     dom12.setSelected(true);
                 }
+                System.out.println(dom123.isSelected());
                 if(type2 == 0){
                     dom123.setSelected(true);
                     state.setText(data.getType2());
+
                 }
+                System.out.println(dom1234.isSelected());
                 if(type3 == 0){
                     dom1234.setSelected(true);
                     amount.setText(Integer.toString(data.getType3()));
                 }
                 other1.setSelected(true);
-                setImage(ttbid);
+                beer1.setSelected(false);
+                wine1.setSelected(false);
+                setImage(a.getAid());
                 ID1.setText(data.getTtbID());
                 RepID1.setText(Integer.toString(data.getRepid()));
                 PlantReg1.setText(Integer.toString(data.getPermitNo()));
@@ -534,7 +562,7 @@ public class ReviseAppController {
                     formula, 1, "", brand_name, "", vintage_date, ph_level, grape_varietal, "", source_of_product, null, 0);
             int aid = du.updateFormSubmission(a, ac);
             if(changeImage){
-                saveImage(ttbid, aid);
+                saveImage(aid);
             }
             su.switchScene("NewApp.fxml", "Application Menu");
             su.createAlertBox("Notification", "Update is successful");
@@ -547,7 +575,7 @@ public class ReviseAppController {
                     formula, 1, "", brand_name, "", 0, 0, "", "", source_of_product, null, 0);
             int aid = du.updateFormSubmission(a, ac);
             if(changeImage){
-                saveImage(ttbid, aid);
+                saveImage(aid);
             }
             su.switchScene("NewApp.fxml", "Application Menu");
             su.createAlertBox("Notification", "Update is successful");
@@ -559,7 +587,7 @@ public class ReviseAppController {
                     formula, 1, "", brand_name, "", 0, 0, "", "", source_of_product, null, 0);
             int aid = du.updateFormSubmission(a, ac);
             if(changeImage){
-                saveImage(ttbid, aid);
+                saveImage(aid);
             }
             su.switchScene("NewApp.fxml", "Application Menu");
             su.createAlertBox("Notification", "Update is successful");
@@ -623,21 +651,19 @@ public class ReviseAppController {
         return newDir;
     }
 
-    public void saveImage(String id, int aid){
+    public void saveImage(int aid){
         BufferedImage image2 = null;
         BufferedImage image3 = null;
         try {
             String path = getPath();
-            image2 = ImageIO.read(tempFile);
             image3 = ImageIO.read(tempFile);
-            ImageIO.write(image2, "jpg", new File(path + "/" + id + ".jpg"));
             ImageIO.write(image3, "jpg", new File(path + "/" + aid + ".jpg"));
         }catch (Exception e){
             e.printStackTrace();
         }
     }
 
-    public void setImage(String aid){
+    public void setImage(int aid){
         try {
             String path = getPath();
             File file = new File(path + "/" + aid + ".jpg");
