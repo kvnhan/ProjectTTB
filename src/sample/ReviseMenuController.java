@@ -33,15 +33,14 @@ import java.util.ArrayList;
 
 public class ReviseMenuController {
 
-    private @FXML CheckBox rev1En, rev2En, rev3En, rev4En, rev5En, rev6En, rev7En,rev8En, rev9En, rev10En, rev11En, rev12En;
+    private @FXML CheckBox rev1En, rev2En, rev3En, rev4En, rev5En, rev6En, rev7En,rev8En, rev9En, rev10En, rev11En, rev12En, rev13En, rev14En, rev15En, rev16En, rev17En, rev18En, rev19En,rev20En, rev21En;
 
     private @FXML TextArea rev1Data, rev2Data, rev3Data, rev4Data, rev5Data, rev6Data, rev7Data, rev8Data, rev9Data,rev10Data, rev11Data, rev12Data;
 
     @FXML private Button back;
     @FXML private Button submit;
-    @FXML private Button UploadImage;
-    @FXML private Label UploadImageLabel;
     @FXML private ChoiceBox applicationChoiceBox;
+    @FXML private Button reviseHelpButton;
 
     private String revisionData = "";
     private DataPasser dataPasser = new DataPasser();
@@ -81,16 +80,16 @@ public class ReviseMenuController {
 
     }
 
-
+/*
     /**
      * Uploads an image to the system.
      * @param Event Upload Image button is pressed.
      */
-    public void uploadImage(ActionEvent Event){
+   /* public void uploadImage(ActionEvent Event){
         openFileChooser();
         UploadImageLabel.setText(revisionImagePath);
     }
-
+*/
     /**
      * Opens a file explorer to choose an image to upload.
      */
@@ -286,5 +285,7 @@ public class ReviseMenuController {
                 e.printStackTrace();
             }*/
         }
-
+    public void helpButtonClicked() {
+        screenUtil.switchScene("ReviseHelp.fxml", "Help");
+    }
 }
