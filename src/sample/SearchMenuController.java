@@ -42,8 +42,6 @@ public class SearchMenuController {
     private @FXML RadioButton normalSearchRadio, intersectSearchRadio, unionSearchRadio;
     private @FXML Button helpSearchButton;
     private @FXML Button searchButton;
-    private @FXML DatePicker startDate;
-    private  @FXML DatePicker endDate;
 
     private @FXML RadioButton csvDownload, tabDownload, customDownload;
     private @FXML TextField CustomDelimiter;// customDirectoryField;
@@ -183,10 +181,13 @@ public class SearchMenuController {
         }
 
         if(startDate.getValue() != null && endDate.getValue() != null){
+            System.out.println("BOTH DATES USED " + Date.valueOf(startDate.getValue()).toString());
             alcoholDataList = intersectAlcoholData(dbUtil.searchAlcoholByDate(Date.valueOf(startDate.getValue()), Date.valueOf(endDate.getValue())), alcoholDataList);
         }else if(startDate.getValue() != null){
+            System.out.println("START DATE USED");
             alcoholDataList = intersectAlcoholData(dbUtil.searchAlcoholByDate(Date.valueOf(startDate.getValue()), "AFTER"), alcoholDataList);
         }else if(endDate.getValue() != null){
+            System.out.println("END DATE USED");
             alcoholDataList = intersectAlcoholData(dbUtil.searchAlcoholByDate(Date.valueOf(startDate.getValue()), "BEFORE"), alcoholDataList);
         }
     }
