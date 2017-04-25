@@ -49,5 +49,6 @@
             </LinearGradient>
          </fill>
       </Rectangle>
+      <Button fx:id="workflowHelp" layoutX="539.0" layoutY="16.0" mnemonicParsing="false" onAction="#needHelp" text="Help" />
   </children>
 </Pane>

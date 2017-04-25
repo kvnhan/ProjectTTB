@@ -681,5 +681,8 @@ public class ReviseAppController {
         work.switchScene("ReviseApp.fxml", "Revise Application");
     }
 
+    public void needHelp (){
+        screenUtil.switchScene("ReviseHelp.fxml","Help");
+    }
 
 }

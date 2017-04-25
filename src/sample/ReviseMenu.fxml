@@ -55,16 +55,6 @@
             <CheckBox fx:id="rev11En" layoutX="41.0" layoutY="649.0" mnemonicParsing="false" />
             <Label layoutX="71.0" layoutY="711.0" text="The stated amounts of sugar (WINE ONLY)" />
             <CheckBox fx:id="rev12En" layoutX="41.0" layoutY="711.0" mnemonicParsing="false" />
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" height="17.0" layoutX="10.0" layoutY="514.0" stroke="#ffffff00" strokeType="INSIDE" width="587.0">
-                     <fill>
-                        <LinearGradient endX="0.08173076923076923" endY="1.0" startX="1.0" startY="1.0">
-                           <stops>
-                              <Stop color="#ff2121fe" />
-                              <Stop color="WHITE" offset="1.0" />
-                           </stops>
-                        </LinearGradient>
-                     </fill>
-                  </Rectangle>
           </children>
         </AnchorPane>
       </content>
@@ -92,5 +82,6 @@
             </LinearGradient>
          </fill>
       </Rectangle>
+      <Button fx:id="reviseMenuHelp" layoutX="1044.0" layoutY="20.0" mnemonicParsing="false" onAction="#needHelp" text="Help" />
   </children>
 </AnchorPane>

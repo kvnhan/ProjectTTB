@@ -470,11 +470,11 @@ public class SearchMenuController {
         for (int i = 0; i< alcoholDataList.size(); i++) {
             fileContents = fileContents + (String.valueOf(alcoholDataList.get(i).getAid()));
             fileContents = fileContents + (DELIMITER);
-            fileContents = fileContents + (alcoholDataList.get(i).getName());
+            fileContents = fileContents + "\"" + (alcoholDataList.get(i).getName()) + "\"";
             fileContents = fileContents + (DELIMITER);
-            fileContents = fileContents + (alcoholDataList.get(i).getBrandName());
+            fileContents = fileContents + "\"" + (alcoholDataList.get(i).getBrandName()) + "\"";
             fileContents = fileContents + (DELIMITER);
-            fileContents = fileContents + (alcoholDataList.get(i).getAppellation());
+            fileContents = fileContents + "\"" + (alcoholDataList.get(i).getAppellation()) + "\"";;
             fileContents = fileContents + (DELIMITER);
             fileContents = fileContents + (String.valueOf(alcoholDataList.get(i).getAlcoholType()));
             //fileWriter.append(data[i].toString());
@@ -542,7 +542,7 @@ public class SearchMenuController {
 
     }
 
-    public void buttonClicked (){
+    public void needHelp (){
         screenUtil.switchScene("SearchHelp.fxml","Help");
     }
 

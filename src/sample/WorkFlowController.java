@@ -113,4 +113,8 @@ public class WorkFlowController {
         return rowChosen;
     }
 
+    public void needHelp (){
+        screenUtil.switchScene("WorkFlowInboxHelp.fxml","Help");
+    }
+
 }

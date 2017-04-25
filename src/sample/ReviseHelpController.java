@@ -28,4 +28,9 @@ public class ReviseHelpController {
 
     }
 
+    public void goBack(){
+        screenUtil.switchScene("ReviseMenu.fxml", "Revisions");
+
+    }
+
 }
