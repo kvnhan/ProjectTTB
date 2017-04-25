@@ -98,6 +98,6 @@
                 </LinearGradient>
             </fill>
         </Rectangle>
-        <Button fx:id="reviseHelpButton" layoutX="1045.0" layoutY="20.0" mnemonicParsing="false" onAction="#helpButtonClicked" text="Help" />
+        <Button fx:id="reviseMenuHelp" layoutX="1044.0" layoutY="20.0" mnemonicParsing="false" onAction="#needHelp" text="Help" />
     </children>
 </AnchorPane>

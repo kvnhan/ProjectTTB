@@ -46,6 +46,7 @@ public class SearchMenuController {
     private @FXML TextField CustomDelimiter;// customDirectoryField;
     //  private @FXML CheckBox CustomDirectoryCheckBox;
     private @FXML ChoiceBox<String> choiceBox;
+    private @FXML DatePicker startDate, endDate;
 
     private ScreenUtil screenUtil = new ScreenUtil();
     private int alcoholChoice = 0;
@@ -316,7 +317,7 @@ public class SearchMenuController {
         displayResults();
     }
 
-    private static final String TAB_DELIMITER = "   ";
+    private static final String TAB_DELIMITER = "\t";
     private static final String COMMA_DELIMITER = ",";
     private String CUSTOM_DELIMITER = "";
     private String DELIMITER = "";
@@ -470,11 +471,11 @@ public class SearchMenuController {
         for (int i = 0; i< alcoholDataList.size(); i++) {
             fileContents = fileContents + (String.valueOf(alcoholDataList.get(i).getAid()));
             fileContents = fileContents + (DELIMITER);
-            fileContents = fileContents + (alcoholDataList.get(i).getName());
+            fileContents = fileContents + "\"" + (alcoholDataList.get(i).getName()) + "\"";
             fileContents = fileContents + (DELIMITER);
-            fileContents = fileContents + (alcoholDataList.get(i).getBrandName());
+            fileContents = fileContents + "\"" + (alcoholDataList.get(i).getBrandName()) + "\"";
             fileContents = fileContents + (DELIMITER);
-            fileContents = fileContents + (alcoholDataList.get(i).getAppellation());
+            fileContents = fileContents + "\"" + (alcoholDataList.get(i).getAppellation()) + "\"";;
             fileContents = fileContents + (DELIMITER);
             fileContents = fileContents + (String.valueOf(alcoholDataList.get(i).getAlcoholType()));
             //fileWriter.append(data[i].toString());
@@ -542,7 +543,7 @@ public class SearchMenuController {
 
     }
 
-    public void buttonClicked (){
+    public void needHelp (){
         screenUtil.switchScene("SearchHelp.fxml","Help");
     }
 

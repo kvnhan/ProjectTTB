@@ -595,6 +595,8 @@ public class ReviseAppController {
             su.createAlertBox("ERROR", "Please select the type of product");
         }
 
+        databaseUtil.roundRobin();
+
     }
 
     /**
@@ -681,5 +683,8 @@ public class ReviseAppController {
         work.switchScene("ReviseApp.fxml", "Revise Application");
     }
 
+    public void needHelp (){
+        screenUtil.switchScene("ReviseHelp.fxml","Help");
+    }
 
 }

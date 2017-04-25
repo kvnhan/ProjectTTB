@@ -285,7 +285,10 @@ public class ReviseMenuController {
                 e.printStackTrace();
             }*/
         }
-    public void helpButtonClicked() {
-        screenUtil.switchScene("ReviseHelp.fxml", "Help");
+
+
+    public void needHelp (){
+        screenUtil.switchScene("ReviseHelp.fxml","Help");
     }
+
 }
