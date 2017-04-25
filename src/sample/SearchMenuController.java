@@ -17,6 +17,7 @@ import java.util.ArrayList;
 
 import javafx.scene.control.cell.PropertyValueFactory;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -38,7 +39,7 @@ public class SearchMenuController {
     private @FXML TextField searchTextField;
     private @FXML TableColumn idColumn, nameColumn, brandNameColumn, alcoholTypeColumn, locationColumn;
     private @FXML TableView table;
-    private @FXML RadioButton normalSearch, intersectSearch, unionSearch;
+    private @FXML RadioButton normalSearchRadio, intersectSearchRadio, unionSearchRadio;
     private @FXML Button helpSearchButton;
     private @FXML Button searchButton;
 
@@ -123,13 +124,13 @@ public class SearchMenuController {
     }
 
     public void search(ActionEvent event) throws SQLException, NoSuchMethodException, IllegalAccessException, InstantiationException, IOException{
-        if(normalSearch.isSelected()){
+        if(normalSearchRadio.isSelected()){
             searchDatabase();
         }
-        else if(intersectSearch.isSelected()){
+        else if(intersectSearchRadio.isSelected()){
             searchIntersect();
         }
-        else {
+        else if(unionSearchRadio.isSelected()){
             searchUnion();
         }
         observableList = FXCollections.observableList(alcoholDataList);
@@ -145,22 +146,22 @@ public class SearchMenuController {
             alcoholDataList = dbUtil.searchAlcoholWithType(BEER);
             alcoholDataList.addAll(dbUtil.searchAlcoholWithType(WINE));
             alcoholDataList.addAll(dbUtil.searchAlcoholWithType(DISTILLED));
-            alcoholDataList = interesectAlcoholData(searchByChoice(), alcoholDataList);
+            alcoholDataList = intersectAlcoholData(searchByChoice(), alcoholDataList);
         }
         else if (isWineBox.isSelected() && isBeerBox.isSelected()){
             alcoholDataList = dbUtil.searchAlcoholWithType(BEER);
             alcoholDataList.addAll(dbUtil.searchAlcoholWithType(WINE));
-            alcoholDataList = interesectAlcoholData(searchByChoice(), alcoholDataList);
+            alcoholDataList = intersectAlcoholData(searchByChoice(), alcoholDataList);
         }
         else if (isDistilledBox.isSelected() && isBeerBox.isSelected()) {
             alcoholDataList = dbUtil.searchAlcoholWithType(BEER);
             alcoholDataList.addAll(dbUtil.searchAlcoholWithType(DISTILLED));
-            alcoholDataList = interesectAlcoholData(searchByChoice(), alcoholDataList);
+            alcoholDataList = intersectAlcoholData(searchByChoice(), alcoholDataList);
         }
         else if (isDistilledBox.isSelected() && isWineBox.isSelected()) {
             alcoholDataList = dbUtil.searchAlcoholWithType(WINE);
             alcoholDataList.addAll(dbUtil.searchAlcoholWithType(DISTILLED));
-            alcoholDataList = interesectAlcoholData(searchByChoice(), alcoholDataList);
+            alcoholDataList = intersectAlcoholData(searchByChoice(), alcoholDataList);
         }
         else if(isWineBox.isSelected() || isBeerBox.isSelected() || isDistilledBox.isSelected()){
             if (isBeerBox.isSelected()){
@@ -173,10 +174,21 @@ public class SearchMenuController {
                 alcoholChoice = 3;
             }
             alcoholDataList = dbUtil.searchAlcoholWithType(alcoholChoice);
-            alcoholDataList = interesectAlcoholData(searchByChoice(), alcoholDataList);
+            alcoholDataList = intersectAlcoholData(searchByChoice(), alcoholDataList);
         }
         else {
             alcoholDataList = searchByChoice();
+        }
+
+        if(startDate.getValue() != null && endDate.getValue() != null){
+            System.out.println("BOTH DATES USED " + Date.valueOf(startDate.getValue()).toString());
+            alcoholDataList = intersectAlcoholData(dbUtil.searchAlcoholByDate(Date.valueOf(startDate.getValue()), Date.valueOf(endDate.getValue())), alcoholDataList);
+        }else if(startDate.getValue() != null){
+            System.out.println("START DATE USED");
+            alcoholDataList = intersectAlcoholData(dbUtil.searchAlcoholByDate(Date.valueOf(startDate.getValue()), "AFTER"), alcoholDataList);
+        }else if(endDate.getValue() != null){
+            System.out.println("END DATE USED");
+            alcoholDataList = intersectAlcoholData(dbUtil.searchAlcoholByDate(Date.valueOf(startDate.getValue()), "BEFORE"), alcoholDataList);
         }
     }
 
@@ -222,7 +234,7 @@ public class SearchMenuController {
         List<AlcoholData> previousAlcoholDataResults = alcoholDataList;
         searchDatabase();
 
-        alcoholDataList = interesectAlcoholData(previousAlcoholDataResults, alcoholDataList);
+        alcoholDataList = intersectAlcoholData(previousAlcoholDataResults, alcoholDataList);
     }
 
     public List<AlcoholData> searchAllAlcoholFields(String searchText) throws SQLException{
@@ -245,7 +257,17 @@ public class SearchMenuController {
             System.out.println("Could not search id field using input");
         }
         List<AlcoholData> alcoholNameResults = dbUtil.searchAlcoholName(searchText);
+        if(alcoholNameResults.isEmpty()) {
+            System.out.println("RESULT IS EMPTY");
+        }else{
+            System.out.println("RESULT IS NOT EMPTY");
+        }
         finalResultList = mergeAlcoholData(alcoholNameResults, finalResultList);
+        if(finalResultList.isEmpty()) {
+            System.out.println("RESULT IS EMPTY");
+        }else{
+            System.out.println("RESULT IS NOT EMPTY");
+        }
         List<AlcoholData> alcoholAppelationResults = dbUtil.searchAlcoholAppellation(searchText);
         finalResultList = mergeAlcoholData(alcoholAppelationResults, finalResultList);
         try {
@@ -255,66 +277,47 @@ public class SearchMenuController {
         }catch (Exception e){
             System.out.println("Could not search alcohol content field using input");
         }
-
         return finalResultList;
 
     }
 
     public List<AlcoholData> mergeAlcoholData(List<AlcoholData> listToAdd, List<AlcoholData> originalList){
-        boolean toAdd;
+        List<AlcoholData> mergedAlcoholData = originalList;
 
         if(originalList.size() == 0){
             return listToAdd;
         }
 
-        for(int i=0; i < listToAdd.size(); i++) {
-            toAdd = true;
+        mergedAlcoholData.addAll(combineAlcoholData(listToAdd, originalList, true));
 
-            for(int j=0; j < originalList.size(); j++) {
-                if(originalList.get(j).getAid() == listToAdd.get(i).getAid()){
-                    toAdd = false;
-                    break;
-                }
-            }
-
-            if(toAdd) {
-                originalList.add(listToAdd.get(i));
-            }
-        }
-
-        return originalList;
+        return mergedAlcoholData;
     }
 
-    public List<AlcoholData> interesectAlcoholData(List<AlcoholData> listToAdd, List<AlcoholData> originalList){
-        ArrayList<AlcoholData> intersectedList = new ArrayList<AlcoholData>();
+    public List<AlcoholData> intersectAlcoholData(List<AlcoholData> listToAdd, List<AlcoholData> originalList){
+        return combineAlcoholData(listToAdd, originalList, false);
+    }
+
+    // combines alcohol data results. to merge assign boolean input to true. to intersect assign boolean input to false.
+    public List<AlcoholData> combineAlcoholData(List<AlcoholData> listToAdd, List<AlcoholData> originalList, boolean isMerge){
+        List<AlcoholData> combinedAlcoholData = new ArrayList<>();
         boolean toAdd;
 
+
         for(int i=0; i < listToAdd.size(); i++) {
-            toAdd = false;
+            toAdd = isMerge;
 
             for(int j=0; j < originalList.size(); j++) {
                 if(originalList.get(j).getAid() == listToAdd.get(i).getAid()){
-                    toAdd = true;
+                    toAdd = !toAdd;
                     break;
                 }
             }
 
             if(toAdd) {
-                intersectedList.add(listToAdd.get(i));
+                combinedAlcoholData.add(listToAdd.get(i));
             }
         }
-
-        return intersectedList;
-    }
-
-
-    public void displayAll(ActionEvent event) throws SQLException, NoSuchMethodException, IllegalAccessException, InstantiationException, IOException{
-        alcoholDataList.clear();
-        alcoholDataList = dbUtil.searchAlcoholWithType(BEER);
-        alcoholDataList.addAll(dbUtil.searchAlcoholWithType(WINE));
-        alcoholDataList.addAll(dbUtil.searchAlcoholWithType(DISTILLED));
-        observableList = FXCollections.observableList(alcoholDataList);
-        displayResults();
+        return combinedAlcoholData;
     }
 
     private static final String TAB_DELIMITER = "\t";
@@ -331,111 +334,6 @@ public class SearchMenuController {
     private String fileContents = "";
     private String customDirectoryString = "";
     private String fileDirectoryWithName = "";
-
-
-    //public void updateCustomDir(){
-    // customDirectoryString = customDirectoryField.getText();
-    ///     System.out.println(customDirectoryString);
-    //     System.out.println("dasdfjjsafs");
-    //  }
-
-//    public void download(){
-//        if(CustomDirectoryCheckBox.isSelected())
-//        {
-//           // fileName = System.getProperty("user.home") + "/"+"CS3733_TeamA" + ".csv";
-//           // customDirectoryString = System.getProperty("user.home") + "/";
-//            customDirectoryString = customDirectoryField.getText();
-//            System.out.println(customDirectoryString);
-//            if(!customDirectoryString.substring(customDirectoryString.length()-1,customDirectoryString.length()-1).equals("/"))
-//            {
-//              ///  customDirectoryString = customDirectoryString + "/";
-//            }
-//        }else{
-//
-//            customDirectoryString = System.getProperty("user.home") + "/";
-//        }
-//
-//        if(csvDownload.isSelected()){
-//            System.out.println("comma delim");
-//            DELIMITER = COMMA_DELIMITER;
-//            fileType = ".csv";
-//        }else if (tabDownload.isSelected()){
-//            System.out.println("tab delim");
-//            DELIMITER = TAB_DELIMITER;
-//            fileType = ".txt";
-//        }else if (customDownload.isSelected()){
-//            System.out.println("custom");
-//            CUSTOM_DELIMITER = customDownload.getText();
-//            System.out.println(CUSTOM_DELIMITER);
-//
-//            DELIMITER = CUSTOM_DELIMITER;
-//            fileType = ".txt";
-//        }
-//
-//
-//        if(F.exists()) {
-//           // for (j = 1; F.exists(); j++) {
-//                int fileDirectoryWithNameLength = fileDirectoryWithName.length();
-//                fileDirectoryWithName =  /*customDirectoryString +*/ fileDirectoryWithName.substring(0,fileDirectoryWithNameLength-4) + /*String.valueOf(j)*/ newFileNumber + fileType;
-//                newFileNumber = Integer.toString(Integer.parseInt(newFileNumber)+1);
-//            //}
-//        }else{
-//            fileDirectoryWithName =  customDirectoryString + fileName + fileType;
-//        }
-//        System.out.println("setting file dir with name");
-//        //fileDirectoryWithName =  customDirectoryString + fileName + fileType;
-//        F = new File(fileDirectoryWithName);
-//        FileWriter fileWriter = null;
-//        System.out.println("fileWriter set to null");
-//        try {
-//            fileWriter = new FileWriter(fileDirectoryWithName);
-//            System.out.println("writing file contents in string");
-//            //Write the CSV file header
-//            fileContents = fileContents +"ID";
-//            fileContents = fileContents + (DELIMITER);
-//            fileContents = fileContents + ("Name");
-//            fileContents = fileContents + (DELIMITER);
-//            fileContents = fileContents + ("Brandname");
-//            fileContents = fileContents + (DELIMITER);
-//            fileContents = fileContents + ("App");
-//            fileContents = fileContents + (DELIMITER);
-//            fileContents = fileContents + ("Type");
-//            fileContents = fileContents + (DELIMITER);
-//
-//            //AlcoholData(ID, name, brandname, app, type)
-//            for (int i = 0; i< alcoholDataList.size(); i++) {
-//                fileContents = fileContents + (String.valueOf(alcoholDataList.get(i).getAid()));
-//                fileContents = fileContents + (DELIMITER);
-//                fileContents = fileContents + (alcoholDataList.get(i).getName());
-//                fileContents = fileContents + (DELIMITER);
-//                fileContents = fileContents + (alcoholDataList.get(i).getBrandName());
-//                fileContents = fileContents + (DELIMITER);
-//                fileContents = fileContents + (alcoholDataList.get(i).getAppellation());
-//                fileContents = fileContents + (DELIMITER);
-//                fileContents = fileContents + (String.valueOf(alcoholDataList.get(i).getAlcoholType()));
-//                //fileWriter.append(data[i].toString());
-//                //fileWriter.append(COMMA_DELIMITER);
-//                fileContents = fileContents + (NEW_LINE_SEPARATOR);
-//            }
-//            fileWriter.append(fileContents);
-//            System.out.println("CSV file was created successfully !!!");
-//            System.out.println("CSV file name:"+fileDirectoryWithName);
-//
-//        } catch (Exception e) {
-//            System.out.println("Error in CsvFileWriter !!!");
-//            e.printStackTrace();
-//        } finally {
-//
-//            try {
-//                fileWriter.flush();
-//                fileWriter.close();
-//            } catch (IOException e) {
-//                System.out.println("Error while flushing/closing fileWriter !!!");
-//                e.printStackTrace();
-//            }
-//
-//        }
-//    }//
 
     ////////////////////////////////////////////////////////////////////
     public void download2(){
@@ -513,15 +411,6 @@ public class SearchMenuController {
             SaveFile(fileContents, file);
         }
     }//);
-
-    // VBox vBox = new VBox();
-    //vBox.getChildren().addAll(textArea, buttonSave);
-
-    // root.getChildren().add(vBox);
-
-    // primaryStage.setScene(new Scene(root, 500, 400));
-    //primaryStage.show();
-    //}
 
     public static void main(String[] args) {
         launch(args);
