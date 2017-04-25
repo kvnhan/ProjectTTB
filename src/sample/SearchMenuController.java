@@ -46,6 +46,7 @@ public class SearchMenuController {
     private @FXML TextField CustomDelimiter;// customDirectoryField;
     //  private @FXML CheckBox CustomDirectoryCheckBox;
     private @FXML ChoiceBox<String> choiceBox;
+    private @FXML DatePicker startDate, endDate;
 
     private ScreenUtil screenUtil = new ScreenUtil();
     private int alcoholChoice = 0;
