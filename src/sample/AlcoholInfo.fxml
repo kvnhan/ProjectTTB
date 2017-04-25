@@ -11,9 +11,6 @@
    <children>
       <Button fx:id="close" layoutX="14.0" layoutY="361.0" mnemonicParsing="false" onAction="#closeWindow" text="Close" />
       <ImageView fx:id="alcImage" fitHeight="327.0" fitWidth="300.0" layoutX="452.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../../../../../Pictures/RWBY/blake_by_lordtechmarine-d6l7ffl.png" />
-         </image>
       </ImageView>
       <Label layoutX="23.0" layoutY="52.0" text="AID:" />
       <Label layoutX="23.0" layoutY="69.0" text="Brand Name:" />
