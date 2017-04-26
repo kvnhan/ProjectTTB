@@ -501,16 +501,16 @@ public class DatabaseUtil {
     public List<AlcoholData> searchAlcoholByDate(java.sql.Date date, String BEFORE_OR_AFTER) throws SQLException{
         String query = "";
         if(BEFORE_OR_AFTER.equals("AFTER")){
-            query = "SELECT * FROM ALCOHOL WHERE '" + date + "' >= ALCOHOL.DATE_APPROVED";
-        }else if(BEFORE_OR_AFTER.equals("BEFORE")){
             query = "SELECT * FROM ALCOHOL WHERE '" + date + "' <= ALCOHOL.DATE_APPROVED";
+        }else if(BEFORE_OR_AFTER.equals("BEFORE")){
+            query = "SELECT * FROM ALCOHOL WHERE '" + date + "' >= ALCOHOL.DATE_APPROVED";
         }
 
         return searchAlcoholTable(query);
     }
 
     public List<AlcoholData> searchAlcoholByDate(java.sql.Date startDate, java.sql.Date endDate) throws SQLException{
-        String query = "SELECT * FROM ALCOHOL WHERE '" + startDate + "' <= ALCOHOL.DATE_APPROVED AND '" + endDate+ "' <= '2013-01-09'";
+        String query = "SELECT * FROM ALCOHOL WHERE '" + startDate + "' <= ALCOHOL.DATE_APPROVED AND '" + endDate+ "' >= '2013-01-09'";
 
         return searchAlcoholTable(query);
     }
