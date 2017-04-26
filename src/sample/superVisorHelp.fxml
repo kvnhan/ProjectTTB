@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="471.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.SuperVisorHelpController">
+   <children>
+      <TextArea editable="false" layoutX="24.0" layoutY="236.0" prefHeight="200.0" prefWidth="546.0" text="This Screen is where you may check the status of any applications that have been assigned to one of your subordinates.&#10;&#10;On the left hand side, you will find a list of all of your employees. If you would like to see what applications they have been assigned, click on their names in order to bring down a drop down menu. This menu contains all of the Applications that have been assigned to that individual.&#10;&#10;When you have selected the employee, you may also look at information about a specific application by clicking on the specific application on the left. When you do this, general information about this application will be shown on the screen. " wrapText="true" />
+      <Button fx:id="backButton" layoutX="5.0" layoutY="440.0" mnemonicParsing="false" onAction="#goBack" text="Back" />
+   </children>
+</AnchorPane>
