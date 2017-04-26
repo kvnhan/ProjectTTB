@@ -113,7 +113,7 @@ public class NewLabelController{
         String formula = "";
         String grape_varietal = "";
         String appellation = "";
-        int permit_no = 0;
+        String permit_no = "";
         String infoOnBottle = "";
         String source_of_product = "";
         String type_of_product = "";
@@ -176,16 +176,7 @@ public class NewLabelController{
         }
 
         if(!PlantReg.getText().trim().isEmpty()) {
-            try {
-                permit_no = Integer.parseInt(PlantReg.getText());
-                if (permit_no > max) {
-                    screenUtil.createAlertBox("ERROR", "Input for PlantReg is too big");
-                    valid = false;
-                }
-            } catch (NumberFormatException e) {
-                screenUtil.createAlertBox("ERROR", "Invalid Input for PlantReg");
-                valid = false;
-            }
+                permit_no = PlantReg.getText();
         }else{
             screenUtil.createAlertBox("ERROR", "Plant Reg is empty");
             valid = false;

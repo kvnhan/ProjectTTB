@@ -13,7 +13,7 @@ public class ApplicationData{
     private int repid;
     private String serial;
     private String address;
-    private int permitNo;
+    private String permitNo;
     private String phoneNumber;
     private String email;
     private String applicantName;
@@ -29,13 +29,12 @@ public class ApplicationData{
      * @param ttbID Int representing the ID of a form.
      * @param repid Representative ID.
      * @param address Manufacturer's address.
-     * @param formula Formula for the alcohol.
      * @param permitNo Number of the permit.
      * @param phoneNumber Phone number for the manufacturer.
      * @param email Manufacturer's email address.
      * @param applicantName Name of the applicant.
      */
-    public ApplicationData(String ttbID, int repid, String serial, String address, int permitNo, String phoneNumber, String email, String applicantName, int type1, String type2, int type3, Date submittedDate) {
+    public ApplicationData(String ttbID, int repid, String serial, String address, String permitNo, String phoneNumber, String email, String applicantName, int type1, String type2, int type3, Date submittedDate) {
         this.ttbID = ttbID;
         this.repid = repid;
         this.serial = serial;
@@ -83,11 +82,11 @@ public class ApplicationData{
         this.address = address;
     }
 
-    public int getPermitNo() {
+    public String getPermitNo() {
         return permitNo;
     }
 
-    public void setPermitNo(int permitNo) {
+    public void setPermitNo(String permitNo) {
         this.permitNo = permitNo;
     }
 

@@ -23,11 +23,12 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../../jfoenix.jar!/" />
+          <root url="jar://C:/Users/jfoenix.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="com.jfoenix:jfoenix:1.3.0" level="project" />
   </component>
 </module>

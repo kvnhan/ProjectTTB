@@ -202,9 +202,9 @@ public class DatabaseUtil {
         addToTable("CLASS", CLASS_FIELDS, values, "CID");
     }
 
-    public String addForm(String ttbid, int repid, String serial, String address, int permitNo, String phone, String email, String applicantName, String status, int appType1, String appType2, int appType3, java.sql.Date dateSubmitted) throws SQLException{
+    public String addForm(String ttbid, int repid, String serial, String address, String permitNo, String phone, String email, String applicantName, String status, int appType1, String appType2, int appType3, java.sql.Date dateSubmitted) throws SQLException{
         int aid = getAccountAid(AccountsUtil.getUsername());
-        String values = "'" + ttbid + "', " + repid + ", '" + serial + "', '" + address + "', " + permitNo + ", '" + phone + "', '" + email + "', '" + applicantName + "', '" + status + "', " + aid + ", " + appType1 + ", '" + appType2 + "', " + appType3 + ", '" + dateSubmitted + "')";
+        String values = "'" + ttbid + "', " + repid + ", '" + serial + "', '" + address + "', '" + permitNo + "', '" + phone + "', '" + email + "', '" + applicantName + "', '" + status + "', " + aid + ", " + appType1 + ", '" + appType2 + "', " + appType3 + ", '" + dateSubmitted + "')";
         addToTable("FORM", FORM_FIELDS, values, "FID");
         return ttbid;
     }
@@ -656,7 +656,7 @@ public class DatabaseUtil {
             int repid = rset.getInt("REPID");
             String serial = rset.getString("SERIAL");
             String address = rset.getString("ADDRESS");
-            int permit_no = rset.getInt("PERMITNO");
+            String permit_no = rset.getString("PERMITNO");
             String phone_number = rset.getString("PHONE");
             String email = rset.getString("EMAIL");
             String applicantName = rset.getString("APPLICANTNAME");
@@ -902,7 +902,7 @@ public class DatabaseUtil {
         int repid = 0;
         String serial = "";
         String address = "";
-        int permit_no = 0;
+        String permit_no = "";
         String phone_number = "";
         String email = "";
         String applicantName = "";
@@ -919,7 +919,7 @@ public class DatabaseUtil {
             repid = rset.getInt("REPID");
             serial = rset.getString("SERIAL");
             address = rset.getString("ADDRESS");
-            permit_no = rset.getInt("PERMITNO");
+            permit_no = rset.getString("PERMITNO");
             phone_number = rset.getString("PHONE");
             email = rset.getString("EMAIL");
             applicantName = rset.getString("APPLICANTNAME");
@@ -1247,7 +1247,7 @@ public class DatabaseUtil {
         sm.setInt(1, applicationData.getRepid());
         sm.setString(2, applicationData.getSerial());
         sm.setString(3, applicationData.getAddress());
-        sm.setInt(4, applicationData.getPermitNo());
+        sm.setString(4, applicationData.getPermitNo());
         sm.setString(5, applicationData.getPhoneNumber());
         sm.setString(6, applicationData.getEmail());
         sm.setString(7, applicationData.getApplicantName());

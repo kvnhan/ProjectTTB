@@ -193,7 +193,7 @@ public class ReviseAppController {
                 wineCheckBox.setSelected(true);
                 //ID1.setText(data.getTtbID());
                 RepID.setText(Integer.toString(data.getRepid()));
-                PlantReg.setText(Integer.toString(data.getPermitNo()));
+                PlantReg.setText(data.getPermitNo());
                 SerialNo.setText(data.getSerial());
                 ApplicantName.setText(data.getApplicantName());
                 grapeVarietal.setText(a.getGrapeVarietal());
@@ -261,7 +261,7 @@ public class ReviseAppController {
                 beerCheckBox.setSelected(true);
                 //ID1.setText(data.getTtbID());
                 RepID.setText(Integer.toString(data.getRepid()));
-                PlantReg.setText(Integer.toString(data.getPermitNo()));
+                PlantReg.setText(data.getPermitNo());
                 SerialNo.setText(data.getSerial());
                 ApplicantName.setText(data.getApplicantName());
                 //Varietal1.setText(wine.getGrape_varietal());
@@ -313,7 +313,7 @@ public class ReviseAppController {
                 distilledCheckBox.setSelected(true);
                 //ID1.setText(data.getTtbID());
                 RepID.setText(Integer.toString(data.getRepid()));
-                PlantReg.setText(Integer.toString(data.getPermitNo()));
+                PlantReg.setText(data.getPermitNo());
                 SerialNo.setText(data.getSerial());
                 ApplicantName.setText(data.getApplicantName());
                 //Varietal1.setText(wine.getGrape_varietal());
@@ -419,7 +419,7 @@ public class ReviseAppController {
                 setImage(a.getAid());
                 //ID1.setText(data.getTtbID());
                 RepID.setText(Integer.toString(data.getRepid()));
-                PlantReg.setText(Integer.toString(data.getPermitNo()));
+                PlantReg.setText(data.getPermitNo());
                 SerialNo.setText(data.getSerial());
                 ApplicantName.setText(data.getApplicantName());
                 grapeVarietal.setText(a.getGrapeVarietal());
@@ -464,7 +464,7 @@ public class ReviseAppController {
                 setImage(a.getAid());
                 //ID1.setText(data.getTtbID());
                 RepID.setText(Integer.toString(data.getRepid()));
-                PlantReg.setText(Integer.toString(data.getPermitNo()));
+                PlantReg.setText(data.getPermitNo());
                 SerialNo.setText(data.getSerial());
                 ApplicantName.setText(data.getApplicantName());
                 BrandName.setText(a.getBrandName());
@@ -503,7 +503,7 @@ public class ReviseAppController {
                 setImage(a.getAid());
                 //ID.setText(data.getTtbID());
                 RepID.setText(Integer.toString(data.getRepid()));
-                PlantReg.setText(Integer.toString(data.getPermitNo()));
+                PlantReg.setText(data.getPermitNo());
                 SerialNo.setText(data.getSerial());
                 ApplicantName.setText(data.getApplicantName());
                 BrandName.setText(a.getBrandName());
@@ -532,7 +532,7 @@ public class ReviseAppController {
         String address = Address.getText();
         String fancyName = Name.getText();
         String formula = Formula.getText();
-        int permit_no = Integer.parseInt(PlantReg.getText());
+        String permit_no = PlantReg.getText();
         String source_of_product = "";
         String type_of_product = "";
         String brand_name = BrandName.getText();
