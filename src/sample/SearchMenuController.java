@@ -317,7 +317,7 @@ public class SearchMenuController {
         displayResults();
     }
 
-    private static final String TAB_DELIMITER = "   ";
+    private static final String TAB_DELIMITER = "\t";
     private static final String COMMA_DELIMITER = ",";
     private String CUSTOM_DELIMITER = "";
     private String DELIMITER = "";
