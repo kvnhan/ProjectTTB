@@ -323,14 +323,11 @@ public class DatabaseUtil {
      * @param description Label description.
      * @throws SQLException
      */
-    public void addReview(int fid, int status, int decider, String date, String general, String originCode, String brandName, String facifulName, String grapeVar, String wineVintage, String appellation, String bottler, String formula, String sulfite, String legibility, String labelSize, String description) throws SQLException {
+    public void addReview(int fid, int status, int decider, Date date, String general, String originCode, String brandName, String facifulName, String grapeVar, String wineVintage, String appellation, String bottler, String formula, String sulfite, String legibility, String labelSize, String description) throws SQLException {
         String values;
-        if(date.trim().isEmpty()){
-            values = "" + status + ", " + decider + ", NULL, '" + general + "', '" + originCode + "', '" + brandName + "', '" + facifulName + "', '" + grapeVar + "', '" + wineVintage + "', '" + appellation + "', '" + bottler + "', '" + formula + "', '" + sulfite + "', '" + legibility + "', '" + labelSize + "', '" + description + "')";
-        }
-        else{
-            values = "" + status + ", " + decider + ", DATE('" + date + "'), '" + general + "', '" + originCode + "', '" + brandName + "', '" + facifulName + "', '" + grapeVar + "', '" + wineVintage + "', '" + appellation + "', '" + bottler + "', '" + formula + "', '" + sulfite + "', '" + legibility + "', '" + labelSize + "', '" + description + "')";
-        }
+
+        values = "" + status + ", " + decider + ", '" + date + "', '" + general + "', '" + originCode + "', '" + brandName + "', '" + facifulName + "', '" + grapeVar + "', '" + wineVintage + "', '" + appellation + "', '" + bottler + "', '" + formula + "', '" + sulfite + "', '" + legibility + "', '" + labelSize + "', '" + description + "')";
+
         addToTable("REVIEWS", REVIEWS_FIELDS, values, "FID", fid);
     }
 
@@ -497,6 +494,23 @@ public class DatabaseUtil {
     }
     public List<AlcoholData> searchAlcoholContent(double alcCont) throws SQLException{
         String query = "SELECT * FROM ALCOHOL WHERE ALCOHOL.ALC_CONTENT = " + alcCont;
+
+        return searchAlcoholTable(query);
+    }
+
+    public List<AlcoholData> searchAlcoholByDate(java.sql.Date date, String BEFORE_OR_AFTER) throws SQLException{
+        String query = "";
+        if(BEFORE_OR_AFTER.equals("AFTER")){
+            query = "SELECT * FROM ALCOHOL WHERE '" + date + "' <= ALCOHOL.DATE_APPROVED";
+        }else if(BEFORE_OR_AFTER.equals("BEFORE")){
+            query = "SELECT * FROM ALCOHOL WHERE '" + date + "' >= ALCOHOL.DATE_APPROVED";
+        }
+
+        return searchAlcoholTable(query);
+    }
+
+    public List<AlcoholData> searchAlcoholByDate(java.sql.Date startDate, java.sql.Date endDate) throws SQLException{
+        String query = "SELECT * FROM ALCOHOL WHERE '" + startDate + "' <= ALCOHOL.DATE_APPROVED AND '" + endDate+ "' >= '2013-01-09'";
 
         return searchAlcoholTable(query);
     }
@@ -711,7 +725,7 @@ public class DatabaseUtil {
     }
     */
     // Change status after government agents finish reviewing an application
-    public void changeStatus(String newStatus, String ttbid) throws SQLException{
+    public void changeFormStatus(String newStatus, String ttbid) throws SQLException{
         String query = "UPDATE FORM SET STATUS = ? WHERE TTBID = ?";
 
         PreparedStatement pstmt = conn.prepareStatement(query);
@@ -730,18 +744,27 @@ public class DatabaseUtil {
     }
 
     public void changeAlcoholStatus(String newStatus, int alcoholID) throws SQLException{
-        String query = "UPDATE ALCOHOL SET STATUS = ? WHERE AID = ?";
+        java.sql.Date currentDate = new java.sql.Date((new java.util.Date()).getTime());
 
-        PreparedStatement pstmt = conn.prepareStatement(query);
+        String updateStatusQuery = "UPDATE ALCOHOL SET STATUS = ? WHERE AID = ?";
+
+        PreparedStatement pstmt = conn.prepareStatement(updateStatusQuery);
         pstmt.setString(1, newStatus);
+        pstmt.setInt(2, alcoholID);
+        pstmt.executeUpdate();
+
+        String updateDateQuery = "UPDATE ALCOHOL SET DATE_APPROVED = ? WHERE AID = ?";
+
+        pstmt = conn.prepareStatement(updateDateQuery);
+        pstmt.setDate(1, currentDate);
         pstmt.setInt(2, alcoholID);
         pstmt.executeUpdate();
     }
 
     public void decideApplicationAction(String status, ApplicationData thisForm, javafx.scene.control.TextArea commentsField) throws  SQLException{
         // change alcohol status to approved
-        changeAlcoholStatus(status, thisForm.getAssociatedAlchID());
-        changeStatus(status.toUpperCase(), thisForm.getTtbID());
+        changeAlcoholStatus("APPROVED", thisForm.getAssociatedAlchID());
+        changeFormStatus(status.toUpperCase(), thisForm.getTtbID());
 
 
         //AlcoholData associatedAlcohol = thisForm.getAssociatedAlcoholData();
@@ -753,8 +776,6 @@ public class DatabaseUtil {
         //get comments
         String comments = commentsField.getText();
 
-        //update alcohol status
-        changeStatus(status.toUpperCase(), thisForm.getTtbID());
 /*
         int statusInInteger;
 
@@ -974,8 +995,6 @@ public class DatabaseUtil {
         String appellation = "";
         int vintage_date = 0;
         double ph_level = 0;
-
-
 
 
         while(rset.next()){
@@ -1431,13 +1450,14 @@ public class DatabaseUtil {
      */
     public ArrayList<TreeItem<TItem>> getFormItems(int aid) throws SQLException {
         ArrayList<TreeItem<TItem>> list = new ArrayList<>();
-        PreparedStatement getForms = conn.prepareStatement("SELECT TTBID, BRANDNAME, FANCYNAME FROM FORM WHERE GOVID = ?");
+        PreparedStatement getForms = conn.prepareStatement("SELECT ALCHID, TTBID FROM FORM WHERE GOVID = ?");
         getForms.setInt(1,aid);
 
         ResultSet rs =  getForms.executeQuery();
 
         while(rs.next()){
-            list.add(new TreeItem<TItem>(new FormItem(rs.getString("FANCYNAME"), rs.getString("TTBID"),rs.getString("BRANDNAME"))));
+            AlcoholData currentDate = searchAlcoholWithID(rs.getInt("ALCHID")).get(0);
+            list.add(new TreeItem<TItem>(new FormItem(currentDate.getName(), rs.getString("TTBID"),currentDate.getBrandName())));
         }
 
         return list;

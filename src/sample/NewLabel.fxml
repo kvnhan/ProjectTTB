@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1083.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.NewLabelController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1083.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.NewLabelController">
     <children>
         <Button fx:id="helpNewButton" layoutX="937.0" layoutY="14.0" mnemonicParsing="false" onAction="#buttonClicked" text="Help" />
 
@@ -114,7 +114,7 @@
             <font>
                 <Font name="Constantia" size="24.0" />
             </font></Label>
-        <TextField fx:id="SerialNo" layoutX="210.0" layoutY="285.0" prefWidth="250.0" promptText="CaptainCrunch7">
+        <TextField fx:id="SerialNo" layoutX="210.0" layoutY="285.0" prefWidth="250.0" promptText="_ _ - _ _ _ _">
             <font>
                 <Font name="Constantia" size="14.0" />
             </font></TextField>
@@ -132,7 +132,7 @@
                 <Font name="Constantia" size="24.0" />
             </font>
         </Label>
-        <TextField fx:id="Name" layoutX="210.0" layoutY="365.0" prefWidth="250.0" promptText="Fanciful Name">
+        <TextField fx:id="Name" layoutX="210.0" layoutY="365.0" prefWidth="250.0" promptText="CaptainCrunch7">
             <font>
                 <Font name="Constantia" size="14.0" />
             </font></TextField>
@@ -182,7 +182,7 @@
             <font>
                 <Font name="Constantia" size="24.0" />
             </font></Label>
-        <TextField fx:id="Address" layoutX="700.0" layoutY="326.0" prefWidth="250.0" promptText="Plant Address">
+        <TextField fx:id="Address" layoutX="705.0" layoutY="326.0" prefWidth="250.0" promptText="Plant Address">
             <font>
                 <Font name="Constantia" size="14.0" />
             </font></TextField>
