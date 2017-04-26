@@ -12,112 +12,183 @@
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.RadialGradient?>
 <?import javafx.scene.paint.Stop?>
-<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="581.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.SearchMenuController">
+
+<AnchorPane prefHeight="800.0" prefWidth="1150.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.SearchMenuController">
    <children>
-      <Label layoutX="14.0" layoutY="14.0" text="Alcohol Type:">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </Label>
-      <Button fx:id="Back" layoutX="14.0" layoutY="529.0" mnemonicParsing="false" onAction="#back" text="Back" />
-      <Button fx:id="searchButton" layoutX="699.0" layoutY="523.0" mnemonicParsing="false" onAction="#search" text="Search">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Button>
-      <CheckBox fx:id="isWineBox" layoutX="125.0" layoutY="16.0" mnemonicParsing="false" text="Wine">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </CheckBox>
-      <CheckBox fx:id="isBeerBox" layoutX="197.0" layoutY="16.0" mnemonicParsing="false" text="Beer">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </CheckBox>
-      <CheckBox fx:id="isDistilledBox" layoutX="265.0" layoutY="16.0" mnemonicParsing="false" text="Distilled Spirits">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </CheckBox>
-      <TextField fx:id="searchTextField" layoutX="565.0" layoutY="13.0" prefHeight="31.0" prefWidth="150.0" />
-      <TableView fx:id="table" editable="true" layoutX="12.0" layoutY="165.0" prefHeight="311.0" prefWidth="777.0">
-         <columns>
-            <TableColumn fx:id="idColumn" prefWidth="100.0" text="ID" />
-            <TableColumn fx:id="nameColumn" prefWidth="200.0" text="Name" />
-            <TableColumn fx:id="brandNameColumn" prefWidth="200.0" text="Brand Name" />
-            <TableColumn fx:id="alcoholTypeColumn" prefWidth="75.0" text="Type" />
-            <TableColumn fx:id="locationColumn" prefWidth="200.0" text="Location" />
-         </columns>
-      </TableView>
-      <Button fx:id="downloadButton" layoutX="409.0" layoutY="534.0" mnemonicParsing="false" onMouseClicked="#download2" prefHeight="31.0" prefWidth="146.0" text="Download Results" />
-      <ChoiceBox fx:id="choiceBox" layoutX="407.0" layoutY="13.0" prefWidth="150.0" />
-      <RadioButton fx:id="csvDownload" layoutX="71.0" layoutY="488.0" mnemonicParsing="false" selected="true" text="CSV">
-         <toggleGroup>
-            <ToggleGroup fx:id="download_type" />
-         </toggleGroup></RadioButton>
-      <RadioButton fx:id="tabDownload" layoutX="71.0" layoutY="514.0" mnemonicParsing="false" text="Tab-Delimited" toggleGroup="$download_type" />
-      <RadioButton fx:id="customDownload" layoutX="71.0" layoutY="539.0" mnemonicParsing="false" text="Custom Delimitor:" toggleGroup="$download_type" />
-      <TextField fx:id="CustomDelimiter" layoutX="227.0" layoutY="534.0" prefHeight="31.0" prefWidth="168.0" promptText="Insert Delimiter Here" />
-      <TitledPane expanded="false" layoutX="12.0" layoutY="50.0" prefHeight="112.0" prefWidth="777.0" text="Advanced Search">
-         <content>
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="0.0" prefWidth="775.0">
+      <GridPane layoutX="178.0" layoutY="129.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="657.0" prefWidth="958.0" style="-fx-background-color: purple;">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <VBox prefHeight="665.0" prefWidth="958.0">
                <children>
-                  <DatePicker fx:id="startDate" layoutX="6.0" layoutY="36.0" prefHeight="31.0" prefWidth="134.0" />
-                  <Label layoutX="15.0" layoutY="8.0" text="Submitted After:">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="164.0" layoutY="8.0" text="Submitted Before:">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Label>
-                  <DatePicker fx:id="endDate" layoutX="160.0" layoutY="36.0" prefHeight="31.0" prefWidth="134.0" />
-                  <Label layoutX="314.0" layoutY="26.0" text="Type of search:">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Label>
-                  <RadioButton fx:id="normalSearchRadio" layoutX="427.0" layoutY="9.0" mnemonicParsing="false" selected="true" text="Normal Search">
-                     <toggleGroup>
-                        <ToggleGroup fx:id="searchType2" />
-                     </toggleGroup>
-                  </RadioButton>
-                  <RadioButton fx:id="intersectSearchRadio" layoutX="427.0" layoutY="31.0" mnemonicParsing="false" text="Search within current search list" toggleGroup="$searchType2" />
-                  <RadioButton fx:id="unionSearchRadio" layoutX="427.0" layoutY="54.0" mnemonicParsing="false" text="Add next search to the current search list" toggleGroup="$searchType2" />
+                  <GridPane prefHeight="168.0" prefWidth="958.0">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="937.0" minWidth="5.0" prefWidth="5.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="937.0" minWidth="10.0" prefWidth="932.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="465.0" minWidth="5.0" prefWidth="5.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints maxHeight="50.0" minHeight="5.0" prefHeight="10.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="59.0" minHeight="10.0" prefHeight="45.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="153.0" minHeight="10.0" prefHeight="120.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="118.0" minHeight="0.0" prefHeight="2.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="76.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                           <children>
+                              <Label layoutX="14.0" layoutY="13.0" text="Alcohol Type:">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <CheckBox fx:id="isWineBox" layoutX="151.0" layoutY="13.0" mnemonicParsing="false" text="Wine">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </CheckBox>
+                              <CheckBox fx:id="isBeerBox" layoutX="228.0" layoutY="13.0" mnemonicParsing="false" text="Beer">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </CheckBox>
+                              <CheckBox fx:id="isDistilledBox" layoutX="300.0" layoutY="13.0" mnemonicParsing="false" text="Distilled Spirits">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </CheckBox>
+                              <ChoiceBox fx:id="choiceBox" layoutX="443.0" layoutY="13.0" prefWidth="150.0" />
+                              <TextField fx:id="searchTextField" layoutX="611.0" layoutY="10.0" prefHeight="31.0" prefWidth="255.0" />
+                              <Button fx:id="helpSearchButton" layoutX="880.0" layoutY="12.0" mnemonicParsing="false" onAction="#needHelp" prefHeight="27.0" prefWidth="48.0" text="Help" />
+                           </children>
+                        </Pane>
+                        <TitledPane expanded="false" prefHeight="111.0" prefWidth="937.0" style="-fx-background-color: white;" text="Advanced Search" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="0.0" prefWidth="775.0">
+                                 <children>
+                                    <DatePicker fx:id="startDate" layoutX="6.0" layoutY="36.0" prefHeight="31.0" prefWidth="134.0" />
+                                    <Label layoutX="15.0" layoutY="8.0" text="Submitted After:">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="164.0" layoutY="8.0" text="Submitted Before:">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                    </Label>
+                                    <DatePicker fx:id="endDate" layoutX="160.0" layoutY="36.0" prefHeight="31.0" prefWidth="134.0" />
+                                    <Label layoutX="314.0" layoutY="26.0" text="Type of search:">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                    </Label>
+                                    <RadioButton fx:id="normalSearchRadio" layoutX="427.0" layoutY="9.0" mnemonicParsing="false" selected="true" text="Normal Search">
+                                       <toggleGroup>
+                                          <ToggleGroup fx:id="searchType2" />
+                                       </toggleGroup>
+                                    </RadioButton>
+                                    <RadioButton fx:id="intersectSearchRadio" layoutX="427.0" layoutY="31.0" mnemonicParsing="false" text="Search within current search list" toggleGroup="$searchType2" />
+                                    <RadioButton fx:id="unionSearchRadio" layoutX="427.0" layoutY="54.0" mnemonicParsing="false" text="Add next search to the current search list" toggleGroup="$searchType2" />
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </TitledPane>
+                     </children>
+                  </GridPane>
+                  <GridPane prefHeight="379.0" prefWidth="942.0">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="466.0" minWidth="3.0" prefWidth="5.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="939.0" minWidth="10.0" prefWidth="933.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="939.0" minWidth="0.0" prefWidth="5.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <TableView fx:id="table" editable="true" prefHeight="311.0" prefWidth="777.0" GridPane.columnIndex="1">
+                           <columns>
+                              <TableColumn fx:id="idColumn" prefWidth="100.0" text="ID" />
+                              <TableColumn fx:id="nameColumn" prefWidth="200.0" text="Name" />
+                              <TableColumn fx:id="brandNameColumn" prefWidth="200.0" text="Brand Name" />
+                              <TableColumn fx:id="alcoholTypeColumn" prefWidth="75.0" text="Type" />
+                              <TableColumn fx:id="locationColumn" prefWidth="200.0" text="Location" />
+                           </columns>
+                        </TableView>
+                     </children>
+                  </GridPane>
+                  <GridPane prefHeight="120.0" prefWidth="958.0">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="952.0" minWidth="10.0" prefWidth="12.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="952.0" minWidth="10.0" prefWidth="940.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="474.0" minWidth="6.0" prefWidth="10.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints maxHeight="5.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="49.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="45.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                           <children>
+                              <RadioButton fx:id="csvDownload" layoutX="104.0" layoutY="8.0" mnemonicParsing="false" selected="true" text="CSV">
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="download_type" />
+                                 </toggleGroup>
+                              </RadioButton>
+                           </children>
+                        </Pane>
+                        <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                           <children>
+                              <RadioButton fx:id="tabDownload" layoutX="104.0" layoutY="8.0" mnemonicParsing="false" text="Tab-Delimited" toggleGroup="$download_type" />
+                           </children>
+                        </Pane>
+                        <Pane prefHeight="0.0" prefWidth="939.0" style="-fx-background-color: white;" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                           <children>
+                              <Button fx:id="Back" layoutX="14.0" layoutY="3.0" mnemonicParsing="false" onAction="#back" prefHeight="25.0" prefWidth="60.0" text="Back" />
+                              <RadioButton fx:id="customDownload" layoutX="104.0" layoutY="8.0" mnemonicParsing="false" text="Custom Delimitor:" toggleGroup="$download_type" />
+                              <TextField fx:id="CustomDelimiter" layoutX="295.0" layoutY="1.0" prefHeight="31.0" prefWidth="168.0" promptText="Insert Delimiter Here" />
+                              <Button fx:id="downloadButton" layoutX="499.0" layoutY="1.0" mnemonicParsing="false" onMouseClicked="#download2" prefHeight="31.0" prefWidth="146.0" text="Download Results" />
+                              <Button fx:id="searchButton" layoutX="782.0" layoutY="-10.0" mnemonicParsing="false" onAction="#search" prefHeight="44.0" prefWidth="146.0" text="Search">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </Pane>
+                     </children>
+                  </GridPane>
                </children>
-            </AnchorPane>
-         </content>
-      </TitledPane>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" height="10.0" layoutX="-2.0" layoutY="-1.0" stroke="TRANSPARENT" strokeType="INSIDE" width="800.0">
+            </VBox>
+         </children>
+      </GridPane>
+      <Text layoutX="14.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="COLA Search" underline="true" wrappingWidth="625.13671875">
+         <font>
+            <Font name="Georgia Bold" size="79.0" />
+         </font>
          <fill>
-            <LinearGradient endX="1.0" endY="1.0">
+            <RadialGradient centerX="0.43333333333333335" centerY="0.4285714285714286" radius="0.5">
                <stops>
-                  <Stop color="#1f1fffdc" />
+                  <Stop color="#d00abc" />
                   <Stop color="WHITE" offset="1.0" />
                </stops>
-            </LinearGradient>
+            </RadialGradient>
          </fill>
-      </Rectangle>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" height="17.0" layoutX="-5.0" layoutY="571.0" stroke="#ffffff00" strokeType="INSIDE" width="808.0">
-         <fill>
-            <LinearGradient endX="0.08173076923076923" endY="1.0" startX="1.0" startY="1.0">
-               <stops>
-                  <Stop color="#ff2121fe" />
-                  <Stop color="WHITE" offset="1.0" />
-               </stops>
-            </LinearGradient>
-         </fill>
-      </Rectangle>
-      <Button fx:id="helpSearchButton" layoutX="746.0" layoutY="11.0" mnemonicParsing="false" onAction="#needHelp" prefHeight="27.0" prefWidth="48.0" text="Help" />
-
+      </Text>
    </children>
-</Pane>
+</AnchorPane>

@@ -1,5 +1,7 @@
 package sample;
 
+import com.jfoenix.controls.JFXRadioButton;
+import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -27,6 +29,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
+import javafx.scene.control.TextArea;
 
 import javafx.scene.control.TextField;
 
@@ -42,37 +45,36 @@ public class NewLabelController{
     ScreenUtil screenUtil = new ScreenUtil();
 
     @FXML private ImageView image;
-    @FXML private TextField RepID;
-    @FXML private TextField PlantReg;
-    @FXML private TextField SerialNo;
-    @FXML private TextField ApplicantName;
-    @FXML private TextField Name;
-    @FXML private TextField PhoneNumber;
-    @FXML private TextField MailingAddress;
-    @FXML private TextField originField;
-    @FXML private TextField BrandName;
-    @FXML private TextField Address;
-    @FXML private TextField Formula;
-    @FXML private TextField EmailAddress;
-    @FXML private TextField alcoholContent;
-    @FXML private TextField netContentField;
-    @FXML private TextField grapeVarietal;
-    @FXML private TextField Appellation;
-    @FXML private TextField sulfiteField;
-    @FXML private TextField Vintage;
-    @FXML private TextField bottlerField;
-    @FXML private TextField healthWarningField;
-    @FXML private TextField pH;
+    @FXML private JFXTextField RepID;
+    @FXML private JFXTextField PlantReg;
+    @FXML private JFXTextField SerialNo;
+    @FXML private JFXTextField ApplicantName;
+    @FXML private JFXTextField Name;
+    @FXML private JFXTextField PhoneNumber;
+    @FXML private JFXTextField MailingAddress;
+    @FXML private JFXTextField originField;
+    @FXML private JFXTextField BrandName;
+    @FXML private JFXTextField Address;
+    @FXML private JFXTextField Formula;
+    @FXML private JFXTextField EmailAddress;
+    @FXML private JFXTextField alcoholContent;
+    @FXML private JFXTextField netContentField;
+    @FXML private JFXTextField grapeVarietal;
+    @FXML private JFXTextField Appellation;
+    @FXML private JFXTextField sulfiteField;
+    @FXML private JFXTextField Vintage;
+    @FXML private JFXTextField bottlerField;
+    @FXML private TextArea additionalInfoField;
+    @FXML private JFXTextField pH;
     @FXML private TitledPane WinePane;
-
     @FXML private CheckBox dom1;
     @FXML private CheckBox dom11;
     @FXML private CheckBox dom111;
-    @FXML private CheckBox dom;
-    @FXML private CheckBox imp;
-    @FXML private CheckBox wineCheckBox;
-    @FXML private CheckBox beerCheckBox;
-    @FXML private CheckBox distilledCheckBox;
+    @FXML private JFXRadioButton dom;
+    @FXML private JFXRadioButton imp;
+    @FXML private JFXRadioButton wineCheckBox;
+    @FXML private JFXRadioButton beerCheckBox;
+    @FXML private JFXRadioButton distilledCheckBox;
     @FXML private TextField type2Box;
     @FXML private TextField type3box;
 
@@ -90,50 +92,7 @@ public class NewLabelController{
         screenUtil.switchScene("NewLabel.fxml", "New Label");
     }
 
-    @FXML
-    private void handledomBox(){
-        if(dom.isSelected()){
-            imp.setSelected(false);
-        }
-    }
-    @FXML
-    private void handleimpBox(){
-        if(imp.isSelected()){
-            dom.setSelected(false);
-        }
-    }
 
-    @FXML
-    private void handlewineBox(){
-        if(wineCheckBox.isSelected()){
-            beerCheckBox.setSelected(false);
-            distilledCheckBox.setSelected(false);
-
-        }
-
-        if (wineCheckBox.isSelected()){
-            WinePane.setExpanded(true);
-        }
-        else {
-            WinePane.setExpanded(false);
-        }
-    }
-
-    @FXML
-    private void handlebeerBox(){
-        if(beerCheckBox.isSelected()){
-            wineCheckBox.setSelected(false);
-            distilledCheckBox.setSelected(false);
-        }
-    }
-
-    @FXML
-    private void handleotherBox(){
-        if(distilledCheckBox.isSelected()){
-            beerCheckBox.setSelected(false);
-            wineCheckBox.setSelected(false);
-        }
-    }
     public void goBack (ActionEvent event){
         screenUtil.switchScene("MainMenu.fxml","Main Menu");
     }
@@ -403,7 +362,7 @@ public class NewLabelController{
 
         sulfiteDesc= sulfiteField.getText();
         bottlerInfo= bottlerField.getText();
-        healthWarningText= healthWarningField.getText();
+        healthWarningText= additionalInfoField.getText();
 
         if(valid){
             if(screenUtil.createConfirmBox("Confirm", "Would you like to submit the form?")) {

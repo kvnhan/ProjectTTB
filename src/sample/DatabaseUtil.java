@@ -953,7 +953,8 @@ public class DatabaseUtil {
         String brand_name = "";
         int  alcoholType = 0;
         double alcoholContent = 0;
-        // int origin = 0;
+        int origin = 0;
+        double net = 0;
 
 
 
@@ -965,11 +966,14 @@ public class DatabaseUtil {
             brand_name = rset.getString("BRAND_NAME");
             alcoholContent = rset.getDouble("ALCH_CONTENT");
             alcoholType = rset.getInt("ALCOHOL_TYPE");
+            origin = rset.getInt("ORIGIN_CODE");
+            net = rset.getDouble("NET_CONTENT");
+
 
         }
 
-        a = new AlcoholData(aid, fancyName, "", "", alcoholContent, 0, "", 0, 0, "", "",
-                formula, alcoholType, "", brand_name, "", 0, 0, "", "", source_of_product, null, 0);
+        a = new AlcoholData(aid, fancyName, "", "", alcoholContent, net, "", 0, 0, "", "",
+                formula, alcoholType, "", brand_name, "", 0, 0, "", "", source_of_product, null, origin);
 
         return a;
     }
@@ -990,11 +994,12 @@ public class DatabaseUtil {
         String brand_name = "";
         int  alcoholType = 0;
         double alcoholContent = 0;
-        // int origin = 0;
+        int origin = 0;
         String grape_varietal = "";
         String appellation = "";
         int vintage_date = 0;
         double ph_level = 0;
+        double net = 0;
 
 
         while(rset.next()){
@@ -1008,11 +1013,13 @@ public class DatabaseUtil {
             appellation = rset.getString("APPELLATION");
             vintage_date = rset.getInt("WINE_VINTAGE");
             ph_level = rset.getDouble("PH_LEVEL");
+            origin = rset.getInt("ORIGIN_CODE");
+            net = rset.getDouble("NET_CONTENT");
 
         }
 
-        a = new AlcoholData(aid, fancyName, appellation, "", alcoholContent, 0, "", 0, 0, "", "",
-                formula, alcoholType, "", brand_name, "", vintage_date, ph_level, grape_varietal, "", source_of_product, null, 0);
+        a = new AlcoholData(aid, fancyName, appellation, "", alcoholContent, net, "", 0, 0, "", "",
+                formula, alcoholType, "", brand_name, "", vintage_date, ph_level, grape_varietal, "", source_of_product, null, origin);
 
         return a;
     }
@@ -1230,7 +1237,7 @@ public class DatabaseUtil {
         String formStatus = "UNASSIGNED";
         String alcoholStatus = "PROCESSING";
         java.sql.Date currentDate = new java.sql.Date((new java.util.Date()).getTime());
-        int aid = getAccountAid(applicationData.getTtbID());
+        int aid = getAidOfForm(applicationData.getTtbID());
 
         String formSQL = "UPDATE APP.FORM SET REPID = ?, SERIAL = ?, ADDRESS = ?," +
                 "PERMITNO = ?, PHONE = ?, EMAIL = ?, APPLICANTNAME = ?, STATUS = ?, APP_TYPE_1 = ?, APP_TYPE_2 = ?, APP_TYPE_3 = ?, DATE_SUBMITTED = ? WHERE TTBID = ?";
