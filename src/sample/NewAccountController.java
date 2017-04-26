@@ -75,12 +75,12 @@ public class NewAccountController {
                 userType = 0;
             }
 
-            if( (newUsername.length() >= 5 && newUsername.length() <= 15) && !dbUtil.contains("ACCOUNT", "USERNAME", newUsername)){
-               dbUtil.addAccount(newUsername, "password", 1, userType);
+            if( (newUsername.trim().length() >= 5 && newUsername.trim().length() <= 15) && !dbUtil.contains("ACCOUNT", "USERNAME", newUsername.trim())){
+               dbUtil.addAccount(newUsername.trim(), "password", 1, userType);
                screenUtil.switchScene("Login.fxml", "Login");
-            }else if(newUsername.length() < 5 || newUsername.length() > 15){
+            }else if(newUsername.trim().length() < 5 || newUsername.trim().length() > 15){
                 errorBox.setText("User name must be 5 - 15 characters long");
-            }else if(dbUtil.contains("ACCOUNT", "USERNAME", newUsername)){
+            }else if(dbUtil.contains("ACCOUNT", "USERNAME", newUsername.trim())){
                 errorBox.setText("Username taken!");
             }else{
                 errorBox.setText("Unknown error!");
