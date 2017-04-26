@@ -87,5 +87,8 @@ public class SupervisorController {
         System.out.println("DOne");
     }
 
+    public void needHelp (){
+        screenUtil.switchScene("superVisorHelp.fxml","Help");
+    }
 
 }

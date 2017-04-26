@@ -15,7 +15,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1250.0" style="-fx-background-color: #5e5555;" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.SupervisorController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1250.0" style="-fx-background-color: #5e5555;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.SupervisorController">
    <center>
       <SplitPane dividerPositions="0.22169059011164274" prefHeight="160.0" prefWidth="200.0" style="-fx-background-color: #7c7272;" BorderPane.alignment="CENTER">
          <items>
@@ -48,13 +48,16 @@
                            <VBox.margin>
                               <Insets left="30.0" right="30.0" top="30.0" />
                            </VBox.margin>
+                           <children>
+                              <Button fx:id="helpButton" mnemonicParsing="false" onAction="#needHelp" prefHeight="53.0" prefWidth="113.0" text="Help" />
+                           </children>
                         </HBox>
                         <VBox alignment="TOP_CENTER" maxWidth="-Infinity" prefHeight="757.0" prefWidth="930.0" style="-fx-background-color: white; -fx-border-color: #7c7272; -fx-border-radius: 0 0 5 5; -fx-background-radius: 0 0 5 5;" VBox.vgrow="ALWAYS">
                            <VBox.margin>
                               <Insets bottom="5.0" left="30.0" right="30.0" />
                            </VBox.margin>
                            <children>
-                              <Text fx:id="title" strokeType="OUTSIDE" strokeWidth="0.0" text="Basic Info:" wrappingWidth="196.6708984375">
+                              <Text fx:id="title" strokeType="OUTSIDE" strokeWidth="0.0" text="Basic Info:" wrappingWidth="245.6708984375">
                                  <VBox.margin>
                                     <Insets top="50.0" />
                                  </VBox.margin>
