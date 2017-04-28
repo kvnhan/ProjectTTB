@@ -1,9 +1,17 @@
 package sample;
 
+import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXHamburger;
+import com.jfoenix.controls.JFXRadioButton;
+import com.jfoenix.transitions.hamburger.HamburgerBackArrowBasicTransition;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableDoubleValue;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -12,6 +20,7 @@ import javafx.scene.control.*;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -22,9 +31,14 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.VBox;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -37,17 +51,24 @@ public class SearchMenuController {
     private String searchText;
     private @FXML CheckBox isWineBox, isBeerBox, isDistilledBox;
     private @FXML TextField searchTextField;
-    private @FXML TableColumn idColumn, nameColumn, brandNameColumn, alcoholTypeColumn, locationColumn;
-    private @FXML TableView table;
     private @FXML RadioButton normalSearchRadio, intersectSearchRadio, unionSearchRadio;
     private @FXML Button helpSearchButton;
     private @FXML Button searchButton;
+    private @FXML Label Result;
+    private @FXML JFXHamburger Back;
 
     private @FXML RadioButton csvDownload, tabDownload, customDownload;
     private @FXML TextField CustomDelimiter;// customDirectoryField;
     //  private @FXML CheckBox CustomDirectoryCheckBox;
-    private @FXML ChoiceBox<String> choiceBox;
+    private @FXML JFXComboBox<String> choiceBox;
     private @FXML DatePicker startDate, endDate;
+
+    private @FXML TableColumn idColumn, nameColumn, brandNameColumn, alcoholTypeColumn, locationColumn, contentColumn;
+    private @FXML TableView table;
+    private @FXML GridPane resultsMainGridPane;
+    private GridPane alcoholLabelGridPane = new GridPane();
+    private ScrollPane imageScrollPane = new ScrollPane(alcoholLabelGridPane);
+    private @FXML ToggleGroup toggleView;
 
     private ScreenUtil screenUtil = new ScreenUtil();
     private int alcoholChoice = 0;
@@ -60,30 +81,65 @@ public class SearchMenuController {
 
     private DatabaseUtil dbUtil = new DatabaseUtil();
     private String choiceSearch;
+    private boolean hasViewChanged = false;
+
+    private javafx.scene.image.Image alcoholImage;
+    private ImageView alcoholImageView;
 
     @FXML
     public void initialize(){
+        HamburgerBackArrowBasicTransition burgerTask2 = new HamburgerBackArrowBasicTransition(Back);
+        burgerTask2.setRate(-1);
+        Back.addEventHandler(MouseEvent.MOUSE_ENTERED, (e) -> {
+            burgerTask2.setRate(burgerTask2.getRate() * -1);
+            burgerTask2.play();
+        });
 
-        searchTextField.setOnKeyPressed(new EventHandler<KeyEvent>() {
+        Back.addEventHandler(MouseEvent.MOUSE_PRESSED, (e) -> {
+            screenUtil.switchScene("MainMenu.fxml", "Main Menu");
+        });
+
+        searchTextField.addEventHandler(KeyEvent.KEY_PRESSED, (e) -> {
+            try {
+                search(new ActionEvent(searchButton, (Node) searchButton));
+            } catch (SQLException e1) {
+                e1.printStackTrace();
+            } catch (NoSuchMethodException e1) {
+                e1.printStackTrace();
+            } catch (IllegalAccessException e1) {
+                e1.printStackTrace();
+            } catch (InstantiationException e1) {
+                e1.printStackTrace();
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+        });
+
+
+        alcoholLabelGridPane.setHgap(10);
+        alcoholLabelGridPane.setVgap(10);
+        alcoholLabelGridPane.setPadding(new Insets(0,0,0,8));
+        //alcoholLabelGridPane.setBackground(new Background(new BackgroundFill(Color.web("#e74c3c"), CornerRadii.EMPTY, Insets.EMPTY)));
+
+        toggleView.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
             @Override
-            public void handle(KeyEvent event) {
-                if (event.getCode() == KeyCode.ENTER) {
-                    try {
-                        search(new ActionEvent(searchButton, (Node) searchButton));
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                    } catch (NoSuchMethodException e) {
-                        e.printStackTrace();
-                    } catch (IllegalAccessException e) {
-                        e.printStackTrace();
-                    } catch (InstantiationException e) {
-                        e.printStackTrace();
-                    } catch (IOException e) {
-                        e.printStackTrace();
+            public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
+                if(toggleView.getSelectedToggle() != null){
+                    String selectedView = ((JFXRadioButton)toggleView.getSelectedToggle()).getText();
+                    if(selectedView.equals("List View") && hasViewChanged){
+                        resultsMainGridPane.getChildren().remove(imageScrollPane);
+                        resultsMainGridPane.getChildren().add(table);
+                    }else if(selectedView.equals("Image View")){
+                        hasViewChanged = true;
+                        resultsMainGridPane.getChildren().remove(table);
+                        imageScrollPane = new ScrollPane(alcoholLabelGridPane);
+                        imageScrollPane.setFitToWidth(true);
+                        resultsMainGridPane.getChildren().add(imageScrollPane);
                     }
                 }
             }
         });
+
 
         // to get information (alcohol data) from the double clicked row in the table
         table.setRowFactory(tv -> {
@@ -98,25 +154,91 @@ public class SearchMenuController {
             return row;
         });
         //adds options
-        choiceBox.getItems().addAll("All Fields", "ID", "Name", "Brand Name", "Location", "Alcohol Content");
+        choiceBox.getItems().addAll("All", "Wine", "Beer", "Distilled", "Wine and Beer", "Wine and Distilled", "Beer and Distilled", "ID", "Name", "Brand Name", "Location", "Alcohol Content");
         //sets default vaule
-        choiceBox.setValue("All Fields");
+        choiceBox.setValue("All");
     }
 
 
-    public void displayResults(){
+    public void displayResults() {
         table.getColumns().clear();
         idColumn.setCellValueFactory(new PropertyValueFactory<>("aid"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("Name"));
-        brandNameColumn.setCellValueFactory(new PropertyValueFactory<>("BrandName"));
+        brandNameColumn.setCellValueFactory(new PropertyValueFactory<>("Brand Name"));
         alcoholTypeColumn.setCellValueFactory(new PropertyValueFactory<>("AlcoholType"));
         locationColumn.setCellValueFactory(new PropertyValueFactory<>("Appellation"));
+        contentColumn.setCellValueFactory(new PropertyValueFactory<>("AlchContent"));
         table.setItems(this.getObservableList());
-        table.getColumns().addAll(idColumn, nameColumn, brandNameColumn, alcoholTypeColumn, locationColumn);
+        table.getColumns().addAll(idColumn, nameColumn, brandNameColumn, alcoholTypeColumn, locationColumn, contentColumn);
+
+        int imageCol = 0;
+        int imageRow = 0;
+        ColumnConstraints col1 = new ColumnConstraints();
+        col1.setPercentWidth(33);
+        ColumnConstraints col2 = new ColumnConstraints();
+        col2.setPercentWidth(33);
+        ColumnConstraints col3 = new ColumnConstraints();
+        col3.setPercentWidth(33);
+
+        alcoholLabelGridPane.getColumnConstraints().addAll(col1, col2, col3);
+
+        for (int i = 0; i < alcoholDataList.size(); i++) {
+            final AlcoholData currentAlcoholData = alcoholDataList.get(i);
+            InputStream inputStream = SearchMenuController.class.getClassLoader().getResourceAsStream("labels/"+ String.valueOf(alcoholDataList.get(i).getAid()) + ".jfif");
+            alcoholImage = new javafx.scene.image.Image(inputStream);
+            alcoholImageView = new ImageView();
+
+            alcoholImageView.setImage(alcoholImage);
+
+            alcoholImageView.setFitWidth(260);
+            alcoholImageView.setFitHeight(260);
+
+            ImageViewPane imageViewPane = new ImageViewPane(alcoholImageView);
+
+            imageViewPane.setOnMouseEntered(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    int depth = 150;
+
+                    DropShadow borderGlow= new DropShadow();
+                    borderGlow.setOffsetY(0f);
+                    borderGlow.setOffsetX(0f);
+                    borderGlow.setColor(Color.web("#e74c3c"));
+                    borderGlow.setWidth(depth);
+                    borderGlow.setHeight(depth);
+
+                    imageViewPane.setEffect(borderGlow);
+                }
+            });
+
+            imageViewPane.setOnMouseExited(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    imageViewPane.setEffect(null);
+                }
+            });
+
+            imageViewPane.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    screenUtil.pullUpAlcoholDetails(currentAlcoholData);
+                }
+            });
+
+            alcoholLabelGridPane.add(imageViewPane, imageCol, imageRow);
+
+            imageCol++;
+            if (imageCol > 2) {
+                imageCol = 0;
+                imageRow++;
+            }
+        }
     }
 
     public void back (ActionEvent event){
-        screenUtil.switchScene("MainMenu.fxml", "Main Menu");
+        Back.addEventHandler(MouseEvent.MOUSE_PRESSED, (e) -> {
+            screenUtil.switchScene("MainMenu.fxml", "Main Menu");
+        });
     }
 
     public ObservableList<AlcoholData> getObservableList() {
@@ -134,43 +256,45 @@ public class SearchMenuController {
             searchUnion();
         }
         observableList = FXCollections.observableList(alcoholDataList);
+        int results = observableList.size();
+        Result.setText("Showing " + results + " Search Results");
         displayResults();
-        System.out.println("Search finished");
     }
 
 
     //"All Fields", "ID", "Name", "Brand Name", "Location", "Alcohol Content"
     //TODO add other spirits
     private void searchDatabase() throws SQLException {
-        if (isWineBox.isSelected() && isBeerBox.isSelected() && isDistilledBox.isSelected()){
+        choiceSearch = choiceBox.getValue();
+        if (choiceSearch.equals("All")){
             alcoholDataList = dbUtil.searchAlcoholWithType(BEER);
             alcoholDataList.addAll(dbUtil.searchAlcoholWithType(WINE));
             alcoholDataList.addAll(dbUtil.searchAlcoholWithType(DISTILLED));
             alcoholDataList = intersectAlcoholData(searchByChoice(), alcoholDataList);
         }
-        else if (isWineBox.isSelected() && isBeerBox.isSelected()){
+        else if (choiceSearch.equals("Wine and Beer")){
             alcoholDataList = dbUtil.searchAlcoholWithType(BEER);
             alcoholDataList.addAll(dbUtil.searchAlcoholWithType(WINE));
             alcoholDataList = intersectAlcoholData(searchByChoice(), alcoholDataList);
         }
-        else if (isDistilledBox.isSelected() && isBeerBox.isSelected()) {
+        else if (choiceSearch.equals("Beer and Distilled")) {
             alcoholDataList = dbUtil.searchAlcoholWithType(BEER);
             alcoholDataList.addAll(dbUtil.searchAlcoholWithType(DISTILLED));
             alcoholDataList = intersectAlcoholData(searchByChoice(), alcoholDataList);
         }
-        else if (isDistilledBox.isSelected() && isWineBox.isSelected()) {
+        else if (choiceSearch.equals("Wine and Distilled")) {
             alcoholDataList = dbUtil.searchAlcoholWithType(WINE);
             alcoholDataList.addAll(dbUtil.searchAlcoholWithType(DISTILLED));
             alcoholDataList = intersectAlcoholData(searchByChoice(), alcoholDataList);
         }
-        else if(isWineBox.isSelected() || isBeerBox.isSelected() || isDistilledBox.isSelected()){
-            if (isBeerBox.isSelected()){
-                alcoholChoice = 1;
-            }
-            else if (isWineBox.isSelected()){
+        else if(choiceSearch.equals("Wine") || choiceSearch.equals("Beer") || choiceSearch.equals("Distilled")){
+            if (choiceSearch.equals("Wine")){
                 alcoholChoice = 2;
             }
-            else if (isDistilledBox.isSelected()){
+            else if (choiceSearch.equals("Beer")){
+                alcoholChoice = 1;
+            }
+            else if (choiceSearch.equals("Distilled")){
                 alcoholChoice = 3;
             }
             alcoholDataList = dbUtil.searchAlcoholWithType(alcoholChoice);
@@ -207,7 +331,7 @@ public class SearchMenuController {
             } else if (choiceSearch.equals("Location Name")) {
                 adl = dbUtil.searchAlcoholAppellation(searchText);
             } else if (choiceSearch.equals("Alcohol Content")) {
-                double searchDoubleValue = Double.parseDouble(searchText);
+                double searchDoubleValue = Double.parseDouble(searchText.trim());
                 adl = dbUtil.searchAlcoholContent(searchDoubleValue);
             } else {
                 adl = searchAllAlcoholFields(searchText);
@@ -434,4 +558,3 @@ public class SearchMenuController {
     }
 
 }
-
