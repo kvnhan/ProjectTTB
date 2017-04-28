@@ -82,6 +82,7 @@ public class SearchMenuController {
     private DatabaseUtil dbUtil = new DatabaseUtil();
     private String choiceSearch;
     private boolean hasViewChanged = false;
+    private boolean isSearchInImageView = false;
 
     private javafx.scene.image.Image alcoholImage;
     private ImageView alcoholImageView;
@@ -99,27 +100,7 @@ public class SearchMenuController {
             screenUtil.switchScene("MainMenu.fxml", "Main Menu");
         });
 
-        searchTextField.addEventHandler(KeyEvent.KEY_PRESSED, (e) -> {
-            try {
-                search(new ActionEvent(searchButton, (Node) searchButton));
-            } catch (SQLException e1) {
-                e1.printStackTrace();
-            } catch (NoSuchMethodException e1) {
-                e1.printStackTrace();
-            } catch (IllegalAccessException e1) {
-                e1.printStackTrace();
-            } catch (InstantiationException e1) {
-                e1.printStackTrace();
-            } catch (IOException e1) {
-                e1.printStackTrace();
-            }
-        });
-
-
-        alcoholLabelGridPane.setHgap(10);
-        alcoholLabelGridPane.setVgap(10);
-        alcoholLabelGridPane.setPadding(new Insets(0,0,0,8));
-        //alcoholLabelGridPane.setBackground(new Background(new BackgroundFill(Color.web("#e74c3c"), CornerRadii.EMPTY, Insets.EMPTY)));
+        enableAutomaticSearch();
 
         toggleView.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
             @Override
@@ -127,14 +108,16 @@ public class SearchMenuController {
                 if(toggleView.getSelectedToggle() != null){
                     String selectedView = ((JFXRadioButton)toggleView.getSelectedToggle()).getText();
                     if(selectedView.equals("List View") && hasViewChanged){
+                        isSearchInImageView = false;
                         resultsMainGridPane.getChildren().remove(imageScrollPane);
                         resultsMainGridPane.getChildren().add(table);
+                        enableAutomaticSearch();
                     }else if(selectedView.equals("Image View")){
                         hasViewChanged = true;
+                        isSearchInImageView = true;
                         resultsMainGridPane.getChildren().remove(table);
-                        imageScrollPane = new ScrollPane(alcoholLabelGridPane);
-                        imageScrollPane.setFitToWidth(true);
-                        resultsMainGridPane.getChildren().add(imageScrollPane);
+                        disableAutomaticSearch();
+                        displayResultsInThumbnail();
                     }
                 }
             }
@@ -170,6 +153,17 @@ public class SearchMenuController {
         contentColumn.setCellValueFactory(new PropertyValueFactory<>("AlchContent"));
         table.setItems(this.getObservableList());
         table.getColumns().addAll(idColumn, nameColumn, brandNameColumn, alcoholTypeColumn, locationColumn, contentColumn);
+    }
+
+    public void displayResultsInThumbnail(){
+        alcoholLabelGridPane = new GridPane();
+        alcoholLabelGridPane.setHgap(10);
+        alcoholLabelGridPane.setVgap(10);
+        alcoholLabelGridPane.setPadding(new Insets(0,0,0,8));
+        //alcoholLabelGridPane.setBackground(new Background(new BackgroundFill(Color.web("#e74c3c"), CornerRadii.EMPTY, Insets.EMPTY)));
+        imageScrollPane = new ScrollPane(alcoholLabelGridPane);
+        imageScrollPane.setFitToWidth(true);
+        resultsMainGridPane.getChildren().add(imageScrollPane);
 
         int imageCol = 0;
         int imageRow = 0;
@@ -185,6 +179,16 @@ public class SearchMenuController {
         for (int i = 0; i < alcoholDataList.size(); i++) {
             final AlcoholData currentAlcoholData = alcoholDataList.get(i);
             InputStream inputStream = SearchMenuController.class.getClassLoader().getResourceAsStream("labels/"+ String.valueOf(alcoholDataList.get(i).getAid()) + ".jfif");
+            if(inputStream == null){
+                int alcoholType = currentAlcoholData.getAlcoholType();
+                if(alcoholType == 1){
+                    inputStream = SearchMenuController.class.getClassLoader().getResourceAsStream("labels/beer_default.jfif");
+                }else if(alcoholType == 2){
+                    inputStream = SearchMenuController.class.getClassLoader().getResourceAsStream("labels/wine_default.jfif");
+                }else if(alcoholType == 3){
+                    inputStream = SearchMenuController.class.getClassLoader().getResourceAsStream("labels/distilled_default.jfif");
+                }
+            }
             alcoholImage = new javafx.scene.image.Image(inputStream);
             alcoholImageView = new ImageView();
 
@@ -233,6 +237,7 @@ public class SearchMenuController {
                 imageRow++;
             }
         }
+
     }
 
     public void back (ActionEvent event){
@@ -259,6 +264,9 @@ public class SearchMenuController {
         int results = observableList.size();
         Result.setText("Showing " + results + " Search Results");
         displayResults();
+        if(isSearchInImageView){
+            displayResultsInThumbnail();
+        }
     }
 
 
@@ -439,6 +447,35 @@ public class SearchMenuController {
             }
         }
         return combinedAlcoholData;
+    }
+
+
+    public void enableAutomaticSearch(){
+        searchTextField.addEventHandler(KeyEvent.KEY_PRESSED, (e) -> {
+            try {
+                search(new ActionEvent(searchButton, (Node) searchButton));
+            } catch (SQLException e1) {
+                e1.printStackTrace();
+            } catch (NoSuchMethodException e1) {
+                e1.printStackTrace();
+            } catch (IllegalAccessException e1) {
+                e1.printStackTrace();
+            } catch (InstantiationException e1) {
+                e1.printStackTrace();
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+        });
+    }
+
+    public void disableAutomaticSearch(){
+        EventHandler keyHandler = new EventHandler<javafx.scene.input.KeyEvent>(){
+            public void handle(javafx.scene.input.KeyEvent event){
+                searchTextField.removeEventHandler(KeyEvent.KEY_PRESSED, this);
+
+            }
+        };
+        searchTextField.addEventFilter(KeyEvent.KEY_PRESSED, keyHandler);
     }
 
     private static final String TAB_DELIMITER = "\t";
