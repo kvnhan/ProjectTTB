@@ -1,148 +1,236 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="475.0" prefWidth="800.0" style="-fx-background-color: #dea09b#dea09b;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.AlcoholInfoController">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="475.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.AlcoholInfoController">
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="680.0" minWidth="10.0" prefWidth="376.0" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="438.0" minWidth="10.0" prefWidth="374.0" />
+  </columnConstraints>
+  <rowConstraints>
+      <RowConstraints maxHeight="384.0" minHeight="10.0" prefHeight="47.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="401.0" minHeight="10.0" prefHeight="390.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="195.0" minHeight="10.0" prefHeight="47.0" vgrow="SOMETIMES" />
+  </rowConstraints>
    <children>
-      <Button fx:id="close" layoutX="12.0" layoutY="425.0" mnemonicParsing="false" onAction="#closeWindow" text="Close">
+      <Button fx:id="close" mnemonicParsing="false" onAction="#closeWindow" prefHeight="35.0" prefWidth="108.0" text="Close" GridPane.rowIndex="2">
          <font>
             <Font name="Constantia" size="18.0" />
-         </font></Button>
-      <ImageView fx:id="alcImage" fitHeight="327.0" fitWidth="300.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
-      </ImageView>
-      <Label layoutX="375.0" layoutY="25.0" text="AID:">
+         </font>
+         <GridPane.margin>
+            <Insets left="5.0" />
+         </GridPane.margin>
+      </Button>
+      <ImageView fx:id="alcImage" fitHeight="350.0" fitWidth="350.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1" />
+      <GridPane GridPane.columnIndex="1" GridPane.rowIndex="1">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label text="AID:">
+               <font>
+                  <Font name="Constantia" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="alcAID" text="AID" GridPane.columnIndex="1">
+               <font>
+                  <Font name="Constantia" size="18.0" />
+               </font>
+            </Label>
+            <Label text="Brand Name:" GridPane.rowIndex="1">
+               <font>
+                  <Font name="Constantia" size="18.0" />
+               </font>
+            </Label>
+            <Label text="Alcohol Type:" GridPane.rowIndex="2">
+               <font>
+                  <Font name="Constantia" size="18.0" />
+               </font>
+            </Label>
+            <Label text="Appelation:" GridPane.rowIndex="3">
+               <font>
+                  <Font name="Constantia" size="18.0" />
+               </font>
+            </Label>
+            <Label text="Sulfite Description:" GridPane.rowIndex="4">
+               <font>
+                  <Font name="Constantia" size="18.0" />
+               </font>
+            </Label>
+            <Label text="Alcohol Content:" GridPane.rowIndex="5">
+               <font>
+                  <Font name="Constantia" size="18.0" />
+               </font>
+            </Label>
+            <Label text="Label Size:" GridPane.rowIndex="6">
+               <font>
+                  <Font name="Constantia" size="18.0" />
+               </font>
+            </Label>
+            <Label text="Label Legibility:" GridPane.rowIndex="7">
+               <font>
+                  <Font name="Constantia" size="18.0" />
+               </font>
+            </Label>
+            <Label text="Class:" GridPane.rowIndex="8">
+               <font>
+                  <Font name="Constantia" size="18.0" />
+               </font>
+            </Label>
+            <Label text="Product Type:" GridPane.rowIndex="9">
+               <font>
+                  <Font name="Constantia" size="18.0" />
+               </font>
+            </Label>
+            <Label text="Health Warning:" GridPane.rowIndex="10">
+               <font>
+                  <Font name="Constantia" size="18.0" />
+               </font>
+            </Label>
+            <Label text="Net Content:" GridPane.rowIndex="11">
+               <font>
+                  <Font name="Constantia" size="18.0" />
+               </font>
+            </Label>
+            <Label text="Formula:" GridPane.rowIndex="12">
+               <font>
+                  <Font name="Constantia" size="18.0" />
+               </font>
+            </Label>
+            <Label text="Botteler's Information:" GridPane.rowIndex="13">
+               <font>
+                  <Font name="Constantia" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="alcBrandName" text="Brand Name" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <font>
+                  <Font name="Constantia" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="alcType" text="Alcohol Type" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <font>
+                  <Font name="Constantia" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="alcAppelation" text="Appelation" GridPane.columnIndex="1" GridPane.rowIndex="3">
+               <font>
+                  <Font name="Constantia" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="alcSulfite" text="Sulfite Description" GridPane.columnIndex="1" GridPane.rowIndex="4">
+               <font>
+                  <Font name="Constantia" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="alcAlcoholContent" text="Alcohol Content" GridPane.columnIndex="1" GridPane.rowIndex="5">
+               <font>
+                  <Font name="Constantia" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="alcSize" prefHeight="21.0" prefWidth="144.0" text="Label Size" GridPane.columnIndex="1" GridPane.rowIndex="6">
+               <font>
+                  <Font name="Constantia" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="alcLegibility" prefHeight="21.0" prefWidth="144.0" text="Label Legibility" GridPane.columnIndex="1" GridPane.rowIndex="7">
+               <font>
+                  <Font name="Constantia" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="alcClass" prefHeight="21.0" prefWidth="144.0" text="Class" GridPane.columnIndex="1" GridPane.rowIndex="8">
+               <font>
+                  <Font name="Constantia" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="alcProductType" prefHeight="21.0" prefWidth="144.0" text="Product Type" GridPane.columnIndex="1" GridPane.rowIndex="9">
+               <font>
+                  <Font name="Constantia" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="alcHealthWarning" prefHeight="21.0" prefWidth="144.0" text="Health Warning" GridPane.columnIndex="1" GridPane.rowIndex="10">
+               <font>
+                  <Font name="Constantia" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="alcNetContent" prefHeight="21.0" prefWidth="144.0" text="Net Content" GridPane.columnIndex="1" GridPane.rowIndex="11">
+               <font>
+                  <Font name="Constantia" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="alcFormula" prefHeight="21.0" prefWidth="144.0" text="Formula" GridPane.columnIndex="1" GridPane.rowIndex="12">
+               <font>
+                  <Font name="Constantia" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="alcInfo" text="Botteler's Information" GridPane.columnIndex="1" GridPane.rowIndex="13">
+               <font>
+                  <Font name="Constantia" size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </GridPane>
+      <GridPane GridPane.columnIndex="1" GridPane.rowIndex="2">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Hyperlink fx:id="review" onAction="#review" prefHeight="31.0" prefWidth="79.0" text="Reviews">
+               <font>
+                  <Font name="Constantia" size="18.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="-6.0" />
+               </GridPane.margin>
+            </Hyperlink>
+            <Hyperlink fx:id="buy" onAction="#buy" text="Buy" GridPane.columnIndex="1">
+               <font>
+                  <Font name="Constantia" size="18.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="-6.0" />
+               </GridPane.margin>
+            </Hyperlink>
+         </children>
+      </GridPane>
+      <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #e74c3c;" />
+      <Label text="Alcohol Info:" textFill="WHITE">
          <font>
             <Font name="Constantia" size="18.0" />
-         </font></Label>
-      <Label layoutX="375.0" layoutY="50.0" text="Brand Name:">
-         <font>
-            <Font name="Constantia" size="18.0" />
-         </font></Label>
-      <Label layoutX="375.0" layoutY="75.0" text="Alcohol Type:">
-         <font>
-            <Font name="Constantia" size="18.0" />
-         </font></Label>
-      <Label layoutX="375.0" layoutY="100.0" text="Appelation:">
-         <font>
-            <Font name="Constantia" size="18.0" />
-         </font></Label>
-      <Label layoutX="375.0" layoutY="125.0" text="Sulfite Description:">
-         <font>
-            <Font name="Constantia" size="18.0" />
-         </font></Label>
-      <Label layoutX="375.0" layoutY="150.0" text="Alcohol Content:">
-         <font>
-            <Font name="Constantia" size="18.0" />
-         </font></Label>
-      <Label layoutX="375.0" layoutY="300.0" text="Label Size:">
-         <font>
-            <Font name="Constantia" size="18.0" />
-         </font></Label>
-      <Label layoutX="375.0" layoutY="275.0" text="Label Legibility:">
-         <font>
-            <Font name="Constantia" size="18.0" />
-         </font></Label>
-      <Label layoutX="375.0" layoutY="250.0" text="Class:">
-         <font>
-            <Font name="Constantia" size="18.0" />
-         </font></Label>
-      <Label layoutX="375.0" layoutY="225.0" text="Product Type:">
-         <font>
-            <Font name="Constantia" size="18.0" />
-         </font></Label>
-      <Label layoutX="375.0" layoutY="200.0" text="Health Warning:">
-         <font>
-            <Font name="Constantia" size="18.0" />
-         </font></Label>
-      <Label layoutX="375.0" layoutY="175.0" text="Net Content:">
-         <font>
-            <Font name="Constantia" size="18.0" />
-         </font></Label>
-      <Label layoutX="375.0" layoutY="325.0" text="Formula:">
-         <font>
-            <Font name="Constantia" size="18.0" />
-         </font></Label>
-      <Label layoutX="375.0" layoutY="350.0" text="Botteler's Information:">
-         <font>
-            <Font name="Constantia" size="18.0" />
-         </font></Label>
-      <Label fx:id="alcAID" layoutX="600.0" layoutY="25.0" text="AID">
-         <font>
-            <Font name="Constantia" size="18.0" />
-         </font></Label>
-      <Label fx:id="alcBrandName" layoutX="600.0" layoutY="50.0" text="Brand Name">
-         <font>
-            <Font name="Constantia" size="18.0" />
-         </font></Label>
-      <Label fx:id="alcType" layoutX="600.0" layoutY="75.0" text="Alcohol Type">
-         <font>
-            <Font name="Constantia" size="18.0" />
-         </font></Label>
-      <Label fx:id="alcAppelation" layoutX="600.0" layoutY="100.0" text="Appelation">
-         <font>
-            <Font name="Constantia" size="18.0" />
-         </font></Label>
-      <Label fx:id="alcSulfite" layoutX="600.0" layoutY="125.0" text="Sulfite Description">
-         <font>
-            <Font name="Constantia" size="18.0" />
-         </font></Label>
-      <Label fx:id="alcAlcoholContent" layoutX="600.0" layoutY="150.0" text="Alcohol Content">
-         <font>
-            <Font name="Constantia" size="18.0" />
-         </font></Label>
-      <Label fx:id="alcSize" layoutX="600.0" layoutY="300.0" prefHeight="21.0" prefWidth="144.0" text="Label Size">
-         <font>
-            <Font name="Constantia" size="18.0" />
-         </font></Label>
-      <Label fx:id="alcLegibility" layoutX="600.0" layoutY="275.0" prefHeight="21.0" prefWidth="144.0" text="Label Legibility">
-         <font>
-            <Font name="Constantia" size="18.0" />
-         </font></Label>
-      <Label fx:id="alcClass" layoutX="600.0" layoutY="250.0" prefHeight="21.0" prefWidth="144.0" text="Class">
-         <font>
-            <Font name="Constantia" size="18.0" />
-         </font></Label>
-      <Label fx:id="alcProductType" layoutX="600.0" layoutY="225.0" prefHeight="21.0" prefWidth="144.0" text="Product Type">
-         <font>
-            <Font name="Constantia" size="18.0" />
-         </font></Label>
-      <Label fx:id="alcHealthWarning" layoutX="600.0" layoutY="200.0" prefHeight="21.0" prefWidth="144.0" text="Health Warning">
-         <font>
-            <Font name="Constantia" size="18.0" />
-         </font></Label>
-      <Label fx:id="alcNetContent" layoutX="600.0" layoutY="175.0" prefHeight="21.0" prefWidth="144.0" text="Net Content">
-         <font>
-            <Font name="Constantia" size="18.0" />
-         </font></Label>
-      <Label fx:id="alcFormula" layoutX="600.0" layoutY="325.0" prefHeight="21.0" prefWidth="144.0" text="Formula">
-         <font>
-            <Font name="Constantia" size="18.0" />
-         </font></Label>
-      <Label fx:id="alcInfo" layoutX="600.0" layoutY="350.0" text="Botteler's Information">
-         <font>
-            <Font name="Constantia" size="18.0" />
-         </font></Label>
-      <Label layoutX="12.0" layoutY="350.0" text="Reviews:">
-         <font>
-            <Font name="Constantia" size="18.0" />
-         </font></Label>
-      <Label layoutX="13.0" layoutY="375.0" text="Buy:">
-         <font>
-            <Font name="Constantia" size="18.0" />
-         </font></Label>
-      <Hyperlink fx:id="review" layoutX="231.0" layoutY="350.0" onAction="#review" text="Reviews">
-         <font>
-            <Font name="Constantia" size="18.0" />
-         </font></Hyperlink>
-      <Hyperlink fx:id="buy" layoutX="231.0" layoutY="375.0" onAction="#buy" text="Buy">
-         <font>
-            <Font name="Constantia" size="18.0" />
-         </font></Hyperlink>
+         </font>
+         <GridPane.margin>
+            <Insets left="5.0" />
+         </GridPane.margin>
+      </Label>
+      <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #e74c3c;" GridPane.columnIndex="1" />
    </children>
-</AnchorPane>
+</GridPane>
