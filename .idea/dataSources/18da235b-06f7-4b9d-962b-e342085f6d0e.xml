@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataSource name="ProjectC">
-  <database-model serializer="dbm" rdbms="DERBY" format-version="4.1">
+  <database-model serializer="dbm" rdbms="DERBY" format-version="4.0">
     <root id="1"/>
     <schema id="2" parent="1" name="APP">
       <Current>1</Current>
@@ -179,6 +179,8 @@
       <RefTableName>PRODUCT_TYPE</RefTableName>
       <RefKeyName>SQL170330085503400</RefKeyName>
       <RefColNames>PID</RefColNames>
+      <OnDelete>no-action</OnDelete>
+      <OnUpdate>no-action</OnUpdate>
     </foreign-key>
     <foreign-key id="60" parent="15" name="ALCOHOLNEWC___FK">
       <ColNames>CLASS</ColNames>
@@ -186,6 +188,8 @@
       <RefTableName>CLASS</RefTableName>
       <RefKeyName>SQL170330085440790</RefKeyName>
       <RefColNames>CID</RefColNames>
+      <OnDelete>no-action</OnDelete>
+      <OnUpdate>no-action</OnUpdate>
     </foreign-key>
     <foreign-key id="61" parent="15" name="ALCOHOLNEWAT___FK">
       <ColNames>ALCOHOL_TYPE</ColNames>
@@ -193,6 +197,8 @@
       <RefTableName>ALCH_TYPE</RefTableName>
       <RefKeyName>SQL170330085521280</RefKeyName>
       <RefColNames>ATID</RefColNames>
+      <OnDelete>no-action</OnDelete>
+      <OnUpdate>no-action</OnUpdate>
     </foreign-key>
     <column id="62" parent="16" name="CID">
       <Position>1</Position>
@@ -308,6 +314,8 @@
       <RefTableName>ACCOUNT</RefTableName>
       <RefKeyName>SQL170404222048220</RefKeyName>
       <RefColNames>AID</RefColNames>
+      <OnDelete>no-action</OnDelete>
+      <OnUpdate>no-action</OnUpdate>
     </foreign-key>
     <foreign-key id="89" parent="17" name="FORM_ACCOUNTGOV__FK">
       <ColNames>GOVID</ColNames>
@@ -315,6 +323,8 @@
       <RefTableName>ACCOUNT</RefTableName>
       <RefKeyName>SQL170404222048220</RefKeyName>
       <RefColNames>AID</RefColNames>
+      <OnDelete>no-action</OnDelete>
+      <OnUpdate>no-action</OnUpdate>
     </foreign-key>
     <foreign-key id="90" parent="17" name="FORMALCH___FK">
       <ColNames>ALCHID</ColNames>
@@ -322,6 +332,8 @@
       <RefTableName>ALCOHOL</RefTableName>
       <RefKeyName>SQL170404222323510</RefKeyName>
       <RefColNames>AID</RefColNames>
+      <OnDelete>no-action</OnDelete>
+      <OnUpdate>no-action</OnUpdate>
     </foreign-key>
     <column id="91" parent="18" name="LABEL_INFO">
       <Position>1</Position>
@@ -473,6 +485,8 @@
       <RefTableName>FORM</RefTableName>
       <RefKeyName>SQL170408002506440</RefKeyName>
       <RefColNames>FID</RefColNames>
+      <OnDelete>no-action</OnDelete>
+      <OnUpdate>no-action</OnUpdate>
     </foreign-key>
     <foreign-key id="127" parent="20" name="REVIEWSSTATUS___FK">
       <ColNames>STATUS</ColNames>
@@ -480,6 +494,8 @@
       <RefTableName>STATUS</RefTableName>
       <RefKeyName>SQL170404222526110</RefKeyName>
       <RefColNames>SID</RefColNames>
+      <OnDelete>no-action</OnDelete>
+      <OnUpdate>no-action</OnUpdate>
     </foreign-key>
     <foreign-key id="128" parent="20" name="DECIDER__FK">
       <ColNames>DECIDER</ColNames>
@@ -487,6 +503,8 @@
       <RefTableName>ACCOUNT</RefTableName>
       <RefKeyName>SQL170404222048220</RefKeyName>
       <RefColNames>AID</RefColNames>
+      <OnDelete>no-action</OnDelete>
+      <OnUpdate>no-action</OnUpdate>
     </foreign-key>
     <column id="129" parent="21" name="SID">
       <Position>1</Position>

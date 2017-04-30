@@ -1546,12 +1546,17 @@ public class DatabaseUtil {
         if(null == ref){
             return false;
         }
-        else if(ref.equals(password)){
-            johnsUtil.model.SharedResources.Account acc = johnsUtil.model.SharedResources.Account.getInstance();
-            acc.setAccountID(rs.getInt("AID"));
-            acc.setUserName(rs.getString("USERNAME"));
-            acc.setUserType(rs.getInt("USER_TYPE"));
-            return true;
+        else if(rs.isBeforeFirst()){
+            if (ref.equals(password)) {
+                johnsUtil.model.SharedResources.Account acc = johnsUtil.model.SharedResources.Account.getInstance();
+                acc.setAccountID(rs.getInt("AID"));
+                acc.setUserName(rs.getString("USERNAME"));
+                acc.setUserType(rs.getInt("USER_TYPE"));
+                return true;
+            }
+            else{
+                return false;
+            }
         }
         else{
             return false;
