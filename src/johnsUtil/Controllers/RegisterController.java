@@ -13,14 +13,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import johnsUtil.Main;
 import johnsUtil.model.SharedResources.Account;
 import johnsUtil.model.SharedResources.Database;
 
-import javax.swing.*;
-import javax.xml.crypto.Data;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -58,7 +57,8 @@ public class RegisterController implements Initializable {
     private JFXPasswordField passTF;
 
     @FXML
-    private JLabel errorText;
+    private Label errorText;
+
 
 
     @Override
