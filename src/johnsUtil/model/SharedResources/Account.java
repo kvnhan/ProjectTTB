@@ -1,4 +1,4 @@
-package johnsUtil.model;
+package johnsUtil.model.SharedResources;
 
 import java.io.File;
 
@@ -7,7 +7,7 @@ import java.io.File;
  */
 public class Account {
 
-    private static Account instance = new Account();
+    private static Account account = new Account();
 
     private int accountID;
     private String userName;
@@ -32,15 +32,14 @@ public class Account {
     }
 
     /**Tries to gather account info from usrName
-     * Yea I realize holding a password in a string is a vulnrability but, this is software security engineering class.
-     * @author John
+     * Yea I realize holding a password in a string is a vulnerability but, this is software security engineering class and not
+     *  a functional requirement given we have a shit ton of stuff to do in such little time....
      * @param usrName
      * @param password
      */
     @Deprecated
     public void login(String usrName, String password){
         //call database util, get info, and plug in, otherwise throw exception
-
         loggedIn = true;
     }
 
@@ -55,6 +54,16 @@ public class Account {
         this.picPath = null;
         loggedIn = false;
     }
+
+    /**
+     * Adds account to databse
+     * @param account
+     */
+    @Deprecated
+    public  void createAccount(Account account){
+
+    }
+
 
 
     public int getAccountID() {
@@ -121,9 +130,6 @@ public class Account {
         this.phoneNum = phoneNum;
     }
 
-    public static Account getInstance(){
-        return instance;
-    }
-
+    public Account getInstance(){ return account; }
 
 }
