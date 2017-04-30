@@ -1,4 +1,4 @@
-package johnsUtil.model;
+package johnsUtil.model.Export;
 
 //import org.apache.pdfbox.pdmodel.PDDocument;
 //import org.apache.pdfbox.pdmodel.interactive.form.PDAcroForm;
@@ -70,7 +70,7 @@ package johnsUtil.model;
 ////    }
 //
 //    /**
-//     * Fill the new form out with the specified text
+//   * Fill the new form out with the specified text
 //     * @Param Form Data required to fill out alcohol form
 //     * @throws  NullPointerException - If not form is set
 //     */

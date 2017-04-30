@@ -1,4 +1,4 @@
-package johnsUtil.model;
+package johnsUtil.model.Export;
 
 /**
  * Created by John on 4/20/2017.
