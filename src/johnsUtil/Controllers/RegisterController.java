@@ -95,11 +95,10 @@ public class RegisterController implements Initializable {
             else{
                 nameTF.setStyle("-fx-prompt-text-fill: rgb(178,178,178);");
                 nameTF.setPromptText("Username");
-
             }
             errorText.setText("");
         } catch (SQLException e) {
-            errorText.setText("There was a problem connecting to the database");
+            errorText.setText("There was a problem connecting to the database (X2)");
             havefields = false;
         }
 
@@ -121,16 +120,6 @@ public class RegisterController implements Initializable {
             passTF.setStyle("-fx-prompt-text-fill: rgb(178,178,178);");
             passTF.setPromptText("Password");
         }
-        if(userTF.getText().trim().equals("")){
-            userTF.setStyle("-fx-prompt-text-fill: red;");
-            userTF.setPromptText("Username *Required Field*");
-            havefields = false;
-        }
-        else{
-            userTF.setStyle("-fx-prompt-text-fill: rgb(178,178,178);");
-            userTF.setPromptText("Username");
-        }
-
         if(typeCB.getValue() == null){
             typeCB.setStyle("-fx-prompt-text-fill: red;");
             typeCB.setPromptText("User Type *Required Field*");
@@ -140,7 +129,6 @@ public class RegisterController implements Initializable {
             typeCB.setStyle("-fx-prompt-text-fill: rgb(178,178,178);");
             typeCB.setPromptText("User Type");
         }
-
 
         if(havefields){
             //TODO add other fields and verify usertype
@@ -158,11 +146,12 @@ public class RegisterController implements Initializable {
                 type = 1;
             }
             //TODO image
-            Account.getInstance().createAccount(userName,pass,name,address,email,phone,type,null);
+
             try {
                 Account.getInstance().login(userName,pass);
+                Account.getInstance().createAccount(userName,pass,name,address,email,phone,type,null);
             } catch (SQLException e) {
-                e.printStackTrace();
+                errorText.setText("There was a problem connecting to the database (X2)");
             }
             //TODO change scene
         }
