@@ -40,25 +40,12 @@ public class HomeController implements Initializable {
     @FXML
     private JFXHamburger hamburger;
 
-    @FXML
-    private JFXButton btnLogout;
-
-    @FXML
-    private JFXButton btnMinimize;
-
-    @FXML
-    private JFXButton btnExpand;
-
-    @FXML
-    private JFXButton btnClose;
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         //btnClose.setGraphic(new ImageView(new Image(Main.class.getResourceAsStream("/closeOld.png"))));
        // btnExpand.setGraphic(new ImageView(new Image(Main.class.getResourceAsStream("/maximizeOld.png"))));
         //btnMinimize.setGraphic(new ImageView(new Image(Main.class.getResourceAsStream("/minimize.png"))));
-        btnLogout.setGraphic(new ImageView(new Image(Main.class.getResourceAsStream("/logout.png"))));
-
+        //btnLogout.setGraphic(new ImageView(new Image(Main.class.getResourceAsStream("/logout.png"))));
 
         try {
             vbox = FXMLLoader.load(getClass().getClassLoader().getResource("johnsUtil/Views/NavigationPane.fxml"));

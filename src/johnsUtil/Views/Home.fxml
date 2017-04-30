@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXDrawer?>
 <?import com.jfoenix.controls.JFXHamburger?>
 <?import javafx.scene.layout.BorderPane?>
@@ -20,11 +19,7 @@
             </VBox>
          </left>
          <right>
-            <VBox prefWidth="64.0" BorderPane.alignment="CENTER">
-               <children>
-                  <JFXButton fx:id="btnLogout" ellipsisString="" prefHeight="64.0" prefWidth="64.0" text=" " />
-               </children>
-            </VBox>
+            <VBox prefWidth="64.0" BorderPane.alignment="CENTER" />
          </right>
       </BorderPane>
    </center>

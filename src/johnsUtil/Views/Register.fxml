@@ -2,6 +2,7 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXPasswordField?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
@@ -14,73 +15,79 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="555.0" prefWidth="943.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="johnsUtil.Controllers.RegisterController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="590.0" prefWidth="943.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="johnsUtil.Controllers.RegisterController">
    <center>
-      <GridPane prefHeight="421.0" prefWidth="928.0" BorderPane.alignment="CENTER_RIGHT">
-        <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="650.0" minWidth="10.0" prefWidth="275.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="656.0" minWidth="10.0" prefWidth="41.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="650.0" minWidth="10.0" prefWidth="275.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="628.0" minWidth="10.0" prefWidth="33.0" />
-        </columnConstraints>
-        <rowConstraints>
-            <RowConstraints maxHeight="151.0" minHeight="10.0" prefHeight="42.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="204.0" minHeight="10.0" prefHeight="43.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="176.0" minHeight="10.0" prefHeight="79.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="192.0" minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="220.0" minHeight="0.0" prefHeight="73.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="229.0" minHeight="0.0" prefHeight="20.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="322.0" minHeight="10.0" prefHeight="96.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="322.0" minHeight="10.0" prefHeight="37.0" vgrow="SOMETIMES" />
-        </rowConstraints>
+      <VBox BorderPane.alignment="CENTER_RIGHT">
          <children>
-            <JFXTextField fx:id="nameTF" focusColor="#e74c3c" labelFloat="true" prefHeight="55.0" prefWidth="284.0" promptText="Full Name" GridPane.rowIndex="2">
+            <GridPane prefHeight="411.0" prefWidth="659.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="650.0" minWidth="10.0" prefWidth="275.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="656.0" minWidth="10.0" prefWidth="37.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="650.0" minWidth="10.0" prefWidth="295.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="628.0" minWidth="10.0" prefWidth="33.0" />
+              </columnConstraints>
+              <rowConstraints>
+                  <RowConstraints maxHeight="151.0" minHeight="10.0" prefHeight="42.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="176.0" minHeight="10.0" prefHeight="61.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="192.0" minHeight="10.0" prefHeight="19.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="220.0" minHeight="0.0" prefHeight="76.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="229.0" minHeight="0.0" prefHeight="22.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="322.0" minHeight="10.0" prefHeight="70.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="322.0" minHeight="0.0" prefHeight="23.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="322.0" minHeight="10.0" prefHeight="63.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <JFXTextField fx:id="nameTF" focusColor="#e74c3c" labelFloat="true" minHeight="55.0" prefHeight="55.0" prefWidth="293.0" promptText="Full Name" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="Calibri Light" size="20.0" />
+                     </font>
+                  </JFXTextField>
+                  <JFXTextField fx:id="addressTF" focusColor="#e74c3c" labelFloat="true" minHeight="55.0" prefHeight="55.0" prefWidth="293.0" promptText="Address" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="Calibri Light" size="20.0" />
+                     </font>
+                  </JFXTextField>
+                  <JFXTextField fx:id="userTF" focusColor="#e74c3c" labelFloat="true" minHeight="55.0" prefHeight="55.0" prefWidth="293.0" promptText="Username" GridPane.rowIndex="3">
+                     <font>
+                        <Font name="Calibri Light" size="20.0" />
+                     </font>
+                  </JFXTextField>
+                  <JFXTextField fx:id="emailTF" focusColor="#e74c3c" labelFloat="true" minHeight="55.0" prefHeight="55.0" prefWidth="293.0" promptText="Email Address" GridPane.columnIndex="2" GridPane.rowIndex="5">
+                     <font>
+                        <Font name="Calibri Light" size="20.0" />
+                     </font>
+                  </JFXTextField>
+                  <JFXTextField fx:id="phoneTF" focusColor="#e74c3c" labelFloat="true" minHeight="55.0" prefHeight="55.0" prefWidth="293.0" promptText="Phone Number" GridPane.rowIndex="5">
+                     <font>
+                        <Font name="Calibri Light" size="20.0" />
+                     </font>
+                  </JFXTextField>
+                  <JFXComboBox fx:id="typeCB" focusColor="#e74c3c" labelFloat="true" minHeight="55.0" prefHeight="55.0" prefWidth="293.0" promptText="User Type" style="-jfx-focus-color: #e74c3c;" GridPane.columnIndex="2" GridPane.rowIndex="7" />
+                  <JFXPasswordField fx:id="passTF" focusColor="#e74c3c" labelFloat="true" minHeight="55.0" prefWidth="55.0" promptText="Password" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                     <font>
+                        <Font name="Calibri Light" size="20.0" />
+                     </font>
+                  </JFXPasswordField>
+               </children>
+            </GridPane>
+            <Label fx:id="errorText" prefHeight="35.0" prefWidth="611.0" textFill="RED">
                <font>
-                  <Font name="Calibri Light" size="20.0" />
-               </font>
-            </JFXTextField>
-            <JFXTextField fx:id="addressTF" focusColor="#e74c3c" labelFloat="true" prefHeight="55.0" prefWidth="293.0" promptText="Address" GridPane.columnIndex="2" GridPane.rowIndex="2">
-               <font>
-                  <Font name="Calibri Light" size="20.0" />
-               </font>
-            </JFXTextField>
-            <JFXTextField fx:id="userTF" focusColor="#e74c3c" labelFloat="true" prefHeight="55.0" prefWidth="293.0" promptText="Username" GridPane.rowIndex="4">
-               <font>
-                  <Font name="Calibri Light" size="20.0" />
-               </font>
-            </JFXTextField>
-            <JFXTextField fx:id="emailTF" focusColor="#e74c3c" labelFloat="true" prefHeight="55.0" prefWidth="293.0" promptText="Email Address" GridPane.columnIndex="2" GridPane.rowIndex="4">
-               <font>
-                  <Font name="Calibri Light" size="20.0" />
-               </font>
-            </JFXTextField>
-            <JFXTextField fx:id="phoneTF" focusColor="#e74c3c" labelFloat="true" prefHeight="55.0" prefWidth="293.0" promptText="Phone Number" GridPane.rowIndex="6">
-               <font>
-                  <Font name="Calibri Light" size="20.0" />
-               </font>
-            </JFXTextField>
-            <Label alignment="BOTTOM_LEFT" prefHeight="55.0" prefWidth="267.0" textFill="#9e9999" GridPane.rowIndex="1">
-               <font>
-                  <Font size="17.0" />
+                  <Font size="16.0" />
                </font>
             </Label>
-            <Label alignment="BOTTOM_LEFT" prefHeight="55.0" prefWidth="267.0" textFill="#9e9999" GridPane.columnIndex="2" GridPane.rowIndex="1">
-               <font>
-                  <Font size="17.0" />
-               </font>
-            </Label>
-            <JFXComboBox fx:id="typeCB" focusColor="#e74c3c" labelFloat="true" prefHeight="55.0" prefWidth="293.0" promptText="User Type" style="-jfx-focus-color: #e74c3c;" GridPane.columnIndex="2" GridPane.rowIndex="6" />
          </children>
-      </GridPane>
+      </VBox>
    </center>
    <bottom>
-      <HBox alignment="CENTER" prefHeight="104.0" prefWidth="951.0" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER" prefHeight="95.0" prefWidth="943.0" BorderPane.alignment="CENTER">
          <children>
-            <JFXButton fx:id="submit" buttonType="RAISED" onAction="#handleSubmit" prefHeight="61.0" prefWidth="204.0" ripplerFill="WHITE" style="-fx-background-color: #e74c3c;" text="Create Account" textFill="WHITE">
+            <JFXButton fx:id="submit" buttonType="RAISED" onAction="#handleSubmit" prefHeight="76.0" prefWidth="204.0" ripplerFill="WHITE" style="-fx-background-color: #e74c3c;" text="Create Account" textFill="WHITE">
                <font>
                   <Font name="Calibri Light" size="20.0" />
                </font>
+               <HBox.margin>
+                  <Insets bottom="15.0" />
+               </HBox.margin>
             </JFXButton>
          </children>
       </HBox>

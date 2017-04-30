@@ -67,12 +67,20 @@ public class Account {
     }
 
     /**
-     * Adds account to databse
-     * @param account
+     * Creates an account with the given fields
+     * @param userName
+     * @param pass
+     * @param name
+     * @param address
+     * @param email
+     * @param phone
+     * @param type
+     * @param file
      */
-    @Deprecated
-    public void createAccount(Account account){
-
+    public void createAccount(String userName, String pass,String name, String address, String email, String phone, int type, java.io.File file){
+        //TODO
+        //Add to database *remember to hash password*
+        //save image
     }
 
     /**
@@ -194,4 +202,5 @@ public class Account {
     public void setSearch(String searchHack) {
         this.searchHack = searchHack;
     }
+
 }
