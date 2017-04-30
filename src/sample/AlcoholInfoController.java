@@ -36,6 +36,9 @@ public class AlcoholInfoController {
     private String setTextHelper(String s){
         if(s.equals("null"))
                 return " ";
+        else if(s.equals(".")){
+            return " ";
+        }
         else
             return s;
     }
