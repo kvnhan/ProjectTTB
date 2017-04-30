@@ -5,15 +5,22 @@ import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 import johnsUtil.Main;
+import johnsUtil.model.SharedResources.Account;
 
+import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class LoginController implements Initializable {
@@ -48,14 +55,27 @@ public class LoginController implements Initializable {
 
     @FXML
     void close(ActionEvent event) {
-        System.out.println("CLicked");
         Node currentSource = (Node) event.getSource();
         currentSource.getScene().getWindow().hide();
     }
 
     @FXML
-    void submit(ActionEvent event) {
-        //
+    void submit(ActionEvent event) throws IOException {
+        errorLabel.setText("");
+        try {
+            boolean successful = Account.getInstance().login(username.getText().trim(),password.getText().trim());
+
+            if(successful){
+                Stage primaryStage = (Stage) username.getScene().getWindow();
+                Parent root = FXMLLoader.load(getClass().getResource("Views/Home.fxml"));
+                primaryStage.setScene(new Scene(root));
+            }
+            else{
+                errorLabel.setText("The username or password you've entered doesn't match any account");
+            }
+        } catch (SQLException e) {
+            errorLabel.setText("There was a problem connecting to the database");
+        }
     }
 
 }

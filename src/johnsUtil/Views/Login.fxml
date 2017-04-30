@@ -59,7 +59,7 @@
                         <Font name="Calibri Light" size="25.0" />
                      </font>
                   </JFXPasswordField>
-                  <Label fx:id="errorLabel" contentDisplay="CENTER" prefHeight="56.0" prefWidth="323.0" textAlignment="CENTER" textFill="RED" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                  <Label fx:id="errorLabel" contentDisplay="CENTER" prefHeight="56.0" prefWidth="323.0" textAlignment="CENTER" textFill="RED" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="3">
                      <font>
                         <Font name="Calibri Light" size="20.0" />
                      </font>

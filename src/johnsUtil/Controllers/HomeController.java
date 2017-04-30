@@ -54,14 +54,14 @@ public class HomeController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        btnClose.setGraphic(new ImageView(new Image(Main.class.getResourceAsStream("/closeOld.png"))));
-        btnExpand.setGraphic(new ImageView(new Image(Main.class.getResourceAsStream("/maximizeOld.png"))));
-        btnMinimize.setGraphic(new ImageView(new Image(Main.class.getResourceAsStream("/minimize.png"))));
+        //btnClose.setGraphic(new ImageView(new Image(Main.class.getResourceAsStream("/closeOld.png"))));
+       // btnExpand.setGraphic(new ImageView(new Image(Main.class.getResourceAsStream("/maximizeOld.png"))));
+        //btnMinimize.setGraphic(new ImageView(new Image(Main.class.getResourceAsStream("/minimize.png"))));
         btnLogout.setGraphic(new ImageView(new Image(Main.class.getResourceAsStream("/logout.png"))));
 
 
         try {
-            vbox = FXMLLoader.load(getClass().getResource("/wpi/NavigationPane.fxml"));
+            vbox = FXMLLoader.load(getClass().getClassLoader().getResource("johnsUtil/Views/NavigationPane.fxml"));
             drawer.setSidePane(vbox);
         } catch (IOException e) {
             e.printStackTrace();

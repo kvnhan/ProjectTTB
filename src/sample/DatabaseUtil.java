@@ -1,6 +1,7 @@
 package sample;
 
 import javafx.scene.control.*;
+import org.mindrot.jbcrypt.BCrypt;
 
 import java.awt.*;
 import java.sql.*;
@@ -1459,10 +1460,6 @@ public class DatabaseUtil {
         }
         ttbid +=  id+"";
 
-
-
-
-
         checkDate.close();
         incrementDate.close();
 
@@ -1547,11 +1544,13 @@ public class DatabaseUtil {
             return false;
         }
         else if(rs.isBeforeFirst()){
-            if (ref.equals(password)) {
+            if (BCrypt.checkpw(password,ref)) {
                 johnsUtil.model.SharedResources.Account acc = johnsUtil.model.SharedResources.Account.getInstance();
                 acc.setAccountID(rs.getInt("AID"));
                 acc.setUserName(rs.getString("USERNAME"));
                 acc.setUserType(rs.getInt("USER_TYPE"));
+
+                //TODO rest of fields
                 return true;
             }
             else{

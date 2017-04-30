@@ -104,7 +104,7 @@
                <children>
                   <HBox fx:id="hBoxForSearch" alignment="CENTER" GridPane.columnIndex="1">
                      <children>
-                        <JFXButton fx:id="searchBtn" buttonType="RAISED" prefHeight="77.0" prefWidth="148.0" ripplerFill="#727272" />
+                        <JFXButton fx:id="searchBtn" buttonType="RAISED" onAction="#handleSearchButton" prefHeight="77.0" prefWidth="148.0" ripplerFill="#727272" />
                         <ComboBox fx:id="searchCombo" prefHeight="59.0" prefWidth="370.0" promptText="Search" />
                      </children>
                   </HBox>

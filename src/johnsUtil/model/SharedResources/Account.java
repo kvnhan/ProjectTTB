@@ -23,6 +23,7 @@ public class Account {
     private String phoneNum;
     private File picPath;
     private boolean loggedIn;
+    private String searchHack; //for guests
 
     private Account(){
         this.accountID  = -1;
@@ -33,7 +34,8 @@ public class Account {
         this.email = "";
         this.phoneNum = "";
         this.picPath = null;
-        loggedIn = false;
+        this.loggedIn = false;
+        this.searchHack = "";
     }
 
     /**Tries to gather account info from usrName
@@ -69,10 +71,17 @@ public class Account {
      * @param account
      */
     @Deprecated
-    public  void createAccount(Account account){
+    public void createAccount(Account account){
 
     }
 
+    /**
+     * Creates a non salted sha256 hashed string from the given password
+     * @param password
+     * @return
+     * @throws NoSuchAlgorithmException
+     */
+    @Deprecated
     private static String sha256NoSaltPassword(String password) throws NoSuchAlgorithmException {
         MessageDigest md = MessageDigest.getInstance("SHA-256");
         md.update(password.getBytes());
@@ -101,7 +110,7 @@ public class Account {
      * @param password
      * @return hash
      */
-    public static String bCryptSaltedPassword(String password){
+    private static String bCryptSaltedPassword(String password){
         String hashed =  BCrypt.hashpw(password,BCrypt.gensalt());
         return hashed;
     }
@@ -174,4 +183,15 @@ public class Account {
 
     public static Account getInstance(){ return account; }
 
+    public boolean isLoggedIn() {
+        return loggedIn;
+    }
+
+    public String getSearch() {
+        return searchHack;
+    }
+
+    public void setSearch(String searchHack) {
+        this.searchHack = searchHack;
+    }
 }

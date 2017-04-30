@@ -4,7 +4,6 @@
 <?import com.jfoenix.controls.JFXDrawer?>
 <?import com.jfoenix.controls.JFXHamburger?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="johnsUtil.Controllers.HomeController">
@@ -29,13 +28,4 @@
          </right>
       </BorderPane>
    </center>
-   <top>
-      <HBox alignment="CENTER_RIGHT" prefHeight="45.0" prefWidth="200.0" spacing="2.0" style="-fx-background-color: #f2f2f2;" BorderPane.alignment="CENTER">
-         <children>
-            <JFXButton fx:id="btnMinimize" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="45.0" prefWidth="45.0" ripplerFill="#6b5e5e" text="-" />
-            <JFXButton fx:id="btnExpand" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="45.0" prefWidth="45.0" ripplerFill="#6b5e5e" text=" " />
-            <JFXButton fx:id="btnClose" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="45.0" prefWidth="45.0" ripplerFill="#f57474" text=" " />
-         </children>
-      </HBox>
-   </top>
 </BorderPane>
