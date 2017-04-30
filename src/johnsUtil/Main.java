@@ -17,7 +17,7 @@ public class Main extends Application {
         String fxmlFile = "Views/MainMenu.fxml";
         Parent root = FXMLLoader.load(getClass().getResource(fxmlFile));
         primaryStage.setTitle("TTB Client");
-        Scene mainScene = new Scene(root, 1100, 700);
+        Scene mainScene = new Scene(root,1100, 700);
         if(fxmlFile.contains("MainMenu.fxml")){
             String mainCss = this.getClass().getResource("Views/Styling/main.css").toExternalForm();
             mainScene.getStylesheets().add(mainCss);

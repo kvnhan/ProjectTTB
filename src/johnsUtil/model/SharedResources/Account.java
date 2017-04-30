@@ -1,5 +1,7 @@
 package johnsUtil.model.SharedResources;
 
+import org.mindrot.jbcrypt.BCrypt;
+
 import java.io.File;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -71,7 +73,7 @@ public class Account {
 
     }
 
-    private String sha256NoSaltPassword(String password) throws NoSuchAlgorithmException {
+    private static String sha256NoSaltPassword(String password) throws NoSuchAlgorithmException {
         MessageDigest md = MessageDigest.getInstance("SHA-256");
         md.update(password.getBytes());
 
@@ -92,6 +94,16 @@ public class Account {
         }
 
         return hexString.toString();
+    }
+
+    /**
+     * Generates a BCrypted Salted hash for a password
+     * @param password
+     * @return hash
+     */
+    public static String bCryptSaltedPassword(String password){
+        String hashed =  BCrypt.hashpw(password,BCrypt.gensalt());
+        return hashed;
     }
 
 
