@@ -5,16 +5,14 @@ import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.transitions.hamburger.HamburgerBackArrowBasicTransition;
 import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableDoubleValue;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
-import javafx.scene.Group;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 
 import java.io.File;
@@ -26,23 +24,19 @@ import java.util.ArrayList;
 
 import javafx.scene.control.cell.PropertyValueFactory;
 
-import java.util.Collections;
 import java.util.List;
-import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.scene.effect.DropShadow;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
+import javafx.scene.image.*;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-
-import javax.swing.*;
 
 import static javafx.application.Application.launch;
 
@@ -86,6 +80,14 @@ public class SearchMenuController {
 
     private javafx.scene.image.Image alcoholImage;
     private ImageView alcoholImageView;
+    private int imageResultPageNumber;
+    private int resultsPerPage = 15;
+    private int noOfPagesGenerated;
+    private int generatedResultBound;
+    private @FXML HBox pageControlsHBox;
+    private @FXML ToggleButton previousPageButton;
+    private @FXML Button nextPageButton;
+    private @FXML Text pageNoText;
 
     @FXML
     public void initialize(){
@@ -100,6 +102,10 @@ public class SearchMenuController {
             screenUtil.switchScene("MainMenu.fxml", "Main Menu");
         });
 
+        createPageNavigationButtons();
+
+        pageControlsHBox.setVisible(false);
+
         enableAutomaticSearch();
 
         toggleView.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
@@ -109,6 +115,7 @@ public class SearchMenuController {
                     String selectedView = ((JFXRadioButton)toggleView.getSelectedToggle()).getText();
                     if(selectedView.equals("List View") && hasViewChanged){
                         isSearchInImageView = false;
+                        Result.setText("Showing " + alcoholDataList.size() + " search results.");
                         resultsMainGridPane.getChildren().remove(imageScrollPane);
                         resultsMainGridPane.getChildren().add(table);
                         enableAutomaticSearch();
@@ -165,6 +172,26 @@ public class SearchMenuController {
         imageScrollPane.setFitToWidth(true);
         resultsMainGridPane.getChildren().add(imageScrollPane);
 
+        noOfPagesGenerated = (int)Math.ceil((double)alcoholDataList.size()/(double)resultsPerPage);
+
+        if(noOfPagesGenerated > 1){
+            Result.setText("Showing " + resultsPerPage + " results per page. " + noOfPagesGenerated + " pages have been generated.");
+        }else{
+            Result.setText("Showing " + alcoholDataList.size() + " search results.");
+        }
+
+        pageControlsHBox.setVisible(alcoholDataList.size() > resultsPerPage);
+
+        int floor = noOfPagesGenerated-1;
+
+        if(floor*resultsPerPage >= (imageResultPageNumber+1)*resultsPerPage){
+            generatedResultBound = (imageResultPageNumber+1)*resultsPerPage;
+        }else{
+            generatedResultBound = floor*resultsPerPage + (int) Math.round((((double)alcoholDataList.size()/(double)resultsPerPage)-floor)*resultsPerPage);
+        }
+
+        pageNoText.setText("Page " + (imageResultPageNumber + 1));
+
         int imageCol = 0;
         int imageRow = 0;
         ColumnConstraints col1 = new ColumnConstraints();
@@ -176,7 +203,7 @@ public class SearchMenuController {
 
         alcoholLabelGridPane.getColumnConstraints().addAll(col1, col2, col3);
 
-        for (int i = 0; i < alcoholDataList.size(); i++) {
+        for (int i = imageResultPageNumber*resultsPerPage; i < generatedResultBound; i++) {
             final AlcoholData currentAlcoholData = alcoholDataList.get(i);
             InputStream inputStream = SearchMenuController.class.getClassLoader().getResourceAsStream("labels/"+ String.valueOf(alcoholDataList.get(i).getAid()) + ".jfif");
             if(inputStream == null){
@@ -251,6 +278,11 @@ public class SearchMenuController {
     }
 
     public void search(ActionEvent event) throws SQLException, NoSuchMethodException, IllegalAccessException, InstantiationException, IOException{
+        imageResultPageNumber = 0;
+        noOfPagesGenerated = 0;
+        previousPageButton.setDisable(true);
+        nextPageButton.setDisable(false);
+
         if(normalSearchRadio.isSelected()){
             searchDatabase();
         }
@@ -261,8 +293,7 @@ public class SearchMenuController {
             searchUnion();
         }
         observableList = FXCollections.observableList(alcoholDataList);
-        int results = observableList.size();
-        Result.setText("Showing " + results + " Search Results");
+        Result.setText("Showing " + observableList.size() + " search results.");
         displayResults();
         if(isSearchInImageView){
             displayResultsInThumbnail();
@@ -588,6 +619,46 @@ public class SearchMenuController {
             //        .getName()).log(Level.SEVERE, null, ex);
         }
 
+    }
+
+    public void createPageNavigationButtons(){
+        InputStream inputStreamForButtons;
+        ImageView buttonImageView;
+        pageControlsHBox.setAlignment(Pos.CENTER_LEFT);
+
+        inputStreamForButtons = SearchMenuController.class.getResourceAsStream("/images/previous_button_image.png");
+        buttonImageView = new ImageView(new Image(inputStreamForButtons));
+        buttonImageView.setFitHeight(31);
+        buttonImageView.setPreserveRatio(true);
+        previousPageButton.setGraphic(buttonImageView);
+
+        inputStreamForButtons = SearchMenuController.class.getResourceAsStream("/images/next_button_image.png");
+        buttonImageView = new ImageView(new Image(inputStreamForButtons));
+        buttonImageView.setFitHeight(31);
+        buttonImageView.setPreserveRatio(true);
+        nextPageButton.setGraphic(buttonImageView);
+
+        previousPageButton.setOnAction((ActionEvent e) -> {
+            nextPageButton.setDisable(false);
+            imageResultPageNumber--;
+            if(imageResultPageNumber > 0){
+                displayResultsInThumbnail();
+            }else{
+                previousPageButton.setDisable(true);
+                displayResultsInThumbnail();
+            }
+        });
+
+        nextPageButton.setOnAction((ActionEvent e) -> {
+            previousPageButton.setDisable(false);
+            imageResultPageNumber++;
+            if(imageResultPageNumber < (noOfPagesGenerated-1)){
+                displayResultsInThumbnail();
+            }else{
+                nextPageButton.setDisable(true);
+                displayResultsInThumbnail();
+            }
+        });
     }
 
     public void needHelp (){

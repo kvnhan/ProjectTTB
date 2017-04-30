@@ -1079,16 +1079,7 @@ public class DatabaseUtil {
 
         rset = stmt.executeQuery(query);
 
-        //Should give asc db of govid of government works id and the number of forms they have assigned to themrset = stm.executeQuery(sql);
 
-       /* int occ;
-        while(rset.next()){
-            GOVID = rset.getInt("GOVID");
-            occ = rset.getInt("CNT");
-
-            System.out.println("Gov ID: " + GOVID + "Occurences: " + occ);
-        }
-*/
         if(rset.next()){
             while ((rset.getInt("GOVID") == 0)){
                 rset.next();
@@ -1479,11 +1470,14 @@ public class DatabaseUtil {
         ArrayList<ApplicationData> unAssignedForms = searchUnassignedForms();
         System.out.println("Unassigned forms = "+ unAssignedForms.size());
         if(!(unAssignedForms.size() == 0)){
-            for(int i = 0; i < unAssignedForms.size(); i++) {;
+            for(int i = 0; i < unAssignedForms.size(); i++) {
                 int GOVID = searchMinWorkLoad();
-                System.out.println("Found govid with min workload = " + GOVID);
-                assignForm(GOVID, unAssignedForms.get(i));
-                System.out.println("FORM ID "+ unAssignedForms.get(i) + " ASSIGNED");
+                // only assign if worker has less than 10 forms
+                if(searchFormWithGovId(GOVID).size() < 10){
+                    System.out.println("Found govid with min workload = " + GOVID);
+                    assignForm(GOVID, unAssignedForms.get(i));
+                    System.out.println("FORM ID "+ unAssignedForms.get(i) + " ASSIGNED");
+                }
             }
         }
 
