@@ -20,9 +20,11 @@ public class ApplicationData{
     private int type1;
     private String type2;
     private int type3;
+    private String permitAddress;
     private Date submittedDate;
 
     private AlcoholData alcoholData = null;
+
 
     /**
      * Creates an instance of Application Data.
@@ -34,7 +36,7 @@ public class ApplicationData{
      * @param email Manufacturer's email address.
      * @param applicantName Name of the applicant.
      */
-    public ApplicationData(String ttbID, int repid, String serial, String address, String permitNo, String phoneNumber, String email, String applicantName, int type1, String type2, int type3, Date submittedDate) {
+    public ApplicationData(String ttbID, int repid, String serial, String address, String permitNo, String phoneNumber, String email, String applicantName, int type1, String type2, int type3, String permitAddress, Date submittedDate) {
         this.ttbID = ttbID;
         this.repid = repid;
         this.serial = serial;
@@ -46,6 +48,8 @@ public class ApplicationData{
         this.type1 = type1;
         this.type2 = type2;
         this.type3 = type3;
+        this.permitAddress = permitAddress;
+
         this.submittedDate = submittedDate;
     }
 
@@ -153,9 +157,11 @@ public class ApplicationData{
     public int getAssociatedAlchID() throws SQLException{
         return databaseUtil.getAidOfForm(this.getTtbID());
     }
-
+    public String getPermitAddress() {
+        return permitAddress;
+    }
     public AlcoholData getAssociatedAlcoholData()throws SQLException{
-        alcoholData = databaseUtil.searchAlcoholWithID(getAssociatedAlchID()).get(0);
+        alcoholData = databaseUtil.searchAlcoholID(getAssociatedAlchID()).get(0);
         return alcoholData;
     }
 

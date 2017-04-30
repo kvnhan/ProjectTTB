@@ -1,40 +1,30 @@
 package sample;
 
+import FormObserver.REST;
+import FormObserver.Subject;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TitledPane;
-import javafx.scene.image.*;
 import javafx.scene.image.Image;
-import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
-import java.awt.*;
+
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.net.URLDecoder;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.Date;
 import javafx.scene.control.TextArea;
 
 import javafx.scene.control.TextField;
 
 import javax.imageio.ImageIO;
-import java.util.Random;
+
 /**
  * Controller for new label screen.
  */
@@ -77,7 +67,7 @@ public class NewLabelController{
     @FXML private JFXRadioButton distilledCheckBox;
     @FXML private TextField type2Box;
     @FXML private TextField type3box;
-
+    private Subject subject;
     @FXML private Button Submit;
     @FXML private Button back;
     @FXML private Button clear;
@@ -93,6 +83,15 @@ public class NewLabelController{
     }
 
 
+    public void initialize(){
+        subject = new Subject();
+        new REST(subject, SerialNo, MailingAddress, PlantReg, PhoneNumber, EmailAddress, ApplicantName, Address);
+    }
+
+    public void notifyObservers(){
+        String rep = RepID.getText();
+        subject.setText(rep);
+    }
     public void goBack (ActionEvent event){
         screenUtil.switchScene("MainMenu.fxml","Main Menu");
     }
@@ -129,9 +128,10 @@ public class NewLabelController{
         int vintage_date = 0;
         double ph_level = 0;
         int max = 999999999;
+        String permitAddress = "";
 
         int originCode = 0;
-        double netContentDouble = 0;
+        String netContentDouble = "";
         String sulfiteDesc= "";
         String bottlerInfo= "";
         String healthWarningText= "";
@@ -176,7 +176,7 @@ public class NewLabelController{
         }
 
         if(!PlantReg.getText().trim().isEmpty()) {
-                permit_no = PlantReg.getText();
+            permit_no = PlantReg.getText();
         }else{
             screenUtil.createAlertBox("ERROR", "Plant Reg is empty");
             valid = false;
@@ -190,7 +190,7 @@ public class NewLabelController{
 
         if(!Appellation.getText().trim().isEmpty()){
             appellation = Appellation.getText();
-      }else if(wineCheckBox.isSelected()){
+        }else if(wineCheckBox.isSelected()){
             screenUtil.createAlertBox("ERROR", "Appellation is empty");
             valid = false;
         }
@@ -336,12 +336,7 @@ public class NewLabelController{
 
         if(!netContentField.getText().trim().isEmpty()) {
             try {
-                netContentDouble = Double.parseDouble(netContentField.getText());
-                if(netContentDouble > 99999){
-                    screenUtil.createAlertBox("ERROR", "Net content is above the allowed input limit");
-                    valid = false;
-                }
-
+                netContentDouble = (netContentField.getText());
             } catch (NumberFormatException e) {
                 screenUtil.createAlertBox("ERROR", "Invalid Input for Net Content");
                 valid = false;
@@ -354,15 +349,17 @@ public class NewLabelController{
         sulfiteDesc= sulfiteField.getText();
         bottlerInfo= bottlerField.getText();
         healthWarningText= additionalInfoField.getText();
+        permitAddress = Address.getText();
+
 
         if(valid){
             if(screenUtil.createConfirmBox("Confirm", "Would you like to submit the form?")) {
                 String newTTBID;
                 int alcoholID;
-                java.sql.Date currentDate = new java.sql.Date((new java.util.Date()).getTime());
+                java.sql.Date currentDate = new java.sql.Date((new Date()).getTime());
 
                 if (wineCheckBox.isSelected()) {
-                    newTTBID = db.addForm(db.getNewTTBID(), repid, serial, address, permit_no, phone_number, email, applicantName, "UNASSIGNED", type1, type2, type3, currentDate);
+                    newTTBID = db.addForm(db.getNewTTBID(), repid, serial, address, permit_no, phone_number, email, applicantName, "UNASSIGNED", type1, type2, type3, permitAddress, currentDate);
 
                     // Add to alcohol
                     alcoholID = db.addAlcohol(fancyName, appellation, sulfiteDesc, alcoholContentDouble, netContentDouble, healthWarningText, 0, 0, "n/a", "n/a", formula, 2, bottlerInfo, brand_name, "PROCESSING",vintage_date, ph_level, grape_varietal, infoOnBottle, source_of_product, null, originCode);
@@ -375,7 +372,7 @@ public class NewLabelController{
 
 
                 } else if (beerCheckBox.isSelected()) {
-                    newTTBID = db.addForm(db.getNewTTBID(), repid, serial, address, permit_no, phone_number, email, applicantName, "UNASSIGNED", type1, type2, type3, currentDate);
+                    newTTBID = db.addForm(db.getNewTTBID(), repid, serial, address, permit_no, phone_number, email, applicantName, "UNASSIGNED", type1, type2, type3, permitAddress, currentDate);
 
                     // Add to alcohol
                     alcoholID = db.addAlcohol(fancyName, appellation, sulfiteDesc, alcoholContentDouble, netContentDouble, healthWarningText, 0, 0, "n/a", "n/a", formula, 1, bottlerInfo, brand_name, "PROCESSING",vintage_date, ph_level, grape_varietal, infoOnBottle, source_of_product, null, originCode);
@@ -387,7 +384,7 @@ public class NewLabelController{
                     screenUtil.switchScene("NewApp.fxml", "New Application");
 
                 } else if (distilledCheckBox.isSelected()) {
-                    newTTBID = db.addForm(db.getNewTTBID(), repid, serial, address, permit_no, phone_number, email, applicantName, "UNASSIGNED", type1, type2, type3, currentDate);
+                    newTTBID = db.addForm(db.getNewTTBID(), repid, serial, address, permit_no, phone_number, email, applicantName, "UNASSIGNED", type1, type2, type3, permitAddress, currentDate);
 
                     // Add to alcohol
                     alcoholID = db.addAlcohol(fancyName, appellation, sulfiteDesc, alcoholContentDouble, netContentDouble, healthWarningText, 0, 0, "n/a", "n/a", formula, 3, bottlerInfo, brand_name, "PROCESSING",vintage_date, ph_level, grape_varietal, infoOnBottle, source_of_product, null, originCode);
@@ -414,18 +411,18 @@ public class NewLabelController{
 
     public void chooseFile(ActionEvent event)throws Exception{
         tempFile = screenUtil.openFileChooser();
-            if (tempFile != null) {
-                //myFilePath.setText(tempFile.getPath());
-                filepath = tempFile.toURI().toString();
-                System.out.println(filepath);
-                javafx.scene.image.Image img = new Image(filepath);
-                image.setImage(img);
-            }
+        if (tempFile != null) {
+            //myFilePath.setText(tempFile.getPath());
+            filepath = tempFile.toURI().toString();
+            System.out.println(filepath);
+            Image img = new Image(filepath);
+            image.setImage(img);
+        }
 
     }
 
     public void buttonClicked (){
-            screenUtil.switchScene("NewHelp.fxml","Help");
+        screenUtil.switchScene("NewHelp.fxml","Help");
     }
 
     public void exportPDF () {

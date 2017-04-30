@@ -15,10 +15,9 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
+import java.net.URL;
+import java.net.URLDecoder;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -77,6 +76,8 @@ public class SearchMenuController {
     private String choiceSearch;
     private boolean hasViewChanged = false;
     private boolean isSearchInImageView = false;
+    private boolean foundImage = false;
+
 
     private javafx.scene.image.Image alcoholImage;
     private ImageView alcoholImageView;
@@ -205,21 +206,38 @@ public class SearchMenuController {
 
         for (int i = imageResultPageNumber*resultsPerPage; i < generatedResultBound; i++) {
             final AlcoholData currentAlcoholData = alcoholDataList.get(i);
-            InputStream inputStream = SearchMenuController.class.getClassLoader().getResourceAsStream("labels/"+ String.valueOf(alcoholDataList.get(i).getAid()) + ".jfif");
-            if(inputStream == null){
-                int alcoholType = currentAlcoholData.getAlcoholType();
-                if(alcoholType == 1){
-                    inputStream = SearchMenuController.class.getClassLoader().getResourceAsStream("labels/beer_default.jfif");
-                }else if(alcoholType == 2){
-                    inputStream = SearchMenuController.class.getClassLoader().getResourceAsStream("labels/wine_default.jfif");
-                }else if(alcoholType == 3){
-                    inputStream = SearchMenuController.class.getClassLoader().getResourceAsStream("labels/distilled_default.jfif");
+            try {
+                InputStream inputStream = SearchMenuController.class.getClassLoader().getResourceAsStream("labels/" + String.valueOf(alcoholDataList.get(i).getAid()) + ".jfif");
+                if (inputStream == null) {
+                    int alcoholType = currentAlcoholData.getAlcoholType();
+                    if (alcoholType == 1) {
+                        inputStream = SearchMenuController.class.getClassLoader().getResourceAsStream("labels/beer_default.jfif");
+                    } else if (alcoholType == 2) {
+                        inputStream = SearchMenuController.class.getClassLoader().getResourceAsStream("labels/wine_default.jfif");
+                    } else if (alcoholType == 3) {
+                        inputStream = SearchMenuController.class.getClassLoader().getResourceAsStream("labels/distilled_default.jfif");
+                    }
+                }
+                alcoholImage = new javafx.scene.image.Image(inputStream);
+                alcoholImageView = new ImageView();
+
+                alcoholImageView.setImage(alcoholImage);
+                foundImage = true;
+
+            }catch (Exception e){
+                foundImage = true;
+                try {
+                    if (foundImage == false) {
+                        alcoholImageView = new ImageView();
+                        String path = getPath();
+                        File file = new File(path + "/" + alcoholDataList.get(i).getAid() + ".jpg");
+                        javafx.scene.image.Image image1 = new javafx.scene.image.Image(file.toURI().toString());
+                        alcoholImageView.setImage(image1);
+                    }
+                }catch (Exception e2){
+
                 }
             }
-            alcoholImage = new javafx.scene.image.Image(inputStream);
-            alcoholImageView = new ImageView();
-
-            alcoholImageView.setImage(alcoholImage);
 
             alcoholImageView.setFitWidth(260);
             alcoholImageView.setFitHeight(260);
@@ -482,7 +500,7 @@ public class SearchMenuController {
 
 
     public void enableAutomaticSearch(){
-        searchTextField.addEventHandler(KeyEvent.KEY_PRESSED, (e) -> {
+        searchTextField.addEventHandler(KeyEvent.KEY_RELEASED, (e) -> {
             try {
                 search(new ActionEvent(searchButton, (Node) searchButton));
             } catch (SQLException e1) {
@@ -663,6 +681,21 @@ public class SearchMenuController {
 
     public void needHelp (){
         screenUtil.switchScene("SearchHelp.fxml","Help");
+    }
+
+    public String getPath() throws UnsupportedEncodingException {
+
+
+        URL url = this.getClass().getProtectionDomain().getCodeSource().getLocation();
+        String jarPath = URLDecoder.decode(url.getFile(), "UTF-8");
+        String parentPath = new File(jarPath).getParentFile().getPath();
+
+        String fileSeparator = System.getProperty("file.separator");
+        String newDir = parentPath + fileSeparator + "images" + fileSeparator;
+
+        System.out.println(newDir);
+
+        return newDir;
     }
 
 }
