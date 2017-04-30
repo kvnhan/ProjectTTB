@@ -39,18 +39,37 @@ public class AlcoholInfoController {
         else
             return s;
     }
+    //returns class
+    private String setTextClassHelper(int alcClass){
+        return "Sparkling Wine";
+    }
+    //returns type as a string
+    private String setTextTypeHelper(int alcType){
+        switch(alcType){
+            case 1:
+                return "Malt Beverage";
+            case 2:
+                return "Wine";
+            case 3:
+                return "Distilled Spirits";
+            default:
+                return "Alcohol";
+        }
+    }
+
+
     public void initialize(){
         alcAID.setText(setTextHelper(String.valueOf(dataPass.getAlcData().getAid())));
         alcBrandName.setText(setTextHelper(String.valueOf(dataPass.getAlcData().getBrandName())));
         alcFancyName.setText(setTextHelper(String.valueOf(dataPass.getAlcData().getName())));
-        alcType.setText(setTextHelper(String.valueOf(dataPass.getAlcData().getAlcoholType())));
+        alcType.setText(setTextTypeHelper(Integer.valueOf(dataPass.getAlcData().getAlcoholType())));
         alcAppelation.setText(setTextHelper(String.valueOf(dataPass.getAlcData().getAppellation())));
         alcSulfite.setText(setTextHelper(String.valueOf(dataPass.getAlcData().getSulfiteDescription())));
         alcAlcoholContent.setText(setTextHelper(String.valueOf(dataPass.getAlcData().getAlchContent())));
         alcNetContent.setText(setTextHelper(String.valueOf(dataPass.getAlcData().getNetContent())));
         alcHealthWarning.setText(setTextHelper(String.valueOf(dataPass.getAlcData().getHealthWarning())));
         alcProductType.setText(setTextHelper(String.valueOf(dataPass.getAlcData().getProductType())));
-        alcClass.setText(setTextHelper(String.valueOf(dataPass.getAlcData().getClassType())));
+        alcClass.setText(setTextClassHelper(Integer.valueOf(dataPass.getAlcData().getClassType())));
         alcLegibility.setText(setTextHelper(String.valueOf(dataPass.getAlcData().getLabelLegibility())));
         alcSize.setText(setTextHelper(String.valueOf(dataPass.getAlcData().getLabelSize())));
         alcFormula.setText(setTextHelper(String.valueOf(dataPass.getAlcData().getFormulas())));
