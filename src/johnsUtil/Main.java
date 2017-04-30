@@ -12,7 +12,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        String fxmlFile = "/Views/MainMenu.fxml";
+        String fxmlFile = "Views/MainMenu.fxml";
         Parent root = FXMLLoader.load(getClass().getResource(fxmlFile));
         primaryStage.setTitle("TTB Client");
         Scene mainScene = new Scene(root, 1100, 700);
