@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXDrawer?>
+<?import com.jfoenix.controls.JFXHamburger?>
+<?import com.jfoenix.controls.JFXTreeView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="johnsUtil.Controllers.InboxManuController">
+   <left>
+      <JFXDrawer fx:id="drawer" defaultDrawerSize="250.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="700.0" prefWidth="0.0" BorderPane.alignment="CENTER" />
+   </left>
+   <center>
+      <BorderPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" BorderPane.alignment="TOP_LEFT">
+         <left>
+            <VBox prefHeight="646.0" prefWidth="282.0" style="-fx-background-color: transparent;" BorderPane.alignment="CENTER">
+               <children>
+                  <TextField minHeight="40.0" prefHeight="40.0" promptText="Search" style="-fx-background-radius: 10 10 0 0; -fx-border-radius: 10 10 0 0;">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <VBox.margin>
+                        <Insets left="15.0" right="15.0" top="10.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <JFXTreeView maxHeight="1.7976931348623157E308" prefHeight="900.0" prefWidth="319.0">
+                     <VBox.margin>
+                        <Insets bottom="10.0" left="15.0" right="15.0" />
+                     </VBox.margin>
+                  </JFXTreeView>
+               </children>
+               <BorderPane.margin>
+                  <Insets />
+               </BorderPane.margin>
+            </VBox>
+         </left>
+         <top>
+            <HBox prefHeight="54.0" prefWidth="676.0" style="-fx-background-color: #E74C3C;" BorderPane.alignment="CENTER">
+               <children>
+                  <JFXHamburger fx:id="hamburger" maxHeight="54.0" maxWidth="54.0" prefHeight="54.0" prefWidth="63.0" />
+               </children>
+            </HBox>
+         </top>
+      </BorderPane>
+   </center>
+</BorderPane>

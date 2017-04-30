@@ -12,7 +12,7 @@ public class AlcoholData {
     private String appellation;
     private String sulfiteDescription;
     private double alchContent;
-    private double netContent;
+    private String netContent;
     private String healthWarning;
     private int productType;
     private int classType;
@@ -50,7 +50,7 @@ public class AlcoholData {
      * @param alcoholType Type of alcohol.
      * @param bottlersInfo General information about the bottler.
      */
-    public AlcoholData(int aid, String name, String appellation, String sulfiteDescription, double alchContent, double netContent, String healthWarning, int productType, int classType, String labelLegibility, String labelSize, String formulas, int alcoholType, String bottlersInfo, String brandName, String status, int wineVintage, double phLevel, String grapeVarietal, String infoOnBottle, String sourceOfProduct, Date dateApproved, int originCode) {
+    public AlcoholData(int aid, String name, String appellation, String sulfiteDescription, double alchContent, String netContent, String healthWarning, int productType, int classType, String labelLegibility, String labelSize, String formulas, int alcoholType, String bottlersInfo, String brandName, String status, int wineVintage, double phLevel, String grapeVarietal, String infoOnBottle, String sourceOfProduct, Date dateApproved, int originCode) {
         this.aid = aid;
         this.name = name;
         this.appellation = appellation;
@@ -117,11 +117,11 @@ public class AlcoholData {
         this.alchContent = alchContent;
     }
 
-    public double getNetContent() {
+    public String getNetContent() {
         return netContent;
     }
 
-    public void setNetContent(double netContent) {
+    public void setNetContent(String netContent) {
         this.netContent = netContent;
     }
 

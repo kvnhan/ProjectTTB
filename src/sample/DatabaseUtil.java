@@ -1,6 +1,7 @@
 package sample;
 
 import javafx.scene.control.*;
+import org.mindrot.jbcrypt.BCrypt;
 
 import java.awt.*;
 import java.sql.*;
@@ -9,6 +10,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Date;
+
 /**
  * Set of functions for interacting with the database.
  */
@@ -20,7 +22,7 @@ public class DatabaseUtil {
     private String ALCH_TYPE_FIELDS = " (ATID, CLASS)";
     private String ALCOHOL_FIELDS = " (AID, NAME, APPELLATION, SULFITE_DESC, ALCH_CONTENT, NET_CONTENT, HEALTH_WARNING, PRODUCT_TYPE, CLASS, LABEL_LEGIBILLITY, LABEL_SIZE, FORMULAS, ALCOHOL_TYPE, BOTTLERS_INFO, BRAND_NAME, STATUS, WINE_VINTAGE, PH_LEVEL, GRAPE_VARIETAL, INFO_ON_BOTTLE, SOURCE_OF_PRODUCT, DATE_APPROVED, ORIGIN_CODE)";
     private String CLASS_FIELDS = " (CID, CLASS)";
-    private String FORM_FIELDS = " (FID, TTBID, REPID, SERIAL, ADDRESS, PERMITNO, PHONE, EMAIL, APPLICANTNAME, STATUS, AID, APP_TYPE_1, APP_TYPE_2, APP_TYPE_3, DATE_SUBMITTED)";
+    private String FORM_FIELDS = " (FID, TTBID, REPID, SERIAL, ADDRESS, PERMITNO, PHONE, EMAIL, APPLICANTNAME, STATUS, AID, APP_TYPE_1, APP_TYPE_2, APP_TYPE_3, PERMIT_ADDRESS, DATE_SUBMITTED)";
     /*private String FORM_FIELDS_WINE = " (FID, TTBID, REPID, SERIAL, ADDRESS, FORMULA, GRAPEVAR, APPELLATION, PERMITNO, INFO_ON_BOTTLE, SOURCE, TYPE, PHONE, EMAIL" +
             ", DATE, APPLICANTNAME, VINTAGE, PH, STATUS, AID, APP_TYPE_1, APP_TYPE_2, APP_TYPE_3)";
     private String FORM_FIELDS_BEER = " (FID, TTBID, REPID, SERIAL, ADDRESS, FORMULA, PERMITNO, INFO_ON_BOTTLE, SOURCE, TYPE, PHONE, " +
@@ -186,9 +188,9 @@ public class DatabaseUtil {
      * @param brandName
      * @throws SQLException
      */
-    public int addAlcohol(String name, String appellation, String sulfiteDesc, double alcoholContent, double netContent, String healthWarning, int productType, int classType, String labelLegibility, String labelSize, String formulas, int alcoholType, String bottlersInfo, String brandName, String status, int wineVintage, double phLevel, String grapeVarietal, String infoOnBottle, String sourceOfProduct, java.sql.Date dateApproved, int originCode) throws SQLException {
+    public int addAlcohol(String name, String appellation, String sulfiteDesc, double alcoholContent, String netContent, String healthWarning, int productType, int classType, String labelLegibility, String labelSize, String formulas, int alcoholType, String bottlersInfo, String brandName, String status, int wineVintage, double phLevel, String grapeVarietal, String infoOnBottle, String sourceOfProduct, java.sql.Date dateApproved, int originCode) throws SQLException {
         System.out.println("ADDING ALCOHOL");
-        String values = "'" + name + "', '" + appellation + "', '" + sulfiteDesc + "', " + alcoholContent + "," + netContent + ",'" + healthWarning + "', " + productType + ", " + classType + ", '" + labelLegibility + "', '" + labelSize + "', '" + formulas + "', " + alcoholType + ", '" + bottlersInfo + "', '" + brandName + "', '" + status + "', " + wineVintage + ", " + phLevel + ", '" + grapeVarietal  + "', '" + infoOnBottle + "', '" + sourceOfProduct + "', " + dateApproved + ", " + originCode + " )";
+        String values = "'" + name + "', '" + appellation + "', '" + sulfiteDesc + "', " + alcoholContent + ",'" + netContent + "','" + healthWarning + "', " + productType + ", " + classType + ", '" + labelLegibility + "', '" + labelSize + "', '" + formulas + "', " + alcoholType + ", '" + bottlersInfo + "', '" + brandName + "', '" + status + "', " + wineVintage + ", " + phLevel + ", '" + grapeVarietal  + "', '" + infoOnBottle + "', '" + sourceOfProduct + "', " + dateApproved + ", " + originCode + " )";
         return addToTable("ALCOHOL", ALCOHOL_FIELDS, values, "AID");
     }
 
@@ -202,9 +204,9 @@ public class DatabaseUtil {
         addToTable("CLASS", CLASS_FIELDS, values, "CID");
     }
 
-    public String addForm(String ttbid, int repid, String serial, String address, String permitNo, String phone, String email, String applicantName, String status, int appType1, String appType2, int appType3, java.sql.Date dateSubmitted) throws SQLException{
+    public String addForm(String ttbid, int repid, String serial, String address, String permitNo, String phone, String email, String applicantName, String status, int appType1, String appType2, int appType3, String permitAddress, java.sql.Date dateSubmitted) throws SQLException{
         int aid = getAccountAid(AccountsUtil.getUsername());
-        String values = "'" + ttbid + "', " + repid + ", '" + serial + "', '" + address + "', '" + permitNo + "', '" + phone + "', '" + email + "', '" + applicantName + "', '" + status + "', " + aid + ", " + appType1 + ", '" + appType2 + "', " + appType3 + ", '" + dateSubmitted + "')";
+        String values = "'" + ttbid + "', " + repid + ", '" + serial + "', '" + address + "', '" + permitNo + "', '" + phone + "', '" + email + "', '" + applicantName + "', '" + status + "', " + aid + ", " + appType1 + ", '" + appType2 + "', " + appType3 + ", '" + permitAddress + "', '" + dateSubmitted + "')";
         addToTable("FORM", FORM_FIELDS, values, "FID");
         return ttbid;
     }
@@ -466,34 +468,39 @@ public class DatabaseUtil {
 
     // Code used to search Alcohol table based on alcohol type
     public List<AlcoholData> searchAlcoholWithType(int alcoholType) throws SQLException{
-        String query = "SELECT * FROM ALCOHOL WHERE ALCOHOL.ALCOHOL_TYPE = " + alcoholType;
+        String query = "SELECT * FROM ALCOHOL WHERE ALCOHOL.ALCOHOL_TYPE = " + alcoholType + " AND STATUS = 'APPROVED'";
 
         return searchAlcoholTable(query);
     }
 
     // Code used to search Alcohol table based on brand name. Uses partial search
     public List<AlcoholData> searchAlcoholBrand(String brandName) throws SQLException{
-        String query = "SELECT * FROM ALCOHOL WHERE UPPER(ALCOHOL.BRAND_NAME) LIKE UPPER('%" + brandName + "%')";
+        String query = "SELECT * FROM ALCOHOL WHERE UPPER(ALCOHOL.BRAND_NAME) LIKE UPPER('%" + brandName + "%')  AND STATUS = 'APPROVED'";
 
         return searchAlcoholTable(query);
     }
     public List<AlcoholData> searchAlcoholWithID(int number) throws SQLException{
+        String query = "SELECT * FROM ALCOHOL WHERE ALCOHOL.AID = " + number + " AND STATUS = 'APPROVED'";
+
+        return searchAlcoholTable(query);
+    }
+    public List<AlcoholData> searchAlcoholID(int number) throws SQLException{
         String query = "SELECT * FROM ALCOHOL WHERE ALCOHOL.AID = " + number;
 
         return searchAlcoholTable(query);
     }
     public List<AlcoholData> searchAlcoholName(String name) throws SQLException{
-        String query = "SELECT * FROM ALCOHOL WHERE UPPER(ALCOHOL.NAME) LIKE UPPER('%" + name + "%')";
+        String query = "SELECT * FROM ALCOHOL WHERE UPPER(ALCOHOL.NAME) LIKE UPPER('%" + name + "%')  AND STATUS = 'APPROVED'";
 
         return searchAlcoholTable(query);
     }
     public List<AlcoholData> searchAlcoholAppellation(String appellation) throws SQLException{
-        String query = "SELECT * FROM ALCOHOL WHERE UPPER(ALCOHOL.APPELLATION) LIKE UPPER('%" + appellation + "%')";
+        String query = "SELECT * FROM ALCOHOL WHERE UPPER(ALCOHOL.APPELLATION) LIKE UPPER('%" + appellation + "%') AND STATUS = 'APPROVED'";
 
         return searchAlcoholTable(query);
     }
     public List<AlcoholData> searchAlcoholContent(double alcCont) throws SQLException{
-        String query = "SELECT * FROM ALCOHOL WHERE ALCOHOL.ALC_CONTENT = " + alcCont;
+        String query = "SELECT * FROM ALCOHOL WHERE ALCOHOL.ALCH_CONTENT = " + alcCont + " AND STATUS = 'APPROVED'";
 
         return searchAlcoholTable(query);
     }
@@ -501,16 +508,16 @@ public class DatabaseUtil {
     public List<AlcoholData> searchAlcoholByDate(java.sql.Date date, String BEFORE_OR_AFTER) throws SQLException{
         String query = "";
         if(BEFORE_OR_AFTER.equals("AFTER")){
-            query = "SELECT * FROM ALCOHOL WHERE '" + date + "' <= ALCOHOL.DATE_APPROVED";
+            query = "SELECT * FROM ALCOHOL WHERE '" + date + "' <= ALCOHOL.DATE_APPROVED  AND STATUS = 'APPROVED'";
         }else if(BEFORE_OR_AFTER.equals("BEFORE")){
-            query = "SELECT * FROM ALCOHOL WHERE '" + date + "' >= ALCOHOL.DATE_APPROVED";
+            query = "SELECT * FROM ALCOHOL WHERE '" + date + "' >= ALCOHOL.DATE_APPROVED  AND STATUS = 'APPROVED'";
         }
 
         return searchAlcoholTable(query);
     }
 
     public List<AlcoholData> searchAlcoholByDate(java.sql.Date startDate, java.sql.Date endDate) throws SQLException{
-        String query = "SELECT * FROM ALCOHOL WHERE '" + startDate + "' <= ALCOHOL.DATE_APPROVED AND '" + endDate+ "' >= '2013-01-09'";
+        String query = "SELECT * FROM ALCOHOL WHERE '" + startDate + "' <= ALCOHOL.DATE_APPROVED AND '" + endDate+ "' >= '2013-01-09'" +  "AND STATUS = 'APPROVED'";
 
         return searchAlcoholTable(query);
     }
@@ -539,34 +546,34 @@ public class DatabaseUtil {
         rset = stmt.executeQuery(query);
 
         while(rset.next()){
-                int AID = rset.getInt("AID");
-                String name = String.format("%1$"+25+ "s", rset.getString("NAME")).trim();
-                String appelation = String.format("%1$"+22+ "s", rset.getString("APPELLATION")).trim();
-                String sulfiteDesc = String.format("%1$"+22+ "s", rset.getString("SULFITE_DESC")).trim();
-                double alchContent = rset.getDouble("ALCH_CONTENT");
-                double netContent = rset.getDouble("NET_CONTENT");
-                String healthWarning = String.format("%1$"+22+ "s", rset.getString("HEALTH_WARNING")).trim();
-                int productType = rset.getInt("PRODUCT_TYPE");
-                int classType = rset.getInt("CLASS");
-                String labelLegibility = String.format("%1$"+22+ "s", rset.getString("LABEL_LEGIBILLITY")).trim();
-                String labelSize = rset.getString("LABEL_SIZE");
-                String formulas = String.format("%1$"+22+ "s", rset.getString("FORMULAS")).trim();
-                int alchType = rset.getInt("ALCOHOL_TYPE");
-                String bottlersInfo = String.format("%1$"+22+ "s", rset.getString("BOTTLERS_INFO")).trim();
-                String brandname = String.format("%1$"+25+ "s", rset.getString("BRAND_NAME")).trim();
-                String status = String.format("%1$"+25+ "s", rset.getString("STATUS")).trim();
-                int wineVintage = rset.getInt("WINE_VINTAGE");
-                double phLevel = rset.getInt("PH_LEVEL");
-                String grapeVarietal = String.format("%1$"+25+ "s", rset.getString("GRAPE_VARIETAL")).trim();
-                String infoOnBottle = String.format("%1$"+25+ "s", rset.getString("INFO_ON_BOTTLE")).trim();
-                String sourceOfProduct = String.format("%1$"+25+ "s", rset.getString("SOURCE_OF_PRODUCT")).trim();
-                java.sql.Date dateApproved = rset.getDate("DATE_APPROVED");
-                int originCode = rset.getInt("ORIGIN_CODE");
+            int AID = rset.getInt("AID");
+            String name = String.format("%1$"+25+ "s", rset.getString("NAME")).trim();
+            String appelation = String.format("%1$"+22+ "s", rset.getString("APPELLATION")).trim();
+            String sulfiteDesc = String.format("%1$"+22+ "s", rset.getString("SULFITE_DESC")).trim();
+            double alchContent = rset.getDouble("ALCH_CONTENT");
+            String netContent = rset.getString("NET_CONTENT");
+            String healthWarning = String.format("%1$"+22+ "s", rset.getString("HEALTH_WARNING")).trim();
+            int productType = rset.getInt("PRODUCT_TYPE");
+            int classType = rset.getInt("CLASS");
+            String labelLegibility = String.format("%1$"+22+ "s", rset.getString("LABEL_LEGIBILLITY")).trim();
+            String labelSize = rset.getString("LABEL_SIZE");
+            String formulas = String.format("%1$"+22+ "s", rset.getString("FORMULAS")).trim();
+            int alchType = rset.getInt("ALCOHOL_TYPE");
+            String bottlersInfo = String.format("%1$"+22+ "s", rset.getString("BOTTLERS_INFO")).trim();
+            String brandname = String.format("%1$"+25+ "s", rset.getString("BRAND_NAME")).trim();
+            String status = String.format("%1$"+25+ "s", rset.getString("STATUS")).trim();
+            int wineVintage = rset.getInt("WINE_VINTAGE");
+            double phLevel = rset.getInt("PH_LEVEL");
+            String grapeVarietal = String.format("%1$"+25+ "s", rset.getString("GRAPE_VARIETAL")).trim();
+            String infoOnBottle = String.format("%1$"+25+ "s", rset.getString("INFO_ON_BOTTLE")).trim();
+            String sourceOfProduct = String.format("%1$"+25+ "s", rset.getString("SOURCE_OF_PRODUCT")).trim();
+            java.sql.Date dateApproved = rset.getDate("DATE_APPROVED");
+            int originCode = rset.getInt("ORIGIN_CODE");
 
 
             a = new AlcoholData(AID, name, appelation, sulfiteDesc, alchContent, netContent, healthWarning, productType, classType, labelLegibility, labelSize, formulas, alchType, bottlersInfo, brandname, status, wineVintage, phLevel, grapeVarietal, infoOnBottle, sourceOfProduct, dateApproved, originCode);
-                AlcoholDataList.add(a);
-            }
+            AlcoholDataList.add(a);
+        }
 
         return AlcoholDataList;
 
@@ -637,6 +644,44 @@ public class DatabaseUtil {
         return searchForm(query);
     }
 
+    public ApplicationData searchFormWithRepID(int rep) throws SQLException{
+        stmt = conn.createStatement();
+        String query = "SELECT * FROM FORM WHERE FORM.REPID = " + rep;
+        rset = stmt.executeQuery(query);
+        String ttbid = "";
+        String serial = "";
+        String address = "";
+        String permit_no = "";
+        String phone_number = "";
+        String email = "";
+        String applicantName = "";
+        int type1 = 0;
+        String type2 = "";
+        int type3 = 0;
+        String permitAddress = "";
+        java.sql.Date dateSubmitted = null;
+        ApplicationData a = new ApplicationData(ttbid, rep, serial, address, permit_no, phone_number, email, applicantName, type1, type2, type3, permitAddress, dateSubmitted);
+        while(rset.next()) {
+            ttbid = rset.getString("TTBID");
+            serial = rset.getString("SERIAL");
+            address = rset.getString("ADDRESS");
+            permit_no = rset.getString("PERMITNO");
+            phone_number = rset.getString("PHONE");
+            email = rset.getString("EMAIL");
+            applicantName = rset.getString("APPLICANTNAME");
+            type1 = rset.getInt("APP_TYPE_1");
+            type2 = rset.getString("APP_TYPE_2");
+            type3 = rset.getInt("APP_TYPE_3");
+            permitAddress = rset.getString("PERMIT_ADDRESS");
+            dateSubmitted = rset.getDate("DATE_SUBMITTED");
+
+
+            a = new ApplicationData(ttbid, rep, serial, address, permit_no, phone_number, email, applicantName, type1, type2, type3,permitAddress,dateSubmitted);
+            return a;
+        }
+        return a;
+    }
+
     public ArrayList<ApplicationData> searchFormWithTTBID(String ttbid) throws SQLException{
         String query = "SELECT * FROM FORM WHERE FORM.TTBID = '" + ttbid + "'";
 
@@ -662,10 +707,11 @@ public class DatabaseUtil {
             String applicantName = rset.getString("APPLICANTNAME");
             int type1 = rset.getInt("APP_TYPE_1");
             String type2 = rset.getString("APP_TYPE_2");
-             int type3 = rset.getInt("APP_TYPE_3");
+            int type3 = rset.getInt("APP_TYPE_3");
+            String permitAddress = rset.getString("PERMIT_ADDRESS");
             java.sql.Date dateSubmitted = rset.getDate("DATE_SUBMITTED");
 
-            a = new ApplicationData(ttbid, repid, serial, address, permit_no, phone_number, email, applicantName, type1, type2, type3, dateSubmitted);
+            a = new ApplicationData(ttbid, repid, serial, address, permit_no, phone_number, email, applicantName, type1, type2, type3, permitAddress, dateSubmitted);
             AppDataList.add(a);
         }
 
@@ -744,7 +790,7 @@ public class DatabaseUtil {
     }
 
     public void changeAlcoholStatus(String newStatus, int alcoholID) throws SQLException{
-        java.sql.Date currentDate = new java.sql.Date((new java.util.Date()).getTime());
+        java.sql.Date currentDate = new java.sql.Date((new Date()).getTime());
 
         String updateStatusQuery = "UPDATE ALCOHOL SET STATUS = ? WHERE AID = ?";
 
@@ -774,7 +820,7 @@ public class DatabaseUtil {
         //int GOVID = getAccountAid(ReviewerUsername);
 
         //get comments
-        String comments = commentsField.getText();
+        //String comments = commentsField.getText();
 
 /*
         int statusInInteger;
@@ -825,71 +871,71 @@ public class DatabaseUtil {
        *//* addReview(FID, statusInInteger, GOVID, date, general, originCode, brandName, fancifulName, grapevar, wineVintage, appellation, bottler, formula, sulfite, legibility, labelSize, descrip);
 */
     }
-/*
-    public BeerApplicationData fillSubmittedBeerForm(String ttbid) throws SQLException{
+    /*
+        public BeerApplicationData fillSubmittedBeerForm(String ttbid) throws SQLException{
 
-        String sql = "SELECT * FROM APP.FORM WHERE TTBID = ?";
-        BeerApplicationData a;
-        PreparedStatement sm;
-        sm = conn.prepareStatement(sql);
-        sm.setString(1, ttbid);
-        rset = sm.executeQuery();
+            String sql = "SELECT * FROM APP.FORM WHERE TTBID = ?";
+            BeerApplicationData a;
+            PreparedStatement sm;
+            sm = conn.prepareStatement(sql);
+            sm.setString(1, ttbid);
+            rset = sm.executeQuery();
 
-        int repid = 0;
-        String serial = "";
-        String address = "";
-        String fancyName = "";
-        String formula = "";
-        int permit_no = 0;
-        String infoOnBottle = "";
-        String source_of_product = "";
-        String type_of_product = "";
-        String brand_name = "";
-        String phone_number = "";
-        String email = "";
-        String applicantName = "";
-        String alcoholType = "";
-        String alcoholContent = "";
-        String date = "";
-        String status = "";
-        int type1 = 0;
-        String type2 = "";
-        int type3 = 0;
+            int repid = 0;
+            String serial = "";
+            String address = "";
+            String fancyName = "";
+            String formula = "";
+            int permit_no = 0;
+            String infoOnBottle = "";
+            String source_of_product = "";
+            String type_of_product = "";
+            String brand_name = "";
+            String phone_number = "";
+            String email = "";
+            String applicantName = "";
+            String alcoholType = "";
+            String alcoholContent = "";
+            String date = "";
+            String status = "";
+            int type1 = 0;
+            String type2 = "";
+            int type3 = 0;
 
-        while(rset.next()){
-            repid = rset.getInt("REPID");
-            serial = rset.getString("SERIAL");
-            address = rset.getString("ADDRESS");
-            //fancyName = rset.getString("FANCYNAME");
-            formula = rset.getString("FORMULA");
-            permit_no = rset.getInt("PERMITNO");
-            infoOnBottle = rset.getString("INFO_ON_BOTTLE");
-            source_of_product = rset.getString("SOURCE");
-            type_of_product = rset.getString("TYPE");
-            //brand_name = rset.getString("BRANDNAME");
-            phone_number = rset.getString("PHONE");
-            email = rset.getString("EMAIL");
-            applicantName = rset.getString("APPLICANTNAME");
-            //alcoholType = rset.getString("ALCOHOLTYPE");
-            //alcoholContent = Double.toString(rset.getDouble("ALCOHOL_CONTENT"));
-            type1 = rset.getInt("APP_TYPE_1");
-            type2 = rset.getString("APP_TYPE_2");
-            type3 = rset.getInt("APP_TYPE_3");
-            //date = rset.getString("DATE");
-            status = rset.getString("STATUS");
-            info = new AcceptanceInformation(null, applicantName, null, status);
+            while(rset.next()){
+                repid = rset.getInt("REPID");
+                serial = rset.getString("SERIAL");
+                address = rset.getString("ADDRESS");
+                //fancyName = rset.getString("FANCYNAME");
+                formula = rset.getString("FORMULA");
+                permit_no = rset.getInt("PERMITNO");
+                infoOnBottle = rset.getString("INFO_ON_BOTTLE");
+                source_of_product = rset.getString("SOURCE");
+                type_of_product = rset.getString("TYPE");
+                //brand_name = rset.getString("BRANDNAME");
+                phone_number = rset.getString("PHONE");
+                email = rset.getString("EMAIL");
+                applicantName = rset.getString("APPLICANTNAME");
+                //alcoholType = rset.getString("ALCOHOLTYPE");
+                //alcoholContent = Double.toString(rset.getDouble("ALCOHOL_CONTENT"));
+                type1 = rset.getInt("APP_TYPE_1");
+                type2 = rset.getString("APP_TYPE_2");
+                type3 = rset.getInt("APP_TYPE_3");
+                //date = rset.getString("DATE");
+                status = rset.getString("STATUS");
+                info = new AcceptanceInformation(null, applicantName, null, status);
+
+            }
+
+            a = new BeerApplicationData(ttbid, info, repid, serial,address,
+                    formula, permit_no, infoOnBottle,
+                    source_of_product, type_of_product, phone_number, email, null, applicantName,
+                    type1, type2, type3);
+
+            return a;
 
         }
-
-        a = new BeerApplicationData(ttbid, info, repid, serial,address,
-                formula, permit_no, infoOnBottle,
-                source_of_product, type_of_product, phone_number, email, null, applicantName,
-                type1, type2, type3);
-
-        return a;
-
-    }
-    */
+        */
     public ApplicationData fillSubmittedForm(String ttbid) throws SQLException{
 
         String sql = "SELECT * FROM APP.FORM WHERE TTBID = ?";
@@ -906,12 +952,13 @@ public class DatabaseUtil {
         String phone_number = "";
         String email = "";
         String applicantName = "";
-        java.util.Date date;
+        Date date;
         java.sql.Date d = null;
         String status = "";
         int type1 = 0;
         String type2 = "";
         int type3 = 0;
+        String permitAddress = "";
 
 
         while(rset.next()){
@@ -926,13 +973,14 @@ public class DatabaseUtil {
             type1 = rset.getInt("APP_TYPE_1");
             type2 = rset.getString("APP_TYPE_2");
             type3 = rset.getInt("APP_TYPE_3");
+            permitAddress = rset.getString("PERMIT_ADDRESS");
             d = rset.getDate("DATE_SUBMITTED");
 
         }
 
         date = d;
 
-        a = new ApplicationData(ttbid, repid, serial, address, permit_no, phone_number, email, applicantName, type1, type2, type3, d);
+        a = new ApplicationData(ttbid, repid, serial, address, permit_no, phone_number, email, applicantName, type1, type2, type3, permitAddress, d);
 
         return a;
     }
@@ -954,7 +1002,7 @@ public class DatabaseUtil {
         int  alcoholType = 0;
         double alcoholContent = 0;
         int origin = 0;
-        double net = 0;
+        String net = "";
 
 
 
@@ -967,7 +1015,7 @@ public class DatabaseUtil {
             alcoholContent = rset.getDouble("ALCH_CONTENT");
             alcoholType = rset.getInt("ALCOHOL_TYPE");
             origin = rset.getInt("ORIGIN_CODE");
-            net = rset.getDouble("NET_CONTENT");
+            net = rset.getString("NET_CONTENT");
 
 
         }
@@ -999,7 +1047,7 @@ public class DatabaseUtil {
         String appellation = "";
         int vintage_date = 0;
         double ph_level = 0;
-        double net = 0;
+        String net = "";
 
 
         while(rset.next()){
@@ -1014,7 +1062,7 @@ public class DatabaseUtil {
             vintage_date = rset.getInt("WINE_VINTAGE");
             ph_level = rset.getDouble("PH_LEVEL");
             origin = rset.getInt("ORIGIN_CODE");
-            net = rset.getDouble("NET_CONTENT");
+            net = rset.getString("NET_CONTENT");
 
         }
 
@@ -1204,7 +1252,7 @@ public class DatabaseUtil {
         }
         return notempty;
     }
-// Get Status
+    // Get Status
     public String getStatus(String ttbid) throws SQLException {
         String sql = "SELECT * FROM APP.FORM WHERE TTBID = ?";
         PreparedStatement sm;
@@ -1236,11 +1284,11 @@ public class DatabaseUtil {
     public int updateFormSubmission(ApplicationData applicationData, AlcoholData alcoholData) throws SQLException{
         String formStatus = "UNASSIGNED";
         String alcoholStatus = "PROCESSING";
-        java.sql.Date currentDate = new java.sql.Date((new java.util.Date()).getTime());
+        java.sql.Date currentDate = new java.sql.Date((new Date()).getTime());
         int aid = getAidOfForm(applicationData.getTtbID());
 
         String formSQL = "UPDATE APP.FORM SET REPID = ?, SERIAL = ?, ADDRESS = ?," +
-                "PERMITNO = ?, PHONE = ?, EMAIL = ?, APPLICANTNAME = ?, STATUS = ?, APP_TYPE_1 = ?, APP_TYPE_2 = ?, APP_TYPE_3 = ?, DATE_SUBMITTED = ? WHERE TTBID = ?";
+                "PERMITNO = ?, PHONE = ?, EMAIL = ?, APPLICANTNAME = ?, STATUS = ?, APP_TYPE_1 = ?, APP_TYPE_2 = ?, APP_TYPE_3 = ?, DATE_SUBMITTED = ? , PERMIT_ADDRESS = ? WHERE TTBID = ?";
 
         PreparedStatement sm;
         sm = conn.prepareStatement(formSQL);
@@ -1256,7 +1304,8 @@ public class DatabaseUtil {
         sm.setString(10, applicationData.getType2());
         sm.setInt(11, applicationData.getType3());
         sm.setDate(12, currentDate);
-        sm.setString(13, applicationData.getTtbID());
+        sm.setString(13, applicationData.getPermitAddress());
+        sm.setString(14, applicationData.getTtbID());
 
         sm.executeUpdate();
 
@@ -1270,7 +1319,7 @@ public class DatabaseUtil {
         sm.setString(2, alcoholData.getAppellation());
         sm.setString(3, alcoholData.getSulfiteDescription());
         sm.setDouble(4, alcoholData.getAlchContent());
-        sm.setDouble(5, alcoholData.getNetContent());
+        sm.setString(5, alcoholData.getNetContent());
         sm.setString(6, alcoholData.getHealthWarning());
         sm.setInt(7, alcoholData.getProductType());
         sm.setInt(8, alcoholData.getClassType());
@@ -1411,10 +1460,6 @@ public class DatabaseUtil {
         }
         ttbid +=  id+"";
 
-
-
-
-
         checkDate.close();
         incrementDate.close();
 
@@ -1463,7 +1508,7 @@ public class DatabaseUtil {
         ResultSet rs =  getForms.executeQuery();
 
         while(rs.next()){
-            AlcoholData currentDate = searchAlcoholWithID(rs.getInt("ALCHID")).get(0);
+            AlcoholData currentDate = searchAlcoholID(rs.getInt("ALCHID")).get(0);
             list.add(new TreeItem<TItem>(new FormItem(currentDate.getName(), rs.getString("TTBID"),currentDate.getBrandName())));
         }
 
@@ -1488,6 +1533,36 @@ public class DatabaseUtil {
         }
 
     }
+
+    public boolean logIn(String userName, String password) throws SQLException {
+        PreparedStatement getAcc = conn.prepareStatement("SELECT * FROM ACCOUNT WHERE  USERNAME = ?");
+        getAcc.setString(1,userName);
+
+        ResultSet rs =  getAcc.executeQuery();
+        String ref = rs.getString("APP.ACCOUNT.PASSWORDHASH");
+        if(null == ref){
+            return false;
+        }
+        else if(rs.isBeforeFirst()){
+            if (BCrypt.checkpw(password,ref)) {
+                johnsUtil.model.SharedResources.Account acc = johnsUtil.model.SharedResources.Account.getInstance();
+                acc.setAccountID(rs.getInt("AID"));
+                acc.setUserName(rs.getString("USERNAME"));
+                acc.setUserType(rs.getInt("USER_TYPE"));
+
+                //TODO rest of fields
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        else{
+            return false;
+        }
+    }
+
+
 
 
 }

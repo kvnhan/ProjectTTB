@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.layout.HBox?>
+
+<HBox fx:id="toolbar" alignment="CENTER_RIGHT" prefHeight="45.0" prefWidth="800.0" spacing="2.0" style="-fx-background-color: #f2f2f2;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="johnsUtil.Controllers.toolbarController">
+   <children>
+      <JFXButton fx:id="btnMinimize" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#handleMinimize" prefHeight="45.0" prefWidth="45.0" ripplerFill="#6b5e5e" text="-" />
+      <JFXButton fx:id="btnExpand" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#handleMaximize" prefHeight="45.0" prefWidth="45.0" ripplerFill="#6b5e5e" text=" " />
+      <JFXButton fx:id="btnClose" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#handleClose" prefHeight="45.0" prefWidth="45.0" ripplerFill="#f57474" text=" " />
+   </children>
+</HBox>

@@ -205,10 +205,10 @@ public class ReviseAppController {
                 EmailAddress.setText(data.getEmail());
                 Vintage.setText(Integer.toString(a.getWineVintage()));
                 pH.setText(Double.toString(a.getPhLevel()));
-                Address.setText(data.getAddress());
+                Address.setText(data.getPermitAddress());
                 MailingAddress.setText(data.getAddress());
                 alcoholContent.setText(Double.toString(a.getAlchContent()));
-                netContentField.setText(Double.toString(a.getNetContent()));
+                netContentField.setText((a.getNetContent()));
                 originField.setText(Integer.toString(a.getOriginCode()));
                 bottlerField.setText(a.getBottlersInfo());
                 sulfiteField.setText(a.getSulfiteDescription());
@@ -273,10 +273,10 @@ public class ReviseAppController {
                 EmailAddress.setText(data.getEmail());
                 //Vintage1.setText(Integer.toString(wine.getVintage_date()));
                 //pH1.setText(Double.toString(wine.getPh_level()));
-                Address.setText(data.getAddress());
+                Address.setText(data.getPermitAddress());
                 MailingAddress.setText(data.getAddress());
                 alcoholContent.setText(Double.toString(a.getAlchContent()));
-                netContentField.setText(Double.toString(a.getNetContent()));
+                netContentField.setText((a.getNetContent()));
                 originField.setText(Integer.toString(a.getOriginCode()));
 
                 if(dataPasser.getDisableAlcoContentField() == 1){
@@ -325,10 +325,10 @@ public class ReviseAppController {
                 EmailAddress.setText(data.getEmail());
                 //Vintage1.setText(Integer.toString(wine.getVintage_date()));
                 //pH1.setText(Double.toString(wine.getPh_level()));
-                Address.setText(data.getAddress());
+                Address.setText(data.getPermitAddress());
                 MailingAddress.setText(data.getAddress());
                 alcoholContent.setText(Double.toString(a.getAlchContent()));
-                netContentField.setText(Double.toString(a.getNetContent()));
+                netContentField.setText((a.getNetContent()));
                 originField.setText(Integer.toString(a.getOriginCode()));
 
                 if(dataPasser.getDisableAlcoContentField() == 1){
@@ -347,7 +347,7 @@ public class ReviseAppController {
     }
 
 
-    public void goBack (javafx.event.ActionEvent event){
+    public void goBack (ActionEvent event){
         if(dataPasser.isIsRevised() == 1){
             dataPasser.setIsRevised(0);
             screenUtil.switchScene("ReviseMenu.fxml", "Revise Menu");
@@ -362,7 +362,7 @@ public class ReviseAppController {
      * Autofills a selected form into the screen.
      *
      */
-    public void autoFillSelectedForm(javafx.event.ActionEvent event)throws SQLException{
+    public void autoFillSelectedForm(ActionEvent event)throws SQLException{
 
         String ttbid = formChoiceBox.getValue().toString().trim();
         ApplicationData data;
@@ -431,9 +431,9 @@ public class ReviseAppController {
                 EmailAddress.setText(data.getEmail());
                 Vintage.setText(Integer.toString(a.getWineVintage()));
                 pH.setText(Double.toString(a.getPhLevel()));
-                Address.setText(data.getAddress());
+                Address.setText(data.getPermitAddress());
                 MailingAddress.setText(data.getAddress());
-                netContentField.setText(Double.toString(a.getNetContent()));
+                netContentField.setText((a.getNetContent()));
                 originField.setText(Integer.toString(a.getOriginCode()));
                 bottlerField.setText(a.getBottlersInfo());
                 sulfiteField.setText(a.getSulfiteDescription());
@@ -472,9 +472,9 @@ public class ReviseAppController {
                 Formula.setText(a.getFormulas());
                 PhoneNumber.setText(data.getPhoneNumber());
                 EmailAddress.setText(data.getEmail());
-                Address.setText(data.getAddress());
+                Address.setText(data.getPermitAddress());
                 MailingAddress.setText(data.getAddress());
-                netContentField.setText(Double.toString(a.getNetContent()));
+                netContentField.setText((a.getNetContent()));
                 originField.setText(Integer.toString(a.getOriginCode()));
                 alcoholContent.setText(Double.toString(a.getAlchContent()));
 
@@ -511,9 +511,9 @@ public class ReviseAppController {
                 Formula.setText(a.getFormulas());
                 PhoneNumber.setText(data.getPhoneNumber());
                 EmailAddress.setText(data.getEmail());
-                Address.setText(data.getAddress());
+                Address.setText(data.getPermitAddress());
                 MailingAddress.setText(data.getAddress());
-                netContentField.setText(Double.toString(a.getNetContent()));
+                netContentField.setText((a.getNetContent()));
                 originField.setText(Integer.toString(a.getOriginCode()));
                 alcoholContent.setText(Double.toString(a.getAlchContent()));
 
@@ -529,7 +529,7 @@ public class ReviseAppController {
         String ttbid = formChoiceBox.getValue().toString().trim();
         int repid = Integer.parseInt(RepID.getText());
         String serial = SerialNo.getText();
-        String address = Address.getText();
+        String address = MailingAddress.getText();
         String fancyName = Name.getText();
         String formula = Formula.getText();
         String permit_no = PlantReg.getText();
@@ -543,9 +543,9 @@ public class ReviseAppController {
         String date ="";
         String info = "";
         double content = Double.parseDouble(alcoholContent.getText());
-        double netcontent = Double.parseDouble(netContentField.getText());
+        String netcontent = (netContentField.getText());
         int origin = Integer.parseInt(originField.getText());
-
+        String permitAddress = Address.getText();
         int type1 = 0;
         String type2 = "";
         int type3 = -1;
@@ -579,7 +579,7 @@ public class ReviseAppController {
             String appellation = Appellation.getText();
             String bottler = bottlerField.getText();
             String sulfite = sulfiteField.getText();
-            ApplicationData a = new ApplicationData(ttbid,repid,serial,address,permit_no,phone_number,email,applicantName,type1,type2,type3, null);
+            ApplicationData a = new ApplicationData(ttbid,repid,serial,address,permit_no,phone_number,email,applicantName,type1,type2,type3, permitAddress, null);
             AlcoholData ac = new AlcoholData(0, fancyName, appellation, sulfite, content, netcontent, "n/a", 0, 0, "n/a","n/a",
                     formula, 2, bottler, brand_name, "", vintage_date, ph_level, grape_varietal, "", source_of_product, null, origin);
             int aid = du.updateFormSubmission(a, ac);
@@ -592,7 +592,7 @@ public class ReviseAppController {
         } else if (beerCheckBox.isSelected()) {
             type_of_product = "MALT BEVERAGES";
             alcoholType = "MALT BEVERAGES";
-            ApplicationData a = new ApplicationData(ttbid,repid,serial,address,permit_no,phone_number,email,applicantName,type1,type2,type3, null);
+            ApplicationData a = new ApplicationData(ttbid,repid,serial,address,permit_no,phone_number,email,applicantName,type1,type2,type3, permitAddress,null);
             AlcoholData ac = new AlcoholData(0, fancyName, "n/a", "", content, netcontent, "n/a", 0, 0, "n/a","n/a",
                     formula, 1, "n/a", brand_name, "n/a", 0, 0, "n/a", "n/a", source_of_product, null, origin);
             int aid = du.updateFormSubmission(a, ac);
@@ -604,7 +604,7 @@ public class ReviseAppController {
         } else if (distilledCheckBox.isSelected()) {
             type_of_product = "DISTILLED SPIRITS";
             alcoholType = "DISTILLED SPIRITS";
-            ApplicationData a = new ApplicationData(ttbid,repid,serial,address,permit_no,phone_number,email,applicantName,type1,type2,type3, null);
+            ApplicationData a = new ApplicationData(ttbid,repid,serial,address,permit_no,phone_number,email,applicantName,type1,type2,type3, permitAddress,null);
             AlcoholData ac = new AlcoholData(0, fancyName, "n/a", "", content, netcontent, "n/a", 0, 0, "n/a","n/a",
                     formula, 3, "n/a", brand_name, "n/a", 0, 0, "n/a", "n/a", source_of_product, null, origin);
             int aid = du.updateFormSubmission(a, ac);
@@ -631,7 +631,7 @@ public class ReviseAppController {
             //myFilePath.setText(tempFile.getPath());
             filepath = tempFile.toURI().toString();
             System.out.println(filepath);
-            javafx.scene.image.Image img = new javafx.scene.image.Image(filepath);
+            Image img = new Image(filepath);
             image.setImage(img);
         }
         changeImage = true;
