@@ -18,8 +18,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.util.Duration;
-import wpi.AutoCompleteComboBoxListener;
-import wpi.Main;
+import johnsUtil.Components.AutoCompleteComboBoxListener;
+import johnsUtil.Main;
 
 import java.awt.*;
 import java.io.IOException;
