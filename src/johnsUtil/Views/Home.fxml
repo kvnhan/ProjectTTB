@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXDrawer?>
+<?import com.jfoenix.controls.JFXHamburger?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="johnsUtil.Controllers.HomeController">
+   <left>
+      <JFXDrawer fx:id="drawer" defaultDrawerSize="300.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="655.0" prefWidth="0.0" BorderPane.alignment="CENTER" />
+   </left>
+   <center>
+      <BorderPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+         <left>
+            <VBox prefWidth="64.0" BorderPane.alignment="CENTER">
+               <children>
+                  <JFXHamburger fx:id="hamburger" prefHeight="54.0" prefWidth="54.0" />
+               </children>
+            </VBox>
+         </left>
+         <right>
+            <VBox prefWidth="64.0" BorderPane.alignment="CENTER">
+               <children>
+                  <JFXButton fx:id="btnLogout" ellipsisString="" prefHeight="64.0" prefWidth="64.0" text=" " />
+               </children>
+            </VBox>
+         </right>
+      </BorderPane>
+   </center>
+   <top>
+      <HBox alignment="CENTER_RIGHT" prefHeight="45.0" prefWidth="200.0" spacing="2.0" style="-fx-background-color: #f2f2f2;" BorderPane.alignment="CENTER">
+         <children>
+            <JFXButton fx:id="btnMinimize" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="45.0" prefWidth="45.0" ripplerFill="#6b5e5e" text="-" />
+            <JFXButton fx:id="btnExpand" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="45.0" prefWidth="45.0" ripplerFill="#6b5e5e" text=" " />
+            <JFXButton fx:id="btnClose" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="45.0" prefWidth="45.0" ripplerFill="#f57474" text=" " />
+         </children>
+      </HBox>
+   </top>
+</BorderPane>

@@ -31,7 +31,11 @@
                         <RowConstraints minHeight="10.0" vgrow="ALWAYS" />
                     </rowConstraints>
                     <children>
-                        <Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="254.0" prefWidth="1200.0" style="-fx-background-color: purple;" />
+                        <Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="254.0" prefWidth="1200.0" style="-fx-background-color: purple;">
+                        <children>
+                            <JFXButton fx:id="helpButton" layoutX="1136.0" layoutY="14.0" mnemonicParsing="false" onAction="#needHelp" style="-fx-background-color: purple;" text="Help" textFill="#f5f4f4" />
+                        </children>
+                        </Pane>
                     </children>
                 </GridPane>
                 <GridPane layoutX="170.0" layoutY="200.0" prefHeight="3082.0" prefWidth="850.0" style="-fx-background-color: white;">

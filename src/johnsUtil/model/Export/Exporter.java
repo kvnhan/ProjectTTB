@@ -1,4 +1,4 @@
-package johnsUtil.model;
+package johnsUtil.model.Export;
 
 import java.io.File;
 import java.io.IOException;

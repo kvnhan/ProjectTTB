@@ -1,4 +1,5 @@
-package johnsUtil.model;
+package johnsUtil.model.Export;
+
 
 import java.io.File;
 import java.io.IOException;
@@ -31,7 +32,7 @@ public class FileFactory {
      */
     public void createFile(FileType type,List<Form> forms, File target) throws IOException {
         if(type == FileType.PDF ){
-            Exporter pdfModel = new PdfModel(this.sourcePdf,target,forms.get(0));
+            Exporter pdfModel = null; //TODO //new PdfModel(this.sourcePdf,target,forms.get(0));
             pdfModel.open();
             pdfModel.fill();
             pdfModel.save();

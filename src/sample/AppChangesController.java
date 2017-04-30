@@ -4,12 +4,12 @@ import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
 
 import java.awt.*;
-import java.io.InputStream;
 
 /**
- * Created by peternolan on 4/26/17.
+ * Created by peternolan on 4/29/17.
  */
-public class SuperVisorHelpController {
+public class AppChangesController {
+
     ScreenUtil screenUtil = new ScreenUtil();
     @FXML
     ImageView screenImage;
@@ -34,7 +34,7 @@ public class SuperVisorHelpController {
     */
 
     public void goBack(){
-        screenUtil.switchScene("supervisorView.fxml", "Assignments");
+        screenUtil.switchScene("ReviseHelp.fxml", "Assignments");
     }
 
 }

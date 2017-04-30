@@ -288,7 +288,7 @@ public class ReviseMenuController {
 
 
     public void needHelp (){
-        screenUtil.switchScene("ReviseHelp.fxml","Help");
+        screenUtil.switchScene("AppChangesHelp.fxml","Help");
     }
 
 }
