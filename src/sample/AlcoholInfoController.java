@@ -23,7 +23,7 @@ public class AlcoholInfoController {
 
     @FXML
     Label alcAID, alcBrandName, alcType, alcAppelation, alcSulfite, alcAlcoholContent, alcNetContent,alcHealthWarning,
-          alcProductType, alcClass, alcLegibility, alcSize, alcFormula, alcInfo;
+          alcProductType, alcClass, alcLegibility, alcSize, alcFormula, alcInfo, alcFancyName;
     @FXML
     ImageView alcImage;
     @FXML
@@ -32,22 +32,29 @@ public class AlcoholInfoController {
 
     Button close;
     private boolean foundImage = false;
-
+    //removes null text
+    private String setTextHelper(String s){
+        if(s.equals("null"))
+                return " ";
+        else
+            return s;
+    }
     public void initialize(){
-        alcAID.setText(String.valueOf(dataPass.getAlcData().getAid()));
-        alcBrandName.setText(String.valueOf(dataPass.getAlcData().getBrandName()));
-        alcType.setText(String.valueOf(dataPass.getAlcData().getAlcoholType()));
-        alcAppelation.setText(String.valueOf(dataPass.getAlcData().getAppellation()));
-        alcSulfite.setText(String.valueOf(dataPass.getAlcData().getSulfiteDescription()));
-        alcAlcoholContent.setText(String.valueOf(dataPass.getAlcData().getAlchContent()));
-        alcNetContent.setText(String.valueOf(dataPass.getAlcData().getNetContent()));
-        alcHealthWarning.setText(String.valueOf(dataPass.getAlcData().getHealthWarning()));
-        alcProductType.setText(String.valueOf(dataPass.getAlcData().getProductType()));
-        alcClass.setText(String.valueOf(dataPass.getAlcData().getClassType()));
-        alcLegibility.setText(String.valueOf(dataPass.getAlcData().getLabelLegibility()));
-        alcSize.setText(String.valueOf(dataPass.getAlcData().getLabelSize()));
-        alcFormula.setText(String.valueOf(dataPass.getAlcData().getFormulas()));
-        alcInfo.setText(String.valueOf(dataPass.getAlcData().getBottlersInfo()));
+        alcAID.setText(setTextHelper(String.valueOf(dataPass.getAlcData().getAid())));
+        alcBrandName.setText(setTextHelper(String.valueOf(dataPass.getAlcData().getBrandName())));
+        alcFancyName.setText(setTextHelper(String.valueOf(dataPass.getAlcData().getName())));
+        alcType.setText(setTextHelper(String.valueOf(dataPass.getAlcData().getAlcoholType())));
+        alcAppelation.setText(setTextHelper(String.valueOf(dataPass.getAlcData().getAppellation())));
+        alcSulfite.setText(setTextHelper(String.valueOf(dataPass.getAlcData().getSulfiteDescription())));
+        alcAlcoholContent.setText(setTextHelper(String.valueOf(dataPass.getAlcData().getAlchContent())));
+        alcNetContent.setText(setTextHelper(String.valueOf(dataPass.getAlcData().getNetContent())));
+        alcHealthWarning.setText(setTextHelper(String.valueOf(dataPass.getAlcData().getHealthWarning())));
+        alcProductType.setText(setTextHelper(String.valueOf(dataPass.getAlcData().getProductType())));
+        alcClass.setText(setTextHelper(String.valueOf(dataPass.getAlcData().getClassType())));
+        alcLegibility.setText(setTextHelper(String.valueOf(dataPass.getAlcData().getLabelLegibility())));
+        alcSize.setText(setTextHelper(String.valueOf(dataPass.getAlcData().getLabelSize())));
+        alcFormula.setText(setTextHelper(String.valueOf(dataPass.getAlcData().getFormulas())));
+        alcInfo.setText(setTextHelper(String.valueOf(dataPass.getAlcData().getBottlersInfo())));
 
         try {
             InputStream resource = ScreenUtil.class.getClassLoader().getResourceAsStream("labels/"  + dataPass.getAlcData().getAid() + ".jfif");
@@ -84,7 +91,7 @@ public class AlcoholInfoController {
 
             }
         };
-        a.getHostServices().showDocument("http://www.wine-searcher.com/find/" + alcBrandName.getText());
+        a.getHostServices().showDocument("http://www.wine-searcher.com/find/" + alcFancyName.getText() + "%20" + alcBrandName.getText());
     }
     @FXML
     public void review(ActionEvent event){
@@ -94,7 +101,7 @@ public class AlcoholInfoController {
 
             }
         };
-        a.getHostServices().showDocument("https://www.google.com/search?q=" + alcBrandName.getText() + " reviews");
+        a.getHostServices().showDocument("https://www.google.com/search?q=" + alcFancyName.getText() + " " + alcBrandName.getText() + " reviews");
         // a.getHostServices().showDocument("https://www.tripadvisor.com/Search?geo=&pid=3825&redirect=&startTime=&uiOrigin=&q=" + alcBrandName.getText());
     }
 
