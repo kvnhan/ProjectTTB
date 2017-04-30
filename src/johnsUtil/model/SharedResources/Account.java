@@ -1,6 +1,8 @@
 package johnsUtil.model.SharedResources;
 
 import java.io.File;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 /**
  * Created by John on 4/21/2017.
@@ -22,7 +24,7 @@ public class Account {
     private Account(){
         this.accountID  = -1;
         this.userName = "";
-        this.userType = -1;
+        this.userType = 3;
         this.name = "";
         this.address =  "";
         this.email = "";
@@ -62,6 +64,27 @@ public class Account {
     @Deprecated
     public  void createAccount(Account account){
 
+    }
+
+    private String sha256NoSaltPassword(String password) throws NoSuchAlgorithmException {
+        MessageDigest md = MessageDigest.getInstance("SHA-256");
+        md.update(password.getBytes());
+
+        byte byteData[] = md.digest();
+
+        StringBuffer sb = new StringBuffer();
+        for (int i = 0; i < byteData.length; i++) {
+            sb.append(Integer.toString((byteData[i] & 0xff) + 0x100, 16).substring(1));
+        }
+
+        StringBuffer hexString = new StringBuffer();
+        for (int i=0;i<byteData.length;i++) {
+            String hex=Integer.toHexString(0xff & byteData[i]);
+            if(hex.length()==1) hexString.append('0');
+            hexString.append(hex);
+        }
+
+        return hexString.toString();
     }
 
 
