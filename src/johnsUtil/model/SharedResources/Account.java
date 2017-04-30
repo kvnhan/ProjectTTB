@@ -53,7 +53,7 @@ public class Account {
     public void logout(){
         this.accountID  = -1;
         this.userName = "";
-        this.userType = -1;
+        this.userType = 3;
         this.name = "";
         this.address =  "";
         this.email = "";

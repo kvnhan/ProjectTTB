@@ -1497,7 +1497,7 @@ public class DatabaseUtil {
         getAcc.setString(1,userName);
 
         ResultSet rs =  getAcc.executeQuery();
-        String ref = rs.getString("PASSWORDHASH");
+        String ref = rs.getString("APP.ACCOUNT.PASSWORDHASH");
         if(null == ref){
             return false;
         }
