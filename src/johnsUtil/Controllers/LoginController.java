@@ -23,6 +23,9 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+/**
+ * Controller for the login screen.
+ */
 public class LoginController implements Initializable {
     @FXML
     private Label errorLabel;
@@ -45,6 +48,11 @@ public class LoginController implements Initializable {
     @FXML
     private ImageView icon;
 
+    /**
+     * Initializes the login screen.
+     * @param location Location for a picture.
+     * @param resources Bundle of resources for login screen.
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         Image img = new Image(Main.class.getResourceAsStream("/user2.png"));
@@ -53,12 +61,21 @@ public class LoginController implements Initializable {
         }
     }
 
+    /**
+     * Closes the login page.
+     * @param event
+     */
     @FXML
     void close(ActionEvent event) {
         Node currentSource = (Node) event.getSource();
         currentSource.getScene().getWindow().hide();
     }
 
+    /**
+     * Tries a login.
+     * @param event Submit button is pressed.
+     * @throws IOException
+     */
     @FXML
     void submit(ActionEvent event) throws IOException {
         errorLabel.setText("");

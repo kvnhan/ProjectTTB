@@ -136,7 +136,7 @@ public class ApplicationReviewController{
 
 
     @FXML
-    void setIncomplete(ActionEvent event) throws SQLException{
+    void setRevise(ActionEvent event) throws SQLException{
         dbUtil.decideApplicationAction("INCOMPLETE", thisForm, commentsField);
         nextApplication();
     }

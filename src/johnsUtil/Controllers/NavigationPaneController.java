@@ -11,7 +11,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 /**
- * Created by John on 4/27/2017.
+ * Controller for the navigation screen.
  */
 public class NavigationPaneController implements Initializable {
     @FXML
@@ -41,7 +41,11 @@ public class NavigationPaneController implements Initializable {
     @FXML
     private JFXButton logoutBtn;
 
-
+    /**
+     * Initializes the navigation screen.
+     * @param location Location of alcohol image.
+     * @param resources ResourceBundle for resources for the application.
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         Image img = new Image(Main.class.getResourceAsStream("/alch.png"));

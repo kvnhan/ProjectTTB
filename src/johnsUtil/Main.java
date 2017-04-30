@@ -7,11 +7,14 @@ import javafx.stage.Stage;
 import johnsUtil.model.SharedResources.Account;
 
 /**
- * Created by John on 4/30/2017.
+ * Initializes the application.
  */
 
 public class Main extends Application {
-
+    /**
+     * Starts the application.
+     * @param primaryStage Homescreen for the application.
+     */
     @Override
     public void start(Stage primaryStage) throws Exception{
         String fxmlFile = "Views/MainMenu.fxml";

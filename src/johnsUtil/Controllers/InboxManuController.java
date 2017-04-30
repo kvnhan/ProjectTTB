@@ -18,8 +18,7 @@ import java.util.ResourceBundle;
 
 
 /**
- * Created by John on 4/21/2017.
- * //
+ * Controller for the Manufacturer Inbox screen.
  */
 public class InboxManuController implements Initializable {
 
@@ -45,6 +44,9 @@ public class InboxManuController implements Initializable {
     private JFXButton btnClose;
 
     @Override
+    /**
+     * Initializes the manufacturer inbox.
+     */
     public void initialize(URL location, ResourceBundle resources) {
         try {
             vbox = FXMLLoader.load(getClass().getResource("/wpi/Views/NavigationPane.fxml"));
