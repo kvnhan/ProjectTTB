@@ -36,19 +36,27 @@ public class AlcoholData {
      * Creates an AlcoholData object.
      * @param aid Account ID linked to the object.
      * @param name Fanciful name of the alcohol.
-     * @param brandName Brand name for the alcohol.
      * @param appellation For wines, the area of origination for the alcohol.
      * @param sulfiteDescription Description of the sulfite content of the alcohol.
      * @param alchContent Proof of the alcohol.
      * @param netContent Net alcohol content.
      * @param healthWarning Text of the alcohol's label's health warning.
      * @param productType Type of product.
-     * @param classType Type of class? not sure
+     * @param classType Type of class of the alcohol.
      * @param labelLegibility Metric for legibility of the label.
      * @param labelSize Actual size of the label.
      * @param formulas Formulas for the alcoholic beverage.
      * @param alcoholType Type of alcohol.
      * @param bottlersInfo General information about the bottler.
+     * @param brandName Brand name for the alcohol.
+     * @param status Status of the alcohol.
+     * @param wineVintage Vintage year for the wine.
+     * @param phLevel Level of pH in the alcohol.
+     * @param grapeVarietal Varieties of grape used in the wine.
+     * @param infoOnBottle Information listed on label.
+     * @param sourceOfProduct Location from whence the product came.
+     * @param dateApproved Date alcohol was approved for sale.
+     * @param originCode Code for state the alcohol originates from.
      */
     public AlcoholData(int aid, String name, String appellation, String sulfiteDescription, double alchContent, String netContent, String healthWarning, int productType, int classType, String labelLegibility, String labelSize, String formulas, int alcoholType, String bottlersInfo, String brandName, String status, int wineVintage, double phLevel, String grapeVarietal, String infoOnBottle, String sourceOfProduct, Date dateApproved, int originCode) {
         this.aid = aid;

@@ -119,7 +119,9 @@ public class ApplicationReviewController{
     }
 
 
-
+    /**
+     * Returns user to the workflow inbox.
+     */
     @FXML
     void setGoBack(){
         screenUtil.switchScene("WorkFlow.fxml", "Main Menu");
@@ -134,7 +136,11 @@ public class ApplicationReviewController{
         nextApplication();
     }
 
-
+    /**
+     * Sets an application status to "INCOMPLETE" and adds comments to the application.
+     * @param event
+     * @throws SQLException
+     */
     @FXML
     void setRevise(ActionEvent event) throws SQLException{
         dbUtil.decideApplicationAction("INCOMPLETE", thisForm, commentsField);
@@ -151,6 +157,9 @@ public class ApplicationReviewController{
         nextApplication();
     }
 
+    /**
+     * Forwards the application to another govt. worker.
+     */
     @FXML
     public void forwardApp(ActionEvent event) throws SQLException{
         String govUsernm = acctToChoose.getValue().toString().trim();
@@ -176,7 +185,9 @@ public class ApplicationReviewController{
         }
     }
 
-
+    /**
+     * Takes user to the help screen.
+     */
     public void helpClick () {
             screenUtil.switchScene("ReviewHelp.fxml","Help");
     }
@@ -190,6 +201,11 @@ public class ApplicationReviewController{
         ApplicationReviewController.appReviewMode = appReviewMode;
     }
 
+    /**
+     * gets path to the alcohol label picture.
+     * @return Returns the path to the alcohol label picture.
+     * @throws UnsupportedEncodingException
+     */
     public String getPath() throws UnsupportedEncodingException {
         URL url = this.getClass().getProtectionDomain().getCodeSource().getLocation();
         String jarPath = URLDecoder.decode(url.getFile(), "UTF-8");

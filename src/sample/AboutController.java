@@ -6,7 +6,7 @@ import javafx.scene.text.Text;
 import java.awt.*;
 
 /**
- * Created by peternolan on 4/15/17.
+ * Controller for the "About" page.
  */
 public class AboutController {
     ScreenUtil screenUtil = new ScreenUtil();
@@ -14,6 +14,9 @@ public class AboutController {
     @FXML
     private TextArea text;
 
+    /**
+     * Brings user back to the main menu.
+     */
     public void goBack(){
         screenUtil.switchScene("MainMenu.fxml", "Main Menu");
 

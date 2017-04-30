@@ -202,6 +202,11 @@ public class DatabaseUtil {
         addToTable("CLASS", CLASS_FIELDS, values, "CID");
     }
 
+    /**
+     * Adds a form to the database. See ApplicationData class for information on the parameters.
+     * @return Returns the TTBID for the added form.
+     * @throws SQLException
+     */
     public String addForm(String ttbid, int repid, String serial, String address, String permitNo, String phone, String email, String applicantName, String status, int appType1, String appType2, int appType3, String permitAddress, java.sql.Date dateSubmitted) throws SQLException{
         int aid = getAccountAid(AccountsUtil.getUsername());
         String values = "'" + ttbid + "', " + repid + ", '" + serial + "', '" + address + "', '" + permitNo + "', '" + phone + "', '" + email + "', '" + applicantName + "', '" + status + "', " + aid + ", " + appType1 + ", '" + appType2 + "', " + appType3 + ", '" + permitAddress + "', '" + dateSubmitted + "')";
@@ -1532,6 +1537,13 @@ public class DatabaseUtil {
 
     }
 
+    /**
+     * Logs a user into the application.
+     * @param userName Username to login.
+     * @param password Password to check.
+     * @return Returns True if successful.
+     * @throws SQLException
+     */
     public boolean logIn(String userName, String password) throws SQLException {
         PreparedStatement getAcc = conn.prepareStatement("SELECT * FROM ACCOUNT WHERE  USERNAME = ?");
         getAcc.setString(1,userName);

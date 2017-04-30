@@ -60,7 +60,9 @@ public class AlcoholInfoController {
         }
     }
 
-
+    /**
+     * Initializes the alcohol info screen.
+     */
     public void initialize(){
         alcAID.setText(setTextHelper(String.valueOf(dataPass.getAlcData().getAid())));
         alcBrandName.setText(setTextHelper(String.valueOf(dataPass.getAlcData().getBrandName())));
@@ -101,10 +103,18 @@ public class AlcoholInfoController {
 
     }
 
+    /**
+     * Closes the alcohol info screen.
+     */
     public void closeWindow(){
         Stage stage = (Stage) close.getScene().getWindow();
         stage.close();
     }
+
+    /**
+     * Takes user to search for the alcohol online.
+     * @param event Button pressed.
+     */
     @FXML
     public void buy(ActionEvent event){
         Application a = new Application() {
@@ -115,6 +125,11 @@ public class AlcoholInfoController {
         };
         a.getHostServices().showDocument("http://www.wine-searcher.com/find/" + alcFancyName.getText() + "%20" + alcBrandName.getText());
     }
+
+    /**
+     * Shows reviews for the alcohol.
+     * @param event Button clicked.
+     */
     @FXML
     public void review(ActionEvent event){
         Application a = new Application() {
@@ -127,7 +142,11 @@ public class AlcoholInfoController {
         // a.getHostServices().showDocument("https://www.tripadvisor.com/Search?geo=&pid=3825&redirect=&startTime=&uiOrigin=&q=" + alcBrandName.getText());
     }
 
-
+    /**
+     * Gets the path to the alcohol image.
+     * @return Returns the image path.
+     * @throws UnsupportedEncodingException
+     */
     public String getPath() throws UnsupportedEncodingException {
         URL url = this.getClass().getProtectionDomain().getCodeSource().getLocation();
         String jarPath = URLDecoder.decode(url.getFile(), "UTF-8");
