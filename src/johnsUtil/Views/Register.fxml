@@ -52,22 +52,22 @@
                         <Font name="Calibri Light" size="20.0" />
                      </font>
                   </JFXTextField>
-                  <JFXTextField fx:id="emailTF" focusColor="#e74c3c" labelFloat="true" minHeight="55.0" prefHeight="55.0" prefWidth="293.0" promptText="Email Address" GridPane.columnIndex="2" GridPane.rowIndex="5">
-                     <font>
-                        <Font name="Calibri Light" size="20.0" />
-                     </font>
-                  </JFXTextField>
-                  <JFXTextField fx:id="phoneTF" focusColor="#e74c3c" labelFloat="true" minHeight="55.0" prefHeight="55.0" prefWidth="293.0" promptText="Phone Number" GridPane.rowIndex="5">
-                     <font>
-                        <Font name="Calibri Light" size="20.0" />
-                     </font>
-                  </JFXTextField>
-                  <JFXComboBox fx:id="typeCB" focusColor="#e74c3c" labelFloat="true" minHeight="55.0" prefHeight="55.0" prefWidth="293.0" promptText="User Type" style="-jfx-focus-color: #e74c3c;" GridPane.columnIndex="2" GridPane.rowIndex="7" />
                   <JFXPasswordField fx:id="passTF" focusColor="#e74c3c" labelFloat="true" minHeight="55.0" prefWidth="55.0" promptText="Password" GridPane.columnIndex="2" GridPane.rowIndex="3">
                      <font>
                         <Font name="Calibri Light" size="20.0" />
                      </font>
                   </JFXPasswordField>
+                  <JFXTextField fx:id="phoneTF" focusColor="#e74c3c" labelFloat="true" minHeight="55.0" prefHeight="55.0" prefWidth="293.0" promptText="Phone Number" GridPane.rowIndex="5">
+                     <font>
+                        <Font name="Calibri Light" size="20.0" />
+                     </font>
+                  </JFXTextField>
+                  <JFXTextField fx:id="emailTF" focusColor="#e74c3c" labelFloat="true" minHeight="55.0" prefHeight="55.0" prefWidth="293.0" promptText="Email Address" GridPane.columnIndex="2" GridPane.rowIndex="5">
+                     <font>
+                        <Font name="Calibri Light" size="20.0" />
+                     </font>
+                  </JFXTextField>
+                  <JFXComboBox fx:id="typeCB" focusColor="#e74c3c" labelFloat="true" minHeight="55.0" prefHeight="55.0" prefWidth="293.0" promptText="User Type" style="-jfx-focus-color: #e74c3c;" GridPane.columnIndex="2" GridPane.rowIndex="7" />
                </children>
             </GridPane>
             <Label fx:id="errorText" prefHeight="35.0" prefWidth="611.0" textFill="RED">

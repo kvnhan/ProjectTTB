@@ -101,9 +101,7 @@ public class DatabaseUtil {
 
         rset = stmt.executeQuery(query);
 
-        contains = rset.next();
-
-        return contains;
+        return rset.isBeforeFirst();
     }
 
     /**
