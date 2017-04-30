@@ -113,8 +113,8 @@ public class MainMenuController implements Initializable{
         startAnimation(hbox);
 
         try {
-            loginPopup = new JFXPopup(FXMLLoader.load(getClass().getResource("/wpi/Views/Login.fxml")));
-            registerPopup = new JFXPopup(FXMLLoader.load(getClass().getResource("/wpi/Views/Register.fxml")));
+            loginPopup = new JFXPopup(FXMLLoader.load(getClass().getResource("/johnsUtil/Views/Login.fxml")));
+            registerPopup = new JFXPopup(FXMLLoader.load(getClass().getResource("/johnsUtil/Views/Register.fxml")));
         } catch (IOException e) {
             e.printStackTrace();
         }
