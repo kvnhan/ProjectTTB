@@ -70,9 +70,6 @@ public class RegisterController implements Initializable {
         if(img != null){
             icon.setImage(img);
         }
-
-        typeCB.getItems().addAll("Manufacturer","Government Worker");
-
     }
 
     @FXML
