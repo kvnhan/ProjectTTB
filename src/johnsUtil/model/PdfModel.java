@@ -6,10 +6,6 @@ package johnsUtil.model;
 //import org.apache.pdfbox.pdmodel.interactive.form.PDField;
 //import org.apache.pdfbox.pdmodel.interactive.form.PDTextField;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.Iterator;
-
 /**
  * Created by John on 4/16/2017.
  */
