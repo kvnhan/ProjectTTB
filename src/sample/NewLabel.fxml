@@ -19,7 +19,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<ScrollPane fitToWidth="true" hbarPolicy="ALWAYS" maxHeight="3300.0" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="810.0" prefWidth="1200.0" vbarPolicy="ALWAYS" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.NewLabelController">
+<ScrollPane fitToWidth="true" hbarPolicy="ALWAYS" maxHeight="3300.0" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="810.0" prefWidth="1200.0" vbarPolicy="ALWAYS" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.NewLabelController">
     <content>
         <AnchorPane prefHeight="3300.0" prefWidth="1200.0">
             <children>
@@ -165,7 +165,7 @@
                                         </Pane>
                                         <CheckBox fx:id="dom1" mnemonicParsing="false" text="Certificate of Label Approval" />
                                         <CheckBox fx:id="dom11" mnemonicParsing="false" text="Certificate of Exemption from Label Approval" GridPane.rowIndex="1" />
-                                        <CheckBox fx:id="dom111" mnemonicParsing="false" text="Distinctive Lquor Bottle Approval Total Bottle Capacity Before Closure" GridPane.rowIndex="2" />
+                                        <CheckBox fx:id="dom111" mnemonicParsing="false" text="Distinctive Liquor Bottle Approval Total Bottle Capacity Before Closure" GridPane.rowIndex="2" />
                                         <CheckBox fx:id="dom1111" mnemonicParsing="false" text="Resubmission After Rejecction" GridPane.rowIndex="3" />
                                     </children>
                                 </GridPane>
@@ -199,7 +199,7 @@
                         </Pane>
                         <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3">
                             <children>
-                                <Text layoutX="51.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type of Product">
+                                <Text layoutX="51.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type of Product">
                                     <font>
                                         <Font size="24.0" />
                                     </font>

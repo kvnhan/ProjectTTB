@@ -50,6 +50,7 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
@@ -68,62 +69,67 @@
                   <Font name="Constantia" size="18.0" />
                </font>
             </Label>
-            <Label text="Alcohol Type:" GridPane.rowIndex="2">
+            <Label text="Fanciful Name:" GridPane.rowIndex="2">
                <font>
                   <Font name="Constantia" size="18.0" />
                </font>
             </Label>
-            <Label text="Appelation:" GridPane.rowIndex="3">
+            <Label text="Alcohol Type:" GridPane.rowIndex="3">
                <font>
                   <Font name="Constantia" size="18.0" />
                </font>
             </Label>
-            <Label text="Sulfite Description:" GridPane.rowIndex="4">
+            <Label text="Appelation:" GridPane.rowIndex="4">
                <font>
                   <Font name="Constantia" size="18.0" />
                </font>
             </Label>
-            <Label text="Alcohol Content:" GridPane.rowIndex="5">
+            <Label text="Sulfite Description:" GridPane.rowIndex="5">
                <font>
                   <Font name="Constantia" size="18.0" />
                </font>
             </Label>
-            <Label text="Label Size:" GridPane.rowIndex="6">
+            <Label text="Alcohol Content:" GridPane.rowIndex="6">
                <font>
                   <Font name="Constantia" size="18.0" />
                </font>
             </Label>
-            <Label text="Label Legibility:" GridPane.rowIndex="7">
+            <Label text="Label Size:" GridPane.rowIndex="7">
                <font>
                   <Font name="Constantia" size="18.0" />
                </font>
             </Label>
-            <Label text="Class:" GridPane.rowIndex="8">
+            <Label text="Label Legibility:" GridPane.rowIndex="8">
                <font>
                   <Font name="Constantia" size="18.0" />
                </font>
             </Label>
-            <Label text="Product Type:" GridPane.rowIndex="9">
+            <Label text="Class:" GridPane.rowIndex="9">
                <font>
                   <Font name="Constantia" size="18.0" />
                </font>
             </Label>
-            <Label text="Health Warning:" GridPane.rowIndex="10">
+            <Label text="Product Type:" GridPane.rowIndex="10">
                <font>
                   <Font name="Constantia" size="18.0" />
                </font>
             </Label>
-            <Label text="Net Content:" GridPane.rowIndex="11">
+            <Label text="Health Warning:" GridPane.rowIndex="11">
                <font>
                   <Font name="Constantia" size="18.0" />
                </font>
             </Label>
-            <Label text="Formula:" GridPane.rowIndex="12">
+            <Label text="Net Content:" GridPane.rowIndex="12">
                <font>
                   <Font name="Constantia" size="18.0" />
                </font>
             </Label>
-            <Label text="Botteler's Information:" GridPane.rowIndex="13">
+            <Label text="Formula:" GridPane.rowIndex="13">
+               <font>
+                  <Font name="Constantia" size="18.0" />
+               </font>
+            </Label>
+            <Label text="Botteler's Information:" GridPane.rowIndex="14">
                <font>
                   <Font name="Constantia" size="18.0" />
                </font>
@@ -133,62 +139,67 @@
                   <Font name="Constantia" size="18.0" />
                </font>
             </Label>
-            <Label fx:id="alcType" text="Alcohol Type" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <Label fx:id="alcFancyName" text="Fanciful Name" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <font>
                   <Font name="Constantia" size="18.0" />
                </font>
             </Label>
-            <Label fx:id="alcAppelation" text="Appelation" GridPane.columnIndex="1" GridPane.rowIndex="3">
+            <Label fx:id="alcType" text="Alcohol Type" GridPane.columnIndex="1" GridPane.rowIndex="3">
                <font>
                   <Font name="Constantia" size="18.0" />
                </font>
             </Label>
-            <Label fx:id="alcSulfite" text="Sulfite Description" GridPane.columnIndex="1" GridPane.rowIndex="4">
+            <Label fx:id="alcAppelation" text="Appelation" GridPane.columnIndex="1" GridPane.rowIndex="4">
                <font>
                   <Font name="Constantia" size="18.0" />
                </font>
             </Label>
-            <Label fx:id="alcAlcoholContent" text="Alcohol Content" GridPane.columnIndex="1" GridPane.rowIndex="5">
+            <Label fx:id="alcSulfite" text="Sulfite Description" GridPane.columnIndex="1" GridPane.rowIndex="5">
                <font>
                   <Font name="Constantia" size="18.0" />
                </font>
             </Label>
-            <Label fx:id="alcSize" prefHeight="21.0" prefWidth="144.0" text="Label Size" GridPane.columnIndex="1" GridPane.rowIndex="6">
+            <Label fx:id="alcAlcoholContent" text="Alcohol Content" GridPane.columnIndex="1" GridPane.rowIndex="6">
                <font>
                   <Font name="Constantia" size="18.0" />
                </font>
             </Label>
-            <Label fx:id="alcLegibility" prefHeight="21.0" prefWidth="144.0" text="Label Legibility" GridPane.columnIndex="1" GridPane.rowIndex="7">
+            <Label fx:id="alcSize" prefHeight="21.0" prefWidth="144.0" text="Label Size" GridPane.columnIndex="1" GridPane.rowIndex="7">
                <font>
                   <Font name="Constantia" size="18.0" />
                </font>
             </Label>
-            <Label fx:id="alcClass" prefHeight="21.0" prefWidth="144.0" text="Class" GridPane.columnIndex="1" GridPane.rowIndex="8">
+            <Label fx:id="alcLegibility" prefHeight="21.0" prefWidth="144.0" text="Label Legibility" GridPane.columnIndex="1" GridPane.rowIndex="8">
                <font>
                   <Font name="Constantia" size="18.0" />
                </font>
             </Label>
-            <Label fx:id="alcProductType" prefHeight="21.0" prefWidth="144.0" text="Product Type" GridPane.columnIndex="1" GridPane.rowIndex="9">
+            <Label fx:id="alcClass" prefHeight="21.0" prefWidth="144.0" text="Class" GridPane.columnIndex="1" GridPane.rowIndex="9">
                <font>
                   <Font name="Constantia" size="18.0" />
                </font>
             </Label>
-            <Label fx:id="alcHealthWarning" prefHeight="21.0" prefWidth="144.0" text="Health Warning" GridPane.columnIndex="1" GridPane.rowIndex="10">
+            <Label fx:id="alcProductType" prefHeight="21.0" prefWidth="144.0" text="Product Type" GridPane.columnIndex="1" GridPane.rowIndex="10">
                <font>
                   <Font name="Constantia" size="18.0" />
                </font>
             </Label>
-            <Label fx:id="alcNetContent" prefHeight="21.0" prefWidth="144.0" text="Net Content" GridPane.columnIndex="1" GridPane.rowIndex="11">
+            <Label fx:id="alcHealthWarning" prefHeight="21.0" prefWidth="144.0" text="Health Warning" GridPane.columnIndex="1" GridPane.rowIndex="11">
                <font>
                   <Font name="Constantia" size="18.0" />
                </font>
             </Label>
-            <Label fx:id="alcFormula" prefHeight="21.0" prefWidth="144.0" text="Formula" GridPane.columnIndex="1" GridPane.rowIndex="12">
+            <Label fx:id="alcNetContent" prefHeight="21.0" prefWidth="144.0" text="Net Content" GridPane.columnIndex="1" GridPane.rowIndex="12">
                <font>
                   <Font name="Constantia" size="18.0" />
                </font>
             </Label>
-            <Label fx:id="alcInfo" text="Botteler's Information" GridPane.columnIndex="1" GridPane.rowIndex="13">
+            <Label fx:id="alcFormula" prefHeight="21.0" prefWidth="144.0" text="Formula" GridPane.columnIndex="1" GridPane.rowIndex="13">
+               <font>
+                  <Font name="Constantia" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="alcInfo" text="Botteler's Information" GridPane.columnIndex="1" GridPane.rowIndex="14">
                <font>
                   <Font name="Constantia" size="18.0" />
                </font>
