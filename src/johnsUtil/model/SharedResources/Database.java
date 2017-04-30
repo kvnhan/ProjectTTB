@@ -10,5 +10,5 @@ public class Database {
 
     private Database(){};
 
-    public DatabaseUtil getInstance(){ return  database; }
+    public static DatabaseUtil getInstance(){ return  database; }
 }

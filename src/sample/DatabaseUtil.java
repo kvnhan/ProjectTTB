@@ -1,6 +1,7 @@
 package sample;
 
 import javafx.scene.control.*;
+import johnsUtil.model.SharedResources.Database;
 
 import java.awt.*;
 import java.sql.*;
@@ -1448,7 +1449,7 @@ public class DatabaseUtil {
      */
     public ArrayList<TreeItem<TItem>> getFormItems(int aid) throws SQLException {
         ArrayList<TreeItem<TItem>> list = new ArrayList<>();
-        PreparedStatement getForms = conn.prepareStatement("SELECT ALCHID, TTBID FROM FORM WHERE GOVID = ?");
+        PreparedStatement getForms = conn.prepareStatement("SELECT ALCHID, TTBID FROM FORM WHERE GOVID = ? ");
         getForms.setInt(1,aid);
 
         ResultSet rs =  getForms.executeQuery();
@@ -1481,6 +1482,35 @@ public class DatabaseUtil {
             }
         }
 
+    }
+
+
+    /**
+     * If passed in username and password match a store account, will set static account object to stored account found
+     * @param userName
+     * @param password
+     * @return boolean indicating whether the user was succesfully logged in.
+     * @throws SQLException
+     */
+    public boolean logIn(String userName, String password) throws SQLException {
+        PreparedStatement getAcc = conn.prepareStatement("SELECT * FROM ACCOUNT WHERE  USERNAME = ?");
+        getAcc.setString(1,userName);
+
+        ResultSet rs =  getAcc.executeQuery();
+        String ref = rs.getString("PASSWORDHASH");
+        if(null == ref){
+            return false;
+        }
+        else if(ref.equals(password)){
+            johnsUtil.model.SharedResources.Account acc = johnsUtil.model.SharedResources.Account.getInstance();
+            acc.setAccountID(rs.getInt("AID"));
+            acc.setUserName(rs.getString("USERNAME"));
+            acc.setUserType(rs.getInt("USER_TYPE"));
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
 

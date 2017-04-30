@@ -3,6 +3,7 @@ package johnsUtil.model.SharedResources;
 import java.io.File;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.sql.SQLException;
 
 /**
  * Created by John on 4/21/2017.
@@ -39,10 +40,14 @@ public class Account {
      * @param usrName
      * @param password
      */
-    @Deprecated
-    public void login(String usrName, String password){
-        //call database util, get info, and plug in, otherwise throw exception
-        loggedIn = true;
+    public boolean login(String usrName, String password) throws SQLException {
+        if(Database.getInstance().logIn(usrName,password)){
+            loggedIn = true;
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
     public void logout(){
@@ -79,8 +84,10 @@ public class Account {
 
         StringBuffer hexString = new StringBuffer();
         for (int i=0;i<byteData.length;i++) {
-            String hex=Integer.toHexString(0xff & byteData[i]);
-            if(hex.length()==1) hexString.append('0');
+            String hex =Integer.toHexString(0xff & byteData[i]);
+            if(hex.length()==1){
+                hexString.append('0');
+            }
             hexString.append(hex);
         }
 
@@ -153,6 +160,6 @@ public class Account {
         this.phoneNum = phoneNum;
     }
 
-    public Account getInstance(){ return account; }
+    public static Account getInstance(){ return account; }
 
 }
