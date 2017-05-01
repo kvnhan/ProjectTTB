@@ -12,6 +12,10 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.image.*;
 import javafx.scene.image.Image;
 import javafx.stage.FileChooser;
@@ -19,6 +23,7 @@ import javafx.stage.Stage;
 
 import javax.imageio.ImageIO;
 import javax.swing.event.ChangeListener;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.UnsupportedEncodingException;
@@ -26,6 +31,7 @@ import java.net.URL;
 import java.net.URLDecoder;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Application Revision Screen controller.
@@ -88,7 +94,7 @@ public class ReviseAppController {
     private DatabaseUtil databaseUtil =  new DatabaseUtil();
     private AccountsUtil accountsUtil = new AccountsUtil();
     private ScreenUtil screenUtil = new ScreenUtil();
-
+    private ArrayList<TextField> checkList = new ArrayList<>();
 
 
     @FXML
@@ -97,13 +103,15 @@ public class ReviseAppController {
      */
     public void initialize()throws SQLException{
         formsObservableList = FXCollections.observableArrayList();
-        try {
-            formsFound = databaseUtil.searchFormWithAid(databaseUtil.getAccountAid(accountsUtil.getUsername()));
-            if (formsFound.size() == 0)
-                System.out.println("SUCCESS");
-            for (int i = 0; i < formsFound.size(); i++) {
-                formsObservableList.add(formsFound.get(i).getTtbID());
-            }
+        formsFound = databaseUtil.searchFormWithAid(databaseUtil.getAccountAid(accountsUtil.getUsername()));
+
+        checkList.addAll(Arrays.asList(RepID, PlantReg, SerialNo, Address, ApplicantName, MailingAddress, EmailAddress,
+                PhoneNumber, BrandName, Name, Formula, alcoholContent, netContentField, pH, originField,
+                sulfiteField, grapeVarietal, Appellation, Vintage, bottlerField));
+
+        for(int i = 0; i < formsFound.size(); i ++){
+            formsObservableList.add(formsFound.get(i).getTtbID());
+        }
 
         /*formChoiceBox.getSelectionModel().selectedIndexProperty().addListener(new javafx.beans.value.ChangeListener<Number>() {
             @Override
@@ -112,251 +120,246 @@ public class ReviseAppController {
             }
         });*/
 
-            formChoiceBox.setItems(formsObservableList);
+        formChoiceBox.setItems(formsObservableList);
 
-            System.out.println(dataPasser.isIsInvokebyReviseMenu());
-            if (dataPasser.isIsInvokebyReviseMenu() == 1) {
-                dataPasser.setIsRevised(1);
-                find.setDisable(true);
-                ttbid = dataPasser.getTtbID();
-                formChoiceBox.setValue(ttbid);
-                formChoiceBox.setDisable(true);
-                int type1;
-                int type2;
-                int type3;
-                String type;
-                String source;
-                ApplicationData data;
-                AlcoholData a;
-                dom1.setSelected(false);
-                dom11.setSelected(false);
-                dom111.setSelected(false);
-                if (!type3box.getText().trim().isEmpty()) {
-                    type3box.clear();
+        System.out.println(dataPasser.isIsInvokebyReviseMenu());
+        if(dataPasser.isIsInvokebyReviseMenu() == 1) {
+            dataPasser.setIsRevised(1);
+            find.setDisable(true);
+            ttbid = dataPasser.getTtbID();
+            formChoiceBox.setValue(ttbid);
+            formChoiceBox.setDisable(true);
+            int type1;
+            int type2;
+            int type3;
+            String type;
+            String source;
+            ApplicationData data;
+            AlcoholData a;
+            dom1.setSelected(false);
+            dom11.setSelected(false);
+            dom111.setSelected(false);
+            if(!type3box.getText().trim().isEmpty()){
+                type3box.clear();
+            }
+            if(!type2Box.getText().trim().isEmpty()){
+                type2Box.clear();
+            }
+            type = databaseUtil.checkforType(ttbid);
+            type1 = databaseUtil.checkforType1(ttbid);
+            type2 = databaseUtil.checkforType2(ttbid);
+            type3 = databaseUtil.checkforType3(ttbid);
+            source = databaseUtil.checkforSource(ttbid);
+
+            if(dataPasser.getDisableRestField() == 1){
+                type2Box.setDisable(true);
+                type3box.setDisable(true);
+                beerCheckBox.setDisable(true);
+                wineCheckBox.setDisable(true);
+                distilledCheckBox.setDisable(true);
+                //ID1.setDisable(true);
+                RepID.setDisable(true);
+                PlantReg.setDisable(true);
+                SerialNo.setDisable(true);
+                ApplicantName.setDisable(true);
+                BrandName.setDisable(true);
+                Name.setDisable(true);
+                Formula.setDisable(true);
+                PhoneNumber.setDisable(true);
+                EmailAddress.setDisable(true);
+                Address.setDisable(true);
+                MailingAddress.setDisable(true);
+                //clearButton.setDisable(true);
+                dom.setDisable(true);
+                imp.setDisable(true);
+                dom11.setDisable(true);
+                dom111.setDisable(true);
+                dom1.setDisable(true);
+                dom1111.setDisable(true);
+                ttb.setDisable(true);
+            }
+            if (type.equals("WINE")) {
+                if(source.equals("DOMESTIC")){
+                    dom.setSelected(true);
                 }
-                if (!type2Box.getText().trim().isEmpty()) {
-                    type2Box.clear();
+                if(source.equals("IMPORTED")){
+                    imp.setSelected(true);
                 }
-                type = databaseUtil.checkforType(ttbid);
-                type1 = databaseUtil.checkforType1(ttbid);
-                type2 = databaseUtil.checkforType2(ttbid);
-                type3 = databaseUtil.checkforType3(ttbid);
-                source = databaseUtil.checkforSource(ttbid);
+                data = databaseUtil.fillSubmittedForm(ttbid);
+                a = databaseUtil.getAlcohoforWine(ttbid);
+                setImage(a.getAid());
 
-                if (dataPasser.getDisableRestField() == 1) {
-                    type2Box.setDisable(true);
-                    type3box.setDisable(true);
-                    beerCheckBox.setDisable(true);
-                    wineCheckBox.setDisable(true);
-                    distilledCheckBox.setDisable(true);
-                    //ID1.setDisable(true);
-                    RepID.setDisable(true);
-                    PlantReg.setDisable(true);
-                    SerialNo.setDisable(true);
-                    ApplicantName.setDisable(true);
-                    BrandName.setDisable(true);
-                    Name.setDisable(true);
-                    Formula.setDisable(true);
-                    PhoneNumber.setDisable(true);
-                    EmailAddress.setDisable(true);
-                    Address.setDisable(true);
-                    MailingAddress.setDisable(true);
-                    //clearButton.setDisable(true);
-                    dom.setDisable(true);
-                    imp.setDisable(true);
-                    dom11.setDisable(true);
-                    dom111.setDisable(true);
-                    dom1.setDisable(true);
-                    dom1111.setDisable(true);
-                    ttb.setDisable(true);
+                if(type1 == 0){
+                    dom1.setSelected(true);
                 }
-                if (type.equals("WINE")) {
-                    if (source.equals("DOMESTIC")) {
-                        dom.setSelected(true);
-                    }
-                    if (source.equals("IMPORTED")) {
-                        imp.setSelected(true);
-                    }
-                    data = databaseUtil.fillSubmittedForm(ttbid);
-                    a = databaseUtil.getAlcohoforWine(ttbid);
-                    setImage(a.getAid());
+                if(type2 == 0){
+                    dom11.setSelected(true);
+                    type2Box.setText(data.getType2());
+                }
+                if(type3 == 0){
+                    dom111.setSelected(true);
+                    type3box.setText(Integer.toString(data.getType3()));
+                }
+                wineCheckBox.setSelected(true);
+                //ID1.setText(data.getTtbID());
+                RepID.setText(Integer.toString(data.getRepid()));
+                PlantReg.setText(data.getPermitNo());
+                SerialNo.setText(data.getSerial());
+                ApplicantName.setText(data.getApplicantName());
+                grapeVarietal.setText(a.getGrapeVarietal());
+                Appellation.setText(a.getAppellation());
+                BrandName.setText(a.getBrandName());
+                Name.setText(a.getName());
+                Formula.setText(a.getFormulas());
+                PhoneNumber.setText(data.getPhoneNumber());
+                EmailAddress.setText(data.getEmail());
+                Vintage.setText(Integer.toString(a.getWineVintage()));
+                pH.setText(Double.toString(a.getPhLevel()));
+                Address.setText(data.getAddress());
+                MailingAddress.setText(data.getAddress());
+                alcoholContent.setText(Double.toString(a.getAlchContent()));
+                netContentField.setText(Double.toString(a.getNetContent()));
+                originField.setText(Integer.toString(a.getOriginCode()));
+                bottlerField.setText(a.getBottlersInfo());
+                sulfiteField.setText(a.getSulfiteDescription());
 
-                    if (type1 == 0) {
-                        dom1.setSelected(true);
-                    }
-                    if (type2 == 0) {
-                        dom11.setSelected(true);
-                        type2Box.setText(data.getType2());
-                    }
-                    if (type3 == 0) {
-                        dom111.setSelected(true);
-                        type3box.setText(Integer.toString(data.getType3()));
-                    }
-                    wineCheckBox.setSelected(true);
-                    //ID1.setText(data.getTtbID());
-                    RepID.setText(Integer.toString(data.getRepid()));
-                    PlantReg.setText(data.getPermitNo());
-                    SerialNo.setText(data.getSerial());
-                    ApplicantName.setText(data.getApplicantName());
-                    grapeVarietal.setText(a.getGrapeVarietal());
-                    Appellation.setText(a.getAppellation());
-                    BrandName.setText(a.getBrandName());
-                    Name.setText(a.getName());
-                    Formula.setText(a.getFormulas());
-                    PhoneNumber.setText(data.getPhoneNumber());
-                    EmailAddress.setText(data.getEmail());
-                    Vintage.setText(Integer.toString(a.getWineVintage()));
-                    pH.setText(Double.toString(a.getPhLevel()));
-                    Address.setText(data.getPermitAddress());
-                    MailingAddress.setText(data.getAddress());
-                    alcoholContent.setText(Double.toString(a.getAlchContent()));
-                    netContentField.setText((a.getNetContent()));
-                    originField.setText(Integer.toString(a.getOriginCode()));
-                    bottlerField.setText(a.getBottlersInfo());
-                    sulfiteField.setText(a.getSulfiteDescription());
-
-                    if (dataPasser.getDisableVintageField() == 1) {
-                        Vintage.setDisable(true);
-                    }
-                    if (dataPasser.getDisablepHField() == 1) {
-                        pH.setDisable(true);
-                    }
-                    if (dataPasser.getDisableAppellationField() == 1) {
-                        Appellation.setDisable(true);
-                    }
-                    if (dataPasser.getDisableVarietalField() == 1) {
-                        grapeVarietal.setDisable(true);
-                    }
-                    if (dataPasser.getDisableAlcoContentField() == 1) {
-                        alcoholContent.setDisable(true);
-                    }
+                if(dataPasser.getDisableVintageField() == 1){
+                    Vintage.setDisable(true);
+                }
+                if(dataPasser.getDisablepHField() == 1){
+                    pH.setDisable(true);
+                }
+                if(dataPasser.getDisableAppellationField() == 1){
+                    Appellation.setDisable(true);
+                }
+                if(dataPasser.getDisableVarietalField() == 1){
+                    grapeVarietal.setDisable(true);
+                }
+                if(dataPasser.getDisableAlcoContentField() == 1){
+                    alcoholContent.setDisable(true);
+                }
 
 
-                } else if (type.equals("BEER")) {
-                    if (source.equals("DOMESTIC")) {
-                        dom.setSelected(true);
-                    }
-                    if (source.equals("IMPORTED")) {
-                        imp.setSelected(true);
-                    }
+            } else if (type.equals("BEER")) {
+                if(source.equals("DOMESTIC")){
+                    dom.setSelected(true);
+                }
+                if(source.equals("IMPORTED")){
+                    imp.setSelected(true);
+                }
 
-                    data = databaseUtil.fillSubmittedForm(ttbid);
-                    a = databaseUtil.getAlcohoforBeer(ttbid);
-                    setImage(a.getAid());
-                    if (type1 == 0) {
-                        dom1.setSelected(true);
-                    }
-                    if (type2 == 0) {
-                        dom11.setSelected(true);
-                        type2Box.setText(data.getType2());
-                    }
-                    if (type3 == 0) {
-                        dom111.setSelected(true);
-                        type3box.setText(Integer.toString(data.getType3()));
-                    }
-                    if (dataPasser.getDisableRestField() == 1) {
-                        Vintage.setDisable(true);
-                        pH.setDisable(true);
-                        Appellation.setDisable(true);
-                        grapeVarietal.setDisable(true);
-                    }
-                    beerCheckBox.setSelected(true);
-                    //ID1.setText(data.getTtbID());
-                    RepID.setText(Integer.toString(data.getRepid()));
-                    PlantReg.setText(data.getPermitNo());
-                    SerialNo.setText(data.getSerial());
-                    ApplicantName.setText(data.getApplicantName());
-                    //Varietal1.setText(wine.getGrape_varietal());
-                    //Appellation1.setText(wine.getAppellation());
-                    BrandName.setText(a.getBrandName());
-                    Name.setText(a.getName());
-                    Formula.setText(a.getFormulas());
-                    PhoneNumber.setText(data.getPhoneNumber());
-                    EmailAddress.setText(data.getEmail());
-                    //Vintage1.setText(Integer.toString(wine.getVintage_date()));
-                    //pH1.setText(Double.toString(wine.getPh_level()));
-                    Address.setText(data.getPermitAddress());
-                    MailingAddress.setText(data.getAddress());
-                    alcoholContent.setText(Double.toString(a.getAlchContent()));
-                    netContentField.setText((a.getNetContent()));
-                    originField.setText(Integer.toString(a.getOriginCode()));
+                data = databaseUtil.fillSubmittedForm(ttbid);
+                a = databaseUtil.getAlcohoforBeer(ttbid);
+                setImage(a.getAid());
+                if(type1 == 0){
+                    dom1.setSelected(true);
+                }
+                if(type2 == 0){
+                    dom11.setSelected(true);
+                    type2Box.setText(data.getType2());
+                }
+                if(type3 == 0){
+                    dom111.setSelected(true);
+                    type3box.setText(Integer.toString(data.getType3()));
+                }
+                if(dataPasser.getDisableRestField() == 1){
+                    Vintage.setDisable(true);
+                    pH.setDisable(true);
+                    Appellation.setDisable(true);
+                    grapeVarietal.setDisable(true);
+                }
+                beerCheckBox.setSelected(true);
+                //ID1.setText(data.getTtbID());
+                RepID.setText(Integer.toString(data.getRepid()));
+                PlantReg.setText(data.getPermitNo());
+                SerialNo.setText(data.getSerial());
+                ApplicantName.setText(data.getApplicantName());
+                //Varietal1.setText(wine.getGrape_varietal());
+                //Appellation1.setText(wine.getAppellation());
+                BrandName.setText(a.getBrandName());
+                Name.setText(a.getName());
+                Formula.setText(a.getFormulas());
+                PhoneNumber.setText(data.getPhoneNumber());
+                EmailAddress.setText(data.getEmail());
+                //Vintage1.setText(Integer.toString(wine.getVintage_date()));
+                //pH1.setText(Double.toString(wine.getPh_level()));
+                Address.setText(data.getAddress());
+                MailingAddress.setText(data.getAddress());
+                alcoholContent.setText(Double.toString(a.getAlchContent()));
+                netContentField.setText(Double.toString(a.getNetContent()));
+                originField.setText(Integer.toString(a.getOriginCode()));
 
-                    if (dataPasser.getDisableAlcoContentField() == 1) {
-                        alcoholContent.setEditable(false);
-                    }
-                } else {
-                    if (source.equals("DOMESTIC")) {
-                        dom.setSelected(true);
-                    }
-                    if (source.equals("IMPORTED")) {
-                        imp.setSelected(true);
-                    }
-                    data = databaseUtil.fillSubmittedForm(ttbid);
-                    a = databaseUtil.getAlcohoforBeer(ttbid);
-                    setImage(a.getAid());
-                    if (type1 == 0) {
-                        dom1.setSelected(true);
-                    }
-                    if (type2 == 0) {
-                        dom11.setSelected(true);
-                        type2Box.setText(data.getType2());
-                    }
-                    if (type3 == 0) {
-                        dom111.setSelected(true);
-                        type3box.setText(Integer.toString(data.getType3()));
-                    }
-                    if (dataPasser.getDisableRestField() == 1) {
-                        Vintage.setDisable(true);
-                        pH.setDisable(true);
-                        Appellation.setDisable(true);
-                        grapeVarietal.setDisable(true);
-                    }
+                if(dataPasser.getDisableAlcoContentField() == 1){
+                    alcoholContent.setEditable(false);
+                }
+            } else {
+                if(source.equals("DOMESTIC")){
+                    dom.setSelected(true);
+                }
+                if(source.equals("IMPORTED")){
+                    imp.setSelected(true);
+                }
+                data = databaseUtil.fillSubmittedForm(ttbid);
+                a = databaseUtil.getAlcohoforBeer(ttbid);
+                setImage(a.getAid());
+                if(type1 == 0){
+                    dom1.setSelected(true);
+                }
+                if(type2 == 0){
+                    dom11.setSelected(true);
+                    type2Box.setText(data.getType2());
+                }
+                if(type3 == 0){
+                    dom111.setSelected(true);
+                    type3box.setText(Integer.toString(data.getType3()));
+                }
+                if(dataPasser.getDisableRestField() == 1){
+                    Vintage.setDisable(true);
+                    pH.setDisable(true);
+                    Appellation.setDisable(true);
+                    grapeVarietal.setDisable(true);
+                }
 
-                    distilledCheckBox.setSelected(true);
-                    //ID1.setText(data.getTtbID());
-                    RepID.setText(Integer.toString(data.getRepid()));
-                    PlantReg.setText(data.getPermitNo());
-                    SerialNo.setText(data.getSerial());
-                    ApplicantName.setText(data.getApplicantName());
-                    //Varietal1.setText(wine.getGrape_varietal());
-                    //Appellation1.setText(wine.getAppellation());
-                    BrandName.setText(a.getBrandName());
-                    Name.setText(a.getName());
-                    Formula.setText(a.getFormulas());
-                    PhoneNumber.setText(data.getPhoneNumber());
-                    EmailAddress.setText(data.getEmail());
-                    //Vintage1.setText(Integer.toString(wine.getVintage_date()));
-                    //pH1.setText(Double.toString(wine.getPh_level()));
-                    Address.setText(data.getPermitAddress());
-                    MailingAddress.setText(data.getAddress());
-                    alcoholContent.setText(Double.toString(a.getAlchContent()));
-                    netContentField.setText((a.getNetContent()));
-                    originField.setText(Integer.toString(a.getOriginCode()));
+                distilledCheckBox.setSelected(true);
+                //ID1.setText(data.getTtbID());
+                RepID.setText(Integer.toString(data.getRepid()));
+                PlantReg.setText(data.getPermitNo());
+                SerialNo.setText(data.getSerial());
+                ApplicantName.setText(data.getApplicantName());
+                //Varietal1.setText(wine.getGrape_varietal());
+                //Appellation1.setText(wine.getAppellation());
+                BrandName.setText(a.getBrandName());
+                Name.setText(a.getName());
+                Formula.setText(a.getFormulas());
+                PhoneNumber.setText(data.getPhoneNumber());
+                EmailAddress.setText(data.getEmail());
+                //Vintage1.setText(Integer.toString(wine.getVintage_date()));
+                //pH1.setText(Double.toString(wine.getPh_level()));
+                Address.setText(data.getAddress());
+                MailingAddress.setText(data.getAddress());
+                alcoholContent.setText(Double.toString(a.getAlchContent()));
+                netContentField.setText(Double.toString(a.getNetContent()));
+                originField.setText(Integer.toString(a.getOriginCode()));
 
-                    if (dataPasser.getDisableAlcoContentField() == 1) {
-                        alcoholContent.setDisable(true);
-                    }
+                if(dataPasser.getDisableAlcoContentField() == 1){
+                    alcoholContent.setDisable(true);
                 }
             }
-            dataPasser.setIsInvokebyReviseMenu(0);
-            dataPasser.setDisableRestField(0);
-            dataPasser.setDisableAppellationField(0);
-            dataPasser.setDisableVintageField(0);
-            dataPasser.setDisableVarietalField(0);
-            dataPasser.setDisablepHField(0);
-            dataPasser.setDisableAlcoContentField(0);
-            System.out.println(dataPasser.isIsInvokebyReviseMenu());
         }
-        catch(SQLException e){
-            System.out.println("No old forms");
-        }
+        dataPasser.setIsInvokebyReviseMenu(0);
+        dataPasser.setDisableRestField(0);
+        dataPasser.setDisableAppellationField(0);
+        dataPasser.setDisableVintageField(0);
+        dataPasser.setDisableVarietalField(0);
+        dataPasser.setDisablepHField(0);
+        dataPasser.setDisableAlcoContentField(0);
+        System.out.println(dataPasser.isIsInvokebyReviseMenu());
+
+        highlightObjects();
     }
 
-    /**
-     * Returns user to the main menu.
-     * @param event Back button pressed.
-     */
-    public void goBack (ActionEvent event){
+
+    public void goBack (javafx.event.ActionEvent event){
         if(dataPasser.isIsRevised() == 1){
             dataPasser.setIsRevised(0);
             screenUtil.switchScene("ReviseMenu.fxml", "Revise Menu");
@@ -366,12 +369,39 @@ public class ReviseAppController {
 
 
     }
+
+    public void highlightObjects(){
+        try{
+            ApplicationData data;
+            data = databaseUtil.fillSubmittedForm(ttbid);
+            String comments = "";
+            char[] numberArray = comments.substring(0,20).toCharArray();
+            char currNum = '.';
+            for (int i = 0; i < numberArray.length; i++) {
+                currNum = numberArray[i];
+                if(currNum == '1'){
+                    checkList.get(i).setStyle("-fx-background-color: indianred; -fx-text-fill: #FFFFFF; -fx-border-color: darkred");
+                    System.out.println("Field Highlighted");
+                }
+                else if(currNum == '0'){
+                    System.out.println("Field Not Highlighted");
+                }
+                else{
+                    System.out.println("Invalid Char Recieved");
+                }
+            }
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
     @FXML
     /**
      * Autofills a selected form into the screen.
      *
      */
-    public void autoFillSelectedForm(ActionEvent event)throws SQLException{
+    public void autoFillSelectedForm(javafx.event.ActionEvent event)throws SQLException{
 
         String ttbid = formChoiceBox.getValue().toString().trim();
         ApplicationData data;
@@ -440,9 +470,9 @@ public class ReviseAppController {
                 EmailAddress.setText(data.getEmail());
                 Vintage.setText(Integer.toString(a.getWineVintage()));
                 pH.setText(Double.toString(a.getPhLevel()));
-                Address.setText(data.getPermitAddress());
+                Address.setText(data.getAddress());
                 MailingAddress.setText(data.getAddress());
-                netContentField.setText((a.getNetContent()));
+                netContentField.setText(Double.toString(a.getNetContent()));
                 originField.setText(Integer.toString(a.getOriginCode()));
                 bottlerField.setText(a.getBottlersInfo());
                 sulfiteField.setText(a.getSulfiteDescription());
@@ -481,9 +511,9 @@ public class ReviseAppController {
                 Formula.setText(a.getFormulas());
                 PhoneNumber.setText(data.getPhoneNumber());
                 EmailAddress.setText(data.getEmail());
-                Address.setText(data.getPermitAddress());
+                Address.setText(data.getAddress());
                 MailingAddress.setText(data.getAddress());
-                netContentField.setText((a.getNetContent()));
+                netContentField.setText(Double.toString(a.getNetContent()));
                 originField.setText(Integer.toString(a.getOriginCode()));
                 alcoholContent.setText(Double.toString(a.getAlchContent()));
 
@@ -520,9 +550,9 @@ public class ReviseAppController {
                 Formula.setText(a.getFormulas());
                 PhoneNumber.setText(data.getPhoneNumber());
                 EmailAddress.setText(data.getEmail());
-                Address.setText(data.getPermitAddress());
+                Address.setText(data.getAddress());
                 MailingAddress.setText(data.getAddress());
-                netContentField.setText((a.getNetContent()));
+                netContentField.setText(Double.toString(a.getNetContent()));
                 originField.setText(Integer.toString(a.getOriginCode()));
                 alcoholContent.setText(Double.toString(a.getAlchContent()));
 
@@ -538,7 +568,7 @@ public class ReviseAppController {
         String ttbid = formChoiceBox.getValue().toString().trim();
         int repid = Integer.parseInt(RepID.getText());
         String serial = SerialNo.getText();
-        String address = MailingAddress.getText();
+        String address = Address.getText();
         String fancyName = Name.getText();
         String formula = Formula.getText();
         String permit_no = PlantReg.getText();
@@ -552,9 +582,9 @@ public class ReviseAppController {
         String date ="";
         String info = "";
         double content = Double.parseDouble(alcoholContent.getText());
-        String netcontent = (netContentField.getText());
+        double netcontent = Double.parseDouble(netContentField.getText());
         int origin = Integer.parseInt(originField.getText());
-        String permitAddress = Address.getText();
+
         int type1 = 0;
         String type2 = "";
         int type3 = -1;
@@ -588,7 +618,7 @@ public class ReviseAppController {
             String appellation = Appellation.getText();
             String bottler = bottlerField.getText();
             String sulfite = sulfiteField.getText();
-            ApplicationData a = new ApplicationData(ttbid,repid,serial,address,permit_no,phone_number,email,applicantName,type1,type2,type3, permitAddress, null);
+            ApplicationData a = new ApplicationData(ttbid,repid,serial,address,permit_no,phone_number,email,applicantName,type1,type2,type3, null);
             AlcoholData ac = new AlcoholData(0, fancyName, appellation, sulfite, content, netcontent, "n/a", 0, 0, "n/a","n/a",
                     formula, 2, bottler, brand_name, "", vintage_date, ph_level, grape_varietal, "", source_of_product, null, origin);
             int aid = du.updateFormSubmission(a, ac);
@@ -601,7 +631,7 @@ public class ReviseAppController {
         } else if (beerCheckBox.isSelected()) {
             type_of_product = "MALT BEVERAGES";
             alcoholType = "MALT BEVERAGES";
-            ApplicationData a = new ApplicationData(ttbid,repid,serial,address,permit_no,phone_number,email,applicantName,type1,type2,type3, permitAddress,null);
+            ApplicationData a = new ApplicationData(ttbid,repid,serial,address,permit_no,phone_number,email,applicantName,type1,type2,type3, null);
             AlcoholData ac = new AlcoholData(0, fancyName, "n/a", "", content, netcontent, "n/a", 0, 0, "n/a","n/a",
                     formula, 1, "n/a", brand_name, "n/a", 0, 0, "n/a", "n/a", source_of_product, null, origin);
             int aid = du.updateFormSubmission(a, ac);
@@ -613,7 +643,7 @@ public class ReviseAppController {
         } else if (distilledCheckBox.isSelected()) {
             type_of_product = "DISTILLED SPIRITS";
             alcoholType = "DISTILLED SPIRITS";
-            ApplicationData a = new ApplicationData(ttbid,repid,serial,address,permit_no,phone_number,email,applicantName,type1,type2,type3, permitAddress,null);
+            ApplicationData a = new ApplicationData(ttbid,repid,serial,address,permit_no,phone_number,email,applicantName,type1,type2,type3, null);
             AlcoholData ac = new AlcoholData(0, fancyName, "n/a", "", content, netcontent, "n/a", 0, 0, "n/a","n/a",
                     formula, 3, "n/a", brand_name, "n/a", 0, 0, "n/a", "n/a", source_of_product, null, origin);
             int aid = du.updateFormSubmission(a, ac);
@@ -640,7 +670,7 @@ public class ReviseAppController {
             //myFilePath.setText(tempFile.getPath());
             filepath = tempFile.toURI().toString();
             System.out.println(filepath);
-            Image img = new Image(filepath);
+            javafx.scene.image.Image img = new javafx.scene.image.Image(filepath);
             image.setImage(img);
         }
         changeImage = true;
@@ -654,7 +684,7 @@ public class ReviseAppController {
         ScreenUtil work = new ScreenUtil();
         work.switchScene("ReviseApp.fxml", "Revise Application");
     }
-*/
+
 
     /**
      * Opens a file explorer to choose an image to upload.
@@ -667,11 +697,6 @@ public class ReviseAppController {
         revisionImagePath = selectedFile.getPath();
     }
 
-    /**
-     * gets image path.
-     * @return Returns ath to the alcohol image.
-     * @throws UnsupportedEncodingException
-     */
     public String getPath() throws UnsupportedEncodingException {
 
 
@@ -687,10 +712,6 @@ public class ReviseAppController {
         return newDir;
     }
 
-    /**
-     * Saves image to the system.
-     * @param aid AID to associate with the image.
-     */
     public void saveImage(int aid){
         BufferedImage image2 = null;
         BufferedImage image3 = null;
@@ -703,10 +724,6 @@ public class ReviseAppController {
         }
     }
 
-    /**
-     * Set image in system.
-     * @param aid AID to associate with the image.
-     */
     public void setImage(int aid){
         try {
             String path = getPath();
@@ -727,9 +744,6 @@ public class ReviseAppController {
         work.switchScene("ReviseApp.fxml", "Revise Application");
     }
 
-    /**
-     * Brings user to the revisions help screen.
-     */
     public void needHelp (){
         screenUtil.switchScene("ReviseHelp.fxml","Help");
     }
