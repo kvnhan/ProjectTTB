@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="502.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.AppChangesController">
+   <children>
+      <ImageView fitHeight="258.0" fitWidth="578.0" layoutX="10.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" />
+      <TextArea editable="false" layoutX="14.0" layoutY="278.0" prefHeight="182.0" prefWidth="578.0" text="This page will allow you to make changes to labels that you have already submitted and require updated information. First, please find the ID of the application you wish to update.&#10;&#10;Then, please select the fields that you would like to have updated on the label by selecting the checkboxes next to the field that you would like to update. After making your selection, you can input information into the text box on the right.&#10;&#10;When you have finished inputting the information you would like to have changed, please hit &quot;Submit&quot; in order to have these updates registered for review." wrapText="true" />
+      <Button fx:id="backButton" layoutX="10.0" layoutY="466.0" mnemonicParsing="false" onAction="#goBack" text="Back" />
+   </children>
+</AnchorPane>

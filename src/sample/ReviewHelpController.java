@@ -38,7 +38,7 @@ public class ReviewHelpController {
      * Returns user to the search page.
      */
     public void goBack(){
-        screenUtil.switchScene("SearchMenu.fxml", "Search");
+        screenUtil.switchScene("WorkFlow.fxml", "Search");
 
     }
 }
