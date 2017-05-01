@@ -39,6 +39,9 @@ public class AlcoholInfoController {
         else if(s.equals(".")){
             return " ";
         }
+        else if(s.equals("n/a")){
+            return " ";
+        }
         else
             return s;
     }
