@@ -131,7 +131,7 @@
                       <JFXRadioButton fx:id="tabDownload" text="Tab-Delimited" GridPane.rowIndex="2" />
                       <JFXRadioButton fx:id="customDownload" prefHeight="17.0" prefWidth="154.0" text="Custom Delimitor:" GridPane.rowIndex="3" />
                       <TextField fx:id="CustomDelimiter" promptText="Insert Delimiter Here" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                      <JFXButton fx:id="downloadButton" prefHeight="31.0" prefWidth="170.0" text="Download Results" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                      <JFXButton fx:id="downloadButton" onAction="#download2" prefHeight="31.0" prefWidth="170.0" text="Download Results" GridPane.columnIndex="2" GridPane.rowIndex="3" />
                   <HBox fx:id="pageControlsHBox" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2">
                      <children>
                         <ToggleButton fx:id="previousPageButton" mnemonicParsing="false" />

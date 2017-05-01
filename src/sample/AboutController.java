@@ -1,6 +1,8 @@
 package sample;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.text.Text;
 
 import javafx.scene.image.ImageView;
@@ -120,12 +122,10 @@ public class AboutController {
 
     }
 
-    /**
-     * Brings user back to the main menu.
-     */
-    public void goBack(){
-        screenUtil.switchScene("MainMenu.fxml", "Main Menu");
-
+    @FXML
+    void handleClose(ActionEvent event) {
+        Node currentSource = (Node) event.getSource();
+        currentSource.getScene().getWindow().hide();
     }
 
 }
