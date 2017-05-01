@@ -562,7 +562,11 @@ public class DatabaseUtil {
         while(rset.next()){
             int AID = rset.getInt("AID");
             String name = String.format("%1$"+25+ "s", rset.getString("NAME")).trim();
+            if(name.equals("n/a"))
+                name = null; //kids, get off my lawn
             String appelation = String.format("%1$"+22+ "s", rset.getString("APPELLATION")).trim();
+            if(appelation.equals("n/a"))
+                appelation = null; //kids, get off my lawn
             String sulfiteDesc = String.format("%1$"+22+ "s", rset.getString("SULFITE_DESC")).trim();
             double alchContent = rset.getDouble("ALCH_CONTENT");
             String netContent = rset.getString("NET_CONTENT");
