@@ -104,7 +104,7 @@ public class SearchMenuController {
      * Initializes the search menu.
      */
     @FXML
-    public void initialize(){
+    public void initialize() throws SQLException, NoSuchMethodException, IllegalAccessException, InstantiationException, IOException{
         String searchTemp = "";
         if(Account.getInstance().getSearch().trim().length() > 0){
             searchTemp = Account.getInstance().getSearch();
@@ -333,6 +333,10 @@ public class SearchMenuController {
      * @throws IOException
      */
     public void search(ActionEvent event) throws SQLException, NoSuchMethodException, IllegalAccessException, InstantiationException, IOException{
+        search2();
+    }
+
+    public void search2() throws SQLException, NoSuchMethodException, IllegalAccessException, InstantiationException, IOException{
         imageResultPageNumber = 0;
         noOfPagesGenerated = 0;
         previousPageButton.setDisable(true);
@@ -354,6 +358,7 @@ public class SearchMenuController {
             displayResultsInThumbnail();
         }
     }
+
 
 
 

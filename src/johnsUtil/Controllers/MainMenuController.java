@@ -31,6 +31,7 @@ import johnsUtil.model.SharedResources.Account;
 import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -168,13 +169,15 @@ public class MainMenuController implements Initializable{
      * @throws IOException
      */
     @FXML
-    protected void handleSearchButton(ActionEvent event) throws IOException {
+    protected void handleSearchButton(ActionEvent event) throws SQLException, NoSuchMethodException, IllegalAccessException, InstantiationException, IOException {
         Account.getInstance().setSearch(searchCombo.getEditor().getText());
 
         Stage primaryStage = (Stage) searchCombo.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("johnsUtil/Views/Home.fxml"));
         primaryStage.getScene().setRoot(root);
 
+        SearchMenuController searchMenuController = new SearchMenuController();
+        searchMenuController.search2();
     }
 
     /**
