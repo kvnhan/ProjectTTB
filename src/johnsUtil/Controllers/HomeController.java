@@ -16,6 +16,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Screen;
+import javafx.stage.Stage;
 import johnsUtil.model.SharedResources.Account;
 import sample.Main;
 

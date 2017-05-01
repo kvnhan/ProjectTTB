@@ -6,9 +6,11 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import johnsUtil.Main;
@@ -84,7 +86,17 @@ public class NavigationPaneController implements Initializable {
             vbox.getChildren().remove(mainMenuBtn);
         }
 
-
+        appBtn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                try {
+                    Parent scroll = FXMLLoader.load(getClass().getClassLoader().getResource("johnsUtil/Views/NewLabel.fxml"));
+                    getRoot().setCenter(scroll);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
 
         logoutBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -103,8 +115,32 @@ public class NavigationPaneController implements Initializable {
             }
         });
 
+        mainMenuBtn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                if(Screen.getInstance().createConfirmBox("Logout", "Are you sure you want to logout, all of your unsaved progress will be lose?")){
+                    Stage primaryStage = Account.getInstance().getWindow();
+                    Parent root = null;
+                    try {
+                        root = FXMLLoader.load(getClass().getClassLoader().getResource("johnsUtil/Views/MainMenu.fxml"));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    primaryStage.getScene().setRoot(root);
+                }
+            }
+        });
 
 
-        //TODO Add listerns to change scenes
+    }
+
+    private BorderPane getRoot(){
+        BorderPane parent = (BorderPane) Account.getInstance().getWindow().getScene().getRoot();
+        for(Node node: parent.getChildren()){
+            if(node.getAccessibleText() != null && node.getAccessibleText().equals("center")){
+                return (BorderPane) node;
+            }
+        }
+        return null;
     }
 }
