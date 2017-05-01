@@ -48,7 +48,7 @@ public class ReadWithScanner {
 
     /**
      * Function for parsing strings with text that would interfere with proper functionality.
-      * @param s String to parse.
+     * @param s String to parse.
      * @return Returns "0" if a bad string is found; returns the input string otherwise.
      */
     private String stringHelper(String s){
@@ -62,6 +62,29 @@ public class ReadWithScanner {
         }
         return s;
     }
+
+
+    /**
+     * Function for parsing strings with text that would interfere with proper functionality.
+     * @param s String to parse.
+     * @return Returns "0" if a bad string is found; returns the input string otherwise.
+     */
+    private String stringHelperPound(String s){
+        if(s.contains(".")) {
+            System.out.println("I found a null");
+            return "0";
+        }
+        else if(s.equals(". .")) {
+            System.out.println("I found a bad value");
+            return "0";
+        }
+        else if(s.contains("#")) {
+            System.out.println("I found a pound value");
+            return "0";
+        }
+        return s;
+        }
+
 
     /**
      * Parses strings into integers unless not in proper number format.
@@ -351,7 +374,7 @@ public class ReadWithScanner {
         System.out.println(RECEIVED_CODE);
 
 
-        String ttb = dataUtil.addForm(CFM_APPL_ID, Integer.parseInt(REP_ID),stringHelper(SERIAL_NUM), stringHelper(ADDRESS), "", "", "", stringHelper(STATUS), 0, "", 0, SQLrecDate, stringHelper(PERMIT_NAME), stringHelper(ADDRESS), stringHelper(QUALIFICATION), stringHelper(RECEIVED_CODE),stringHelper(SPCL_WORDING_DESC),stringHelper(PERMIT_ID));
+        String ttb = dataUtil.addForm(CFM_APPL_ID, Integer.parseInt(REP_ID),stringHelperPound(SERIAL_NUM), stringHelper(ADDRESS), "", "", "", stringHelper(STATUS), 0, "", 0, SQLrecDate, stringHelper(PERMIT_NAME), stringHelper(ADDRESS), stringHelper(QUALIFICATION), stringHelper(RECEIVED_CODE),stringHelper(SPCL_WORDING_DESC),stringHelper(PERMIT_ID));
        // dataUtil.addAlcohol("","", " ",0.0, "", " ", 0, 0, " ", " ", " ", 1, " ","", "", 0000, 0.0, "", " ", "",  new java.sql.Date(00-00-0000), 0);
 
 
@@ -370,8 +393,6 @@ public class ReadWithScanner {
 
                 //log("Name is : " + quote(name.trim()) + ", and Value is : " + quote(value.trim()) + "&" + quote(value2.trim()));
         }
-
-
 
     // PRIVATE
     private final Path fFilePath;

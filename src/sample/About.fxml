@@ -3,43 +3,40 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
-<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.paint.LinearGradient?>
-<?import javafx.scene.paint.Stop?>
-<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="502.0" prefWidth="539.0" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.AboutController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="595.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.AboutController">
    <children>
-      <AnchorPane prefHeight="483.0" prefWidth="539.0" />
-      <Label layoutX="3.0" layoutY="11.0" prefHeight="56.0" prefWidth="125.0" text="About:">
+      <Label layoutX="3.0" layoutY="-6.0" prefHeight="56.0" prefWidth="125.0" text="About:">
          <font>
             <Font size="40.0" />
          </font>
       </Label>
-      <TextArea editable="false" layoutX="19.0" layoutY="59.0" prefHeight="368.0" prefWidth="500.0" text="We would like to thank the US Treasury’s Alcohol and Tobacco Tax and Trade Bureau, who provided us with the opportunity to work on this project. We would also like to thank their representative Assistant CIO, Greg Greely, for their time and input on our application.&#10;&#10;This project was organized by the Worcester Polytechnic Institute's Computer Science Department, CS 3733 Software Engineering Class, taught by Professor Wilson Wong.&#10;&#10;This Application was Implemented by CS 3733 Team A, whose members include:&#10;&#10;Project Manager - Elsa Luthi&#10;Lead Engineer - Ari Goodman&#10;Assistant Lead Engineer - Jonathan A’Vant&#10;Assistant Lead Engineer - Christian Cedron&#10;Documentation Analyst - Lucy Stuehrmann&#10;Product Owner- Sam Winter&#10;Test Engineer - Kien Nhan&#10;Software Engineers - Adonay Resom, Jacob Remz, Peter Nolan, &#10;Team Coach: Trevor J. Valcourt" wrapText="true" />
-      <Separator layoutY="51.0" prefHeight="8.0" prefWidth="521.0" />
-      <Button fx:id="backButton" layoutX="10.0" layoutY="431.0" mnemonicParsing="false" onAction="#goBack" text="Back" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" height="17.0" layoutX="-5.0" layoutY="-1.0" stroke="TRANSPARENT" strokeType="INSIDE" width="387.0">
-         <fill>
-            <LinearGradient endX="1.0" endY="1.0">
-               <stops>
-                  <Stop color="#1f1fffdc" />
-                  <Stop color="WHITE" offset="1.0" />
-               </stops>
-            </LinearGradient>
-         </fill>
-      </Rectangle>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" height="17.0" layoutY="486.0" stroke="#ffffff00" strokeType="INSIDE" width="539.0">
-         <fill>
-            <LinearGradient endX="0.08173076923076923" endY="1.0" startX="1.0" startY="1.0">
-               <stops>
-                  <Stop color="#ff2121fe" />
-                  <Stop color="WHITE" offset="1.0" />
-               </stops>
-            </LinearGradient>
-         </fill>
-      </Rectangle>
+      <Separator layoutY="38.0" prefHeight="8.0" prefWidth="521.0" />
+      <Button fx:id="backButton" layoutX="3.0" layoutY="562.0" mnemonicParsing="false" onAction="#goBack" text="Back" />
+      <Label layoutX="8.0" layoutY="46.0" prefHeight="70.0" prefWidth="731.0" text="We would like to thank the US Treasury’s Alcohol and Tobacco Tax and Trade Bureau, who provided us with the opportunity to work on this project. We would also like to thank their representative Assistant CIO, Greg Greely, for their time and input on our application." wrapText="true" />
+      <Label layoutX="10.0" layoutY="116.0" prefHeight="56.0" prefWidth="731.0" text="This project was organized by the Worcester Polytechnic Institute's Computer Science Department, CS 3733 Software Engineering Class, taught by Professor Wilson Wong." wrapText="true" />
+      <Label layoutX="11.0" layoutY="172.0" prefHeight="27.0" prefWidth="500.0" text="This Application was Implemented by CS 3733 Team A, whose members include:" />
+      <Label layoutX="12.0" layoutY="276.0" text="Project Manager - Elsa Luthi" />
+      <ImageView fx:id="elsaPic" fitHeight="78.0" fitWidth="78.0" layoutX="70.0" layoutY="199.0" pickOnBounds="true" preserveRatio="true" />
+      <Label layoutX="323.0" layoutY="276.0" text="Lead Engineer - Ari Goodman" />
+      <ImageView fx:id="ariPic" fitHeight="78.0" fitWidth="78.0" layoutX="373.0" layoutY="199.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="jonPic" fitHeight="78.0" fitWidth="78.0" layoutX="70.0" layoutY="293.0" pickOnBounds="true" preserveRatio="true" />
+      <Label layoutX="4.0" layoutY="385.0" text="Assistant Lead Engineer - Jonathan A’Vant" />
+      <Label layoutX="3.0" layoutY="474.0" text="Assistant Lead Engineer - Christian Cedron" />
+      <Label layoutX="321.0" layoutY="474.0" text="Software Engineers - Adonay Resom, Jacob Remz, Peter Nolan" />
+      <ImageView fx:id="adonayPic" fitHeight="70.0" fitWidth="66.0" layoutX="359.0" layoutY="406.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="jacobPic" fitHeight="70.0" fitWidth="78.0" layoutX="475.0" layoutY="402.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="peterPic" fitHeight="70.0" fitWidth="66.0" layoutX="608.0" layoutY="404.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="chrisPic" fitHeight="70.0" fitWidth="78.0" layoutX="80.0" layoutY="402.0" pickOnBounds="true" preserveRatio="true" />
+      <Label layoutX="550.0" layoutY="276.0" text="Product Owner- Sam Winter" />
+      <ImageView fx:id="samPic" fitHeight="78.0" fitWidth="78.0" layoutX="608.0" layoutY="199.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="lucyPic" fitHeight="78.0" fitWidth="78.0" layoutX="568.0" layoutY="307.0" pickOnBounds="true" preserveRatio="true" />
+      <Label layoutX="482.0" layoutY="385.0" text="Documentation Analyst - Lucy Stuehrmann" />
+      <Label layoutX="295.0" layoutY="385.0" text="Test Engineer - Kien Nhan" />
+      <Label layoutX="89.0" layoutY="567.0" text="Team Coach: Trevor J. Valcourt" />
+      <ImageView fx:id="kienPic" fitHeight="78.0" fitWidth="78.0" layoutX="334.0" layoutY="307.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>

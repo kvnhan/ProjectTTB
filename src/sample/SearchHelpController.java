@@ -20,7 +20,7 @@ public class SearchHelpController {
     public void initialize(){
 
         try {
-            InputStream resource = ScreenUtil.class.getClassLoader().getResourceAsStream("resources/SearchHelp.png");
+            InputStream resource = ScreenUtil.class.getClassLoader().getResourceAsStream("resources/SearchUI.png");
             screenImage.setImage(new javafx.scene.image.Image(resource, 500.0, 0.0, true, true));
         }
         catch(NullPointerException nullPoint){
