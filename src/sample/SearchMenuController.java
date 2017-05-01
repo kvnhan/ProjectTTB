@@ -113,7 +113,7 @@ public class SearchMenuController {
 
         pageControlsHBox.setVisible(false);
 
-        enableAutomaticSearch();
+        //enableAutomaticSearch();
 
         toggleView.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
             @Override
@@ -125,12 +125,12 @@ public class SearchMenuController {
                         Result.setText("Showing " + alcoholDataList.size() + " search results.");
                         resultsMainGridPane.getChildren().remove(imageScrollPane);
                         resultsMainGridPane.getChildren().add(table);
-                        enableAutomaticSearch();
+                     //   enableAutomaticSearch();
                     }else if(selectedView.equals("Image View")){
                         hasViewChanged = true;
                         isSearchInImageView = true;
                         resultsMainGridPane.getChildren().remove(table);
-                        disableAutomaticSearch();
+                    //    disableAutomaticSearch();
                         displayResultsInThumbnail();
                     }
                 }

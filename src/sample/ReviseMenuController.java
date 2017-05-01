@@ -59,12 +59,12 @@ public class ReviseMenuController {
      */
     public void initialize() throws SQLException{
         formsObservableList = FXCollections.observableArrayList();
-        formsFound = databaseUtil.searchFormWithAid(databaseUtil.getAccountAid(accountsUtil.getUsername()));
-
-        for(int i = 0; i < formsFound.size(); i ++){
-            formsObservableList.add(formsFound.get(i).getTtbID());
+        try {
+            formsFound = databaseUtil.searchFormWithAid(databaseUtil.getAccountAid(accountsUtil.getUsername()));
         }
-
+        catch(SQLException e){
+            System.out.println("YOU HAVE NO FORMS");
+        }
         applicationChoiceBox.setItems(formsObservableList);
         applicationChoiceBox.getSelectionModel().selectFirst();
     }
