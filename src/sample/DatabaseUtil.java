@@ -19,7 +19,7 @@ public class DatabaseUtil {
 
     private static String driver = "org.apache.derby.jdbc.EmbeddedDriver";
     private static String connectionURL = "jdbc:derby:DATABASE/ProjectC;create=true";
-    private String ACCOUNT_FIELDS = " (AID, USERNAME, PASSWORDHASH, ISLOGGEDIN, USER_TYPE)";
+    private String ACCOUNT_FIELDS = " (AID, USERNAME, PASSWORDHASH, ISLOGGEDIN, USER_TYPE, YOUR_NAME, EMAIL, PHONE, ADDRESS, IMAGE_PATH, LAST_LOGGED_IN)";
     private String ALCH_TYPE_FIELDS = " (ATID, CLASS)";
     private String ALCOHOL_FIELDS = " (AID, NAME, APPELLATION, SULFITE_DESC, ALCH_CONTENT, NET_CONTENT, HEALTH_WARNING, PRODUCT_TYPE, CLASS, LABEL_LEGIBILLITY, LABEL_SIZE, FORMULAS, ALCOHOL_TYPE, BOTTLERS_INFO, BRAND_NAME, STATUS, WINE_VINTAGE, PH_LEVEL, GRAPE_VARIETAL, INFO_ON_BOTTLE, SOURCE_OF_PRODUCT, DATE_APPROVED, ORIGIN_CODE)";
     private String CLASS_FIELDS = " (CID, CLASS)";
@@ -154,8 +154,14 @@ public class DatabaseUtil {
      * @param userType Type of user.
      * @throws SQLException
      */
-    public void addAccount(String username, String password, int isLoggedIn, int userType) throws SQLException {
-        String values = "'" + username + "', '" + password + "', " + isLoggedIn + "," + userType + " )";
+    public void addAccount(String username, String password, int isLoggedIn, int userType, String name, String email, String phone, String address, File path) throws SQLException {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        DateFormat year = new SimpleDateFormat("yyyy");
+        DateFormat day = new SimpleDateFormat("D");
+        Date date = new Date();
+        String curDate = dateFormat.format(date);
+
+        String values = "'" + username + "', '" + password + "', " + isLoggedIn + "," + userType  + ",'" + name + "','" + email  + "','" + phone  + "','" + address  + "','" + path.toURI().toString()  + "','" + curDate + "' )";
         addToTable("ACCOUNT", ACCOUNT_FIELDS, values, "AID");
     }
 

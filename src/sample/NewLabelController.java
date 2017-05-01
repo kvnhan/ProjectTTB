@@ -70,10 +70,42 @@ public class NewLabelController{
     private Subject subject;
     @FXML private Button Submit;
     @FXML private Button back;
+    @FXML private Button autoFill;
     @FXML private Button clear;
     @FXML private Button helpNewButton;
     private String filepath;
     private File tempFile;
+
+    private int getRandomInt(){
+        return 4;
+    }
+
+    @FXML
+    private void autoFill(ActionEvent e){
+        RepID.setText(String.valueOf(getRandomInt()));
+        PlantReg.setText(String.valueOf(getRandomInt()));
+        SerialNo.setText(String.valueOf(getRandomInt()));
+        ApplicantName.setText("Ari G");
+        Name.setText("Beer is bad");
+        PhoneNumber.setText("911");
+        MailingAddress.setText("Jacob's house");
+        originField.setText("26");
+        BrandName.setText("Brandon");
+        Address.setText("Brandon's House");
+        Formula.setText("Krabby Patties");
+        EmailAddress.setText("jdasjdjkasj@dkajskldjaslk.com");
+        alcoholContent.setText("100");
+        netContentField.setText("2 Liters");
+        grapeVarietal.setText("French");
+        Appellation.setText("France?");
+        sulfiteField.setText("5");
+        Vintage.setText("1999");
+        bottlerField.setText("17th one from the left");
+        additionalInfoField.setText("Jose Wong");
+        pH.setText("7.0");
+
+    }
+
     @FXML
     /**
      * Clears information from the screen.
@@ -439,7 +471,6 @@ public class NewLabelController{
         }else{
             screenUtil.createAlertBox("ERROR", errorMessage);
         }
-
     }
 
     /**

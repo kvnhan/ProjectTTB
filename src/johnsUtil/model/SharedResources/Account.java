@@ -2,8 +2,14 @@ package johnsUtil.model.SharedResources;
 
 import org.mindrot.jbcrypt.BCrypt;
 
+import javax.imageio.ImageIO;
 import javax.xml.crypto.Data;
+import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URL;
+import java.net.URLDecoder;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
@@ -87,10 +93,46 @@ public class Account {
      * @param type Type of account.
      * @param file Account image.
      */
-    public void createAccount(String userName, String pass,String name, String address, String email, String phone, int type, java.io.File file){
-        //TODO
-        //Add to database *remember to hash password*
-        //save image
+    public void createAccount(String userName, String pass,String name, String address, String email, String phone, int type, java.io.File file) throws SQLException {
+        File image =  new File("");
+        if(file != null){
+            try {
+                image = saveImage(file);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        Database.getInstance().addAccount(userName, bCryptSaltedPassword(pass), 0, type, name, phone, phone, address, image);
+    }
+
+
+    /**
+     * Saves alcohol label image to the system.
+     */
+    private java.io.File saveImage(java.io.File file) throws IOException {
+        BufferedImage image = null;
+
+        File newFile;
+        String path = getPath();
+        image = ImageIO.read(file);
+        ImageIO.write(image, "jpg", newFile = new File(path + "/" + accountID + ".jpg"));
+        return newFile;
+    }
+
+    /**
+     * Gets path for the label image.
+     * @return Returns string representing path to the label image.
+     * @throws UnsupportedEncodingException
+     */
+    private String getPath() throws UnsupportedEncodingException {
+        URL url = this.getClass().getProtectionDomain().getCodeSource().getLocation();
+        String jarPath = URLDecoder.decode(url.getFile(), "UTF-8");
+        String parentPath = new File(jarPath).getParentFile().getPath();
+
+        String fileSeparator = System.getProperty("file.separator");
+        String newDir = parentPath + fileSeparator + "icons" + fileSeparator;
+
+        return newDir;
     }
 
     /**
