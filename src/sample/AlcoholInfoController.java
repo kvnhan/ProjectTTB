@@ -46,7 +46,14 @@ public class AlcoholInfoController {
     private String setTextClassHelper(int alcClass){
         return "Sparkling Wine";
     }
-    //returns type as a string
+
+    /**
+     * Converts an alcohol type to a readable string.
+      * @param alcType Int representing the alcohol type. 1 = Malt Beverage,
+     *                2 = Wine, 3 = Distilled Spirits, and anything else =
+     *                 Alcohol.
+     * @return Returns the readable string type as enumerated above.
+     */
     private String setTextTypeHelper(int alcType){
         switch(alcType){
             case 1:
