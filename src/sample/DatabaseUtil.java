@@ -4,6 +4,7 @@ import javafx.scene.control.*;
 import org.mindrot.jbcrypt.BCrypt;
 
 import java.awt.*;
+import java.io.File;
 import java.sql.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -101,7 +102,8 @@ public class DatabaseUtil {
 
         rset = stmt.executeQuery(query);
 
-        return rset.isBeforeFirst();
+
+        return !(rset.next() == false);
     }
 
     /**
@@ -1534,21 +1536,30 @@ public class DatabaseUtil {
 
     public boolean logIn(String userName, String password) throws SQLException {
         PreparedStatement getAcc = conn.prepareStatement("SELECT * FROM ACCOUNT WHERE  USERNAME = ?");
+        String ref;
         getAcc.setString(1,userName);
 
         ResultSet rs =  getAcc.executeQuery();
-        String ref = rs.getString("APP.ACCOUNT.PASSWORDHASH");
+        if(rs.next()){
+            ref = rs.getString("PASSWORDHASH");
+        }
+        else{
+            return false;
+        }
         if(null == ref){
             return false;
         }
-        else if(rs.isBeforeFirst()){
+        else if(!(rs.next() == false)){
             if (BCrypt.checkpw(password,ref)) {
                 johnsUtil.model.SharedResources.Account acc = johnsUtil.model.SharedResources.Account.getInstance();
                 acc.setAccountID(rs.getInt("AID"));
                 acc.setUserName(rs.getString("USERNAME"));
                 acc.setUserType(rs.getInt("USER_TYPE"));
-
-                //TODO rest of fields
+                acc.setAddress(rs.getString("ADDRESS"));
+                acc.setName(rs.getString("YOUR_NAME"));
+                acc.setEmail(rs.getString("EMAIL"));
+                acc.setPhoneNum(rs.getString("PHONE"));
+                acc.setPicPath(new File(rs.getString("IMAGE_PATH")));
                 return true;
             }
             else{
@@ -1558,6 +1569,18 @@ public class DatabaseUtil {
         else{
             return false;
         }
+    }
+
+    public void logOut(int aid) throws SQLException {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        DateFormat year = new SimpleDateFormat("yyyy");
+        DateFormat day = new SimpleDateFormat("D");
+        Date date = new Date();
+        String curDate = dateFormat.format(date);
+
+        PreparedStatement acc = conn.prepareStatement("UPDATE ACCOUNT SET LAST_LOGGED_IN = ? WHERE AID = ?");
+        acc.setString(1,curDate);
+        acc.setInt(2,aid);
     }
 
 

@@ -2,6 +2,7 @@ package johnsUtil.model.SharedResources;
 
 import org.mindrot.jbcrypt.BCrypt;
 
+import javax.xml.crypto.Data;
 import java.io.File;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -55,6 +56,12 @@ public class Account {
     }
 
     public void logout(){
+        try {
+            Database.getInstance().logOut(accountID);
+        } catch (SQLException e) {
+            //Couldn't set last logged in .. oh well
+        }
+
         this.accountID  = -1;
         this.userName = "";
         this.userType = 3;
