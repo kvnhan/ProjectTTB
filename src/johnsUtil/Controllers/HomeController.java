@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Rectangle2D;
+import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -35,9 +36,13 @@ public class HomeController implements Initializable {
     @FXML
     private JFXDrawer drawer;
 
+    @FXML
+    private VBox burgerBox;
+
     private VBox vbox;
     private BorderPane borderPane;
     private ImageView logo;
+    private GridPane gridPane;
 
 
 
@@ -62,7 +67,13 @@ public class HomeController implements Initializable {
         try {
             vbox = FXMLLoader.load(getClass().getClassLoader().getResource("johnsUtil/Views/NavigationPane.fxml"));
             borderPane = FXMLLoader.load(getClass().getClassLoader().getResource("johnsUtil/Views/SearchMenu.fxml"));
-
+            for(Node node : borderPane.getChildren()){
+                if(node.getAccessibleText() != null && node.getAccessibleText().equals("gridPane")){
+                    gridPane = (GridPane) node;
+                }
+            }
+            gridPane.add(hamburger,0,2);
+            center.getChildren().remove(burgerBox);
             center.setCenter(borderPane);
             drawer.setSidePane(vbox);
 

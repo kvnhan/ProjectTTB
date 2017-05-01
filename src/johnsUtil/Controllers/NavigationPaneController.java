@@ -1,6 +1,8 @@
 package johnsUtil.Controllers;
 
 import com.jfoenix.controls.JFXButton;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.image.Image;
@@ -8,6 +10,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import johnsUtil.Main;
 import johnsUtil.model.SharedResources.Account;
+import johnsUtil.model.SharedResources.Screen;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -77,6 +80,14 @@ public class NavigationPaneController implements Initializable {
             vbox.getChildren().remove(mainMenuBtn);
         }
 
+
+
+        logoutBtn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                Screen.getInstance().createConfirmBox("Test 123", "Test 345");
+            }
+        });
 
 
 
