@@ -332,7 +332,7 @@ public class ReadWithScanner {
             System.out.println(STATUS);
             System.out.println(EXPIRY_DATE);
             System.out.println(SURRENDERED_DATE);
-            System.out.println(QUALIFICATION);
+            Sytem.out.println(QUALIFICATION);
             System.out.println(RECEIVED_CODE);
 
 */
