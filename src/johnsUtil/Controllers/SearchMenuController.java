@@ -29,6 +29,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.*;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
@@ -112,6 +113,25 @@ public class SearchMenuController {
             Account.getInstance().setSearch("");
         }
         searchTextField.setText(searchTemp);
+
+        //TODO: add search functionality
+
+        searchTextField.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                if (event.getCode() == KeyCode.ENTER) {
+                    System.out.println("Searched using enter");
+                    try {
+                        search(new ActionEvent(searchButton, (Node) searchButton));
+                    }
+                    catch(java.sql.SQLException e){}
+                    catch(java.lang.NoSuchMethodException e){}
+                    catch(java.lang.IllegalAccessException e){}
+                    catch(java.lang.InstantiationException e){}
+                    catch(java.io.IOException e){}
+                }
+            }
+        });
 //        HamburgerBackArrowBasicTransition burgerTask2 = new HamburgerBackArrowBasicTransition(Back);
 //        burgerTask2.setRate(-1);
 //        Back.addEventHandler(MouseEvent.MOUSE_ENTERED, (e) -> {
