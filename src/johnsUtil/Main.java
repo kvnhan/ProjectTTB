@@ -3,6 +3,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import johnsUtil.model.SharedResources.Account;
 import johnsUtil.model.SharedResources.Database;
@@ -30,6 +31,7 @@ public class Main extends Application {
         primaryStage.setMaximized(true);
         primaryStage.setMinHeight(800);
         primaryStage.setMinWidth(1300);
+        primaryStage.getIcons().add(new Image(Main.class.getResourceAsStream("/alch.png")));
         Account.getInstance().setWindow(primaryStage);
         primaryStage.show();
     }

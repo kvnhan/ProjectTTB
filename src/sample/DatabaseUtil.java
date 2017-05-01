@@ -1630,13 +1630,13 @@ public class DatabaseUtil {
             if (BCrypt.checkpw(password,ref.trim())) {
                 johnsUtil.model.SharedResources.Account acc = johnsUtil.model.SharedResources.Account.getInstance();
                 acc.setAccountID(rs.getInt("AID"));
-                acc.setUserName(rs.getString("USERNAME"));
+                acc.setUserName(rs.getString("USERNAME").trim());
                 acc.setUserType(rs.getInt("USER_TYPE"));
-                acc.setAddress(rs.getString("ADDRESS"));
-                acc.setName(rs.getString("YOUR_NAME"));
-                acc.setEmail(rs.getString("EMAIL"));
-                acc.setPhoneNum(rs.getString("PHONE"));
-                acc.setPicPath(new File(rs.getString("IMAGE_PATH")));
+                acc.setAddress(rs.getString("ADDRESS").trim());
+                acc.setName(rs.getString("YOUR_NAME").trim());
+                acc.setEmail(rs.getString("EMAIL").trim());
+                acc.setPhoneNum(rs.getString("PHONE").trim());
+                acc.setPicPath(new File(rs.getString("IMAGE_PATH").trim()));
                 return true;
             }
             else{
