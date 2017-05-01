@@ -131,6 +131,7 @@ public class ReviseAppController {
                 dom1.setSelected(false);
                 dom11.setSelected(false);
                 dom111.setSelected(false);
+                dom1111.setSelected(false);
                 if (!type3box.getText().trim().isEmpty()) {
                     type3box.clear();
                 }
@@ -153,14 +154,14 @@ public class ReviseAppController {
                     RepID.setDisable(true);
                     PlantReg.setDisable(true);
                     SerialNo.setDisable(true);
-                    ApplicantName.setDisable(true);
+                    //ApplicantName.setDisable(true);
                     BrandName.setDisable(true);
                     Name.setDisable(true);
                     Formula.setDisable(true);
                     PhoneNumber.setDisable(true);
                     EmailAddress.setDisable(true);
-                    Address.setDisable(true);
-                    MailingAddress.setDisable(true);
+                    //Address.setDisable(true);
+                    //MailingAddress.setDisable(true);
                     //clearButton.setDisable(true);
                     dom.setDisable(true);
                     imp.setDisable(true);
@@ -169,6 +170,8 @@ public class ReviseAppController {
                     dom1.setDisable(true);
                     dom1111.setDisable(true);
                     ttb.setDisable(true);
+                    sulfiteField.setDisable(true);
+                    originField.setDisable(true);
                 }
                 if (type.equals("WINE")) {
                     if (source.equals("DOMESTIC")) {
@@ -231,6 +234,23 @@ public class ReviseAppController {
                         alcoholContent.setDisable(true);
                     }
 
+                    if (dataPasser.getDisableNet() == 1) {
+                        netContentField.setDisable(true);
+                    }
+                    if (dataPasser.getDisableComment() == 1) {
+                        additionalInfoField.setDisable(true);
+                    }
+                    if(dataPasser.getDisableAddress() == 1){
+                        Address.setDisable(true);
+
+                    }
+                    if(dataPasser.getDisableMailingAndName() == 1){
+                        MailingAddress.setDisable(true);
+                        ApplicantName.setDisable(true);
+                    }
+                    if (dataPasser.getDisableBottler() == 1){
+                        bottlerField.setDisable(true);
+                    }
 
                 } else if (type.equals("BEER")) {
                     if (source.equals("DOMESTIC")) {
@@ -259,6 +279,8 @@ public class ReviseAppController {
                         pH.setDisable(true);
                         Appellation.setDisable(true);
                         grapeVarietal.setDisable(true);
+                        bottlerField.setDisable(true);
+                        sulfiteField.setDisable(true);
                     }
                     beerCheckBox.setSelected(true);
                     //ID1.setText(data.getTtbID());
@@ -282,7 +304,21 @@ public class ReviseAppController {
                     originField.setText(Integer.toString(a.getOriginCode()));
 
                     if (dataPasser.getDisableAlcoContentField() == 1) {
-                        alcoholContent.setEditable(false);
+                        alcoholContent.setDisable(true);
+                    }
+                    if (dataPasser.getDisableComment() == 1) {
+                        additionalInfoField.setDisable(true);
+                    }
+                    if (dataPasser.getDisableNet() == 1) {
+                        netContentField.setDisable(true);
+                    }
+                    if(dataPasser.getDisableAddress() == 1){
+                        Address.setDisable(true);
+
+                    }
+                    if(dataPasser.getDisableMailingAndName() == 1){
+                        MailingAddress.setDisable(true);
+                        ApplicantName.setDisable(true);
                     }
                 } else {
                     if (source.equals("DOMESTIC")) {
@@ -310,6 +346,8 @@ public class ReviseAppController {
                         pH.setDisable(true);
                         Appellation.setDisable(true);
                         grapeVarietal.setDisable(true);
+                        bottlerField.setDisable(true);
+                        sulfiteField.setDisable(true);
                     }
 
                     distilledCheckBox.setSelected(true);
@@ -335,6 +373,20 @@ public class ReviseAppController {
 
                     if (dataPasser.getDisableAlcoContentField() == 1) {
                         alcoholContent.setDisable(true);
+                    }
+                    if (dataPasser.getDisableComment() == 1) {
+                        additionalInfoField.setDisable(true);
+                    }
+                    if (dataPasser.getDisableNet() == 1) {
+                        netContentField.setDisable(true);
+                    }
+                    if(dataPasser.getDisableAddress() == 1){
+                        Address.setDisable(true);
+
+                    }
+                    if(dataPasser.getDisableMailingAndName() == 1){
+                        MailingAddress.setDisable(true);
+                        ApplicantName.setDisable(true);
                     }
                 }
             }

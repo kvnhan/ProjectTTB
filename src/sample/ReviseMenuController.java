@@ -18,7 +18,7 @@ import java.util.ArrayList;
 
 
 /**
-* Controller for the Revisions Menu screen.
+ * Controller for the Revisions Menu screen.
  *  */
 //Change to a relevant path. Specify the name of the subfolder in the path and that will help to connect the db.
 //Go back to the notes from the JDBC slides. One uses a prepared statemnt and one does not
@@ -64,6 +64,9 @@ public class ReviseMenuController {
         }
         catch(SQLException e){
             System.out.println("YOU HAVE NO FORMS");
+        }
+        for(int i = 0; i < formsFound.size(); i ++){
+            formsObservableList.add(formsFound.get(i).getTtbID());
         }
         applicationChoiceBox.setItems(formsObservableList);
         applicationChoiceBox.getSelectionModel().selectFirst();
@@ -126,7 +129,6 @@ public class ReviseMenuController {
             dataPasser.setDisableAppellationField(1);
             dataPasser.setDisableVarietalField(1);
         }
-        dataPasser.setDisableRestField(1);
         /*
         if(!rev5En.isSelected()){
             dataPasser.setDisableImageField(1);
@@ -144,13 +146,37 @@ public class ReviseMenuController {
         if(!rev10En.isSelected()){
 
         }
+        */
         if(!rev11En.isSelected()){
-
+            dataPasser.setDisableNet(1);
         }
+        /*
         if(!rev12En.isSelected()){
 
         }
         */
+        if(!rev13En.isSelected()){//Bottler
+            dataPasser.setDisableBottler(1);
+        }
+        if(!rev14En.isSelected()){//Alcohol Content & Distilled Only
+            dataPasser.setDisableAlcoContentField(1);
+        }
+        if(!rev15En.isSelected()){//Statement & for Distilled
+            dataPasser.setDisableComment(1);
+        }
+        if(!rev16En.isSelected()){//Statement & for Wine And Beer
+            dataPasser.setDisableComment(1);
+        }
+        if(!rev17En.isSelected()){//Statement for Beer
+            dataPasser.setDisableComment(1);
+        }
+        if(!rev20En.isSelected()){// Mailin Address & Name
+            dataPasser.setDisableMailingAndName(1);
+        }
+        if(!rev21En.isSelected()){// Address
+            dataPasser.setDisableAddress(1);
+        }
+        dataPasser.setDisableRestField(1);
         screenUtil.switchScene("ReviseApp.fxml", "Revision Updates");
         System.out.println("TTBID: " + ttbid);
 
@@ -284,7 +310,7 @@ public class ReviseMenuController {
             } catch (Exception e) {
                 e.printStackTrace();
             }*/
-        }
+    }
 
     /**
      * Switches users to the Revisions help screen.

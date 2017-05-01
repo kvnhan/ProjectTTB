@@ -6,6 +6,8 @@ package sample;
 public class DataPasser {
 
     private static AlcoholData alcData;
+    private static ApplicationData applicationData;
+    private static int isInvokedByManu;
     private static int isRevised;
     private static String ttbidID;
     private static int isInvokebyReviseMenu;
@@ -17,6 +19,51 @@ public class DataPasser {
     private static int disableImageField;
     private static int disableImageButton;
     private static int disableAlcoContentField;
+    private static int disableBottler;
+    private static int disableComment;
+    private static int disableMailingAndName;
+    private static int disableAddress;
+    private static int disableNet;
+
+    public  int getDisableNet() {
+        return disableNet;
+    }
+
+    public  void setDisableNet(int disableNet) {
+        this.disableNet = disableNet;
+    }
+
+    public int getDisableBottler() {
+        return disableBottler;
+    }
+
+    public void setDisableBottler(int disableBottler) {
+        this.disableBottler = disableBottler;
+    }
+
+    public  int getDisableComment() {
+        return disableComment;
+    }
+
+    public  void setDisableComment(int disableComment) {
+        this.disableComment = disableComment;
+    }
+
+    public  int getDisableMailingAndName() {
+        return disableMailingAndName;
+    }
+
+    public  void setDisableMailingAndName(int disableMailingAndName) {
+        this.disableMailingAndName = disableMailingAndName;
+    }
+
+    public  int getDisableAddress() {
+        return disableAddress;
+    }
+
+    public  void setDisableAddress(int disableAddress) {
+        this.disableAddress = disableAddress;
+    }
 
     public static String getTtbID() {
         return ttbidID;
@@ -113,5 +160,38 @@ public class DataPasser {
 
     public void setAlcData(AlcoholData alcData) {
         this.alcData = alcData;
+    }
+
+    public  ApplicationData getApplicationData() {
+        return applicationData;
+    }
+
+    public void setApplicationData(ApplicationData applicationData) {
+        this.applicationData = applicationData;
+    }
+
+    public  int getIsInvokedByManu() {
+        return isInvokedByManu;
+    }
+
+    public void setIsInvokedByManu(int isInvokedByManu) {
+        this.isInvokedByManu = isInvokedByManu;
+    }
+
+
+    public static int getIsRevised() {
+        return isRevised;
+    }
+
+    public static String getTtbidID() {
+        return ttbidID;
+    }
+
+    public static void setTtbidID(String ttbidID) {
+        DataPasser.ttbidID = ttbidID;
+    }
+
+    public static int getIsInvokebyReviseMenu() {
+        return isInvokebyReviseMenu;
     }
 }
