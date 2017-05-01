@@ -171,7 +171,7 @@
                         </Pane>
                         <Pane prefHeight="105.0" prefWidth="1100.0" GridPane.rowIndex="4">
                             <children>
-                                <Text layoutX="51.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Manufracture Info">
+                                <Text layoutX="51.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Manufacture Info">
                                     <font>
                                         <Font size="24.0" />
                                     </font>
