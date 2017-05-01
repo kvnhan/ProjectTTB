@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.image.ImageView?>
@@ -19,29 +18,28 @@
                </font>
             </Label>
             <Separator layoutY="46.0" prefHeight="3.0" prefWidth="750.0" />
-            <Button fx:id="backButton" layoutY="676.0" mnemonicParsing="false" onAction="#goBack" text="Back" />
             <Label layoutX="8.0" layoutY="46.0" prefHeight="70.0" prefWidth="731.0" text="We would like to thank the US Treasury’s Alcohol and Tobacco Tax and Trade Bureau, who provided us with the opportunity to work on this project. We would also like to thank their representative Assistant CIO, Greg Greely, for their time and input on our application." wrapText="true" />
             <Label layoutX="10.0" layoutY="116.0" prefHeight="56.0" prefWidth="731.0" text="This project was organized by the Worcester Polytechnic Institute's Computer Science Department, CS 3733 Software Engineering Class, taught by Professor Wilson Wong." wrapText="true" />
             <Label layoutX="11.0" layoutY="172.0" prefHeight="27.0" prefWidth="500.0" text="This Application was Implemented by CS 3733 Team A, whose members include:" />
             <Label layoutX="12.0" layoutY="276.0" text="Project Manager - Elsa Luthi" />
             <ImageView fx:id="elsaPic" fitHeight="78.0" fitWidth="78.0" layoutX="70.0" layoutY="199.0" pickOnBounds="true" preserveRatio="true" />
-            <Label layoutX="291.0" layoutY="276.0" text="Lead Engineer - Ari Goodman" />
-            <ImageView fx:id="ariPic" fitHeight="78.0" fitWidth="78.0" layoutX="345.0" layoutY="199.0" pickOnBounds="true" preserveRatio="true" />
+            <Label layoutX="288.0" layoutY="276.0" text="Lead Engineer - Ari Goodman" />
+            <ImageView fx:id="ariPic" fitHeight="78.0" fitWidth="78.0" layoutX="342.0" layoutY="199.0" pickOnBounds="true" preserveRatio="true" />
             <ImageView fx:id="jonPic" fitHeight="78.0" fitWidth="78.0" layoutX="70.0" layoutY="293.0" pickOnBounds="true" preserveRatio="true" />
             <Label layoutX="4.0" layoutY="385.0" text="Assistant Lead Engineer - Jonathan A’Vant" />
             <Label layoutX="3.0" layoutY="474.0" text="Assistant Lead Engineer - Christian Cedron" />
             <Label layoutX="292.0" layoutY="476.0" text="Software Engineers - Adonay Resom" />
-            <ImageView fx:id="adonayPic" fitHeight="70.0" fitWidth="66.0" layoutX="366.0" layoutY="406.0" pickOnBounds="true" preserveRatio="true" />
-            <ImageView fx:id="jacobPic" fitHeight="70.0" fitWidth="78.0" layoutX="58.0" layoutY="502.0" pickOnBounds="true" preserveRatio="true" />
-            <ImageView fx:id="peterPic" fitHeight="70.0" fitWidth="66.0" layoutX="359.0" layoutY="495.0" pickOnBounds="true" preserveRatio="true" />
-            <ImageView fx:id="chrisPic" fitHeight="70.0" fitWidth="78.0" layoutX="80.0" layoutY="402.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="adonayPic" fitHeight="70.0" fitWidth="66.0" layoutX="357.0" layoutY="406.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="jacobPic" fitHeight="70.0" fitWidth="78.0" layoutX="65.0" layoutY="502.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="peterPic" fitHeight="70.0" fitWidth="66.0" layoutX="355.0" layoutY="495.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="chrisPic" fitHeight="70.0" fitWidth="78.0" layoutX="70.0" layoutY="402.0" pickOnBounds="true" preserveRatio="true" />
             <Label layoutX="505.0" layoutY="276.0" text="Product Owner- Sam Winter" />
             <ImageView fx:id="samPic" fitHeight="78.0" fitWidth="78.0" layoutX="551.0" layoutY="199.0" pickOnBounds="true" preserveRatio="true" />
-            <ImageView fx:id="lucyPic" fitHeight="78.0" fitWidth="78.0" layoutX="568.0" layoutY="307.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="lucyPic" fitHeight="78.0" fitWidth="78.0" layoutX="561.0" layoutY="307.0" pickOnBounds="true" preserveRatio="true" />
             <Label layoutX="482.0" layoutY="385.0" text="Documentation Analyst - Lucy Stuehrmann" />
             <Label layoutX="287.0" layoutY="385.0" text="Test Engineer - Kien Nhan" />
             <Label layoutX="3.0" layoutY="658.0" text="Team Coach: Trevor J. Valcourt" />
-            <ImageView fx:id="kienPic" fitHeight="78.0" fitWidth="78.0" layoutX="334.0" layoutY="307.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="kienPic" fitHeight="78.0" fitWidth="78.0" layoutX="341.0" layoutY="307.0" pickOnBounds="true" preserveRatio="true" />
             <Label layoutX="5.0" layoutY="575.0" text="Software Engineer - Jacob Remz" />
             <Label layoutX="291.0" layoutY="575.0" text="Software Engineer - Peter Nolan" />
          </children>
