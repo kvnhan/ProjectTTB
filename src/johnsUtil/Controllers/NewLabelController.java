@@ -6,10 +6,15 @@ import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
+import johnsUtil.model.SharedResources.Account;
 import johnsUtil.model.SharedResources.Database;
 import johnsUtil.model.SharedResources.Screen;
 import sample.DatabaseUtil;
@@ -18,6 +23,7 @@ import sample.ScreenUtil;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.net.URLDecoder;
@@ -105,7 +111,7 @@ public class NewLabelController{
         subject.setText(rep);
     }
     public void goBack (ActionEvent event){
-        screenUtil.switchScene("MainMenu.fxml","Main Menu");
+        screenUtil.switchScene("Home.fxml","Main Menu");
     }
 
     /**
@@ -114,8 +120,6 @@ public class NewLabelController{
      */
     @FXML
     public void fillOutApplication(ActionEvent event) throws SQLException{
-        System.out.print("Submitting");
-
         boolean valid = true;
         int repid = 0;
         String serial = "";
@@ -399,6 +403,13 @@ public class NewLabelController{
                 String newTTBID;
                 int alcoholID;
                 java.sql.Date currentDate = new java.sql.Date((new Date()).getTime());
+                Stage primaryStage = Account.getInstance().getWindow();
+                Parent root = null;
+                try {
+                    root = FXMLLoader.load(getClass().getClassLoader().getResource("johnsUtil/Views/Home.fxml"));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
 
                 if (wineCheckBox.isSelected()) {
                     newTTBID = db.addForm(db.getNewTTBID(), repid, serial, address, permit_no, phone_number, email, applicantName, "UNASSIGNED", type1, type2, type3, permitAddress, currentDate);
@@ -408,10 +419,7 @@ public class NewLabelController{
                     saveImage(alcoholID);
                     //connect form and alcohol
                     db.updateAlcoholIDForForm(alcoholID, newTTBID);
-
-                    System.out.println("It Works");
-                    screenUtil.switchScene("NewApp.fxml", "New Application");
-
+                    primaryStage.setScene(new Scene(root));
 
                 } else if (beerCheckBox.isSelected()) {
                     newTTBID = db.addForm(db.getNewTTBID(), repid, serial, address, permit_no, phone_number, email, applicantName, "UNASSIGNED", type1, type2, type3, permitAddress, currentDate);
@@ -421,9 +429,7 @@ public class NewLabelController{
                     saveImage(alcoholID);
                     //connect form and alcohol
                     db.updateAlcoholIDForForm(alcoholID, newTTBID);
-
-                    System.out.println("This works");
-                    screenUtil.switchScene("NewApp.fxml", "New Application");
+                    primaryStage.setScene(new Scene(root));
 
                 } else if (distilledCheckBox.isSelected()) {
                     newTTBID = db.addForm(db.getNewTTBID(), repid, serial, address, permit_no, phone_number, email, applicantName, "UNASSIGNED", type1, type2, type3, permitAddress, currentDate);
@@ -433,9 +439,7 @@ public class NewLabelController{
                     saveImage(alcoholID);
                     //connect form and alcohol
                     db.updateAlcoholIDForForm(alcoholID, newTTBID);
-
-                    System.out.println("This works too");
-                    screenUtil.switchScene("NewApp.fxml", "New Application");
+                    primaryStage.setScene(new Scene(root));
 
                 }else{
                     errorMessage += "Product Unselected.\n";

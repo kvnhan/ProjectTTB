@@ -69,50 +69,6 @@
                                 <Font name="System Bold" size="36.0" />
                             </font>
                         </Text>
-                        <Pane prefHeight="10.0" prefWidth="1100.0" GridPane.rowIndex="5">
-                            <children>
-                                <JFXTextField fx:id="RepID" labelFloat="true" layoutX="51.0" layoutY="30.0" prefHeight="29.0" prefWidth="275.0" promptText="RepID" />
-                            </children>
-                        </Pane>
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="6">
-                            <children>
-                                <JFXTextField fx:id="PlantReg" labelFloat="true" layoutX="51.0" layoutY="30.0" prefHeight="29.0" prefWidth="275.0" promptText="PermitID" />
-                            </children>
-                        </Pane>
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="7">
-                            <children>
-                                <JFXTextField fx:id="SerialNo" labelFloat="true" layoutX="51.0" layoutY="30.0" prefHeight="29.0" prefWidth="275.0" promptText="Serial Number" />
-                            </children>
-                        </Pane>
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="8">
-                            <children>
-                                <JFXTextField fx:id="Address" labelFloat="true" layoutX="51.0" layoutY="30.0" prefHeight="29.0" prefWidth="275.0" promptText="Plant Address" />
-                            </children>
-                        </Pane>
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="11">
-                            <children>
-                                <JFXTextField fx:id="ApplicantName" labelFloat="true" layoutX="51.0" layoutY="30.0" prefHeight="29.0" prefWidth="275.0" promptText="Applicant Name" />
-                            </children>
-                        </Pane>
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="10">
-                            <children>
-                                <Text layoutX="51.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Applicant Info">
-                                    <font>
-                                        <Font size="24.0" />
-                                    </font>
-                                </Text>
-                            </children>
-                        </Pane>
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="12">
-                            <children>
-                                <JFXTextField fx:id="MailingAddress" labelFloat="true" layoutX="51.0" layoutY="30.0" prefHeight="29.0" prefWidth="275.0" promptText="Mailing Address" />
-                            </children>
-                        </Pane>
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="13">
-                            <children>
-                                <JFXTextField fx:id="EmailAddress" labelFloat="true" layoutX="51.0" layoutY="30.0" prefHeight="29.0" prefWidth="275.0" promptText="Email Address" />
-                            </children>
-                        </Pane>
                         <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
                             <children>
                                 <Text layoutX="51.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type of Application">
@@ -133,7 +89,7 @@
                                     <children>
                                         <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3">
                                             <children>
-                                                <TextField fx:id="ttbid" layoutX="376.0" layoutY="1.0" prefHeight="31.0" prefWidth="184.0" />
+                                                <TextField fx:id="ttbid" editable="false" layoutX="376.0" layoutY="1.0" prefHeight="31.0" prefWidth="184.0" />
                                                 <Label layoutX="325.0" layoutY="6.0" prefHeight="21.0" prefWidth="51.0" text="TTBID" />
                                             </children>
                                         </Pane>
@@ -213,22 +169,6 @@
                                 </GridPane>
                             </children>
                         </Pane>
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="14">
-                            <children>
-                                <JFXTextField fx:id="PhoneNumber" labelFloat="true" layoutX="51.0" layoutY="30.0" prefHeight="29.0" prefWidth="275.0" promptText="Phone Number" />
-                            </children>
-                        </Pane>
-                        <Pane prefHeight="185.0" prefWidth="1100.0" GridPane.rowIndex="29">
-                            <children>
-                                <Text layoutX="51.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Label">
-                                    <font>
-                                        <Font size="24.0" />
-                                    </font>
-                                </Text>
-                                <ImageView fx:id="image" fitHeight="208.0" fitWidth="285.0" layoutX="460.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" />
-                                <JFXButton layoutX="282.0" layoutY="78.0" onAction="#chooseFile" style="-fx-background-color: C0392B;" text="Choose Image" textFill="WHITE" />
-                            </children>
-                        </Pane>
                         <Pane prefHeight="105.0" prefWidth="1100.0" GridPane.rowIndex="4">
                             <children>
                                 <Text layoutX="51.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Manufracture Info">
@@ -238,9 +178,53 @@
                                 </Text>
                             </children>
                         </Pane>
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="17">
+                        <Pane prefHeight="10.0" prefWidth="1100.0" GridPane.rowIndex="5">
                             <children>
-                                <JFXTextField fx:id="BrandName" labelFloat="true" layoutX="51.0" layoutY="30.0" prefHeight="29.0" prefWidth="275.0" promptText="Brand Name" />
+                                <JFXTextField fx:id="RepID" labelFloat="true" layoutX="51.0" layoutY="30.0" prefHeight="29.0" prefWidth="275.0" promptText="RepID" />
+                            </children>
+                        </Pane>
+                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="6">
+                            <children>
+                                <JFXTextField fx:id="PlantReg" labelFloat="true" layoutX="51.0" layoutY="30.0" prefHeight="29.0" prefWidth="275.0" promptText="PermitID" />
+                            </children>
+                        </Pane>
+                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="7">
+                            <children>
+                                <JFXTextField fx:id="SerialNo" labelFloat="true" layoutX="51.0" layoutY="30.0" prefHeight="29.0" prefWidth="275.0" promptText="Serial Number" />
+                            </children>
+                        </Pane>
+                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="8">
+                            <children>
+                                <JFXTextField fx:id="Address" labelFloat="true" layoutX="51.0" layoutY="30.0" prefHeight="29.0" prefWidth="275.0" promptText="Plant Address" />
+                            </children>
+                        </Pane>
+                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="10">
+                            <children>
+                                <Text layoutX="51.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Applicant Info">
+                                    <font>
+                                        <Font size="24.0" />
+                                    </font>
+                                </Text>
+                            </children>
+                        </Pane>
+                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="11">
+                            <children>
+                                <JFXTextField fx:id="ApplicantName" labelFloat="true" layoutX="51.0" layoutY="30.0" prefHeight="29.0" prefWidth="275.0" promptText="Applicant Name" />
+                            </children>
+                        </Pane>
+                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="12">
+                            <children>
+                                <JFXTextField fx:id="MailingAddress" labelFloat="true" layoutX="51.0" layoutY="30.0" prefHeight="29.0" prefWidth="275.0" promptText="Mailing Address" />
+                            </children>
+                        </Pane>
+                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="13">
+                            <children>
+                                <JFXTextField fx:id="EmailAddress" labelFloat="true" layoutX="51.0" layoutY="30.0" prefHeight="29.0" prefWidth="275.0" promptText="Email Address" />
+                            </children>
+                        </Pane>
+                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="14">
+                            <children>
+                                <JFXTextField fx:id="PhoneNumber" labelFloat="true" layoutX="51.0" layoutY="30.0" prefHeight="29.0" prefWidth="275.0" promptText="Phone Number" />
                             </children>
                         </Pane>
                         <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="16">
@@ -250,6 +234,11 @@
                                         <Font size="24.0" />
                                     </font>
                                 </Text>
+                            </children>
+                        </Pane>
+                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="17">
+                            <children>
+                                <JFXTextField fx:id="BrandName" labelFloat="true" layoutX="51.0" layoutY="30.0" prefHeight="29.0" prefWidth="275.0" promptText="Brand Name" />
                             </children>
                         </Pane>
                         <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="18">
@@ -295,6 +284,17 @@
                         <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="27">
                             <children>
                                 <JFXTextField fx:id="sulfiteField" labelFloat="true" layoutX="51.0" layoutY="30.0" prefHeight="29.0" prefWidth="275.0" promptText="Sufite Description" />
+                            </children>
+                        </Pane>
+                        <Pane prefHeight="185.0" prefWidth="1100.0" GridPane.rowIndex="29">
+                            <children>
+                                <Text layoutX="51.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Label">
+                                    <font>
+                                        <Font size="24.0" />
+                                    </font>
+                                </Text>
+                                <ImageView fx:id="image" fitHeight="208.0" fitWidth="285.0" layoutX="460.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" />
+                                <JFXButton layoutX="282.0" layoutY="78.0" onAction="#chooseFile" style="-fx-background-color: C0392B;" text="Choose Image" textFill="WHITE" />
                             </children>
                         </Pane>
                         <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="28">
