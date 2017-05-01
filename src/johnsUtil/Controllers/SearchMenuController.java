@@ -185,18 +185,8 @@ public class SearchMenuController {
         choiceBox.getItems().addAll("All", "Wine", "Beer", "Distilled", "Wine and Beer", "Wine and Distilled", "Beer and Distilled", "ID", "Name", "Brand Name", "Location", "Alcohol Content");
         //sets default vaule
         choiceBox.setValue("All");
-
-        System.out.println("Searched using enter");
-                try {
-                    search(new ActionEvent(searchButton, (Node) searchButton));
-                }
-                catch(java.sql.SQLException e){}
-                catch(java.lang.NoSuchMethodException e){}
-                catch(java.lang.IllegalAccessException e){}
-                catch(java.lang.InstantiationException e){}
-                catch(java.io.IOException e){}
-            }
-
+        search2();
+    }
 
     /**
      * Displays results for a search.

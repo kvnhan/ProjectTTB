@@ -62,8 +62,8 @@ public class MainMenuController implements Initializable{
     private JFXButton button;
     @FXML
     private JFXButton searchBtn;
-    @FXML
-    private TextField searchTF;
+    //@FXML
+    //private TextField searchTF;
     @FXML
     private JFXButton dummy;
     @FXML
@@ -82,6 +82,21 @@ public class MainMenuController implements Initializable{
     private final int NUM_OF_IMGS = 7;
     private final int SLIDE_FREQ = 5;
 
+    @FXML
+    private void searchWithEnter(KeyEvent ke){
+        if (ke.getCode() == KeyCode.ENTER) {
+            System.out.println("Searched using enter");
+            try {
+                handleSearchButton(new ActionEvent(searchBtn, (Node) searchBtn));
+            } catch (java.sql.SQLException e) {
+            } catch (java.lang.NoSuchMethodException e) {
+            } catch (java.lang.IllegalAccessException e) {
+            } catch (java.lang.InstantiationException e) {
+            } catch (java.io.IOException e) {
+            }
+        }
+    }
+
     @Override
     /**
      * Initializes the main menu.
@@ -95,11 +110,11 @@ public class MainMenuController implements Initializable{
             @Override
             public void changed(ObservableValue<? extends String> observable,
                                 String oldValue, String newValue) {
-                if(!hasSearchBoxMoved) {
+                if (!hasSearchBoxMoved) {
                     moveSearchBox(hBoxForSearch);
                     hasSearchBoxMoved = true;
                 }
-                if(!isSearchBoxMoving){
+                if (!isSearchBoxMoving) {
                     new AutoCompleteComboBoxListener(searchCombo);
                 }
             }
@@ -118,7 +133,7 @@ public class MainMenuController implements Initializable{
         ImageView img7 = new ImageView(new Image(Main.class.getResourceAsStream("/image7.jpeg")));
 
 
-        hbox.getChildren().addAll(img1,img2,img3,img4,img5,img6,img7);
+        hbox.getChildren().addAll(img1, img2, img3, img4, img5, img6, img7);
         hbox.setSpacing(5);
 
 
@@ -135,7 +150,6 @@ public class MainMenuController implements Initializable{
         } catch (IOException e) {
             e.printStackTrace();
         }
-        //TODO: add search functionality
         /*
         searchTF.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
@@ -144,8 +158,12 @@ public class MainMenuController implements Initializable{
                     System.out.println("Searched using enter");
                     try {
                         handleSearchButton(new ActionEvent(searchBtn, (Node) searchBtn));
+                    } catch (java.sql.SQLException e) {
+                    } catch (java.lang.NoSuchMethodException e) {
+                    } catch (java.lang.IllegalAccessException e) {
+                    } catch (java.lang.InstantiationException e) {
+                    } catch (java.io.IOException e) {
                     }
-                    catch(IOException e){}
                 }
             }
         });
