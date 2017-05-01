@@ -11,10 +11,12 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
 import johnsUtil.Main;
 import johnsUtil.model.SharedResources.Account;
 import johnsUtil.model.SharedResources.Database;
 
+import java.io.File;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -57,6 +59,8 @@ public class RegisterController implements Initializable {
     @FXML
     private Label errorText;
 
+    private File file;
+
 
     /**
      * Initializes the registration screen.
@@ -72,6 +76,8 @@ public class RegisterController implements Initializable {
         if(img != null){
             icon.setImage(img);
         }
+
+        file = null;
     }
 
     /**
@@ -151,12 +157,13 @@ public class RegisterController implements Initializable {
             else{
                 type = 1;
             }
-            //TODO image
 
             try {
+                Account.getInstance().createAccount(userName,pass,name,address,email,phone,type,file);
                 Account.getInstance().login(userName,pass);
-                Account.getInstance().createAccount(userName,pass,name,address,email,phone,type,null);
+
             } catch (SQLException e) {
+                e.printStackTrace();
                 errorText.setText("There was a problem connecting to the database (X2)");
             }
             //TODO change scene
@@ -169,7 +176,14 @@ public class RegisterController implements Initializable {
      */
     @FXML
     void handleBrowse(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Choose Icon Picture");
+        file = fileChooser.showOpenDialog(nameTF.getScene().getWindow());
 
+        if (file != null) {
+            Image img = new Image(file.toURI().toString());
+            icon.setImage(img);
+        }
     }
 
     /**

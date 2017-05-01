@@ -76,7 +76,7 @@ public class NewAccountController {
             }
 
             if( (newUsername.trim().length() >= 5 && newUsername.trim().length() <= 15) && !dbUtil.contains("ACCOUNT", "USERNAME", newUsername.trim())){
-               dbUtil.addAccount(newUsername.trim(), "password", 1, userType);
+               dbUtil.addAccount(newUsername.trim(), "password", 1, userType,"","","","",null);
                screenUtil.switchScene("Login.fxml", "Login");
             }else if(newUsername.trim().length() < 5 || newUsername.trim().length() > 15){
                 errorBox.setText("User name must be 5 - 15 characters long");
