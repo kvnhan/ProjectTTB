@@ -477,5 +477,10 @@ public class NewLabelController{
             e.printStackTrace();
         }
     }
-
+    /**
+     * Switches user to the help screen for searches.
+     */
+    public void needHelp (){
+        screenUtil.switchScene("NewHelp.fxml","Help");
+    }
 }
