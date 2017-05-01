@@ -39,6 +39,9 @@ import javafx.stage.Stage;
 
 import static javafx.application.Application.launch;
 
+/**
+ * Controller for the search menu.
+ */
 public class SearchMenuController {
 
     private String searchText;
@@ -90,6 +93,9 @@ public class SearchMenuController {
     private @FXML Button nextPageButton;
     private @FXML Text pageNoText;
 
+    /**
+     * Initializes the search menu.
+     */
     @FXML
     public void initialize(){
         HamburgerBackArrowBasicTransition burgerTask2 = new HamburgerBackArrowBasicTransition(Back);
@@ -150,7 +156,9 @@ public class SearchMenuController {
         choiceBox.setValue("All");
     }
 
-
+    /**
+     * Displays results for a search.
+     */
     public void displayResults() {
         table.getColumns().clear();
         idColumn.setCellValueFactory(new PropertyValueFactory<>("aid"));
@@ -163,6 +171,9 @@ public class SearchMenuController {
         table.getColumns().addAll(idColumn, nameColumn, brandNameColumn, alcoholTypeColumn, locationColumn, contentColumn);
     }
 
+    /**
+     * Displays results for a search in a thumbnail.
+     */
     public void displayResultsInThumbnail(){
         alcoholLabelGridPane = new GridPane();
         alcoholLabelGridPane.setHgap(10);
@@ -285,6 +296,10 @@ public class SearchMenuController {
 
     }
 
+    /**
+     * Returns a user to the main menu.
+     * @param event Back button is pressed.
+     */
     public void back (ActionEvent event){
         Back.addEventHandler(MouseEvent.MOUSE_PRESSED, (e) -> {
             screenUtil.switchScene("MainMenu.fxml", "Main Menu");
@@ -295,6 +310,15 @@ public class SearchMenuController {
         return observableList;
     }
 
+    /**
+     * Executes a search.
+     * @param event Search button is pressed.
+     * @throws SQLException
+     * @throws NoSuchMethodException
+     * @throws IllegalAccessException
+     * @throws InstantiationException
+     * @throws IOException
+     */
     public void search(ActionEvent event) throws SQLException, NoSuchMethodException, IllegalAccessException, InstantiationException, IOException{
         imageResultPageNumber = 0;
         noOfPagesGenerated = 0;
@@ -319,8 +343,13 @@ public class SearchMenuController {
     }
 
 
-    //"All Fields", "ID", "Name", "Brand Name", "Location", "Alcohol Content"
+
     //TODO add other spirits
+
+    /**
+     * Searches the database for info.
+     * @throws SQLException
+     */
     private void searchDatabase() throws SQLException {
         choiceSearch = choiceBox.getValue();
         if (choiceSearch.equals("All")){
@@ -370,7 +399,11 @@ public class SearchMenuController {
         }
     }
 
-    //"All Fields", "ID", "Name", "Brand Name", "Location", "Alcohol Content"
+    /**
+     * Searches by different data types.
+      * @return Returns a list of alcohol data.
+     * @throws SQLException
+     */
     public List<AlcoholData> searchByChoice() throws SQLException {
         choiceSearch = choiceBox.getValue();
         List<AlcoholData> adl = new ArrayList<>();
@@ -398,6 +431,11 @@ public class SearchMenuController {
         return adl;
     }
 
+    /**
+     * Does a union search, i.e. the results of one search are added to the results
+     * of a previous search.
+     * @throws SQLException
+     */
     public void searchUnion() throws SQLException
     {
         List<AlcoholData> previousAlcoholDataResults = alcoholDataList;
@@ -406,6 +444,11 @@ public class SearchMenuController {
         alcoholDataList = mergeAlcoholData(previousAlcoholDataResults, alcoholDataList);
     }
 
+    /**
+     * Does an intersection search, i.e. the results of one search come only from the
+     * result set of a previous search.
+     * @throws SQLException
+     */
     public void searchIntersect() throws SQLException
     {
 
@@ -459,6 +502,12 @@ public class SearchMenuController {
 
     }
 
+    /**
+     * Merges alcohol data lists.
+     * @param listToAdd List to merge.
+     * @param originalList Original alcohol data list.
+     * @return Returns the merged list.
+     */
     public List<AlcoholData> mergeAlcoholData(List<AlcoholData> listToAdd, List<AlcoholData> originalList){
         List<AlcoholData> mergedAlcoholData = originalList;
 
@@ -471,11 +520,25 @@ public class SearchMenuController {
         return mergedAlcoholData;
     }
 
+    /**
+     * Gets the intersection of two lists of alcohol data.
+     * @param listToAdd List to intersect with original.
+     * @param originalList Original list.
+     * @return Returns intersected list.
+     */
     public List<AlcoholData> intersectAlcoholData(List<AlcoholData> listToAdd, List<AlcoholData> originalList){
         return combineAlcoholData(listToAdd, originalList, false);
     }
 
     // combines alcohol data results. to merge assign boolean input to true. to intersect assign boolean input to false.
+
+    /**
+     * Combines two lists of alcohol data.
+     * @param listToAdd List to add to original.
+     * @param originalList Original list.
+     * @param isMerge Merges two lists if true, intersects them if false.
+     * @return Returns merged list.
+     */
     public List<AlcoholData> combineAlcoholData(List<AlcoholData> listToAdd, List<AlcoholData> originalList, boolean isMerge){
         List<AlcoholData> combinedAlcoholData = new ArrayList<>();
         boolean toAdd;
@@ -498,7 +561,9 @@ public class SearchMenuController {
         return combinedAlcoholData;
     }
 
-
+    /**
+     * Enables auto search.
+     */
     public void enableAutomaticSearch(){
         searchTextField.addEventHandler(KeyEvent.KEY_RELEASED, (e) -> {
             try {
@@ -517,6 +582,9 @@ public class SearchMenuController {
         });
     }
 
+    /**
+     * Disables auto search.
+     */
     public void disableAutomaticSearch(){
         EventHandler keyHandler = new EventHandler<javafx.scene.input.KeyEvent>(){
             public void handle(javafx.scene.input.KeyEvent event){
@@ -543,6 +611,10 @@ public class SearchMenuController {
     private String fileDirectoryWithName = "";
 
     ////////////////////////////////////////////////////////////////////
+
+    /**
+     * Downloads search results.
+     */
     public void download2(){
         if(csvDownload.isSelected()){
             System.out.println("comma delim");
@@ -623,6 +695,11 @@ public class SearchMenuController {
         launch(args);
     }
 
+    /**
+     * Saves a search as a CSV file.
+     * @param content Content to save.
+     * @param file File to save search to.
+     */
     private void SaveFile(String content, File file){
         try {
             FileWriter fileWriter;
@@ -639,6 +716,9 @@ public class SearchMenuController {
 
     }
 
+    /**
+     * Creates navigation buttons(i.e. scroll)
+     */
     public void createPageNavigationButtons(){
         InputStream inputStreamForButtons;
         ImageView buttonImageView;
@@ -679,10 +759,18 @@ public class SearchMenuController {
         });
     }
 
+    /**
+     * Switches user to the help screen for searches.
+     */
     public void needHelp (){
         screenUtil.switchScene("SearchHelp.fxml","Help");
     }
 
+    /**
+     * Gets an image path.
+     * @return Returns the image path.
+     * @throws UnsupportedEncodingException
+     */
     public String getPath() throws UnsupportedEncodingException {
 
 

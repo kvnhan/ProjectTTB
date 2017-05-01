@@ -127,6 +127,10 @@ public class ScreenUtil {
         return previousScene;
     }
 
+    /**
+     * Shows detail about alcohols.
+     * @param alcoholData Alcohol information to show.
+     */
     public void showAlcoholDetail(AlcoholData alcoholData){
         alertWindow = new Stage();
 
@@ -209,6 +213,10 @@ public class ScreenUtil {
         alertWindow.showAndWait();
     }
 
+    /**
+     * Requests alcohol data from the system.
+     * @param alcData Alcohol data requested.
+     */
     public void pullUpAlcoholDetails(AlcoholData alcData){
         dataPass = new DataPasser();
         dataPass.setAlcData(alcData);
@@ -224,6 +232,10 @@ public class ScreenUtil {
         alertWindow.showAndWait();
     }
 
+    /**
+     * Opens file chooser for label images.
+     * @return Returns chosen file.
+     */
     public File openFileChooser(){
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Choose label picture");

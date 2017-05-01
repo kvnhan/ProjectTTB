@@ -7,7 +7,7 @@ import java.awt.*;
 import java.io.InputStream;
 
 /**
- * Created by peternolan on 4/25/17.
+ * Help screen for the workflow inbox.
  */
 public class WorkFlowInboxHelpController {
     ScreenUtil screenUtil = new ScreenUtil();
@@ -16,6 +16,9 @@ public class WorkFlowInboxHelpController {
     @FXML
     private TextArea text;
 
+    /**
+     * Returns user to the workflow inbox screen.
+     */
     public void goBack(){
         screenUtil.switchScene("WorkFlow.fxml", "Inbox");
     }

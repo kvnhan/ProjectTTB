@@ -82,12 +82,17 @@ public class NewLabelController{
         screenUtil.switchScene("NewLabel.fxml", "New Label");
     }
 
-
+    /**
+     * Initializes the new label screen.
+     */
     public void initialize(){
         subject = new Subject();
         new REST(subject, SerialNo, MailingAddress, PlantReg, PhoneNumber, EmailAddress, ApplicantName, Address);
     }
 
+    /**
+     * Notifies observers of changes to the representative ID.
+     */
     public void notifyObservers(){
         String rep = RepID.getText();
         subject.setText(rep);
@@ -421,15 +426,26 @@ public class NewLabelController{
 
     }
 
+    /**
+     * Switches users to the New Label Help screen.
+     */
     public void buttonClicked (){
         screenUtil.switchScene("NewHelp.fxml","Help");
     }
 
+    /**
+     * Exports a PDF of the form.
+     */
     public void exportPDF () {
 
 
     }
 
+    /**
+     * Gets path for the label image.
+     * @return Returns string representing path to the label image.
+     * @throws UnsupportedEncodingException
+     */
     public String getPath() throws UnsupportedEncodingException {
 
 
@@ -445,6 +461,10 @@ public class NewLabelController{
         return newDir;
     }
 
+    /**
+     * Saves alcohol label image to the system.
+     * @param aid AID to associate with the label image.
+     */
     public void saveImage(int aid){
         BufferedImage image2 = null;
         BufferedImage image3 = null;

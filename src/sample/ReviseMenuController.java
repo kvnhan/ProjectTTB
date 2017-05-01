@@ -286,7 +286,9 @@ public class ReviseMenuController {
             }*/
         }
 
-
+    /**
+     * Switches users to the Revisions help screen.
+     */
     public void needHelp (){
         screenUtil.switchScene("AppChangesHelp.fxml","Help");
     }

@@ -14,7 +14,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
- * Created by John on 4/19/2017.
+ * Controller for supervisor account.
  */
 public class SupervisorController {
     private ScreenUtil screenUtil = new ScreenUtil();
@@ -39,14 +39,24 @@ public class SupervisorController {
     TreeView<TItem> view;
 
     @FXML
+    /**
+     * Returns user to main menu.
+     */
     public void goBack(){
         screenUtil.switchScene("MainMenu.fxml", "Main Menu");
     }
 
+    /**
+     * Initializes the supervisor screen.
+     * @throws SQLException
+     */
     public void initialize() throws SQLException {
 
     }
 
+    /**
+     * Supervisor search function.
+     */
     @FXML
     public void handleSearch(){
         screenUtil = new ScreenUtil();
@@ -87,6 +97,9 @@ public class SupervisorController {
         System.out.println("DOne");
     }
 
+    /**
+     * Switches to supervisor help screen.
+     */
     public void needHelp (){
         screenUtil.switchScene("superVisorHelp.fxml","Help");
     }

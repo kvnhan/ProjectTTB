@@ -1,7 +1,7 @@
 package sample;
 
 /**
- * Created by samur on 4/19/2017.
+ * Controller for Superuser class.
  */
 public class SuperUserController {
 }
