@@ -14,7 +14,9 @@ public class AccountsUtil {
     private static String username = "";
     private ScreenUtil screenUtil;
 
-
+    /**
+     * Creates an instance of an account util.
+     */
     public AccountsUtil(){
         loadFile();
         usernameMap = new HashMap<String, Account>();

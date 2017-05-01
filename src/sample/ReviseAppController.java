@@ -346,7 +346,10 @@ public class ReviseAppController {
         System.out.println(dataPasser.isIsInvokebyReviseMenu());
     }
 
-
+    /**
+     * Returns user to the main menu.
+     * @param event Back button pressed.
+     */
     public void goBack (ActionEvent event){
         if(dataPasser.isIsRevised() == 1){
             dataPasser.setIsRevised(0);
@@ -645,7 +648,7 @@ public class ReviseAppController {
         ScreenUtil work = new ScreenUtil();
         work.switchScene("ReviseApp.fxml", "Revise Application");
     }
-
+*/
 
     /**
      * Opens a file explorer to choose an image to upload.
@@ -658,6 +661,11 @@ public class ReviseAppController {
         revisionImagePath = selectedFile.getPath();
     }
 
+    /**
+     * gets image path.
+     * @return Returns ath to the alcohol image.
+     * @throws UnsupportedEncodingException
+     */
     public String getPath() throws UnsupportedEncodingException {
 
 
@@ -673,6 +681,10 @@ public class ReviseAppController {
         return newDir;
     }
 
+    /**
+     * Saves image to the system.
+     * @param aid AID to associate with the image.
+     */
     public void saveImage(int aid){
         BufferedImage image2 = null;
         BufferedImage image3 = null;
@@ -685,6 +697,10 @@ public class ReviseAppController {
         }
     }
 
+    /**
+     * Set image in system.
+     * @param aid AID to associate with the image.
+     */
     public void setImage(int aid){
         try {
             String path = getPath();
@@ -705,6 +721,9 @@ public class ReviseAppController {
         work.switchScene("ReviseApp.fxml", "Revise Application");
     }
 
+    /**
+     * Brings user to the revisions help screen.
+     */
     public void needHelp (){
         screenUtil.switchScene("ReviseHelp.fxml","Help");
     }

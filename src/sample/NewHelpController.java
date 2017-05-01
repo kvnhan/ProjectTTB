@@ -7,7 +7,7 @@ import java.awt.*;
 import java.io.InputStream;
 
 /**
- * Created by peternolan on 4/15/17.
+ * Controller for help screens.
  */
 public class NewHelpController {
     ScreenUtil screenUtil = new ScreenUtil();
@@ -17,6 +17,9 @@ public class NewHelpController {
     @FXML
     ImageView screenImage;
 
+    /**
+     * Initializes the new label help screen.
+     */
     public void initialize(){
 
         try {
@@ -31,6 +34,9 @@ public class NewHelpController {
 
     }
 
+    /**
+     * Returns a user to the New Label screen.
+     */
     public void goBack(){
         screenUtil.switchScene("NewLabel.fxml", "New Label");
 

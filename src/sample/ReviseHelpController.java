@@ -6,7 +6,7 @@ import javafx.scene.image.ImageView;
 import java.io.InputStream;
 
 /**
- * Created by peternolan on 4/17/17.
+ * Help screen for revisions.
  */
 public class ReviseHelpController {
 
@@ -14,6 +14,9 @@ public class ReviseHelpController {
     @FXML
     ImageView screenImage;
 
+    /**
+     * Initializes the help screen.
+     */
     public void initialize(){
 
         try {
@@ -28,6 +31,9 @@ public class ReviseHelpController {
 
     }
 
+    /**
+     * Returns users to the revisions menu.
+     */
     public void goBack(){
         screenUtil.switchScene("ReviseMenu.fxml", "Revisions");
 

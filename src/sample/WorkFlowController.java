@@ -11,6 +11,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+/**
+ * Controller for the workflow inbox screen.
+ */
 public class WorkFlowController {
 
     @FXML private Label numberOfApplicationsLabel;
@@ -28,6 +31,10 @@ public class WorkFlowController {
 
     private ObservableList<ApplicationData> observableFormsList;
 
+    /**
+     * Initializes the inbox for the workflow.
+     * @throws SQLException
+     */
     @FXML
     public void initialize() throws SQLException{
         databaseUtil.roundRobin();
@@ -66,6 +73,9 @@ public class WorkFlowController {
         displayResults();
     }
 
+    /**
+     * Displays forms assigned to a user.
+     */
     public void displayResults(){
         inboxTable.getColumns().clear();
 
@@ -113,6 +123,9 @@ public class WorkFlowController {
         return rowChosen;
     }
 
+    /**
+     * Pulls up the inbox help screen.
+     */
     public void needHelp (){
         screenUtil.switchScene("WorkFlowInboxHelp.fxml","Help");
     }

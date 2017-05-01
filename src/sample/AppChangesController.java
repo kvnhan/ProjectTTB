@@ -6,7 +6,7 @@ import javafx.scene.image.ImageView;
 import java.awt.*;
 
 /**
- * Created by peternolan on 4/29/17.
+ * Controller for the application changes screen.
  */
 public class AppChangesController {
 
@@ -33,6 +33,9 @@ public class AppChangesController {
     }
     */
 
+    /**
+     * Brings user back to the Revisions Help screen.
+     */
     public void goBack(){
         screenUtil.switchScene("ReviseHelp.fxml", "Assignments");
     }

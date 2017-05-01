@@ -7,7 +7,7 @@ import java.awt.*;
 import java.io.InputStream;
 
 /**
- * Created by peternolan on 4/15/17.
+ * Help screen for searching applications.
  */
 public class ReviewHelpController {
     ScreenUtil screenUtil = new ScreenUtil();
@@ -17,6 +17,9 @@ public class ReviewHelpController {
     @FXML
     ImageView screenImage;
 
+    /**
+     * Initializes the search help screen.
+     */
     public void initialize(){
 
         try {
@@ -31,6 +34,9 @@ public class ReviewHelpController {
 
     }
 
+    /**
+     * Returns user to the search page.
+     */
     public void goBack(){
         screenUtil.switchScene("SearchMenu.fxml", "Search");
 

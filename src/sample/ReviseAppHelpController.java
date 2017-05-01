@@ -1,12 +1,15 @@
 package sample;
 
 /**
- * Created by peternolan on 4/25/17.
+ * Help screen for revisions.
  */
 public class ReviseAppHelpController {
 
     ScreenUtil screenUtil = new ScreenUtil();
 
+    /**
+     * Returns users to the revisions menu.
+     */
     public void goBack(){
         screenUtil.switchScene("ReviseMenu.fxml", "Revisions");
 

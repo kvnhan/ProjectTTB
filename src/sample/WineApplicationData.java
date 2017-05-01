@@ -7,7 +7,7 @@ import java.util.Date;
 
 /**
 
- * Created by Kien Nhan on 4/3/2017.
+ * Data relating to wine applications.
 
  */
 

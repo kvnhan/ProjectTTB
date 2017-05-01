@@ -1,10 +1,5 @@
 package johnsUtil.Controllers;
 
-/**
- * Created by John on 4/27/2017.
- */
-
-
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXPasswordField;
@@ -24,6 +19,9 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+/**
+ * Controller for the registration screen.
+ */
 public class RegisterController implements Initializable {
 
     @FXML
@@ -60,7 +58,11 @@ public class RegisterController implements Initializable {
     private Label errorText;
 
 
-
+    /**
+     * Initializes the registration screen.
+     * @param location Location of the icon.
+     * @param resources ResourceBundle for the application.
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         typeCB.setStyle("-fx-font: 20px \"Calibri Light\";");
@@ -72,6 +74,10 @@ public class RegisterController implements Initializable {
         }
     }
 
+    /**
+     * Handles a submission of a new account.
+     * @param event Submit button clicked.
+     */
     @FXML
     void handleSubmit(ActionEvent event) {
         boolean havefields = true;
@@ -157,11 +163,19 @@ public class RegisterController implements Initializable {
         }
     }
 
+    /**
+     * Handles the browse button being clicked.
+     * @param event Browse button is clicked.
+     */
     @FXML
     void handleBrowse(ActionEvent event) {
 
     }
 
+    /**
+     * Closes the registration screen.
+     * @param event Close button clicked.
+     */
     @FXML
     void handleClose(ActionEvent event) {
         Node currentSource = (Node) event.getSource();

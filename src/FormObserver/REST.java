@@ -5,16 +5,24 @@ import sample.ApplicationData;
 import sample.DatabaseUtil;
 
 /**
- * Created by Kien Nhan on 4/29/2017.
+ * Class for impementation of observer pattern for an active form.
  */
 public class REST extends AbstractForm {
     DatabaseUtil bd = new DatabaseUtil();
+
+    /**
+     * Creates an instance of REST. Holds same information as an abstract form
+     * and attaches an observer to the created abstract form.
+     */
     public REST(Subject s, JFXTextField serial, JFXTextField address, JFXTextField permit, JFXTextField phone, JFXTextField email, JFXTextField name, JFXTextField permitAddress){
         super(s, serial, address, permit, phone, email, name, permitAddress);
         this.s.attachObserver(this);
     }
 
     @Override
+    /**
+     * Updates the information for the active form.
+     */
     public void update() {
         ApplicationData a;
         try {

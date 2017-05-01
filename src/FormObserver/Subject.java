@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Kien Nhan on 4/29/2017.
+ * Represents a subject to which observers are attached.
  */
 public class Subject {
 
@@ -19,10 +19,17 @@ public class Subject {
         notifyAllObservers();
     }
 
+    /**
+     * Adds an observer to the list of observers.
+     * @param observer Abstract form observer to attach.
+     */
     public void attachObserver(AbstractForm observer){
         observers.add(observer);
     }
 
+    /**
+     * Notifies all observers of an update to the active form.
+     */
     public void notifyAllObservers(){
         for (AbstractForm observer : observers) {
             observer.update();

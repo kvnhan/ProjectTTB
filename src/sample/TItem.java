@@ -1,7 +1,7 @@
 package sample;
 
 /**
- * Created by John on 4/19/2017.
+ * Interface for getting data from different classes.
  */
 public interface TItem {
     public String getData1();

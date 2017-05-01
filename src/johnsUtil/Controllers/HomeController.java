@@ -19,7 +19,7 @@ import java.util.ResourceBundle;
 
 
 /**
- * Created by John on 4/21/2017.
+ * Controller for the home page.
  */
 public class HomeController implements Initializable {
 
@@ -41,6 +41,9 @@ public class HomeController implements Initializable {
     private JFXHamburger hamburger;
 
     @Override
+    /**
+     * initializes the homepage.
+     */
     public void initialize(URL location, ResourceBundle resources) {
         //btnClose.setGraphic(new ImageView(new Image(Main.class.getResourceAsStream("/closeOld.png"))));
        // btnExpand.setGraphic(new ImageView(new Image(Main.class.getResourceAsStream("/maximizeOld.png"))));

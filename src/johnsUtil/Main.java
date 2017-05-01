@@ -8,11 +8,14 @@ import johnsUtil.model.SharedResources.Account;
 import johnsUtil.model.SharedResources.Database;
 
 /**
- * Created by John on 4/30/2017.
+ * Initializes the application.
  */
 
 public class Main extends Application {
-
+    /**
+     * Starts the application.
+     * @param primaryStage Homescreen for the application.
+     */
     @Override
     public void start(Stage primaryStage) throws Exception{
         String fxmlFile = "Views/MainMenu.fxml";

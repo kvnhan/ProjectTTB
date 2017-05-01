@@ -7,6 +7,9 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
+/**
+ * Listens for changes to what is displayed by the application.
+ */
 public class AutoCompleteComboBoxListener implements EventHandler<KeyEvent> {
 
     private ComboBox comboBox;
@@ -15,6 +18,10 @@ public class AutoCompleteComboBoxListener implements EventHandler<KeyEvent> {
     private int caretPos;
     private ObservableList<String> list = FXCollections.observableArrayList();;
 
+    /**
+     * Creates an instance of the AutoCompleteComboBoxListener class.
+     * @param comboBox Combo Box to create.
+     */
     public AutoCompleteComboBoxListener(final ComboBox comboBox) {
         this.comboBox = comboBox;
 
@@ -28,6 +35,9 @@ public class AutoCompleteComboBoxListener implements EventHandler<KeyEvent> {
     }
 
     @Override
+    /**
+     * Handler for events in the UI.
+     */
     public void handle(KeyEvent event) {
         if(event.getCode() == KeyCode.UP) {
             caretPos = -1;
@@ -83,6 +93,10 @@ public class AutoCompleteComboBoxListener implements EventHandler<KeyEvent> {
         }
     }
 
+    /**
+     * Changes the position of a caret.
+     * @param textLength New text length to set.
+     */
     private void moveCaret(int textLength) {
         if(caretPos == -1)
             comboBox.getEditor().positionCaret(textLength);

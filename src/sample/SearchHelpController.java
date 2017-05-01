@@ -7,13 +7,16 @@ import java.io.InputStream;
 import javafx.scene.image.ImageView;
 
 /**
- * Created by peternolan on 4/15/17.
+ * Help screen for searches.
  */
 public class SearchHelpController {
 
     ScreenUtil screenUtil = new ScreenUtil();
     @FXML ImageView screenImage;
 
+    /**
+     * Initializes search help screen.
+     */
     public void initialize(){
 
         try {
@@ -31,6 +34,9 @@ public class SearchHelpController {
     @FXML
     private TextArea text;
 
+    /**
+     * Returns users to the search menu.
+     */
     public void goBack(){
         screenUtil.switchScene("SearchMenu.fxml", "Search");
 

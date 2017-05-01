@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.IOException;
 
 /**
- * Created by John on 4/18/2017.
+ * Exports data from classes.
  */
 public interface Exporter {
     public void open() throws IOException;

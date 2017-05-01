@@ -32,6 +32,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+/**
+ * Controller for the main menu.
+ */
 public class MainMenuController implements Initializable{
     private boolean hasSearchBoxMoved;
     private  boolean isSearchBoxMoving;
@@ -73,6 +76,9 @@ public class MainMenuController implements Initializable{
     private final int SLIDE_FREQ = 5;
 
     @Override
+    /**
+     * Initializes the main menu.
+     */
     public void initialize(URL location, ResourceBundle resources) {
 
         hasSearchBoxMoved = false;
@@ -125,6 +131,10 @@ public class MainMenuController implements Initializable{
 
     }
 
+    /**
+     * Opens/closes the Login popup.
+     * @param event Press of the login button.
+     */
     @FXML
     protected void handleLoginButton(ActionEvent event) {
         if (!loginPopup.isShowing()) {
@@ -135,6 +145,11 @@ public class MainMenuController implements Initializable{
         }
     }
 
+    /**
+     * Opens the search screen.
+     * @param event Search button clicked.
+     * @throws IOException
+     */
     @FXML
     protected void handleSearchButton(ActionEvent event) throws IOException {
         Account.getInstance().setSearch(searchCombo.getEditor().getText());
@@ -145,6 +160,10 @@ public class MainMenuController implements Initializable{
 
     }
 
+    /**
+     * Opens the "Register a new account" screen.
+     * @param event Register button is clicked.
+     */
     @FXML
     void handleRegister(ActionEvent event) {
         if (!registerPopup.isShowing()) {
@@ -154,6 +173,10 @@ public class MainMenuController implements Initializable{
         }
     }
 
+    /**
+     * Animates the images for the main menu.
+     * @param hbox Slideshow of pictures.
+     */
     private void startAnimation(final HBox hbox) {
         EventHandler<ActionEvent> slideAction = (ActionEvent t) -> {
             TranslateTransition trans = new TranslateTransition(Duration.seconds(1.5), hbox);
@@ -182,6 +205,11 @@ public class MainMenuController implements Initializable{
         anim.setCycleCount(Timeline.INDEFINITE);
         anim.playFromStart();
     }
+
+    /**
+     * Allows one to move the search box around.
+     *
+     */
     public void moveSearchBox(HBox hbox){
         TranslateTransition tt = new TranslateTransition(Duration.millis(500), hbox);
         tt.setByY(-300f);

@@ -1,12 +1,15 @@
 package sample;
 
-/**
- * Created by Adonay on 4/20/2017.
- */
+
 import java.util.Observable;
 import java.util.Scanner;
-
+/**
+ * Sources keyboard input events.
+ */
 public class KeyboardInputEventSource extends Observable implements Runnable {
+    /**
+     * Runs function to notify observers for keyboard events.
+     */
     public void run() {
         while (true) {
             String response = new Scanner(System.in).next();

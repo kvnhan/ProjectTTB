@@ -7,7 +7,7 @@ import java.awt.*;
 import java.io.InputStream;
 
 /**
- * Created by peternolan on 4/26/17.
+ * Controller for the supervisor help screen.
  */
 public class SuperVisorHelpController {
     ScreenUtil screenUtil = new ScreenUtil();
@@ -33,6 +33,9 @@ public class SuperVisorHelpController {
     }
     */
 
+    /**
+     * Returns user to the supervisor screen.
+     */
     public void goBack(){
         screenUtil.switchScene("supervisorView.fxml", "Assignments");
     }

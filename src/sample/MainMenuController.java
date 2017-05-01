@@ -103,6 +103,10 @@ public class MainMenuController{
         }
     }
 
+    /**
+     * Switches screen to the Supervisor View if the Superuser button is pressed.
+     * @param event Superuser button is pressed.
+     */
     public void SuperUser(ActionEvent event){
       work.switchScene("supervisorView.fxml", "Super User");
     }

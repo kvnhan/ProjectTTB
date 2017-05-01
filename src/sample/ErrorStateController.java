@@ -17,6 +17,9 @@ public class ErrorStateController {
     @FXML
     private Text errorMessageText;
 
+    /**
+     * Returns user to the main menu.
+     */
     public void goBack(){
         screenUtil.switchScene("MainMenu.fxml", "Main Menu");
 

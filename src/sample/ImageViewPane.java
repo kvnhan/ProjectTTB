@@ -1,5 +1,5 @@
 package sample;
-/*
+/**
  * Copyright (c) 2012, Oracle and/or its affiliates. All rights reserved.
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
  */
@@ -17,7 +17,8 @@ import javafx.scene.layout.Region;
 
 
 /**
- *
+ *This class was imported from Oracle's image classes. See Oracle's documentation
+ * on ImageViewPanes for more information.
  * @author akouznet
  */
 public class ImageViewPane extends Region {

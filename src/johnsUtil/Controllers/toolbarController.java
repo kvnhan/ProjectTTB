@@ -18,7 +18,7 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 /**
- * Created by John on 4/27/2017.
+ * Controller for the toolbar.
  */
 public class toolbarController implements Initializable {
     @FXML
@@ -33,7 +33,11 @@ public class toolbarController implements Initializable {
     private static double xOffset = 0;
     private static double yOffset = 0;
 
-
+    /**
+     * Toolbar initialization function.
+     * @param location URLs for locations of the images for the toolbar.
+     * @param resources ResourceBundle for the application.
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         btnClose.setGraphic(new ImageView(new Image(Main.class.getResourceAsStream("/closeOld.png"))));
@@ -41,6 +45,10 @@ public class toolbarController implements Initializable {
         btnMinimize.setGraphic(new ImageView(new Image(Main.class.getResourceAsStream("/minimize.png"))));
     }
 
+    /**
+     * Closes the toolbar.
+     * @param event Close button clicked.
+     */
     @FXML
     void handleClose(ActionEvent event) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -58,12 +66,18 @@ public class toolbarController implements Initializable {
         }
     }
 
+    /**
+     * Maximizes the toolbar.
+     */
     @FXML
     void handleMaximize(ActionEvent event) {
         Stage stage = (Stage) btnClose.getScene().getWindow();
         stage.setMaximized(true);
     }
 
+    /**
+     * Minimizes the toolbar.
+     */
     @FXML
     void handleMinimize(ActionEvent event) {
         Stage stage = (Stage) btnClose.getScene().getWindow();

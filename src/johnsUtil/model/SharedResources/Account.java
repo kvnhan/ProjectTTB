@@ -9,7 +9,7 @@ import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 
 /**
- * Created by John on 4/21/2017.
+ * Contains account information.
  */
 public class Account {
 
@@ -25,7 +25,9 @@ public class Account {
     private File picPath;
     private boolean loggedIn;
     private String searchHack; //for guests
-
+/**
+ * Creates a sample account.
+ */
     private Account(){
         this.accountID  = -1;
         this.userName = "";
@@ -40,10 +42,8 @@ public class Account {
     }
 
     /**Tries to gather account info from usrName
-     * Yea I realize holding a password in a string is a vulnerability but, this is software security engineering class and not
-     *  a functional requirement given we have a shit ton of stuff to do in such little time....
-     * @param usrName
-     * @param password
+     * @param usrName Username of account.
+     * @param password Password of account.
      */
     public boolean login(String usrName, String password) throws SQLException {
         if(Database.getInstance().logIn(usrName,password)){
@@ -55,6 +55,9 @@ public class Account {
         }
     }
 
+    /**
+     * Logs a user out of the application.
+     */
     public void logout(){
         try {
             Database.getInstance().logOut(accountID);
@@ -76,13 +79,13 @@ public class Account {
     /**
      * Creates an account with the given fields
      * @param userName
-     * @param pass
+     * @param pass Password.
      * @param name
      * @param address
      * @param email
      * @param phone
-     * @param type
-     * @param file
+     * @param type Type of account.
+     * @param file Account image.
      */
     public void createAccount(String userName, String pass,String name, String address, String email, String phone, int type, java.io.File file){
         //TODO
@@ -93,7 +96,7 @@ public class Account {
     /**
      * Creates a non salted sha256 hashed string from the given password
      * @param password
-     * @return
+     * @return Returns a nonsalted sha256 hashed string.
      * @throws NoSuchAlgorithmException
      */
     @Deprecated

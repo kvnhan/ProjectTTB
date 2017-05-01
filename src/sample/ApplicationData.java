@@ -30,11 +30,15 @@ public class ApplicationData{
      * Creates an instance of Application Data.
      * @param ttbID Int representing the ID of a form.
      * @param repid Representative ID.
+     * @param serial Serial number for an application.
      * @param address Manufacturer's address.
      * @param permitNo Number of the permit.
      * @param phoneNumber Phone number for the manufacturer.
      * @param email Manufacturer's email address.
      * @param applicantName Name of the applicant.
+     * @params type1, type2, type3 Various metrics relating to the application data.
+     * @param permitAddress Address for the permit.
+     * @param submittedDate Date application was submitted.
      */
     public ApplicationData(String ttbID, int repid, String serial, String address, String permitNo, String phoneNumber, String email, String applicantName, int type1, String type2, int type3, String permitAddress, Date submittedDate) {
         this.ttbID = ttbID;
