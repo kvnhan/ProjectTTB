@@ -23,15 +23,6 @@ import java.util.ResourceBundle;
 public class InboxManuController implements Initializable {
 
     @FXML
-    private JFXDrawer drawer;
-
-    private VBox vbox;
-    private HBox hbox;
-
-    @FXML
-    private JFXHamburger hamburger;
-
-    @FXML
     private BorderPane borderPane;
 
     @FXML
@@ -48,31 +39,9 @@ public class InboxManuController implements Initializable {
      * Initializes the manufacturer inbox.
      */
     public void initialize(URL location, ResourceBundle resources) {
-        try {
-            vbox = FXMLLoader.load(getClass().getResource("/wpi/Views/NavigationPane.fxml"));
-            //hbox = FXMLLoader.load(getClass().getResource("/wpi/Toolbar.fxml")); toolbar
 
-            drawer.setSidePane(vbox);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
-        HamburgerBasicCloseTransition transition = new HamburgerBasicCloseTransition(hamburger);
-        transition.setRate(1);
 
-        hamburger.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-            transition.setRate(transition.getRate()*-1);
-            transition.play();
-
-            if(drawer.isShown()){
-                drawer.close();
-            }
-            else{
-                drawer.open();
-            }
-        });
-        drawer.open();
-        //borderPane.setTop(hbox); toolbar
     }
 
 

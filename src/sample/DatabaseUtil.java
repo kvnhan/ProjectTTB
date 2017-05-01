@@ -216,7 +216,7 @@ public class DatabaseUtil {
      * @throws SQLException
      */
     public String addForm(String ttbid, int repid, String serial, String address, String permitNo, String phone, String email, String applicantName, String status, int appType1, String appType2, int appType3, String permitAddress, java.sql.Date dateSubmitted) throws SQLException{
-        int aid = getAccountAid(AccountsUtil.getUsername());
+        int aid = johnsUtil.model.SharedResources.Account.getInstance().getAccountID();
         String values = "'" + ttbid + "', " + repid + ", '" + serial + "', '" + address + "', '" + permitNo + "', '" + phone + "', '" + email + "', '" + applicantName + "', '" + status + "', " + aid + ", " + appType1 + ", '" + appType2 + "', " + appType3 + ", '" + permitAddress + "', '" + dateSubmitted + "')";
         addToTable("FORM", FORM_FIELDS, values, "FID");
         return ttbid;

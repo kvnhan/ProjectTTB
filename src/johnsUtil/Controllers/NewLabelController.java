@@ -1,4 +1,4 @@
-package sample;
+package johnsUtil.Controllers;
 
 import FormObserver.REST;
 import FormObserver.Subject;
@@ -6,24 +6,30 @@ import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.TitledPane;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
-import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
+import johnsUtil.model.SharedResources.Account;
+import johnsUtil.model.SharedResources.Database;
+import johnsUtil.model.SharedResources.Screen;
+import sample.DatabaseUtil;
+import sample.ScreenUtil;
 
+import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.net.URLDecoder;
 import java.sql.SQLException;
 import java.util.Date;
-import javafx.scene.control.TextArea;
-
-import javafx.scene.control.TextField;
-
-import javax.imageio.ImageIO;
+import java.util.ResourceBundle;
 
 /**
  * Controller for new label screen.
@@ -31,9 +37,10 @@ import javax.imageio.ImageIO;
 public class NewLabelController{
 
     //  ApplicationUtil appUtil = new ApplicationUtil();
-    DatabaseUtil db = new DatabaseUtil();
-    ScreenUtil screenUtil = new ScreenUtil();
+    DatabaseUtil db = Database.getInstance();
+    ScreenUtil screenUtil = Screen.getInstance();
 
+    @FXML private ScrollPane scroll;
     @FXML private ImageView image;
     @FXML private JFXTextField RepID;
     @FXML private JFXTextField PlantReg;
@@ -70,7 +77,6 @@ public class NewLabelController{
     private Subject subject;
     @FXML private Button Submit;
     @FXML private Button back;
-    @FXML private Button autoFill;
     @FXML private Button clear;
     @FXML private Button helpNewButton;
     private String filepath;
@@ -80,31 +86,6 @@ public class NewLabelController{
         return 4;
     }
 
-    @FXML
-    private void autoFill(ActionEvent e){
-        RepID.setText(String.valueOf(getRandomInt()));
-        PlantReg.setText(String.valueOf(getRandomInt()));
-        SerialNo.setText(String.valueOf(getRandomInt()));
-        ApplicantName.setText("Ari G");
-        Name.setText("Beer is bad");
-        PhoneNumber.setText("911");
-        MailingAddress.setText("Jacobs house");
-        originField.setText("26");
-        BrandName.setText("Brandon");
-        Address.setText("Brandons House");
-        Formula.setText("Krabby Patties");
-        EmailAddress.setText("jdasjdjkasj@dkajskldjaslk.com");
-        alcoholContent.setText("100");
-        netContentField.setText("2 Liters");
-        grapeVarietal.setText("French");
-        Appellation.setText("France");
-        sulfiteField.setText("5");
-        Vintage.setText("1999");
-        bottlerField.setText("17th one from the left");
-        additionalInfoField.setText("Jose Wong");
-        pH.setText("7.0");
-
-    }
 
     @FXML
     /**
@@ -130,7 +111,7 @@ public class NewLabelController{
         subject.setText(rep);
     }
     public void goBack (ActionEvent event){
-        screenUtil.switchScene("MainMenu.fxml","Main Menu");
+        screenUtil.switchScene("Home.fxml","Main Menu");
     }
 
     /**
@@ -139,8 +120,6 @@ public class NewLabelController{
      */
     @FXML
     public void fillOutApplication(ActionEvent event) throws SQLException{
-        System.out.print("Submitting");
-
         boolean valid = true;
         int repid = 0;
         String serial = "";
@@ -424,6 +403,13 @@ public class NewLabelController{
                 String newTTBID;
                 int alcoholID;
                 java.sql.Date currentDate = new java.sql.Date((new Date()).getTime());
+                Stage primaryStage = Account.getInstance().getWindow();
+                Parent root = null;
+                try {
+                    root = FXMLLoader.load(getClass().getClassLoader().getResource("johnsUtil/Views/Home.fxml"));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
 
                 if (wineCheckBox.isSelected()) {
                     newTTBID = db.addForm(db.getNewTTBID(), repid, serial, address, permit_no, phone_number, email, applicantName, "UNASSIGNED", type1, type2, type3, permitAddress, currentDate);
@@ -433,10 +419,7 @@ public class NewLabelController{
                     saveImage(alcoholID);
                     //connect form and alcohol
                     db.updateAlcoholIDForForm(alcoholID, newTTBID);
-
-                    System.out.println("It Works");
-                    screenUtil.switchScene("NewApp.fxml", "New Application");
-
+                    primaryStage.setScene(new Scene(root));
 
                 } else if (beerCheckBox.isSelected()) {
                     newTTBID = db.addForm(db.getNewTTBID(), repid, serial, address, permit_no, phone_number, email, applicantName, "UNASSIGNED", type1, type2, type3, permitAddress, currentDate);
@@ -446,9 +429,7 @@ public class NewLabelController{
                     saveImage(alcoholID);
                     //connect form and alcohol
                     db.updateAlcoholIDForForm(alcoholID, newTTBID);
-
-                    System.out.println("This works");
-                    screenUtil.switchScene("NewApp.fxml", "New Application");
+                    primaryStage.setScene(new Scene(root));
 
                 } else if (distilledCheckBox.isSelected()) {
                     newTTBID = db.addForm(db.getNewTTBID(), repid, serial, address, permit_no, phone_number, email, applicantName, "UNASSIGNED", type1, type2, type3, permitAddress, currentDate);
@@ -458,9 +439,7 @@ public class NewLabelController{
                     saveImage(alcoholID);
                     //connect form and alcohol
                     db.updateAlcoholIDForForm(alcoholID, newTTBID);
-
-                    System.out.println("This works too");
-                    screenUtil.switchScene("NewApp.fxml", "New Application");
+                    primaryStage.setScene(new Scene(root));
 
                 }else{
                     errorMessage += "Product Unselected.\n";
@@ -538,7 +517,7 @@ public class NewLabelController{
             image3 = ImageIO.read(tempFile);
             ImageIO.write(image3, "jpg", new File(path + "/" + aid + ".jpg"));
         }catch (Exception e){
-            //e.printStackTrace();
+            e.printStackTrace();
         }
     }
     /**
@@ -547,4 +526,5 @@ public class NewLabelController{
     public void needHelp (){
         screenUtil.switchScene("NewHelp.fxml","Help");
     }
+
 }

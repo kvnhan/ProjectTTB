@@ -1,4 +1,4 @@
-package sample;
+package johnsUtil.Controllers;
 
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXHamburger;
@@ -36,6 +36,13 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import johnsUtil.model.SharedResources.Account;
+import johnsUtil.model.SharedResources.Database;
+import johnsUtil.model.SharedResources.Screen;
+import sample.AlcoholData;
+import sample.DatabaseUtil;
+import sample.ImageViewPane;
+import sample.ScreenUtil;
 
 import static javafx.application.Application.launch;
 
@@ -66,7 +73,7 @@ public class SearchMenuController {
     private ScrollPane imageScrollPane = new ScrollPane(alcoholLabelGridPane);
     private @FXML ToggleGroup toggleView;
 
-    private ScreenUtil screenUtil = new ScreenUtil();
+    private ScreenUtil screenUtil = Screen.getInstance();
     private int alcoholChoice = 0;
     private final int BEER = 1;
     private final int WINE = 2;
@@ -75,7 +82,7 @@ public class SearchMenuController {
     private List<AlcoholData> alcoholDataList = new ArrayList<AlcoholData>();
     private ObservableList<AlcoholData> observableList;
 
-    private DatabaseUtil dbUtil = new DatabaseUtil();
+    private DatabaseUtil dbUtil = Database.getInstance();
     private String choiceSearch;
     private boolean hasViewChanged = false;
     private boolean isSearchInImageView = false;
@@ -98,6 +105,12 @@ public class SearchMenuController {
      */
     @FXML
     public void initialize(){
+        String searchTemp = "";
+        if(Account.getInstance().getSearch().trim().length() > 0){
+            searchTemp = Account.getInstance().getSearch();
+            Account.getInstance().setSearch("");
+        }
+        searchTextField.setText(searchTemp);
 //        HamburgerBackArrowBasicTransition burgerTask2 = new HamburgerBackArrowBasicTransition(Back);
 //        burgerTask2.setRate(-1);
 //        Back.addEventHandler(MouseEvent.MOUSE_ENTERED, (e) -> {
@@ -125,12 +138,12 @@ public class SearchMenuController {
                         Result.setText("Showing " + alcoholDataList.size() + " search results.");
                         resultsMainGridPane.getChildren().remove(imageScrollPane);
                         resultsMainGridPane.getChildren().add(table);
-                     //   enableAutomaticSearch();
+                        //   enableAutomaticSearch();
                     }else if(selectedView.equals("Image View")){
                         hasViewChanged = true;
                         isSearchInImageView = true;
                         resultsMainGridPane.getChildren().remove(table);
-                    //    disableAutomaticSearch();
+                        //    disableAutomaticSearch();
                         displayResultsInThumbnail();
                     }
                 }
@@ -401,7 +414,7 @@ public class SearchMenuController {
 
     /**
      * Searches by different data types.
-      * @return Returns a list of alcohol data.
+     * @return Returns a list of alcohol data.
      * @throws SQLException
      */
     public List<AlcoholData> searchByChoice() throws SQLException {

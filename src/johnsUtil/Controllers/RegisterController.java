@@ -6,17 +6,23 @@ import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import johnsUtil.Main;
 import johnsUtil.model.SharedResources.Account;
 import johnsUtil.model.SharedResources.Database;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -25,6 +31,9 @@ import java.util.ResourceBundle;
  * Controller for the registration screen.
  */
 public class RegisterController implements Initializable {
+
+    @FXML
+    private BorderPane root;
 
     @FXML
     private JFXTextField nameTF;
@@ -76,8 +85,8 @@ public class RegisterController implements Initializable {
         if(img != null){
             icon.setImage(img);
         }
-
         file = null;
+        browse.setVisible(false);
     }
 
     /**
@@ -162,11 +171,17 @@ public class RegisterController implements Initializable {
                 Account.getInstance().createAccount(userName,pass,name,address,email,phone,type,file);
                 Account.getInstance().login(userName,pass);
 
-            } catch (SQLException e) {
+                Stage primaryStage = Account.getInstance().getWindow();
+                Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("johnsUtil/Views/Home.fxml"));
+                primaryStage.setScene(new Scene(root));
+
+                Node currentSource = (Node) event.getSource();
+                currentSource.getScene().getWindow().hide();
+
+            } catch (SQLException | IOException e ) {
                 e.printStackTrace();
                 errorText.setText("There was a problem connecting to the database (X2)");
             }
-            //TODO change scene
         }
     }
 

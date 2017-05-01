@@ -38,7 +38,7 @@
                     <children>
                         <Pane prefHeight="258.0" prefWidth="1061.0">
                             <children>
-                                <Text layoutX="24.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Manufracture Info" wrappingWidth="220.13671875">
+                                <Text layoutX="24.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Manufacturer Info" wrappingWidth="220.13671875">
                                     <font>
                                         <Font name="System Bold" size="24.0" />
                                     </font>
