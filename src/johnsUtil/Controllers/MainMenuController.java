@@ -178,9 +178,6 @@ public class MainMenuController implements Initializable{
         Stage primaryStage = (Stage) searchCombo.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("johnsUtil/Views/Home.fxml"));
         primaryStage.getScene().setRoot(root);
-
-        SearchMenuController searchMenuController = new SearchMenuController();
-        searchMenuController.search2();
     }
 
     /**

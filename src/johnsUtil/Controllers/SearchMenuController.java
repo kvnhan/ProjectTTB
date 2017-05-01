@@ -113,9 +113,6 @@ public class SearchMenuController {
             Account.getInstance().setSearch("");
         }
         searchTextField.setText(searchTemp);
-
-        //TODO: add search functionality
-
         searchTextField.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
@@ -189,7 +186,17 @@ public class SearchMenuController {
         //sets default vaule
         choiceBox.setValue("All");
 
-    }
+        System.out.println("Searched using enter");
+                try {
+                    search(new ActionEvent(searchButton, (Node) searchButton));
+                }
+                catch(java.sql.SQLException e){}
+                catch(java.lang.NoSuchMethodException e){}
+                catch(java.lang.IllegalAccessException e){}
+                catch(java.lang.InstantiationException e){}
+                catch(java.io.IOException e){}
+            }
+
 
     /**
      * Displays results for a search.
