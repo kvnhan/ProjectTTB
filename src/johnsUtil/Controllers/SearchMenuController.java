@@ -175,6 +175,7 @@ public class SearchMenuController {
             row.setOnMouseClicked(event -> {
                 if(event.getClickCount() == 2 && (! row.isEmpty())){
                     AlcoholData rowData = row.getItem();
+                    System.out.println(rowData.getBrandName()); //No Error?
                     screenUtil.pullUpAlcoholDetails(rowData);
                 }
             });
@@ -185,18 +186,8 @@ public class SearchMenuController {
         choiceBox.getItems().addAll("All", "Wine", "Beer", "Distilled", "Wine and Beer", "Wine and Distilled", "Beer and Distilled", "ID", "Name", "Brand Name", "Location", "Alcohol Content");
         //sets default vaule
         choiceBox.setValue("All");
-
-        System.out.println("Searched using enter");
-                try {
-                    search(new ActionEvent(searchButton, (Node) searchButton));
-                }
-                catch(java.sql.SQLException e){}
-                catch(java.lang.NoSuchMethodException e){}
-                catch(java.lang.IllegalAccessException e){}
-                catch(java.lang.InstantiationException e){}
-                catch(java.io.IOException e){}
-            }
-
+        search2();
+    }
 
     /**
      * Displays results for a search.
@@ -205,12 +196,12 @@ public class SearchMenuController {
         table.getColumns().clear();
         idColumn.setCellValueFactory(new PropertyValueFactory<>("aid"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("Name"));
-        brandNameColumn.setCellValueFactory(new PropertyValueFactory<>("Brand Name"));
+        brandNameColumn.setCellValueFactory(new PropertyValueFactory<>("BrandName"));
         alcoholTypeColumn.setCellValueFactory(new PropertyValueFactory<>("AlcoholType"));
         locationColumn.setCellValueFactory(new PropertyValueFactory<>("Appellation"));
         contentColumn.setCellValueFactory(new PropertyValueFactory<>("AlchContent"));
         table.setItems(this.getObservableList());
-        table.getColumns().addAll(idColumn, nameColumn, brandNameColumn, alcoholTypeColumn, locationColumn, contentColumn);
+        table.getColumns().addAll(idColumn, brandNameColumn, nameColumn, alcoholTypeColumn, locationColumn, contentColumn);
     }
 
     /**
