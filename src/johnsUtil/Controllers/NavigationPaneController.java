@@ -86,6 +86,18 @@ public class NavigationPaneController implements Initializable {
             vbox.getChildren().remove(mainMenuBtn);
         }
 
+        workerBtn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                try {
+                    Parent scroll = FXMLLoader.load(getClass().getClassLoader().getResource("johnsUtil/Views/Supervisor.fxml"));
+                    getRoot().setCenter(scroll);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
         appBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {

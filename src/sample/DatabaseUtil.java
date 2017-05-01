@@ -3,12 +3,12 @@ package sample;
 import javafx.scene.control.*;
 import org.mindrot.jbcrypt.BCrypt;
 
-import java.awt.*;
 import java.io.File;
 import java.sql.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Date;
 
@@ -1570,15 +1570,15 @@ public class DatabaseUtil {
      * @return
      * @throws SQLException
      */
-    public ArrayList<TreeItem<TItem>> getAccountItems() throws SQLException {
-        ArrayList<TreeItem<TItem>> list = new ArrayList<>();
+    public ArrayList<TreeItem<johnsUtil.Components.TItem>> getAccountItems() throws SQLException {
+        ArrayList<TreeItem<johnsUtil.Components.TItem>> list = new ArrayList<>();
         PreparedStatement getAccs = conn.prepareStatement("SELECT AID, USERNAME, USER_TYPE FROM ACCOUNT WHERE USER_TYPE = 1");
 
         ResultSet rs =  getAccs.executeQuery();
 
         while(rs.next()){
             int aid = rs.getInt("AID");
-            TreeItem<TItem> item = new TreeItem<TItem>(new AccountItem(aid,rs.getString("USERNAME")));
+            TreeItem<johnsUtil.Components.TItem> item = new TreeItem<johnsUtil.Components.TItem>(new johnsUtil.Components.AccountItem(aid,rs.getString("USERNAME")));
             item.getChildren().addAll(getFormItems(aid));
             list.add(item);
         }
@@ -1595,16 +1595,16 @@ public class DatabaseUtil {
      * @return
      * @throws SQLException
      */
-    public ArrayList<TreeItem<TItem>> getFormItems(int aid) throws SQLException {
-        ArrayList<TreeItem<TItem>> list = new ArrayList<>();
-        PreparedStatement getForms = conn.prepareStatement("SELECT ALCHID, TTBID FROM FORM WHERE GOVID = ?");
+    public ArrayList<TreeItem<johnsUtil.Components.TItem>> getFormItems(int aid) throws SQLException {
+        ArrayList<TreeItem<johnsUtil.Components.TItem>> list = new ArrayList<>();
+        PreparedStatement getForms = conn.prepareStatement("SELECT ALCHID, TTBID FROM FORM WHERE GOVID = ? AND STATUS = 'ASSIGNED'");
         getForms.setInt(1,aid);
 
         ResultSet rs =  getForms.executeQuery();
 
         while(rs.next()){
             AlcoholData currentDate = searchAlcoholID(rs.getInt("ALCHID")).get(0);
-            list.add(new TreeItem<TItem>(new FormItem(currentDate.getName(), rs.getString("TTBID"),currentDate.getBrandName())));
+            list.add(new TreeItem<johnsUtil.Components.TItem>(new johnsUtil.Components.FormItem(currentDate.getName(), rs.getString("TTBID"),currentDate.getBrandName())));
         }
 
         return list;

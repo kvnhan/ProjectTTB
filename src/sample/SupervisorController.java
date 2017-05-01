@@ -36,7 +36,7 @@ public class SupervisorController {
     @FXML
     Button search;
     @FXML
-    TreeView<TItem> view;
+    TreeView<johnsUtil.Components.TItem> view;
 
     @FXML
     /**
@@ -63,22 +63,20 @@ public class SupervisorController {
         databaseUtil = new DatabaseUtil();
         accountsUtil = new AccountsUtil();
 
-        //view = new TreeView<>();
-
-        TreeItem<TItem> root = new TreeItem<TItem>(new AccountItem(0,accountsUtil.getUsername()));
+        TreeItem<johnsUtil.Components.TItem> root = new TreeItem<johnsUtil.Components.TItem>(new johnsUtil.Components.AccountItem(0,accountsUtil.getUsername()));
         try{
-            ArrayList<TreeItem<TItem>> list = databaseUtil.getAccountItems();
+            ArrayList<TreeItem<johnsUtil.Components.TItem>> list = databaseUtil.getAccountItems();
             root.getChildren().addAll(list);
 
 
-            view.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<TreeItem<TItem>>() {
+            view.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<TreeItem<johnsUtil.Components.TItem>>() {
                 @Override
-                public void changed(ObservableValue<? extends TreeItem<TItem>> observable, TreeItem<TItem> oldValue, TreeItem<TItem> newValue) {
+                public void changed(ObservableValue<? extends TreeItem<johnsUtil.Components.TItem>> observable, TreeItem<johnsUtil.Components.TItem> oldValue, TreeItem<johnsUtil.Components.TItem> newValue) {
                     if(newValue == null){
                         return;
                     }
                     else{
-                        TItem value = newValue.getValue();
+                        johnsUtil.Components.TItem value = newValue.getValue();
                         text1.setText(value.getText1());
                         text2.setText(value.getText2());
                         text3.setText(value.getText3());
