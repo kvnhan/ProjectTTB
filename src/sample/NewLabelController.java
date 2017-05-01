@@ -538,7 +538,7 @@ public class NewLabelController{
             image3 = ImageIO.read(tempFile);
             ImageIO.write(image3, "jpg", new File(path + "/" + aid + ".jpg"));
         }catch (Exception e){
-            e.printStackTrace();
+            //e.printStackTrace();
         }
     }
     /**
