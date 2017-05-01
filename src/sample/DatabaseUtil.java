@@ -1607,8 +1607,13 @@ public class DatabaseUtil {
      * @throws SQLException
      */
     public boolean logIn(String userName, String password) throws SQLException {
-        PreparedStatement getAcc = conn.prepareStatement("SELECT * FROM ACCOUNT WHERE  USERNAME = ?");
         String ref;
+        PreparedStatement getAcc;
+
+        if((getAcc = conn.prepareStatement("SELECT * FROM ACCOUNT WHERE USERNAME = ?")) == null){
+            System.out.println("Yea its creeating a null ??");
+        }
+
         getAcc.setString(1,userName);
 
         ResultSet rs =  getAcc.executeQuery();
@@ -1621,8 +1626,8 @@ public class DatabaseUtil {
         if(null == ref){
             return false;
         }
-        else if(!(rs.next() == false)){
-            if (BCrypt.checkpw(password,ref)) {
+        else {
+            if (BCrypt.checkpw(password,ref.trim())) {
                 johnsUtil.model.SharedResources.Account acc = johnsUtil.model.SharedResources.Account.getInstance();
                 acc.setAccountID(rs.getInt("AID"));
                 acc.setUserName(rs.getString("USERNAME"));
@@ -1638,9 +1643,7 @@ public class DatabaseUtil {
                 return false;
             }
         }
-        else{
-            return false;
-        }
+
     }
 
     /**

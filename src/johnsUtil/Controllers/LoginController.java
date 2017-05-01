@@ -83,9 +83,12 @@ public class LoginController implements Initializable {
             boolean successful = Account.getInstance().login(username.getText().trim(),password.getText().trim());
 
             if(successful){
-                Stage primaryStage = (Stage) username.getScene().getWindow();
-                Parent root = FXMLLoader.load(getClass().getResource("Views/Home.fxml"));
+                Stage primaryStage = Account.getInstance().getWindow();
+                Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("johnsUtil/Views/Home.fxml"));
                 primaryStage.setScene(new Scene(root));
+
+                Node currentSource = (Node) event.getSource();
+                currentSource.getScene().getWindow().hide();
             }
             else{
                 errorLabel.setText("The username or password you've entered doesn't match any account");

@@ -30,6 +30,7 @@ public class Main extends Application {
         primaryStage.setMaximized(true);
         primaryStage.setMinHeight(800);
         primaryStage.setMinWidth(1300);
+        Account.getInstance().setWindow(primaryStage);
         primaryStage.show();
     }
 
