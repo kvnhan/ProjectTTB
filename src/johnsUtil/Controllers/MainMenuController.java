@@ -11,12 +11,15 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Bounds;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
@@ -98,6 +101,7 @@ public class MainMenuController implements Initializable{
             }
         });
 
+
         Image img = new Image(Main.class.getResourceAsStream("/alch.png"));
         logo.setImage(img);
 
@@ -127,6 +131,21 @@ public class MainMenuController implements Initializable{
         } catch (IOException e) {
             e.printStackTrace();
         }
+        //TODO: add search functionality
+        /*
+        searchTF.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                if (event.getCode() == KeyCode.ENTER) {
+                    System.out.println("Searched using enter");
+                    try {
+                        handleSearchButton(new ActionEvent(searchBtn, (Node) searchBtn));
+                    }
+                    catch(IOException e){}
+                }
+            }
+        });
+        */
     }
 
     /**
