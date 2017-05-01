@@ -7,10 +7,13 @@ import com.jfoenix.transitions.hamburger.HamburgerBasicCloseTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
+import javafx.stage.Screen;
+import johnsUtil.model.SharedResources.Account;
 import sample.Main;
 
 import java.io.IOException;
@@ -49,6 +52,11 @@ public class HomeController implements Initializable {
        // btnExpand.setGraphic(new ImageView(new Image(Main.class.getResourceAsStream("/maximizeOld.png"))));
         //btnMinimize.setGraphic(new ImageView(new Image(Main.class.getResourceAsStream("/minimize.png"))));
         //btnLogout.setGraphic(new ImageView(new Image(Main.class.getResourceAsStream("/logout.png"))));
+
+        Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
+        Account.getInstance().getWindow().setHeight(primaryScreenBounds.getHeight());
+        Account.getInstance().getWindow().setWidth(primaryScreenBounds.getWidth());
+        Account.getInstance().getWindow().setMaximized(true);
 
         try {
             vbox = FXMLLoader.load(getClass().getClassLoader().getResource("johnsUtil/Views/NavigationPane.fxml"));
