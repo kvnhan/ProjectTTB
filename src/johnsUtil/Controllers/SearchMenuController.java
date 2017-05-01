@@ -675,7 +675,10 @@ public class SearchMenuController {
         //new Stage() = savePopUp;
         start(new Stage());
     }
+    @FXML
+    private void back(){
 
+    }
 
     //////////////////////////////////////////////////////////////////////////
     //@Override

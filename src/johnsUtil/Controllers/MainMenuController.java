@@ -223,6 +223,15 @@ public class MainMenuController implements Initializable{
         anim.playFromStart();
     }
 
+    @FXML
+    public void handleTeamButton(ActionEvent e){
+
+    }
+    @FXML
+    public void handleAboutButton(ActionEvent e){
+
+    }
+
     /**
      * Allows one to move the search box around.
      *
