@@ -160,8 +160,8 @@
                       <TableView fx:id="table" editable="true" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
                           <columns>
                               <TableColumn fx:id="idColumn" prefWidth="122.0" text="ID" />
-                              <TableColumn fx:id="brandNameColumn" prefWidth="148.0" text="Brand Name" />
                               <TableColumn fx:id="nameColumn" prefWidth="147.0" text="Fancy Name" />
+                              <TableColumn fx:id="brandNameColumn" prefWidth="148.0" text="Brand Name" />
                               <TableColumn fx:id="alcoholTypeColumn" prefWidth="106.0" text="Type" />
                               <TableColumn fx:id="locationColumn" minWidth="0.0" prefWidth="170.0" text="Location" />
                               <TableColumn fx:id="contentColumn" minWidth="0.0" prefWidth="141.0" text="Alcohol Content" />
