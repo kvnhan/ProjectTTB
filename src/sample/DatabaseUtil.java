@@ -19,7 +19,7 @@ public class DatabaseUtil {
 
     private static String driver = "org.apache.derby.jdbc.EmbeddedDriver";
     private static String connectionURL = "jdbc:derby:DATABASE/ProjectC;create=true";
-    private String ACCOUNT_FIELDS = " (AID, USERNAME, PASSWORDHASH, ISLOGGEDIN, USER_TYPE, NAME, EMAIL, PHONE, ADDRESS, IMAGE_PATH, LAST_LOGGED_IN)";
+    private String ACCOUNT_FIELDS = " (AID, USERNAME, PASSWORDHASH, ISLOGGEDIN, USER_TYPE, YOUR_NAME, EMAIL, PHONE, ADDRESS, IMAGE_PATH, LAST_LOGGED_IN)";
     private String ALCH_TYPE_FIELDS = " (ATID, CLASS)";
     private String ALCOHOL_FIELDS = " (AID, NAME, APPELLATION, SULFITE_DESC, ALCH_CONTENT, NET_CONTENT, HEALTH_WARNING, PRODUCT_TYPE, CLASS, LABEL_LEGIBILLITY, LABEL_SIZE, FORMULAS, ALCOHOL_TYPE, BOTTLERS_INFO, BRAND_NAME, STATUS, WINE_VINTAGE, PH_LEVEL, GRAPE_VARIETAL, INFO_ON_BOTTLE, SOURCE_OF_PRODUCT, DATE_APPROVED, ORIGIN_CODE)";
     private String CLASS_FIELDS = " (CID, CLASS)";
@@ -161,7 +161,7 @@ public class DatabaseUtil {
         Date date = new Date();
         String curDate = dateFormat.format(date);
 
-        String values = "'" + username + "', '" + password + "', " + isLoggedIn + ",'" + userType  + "','" + name + "','" + email  + "','" + phone  + "','" + address  + "','" + path.toURI().toString()  + "','" + curDate + "' )";
+        String values = "'" + username + "', '" + password + "', " + isLoggedIn + "," + userType  + ",'" + name + "','" + email  + "','" + phone  + "','" + address  + "','" + path.toURI().toString()  + "','" + curDate + "' )";
         addToTable("ACCOUNT", ACCOUNT_FIELDS, values, "AID");
     }
 
@@ -409,7 +409,7 @@ public class DatabaseUtil {
 
         isAdded = uRows > 0;
 
-        System.out.println(uRows + " Row(s) Updated");
+        System.out.println(uRows + " Row(s) Updated 2");
 
         return ID;
     }
@@ -1116,16 +1116,45 @@ public class DatabaseUtil {
      */
     public int searchMinWorkLoad() throws SQLException{//TODO: find out fields + name for govt. worker\
         stmt = conn.createStatement();
-
         int GOVID = 0;
-
+        String status = "";
+        int counter = 0;
         // CHECK IF ALL GOVERNMENT OFFICIALS ARE ASSIGNED TO A FORM, IF NOT ASSIGNS FORMS TO ONES WHICH DONT HAVE A FORM
         for(Account account: searchAccountWithUserType(1)){
+            int countAccepted = 0;
+            int countAssigned = 0;
+            int countWork = 0;
+            counter++;
+            //Check if gov agent has ever been assigned to a form
             if(!containsInt("FORM", "GOVID", getAccountAid(account.getUsername()))){
                 GOVID = getAccountAid(account.getUsername());
                 return GOVID;
+            }else {
+                // Find the gov agent that did all their work and now have nothing to do
+                String haveWork = "SELECT * FROM FORM WHERE GOVID = " + getAccountAid(account.getUsername());
+                rset = stmt.executeQuery(haveWork);
+                while (rset.next()) {
+                    if (rset.getString("STATUS").equals("ACCEPTED")) {
+                        countAccepted++;
+                        countWork++;
+                    }
+                    if (rset.getString("STATUS").equals("ASSIGNED")) {
+                        countAssigned++;
+                        countWork++;
+                    }
+                }
+                if (countAccepted == countWork && countAssigned == 0) {
+                    GOVID = getAccountAid(account.getUsername());
+                    return GOVID;
+                }
+                // Check the amount of work the agent has and allow them to be assigned to form only if they have less than 10
+                if(countAssigned < 10){
+                    GOVID = getAccountAid(account.getUsername());
+                    return GOVID;
+                }
             }
         }
+
         //NEED TO FIGURE OUT HOW TO FIND THE ACCOUNT WITH THE MINIMUM AMOUNT OF TIMES THE FORMS REFERENCE IT
         String query = "SELECT GOVID, SUM(CNT) AS CNT\n" +
                 "FROM\n" +
@@ -1140,14 +1169,15 @@ public class DatabaseUtil {
 
         //Should give asc db of govid of government works id and the number of forms they have assigned to themrset = stm.executeQuery(sql);
 
-       /* int occ;
+       int occ;
         while(rset.next()){
             GOVID = rset.getInt("GOVID");
             occ = rset.getInt("CNT");
 
             System.out.println("Gov ID: " + GOVID + "Occurences: " + occ);
         }
-*/
+
+        /*
         if(rset.next()){
             while ((rset.getInt("GOVID") == 0)){
                 rset.next();
@@ -1158,7 +1188,7 @@ public class DatabaseUtil {
             screenUtil.createAlertBox("Add a Government Official account to the system",
                     "There are no government officials registered on the system. Therefore you cannot add a form because no one will review them.");
         }
-
+*/
         return GOVID;
     }
 
