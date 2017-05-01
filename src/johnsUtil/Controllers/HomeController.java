@@ -11,6 +11,8 @@ import javafx.geometry.Rectangle2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Screen;
 import johnsUtil.model.SharedResources.Account;
@@ -26,11 +28,17 @@ import java.util.ResourceBundle;
  */
 public class HomeController implements Initializable {
 
+
+    @FXML
+    private BorderPane center;
+
     @FXML
     private JFXDrawer drawer;
 
     private VBox vbox;
+    private BorderPane borderPane;
     private ImageView logo;
+
 
 
     @FXML
@@ -53,7 +61,11 @@ public class HomeController implements Initializable {
 
         try {
             vbox = FXMLLoader.load(getClass().getClassLoader().getResource("johnsUtil/Views/NavigationPane.fxml"));
+            borderPane = FXMLLoader.load(getClass().getClassLoader().getResource("johnsUtil/Views/SearchMenu.fxml"));
+
+            center.setCenter(borderPane);
             drawer.setSidePane(vbox);
+
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -2,25 +2,26 @@
 
 <?import com.jfoenix.controls.JFXDrawer?>
 <?import com.jfoenix.controls.JFXHamburger?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="johnsUtil.Controllers.HomeController">
+<BorderPane fx:id="root" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="johnsUtil.Controllers.HomeController">
    <left>
       <JFXDrawer fx:id="drawer" defaultDrawerSize="300.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="655.0" prefWidth="0.0" BorderPane.alignment="CENTER" />
    </left>
    <center>
-      <BorderPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+      <BorderPane fx:id="center" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
          <left>
-            <VBox prefWidth="64.0" BorderPane.alignment="CENTER">
+            <VBox alignment="BOTTOM_LEFT" prefWidth="64.0" BorderPane.alignment="CENTER">
                <children>
                   <JFXHamburger fx:id="hamburger" prefHeight="54.0" prefWidth="54.0" />
                </children>
             </VBox>
          </left>
-         <right>
-            <VBox prefWidth="64.0" BorderPane.alignment="CENTER" />
-         </right>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
       </BorderPane>
    </center>
 </BorderPane>

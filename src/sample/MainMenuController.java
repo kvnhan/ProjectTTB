@@ -6,6 +6,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 import javafx.scene.image.ImageView;
+import johnsUtil.model.SharedResources.*;
+
 import java.io.InputStream;
 import java.sql.SQLException;
 
@@ -21,7 +23,6 @@ public class MainMenuController{
 
     ScreenUtil work = new ScreenUtil();
     DatabaseUtil databaseUtil = new DatabaseUtil();
-    AccountsUtil accountsUtil = new AccountsUtil();
     private String username;
 
     @FXML
@@ -30,7 +31,7 @@ public class MainMenuController{
      */
     public void initialize() throws SQLException{
 
-        username = accountsUtil.getUsername();
+        username = johnsUtil.model.SharedResources.Account.getInstance().getUserName();
         userIDText.setText(username);
 
         if(username.toLowerCase().equals("guest")){

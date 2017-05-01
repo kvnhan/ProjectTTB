@@ -1,4 +1,4 @@
-package sample;
+package johnsUtil.Controllers;
 
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXHamburger;
@@ -7,6 +7,7 @@ import com.jfoenix.transitions.hamburger.HamburgerBackArrowBasicTransition;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -14,28 +15,29 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.*;
-
-import java.io.*;
-import java.net.URL;
-import java.net.URLDecoder;
-import java.sql.*;
-import java.util.ArrayList;
-
 import javafx.scene.control.cell.PropertyValueFactory;
-
-import java.util.List;
-
-import javafx.collections.ObservableList;
 import javafx.scene.effect.DropShadow;
-import javafx.scene.image.*;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.*;
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import johnsUtil.model.SharedResources.*;
+import sample.*;
+
+import java.io.*;
+import java.net.URL;
+import java.net.URLDecoder;
+import java.sql.Date;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import static javafx.application.Application.launch;
 
@@ -51,7 +53,7 @@ public class SearchMenuController {
     private @FXML Button helpSearchButton;
     private @FXML Button searchButton;
     private @FXML Label Result;
-    //private @FXML JFXHamburger Back;
+    private @FXML JFXHamburger Back;
 
     private @FXML RadioButton csvDownload, tabDownload, customDownload;
     private @FXML TextField CustomDelimiter;// customDirectoryField;
@@ -66,7 +68,7 @@ public class SearchMenuController {
     private ScrollPane imageScrollPane = new ScrollPane(alcoholLabelGridPane);
     private @FXML ToggleGroup toggleView;
 
-    private ScreenUtil screenUtil = new ScreenUtil();
+    private ScreenUtil screenUtil;
     private int alcoholChoice = 0;
     private final int BEER = 1;
     private final int WINE = 2;
@@ -75,14 +77,14 @@ public class SearchMenuController {
     private List<AlcoholData> alcoholDataList = new ArrayList<AlcoholData>();
     private ObservableList<AlcoholData> observableList;
 
-    private DatabaseUtil dbUtil = new DatabaseUtil();
+    private DatabaseUtil dbUtil;
     private String choiceSearch;
     private boolean hasViewChanged = false;
     private boolean isSearchInImageView = false;
     private boolean foundImage = false;
 
 
-    private javafx.scene.image.Image alcoholImage;
+    private Image alcoholImage;
     private ImageView alcoholImageView;
     private int imageResultPageNumber;
     private int resultsPerPage = 15;
@@ -98,16 +100,19 @@ public class SearchMenuController {
      */
     @FXML
     public void initialize(){
-//        HamburgerBackArrowBasicTransition burgerTask2 = new HamburgerBackArrowBasicTransition(Back);
-//        burgerTask2.setRate(-1);
-//        Back.addEventHandler(MouseEvent.MOUSE_ENTERED, (e) -> {
-//            burgerTask2.setRate(burgerTask2.getRate() * -1);
-//            burgerTask2.play();
-//        });
-//
-//        Back.addEventHandler(MouseEvent.MOUSE_PRESSED, (e) -> {
-//            screenUtil.switchScene("MainMenu.fxml", "Main Menu");
-//        });
+        dbUtil = johnsUtil.model.SharedResources.Database.getInstance();
+        screenUtil = johnsUtil.model.SharedResources.Screen.getInstance();
+
+        HamburgerBackArrowBasicTransition burgerTask2 = new HamburgerBackArrowBasicTransition(Back);
+        burgerTask2.setRate(-1);
+        Back.addEventHandler(MouseEvent.MOUSE_ENTERED, (e) -> {
+            burgerTask2.setRate(burgerTask2.getRate() * -1);
+            burgerTask2.play();
+        });
+
+        Back.addEventHandler(MouseEvent.MOUSE_PRESSED, (e) -> {
+            screenUtil.switchScene("MainMenu.fxml", "Main Menu");
+        });
 
         createPageNavigationButtons();
 
@@ -229,7 +234,7 @@ public class SearchMenuController {
                         inputStream = SearchMenuController.class.getClassLoader().getResourceAsStream("labels/distilled_default.jfif");
                     }
                 }
-                alcoholImage = new javafx.scene.image.Image(inputStream);
+                alcoholImage = new Image(inputStream);
                 alcoholImageView = new ImageView();
 
                 alcoholImageView.setImage(alcoholImage);
@@ -242,7 +247,7 @@ public class SearchMenuController {
                         alcoholImageView = new ImageView();
                         String path = getPath();
                         File file = new File(path + "/" + alcoholDataList.get(i).getAid() + ".jpg");
-                        javafx.scene.image.Image image1 = new javafx.scene.image.Image(file.toURI().toString());
+                        Image image1 = new Image(file.toURI().toString());
                         alcoholImageView.setImage(image1);
                     }
                 }catch (Exception e2){
@@ -296,15 +301,15 @@ public class SearchMenuController {
 
     }
 
-//    /**
-//     * Returns a user to the main menu.
-//     * @param event Back button is pressed.
-//     */
-//    public void back (ActionEvent event){
-//        Back.addEventHandler(MouseEvent.MOUSE_PRESSED, (e) -> {
-//            screenUtil.switchScene("MainMenu.fxml", "Main Menu");
-//        });
-//    }
+    /**
+     * Returns a user to the main menu.
+     * @param event Back button is pressed.
+     */
+    public void back (ActionEvent event){
+        Back.addEventHandler(MouseEvent.MOUSE_PRESSED, (e) -> {
+            screenUtil.switchScene("MainMenu.fxml", "Main Menu");
+        });
+    }
 
     public ObservableList<AlcoholData> getObservableList() {
         return observableList;
@@ -586,8 +591,8 @@ public class SearchMenuController {
      * Disables auto search.
      */
     public void disableAutomaticSearch(){
-        EventHandler keyHandler = new EventHandler<javafx.scene.input.KeyEvent>(){
-            public void handle(javafx.scene.input.KeyEvent event){
+        EventHandler keyHandler = new EventHandler<KeyEvent>(){
+            public void handle(KeyEvent event){
                 searchTextField.removeEventHandler(KeyEvent.KEY_PRESSED, this);
 
             }
