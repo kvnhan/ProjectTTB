@@ -19,7 +19,6 @@
                </font>
             </Label>
             <Separator layoutY="46.0" prefHeight="3.0" prefWidth="750.0" />
-            <Button fx:id="backButton" layoutY="676.0" mnemonicParsing="false" onAction="#goBack" text="Back" />
             <Label layoutX="8.0" layoutY="46.0" prefHeight="70.0" prefWidth="731.0" text="We would like to thank the US Treasury’s Alcohol and Tobacco Tax and Trade Bureau, who provided us with the opportunity to work on this project. We would also like to thank their representative Assistant CIO, Greg Greely, for their time and input on our application." wrapText="true" />
             <Label layoutX="10.0" layoutY="116.0" prefHeight="56.0" prefWidth="731.0" text="This project was organized by the Worcester Polytechnic Institute's Computer Science Department, CS 3733 Software Engineering Class, taught by Professor Wilson Wong." wrapText="true" />
             <Label layoutX="11.0" layoutY="172.0" prefHeight="27.0" prefWidth="500.0" text="This Application was Implemented by CS 3733 Team A, whose members include:" />
