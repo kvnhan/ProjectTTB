@@ -58,6 +58,8 @@ public class HomeController implements Initializable {
         Account.getInstance().getWindow().setWidth(primaryScreenBounds.getWidth());
         Account.getInstance().getWindow().setMaximized(true);
 
+
+
         try {
             vbox = FXMLLoader.load(getClass().getClassLoader().getResource("johnsUtil/Views/NavigationPane.fxml"));
             drawer.setSidePane(vbox);
