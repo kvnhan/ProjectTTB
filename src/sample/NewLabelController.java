@@ -140,11 +140,13 @@ public class NewLabelController{
         String sulfiteDesc= "";
         String bottlerInfo= "";
         String healthWarningText= "";
+        String errorMessage = "The Following Errors Were Found with Your Application:\n";
 
 
         if(!dom1.isSelected() && !dom11.isSelected() && !dom111.isSelected()){
             valid = false;
-            screenUtil.createAlertBox("ERROR", "Please choose applicable box(es)");
+            errorMessage += "Application Box Unselected";
+            //screenUtil.createAlertBox("ERROR", "Please choose applicable box(es)");
         }else{
             if(dom1.isSelected()){
                 type1 = 1;
@@ -156,7 +158,8 @@ public class NewLabelController{
                 try {
                     type3 = Integer.parseInt(type3box.getText());
                 }catch (NumberFormatException e){
-                    screenUtil.createAlertBox("ERROR", "Invalid Input for Amount");
+                    errorMessage += "Amount invalid \n";
+                    //screenUtil.createAlertBox("ERROR", "Invalid Input for Amount");
                     valid = false;
                 }
             }else{
@@ -168,56 +171,65 @@ public class NewLabelController{
             try {
                 repid = Integer.parseInt(RepID.getText());
                 if (repid > max) {
-                    screenUtil.createAlertBox("ERROR", "Input for RepID is too big");
+                    errorMessage += "RepID invalid.\n";
+                    //screenUtil.createAlertBox("ERROR", "Input for RepID is too big");
                     valid = false;
                 }
             } catch (NumberFormatException e) {
-                screenUtil.createAlertBox("ERROR", "Invaid Input for RepID");
+                errorMessage += "RepID invalid.\n";
+                //screenUtil.createAlertBox("ERROR", "Invaid Input for RepID");
                 valid = false;
             }
         }else{
-            screenUtil.createAlertBox("ERROR", "Rep ID is empty");
+            errorMessage += "RepID is empty.\n";
+            //screenUtil.createAlertBox("ERROR", "Rep ID is empty");
             valid = false;
         }
 
         if(!PlantReg.getText().trim().isEmpty()) {
             permit_no = PlantReg.getText();
         }else{
-            screenUtil.createAlertBox("ERROR", "Plant Reg is empty");
+            errorMessage += "Plant Reg is empty.\n";
+            //screenUtil.createAlertBox("ERROR", "Plant Reg is empty");
             valid = false;
         }
 
         if(!Formula.getText().trim().isEmpty()){
             formula = Formula.getText();
         }else{
-            screenUtil.createAlertBox("ERROR", "Formula is empty");
+            errorMessage += "Formula is empty.\n";
+            //screenUtil.createAlertBox("ERROR", "Formula is empty");
         }
 
         if(!Appellation.getText().trim().isEmpty()){
             appellation = Appellation.getText();
         }else if(wineCheckBox.isSelected()){
-            screenUtil.createAlertBox("ERROR", "Appellation is empty");
+            errorMessage += "Appellation is empty.\n";
+            //screenUtil.createAlertBox("ERROR", "Appellation is empty");
             valid = false;
         }
 
         if(!MailingAddress.getText().trim().isEmpty()){
             address = MailingAddress.getText();
         }else{
-            screenUtil.createAlertBox("ERROR", "Mailling Address is empty");
+            errorMessage += "Mailing Address is empty.\n";
+            //screenUtil.createAlertBox("ERROR", "Mailing Address is empty");
             valid = false;
         }
 
         if(!grapeVarietal.getText().trim().isEmpty()){
             grape_varietal = grapeVarietal.getText();
         }else if(wineCheckBox.isSelected()){
-            screenUtil.createAlertBox("ERROR", "Varietal is empty");
+            errorMessage += "Varietal is empty.\n";
+            //screenUtil.createAlertBox("ERROR", "Varietal is empty");
             valid = false;
         }
 
         if(!ApplicantName.getText().trim().isEmpty()){
             applicantName = ApplicantName.getText();
         }else{
-            screenUtil.createAlertBox("ERROR", "Applicant Name is empty");
+            errorMessage += "Applicant Name is empty.\n";
+            //screenUtil.createAlertBox("ERROR", "Applicant Name is empty");
             valid = false;
         }
 
@@ -225,23 +237,27 @@ public class NewLabelController{
             try {
 
                 alcoholContentDouble = Double.parseDouble(alcoholContent.getText());
-                if(alcoholContentDouble > 99999){
-                    screenUtil.createAlertBox("ERROR", "Alcohol Content is above the allowed input limit");
+                if(alcoholContentDouble > 200){
+                    errorMessage += "Alcohol content is above limit.\n";
+                    //screenUtil.createAlertBox("ERROR", "Alcohol Content is above the allowed input limit");
                     valid = false;
                 }
             } catch (NumberFormatException e) {
-                screenUtil.createAlertBox("ERROR", "Invaid Input for Alcohol content");
+                errorMessage += "Alcohol content is invalid.\n";
+                //screenUtil.createAlertBox("ERROR", "Invaid Input for Alcohol content");
                 valid = false;
             }
         }else{
-            screenUtil.createAlertBox("ERROR", "Alcohol Content is empty");
+            errorMessage += "Alcohol content is empty.\n";
+            //screenUtil.createAlertBox("ERROR", "Alcohol Content is empty");
             valid = false;
         }
 
         if(!SerialNo.getText().trim().isEmpty()){
             serial = (SerialNo.getText());
         }else{
-            screenUtil.createAlertBox("ERROR", "Serial No is empty");
+            errorMessage += "Serial number is empty.\n";
+            //screenUtil.createAlertBox("ERROR", "Serial No is empty");
             valid = false;
         }
 
@@ -251,7 +267,8 @@ public class NewLabelController{
         } else if (imp.isSelected()) {
             source_of_product = "IMPORTED";
         }if(!(dom.isSelected()) && !(imp.isSelected())) {
-            screenUtil.createAlertBox("ERROR", "Please select Domestic or Imported");
+            errorMessage += "Domestic/Imported Unselected.\n";
+            //screenUtil.createAlertBox("ERROR", "Please select Domestic or Imported");
             valid = false;
         }
 
@@ -259,21 +276,24 @@ public class NewLabelController{
         if(!BrandName.getText().trim().isEmpty()) {
             brand_name = BrandName.getText();
         }else{
-            screenUtil.createAlertBox("ERROR", "BrandName is empty");
+            errorMessage += "Brandname empty.\n";
+            //screenUtil.createAlertBox("ERROR", "BrandName is empty");
             valid = false;
             brand_name = "";
         }
         if(!PhoneNumber.getText().trim().isEmpty()){
             phone_number = PhoneNumber.getText();
         }else{
-            screenUtil.createAlertBox("ERROR", "PhoneNumber is empty");
+            errorMessage += "Phone Number is empty.\n";
+            //screenUtil.createAlertBox("ERROR", "PhoneNumber is empty");
             valid = false;
             phone_number = "";
         }
         if(!EmailAddress.getText().trim().isEmpty()){
             email = EmailAddress.getText();
         }else{
-            screenUtil.createAlertBox("ERROR", "Email is empty");
+            errorMessage += "Email is empty.\n";
+            //screenUtil.createAlertBox("ERROR", "Email is empty");
             valid = false;
             email = "";
         }
@@ -281,17 +301,17 @@ public class NewLabelController{
         if(!Name.getText().trim().isEmpty()){
             fancyName = Name.getText();
         }else{
-            screenUtil.createAlertBox("ERROR", "FancyName is empty");
+            errorMessage += "Fancy Name is empty.\n";
+            //screenUtil.createAlertBox("ERROR", "FancyName is empty");
             valid = false;
         }
-
-
 
 
         if(!Address.getText().trim().isEmpty()){
             address = Address.getText();
         }else{
-            screenUtil.createAlertBox("ERROR", "Address is empty");
+            errorMessage += "Address is empty.\n";
+            //screenUtil.createAlertBox("ERROR", "Address is empty");
             address = "";
         }
 
@@ -299,29 +319,35 @@ public class NewLabelController{
             try{
                 vintage_date = Integer.parseInt(Vintage.getText());
                 if(vintage_date > max || vintage_date < 0){
-                    screenUtil.createAlertBox("ERROR", "Invalid Input for VintageDate");
+                    errorMessage += "Invalid input for vintage date.\n";
+                    //screenUtil.createAlertBox("ERROR", "Invalid Input for VintageDate");
                     valid = false;
                 }
             }catch (NumberFormatException e){
-                screenUtil.createAlertBox("ERROR", "Not a Number");
+                errorMessage += "Invalid input for vintage date.\n";
+                //screenUtil.createAlertBox("ERROR", "Not a Number");
                 valid = false;
             }
         }else if(wineCheckBox.isSelected()){
-            screenUtil.createAlertBox("ERROR", "Vintage is empty");
+            errorMessage += "Vintage Date is empty.\n";
+            //screenUtil.createAlertBox("ERROR", "Vintage is empty");
             valid = false;
         }
         if(!pH.getText().trim().isEmpty()){
             try{
                 ph_level = Double.parseDouble(pH.getText());
                 if(ph_level > 14 || ph_level < 0){
-                    screenUtil.createAlertBox("ERROR", "Invalid Input for PH ");
+                    errorMessage += "Invalid input for pH.\n";
+                    //screenUtil.createAlertBox("ERROR", "Invalid Input for PH ");
                     valid = false;
                 }
             }catch (NumberFormatException e){
-                screenUtil.createAlertBox("ERROR", "Not a Number");
+                errorMessage += "Invalid input for pH.\n";
+                //screenUtil.createAlertBox("ERROR", "Not a Number");
                 valid = false;
             }
         }else if(wineCheckBox.isSelected()){
+            errorMessage += "pH is empty.\n";
             screenUtil.createAlertBox("ERROR", "PH is empty");
             valid = false;
         }
@@ -331,11 +357,13 @@ public class NewLabelController{
                 originCode = Integer.parseInt(originField.getText());
 
             } catch (NumberFormatException e) {
-                screenUtil.createAlertBox("ERROR", "Invaid Input for Origin Code");
+                errorMessage += "Origin code invalid.\n";
+                //screenUtil.createAlertBox("ERROR", "Invaid Input for Origin Code");
                 valid = false;
             }
         }else{
-            screenUtil.createAlertBox("ERROR", "Origin Code is empty");
+            errorMessage += "Origin code invalid.\n";
+            //screenUtil.createAlertBox("ERROR", "Origin Code is empty");
             valid = false;
         }
 
@@ -343,11 +371,13 @@ public class NewLabelController{
             try {
                 netContentDouble = (netContentField.getText());
             } catch (NumberFormatException e) {
-                screenUtil.createAlertBox("ERROR", "Invalid Input for Net Content");
+                errorMessage += "Invalid input for net content.\n";
+                //screenUtil.createAlertBox("ERROR", "Invalid Input for Net Content");
                 valid = false;
             }
         }else{
-            screenUtil.createAlertBox("ERROR", "Net content is empty");
+            errorMessage += "Net Content is empty.\n";
+            //screenUtil.createAlertBox("ERROR", "Net content is empty");
             valid = false;
         }
 
@@ -401,10 +431,13 @@ public class NewLabelController{
                     screenUtil.switchScene("NewApp.fxml", "New Application");
 
                 }else{
-                    screenUtil.createAlertBox("ERROR", "Please selecct the type of product");
+                    errorMessage += "Product Unselected.\n";
+                    //screenUtil.createAlertBox("ERROR", "Please select the type of product");
                 }
                 db.roundRobin();
             }
+        }else{
+            screenUtil.createAlertBox("ERROR", errorMessage);
         }
 
     }
