@@ -295,11 +295,10 @@
                         </Pane>
                         <Pane prefHeight="90.0" prefWidth="786.0" GridPane.rowIndex="4">
                             <children>
-                                <Button fx:id="approve" layoutX="682.0" layoutY="67.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="83.0" text="Accept" />
-                                <Button fx:id="reject" layoutX="586.0" layoutY="67.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="83.0" text="Reject" />
+                                <Button fx:id="approve" layoutX="682.0" layoutY="67.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="83.0" onAction = "#setAccepted" text="Accept" />
+                                <Button fx:id="reject" layoutX="586.0" layoutY="67.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="83.0" onAction = "#setReject" text="Reject" />
                                 <Button fx:id="goBack" layoutX="20.0" layoutY="75.0" mnemonicParsing="false" onAction="#setGoBack" prefHeight="25.0" prefWidth="47.0" text="Back" />
-                                <TextField fx:id="IDtoForward" layoutX="340.0" layoutY="67.0" prefHeight="25.0" prefWidth="174.0" promptText="GovID" />
-                                <Button fx:id="forwardApp" layoutX="240.0" layoutY="67.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="83.0" text="Forward to:" />
+                                <Button fx:id="forwardApp" layoutX="240.0" layoutY="67.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="83.0" onAction="#forwardApp" text="Forward to:" />
                             </children>
                         </Pane>
                     </children>
