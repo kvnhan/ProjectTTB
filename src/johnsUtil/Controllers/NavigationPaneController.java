@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 import johnsUtil.Main;
 import johnsUtil.model.SharedResources.Account;
 import johnsUtil.model.SharedResources.Screen;
+import sample.ScreenUtil;
 
 import java.io.IOException;
 import java.net.URL;
@@ -55,6 +56,7 @@ public class NavigationPaneController implements Initializable {
     @FXML
     private JFXButton logoutBtn;
 
+    ScreenUtil work = new ScreenUtil();
     /**
      * Initializes the navigation screen.
      * @param location Location of alcohol image.
@@ -143,6 +145,17 @@ public class NavigationPaneController implements Initializable {
             }
         });
 
+        inboxBtn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                try {
+                    Parent scroll = FXMLLoader.load(getClass().getClassLoader().getResource("sample/WorkFlow.fxml"));
+                    getRoot().setCenter(scroll);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
 
     }
 
