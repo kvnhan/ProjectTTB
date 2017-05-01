@@ -31,14 +31,7 @@ public class HomeController implements Initializable {
 
     private VBox vbox;
     private ImageView logo;
-    private JFXButton btnHome;
-    private JFXButton btnInbox;
-    private JFXButton btnSearch;
-    private JFXButton btnApp;
-    private JFXButton btnRevise;
-    private JFXButton btnWorker;
-    private JFXButton btnNewAcc;
-    private JFXButton btnAccount;
+
 
     @FXML
     private JFXHamburger hamburger;
