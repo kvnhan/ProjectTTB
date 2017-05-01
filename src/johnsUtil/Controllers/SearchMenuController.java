@@ -56,7 +56,7 @@ public class SearchMenuController {
     private @FXML TextField searchTextField;
     private @FXML RadioButton normalSearchRadio, intersectSearchRadio, unionSearchRadio;
     private @FXML Button helpSearchButton;
-    private @FXML Button searchButton;
+    private @FXML Button searchButton, downloadButton;
     private @FXML Label Result;
     //private @FXML JFXHamburger Back;
 
@@ -106,6 +106,7 @@ public class SearchMenuController {
     @FXML
     public void initialize(){
         String searchTemp = "";
+
         if(Account.getInstance().getSearch().trim().length() > 0){
             searchTemp = Account.getInstance().getSearch();
             Account.getInstance().setSearch("");
@@ -167,6 +168,7 @@ public class SearchMenuController {
         choiceBox.getItems().addAll("All", "Wine", "Beer", "Distilled", "Wine and Beer", "Wine and Distilled", "Beer and Distilled", "ID", "Name", "Brand Name", "Location", "Alcohol Content");
         //sets default vaule
         choiceBox.setValue("All");
+
     }
 
     /**
@@ -625,10 +627,23 @@ public class SearchMenuController {
 
     ////////////////////////////////////////////////////////////////////
 
+
     /**
      * Downloads search results.
      */
     public void download2(){
+
+        FileChooser fileChooser = new FileChooser();
+
+        //Set extension filter
+        FileChooser.ExtensionFilter extFilter =
+                new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt");
+        new FileChooser.ExtensionFilter("CSV files (*.csv)", "*.csv");
+        fileChooser.getExtensionFilters().add(extFilter);
+
+        //Show save file dialog
+        File file = fileChooser.showSaveDialog(screenUtil.getPrimaryScene());
+
         if(csvDownload.isSelected()){
             System.out.println("comma delim");
             DELIMITER = COMMA_DELIMITER;
@@ -656,7 +671,7 @@ public class SearchMenuController {
         fileContents = fileContents + (DELIMITER);
         fileContents = fileContents + ("Type");
         fileContents = fileContents + (NEW_LINE_SEPARATOR);
-
+        System.out.println("SIZE OF THING " + String.valueOf(alcoholDataList.size()));
         //AlcoholData(ID, name, brandname, app, type)
         for (int i = 0; i< alcoholDataList.size(); i++) {
             fileContents = fileContents + (String.valueOf(alcoholDataList.get(i).getAid()));
@@ -672,10 +687,14 @@ public class SearchMenuController {
             //fileWriter.append(COMMA_DELIMITER);
             fileContents = fileContents + (NEW_LINE_SEPARATOR);
         }
+
+        if (file != null) {
+            SaveFile(fileContents, file);
+        }
+
         //new Stage() = savePopUp;
         start(new Stage());
     }
-
 
     //////////////////////////////////////////////////////////////////////////
     //@Override
@@ -687,22 +706,23 @@ public class SearchMenuController {
 
         // Button buttonSave = new Button("Save");
 
-        //  buttonSave.setOnAction((ActionEvent event) -> {
-        FileChooser fileChooser = new FileChooser();
+        downloadButton.setOnAction((ActionEvent event) -> {
+            FileChooser fileChooser = new FileChooser();
 
-        //Set extension filter
-        FileChooser.ExtensionFilter extFilter =
-                new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt");
-        new FileChooser.ExtensionFilter("CSV files (*.csv)", "*.csv");
-        fileChooser.getExtensionFilters().add(extFilter);
+            //Set extension filter
+            FileChooser.ExtensionFilter extFilter =
+                    new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt");
+            new FileChooser.ExtensionFilter("CSV files (*.csv)", "*.csv");
+            fileChooser.getExtensionFilters().add(extFilter);
 
-        //Show save file dialog
-        File file = fileChooser.showSaveDialog(primaryStage);
+            //Show save file dialog
+            File file = fileChooser.showSaveDialog(primaryStage);
 
-        if(file != null){
-            SaveFile(fileContents, file);
-        }
-    }//);
+            if (file != null) {
+                SaveFile(fileContents, file);
+            }
+        });
+    }
 
     public static void main(String[] args) {
         launch(args);

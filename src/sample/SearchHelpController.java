@@ -28,7 +28,6 @@ public class SearchHelpController {
             screenImage.setImage(new javafx.scene.image.Image(resource, 100.0, 0.0, true, true));
             System.out.println("Image Was Not Found");
         }
-
     }
 
     @FXML

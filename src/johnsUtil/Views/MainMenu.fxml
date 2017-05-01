@@ -15,7 +15,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1100.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="johnsUtil.Controllers.MainMenuController">
+<BorderPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1100.0" style="-fx-background-color: white;" stylesheets="@Styling/main.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="johnsUtil.Controllers.MainMenuController">
    <center>
       <HBox fx:id="hbox" alignment="CENTER_RIGHT" prefHeight="176.0" prefWidth="1100.0" BorderPane.alignment="CENTER">
          <BorderPane.margin>
@@ -44,7 +44,7 @@
                <children>
                   <HBox alignment="CENTER" prefHeight="150.0" prefWidth="1072.0" style="-fx-background-color: transparent;">
                      <children>
-                        <JFXButton fx:id="about" alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="170.0" text="About" textFill="WHITE">
+                        <JFXButton fx:id="about" alignment="BOTTOM_CENTER" onAction="#handleAboutButton" prefHeight="100.0" prefWidth="170.0" text="About" textFill="WHITE">
                            <HBox.margin>
                               <Insets top="50.0" />
                            </HBox.margin>
@@ -52,7 +52,7 @@
                               <Font name="Calibri Light" size="27.0" />
                            </font>
                         </JFXButton>
-                        <JFXButton fx:id="team" alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="170.0" text="Team" textFill="WHITE">
+                        <JFXButton fx:id="team" alignment="BOTTOM_CENTER" prefHeight="100.0" onAction="#handleTeamButton"  prefWidth="170.0" text="Team" textFill="WHITE">
                            <HBox.margin>
                               <Insets top="50.0" />
                            </HBox.margin>

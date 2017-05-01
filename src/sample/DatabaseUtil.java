@@ -1,6 +1,9 @@
 package sample;
 
+import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.image.*;
+import johnsUtil.*;
 import org.mindrot.jbcrypt.BCrypt;
 
 import java.io.File;
@@ -1571,14 +1574,19 @@ public class DatabaseUtil {
      * @throws SQLException
      */
     public ArrayList<TreeItem<johnsUtil.Components.TItem>> getAccountItems() throws SQLException {
+
         ArrayList<TreeItem<johnsUtil.Components.TItem>> list = new ArrayList<>();
         PreparedStatement getAccs = conn.prepareStatement("SELECT AID, USERNAME, USER_TYPE FROM ACCOUNT WHERE USER_TYPE = 1");
 
         ResultSet rs =  getAccs.executeQuery();
 
         while(rs.next()){
+            ImageView image =  new ImageView(new javafx.scene.image.Image(johnsUtil.Main.class.getResourceAsStream("/user.png")));
+            image.setFitHeight(30);
+            image.setFitWidth(30);
+            Node rootIcon = image;
             int aid = rs.getInt("AID");
-            TreeItem<johnsUtil.Components.TItem> item = new TreeItem<johnsUtil.Components.TItem>(new johnsUtil.Components.AccountItem(aid,rs.getString("USERNAME")));
+            TreeItem<johnsUtil.Components.TItem> item = new TreeItem<johnsUtil.Components.TItem>(new johnsUtil.Components.AccountItem(aid,rs.getString("USERNAME")),rootIcon);
             item.getChildren().addAll(getFormItems(aid));
             list.add(item);
         }
@@ -1596,15 +1604,21 @@ public class DatabaseUtil {
      * @throws SQLException
      */
     public ArrayList<TreeItem<johnsUtil.Components.TItem>> getFormItems(int aid) throws SQLException {
+
         ArrayList<TreeItem<johnsUtil.Components.TItem>> list = new ArrayList<>();
         PreparedStatement getForms = conn.prepareStatement("SELECT ALCHID, TTBID FROM FORM WHERE GOVID = ? AND STATUS = 'ASSIGNED'");
         getForms.setInt(1,aid);
 
+
         ResultSet rs =  getForms.executeQuery();
 
         while(rs.next()){
+            ImageView image =  new ImageView(new javafx.scene.image.Image(johnsUtil.Main.class.getResourceAsStream("/form.png")));
+            image.setFitHeight(30);
+            image.setFitWidth(30);
+            Node rootIcon = image;
             AlcoholData currentDate = searchAlcoholID(rs.getInt("ALCHID")).get(0);
-            list.add(new TreeItem<johnsUtil.Components.TItem>(new johnsUtil.Components.FormItem(currentDate.getName(), rs.getString("TTBID"),currentDate.getBrandName())));
+            list.add(new TreeItem<johnsUtil.Components.TItem>(new johnsUtil.Components.FormItem(currentDate.getName(), rs.getString("TTBID"),currentDate.getBrandName()),rootIcon));
         }
 
         return list;
