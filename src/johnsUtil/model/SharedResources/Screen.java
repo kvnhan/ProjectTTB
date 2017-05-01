@@ -11,7 +11,11 @@ import sample.ScreenUtil;
  * Class containing database info.
  */
 public class Screen {
-    private static ScreenUtil screenUtil = new ScreenUtil();
+    private static ScreenUtil screenUtil;
+
+    static {
+        screenUtil = new ScreenUtil();
+    }
 
     private Screen(){}
     /**

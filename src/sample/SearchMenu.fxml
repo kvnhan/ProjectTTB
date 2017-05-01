@@ -155,7 +155,7 @@
                 <RowConstraints maxHeight="1.7976931348623157E308" minHeight="8.0" prefHeight="8.0" vgrow="ALWAYS" />
             </rowConstraints>
             <children>
-                <JFXRadioButton fx:id="csvDownload" prefHeight="17.0" prefWidth="79.0" text="CSV" GridPane.rowIndex="1" />
+                <JFXRadioButton fx:id="csvDownload"  prefHeight="17.0" prefWidth="79.0" text="CSV" GridPane.rowIndex="1" />
                 <JFXRadioButton fx:id="tabDownload" text="Tab-Delimited" GridPane.rowIndex="2" />
                 <JFXRadioButton fx:id="customDownload" prefHeight="17.0" prefWidth="154.0" text="Custom Delimitor:" GridPane.rowIndex="3" />
                 <TextField fx:id="CustomDelimiter" promptText="Insert Delimiter Here" GridPane.columnIndex="1" GridPane.rowIndex="3" />
@@ -173,7 +173,6 @@
             </HBox>
             </children>
         </GridPane>
-        <JFXHamburger fx:id="Back" onDragDetected="#back" GridPane.rowIndex="3" />
         <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #e74c3c;" GridPane.columnIndex="2" GridPane.hgrow="NEVER" GridPane.vgrow="NEVER" />
         <GridPane fx:id="resultsMainGridPane" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS">
             <columnConstraints>

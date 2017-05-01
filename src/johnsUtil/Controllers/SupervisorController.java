@@ -5,10 +5,12 @@ import com.jfoenix.controls.JFXTreeView;
 import com.sun.org.apache.xml.internal.security.Init;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.TreeItem;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -46,6 +48,11 @@ public class SupervisorController implements Initializable{
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        //Parent scene will inject its own hamburger into hbox
+        hamBox.getChildren().remove(hamburger);
+
+
         screenUtil = Screen.getInstance();
         databaseUtil = Database.getInstance();
         accountsUtil = johnsUtil.model.SharedResources.Account.getInstance();
@@ -66,15 +73,16 @@ public class SupervisorController implements Initializable{
                         return;
                     }
                     else{
-                        //CHange scene ...
+
                     }
                 }
             });
-
 
             view.setRoot(root);
         }catch(SQLException e){
             System.out.println("Couldn't connect to Database");
         }
     }
+
+
 }

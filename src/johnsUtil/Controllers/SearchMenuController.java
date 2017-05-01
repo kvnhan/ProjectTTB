@@ -29,6 +29,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.*;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
@@ -56,7 +57,7 @@ public class SearchMenuController {
     private @FXML TextField searchTextField;
     private @FXML RadioButton normalSearchRadio, intersectSearchRadio, unionSearchRadio;
     private @FXML Button helpSearchButton;
-    private @FXML Button searchButton;
+    private @FXML Button searchButton, downloadButton;
     private @FXML Label Result;
     //private @FXML JFXHamburger Back;
 
@@ -106,11 +107,31 @@ public class SearchMenuController {
     @FXML
     public void initialize() throws SQLException, NoSuchMethodException, IllegalAccessException, InstantiationException, IOException{
         String searchTemp = "";
+
         if(Account.getInstance().getSearch().trim().length() > 0){
             searchTemp = Account.getInstance().getSearch();
             Account.getInstance().setSearch("");
         }
         searchTextField.setText(searchTemp);
+
+        //TODO: add search functionality
+
+        searchTextField.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                if (event.getCode() == KeyCode.ENTER) {
+                    System.out.println("Searched using enter");
+                    try {
+                        search(new ActionEvent(searchButton, (Node) searchButton));
+                    }
+                    catch(java.sql.SQLException e){}
+                    catch(java.lang.NoSuchMethodException e){}
+                    catch(java.lang.IllegalAccessException e){}
+                    catch(java.lang.InstantiationException e){}
+                    catch(java.io.IOException e){}
+                }
+            }
+        });
 //        HamburgerBackArrowBasicTransition burgerTask2 = new HamburgerBackArrowBasicTransition(Back);
 //        burgerTask2.setRate(-1);
 //        Back.addEventHandler(MouseEvent.MOUSE_ENTERED, (e) -> {
@@ -167,6 +188,7 @@ public class SearchMenuController {
         choiceBox.getItems().addAll("All", "Wine", "Beer", "Distilled", "Wine and Beer", "Wine and Distilled", "Beer and Distilled", "ID", "Name", "Brand Name", "Location", "Alcohol Content");
         //sets default vaule
         choiceBox.setValue("All");
+
     }
 
     /**
@@ -630,10 +652,23 @@ public class SearchMenuController {
 
     ////////////////////////////////////////////////////////////////////
 
+
     /**
      * Downloads search results.
      */
     public void download2(){
+
+        FileChooser fileChooser = new FileChooser();
+
+        //Set extension filter
+        FileChooser.ExtensionFilter extFilter =
+                new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt");
+        new FileChooser.ExtensionFilter("CSV files (*.csv)", "*.csv");
+        fileChooser.getExtensionFilters().add(extFilter);
+
+        //Show save file dialog
+        File file = fileChooser.showSaveDialog(screenUtil.getPrimaryScene());
+
         if(csvDownload.isSelected()){
             System.out.println("comma delim");
             DELIMITER = COMMA_DELIMITER;
@@ -661,7 +696,7 @@ public class SearchMenuController {
         fileContents = fileContents + (DELIMITER);
         fileContents = fileContents + ("Type");
         fileContents = fileContents + (NEW_LINE_SEPARATOR);
-
+        System.out.println("SIZE OF THING " + String.valueOf(alcoholDataList.size()));
         //AlcoholData(ID, name, brandname, app, type)
         for (int i = 0; i< alcoholDataList.size(); i++) {
             fileContents = fileContents + (String.valueOf(alcoholDataList.get(i).getAid()));
@@ -677,12 +712,13 @@ public class SearchMenuController {
             //fileWriter.append(COMMA_DELIMITER);
             fileContents = fileContents + (NEW_LINE_SEPARATOR);
         }
+
+        if (file != null) {
+            SaveFile(fileContents, file);
+        }
+
         //new Stage() = savePopUp;
         start(new Stage());
-    }
-    @FXML
-    private void back(){
-
     }
 
     //////////////////////////////////////////////////////////////////////////
@@ -695,22 +731,23 @@ public class SearchMenuController {
 
         // Button buttonSave = new Button("Save");
 
-        //  buttonSave.setOnAction((ActionEvent event) -> {
-        FileChooser fileChooser = new FileChooser();
+        downloadButton.setOnAction((ActionEvent event) -> {
+            FileChooser fileChooser = new FileChooser();
 
-        //Set extension filter
-        FileChooser.ExtensionFilter extFilter =
-                new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt");
-        new FileChooser.ExtensionFilter("CSV files (*.csv)", "*.csv");
-        fileChooser.getExtensionFilters().add(extFilter);
+            //Set extension filter
+            FileChooser.ExtensionFilter extFilter =
+                    new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt");
+            new FileChooser.ExtensionFilter("CSV files (*.csv)", "*.csv");
+            fileChooser.getExtensionFilters().add(extFilter);
 
-        //Show save file dialog
-        File file = fileChooser.showSaveDialog(primaryStage);
+            //Show save file dialog
+            File file = fileChooser.showSaveDialog(primaryStage);
 
-        if(file != null){
-            SaveFile(fileContents, file);
-        }
-    }//);
+            if (file != null) {
+                SaveFile(fileContents, file);
+            }
+        });
+    }
 
     public static void main(String[] args) {
         launch(args);

@@ -49,16 +49,16 @@
                         <Font name="Calibri Light" size="25.0" />
                      </font>
                   </JFXTextField>
-                  <JFXButton fx:id="login" accessibleText="BtnLogin" onAction="#submit" prefHeight="49.0" prefWidth="320.0" style="-fx-background-color: #E74C3C;" text="Login" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                     <font>
-                        <Font name="Calibri Light" size="25.0" />
-                     </font>
-                  </JFXButton>
                   <JFXPasswordField fx:id="password" accessibleText="TFPass" focusColor="#e74c3c" prefHeight="40.0" prefWidth="240.0" promptText="Password" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <font>
                         <Font name="Calibri Light" size="25.0" />
                      </font>
                   </JFXPasswordField>
+                  <JFXButton fx:id="login" accessibleText="BtnLogin" onAction="#submit" prefHeight="49.0" prefWidth="320.0" style="-fx-background-color: #E74C3C;" text="Login" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <font>
+                        <Font name="Calibri Light" size="25.0" />
+                     </font>
+                  </JFXButton>
                   <Label fx:id="errorLabel" contentDisplay="CENTER" prefHeight="56.0" prefWidth="323.0" textAlignment="CENTER" textFill="RED" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="3">
                      <font>
                         <Font name="Calibri Light" size="20.0" />

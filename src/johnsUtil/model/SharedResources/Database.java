@@ -6,7 +6,11 @@ import sample.DatabaseUtil;
  * Class containing database info.
  */
 public class Database {
-    private static DatabaseUtil database = new DatabaseUtil();
+    private static DatabaseUtil database;
+
+    static{
+        database = new DatabaseUtil();
+    }
 
     private Database(){}
     /**

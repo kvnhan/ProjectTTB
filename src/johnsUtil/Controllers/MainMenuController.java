@@ -27,6 +27,8 @@ import javafx.util.Duration;
 import johnsUtil.Components.AutoCompleteComboBoxListener;
 import johnsUtil.Main;
 import johnsUtil.model.SharedResources.Account;
+import johnsUtil.model.SharedResources.Screen;
+import sample.ScreenUtil;
 
 import java.awt.*;
 import java.io.IOException;
@@ -72,6 +74,7 @@ public class MainMenuController implements Initializable{
 
     @FXML private ComboBox searchCombo;
 
+    private ScreenUtil screenUtil = Screen.getInstance();
     private final Color darkColor = Color.decode("#C0392B");
     private final Color lightColor = Color.decode("#E74C3C");
     private final int WIDTH = 1200;
@@ -228,11 +231,11 @@ public class MainMenuController implements Initializable{
 
     @FXML
     public void handleTeamButton(ActionEvent e){
-
+        screenUtil.switchScene("About.fxml","About Our Team");
     }
     @FXML
     public void handleAboutButton(ActionEvent e){
-
+        screenUtil.switchScene("About.fxml","About Our Team");
     }
 
     /**
