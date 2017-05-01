@@ -80,7 +80,6 @@ public class MainMenuController implements Initializable{
      * Initializes the main menu.
      */
     public void initialize(URL location, ResourceBundle resources) {
-
         hasSearchBoxMoved = false;
         searchCombo.setEditable(true);
         searchCombo.setStyle("-fx-font: 27px \"Calibri\"; -fx-background-radius: 0 30 30 0; -fx-border-radius: 0 30 30 0;");
@@ -128,7 +127,6 @@ public class MainMenuController implements Initializable{
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     /**

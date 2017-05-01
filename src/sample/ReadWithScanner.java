@@ -1,8 +1,6 @@
 package sample;
 
-/**
- * Created by Jacob Remz on 4/25/2017.
- */
+
 
 
 import java.nio.charset.Charset;
@@ -11,8 +9,10 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.Scanner;
-
-/** Assumes UTF-8 encoding. JDK 7+. */
+/**
+ * Contains functions for reading files using a scanner.
+ *
+ * Assumes UTF-8 encoding. JDK 7+. */
 public class ReadWithScanner {
     dataUtilUpload dataUtil= new dataUtilUpload();
     public static void main(String... aArgs) throws Exception {
@@ -30,7 +30,7 @@ public class ReadWithScanner {
     }
 
 
-    /** Template method that calls {@link #processLine(String)}.  */
+    /** Template method that calls {@link #processLine(String)}.*/
     public final void processLineByLine() throws Exception  {
         int counter = 0;
         try (Scanner scanner =  new Scanner(fFilePath, ENCODING.name())){
@@ -45,7 +45,12 @@ public class ReadWithScanner {
         }
 
     }
-    // helps parse bad text
+
+    /**
+     * Function for parsing strings with text that would interfere with proper functionality.
+      * @param s String to parse.
+     * @return Returns "0" if a bad string is found; returns the input string otherwise.
+     */
     private String stringHelper(String s){
         if(s.contains(".")) {
             System.out.println("I found a null");
@@ -58,7 +63,12 @@ public class ReadWithScanner {
         return s;
     }
 
-    //helps parse bad text
+    /**
+     * Parses strings into integers unless not in proper number format.
+     * @param s String to parse.
+     * @return Returns the parsed integer or a value signifying an improperly formed string.
+     * @throws NumberFormatException
+     */
     private int integerHelper(String s)throws NumberFormatException{
         try{
             return Integer.parseInt(s);
@@ -367,10 +377,19 @@ public class ReadWithScanner {
     private final Path fFilePath;
     private final static Charset ENCODING = StandardCharsets.UTF_8;
 
+    /**
+     * Prints the value of an object.
+     * @param aObject Object to print.
+     */
     private static void log(Object aObject){
         System.out.println(String.valueOf(aObject));
     }
 
+    /**
+     * Wraps a string in single quotes.
+     * @param aText String to wrap in quotes.
+     * @return Returns the string in quotes.
+     */
     private String quote(String aText){
         String QUOTE = "'";
         return QUOTE + aText + QUOTE;

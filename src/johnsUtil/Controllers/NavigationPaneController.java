@@ -5,7 +5,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
 import johnsUtil.Main;
+import johnsUtil.model.SharedResources.Account;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -14,6 +16,9 @@ import java.util.ResourceBundle;
  * Controller for the navigation screen.
  */
 public class NavigationPaneController implements Initializable {
+    @FXML
+    private VBox vbox;
+
     @FXML
     private ImageView logo;
 
@@ -33,7 +38,7 @@ public class NavigationPaneController implements Initializable {
     private JFXButton workerBtn;
 
     @FXML
-    private JFXButton newAccBtn;
+    private JFXButton mainMenuBtn;
 
     @FXML
     private JFXButton accountBtn;
@@ -52,5 +57,29 @@ public class NavigationPaneController implements Initializable {
         if(img != null){
             logo.setImage(img);
         }
+
+        int type = Account.getInstance().getUserType();
+
+
+        if(3 == type || 0 == type){
+            vbox.getChildren().remove(inboxBtn);
+        }
+        if(2 != type){
+           vbox.getChildren().removeAll(appBtn,reviseBtm);
+        }
+        if(0 != type){
+            vbox.getChildren().remove(workerBtn);
+        }
+        if(3 == type){
+            vbox.getChildren().removeAll(accountBtn,logoutBtn);
+        }
+        else{
+            vbox.getChildren().remove(mainMenuBtn);
+        }
+
+
+
+
+        //TODO Add listerns to change scenes
     }
 }
