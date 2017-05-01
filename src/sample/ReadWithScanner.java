@@ -341,7 +341,7 @@ public class ReadWithScanner {
         System.out.println(RECEIVED_CODE);
 
 
-        String ttb = dataUtil.addForm("", 0, "", "", "", "", "", "", 0, "", 0, new java.sql.Date(00-00-0000), "", "", "","","","");
+        String ttb = dataUtil.addForm(CFM_APPL_ID, Integer.parseInt(REP_ID),stringHelper(SERIAL_NUM), stringHelper(ADDRESS), "", "", "", stringHelper(STATUS), 0, "", 0, SQLrecDate, stringHelper(PERMIT_NAME), stringHelper(ADDRESS), stringHelper(QUALIFICATION), stringHelper(RECEIVED_CODE),stringHelper(SPCL_WORDING_DESC),stringHelper(PERMIT_ID));
        // dataUtil.addAlcohol("","", " ",0.0, "", " ", 0, 0, " ", " ", " ", 1, " ","", "", 0000, 0.0, "", " ", "",  new java.sql.Date(00-00-0000), 0);
 
 
