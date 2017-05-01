@@ -826,68 +826,13 @@ public class DatabaseUtil {
     }
 
     public void decideApplicationAction(String status, ApplicationData thisForm, javafx.scene.control.TextArea commentsField) throws  SQLException{
-        // change alcohol status to approved
-        changeAlcoholStatus("APPROVED", thisForm.getAssociatedAlchID());
+        changeAlcoholStatus(status, thisForm.getAssociatedAlchID());
         changeFormStatus(status.toUpperCase(), thisForm.getTtbID());
+        String comments = commentsField.getText();
+        String sql = "UPDATE FORM SET QUALIFICATIONS = " + comments + "WHERE TTBID = " + thisForm.getTtbID();
+        Statement stm = conn.createStatement();
+        stm.executeUpdate(sql);
 
-
-        //AlcoholData associatedAlcohol = thisForm.getAssociatedAlcoholData();
-
-        //String ReviewerUsername = AccountsUtil.getUsername();
-
-        //int GOVID = getAccountAid(ReviewerUsername);
-
-        //get comments
-        //String comments = commentsField.getText();
-
-/*
-        int statusInInteger;
-
-        if(status.toUpperCase().equals("INCOMPLETE")){
-            statusInInteger = 1;
-        }else if(status.toUpperCase().equals("ACCEPTED")){
-            statusInInteger = 2;
-        }else if(status.toUpperCase().equals("REJECTED")){
-            statusInInteger = 3;
-        }else if(status.toUpperCase().equals("ASSIGNED")){
-            statusInInteger = 4;
-        }else{
-            statusInInteger = 5;
-        }
-
-        String date = thisForm.getDate();
-        String general = comments;
-        String originCode = thisForm.getSource_of_product();
-        String brandName = associatedAlcohol.getBrandName();
-        String fancifulName = associatedAlcohol.getName();
-        String grapevar;
-        String wineVintage;
-        String appellation;
-
-
-        int alcoholType = associatedAlcohol.getAlcoholType();
-
-        if(alcoholType == 2) {
-            grapevar = thisForm.getGrapevar();
-            wineVintage = thisForm.getVintage();
-            appellation = thisForm.getAppellation();
-        }
-        else{
-            grapevar = "This type of alcohol does not have a varietal.";
-            wineVintage = "This type of alcohol does not have a vintage.";
-            appellation = "This type of alcohol does not have an appellation.";
-        }
-        String bottler = thisForm.getBottler();
-        String formula = thisForm.getFormula();
-        String sulfite = thisForm.getSulfite();
-        String legibility = "0";
-        String labelSize = "0";
-        String descrip = thisForm.getInfoOnBottle();
-
-        //add review
-
-       *//* addReview(FID, statusInInteger, GOVID, date, general, originCode, brandName, fancifulName, grapevar, wineVintage, appellation, bottler, formula, sulfite, legibility, labelSize, descrip);
-*/
     }
     /*
         public BeerApplicationData fillSubmittedBeerForm(String ttbid) throws SQLException{
