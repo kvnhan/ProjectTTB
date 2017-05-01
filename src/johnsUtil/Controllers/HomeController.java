@@ -55,11 +55,6 @@ public class HomeController implements Initializable {
      * initializes the homepage.
      */
     public void initialize(URL location, ResourceBundle resources) {
-        //btnClose.setGraphic(new ImageView(new Image(Main.class.getResourceAsStream("/closeOld.png"))));
-       // btnExpand.setGraphic(new ImageView(new Image(Main.class.getResourceAsStream("/maximizeOld.png"))));
-        //btnMinimize.setGraphic(new ImageView(new Image(Main.class.getResourceAsStream("/minimize.png"))));
-        //btnLogout.setGraphic(new ImageView(new Image(Main.class.getResourceAsStream("/logout.png"))));
-
         Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
         Account.getInstance().getWindow().setHeight(primaryScreenBounds.getHeight());
         Account.getInstance().getWindow().setWidth(primaryScreenBounds.getWidth());

@@ -113,7 +113,7 @@ public class NavigationPaneController implements Initializable {
         logoutBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                if(Screen.getInstance().createConfirmBox("Logout", "Are you sure you want to logout, all of your unsaved progress will be lose?")){
+                if(Screen.getInstance().createConfirmBox("Logout", "Are you sure you want to logout, all of your unsaved progress will be lost?")){
                     Account.getInstance().logout();
                     Stage primaryStage = Account.getInstance().getWindow();
                     Parent root = null;
