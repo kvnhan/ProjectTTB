@@ -15,6 +15,7 @@ public class NewAppController {
     private @FXML Button back, newApp, oldApp, Updates;
     private @FXML ImageView symbolImage;
     private ScreenUtil screenUtil = new ScreenUtil();
+    private AccountsUtil accountUtil = new AccountsUtil();
 
     /**
      * Checks which button was pressed and switches scenes accordingly.

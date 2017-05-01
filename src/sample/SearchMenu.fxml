@@ -91,9 +91,9 @@
                 <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
             </rowConstraints>
             <children>
-                <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="COLA SEARCH" wrappingWidth="124.13671875" GridPane.columnIndex="1">
+                <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="COLA SEARCH" wrappingWidth="139.13671875" GridPane.columnIndex="1">
                     <font>
-                        <Font name="System Bold" size="32.0" />
+                        <Font name="System Bold" size="29.0" />
                     </font>
                 </Text>
             </children>
@@ -132,7 +132,7 @@
                                 <ToggleGroup fx:id="Search" />
                             </toggleGroup>
                         </JFXRadioButton>
-                        <JFXRadioButton fx:id="intersectSearchRadio" onAction="#searchIntersect" prefWidth="100.0" text="Refined Search" toggleGroup="$Search" wrapText="true" />
+                        <JFXRadioButton fx:id="intersectSearchRadio" onAction="#searchIntersect" prefWidth="100.0" text="Refine Search" toggleGroup="$Search" wrapText="true" />
                         <JFXRadioButton fx:id="unionSearchRadio" maxWidth="-Infinity" minHeight="-Infinity" onAction="#searchUnion" prefHeight="17.0" prefWidth="62.0" text="Append Search To Current List" toggleGroup="$Search" wrapText="true" VBox.vgrow="ALWAYS" />
                     </children>
                <padding>

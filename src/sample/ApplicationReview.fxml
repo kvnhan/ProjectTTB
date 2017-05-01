@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
@@ -295,11 +296,12 @@
                         </Pane>
                         <Pane prefHeight="90.0" prefWidth="786.0" GridPane.rowIndex="4">
                             <children>
-                                <Button fx:id="approve" layoutX="682.0" layoutY="67.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="83.0" text="Accept" />
-                                <Button fx:id="reject" layoutX="586.0" layoutY="67.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="83.0" text="Reject" />
+                                <Button fx:id="approve" layoutX="682.0" layoutY="67.0" mnemonicParsing="false" onAction="#setAccepted" prefHeight="25.0" prefWidth="83.0" text="Accept" />
+                                <Button fx:id="reject" layoutX="586.0" layoutY="67.0" mnemonicParsing="false" onAction="#setReject" prefHeight="25.0" prefWidth="83.0" text="Reject" />
                                 <Button fx:id="goBack" layoutX="20.0" layoutY="75.0" mnemonicParsing="false" onAction="#setGoBack" prefHeight="25.0" prefWidth="47.0" text="Back" />
-                                <TextField fx:id="IDtoForward" layoutX="340.0" layoutY="67.0" prefHeight="25.0" prefWidth="174.0" promptText="GovID" />
-                                <Button fx:id="forwardApp" layoutX="240.0" layoutY="67.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="83.0" text="Forward to:" />
+                                <Button fx:id="setRevise" layoutX="586.0" layoutY="14.0" mnemonicParsing="false" onAction="#setRevise" prefHeight="25.0" prefWidth="144.0" text="Send for Revisions" />
+                                <Button fx:id="forwardApp" layoutX="240.0" layoutY="67.0" mnemonicParsing="false" onAction="#forwardApp" prefHeight="25.0" prefWidth="83.0" text="Forward to:" />
+                        <ChoiceBox fx:id="acctToChoose" layoutX="334.0" layoutY="67.0" prefWidth="150.0" />
                             </children>
                         </Pane>
                     </children>

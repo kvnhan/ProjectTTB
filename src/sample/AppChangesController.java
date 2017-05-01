@@ -37,7 +37,7 @@ public class AppChangesController {
      * Brings user back to the Revisions Help screen.
      */
     public void goBack(){
-        screenUtil.switchScene("ReviseHelp.fxml", "Assignments");
+        screenUtil.switchScene("ReviseMenu.fxml", "Revisions");
     }
 
 }

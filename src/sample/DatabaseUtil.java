@@ -1162,6 +1162,12 @@ public class DatabaseUtil {
         return GOVID;
     }
 
+    /**
+     * Assigns a form to a government worker.
+     * @param govid ID to assign application to.
+     * @param unAssignedForm Unassigned application.
+     * @throws SQLException
+     */
     public void assignForm(int govid, ApplicationData unAssignedForm) throws SQLException{
         int resultCount;
 
@@ -1175,6 +1181,12 @@ public class DatabaseUtil {
 
     }
 
+    /**
+     * Checks the type of an alcohol application.
+     * @param ttbid Application to check.
+     * @return Returns either "WINE", "BEER", or "OTHER".
+     * @throws SQLException
+     */
     public String checkforType(String ttbid) throws SQLException {
         int type = 0;
         int aid = getAidOfForm(ttbid);
@@ -1195,7 +1207,12 @@ public class DatabaseUtil {
         return "OTHER";
     }
 
-
+    /**
+     * Checks whether an application is for an imported or a domestic product.
+     * @param ttbid TTBID of application to check.
+     * @return Returns String - Either "DOMESTIC" or "IMPORTED".
+     * @throws SQLException
+     */
     public String checkforSource(String ttbid) throws SQLException {
         String type = "";
         int aid = getAidOfForm(ttbid);
@@ -1213,6 +1230,12 @@ public class DatabaseUtil {
         return "IMPORTED";
     }
 
+    /**
+     * Checks if application is a normal application.
+     * @param ttbid TTBID of application to check.
+     * @return Returns 1 if not normal.
+     * @throws SQLException
+     */
     public int checkforType1(String ttbid) throws SQLException {
         String sql = "SELECT * FROM APP.FORM WHERE TTBID = ?";
         PreparedStatement sm;
@@ -1230,6 +1253,12 @@ public class DatabaseUtil {
         return notempty;
     }
 
+    /**
+     * Checks if application is only for sale in a certain state.
+     * @param ttbid TTBID of application to check.
+     * @return Returns 1 if not for sale only in a certain state.
+     * @throws SQLException
+     */
     public int checkforType2(String ttbid) throws SQLException {
         String sql = "SELECT * FROM APP.FORM WHERE TTBID = ?";
         PreparedStatement sm;
@@ -1247,6 +1276,12 @@ public class DatabaseUtil {
         return notempty;
     }
 
+    /**
+     * Checks if an application is of type 3.
+     * @param ttbid TTBID of application to check.
+     * @return Returns 1 if not of type 3.
+     * @throws SQLException
+     */
     public int checkforType3(String ttbid) throws SQLException {
         String sql = "SELECT * FROM APP.FORM WHERE TTBID = ?";
         PreparedStatement sm;
@@ -1263,7 +1298,13 @@ public class DatabaseUtil {
         }
         return notempty;
     }
-    // Get Status
+
+    /**
+     * Gets the status of an application by the TTBID.
+     * @param ttbid TTBID to get status from.
+     * @return String representing application status.
+     * @throws SQLException
+     */
     public String getStatus(String ttbid) throws SQLException {
         String sql = "SELECT * FROM APP.FORM WHERE TTBID = ?";
         PreparedStatement sm;
@@ -1278,6 +1319,12 @@ public class DatabaseUtil {
         return status;
     }
 
+    /**
+     * Returns AID associated with a form.
+     * @param ttbid TTBID of the form.
+     * @return Returns the alcohol ID.
+     * @throws SQLException
+     */
     public int getAidOfForm(String ttbid) throws SQLException {
         String sql = "SELECT * FROM APP.FORM WHERE TTBID = ?";
         PreparedStatement sm;
@@ -1292,6 +1339,13 @@ public class DatabaseUtil {
         return aid;
     }
 
+    /**
+     * Updates a form submission.
+     * @param applicationData Data to update for the application.
+     * @param alcoholData Data to update for the alcohol.
+     * @return Returns integer representing successful update.
+     * @throws SQLException
+     */
     public int updateFormSubmission(ApplicationData applicationData, AlcoholData alcoholData) throws SQLException{
         String formStatus = "UNASSIGNED";
         String alcoholStatus = "PROCESSING";
@@ -1589,6 +1643,11 @@ public class DatabaseUtil {
         }
     }
 
+    /**
+     * Logs an account out of the system.
+     * @param aid Account ID of the account to log out.
+     * @throws SQLException
+     */
     public void logOut(int aid) throws SQLException {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         DateFormat year = new SimpleDateFormat("yyyy");
