@@ -55,6 +55,10 @@ public class ScreenUtil {
         }
     }
 
+    public Stage getPrimaryScene(){
+        return mainWindow;
+    }
+
     /**
      * Creates an alert box.
      *
