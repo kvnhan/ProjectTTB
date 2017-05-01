@@ -43,8 +43,42 @@ public class AlcoholInfoController {
             return s;
     }
     //returns class
-    private String setTextClassHelper(int alcClass){
-        return "Sparkling Wine";
+    private String setTextClassHelper(int alcClass, int alcType){
+        if(alcType==1){
+            switch(alcClass){
+                case 0:
+                    return "ALE";
+                case 1:
+                    return "BEER";
+                case 2:
+                    return "CEREAL BEVERAGE";
+                case 3:
+                    return "LAGER";
+                case 4:
+                    return "SPECIALTY MALT BEVERAGE";
+                case 5:
+                    return "MALT LIQUOR";
+                case 6:
+                    return "NEAR BEER";
+                case 7:
+                    return "PORTER";
+                case 8:
+                    return "STOUT";
+                default:
+                    return "BEER";
+            }
+        }
+        else if(alcType==2){
+            switch(alcClass){
+                case 80:
+                    return "RED WINE";
+                default:
+                    return "WINE";
+            }
+        }
+        else{
+            return "Distilled Spirits";
+        }
     }
 
     /**
@@ -81,7 +115,7 @@ public class AlcoholInfoController {
         alcNetContent.setText(setTextHelper(String.valueOf(dataPass.getAlcData().getNetContent())));
         alcHealthWarning.setText(setTextHelper(String.valueOf(dataPass.getAlcData().getHealthWarning())));
         alcProductType.setText(setTextHelper(String.valueOf(dataPass.getAlcData().getProductType())));
-        alcClass.setText(setTextClassHelper(Integer.valueOf(dataPass.getAlcData().getClassType())));
+        alcClass.setText(setTextClassHelper(Integer.valueOf(dataPass.getAlcData().getClassType()),Integer.valueOf(dataPass.getAlcData().getAlcoholType())));
         alcLegibility.setText(setTextHelper(String.valueOf(dataPass.getAlcData().getLabelLegibility())));
         alcSize.setText(setTextHelper(String.valueOf(dataPass.getAlcData().getLabelSize())));
         alcFormula.setText(setTextHelper(String.valueOf(dataPass.getAlcData().getFormulas())));
@@ -107,7 +141,6 @@ public class AlcoholInfoController {
                 }
             }
         }
-
     }
 
     /**

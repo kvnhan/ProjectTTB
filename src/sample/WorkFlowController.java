@@ -37,40 +37,45 @@ public class WorkFlowController {
      */
     @FXML
     public void initialize() throws SQLException{
-        databaseUtil.roundRobin();
+        try{
+            databaseUtil.roundRobin();
+            activeUser = databaseUtil.searchAccountWithUsername(username).get(0);
 
-        activeUser = databaseUtil.searchAccountWithUsername(username).get(0);
+            if(activeUser.getUserType() == 1){
+                formsList = databaseUtil.searchFormWithGovId(databaseUtil.getAccountAid(username));
+            }else if (activeUser.getUserType() == 2){
+                viewAllButton.setDisable(true);
+                formsList = databaseUtil.searchFormWithAid(databaseUtil.getAccountAid(username));
+            }
 
-        if(activeUser.getUserType() == 1){
-            formsList = databaseUtil.searchFormWithGovId(databaseUtil.getAccountAid(username));
-        }else if (activeUser.getUserType() == 2){
-            viewAllButton.setDisable(true);
-            formsList = databaseUtil.searchFormWithAid(databaseUtil.getAccountAid(username));
-        }
+            numberOfApps = formsList.size();
+            numberOfApplicationsLabel.setText(String.valueOf(numberOfApps));
 
-        numberOfApps = formsList.size();
-        numberOfApplicationsLabel.setText(String.valueOf(numberOfApps));
 
-        observableFormsList = FXCollections.observableList(formsList);
-        if(numberOfApps > 0 && activeUser.getUserType() == 1){
-            inboxTable.setRowFactory(tv -> {
-                TableRow<ApplicationData> row = new TableRow<ApplicationData>();
-                final ApplicationData[] rowData = new ApplicationData[1];
-                row.setOnMouseClicked(event -> {
-                    rowData[0] = row.getItem();
-                    rowChosen = rowData[0];
-                    if(event.getClickCount() == 2 && (! row.isEmpty())){
-                        ApplicationReviewController.setAppReviewMode(2);
-                        screenUtil.switchScene("ApplicationReview.fxml", "Application Review");
-                    }
+            observableFormsList = FXCollections.observableList(formsList);
+            if(numberOfApps > 0 && activeUser.getUserType() == 1){
+                inboxTable.setRowFactory(tv -> {
+                    TableRow<ApplicationData> row = new TableRow<ApplicationData>();
+                    final ApplicationData[] rowData = new ApplicationData[1];
+                    row.setOnMouseClicked(event -> {
+                        rowData[0] = row.getItem();
+                        rowChosen = rowData[0];
+                        if(event.getClickCount() == 2 && (! row.isEmpty())){
+                            ApplicationReviewController.setAppReviewMode(2);
+                            screenUtil.switchScene("ApplicationReview.fxml", "Application Review");
+                        }
+                    });
+                    row.setTooltip(new Tooltip("Double click to open application"));
+                    return row;
                 });
-                row.setTooltip(new Tooltip("Double click to open application"));
-                return row;
-            });
+            }
+
+            displayResults();
+
         }
-
-
-        displayResults();
+        catch(SQLException e){
+            System.out.println("NO OLD APPLICATIONS");
+        }
     }
 
     /**
