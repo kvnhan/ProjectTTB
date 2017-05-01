@@ -27,25 +27,16 @@ public class DBUtilTest {
     @Test
     public void logIn() throws SQLException{
         Account acc = Account.getInstance();
-        assertEquals(false,new DatabaseUtil(null,null).logIn("adonay","password"));
-        assertEquals("adonay",acc.getUserType());
+        assertEquals(true,new DatabaseUtil(null,null).logIn("jaavant","password"));
+        assertEquals("jaavant",acc.getUserName().trim());
     }
 
     @Test
     public void logIn2() throws SQLException{
         Account acc = Account.getInstance();
-        assertEquals(false,new DatabaseUtil(null,null).logIn("adonay","password"));
+        assertEquals(false,new DatabaseUtil(null,null).logIn("jaavant","pssword"));
     }
 
-    @Test
-    public void logout() throws SQLException{
-        Account acc = Account.getInstance();
-        new DatabaseUtil(null,null).logIn("adonay","password");
-        acc.logout();
 
-        assertEquals(acc.getAccountID(),-1);
-        assertEquals(acc.getUserName(), "");
-
-    }
 
 }

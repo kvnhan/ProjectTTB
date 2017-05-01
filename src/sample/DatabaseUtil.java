@@ -1637,8 +1637,13 @@ public class DatabaseUtil {
      * @throws SQLException
      */
     public boolean logIn(String userName, String password) throws SQLException {
-        PreparedStatement getAcc = conn.prepareStatement("SELECT * FROM ACCOUNT WHERE  USERNAME = ?");
         String ref;
+        PreparedStatement getAcc;
+
+        if((getAcc = conn.prepareStatement("SELECT * FROM ACCOUNT WHERE USERNAME = ?")) == null){
+            System.out.println("Yea its creeating a null ??");
+        }
+
         getAcc.setString(1,userName);
 
         ResultSet rs =  getAcc.executeQuery();
@@ -1651,26 +1656,24 @@ public class DatabaseUtil {
         if(null == ref){
             return false;
         }
-        else if(!(rs.next() == false)){
-            if (BCrypt.checkpw(password,ref)) {
+        else {
+            if (BCrypt.checkpw(password,ref.trim())) {
                 johnsUtil.model.SharedResources.Account acc = johnsUtil.model.SharedResources.Account.getInstance();
                 acc.setAccountID(rs.getInt("AID"));
-                acc.setUserName(rs.getString("USERNAME"));
+                acc.setUserName(rs.getString("USERNAME").trim());
                 acc.setUserType(rs.getInt("USER_TYPE"));
-                acc.setAddress(rs.getString("ADDRESS"));
-                acc.setName(rs.getString("YOUR_NAME"));
-                acc.setEmail(rs.getString("EMAIL"));
-                acc.setPhoneNum(rs.getString("PHONE"));
-                acc.setPicPath(new File(rs.getString("IMAGE_PATH")));
+                acc.setAddress(rs.getString("ADDRESS").trim());
+                acc.setName(rs.getString("YOUR_NAME").trim());
+                acc.setEmail(rs.getString("EMAIL").trim());
+                acc.setPhoneNum(rs.getString("PHONE").trim());
+                acc.setPicPath(new File(rs.getString("IMAGE_PATH").trim()));
                 return true;
             }
             else{
                 return false;
             }
         }
-        else{
-            return false;
-        }
+
     }
 
     /**

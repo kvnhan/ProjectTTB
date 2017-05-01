@@ -138,7 +138,7 @@
 //            PDTextField pdFancyName = (PDTextField) acroForm.getField("FANCIFULNAME");
 //            pdFancyName.setValue(form.getFancyName());
 //
-//            PDTextField pdAppInfo = (PDTextField) acroForm.getField("APPLICANTINFO");
+//            PDTextField pdAppInfo = (PDTextField) acroForm.getField("APPLICANT"); //try applicantinfo
 //            pdFancyName.setValue(form.getApplicantInfo());
 //
 //            PDTextField pdMailingAd = (PDTextField) acroForm.getField("MAILING");
@@ -147,11 +147,11 @@
 //            PDTextField pdFormula = (PDTextField) acroForm.getField("FORMULA");
 //            pdFormula.setValue(form.getFormula());
 //
-//            PDTextField pdPlant = (PDTextField) acroForm.getField("");
+//            PDTextField pdPlant = (PDTextField) acroForm.getField("BREWERNO");
 //            pdPlant.setValue(form.getPermit_no());
 //
-//           PDTextField pdAddress = (PDTextField) acroForm.getField("");
-//            pdAddress.setValue("");
+//           //PDTextField pdAddress = (PDTextField) acroForm.getField("");
+//            //pdAddress.setValue("");
 //
 //            PDTextField pdVarietal = (PDTextField) acroForm.getField("VARIETALS");
 //            pdVarietal.setValue(form.getVarietal());
@@ -168,15 +168,20 @@
 //            //TODO  Add checkboxes and fill out their info
 //            int toa = form.getTypeOfApp();
 //            if(1 == toa){
-//
+//                 PDField toa1 = acroForm.getField("toa1");
+//                ((PDCheckBox) wine).check();
 //            }
 //            else if(2 == toa){
-//
+//                  PDField toa2 = acroForm.getField("toa2");
+//                ((PDCheckBox) wine).check();
 //            }
 //            else if(3 == toa){
-//          }
+//                 PDField toa3 = acroForm.getField("toa3");
+//                ((PDCheckBox) wine).check();
+//            }
 //            else if(4 == toa){
-//
+//                 PDField toa4 = acroForm.getField("toa4");
+//                ((PDCheckBox) wine).check();
 //            }
 //
 //            PDTextField pdAddInfo = (PDTextField) acroForm.getField("INFO");
@@ -187,13 +192,14 @@
 //
 //            PDTextField pdApplicantName = (PDTextField) acroForm.getField("APPLICANT");
 //            pdApplicantName.setValue(form.getApplicantName());
+
 //            PDTextField pdIssDate =(PDTextField) acroForm.getField("ISSDATE");
 //            pdDate.setValue(form.getIssuedDate());
 //
 //            PDTextField pdPh = (PDTextField) acroForm.getField("QUAL");
 //            pdPh.setValue(form.getQualifications());
 //
-//            PDTextField pdExpDate =(PDTextField) acroForm.getField("ExpDATE");
+//            PDTextField pdExpDate =(PDTextField) acroForm.getField("EXPDATE");
 //            pdDate.setValue(form.getExpDate());
 //
 //        }

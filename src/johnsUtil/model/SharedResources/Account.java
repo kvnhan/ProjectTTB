@@ -1,9 +1,11 @@
 package johnsUtil.model.SharedResources;
 
+import javafx.stage.Stage;
 import org.mindrot.jbcrypt.BCrypt;
 
 import javax.imageio.ImageIO;
 import javax.xml.crypto.Data;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -31,7 +33,9 @@ public class Account {
     private File picPath;
     private boolean loggedIn;
     private String searchHack; //for guests
-/**
+    private Stage window;
+
+    /**
  * Creates a sample account.
  */
     private Account(){
@@ -45,6 +49,8 @@ public class Account {
         this.picPath = null;
         this.loggedIn = false;
         this.searchHack = "";
+        this.window = null;
+
     }
 
     /**Tries to gather account info from usrName
@@ -253,6 +259,14 @@ public class Account {
 
     public void setSearch(String searchHack) {
         this.searchHack = searchHack;
+    }
+
+    public Stage getWindow() {
+        return window;
+    }
+
+    public void setWindow(Stage window) {
+        this.window = window;
     }
 
 }
