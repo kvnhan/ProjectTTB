@@ -1,7 +1,7 @@
 package johnsUtil.model.Export;
 
 /**
- * Created by John on 4/20/2017.
+ * Contains form data.
  */
 public class Form {
     private String ttbid;

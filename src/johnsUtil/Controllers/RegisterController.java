@@ -1,10 +1,5 @@
 package johnsUtil.Controllers;
 
-/**
- * Controller for the registration screen.
- */
-
-
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXPasswordField;
@@ -24,6 +19,9 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+/**
+ * Controller for the registration screen.
+ */
 public class RegisterController implements Initializable {
 
     @FXML

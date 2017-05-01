@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * Created by John on 4/20/2017.
+ * Contains information on file types.
  */
 enum FileType { PDF, CSV, DELIMITED}
 
