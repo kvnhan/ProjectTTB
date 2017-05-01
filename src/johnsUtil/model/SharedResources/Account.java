@@ -21,7 +21,7 @@ import java.sql.SQLException;
  */
 public class Account {
 
-    private static Account account = new Account();
+    private static Account account;
 
     private int accountID;
     private String userName;
@@ -34,6 +34,10 @@ public class Account {
     private boolean loggedIn;
     private String searchHack; //for guests
     private Stage window;
+
+    static {
+        account = new Account();
+    }
 
     /**
  * Creates a sample account.
