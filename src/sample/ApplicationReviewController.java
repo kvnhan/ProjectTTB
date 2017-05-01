@@ -4,11 +4,8 @@ package sample;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.fxml.FXML;
-import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 
 import java.io.File;
@@ -18,6 +15,7 @@ import java.net.URL;
 import java.net.URLDecoder;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -25,9 +23,9 @@ import java.util.List;
  */
 public class ApplicationReviewController{
     @FXML
-    Button approve, reject, goBack, forwardApp;
+    Button accept, reject, goBack, forwardApp;
     @FXML
-     Label RepID_Label, PlantID_Label, SerialNo_Label, PlantAddress_Label,
+    Label RepID_Label, PlantID_Label, SerialNo_Label, PlantAddress_Label,
             ApplicantName_Label, MaillingAddress_Label, Email_Label, PhoneNumber_Label,
             BrandName_Label, FancyName_Label, Formula_Label, AlcoholContent_Label, NetContent_Label,
             Origin_Label, Sulfite_Label, Varietal_Label, Appellation_Label, Vintage_Label, Bottler_Label,
@@ -38,6 +36,10 @@ public class ApplicationReviewController{
     ChoiceBox acctToChoose;
     @FXML
     ImageView LabelImage;
+    @FXML
+    CheckBox RepIDCheck, PlantIDCheck, SerialNumCheck, PlantAddCheck, ApplicantNameCheck, MailingCheck, EmailCheck,
+            PhoneCheck, BrandCheck, FancyCheck, FormulaCheck, AContentCheck, NContentCheck, PHCheck, OriginCheck,
+            SulfiteCheck, GrapeCheck, AppelationCheck, VintageCheck, BottleCheck, ImageCheck;
 
     private DatabaseUtil dbUtil = new DatabaseUtil();
     private ScreenUtil screenUtil = new ScreenUtil();
@@ -50,6 +52,7 @@ public class ApplicationReviewController{
 
     private ArrayList<Account> acctsFound = new ArrayList<>();
     private ObservableList<String> acctsObservableList;
+    private ArrayList<CheckBox> checkList = new ArrayList<>();
 
     @FXML
     /**
@@ -64,6 +67,12 @@ public class ApplicationReviewController{
         }
         thisForm = listForms.get(0);
 
+        //add all the FXML CheckBoxes to the List of CheckBoxes
+        checkList.addAll(Arrays.asList(RepIDCheck, PlantIDCheck, SerialNumCheck, PlantAddCheck, ApplicantNameCheck, MailingCheck, EmailCheck,
+                PhoneCheck, BrandCheck, FancyCheck, FormulaCheck, AContentCheck, NContentCheck, PHCheck, OriginCheck,
+                SulfiteCheck, GrapeCheck, AppelationCheck, VintageCheck, BottleCheck, ImageCheck));
+
+        //set all of the Labels to contain the proper info.
         RepID_Label.setText(String.valueOf(thisForm.getRepid()));
         PlantID_Label.setText(String.valueOf(thisForm.getPermitNo()));
         SerialNo_Label.setText(String.valueOf(thisForm.getSerial()));
@@ -89,6 +98,7 @@ public class ApplicationReviewController{
 
         pH_Label.setText(String.valueOf(thisForm.getAssociatedAlcoholData().getPhLevel()));
 
+        //setImage view to the AlcoholImage
         try {
             InputStream resource = ScreenUtil.class.getClassLoader().getResourceAsStream("labels/"  + thisForm.getAssociatedAlcoholData().getAid() + ".jfif");
             LabelImage.setImage(new javafx.scene.image.Image(resource, 500.0, 0.0, true, true));
@@ -109,19 +119,23 @@ public class ApplicationReviewController{
                 }
             }
         }
+
+        //generate the list of people to forward the application to
         acctsObservableList = FXCollections.observableArrayList();
         acctsFound = dbUtil.searchAccountWithUserType(1);
         for(int i = 0; i < acctsFound.size(); i++){
             acctsObservableList.add(acctsFound.get(i).getUsername());
         }
-        //acctToChoose.setItems(acctsObservableList);
+        acctToChoose.setItems(acctsObservableList);
+
+        //testing Highlighting (Christian)
+        RepID_Label.setStyle("-fx-background-color: indianred; -fx-text-fill: #FFFFFF; -fx-border-color: darkred");
+
 
     }
 
 
-    /**
-     * Returns user to the workflow inbox.
-     */
+
     @FXML
     void setGoBack(){
         screenUtil.switchScene("WorkFlow.fxml", "Main Menu");
@@ -136,13 +150,9 @@ public class ApplicationReviewController{
         nextApplication();
     }
 
-    /**
-     * Sets an application status to "INCOMPLETE" and adds comments to the application.
-     * @param event
-     * @throws SQLException
-     */
+
     @FXML
-    void setRevise(ActionEvent event) throws SQLException{
+    void setIncomplete(ActionEvent event) throws SQLException{
         dbUtil.decideApplicationAction("INCOMPLETE", thisForm, commentsField);
         nextApplication();
     }
@@ -153,13 +163,25 @@ public class ApplicationReviewController{
      */
 
     public void setReject(ActionEvent event) throws SQLException {
+        commentsField.setText(checkBoxString() + commentsField.getText());
         dbUtil.decideApplicationAction("REJECTED", thisForm, commentsField);
         nextApplication();
     }
 
-    /**
-     * Forwards the application to another govt. worker.
-     */
+    private String checkBoxString() {
+        String toReturn = "";
+        for(CheckBox currBox : checkList){
+            if(currBox.isSelected()){
+                toReturn += "1";
+            }
+            else{
+                toReturn += "0";
+            }
+        }
+        System.out.println("Check Box Binary Return: " + toReturn);
+        return toReturn;
+    }
+
     @FXML
     public void forwardApp(ActionEvent event) throws SQLException{
         String govUsernm = acctToChoose.getValue().toString().trim();
@@ -185,11 +207,9 @@ public class ApplicationReviewController{
         }
     }
 
-    /**
-     * Takes user to the help screen.
-     */
+
     public void helpClick () {
-            screenUtil.switchScene("ReviewHelp.fxml","Help");
+        screenUtil.switchScene("ReviewHelp.fxml","Help");
     }
 
 
@@ -201,11 +221,6 @@ public class ApplicationReviewController{
         ApplicationReviewController.appReviewMode = appReviewMode;
     }
 
-    /**
-     * gets path to the alcohol label picture.
-     * @return Returns the path to the alcohol label picture.
-     * @throws UnsupportedEncodingException
-     */
     public String getPath() throws UnsupportedEncodingException {
         URL url = this.getClass().getProtectionDomain().getCodeSource().getLocation();
         String jarPath = URLDecoder.decode(url.getFile(), "UTF-8");
