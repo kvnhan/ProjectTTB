@@ -180,7 +180,7 @@
                   <Font name="System Bold" size="29.0" />
                </font>
             </Text>
-            <GridPane style="-fx-background-color: #e74c3c;">
+            <GridPane style="-fx-background-color: transparent;">
                <columnConstraints>
                   <ColumnConstraints hgrow="NEVER" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="98.0" />
                   <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="668.0" />
@@ -193,7 +193,7 @@
                </rowConstraints>
                <children>
                   <TextField fx:id="searchTextField" promptText="Find..." GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS" />
-                  <JFXButton fx:id="searchButton" onAction="#search" prefHeight="25.0" prefWidth="77.0" style="-fx-background-color: red;" text="Search" textFill="#f5f4f4" GridPane.columnIndex="2" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS" />
+                  <JFXButton fx:id="searchButton" onAction="#search" prefHeight="25.0" prefWidth="77.0" style="-fx-background-color: #C0392B;" text="Search" textFill="#f5f4f4" GridPane.columnIndex="2" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS" />
                   <JFXButton fx:id="helpSearchButton" onAction="#needHelp" prefHeight="25.0" prefWidth="77.0" text="Help" textFill="#f8f7f7" GridPane.columnIndex="2" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS" />
                   <JFXComboBox fx:id="choiceBox" prefHeight="25.0" prefWidth="93.0" style="-fx-background-color: white;" GridPane.rowIndex="1" />
                </children>

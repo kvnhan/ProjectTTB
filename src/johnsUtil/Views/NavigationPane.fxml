@@ -7,7 +7,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox fx:id="vbox" alignment="TOP_CENTER" minWidth="250.0" prefHeight="700.0" prefWidth="250.0" spacing="4.0" style="-fx-background-color: #E74C3C; -fx-border-radius: 0 0 0 0;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="johnsUtil.Controllers.NavigationPaneController">
+<VBox fx:id="vbox" alignment="TOP_CENTER" minWidth="250.0" prefHeight="700.0" prefWidth="250.0" spacing="4.0" style="-fx-background-color: #e74c3c; -fx-border-radius: 0 0 0 0;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="johnsUtil.Controllers.NavigationPaneController">
    <children>
       <ImageView fx:id="logo" fitHeight="180.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
          <VBox.margin>
@@ -22,13 +22,37 @@
             <Insets bottom="10.0" />
          </VBox.margin>
       </Text>
-      <JFXButton fx:id="inboxBtn" accessibleText="Inbox" maxWidth="1.7976931348623157E308" prefHeight="70.0" prefWidth="215.0" style="-fx-background-color: white; -fx-background-radius: 0 0 0 0; -fx-background-radius: 0 0 0 0;" text="Inbox" textFill="#e74c3c" />
-      <JFXButton fx:id="searchBtn" accessibleText="Search" defaultButton="true" maxWidth="1.7976931348623157E308" prefHeight="70.0" prefWidth="248.0" ripplerFill="#c0392b" style="-fx-background-color: white; -fx-border-radius: 0 0 0 0; -fx-background-radius: 0 0 0 0;" text="Search" textFill="#e74c3c" />
-      <JFXButton fx:id="appBtn" accessibleText="Create" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="70.0" prefWidth="248.0" style="-fx-background-color: white; -fx-background-radius: 0 0 0 0; -fx-border-radius: 0 0 0 0;" text="Create Application" textFill="#e74c3c" />
-      <JFXButton fx:id="reviseBtm" accessibleText="Revise" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="70.0" prefWidth="240.0" ripplerFill="#c0392b" style="-fx-background-color: white; -fx-background-radius: 0 0 0 0; -fx-border-radius: 0 0 0 0;" text="Revise Application" textFill="#e74c3c" />
-      <JFXButton fx:id="workerBtn" accessibleText="Worker" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="70.0" prefWidth="215.0" style="-fx-background-color: white; -fx-background-radius: 0 0 0 0; -fx-border-radius: 0 0 0 0;" text="Worker Analysis" textFill="#e74c3c" />
-      <JFXButton fx:id="mainMenuBtn" accessibleText="Management" maxWidth="1.7976931348623157E308" prefHeight="70.0" prefWidth="215.0" style="-fx-background-color: white; -fx-background-radius: 0 0 0 0; -fx-border-radius: 0 0 0 0;" text="Main Menu" textFill="#e74c3c" />
-      <JFXButton fx:id="accountBtn" accessibleText="Account" maxWidth="1.7976931348623157E308" prefHeight="70.0" prefWidth="215.0" style="-fx-background-color: white; -fx-background-radius: 0 0 0 0; -fx-border-radius: 0 0 0 0;" text="Account" textFill="#e74c3c" />
-      <JFXButton fx:id="logoutBtn" accessibleText="Account" maxWidth="1.7976931348623157E308" prefHeight="70.0" prefWidth="215.0" style="-fx-background-color: white; -fx-background-radius: 0 0 0 0; -fx-border-radius: 0 0 0 0;" text="Logout" textFill="#e74c3c" />
+      <JFXButton fx:id="inboxBtn" accessibleText="Inbox" maxWidth="1.7976931348623157E308" prefHeight="70.0" prefWidth="215.0" style="-fx-background-color: white; -fx-background-radius: 0 0 0 0; -fx-background-radius: 0 0 0 0;" text="Inbox" textFill="#e74c3c">
+         <VBox.margin>
+            <Insets left="3.0" right="3.0" />
+         </VBox.margin></JFXButton>
+      <JFXButton fx:id="searchBtn" accessibleText="Search" defaultButton="true" maxWidth="1.7976931348623157E308" prefHeight="70.0" prefWidth="248.0" ripplerFill="#c0392b" style="-fx-background-color: white; -fx-border-radius: 0 0 0 0; -fx-background-radius: 0 0 0 0;" text="Search" textFill="#e74c3c">
+         <VBox.margin>
+            <Insets left="3.0" right="3.0" />
+         </VBox.margin></JFXButton>
+      <JFXButton fx:id="appBtn" accessibleText="Create" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="70.0" prefWidth="248.0" style="-fx-background-color: white; -fx-background-radius: 0 0 0 0; -fx-border-radius: 0 0 0 0;" text="Create Application" textFill="#e74c3c">
+         <VBox.margin>
+            <Insets left="3.0" right="3.0" />
+         </VBox.margin></JFXButton>
+      <JFXButton fx:id="reviseBtm" accessibleText="Revise" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="70.0" prefWidth="240.0" ripplerFill="#c0392b" style="-fx-background-color: white; -fx-background-radius: 0 0 0 0; -fx-border-radius: 0 0 0 0;" text="Revise Application" textFill="#e74c3c">
+         <VBox.margin>
+            <Insets left="3.0" right="3.0" />
+         </VBox.margin></JFXButton>
+      <JFXButton fx:id="workerBtn" accessibleText="Worker" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="70.0" prefWidth="215.0" style="-fx-background-color: white; -fx-background-radius: 0 0 0 0; -fx-border-radius: 0 0 0 0;" text="Worker Analysis" textFill="#e74c3c">
+         <VBox.margin>
+            <Insets left="3.0" right="3.0" />
+         </VBox.margin></JFXButton>
+      <JFXButton fx:id="mainMenuBtn" accessibleText="Management" maxWidth="1.7976931348623157E308" prefHeight="70.0" prefWidth="215.0" style="-fx-background-color: white; -fx-background-radius: 0 0 0 0; -fx-border-radius: 0 0 0 0;" text="Main Menu" textFill="#e74c3c">
+         <VBox.margin>
+            <Insets left="3.0" right="3.0" />
+         </VBox.margin></JFXButton>
+      <JFXButton fx:id="accountBtn" accessibleText="Account" maxWidth="1.7976931348623157E308" prefHeight="70.0" prefWidth="215.0" style="-fx-background-color: white; -fx-background-radius: 0 0 0 0; -fx-border-radius: 0 0 0 0;" text="Account" textFill="#e74c3c">
+         <VBox.margin>
+            <Insets left="3.0" right="3.0" />
+         </VBox.margin></JFXButton>
+      <JFXButton fx:id="logoutBtn" accessibleText="Account" maxWidth="1.7976931348623157E308" prefHeight="70.0" prefWidth="215.0" style="-fx-background-color: white; -fx-background-radius: 0 0 0 0; -fx-border-radius: 0 0 0 0;" text="Logout" textFill="#e74c3c">
+         <VBox.margin>
+            <Insets left="3.0" right="3.0" />
+         </VBox.margin></JFXButton>
    </children>
 </VBox>
