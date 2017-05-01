@@ -21,7 +21,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane fx:id="root" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="johnsUtil.Controllers.SearchMenuController">
+<BorderPane fx:id="root" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="johnsUtil.Controllers.SearchMenuController">
    <center>
       <GridPane fx:id="gridPane" accessibleText="gridPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="675.0" prefWidth="1176.0" style="-fx-background-color: white;">
           <columnConstraints>
@@ -127,11 +127,15 @@
                       <RowConstraints maxHeight="1.7976931348623157E308" minHeight="8.0" prefHeight="8.0" vgrow="ALWAYS" />
                   </rowConstraints>
                   <children>
-                      <JFXRadioButton fx:id="csvDownload" prefHeight="17.0" prefWidth="79.0" text="CSV" GridPane.rowIndex="1" />
-                      <JFXRadioButton fx:id="tabDownload" text="Tab-Delimited" GridPane.rowIndex="2" />
-                      <JFXRadioButton fx:id="customDownload" prefHeight="17.0" prefWidth="154.0" text="Custom Delimitor:" GridPane.rowIndex="3" />
+                      <JFXRadioButton fx:id="csvDownload" prefHeight="17.0" prefWidth="79.0" text="CSV" GridPane.rowIndex="1">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="CSVGroup" />
+                     </toggleGroup></JFXRadioButton>
+                      <JFXRadioButton fx:id="tabDownload" text="Tab-Delimited" toggleGroup="$CSVGroup" GridPane.rowIndex="2" />
+                      <JFXRadioButton fx:id="customDownload" prefHeight="17.0" prefWidth="154.0" text="Custom Delimitor:" toggleGroup="$CSVGroup" GridPane.rowIndex="3" />
                       <TextField fx:id="CustomDelimiter" promptText="Insert Delimiter Here" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                       <JFXButton fx:id="downloadButton" onAction="#download2" prefHeight="31.0" prefWidth="170.0" text="Download Results" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+
                   <HBox fx:id="pageControlsHBox" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2">
                      <children>
                         <ToggleButton fx:id="previousPageButton" mnemonicParsing="false" />
