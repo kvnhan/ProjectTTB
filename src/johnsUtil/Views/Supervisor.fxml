@@ -3,7 +3,6 @@
 <?import com.jfoenix.controls.JFXHamburger?>
 <?import com.jfoenix.controls.JFXTreeView?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -14,17 +13,9 @@
          <left>
             <VBox prefHeight="646.0" prefWidth="282.0" style="-fx-background-color: transparent;" BorderPane.alignment="CENTER">
                <children>
-                  <TextField minHeight="40.0" prefHeight="40.0" promptText="Search" style="-fx-background-radius: 10 10 0 0; -fx-border-radius: 10 10 0 0;">
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                     <VBox.margin>
-                        <Insets left="15.0" right="15.0" top="10.0" />
-                     </VBox.margin>
-                  </TextField>
                   <JFXTreeView fx:id="view" maxHeight="1.7976931348623157E308" prefHeight="900.0" prefWidth="319.0" showRoot="false">
                      <VBox.margin>
-                        <Insets bottom="10.0" left="15.0" right="15.0" />
+                        <Insets bottom="10.0" left="15.0" right="15.0" top="15.0" />
                      </VBox.margin>
                   </JFXTreeView>
                </children>
@@ -34,7 +25,7 @@
             </VBox>
          </left>
          <top>
-            <HBox fx:id="hamBox" prefHeight="54.0" prefWidth="676.0" style="-fx-background-color: #E74C3C;" BorderPane.alignment="CENTER">
+            <HBox fx:id="hamBox" accessibleText="burgerBox" prefHeight="54.0" prefWidth="676.0" style="-fx-background-color: #E74C3C;" BorderPane.alignment="CENTER">
                <children>
                   <JFXHamburger fx:id="hamburger" maxHeight="54.0" maxWidth="54.0" prefHeight="54.0" prefWidth="63.0" />
                </children>

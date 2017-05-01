@@ -20,6 +20,7 @@ public class FormItem implements TItem {
         this.brandName = brandName;
     }
 
+
     /**
      * Gets the TTBID.
      * @return Returns the TTBID.
