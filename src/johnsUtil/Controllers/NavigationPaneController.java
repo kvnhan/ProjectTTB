@@ -86,7 +86,7 @@ public class NavigationPaneController implements Initializable {
             vbox.getChildren().remove(mainMenuBtn);
         }
 
-        
+
         searchBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -105,6 +105,30 @@ public class NavigationPaneController implements Initializable {
             public void handle(ActionEvent event) {
                 try {
                     Parent scroll = FXMLLoader.load(getClass().getClassLoader().getResource("johnsUtil/Views/Supervisor.fxml"));
+                    getRoot().setCenter(scroll);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        inboxBtn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                try {
+                    Parent scroll = FXMLLoader.load(getClass().getClassLoader().getResource("johnsUtil/Views/InboxManu.fxml"));
+                    getRoot().setCenter(scroll);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        reviseBtm.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                try {
+                    Parent scroll = FXMLLoader.load(getClass().getClassLoader().getResource("sample/ReviseApp.fxml"));
                     getRoot().setCenter(scroll);
                 } catch (IOException e) {
                     e.printStackTrace();
