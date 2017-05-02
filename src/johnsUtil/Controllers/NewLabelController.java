@@ -47,6 +47,7 @@ public class NewLabelController{
     @FXML private JFXTextField SerialNo;
     @FXML private JFXTextField ApplicantName;
     @FXML private JFXTextField Name;
+    @FXML private Button autoFill;
     @FXML private JFXTextField PhoneNumber;
     @FXML private JFXTextField MailingAddress;
     @FXML private JFXTextField originField;
@@ -86,6 +87,31 @@ public class NewLabelController{
         return 4;
     }
 
+
+    @FXML
+    private void autoFill(ActionEvent e){
+        RepID.setText(String.valueOf(getRandomInt()));
+        PlantReg.setText(String.valueOf(getRandomInt()));
+        SerialNo.setText(String.valueOf(getRandomInt()));
+        ApplicantName.setText("Ari G");
+        Name.setText("Beer is bad");
+        PhoneNumber.setText("911");
+        MailingAddress.setText("Jacobs house");
+        originField.setText("26");
+        BrandName.setText("Brandon");
+        Address.setText("Brandons House");
+        Formula.setText("Krabby Patties");
+        EmailAddress.setText("jdasjdjkasj@dkajskldjaslk.com");
+        alcoholContent.setText("100");
+        netContentField.setText("2 Liters");
+        grapeVarietal.setText("French");
+        Appellation.setText("France");
+        sulfiteField.setText("5");
+        Vintage.setText("1999");
+        bottlerField.setText("17th one from the left");
+        additionalInfoField.setText("Jose Wong");
+        pH.setText("7.0");
+    }
 
     @FXML
     /**
