@@ -1,13 +1,13 @@
 package sample;
 
 
+import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
-import johnsUtil.model.*;
 
 import java.io.File;
 import java.io.InputStream;
@@ -49,7 +49,7 @@ public class ApplicationReviewController{
     private ApplicationData thisForm;
     List<ApplicationData> listForms = new ArrayList<ApplicationData>();
     private static int appReviewMode = 1; // 1 = view all forms, 2 = choose form highlighted in inbox then return, 3 choose form highlighted in inbox then go to next available form;
-
+    private DataPasser dataPasser = new DataPasser();
     private int numberOfApps;
     private ArrayList<Account> acctsFound = new ArrayList<>();
     private ObservableList<String> acctsObservableList;
@@ -61,13 +61,15 @@ public class ApplicationReviewController{
      */
     public void initialize() throws SQLException{
         boolean foundImage = false;
+        ApplicationData a =  dataPasser.getApplicationData();
         String user = johnsUtil.model.SharedResources.Account.getInstance().getUserName();
         listForms = dbUtil.searchFormWithGovId(dbUtil.getAccountAid(user));
         if(appReviewMode == 2){
             listForms = new ArrayList<>();
             listForms.add(WorkFlowController.getRowChosen());
         }
-        thisForm = listForms.get(0);
+        thisForm = a;
+        System.out.println(a.getTtbID());
 
         //add all the FXML CheckBoxes to the List of CheckBoxes
         checkList.addAll(Arrays.asList(RepIDCheck, PlantIDCheck, SerialNumCheck, PlantAddCheck, ApplicantNameCheck, MailingCheck, EmailCheck,

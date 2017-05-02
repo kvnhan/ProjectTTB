@@ -268,7 +268,8 @@ public class SearchMenuController {
                 SearchMenuController.class.getClassLoader().getResourceAsStream("labels/" + String.valueOf(alcoholDataList.get(i).getAid()) + ".jfif");
                 String path = null;
                 try {
-                    String imagePath = getPath() + "/" + alcoholDataList.get(i).getAid() + ".jpg";
+                    String imagePath = getPath() + alcoholDataList.get(i).getAid() + ".jpg";
+                    System.out.println(getPath() + alcoholDataList.get(i).getAid() + ".jpg");
                     inputStream = new FileInputStream(imagePath);
                 } catch (UnsupportedEncodingException | FileNotFoundException e) {
                     inputStream = null;
