@@ -97,8 +97,10 @@ public class ReviseAppController {
      */
     public void initialize()throws SQLException{
         formsObservableList = FXCollections.observableArrayList();
+        String user = johnsUtil.model.SharedResources.Account.getInstance().getUserName();
         try {
-            formsFound = databaseUtil.searchFormWithAid(databaseUtil.getAccountAid(accountsUtil.getUsername()));
+            formsFound = databaseUtil.searchFormWithAid(databaseUtil.getAccountAid(user));
+            System.out.println(user);
             if (formsFound.size() == 0)
                 System.out.println("SUCCESS");
             for (int i = 0; i < formsFound.size(); i++) {
@@ -113,6 +115,7 @@ public class ReviseAppController {
         });*/
 
             formChoiceBox.setItems(formsObservableList);
+            System.out.println(formChoiceBox);
 
             System.out.println(dataPasser.isIsInvokebyReviseMenu());
             if (dataPasser.isIsInvokebyReviseMenu() == 1) {
