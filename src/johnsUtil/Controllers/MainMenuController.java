@@ -250,7 +250,7 @@ public class MainMenuController implements Initializable{
     }
     @FXML
     public void handleAboutButton(ActionEvent e){
-        screenUtil.switchScene("MegaHelp.fxml","About Our Team");
+        screenUtil.switchScene("MegaHelp.fxml","Help Pages");
     }
 
     /**
