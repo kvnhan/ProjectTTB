@@ -99,8 +99,9 @@ public class ApplicationReviewController{
         Appellation_Label.setText(String.valueOf(thisForm.getAssociatedAlcoholData().getAppellation()));
         Vintage_Label.setText(String.valueOf(thisForm.getAssociatedAlcoholData().getWineVintage()));
         Bottler_Label.setText(String.valueOf(thisForm.getAssociatedAlcoholData().getBottlersInfo()));
-        sourceOfProduct.setText(String.valueOf(thisForm.getAssociatedAlcoholData().getSourceOfProduct()));
-        typeOfProduct.setText(String.valueOf(thisForm.getAssociatedAlcoholData().getAlcoholType()));
+        //null pointer
+      //  sourceOfProduct.setText(String.valueOf(thisForm.getAssociatedAlcoholData().getSourceOfProduct()));
+      //  typeOfProduct.setText(String.valueOf(thisForm.getAssociatedAlcoholData().getAlcoholType()));
 
         pH_Label.setText(String.valueOf(thisForm.getAssociatedAlcoholData().getPhLevel()));
 

@@ -94,7 +94,7 @@ public class ReviseAppController {
         formsObservableList = FXCollections.observableArrayList();
         String user = johnsUtil.model.SharedResources.Account.getInstance().getUserName();
         try {
-            formsFound = databaseUtil.searchFormWithAid(databaseUtil.getAccountAid(user));
+            formsFound = databaseUtil.searchRejectedFormWithAid(databaseUtil.getAccountAid(user));
             System.out.println(user);
             if (formsFound.size() == 0)
                 System.out.println("SUCCESS");
@@ -395,6 +395,11 @@ public class ReviseAppController {
             dataPasser.setDisableVarietalField(0);
             dataPasser.setDisablepHField(0);
             dataPasser.setDisableAlcoContentField(0);
+            dataPasser.setDisableAddress(0);
+            dataPasser.setDisableMailingAndName(0);
+            dataPasser.setDisableNet(0);
+            dataPasser.setDisableComment(0);
+            dataPasser.setDisableBottler(0);
             System.out.println(dataPasser.isIsInvokebyReviseMenu());
         }
         catch(SQLException e){
@@ -409,9 +414,17 @@ public class ReviseAppController {
     public void goBack (ActionEvent event){
         if(dataPasser.isIsRevised() == 1){
             dataPasser.setIsRevised(0);
-            screenUtil.switchScene("ReviseMenu.fxml", "Revise Menu");
+            try {
+                Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("johnsUtil/Views/InboxManu.fxml"));
+            }catch (Exception e){
+                e.printStackTrace();
+            }
         }else{
-            screenUtil.switchScene("MainMenu.fxml", "Main Menu");
+            try {
+                Parent root2 = FXMLLoader.load(getClass().getClassLoader().getResource("johnsUtil/Views/Home.fxml"));
+            }catch (Exception e2){
+                e2.printStackTrace();
+            }
         }
 
 
@@ -645,9 +658,7 @@ public class ReviseAppController {
             if(changeImage){
                 saveImage(aid);
             }
-            su.switchScene("NewApp.fxml", "Application Menu");
             su.createAlertBox("Notification", "Update is successful");
-
         } else if (beerCheckBox.isSelected()) {
             type_of_product = "MALT BEVERAGES";
             alcoholType = "MALT BEVERAGES";
@@ -658,7 +669,6 @@ public class ReviseAppController {
             if(changeImage){
                 saveImage(aid);
             }
-            su.switchScene("NewApp.fxml", "Application Menu");
             su.createAlertBox("Notification", "Update is successful");
         } else if (distilledCheckBox.isSelected()) {
             type_of_product = "DISTILLED SPIRITS";
@@ -670,12 +680,17 @@ public class ReviseAppController {
             if(changeImage){
                 saveImage(aid);
             }
-            su.switchScene("NewApp.fxml", "Application Menu");
             su.createAlertBox("Notification", "Update is successful");
         }else{
             su.createAlertBox("ERROR", "Please select the type of product");
         }
 
+        try {
+            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("johnsUtil/Views/Home.fxml"));
+            su.createAlertBox("Notification", "Update is successful");
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         databaseUtil.roundRobin();
 
     }

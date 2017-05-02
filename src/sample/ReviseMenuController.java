@@ -57,8 +57,10 @@ public class ReviseMenuController {
      */
     public void initialize() throws SQLException{
         formsObservableList = FXCollections.observableArrayList();
+        String user = johnsUtil.model.SharedResources.Account.getInstance().getUserName();
+        String id = dataPasser.getTtbID();
         try {
-            formsFound = databaseUtil.searchFormWithAid(databaseUtil.getAccountAid(accountsUtil.getUsername()));
+            formsFound = databaseUtil.searchAcceptedFormWithAid(databaseUtil.getAccountAid(user));
         }
         catch(SQLException e){
             System.out.println("YOU HAVE NO FORMS");
@@ -67,7 +69,8 @@ public class ReviseMenuController {
             formsObservableList.add(formsFound.get(i).getTtbID());
         }
         applicationChoiceBox.setItems(formsObservableList);
-        applicationChoiceBox.getSelectionModel().selectFirst();
+        applicationChoiceBox.setValue(id);
+        applicationChoiceBox.setDisable(true);
     }
 
 
@@ -77,7 +80,11 @@ public class ReviseMenuController {
      * @param event Represents a press of the back button.
      */
     public void goBack(ActionEvent event){
-        screenUtil.switchScene("MainMenu.fxml", "Main Menu");
+        try {
+            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("johnsUtil/Views/InboxManu.fxml"));
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
     }
 
