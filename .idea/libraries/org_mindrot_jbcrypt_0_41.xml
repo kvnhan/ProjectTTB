@@ -4,9 +4,11 @@
     <CLASSES>
       <root url="jar://$PROJECT_DIR$/lib/jbcrypt-0.4.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/jbcrypt-0.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jbcrypt-0.4.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
+      <root url="jar://$PROJECT_DIR$/lib/jbcrypt-0.4-sources.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/jbcrypt-0.4-sources.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/jbcrypt-0.4-sources.jar!/" />
     </SOURCES>
