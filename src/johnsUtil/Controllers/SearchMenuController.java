@@ -264,8 +264,6 @@ public class SearchMenuController {
 
             if (inputStream == null) {
                 // if not try looking in output folder
-                inputStream = SearchMenuController.class.getClassLoader().getResourceAsStream("labels/" + String.valueOf(alcoholDataList.get(i).getAid()) + ".jfif");
-                SearchMenuController.class.getClassLoader().getResourceAsStream("labels/" + String.valueOf(alcoholDataList.get(i).getAid()) + ".jfif");
                 String path = null;
                 try {
                     String imagePath = getPath() + alcoholDataList.get(i).getAid() + ".jpg";
@@ -287,53 +285,54 @@ public class SearchMenuController {
                         inputStream = SearchMenuController.class.getClassLoader().getResourceAsStream("labels/distilled_default.jfif");
                     }
                 }
-                alcoholImage = new javafx.scene.image.Image(inputStream);
-                alcoholImageView = new ImageView();
+            }
 
-                alcoholImageView.setImage(alcoholImage);
+            alcoholImage = new javafx.scene.image.Image(inputStream);
+            alcoholImageView = new ImageView();
 
-                alcoholImageView.setFitWidth(260);
-                alcoholImageView.setFitHeight(260);
+            alcoholImageView.setImage(alcoholImage);
 
-                ImageViewPane imageViewPane = new ImageViewPane(alcoholImageView);
+            alcoholImageView.setFitWidth(260);
+            alcoholImageView.setFitHeight(260);
 
-                imageViewPane.setOnMouseEntered(new EventHandler<MouseEvent>() {
-                    @Override
-                    public void handle(MouseEvent event) {
-                        int depth = 150;
+            ImageViewPane imageViewPane = new ImageViewPane(alcoholImageView);
 
-                        DropShadow borderGlow = new DropShadow();
-                        borderGlow.setOffsetY(0f);
-                        borderGlow.setOffsetX(0f);
-                        borderGlow.setColor(Color.web("#e74c3c"));
-                        borderGlow.setWidth(depth);
-                        borderGlow.setHeight(depth);
+            imageViewPane.setOnMouseEntered(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    int depth = 150;
 
-                        imageViewPane.setEffect(borderGlow);
-                    }
-                });
+                    DropShadow borderGlow = new DropShadow();
+                    borderGlow.setOffsetY(0f);
+                    borderGlow.setOffsetX(0f);
+                    borderGlow.setColor(Color.web("#e74c3c"));
+                    borderGlow.setWidth(depth);
+                    borderGlow.setHeight(depth);
 
-                imageViewPane.setOnMouseExited(new EventHandler<MouseEvent>() {
-                    @Override
-                    public void handle(MouseEvent event) {
-                        imageViewPane.setEffect(null);
-                    }
-                });
-
-                imageViewPane.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                    @Override
-                    public void handle(MouseEvent event) {
-                        screenUtil.pullUpAlcoholDetails(currentAlcoholData);
-                    }
-                });
-
-                alcoholLabelGridPane.add(imageViewPane, imageCol, imageRow);
-
-                imageCol++;
-                if (imageCol > 2) {
-                    imageCol = 0;
-                    imageRow++;
+                    imageViewPane.setEffect(borderGlow);
                 }
+            });
+
+            imageViewPane.setOnMouseExited(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    imageViewPane.setEffect(null);
+                }
+            });
+
+            imageViewPane.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    screenUtil.pullUpAlcoholDetails(currentAlcoholData);
+                }
+            });
+
+            alcoholLabelGridPane.add(imageViewPane, imageCol, imageRow);
+
+            imageCol++;
+            if (imageCol > 2) {
+                imageCol = 0;
+                imageRow++;
             }
         }
 
