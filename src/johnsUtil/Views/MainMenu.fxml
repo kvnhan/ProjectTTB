@@ -44,7 +44,7 @@
                <children>
                   <HBox alignment="CENTER" prefHeight="150.0" prefWidth="1072.0" style="-fx-background-color: transparent;">
                      <children>
-                        <JFXButton fx:id="about" alignment="BOTTOM_CENTER" onAction="#handleAboutButton" prefHeight="100.0" prefWidth="170.0" text="About" textFill="WHITE">
+                        <JFXButton fx:id="about" alignment="BOTTOM_CENTER" onAction="#handleAboutButton" prefHeight="100.0" prefWidth="170.0" text="Help" textFill="WHITE">
                            <HBox.margin>
                               <Insets top="50.0" />
                            </HBox.margin>

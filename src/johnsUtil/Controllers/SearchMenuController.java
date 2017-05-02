@@ -818,7 +818,8 @@ public class SearchMenuController {
     /**
      * Switches user to the help screen for searches.
      */
-    public void needHelp (){
+    @FXML
+    public void needHelp (ActionEvent e){
         screenUtil.switchScene("SearchHelp.fxml","Help");
     }
 
