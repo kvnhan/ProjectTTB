@@ -25,13 +25,13 @@ public class ApplicationReviewController{
     @FXML
     Button accept, reject, goBack, forwardApp;
     @FXML
-    Label RepID_Label, PlantID_Label, SerialNo_Label, PlantAddress_Label,
+    Label sourceOfProduct, typeOfProduct, RepID_Label, PlantID_Label, SerialNo_Label, PlantAddress_Label,
             ApplicantName_Label, MaillingAddress_Label, Email_Label, PhoneNumber_Label,
             BrandName_Label, FancyName_Label, Formula_Label, AlcoholContent_Label, NetContent_Label,
             Origin_Label, Sulfite_Label, Varietal_Label, Appellation_Label, Vintage_Label, Bottler_Label,
             pH_Label;
     @FXML
-    TextArea commentsField;
+    TextArea commentsField, additionalInfo;
     @FXML
     ChoiceBox acctToChoose;
     @FXML
@@ -79,10 +79,12 @@ public class ApplicationReviewController{
         SerialNo_Label.setText(String.valueOf(thisForm.getSerial()));
         PlantAddress_Label.setText(String.valueOf(thisForm.getAddress()));
 
+
         ApplicantName_Label.setText(String.valueOf(thisForm.getApplicantName()));
         MaillingAddress_Label.setText(String.valueOf(thisForm.getAddress()));
         Email_Label.setText(String.valueOf(thisForm.getEmail()));
         PhoneNumber_Label.setText(String.valueOf(thisForm.getPhoneNumber()));
+        //additionalInfo.setText(String.valueOf(thisForm.getI));
 
         BrandName_Label.setText(String.valueOf(thisForm.getAssociatedAlcoholData().getBrandName()));
         FancyName_Label.setText(String.valueOf(thisForm.getAssociatedAlcoholData().getName()));
@@ -96,6 +98,8 @@ public class ApplicationReviewController{
         Appellation_Label.setText(String.valueOf(thisForm.getAssociatedAlcoholData().getAppellation()));
         Vintage_Label.setText(String.valueOf(thisForm.getAssociatedAlcoholData().getWineVintage()));
         Bottler_Label.setText(String.valueOf(thisForm.getAssociatedAlcoholData().getBottlersInfo()));
+        sourceOfProduct.setText(String.valueOf(thisForm.getAssociatedAlcoholData().getSourceOfProduct()));
+        typeOfProduct.setText(String.valueOf(thisForm.getAssociatedAlcoholData().getAlcoholType()));
 
         pH_Label.setText(String.valueOf(thisForm.getAssociatedAlcoholData().getPhLevel()));
 

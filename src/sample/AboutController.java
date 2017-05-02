@@ -18,7 +18,7 @@ public class AboutController {
     @FXML
     private TextArea text;
     @FXML
-    ImageView adonayPic, ariPic, elsaPic, jonPic, jacobPic, peterPic, chrisPic, samPic, lucyPic, kienPic;
+    ImageView adonayPic, ariPic, elsaPic, jonPic, jacobPic, peterPic, chrisPic, samPic, lucyPic, kienPic, TrevorPic;
 
     public void initialize(){
 
@@ -52,7 +52,7 @@ public class AboutController {
             ariPic.setImage(new javafx.scene.image.Image(resource, 100.0, 0.0, true, true));
             System.out.println("Image Was Not Found");
         }
-
+//potato
         try {
             InputStream resource4 = ScreenUtil.class.getClassLoader().getResourceAsStream("resources/JONPIC.png");
             jonPic.setImage(new javafx.scene.image.Image(resource4, 500.0, 0.0, true, true));
@@ -117,6 +117,15 @@ public class AboutController {
         catch(NullPointerException nullPoint){
             InputStream resource = ScreenUtil.class.getClassLoader().getResourceAsStream("labels/imageUnavailable.jpg");
             kienPic.setImage(new javafx.scene.image.Image(resource, 100.0, 0.0, true, true));
+            System.out.println("Image Was Not Found");
+        }
+        try {
+            InputStream resource10 = ScreenUtil.class.getClassLoader().getResourceAsStream("resources/TrevorPic.png");
+            TrevorPic.setImage(new javafx.scene.image.Image(resource10, 500.0, 0.0, true, true));
+        }
+        catch(NullPointerException nullPoint){
+            InputStream resource = ScreenUtil.class.getClassLoader().getResourceAsStream("labels/imageUnavailable.jpg");
+            TrevorPic.setImage(new javafx.scene.image.Image(resource, 100.0, 0.0, true, true));
             System.out.println("Image Was Not Found");
         }
 
