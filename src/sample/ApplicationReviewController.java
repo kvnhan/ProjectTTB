@@ -172,7 +172,8 @@ public class ApplicationReviewController{
      */
 
     public void setReject(ActionEvent event) throws SQLException {
-        commentsField.setText(checkBoxString() + commentsField.getText());
+        //commented out for errors
+    //    commentsField.setText(checkBoxString() + commentsField.getText());
         dbUtil.decideApplicationAction("REJECTED", thisForm, commentsField);
         nextApplication();
     }
