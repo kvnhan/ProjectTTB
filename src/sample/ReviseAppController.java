@@ -437,8 +437,13 @@ public class ReviseAppController {
      *
      */
     public void autoFillSelectedForm(ActionEvent event)throws SQLException{
-
-        String ttbid = formChoiceBox.getValue().toString().trim();
+        String ttbid;
+        if(formChoiceBox.getValue() != null){
+            ttbid = formChoiceBox.getValue().toString().trim();
+        }
+        else{
+            ttbid = "";
+        }
         ApplicationData data;
         AlcoholData a;
         String type;
@@ -471,17 +476,17 @@ public class ReviseAppController {
             if (type.equals("WINE")) {
                 data = databaseUtil.fillSubmittedForm(ttbid);
                 a = databaseUtil.getAlcohoforWine(ttbid);
-                System.out.println(dom1.isSelected());
+                //System.out.println(dom1.isSelected());
                 if(type1 == 0){
                     dom1.setSelected(true);
                 }
-                System.out.println(dom111.isSelected());
+                //System.out.println(dom111.isSelected());
                 if(type2 == 0){
                     dom11.setSelected(true);
                     type2Box.setText(data.getType2());
 
                 }
-                System.out.println(dom111.isSelected());
+                //System.out.println(dom111.isSelected());
                 if(type3 == 0){
                     dom111.setSelected(true);
                     type3box.setText(Integer.toString(data.getType3()));
@@ -516,17 +521,17 @@ public class ReviseAppController {
             } else if (type.equals("BEER")) {
                 data = databaseUtil.fillSubmittedForm(ttbid);
                 a = databaseUtil.getAlcohoforBeer(ttbid);
-                System.out.println(dom1.isSelected());
+                //System.out.println(dom1.isSelected());
                 if(type1 == 0){
                     dom1.setSelected(true);
                 }
-                System.out.println(dom111.isSelected());
+                //System.out.println(dom111.isSelected());
                 if(type2 == 0){
                     dom11.setSelected(true);
                     type2Box.setText(data.getType2());
 
                 }
-                System.out.println(dom111.isSelected());
+                //System.out.println(dom111.isSelected());
                 if(type3 == 0){
                     dom111.setSelected(true);
                     type3box.setText(Integer.toString(data.getType3()));
@@ -556,17 +561,17 @@ public class ReviseAppController {
                 data = databaseUtil.fillSubmittedForm(ttbid);
                 Status.setText(data.getStatus());
                 a = databaseUtil.getAlcohoforBeer(ttbid);
-                System.out.println(dom1.isSelected());
+                //System.out.println(dom1.isSelected());
                 if(type1 == 0){
                     dom1.setSelected(true);
                 }
-                System.out.println(dom111.isSelected());
+                //System.out.println(dom111.isSelected());
                 if(type2 == 0){
                     dom111.setSelected(true);
                     type2Box.setText(data.getType2());
 
                 }
-                System.out.println(dom111.isSelected());
+                //System.out.println(dom111.isSelected());
                 if(type3 == 0){
                     dom111.setSelected(true);
                     type3box.setText(Integer.toString(data.getType3()));
@@ -705,7 +710,7 @@ public class ReviseAppController {
         if (tempFile != null) {
             //myFilePath.setText(tempFile.getPath());
             filepath = tempFile.toURI().toString();
-            System.out.println(filepath);
+            //System.out.println(filepath);
             Image img = new Image(filepath);
             image.setImage(img);
         }
@@ -748,7 +753,7 @@ public class ReviseAppController {
         String fileSeparator = System.getProperty("file.separator");
         String newDir = parentPath + fileSeparator + "images" + fileSeparator;
 
-        System.out.println(newDir);
+        //System.out.println(newDir);
 
         return newDir;
     }

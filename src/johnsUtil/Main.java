@@ -48,10 +48,7 @@ public class Main extends Application {
             File file = new File(newDir);
             if(!file.exists()) {
                 file.mkdir();
-                System.out.println("It works!!!");
-                System.out.println(newDir);
             }else{
-                System.out.println("Directory already exists");
                 System.out.println(newDir);
             }
         }catch (Exception e){

@@ -61,9 +61,6 @@ public class NavigationPaneController implements Initializable {
     @FXML
     private JFXButton supervisorBtn;
 
-
-    ScreenUtil work = new ScreenUtil();
-
     /**
      * Initializes the navigation screen.
      * @param location Location of alcohol image.
@@ -101,7 +98,7 @@ public class NavigationPaneController implements Initializable {
             public void handle(ActionEvent event) {
                 try {
                     Parent scroll = FXMLLoader.load(getClass().getClassLoader().getResource("johnsUtil/Views/SearchMenu.fxml"));
-                    getRoot().setCenter(scroll);
+                    //getRoot().setCenter(scroll);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -137,8 +134,8 @@ public class NavigationPaneController implements Initializable {
             @Override
             public void handle(ActionEvent event) {
                 try {
-                    Parent scroll = FXMLLoader.load(getClass().getClassLoader().getResource("sample/ReviseApp.fxml"));
-                    getRoot().setCenter(scroll);
+                    Parent revise = FXMLLoader.load(getClass().getClassLoader().getResource("sample/ReviseApp.fxml"));
+                    getRoot().setCenter(revise);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
