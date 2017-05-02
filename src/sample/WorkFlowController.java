@@ -37,9 +37,10 @@ public class WorkFlowController {
      */
     @FXML
     public void initialize() throws SQLException{
+        String user = johnsUtil.model.SharedResources.Account.getInstance().getUserName();
         try{
             databaseUtil.roundRobin();
-            activeUser = databaseUtil.searchAccountWithUsername(username).get(0);
+            activeUser = databaseUtil.searchAccountWithUsername(user).get(0);
 
             if(activeUser.getUserType() == 1){
                 formsList = databaseUtil.searchFormWithGovId(databaseUtil.getAccountAid(username));
@@ -112,7 +113,7 @@ public class WorkFlowController {
      */
     public void viewAllApplicationsButton(ActionEvent event){
         if(numberOfApps <= 0){
-            screenUtil.switchScene("WorkFlowController.fxml", "Inbox");
+            screenUtil.switchScene("/johnsUtil/Views/InboxManu.fxml", "Inbox");
             screenUtil.createAlertBox("No applications due","There are no applications assigned to you at the moment.");
         }else{
             ApplicationReviewController.setAppReviewMode(1);

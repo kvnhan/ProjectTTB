@@ -205,7 +205,7 @@ public class NavigationPaneController implements Initializable {
             @Override
             public void handle(ActionEvent event) {
                 try {
-                    Parent scroll = FXMLLoader.load(getClass().getClassLoader().getResource("sample/WorkFlow.fxml"));
+                    Parent scroll = FXMLLoader.load(getClass().getClassLoader().getResource("johnsUtil/Views/InboxManu.fxml"));
                     getRoot().setCenter(scroll);
                 } catch (IOException e) {
                     e.printStackTrace();

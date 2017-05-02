@@ -95,40 +95,76 @@ public class InboxManuController implements Initializable {
                     }
                 }
             });
-            listView.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
-                @Override
-                public void handle(MouseEvent click) {
-                    if (click.getClickCount() == 2) {
-                        ApplicationData a = listView.getSelectionModel().getSelectedItems().get(0);
-                        System.out.println(a.getTtbID());
+            if(activeUser.getUserType() == 2) {
+                listView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent click) {
+                        if (click.getClickCount() == 2) {
+                            ApplicationData a = listView.getSelectionModel().getSelectedItems().get(0);
+                            System.out.println(a.getTtbID());
 
-                        try {
-                            form = databaseUtil.searchFormWithTTBID(a.getTtbID());
-                            data = databaseUtil.searchAlcoholID(databaseUtil.getAidOfForm(form.get(0).getTtbID()));
-                            System.out.println(form.size());
-                            System.out.println("Pleaseeee");
-                            dataPasser.setAlcData(data.get(0));
-                            System.out.println("Pleaseee");
-                            dataPasser.setApplicationData(form.get(0));
-                            System.out.println("Pleaseee");
-                            dataPasser.setIsInvokedByManu(1);
-                            System.out.println(dataPasser.getAlcData().getAid());
-                            System.out.println(dataPasser.getIsInvokedByManu());
                             try {
-                                borderPane.setRight(FXMLLoader.load(getClass().getResource("/sample/NewLabel.fxml")));
-                            }catch (Exception e1){
-                                e1.printStackTrace();
+                                form = databaseUtil.searchFormWithTTBID(a.getTtbID());
+                                data = databaseUtil.searchAlcoholID(databaseUtil.getAidOfForm(form.get(0).getTtbID()));
+                                System.out.println(form.size());
+                                System.out.println("Pleaseeee");
+                                dataPasser.setAlcData(data.get(0));
+                                System.out.println("Pleaseee");
+                                dataPasser.setApplicationData(form.get(0));
+                                System.out.println("Pleaseee");
+                                dataPasser.setIsInvokedByManu(1);
+                                System.out.println(dataPasser.getAlcData().getAid());
+                                System.out.println(dataPasser.getIsInvokedByManu());
+                                try {
+                                    borderPane.setRight(FXMLLoader.load(getClass().getResource("/sample/NewLabel.fxml")));
+                                } catch (Exception e1) {
+                                    e1.printStackTrace();
+                                }
+                                System.out.println("Pleaseeeee");
+                                //hbox = FXMLLoader.load(getClass().getResource("/wpi/Toolbar.fxml")); toolbar
+                            } catch (Exception e) {
+
                             }
-                            System.out.println("Pleaseeeee");
-                            //hbox = FXMLLoader.load(getClass().getResource("/wpi/Toolbar.fxml")); toolbar
-                        } catch (Exception e) {
 
                         }
-
                     }
-                }
-            });
+                });
+            }else{
+                listView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent click) {
+                        if (click.getClickCount() == 2) {
+                            ApplicationData a = listView.getSelectionModel().getSelectedItems().get(0);
+                            System.out.println(a.getTtbID());
+
+                            try {
+                                form = databaseUtil.searchFormWithTTBID(a.getTtbID());
+                                data = databaseUtil.searchAlcoholID(databaseUtil.getAidOfForm(form.get(0).getTtbID()));
+                                System.out.println(form.size());
+                                System.out.println("Pleaseeee");
+                                dataPasser.setAlcData(data.get(0));
+                                System.out.println("Pleaseee");
+                                dataPasser.setApplicationData(form.get(0));
+                                System.out.println("Pleaseee");
+                                dataPasser.setIsInvokedByManu(1);
+                                System.out.println(dataPasser.getAlcData().getAid());
+                                System.out.println(dataPasser.getIsInvokedByManu());
+                                try {
+                                    borderPane.setRight(FXMLLoader.load(getClass().getResource("/sample/ApplicationReview.fxml")));
+                                } catch (Exception e1) {
+                                    e1.printStackTrace();
+                                }
+                                System.out.println("Pleaseeeee");
+                                //hbox = FXMLLoader.load(getClass().getResource("/wpi/Toolbar.fxml")); toolbar
+                            } catch (Exception e) {
+
+                            }
+
+                        }
+                    }
+                });
+            }
 
         } catch (Exception e) {
 

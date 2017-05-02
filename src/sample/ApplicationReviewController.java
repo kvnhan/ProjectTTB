@@ -60,7 +60,8 @@ public class ApplicationReviewController{
      */
     public void initialize() throws SQLException{
         boolean foundImage = false;
-        listForms = dbUtil.searchFormWithGovId(dbUtil.getAccountAid(username));
+        String user = johnsUtil.model.SharedResources.Account.getInstance().getUserName();
+        listForms = dbUtil.searchFormWithGovId(dbUtil.getAccountAid(user));
         if(appReviewMode == 2){
             listForms = new ArrayList<>();
             listForms.add(WorkFlowController.getRowChosen());

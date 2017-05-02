@@ -83,8 +83,8 @@
                         <Label fx:id="Status" layoutX="699.0" layoutY="51.0" prefHeight="28.0" prefWidth="138.0" />
                         <Label layoutX="580.0" layoutY="21.0" prefHeight="28.0" prefWidth="64.0" text="TTBID: " />
                         <Label layoutX="580.0" layoutY="51.0" prefHeight="28.0" prefWidth="64.0" text="Status: " />
-                        <ChoiceBox fx:id="formChoiceBox" layoutX="624.0" layoutY="23.0" prefHeight="25.0" prefWidth="136.0" />
-                        <Button fx:id="find" layoutX="768.0" layoutY="23.0" mnemonicParsing="false" onAction="#autoFillSelectedForm" text="Find Form" />
+                        <ChoiceBox fx:id="formChoiceBox" layoutX="624.0" layoutY="23.0" prefHeight="31.0" prefWidth="127.0" />
+                        <Button fx:id="find" layoutX="755.0" layoutY="23.0" mnemonicParsing="false" onAction="#autoFillSelectedForm" prefHeight="31.0" prefWidth="88.0" text="Find Form" />
                      </children>
                   </Pane>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="     Revise Approval Form" wrappingWidth="448.6708984375">

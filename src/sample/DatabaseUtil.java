@@ -826,12 +826,14 @@ public class DatabaseUtil {
     }
 
     public void decideApplicationAction(String status, ApplicationData thisForm, javafx.scene.control.TextArea commentsField) throws  SQLException{
-        changeAlcoholStatus(status, thisForm.getAssociatedAlchID());
+
+        changeAlcoholStatus("APPROVED", thisForm.getAssociatedAlchID());
         changeFormStatus(status.toUpperCase(), thisForm.getTtbID());
-        String comments = commentsField.getText();
-        String sql = "UPDATE FORM SET QUALIFICATIONS = " + comments + "WHERE TTBID = " + thisForm.getTtbID();
-        Statement stm = conn.createStatement();
-        stm.executeUpdate(sql);
+        //TODO
+        //String comments = commentsField.getText();
+        //String sql = "UPDATE FORM SET QUALIFICATIONS = " + comments + "WHERE TTBID = " + thisForm.getTtbID();
+        //Statement stm = conn.createStatement();
+        //stm.executeUpdate(sql);
 
     }
     /*
