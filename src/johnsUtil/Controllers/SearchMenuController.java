@@ -1,9 +1,7 @@
 package johnsUtil.Controllers;
 
 import com.jfoenix.controls.JFXComboBox;
-import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.controls.JFXRadioButton;
-import com.jfoenix.transitions.hamburger.HamburgerBackArrowBasicTransition;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -41,7 +39,7 @@ import johnsUtil.model.SharedResources.Account;
 import johnsUtil.model.SharedResources.Database;
 import johnsUtil.model.SharedResources.Screen;
 import sample.AlcoholData;
-import sample.DatabaseUtil;
+import johnsUtil.model.Database.DatabaseUtil;
 import sample.ImageViewPane;
 import sample.ScreenUtil;
 

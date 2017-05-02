@@ -4,7 +4,6 @@ package johnsUtil.model.SharedResources;
  * Created by John on 5/1/2017.
  */
 
-import sample.DatabaseUtil;
 import sample.ScreenUtil;
 
 /**

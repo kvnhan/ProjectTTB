@@ -11,7 +11,7 @@
       <JFXDrawer fx:id="drawer" defaultDrawerSize="300.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="655.0" prefWidth="0.0" BorderPane.alignment="CENTER" />
    </left>
    <center>
-      <BorderPane fx:id="center" accessibleText="center" prefHeight="20.0" prefWidth="200.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+      <BorderPane fx:id="center" accessibleText="center" prefHeight="20.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <left>
             <VBox fx:id="burgerBox" alignment="BOTTOM_LEFT" minWidth="0.0" prefWidth="64.0" BorderPane.alignment="CENTER">
                <children>

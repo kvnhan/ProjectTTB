@@ -2,13 +2,11 @@ package sample;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 import javafx.scene.image.ImageView;
-import johnsUtil.model.SharedResources.*;
+import johnsUtil.model.Database.DatabaseUtil;
 
-import java.io.InputStream;
 import java.sql.SQLException;
 
 /**

@@ -217,8 +217,8 @@ public class NavigationPaneController implements Initializable {
             @Override
             public void handle(ActionEvent event) {
                 try {
-                    Parent scroll = FXMLLoader.load(getClass().getClassLoader().getResource("johnsUtil/Views/AccountUI.fxml"));
-                    getRoot().setCenter(scroll);
+                    Parent acc = FXMLLoader.load(getClass().getClassLoader().getResource("johnsUtil/Views/Account.fxml"));
+                    getRoot().setCenter(acc);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
