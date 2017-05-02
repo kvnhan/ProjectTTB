@@ -8,7 +8,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.text.Text;
-import johnsUtil.model.Database.DatabaseUtil;
+import johnsUtil.model.*;
 
 import java.sql.SQLException;
 import java.util.ArrayList;

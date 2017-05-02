@@ -16,7 +16,7 @@ import javafx.stage.Stage;
 import johnsUtil.model.SharedResources.Account;
 import johnsUtil.model.SharedResources.Database;
 import johnsUtil.model.SharedResources.Screen;
-import johnsUtil.model.Database.DatabaseUtil;
+import sample.DatabaseUtil;
 import sample.ScreenUtil;
 
 import javax.imageio.ImageIO;

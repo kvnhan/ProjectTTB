@@ -22,7 +22,7 @@ import java.util.Date;
 import javafx.scene.control.TextArea;
 
 import javafx.scene.control.TextField;
-import johnsUtil.model.Database.DatabaseUtil;
+import johnsUtil.model.*;
 
 import javax.imageio.ImageIO;
 

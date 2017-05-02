@@ -1,6 +1,6 @@
 package sample;
 
-import johnsUtil.model.Database.DatabaseUtil;
+import johnsUtil.model.*;
 
 
 /**

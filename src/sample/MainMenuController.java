@@ -5,7 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 import javafx.scene.image.ImageView;
-import johnsUtil.model.Database.DatabaseUtil;
+import johnsUtil.model.*;
 
 import java.sql.SQLException;
 

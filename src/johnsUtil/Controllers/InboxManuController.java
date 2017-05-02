@@ -28,7 +28,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Callback;
 import johnsUtil.model.SharedResources.*;
-import johnsUtil.model.Database.DatabaseUtil;
+import johnsUtil.model.*;
 import sample.*;
 import sample.Account;
 
@@ -118,7 +118,7 @@ public class InboxManuController implements Initializable {
                     ApplicationData selectedItem = listView.getSelectionModel().getSelectedItem();
                     System.out.println(selectedItem.getTtbID());
                         try {
-                            if (selectedItem.getStatus().equals("ACCEPTED")) {
+                            if (selectedItem.getStatus().equals("APPROVED")) {
                                 dataPasser.setTtbID(selectedItem.getTtbID());
                                 Parent screen = FXMLLoader.load(getClass().getResource("/sample/ReviseMenu.fxml"));
                                 getRoot().setCenter(screen);

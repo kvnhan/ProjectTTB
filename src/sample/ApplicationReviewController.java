@@ -7,7 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
-import johnsUtil.model.Database.DatabaseUtil;
+import johnsUtil.model.*;
 
 import java.io.File;
 import java.io.InputStream;

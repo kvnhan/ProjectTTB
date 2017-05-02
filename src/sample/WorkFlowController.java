@@ -6,7 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import johnsUtil.model.Database.DatabaseUtil;
+import johnsUtil.model.*;
 
 import java.sql.SQLException;
 import java.util.ArrayList;

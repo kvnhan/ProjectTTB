@@ -1,6 +1,7 @@
 import johnsUtil.model.SharedResources.Account;
 import org.junit.Test;
-import johnsUtil.model.Database.DatabaseUtil;
+import johnsUtil.model.SharedResources.Database;
+import sample.DatabaseUtil;
 
 import java.sql.SQLException;
 
