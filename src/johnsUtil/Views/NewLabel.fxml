@@ -330,6 +330,11 @@
                         <Insets right="30.0" />
                      </HBox.margin>
                   </JFXButton>
+                   <JFXButton fx:id="autoFillButton" mnemonicParsing="false" onAction="#autoFill" prefHeight="44.0" prefWidth="87.0" style="-fx-background-color: #C0392B;" text="Autofill" textFill="#f5f4f4">
+                       <HBox.margin>
+                           <Insets right="10.0" />
+                       </HBox.margin>
+                   </JFXButton>
                </children>
                <BorderPane.margin>
                   <Insets />
