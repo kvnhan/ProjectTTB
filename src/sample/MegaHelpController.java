@@ -15,7 +15,8 @@ public class MegaHelpController {
             reviseView,
             correctView,
             supervisorView,
-            newView;
+            newView,
+            reviewView;
 
     /**
      * Initializes search help screen.
@@ -59,12 +60,21 @@ public class MegaHelpController {
             System.out.println("Image Was Not Found");
         }
         try {
-            InputStream resource = ScreenUtil.class.getClassLoader().getResourceAsStream("resources/SearchUI.png");
+            InputStream resource = ScreenUtil.class.getClassLoader().getResourceAsStream("resources/NewLabelPic.png");
             newView.setImage(new javafx.scene.image.Image(resource, 500.0, 0.0, true, true));
         }
         catch(NullPointerException nullPoint){
             InputStream resource = ScreenUtil.class.getClassLoader().getResourceAsStream("labels/imageUnavailable.jpg");
             newView.setImage(new javafx.scene.image.Image(resource, 100.0, 0.0, true, true));
+            System.out.println("Image Was Not Found");
+        }
+        try {
+            InputStream resource = ScreenUtil.class.getClassLoader().getResourceAsStream("resources/SearchUI.png");
+            reviewView.setImage(new javafx.scene.image.Image(resource, 500.0, 0.0, true, true));
+        }
+        catch(NullPointerException nullPoint){
+            InputStream resource = ScreenUtil.class.getClassLoader().getResourceAsStream("labels/imageUnavailable.jpg");
+            reviewView.setImage(new javafx.scene.image.Image(resource, 100.0, 0.0, true, true));
             System.out.println("Image Was Not Found");
         }
     }
