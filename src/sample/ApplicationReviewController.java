@@ -45,11 +45,11 @@ public class ApplicationReviewController{
     private ScreenUtil screenUtil = new ScreenUtil();
     private AccountsUtil accountsUtil = new AccountsUtil();
     private String username = accountsUtil.getUsername();
-    private int numberOfApps;
     private ApplicationData thisForm;
     List<ApplicationData> listForms = new ArrayList<ApplicationData>();
     private static int appReviewMode = 1; // 1 = view all forms, 2 = choose form highlighted in inbox then return, 3 choose form highlighted in inbox then go to next available form;
 
+    private int numberOfApps;
     private ArrayList<Account> acctsFound = new ArrayList<>();
     private ObservableList<String> acctsObservableList;
     private ArrayList<CheckBox> checkList = new ArrayList<>();
@@ -200,16 +200,17 @@ public class ApplicationReviewController{
      * Brings a worker to the next application in their inbox.
      */
     public void nextApplication(){
-
+        numberOfApps = listForms.size();
         if(appReviewMode == 1){
             if(numberOfApps <= 1){
-                screenUtil.switchScene("WorkFlow.fxml", "Inbox");
+                //screenUtil.switchScene("ApplicationReview.fxml", "Application Review");
                 screenUtil.createAlertBox("No more assigned forms", "There are no more forms assigned to you.");
             }else{
-                screenUtil.switchScene("ApplicationReview.fxml","Application Review");
+                //TODO properly switch screens
+                //screenUtil.switchScene("ApplicationReview.fxml","Application Review");
             }
         }else if(appReviewMode == 2){
-            screenUtil.switchScene("WorkFlow.fxml", "Inbox");
+            screenUtil.switchScene("InboxManu.fxml", "Inbox");
         }
     }
 
