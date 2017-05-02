@@ -56,6 +56,10 @@ public class NavigationPaneController implements Initializable {
     @FXML
     private JFXButton logoutBtn;
 
+    @FXML
+    private JFXButton supervisorBtn;
+
+
     ScreenUtil work = new ScreenUtil();
     /**
      * Initializes the navigation screen.
@@ -106,7 +110,7 @@ public class NavigationPaneController implements Initializable {
             @Override
             public void handle(ActionEvent event) {
                 try {
-                    Parent scroll = FXMLLoader.load(getClass().getClassLoader().getResource("johnsUtil/Views/Supervisor.fxml"));
+                    Parent scroll = FXMLLoader.load(getClass().getClassLoader().getResource("sample/SuperUser.fxml"));
                     getRoot().setCenter(scroll);
                 } catch (IOException e) {
                     e.printStackTrace();
