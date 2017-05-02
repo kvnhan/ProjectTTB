@@ -21,9 +21,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<ScrollPane fitToWidth="true" hbarPolicy="ALWAYS" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="3303.0" prefWidth="1200.0" vbarPolicy="ALWAYS" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ReviseAppController">
+<ScrollPane fitToWidth="true" hbarPolicy="ALWAYS" maxHeight="3300.0" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" vbarPolicy="ALWAYS" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ReviseAppController">
    <content>
-      <AnchorPane prefHeight="3284.0" prefWidth="1200.0">
+      <AnchorPane maxHeight="3300.0" prefHeight="800.0" prefWidth="1200.0">
          <children>
             <GridPane>
                <columnConstraints>
