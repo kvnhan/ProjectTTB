@@ -203,11 +203,10 @@ public class ApplicationReviewController{
         numberOfApps = listForms.size();
         if(appReviewMode == 1){
             if(numberOfApps <= 1){
-                //screenUtil.switchScene("ApplicationReview.fxml", "Application Review");
+                screenUtil.switchScene("InboxManu.fxml", "Application Review");
                 screenUtil.createAlertBox("No more assigned forms", "There are no more forms assigned to you.");
             }else{
-                //TODO properly switch screens
-                //screenUtil.switchScene("ApplicationReview.fxml","Application Review");
+                screenUtil.switchScene("InboxManu.fxml", "Application Review");
             }
         }else if(appReviewMode == 2){
             screenUtil.switchScene("InboxManu.fxml", "Inbox");
