@@ -39,8 +39,8 @@ import johnsUtil.model.SharedResources.Account;
 import johnsUtil.model.SharedResources.Database;
 import johnsUtil.model.SharedResources.Screen;
 import sample.AlcoholData;
-import johnsUtil.model.Database.DatabaseUtil;
-import sample.ImageViewPane;
+import sample.DatabaseUtil;
+import johnsUtil.Components.ImageViewPane;
 import sample.ScreenUtil;
 
 import static javafx.application.Application.launch;
@@ -109,6 +109,11 @@ public class SearchMenuController {
     public void initialize() throws SQLException, NoSuchMethodException, IllegalAccessException, InstantiationException, IOException{
         String searchTemp = "";
 
+        //adds options
+        choiceBox.getItems().addAll("All", "Wine", "Beer", "Distilled", "Wine and Beer", "Wine and Distilled", "Beer and Distilled", "ID", "Name", "Brand Name", "Location", "Alcohol Content");
+        //sets default vaule
+        choiceBox.setValue("All");
+
         imageViewRadioButton.setSelectedColor(Color.web("#C0392B"));
         listViewRadioButton.setSelectedColor(Color.web("#C0392B"));
         normalSearchRadio.setSelectedColor(Color.web("#C0392B"));
@@ -120,6 +125,11 @@ public class SearchMenuController {
             Account.getInstance().setSearch("");
         }
         searchTextField.setText(searchTemp);
+
+        if(!searchTemp.trim().isEmpty()){
+            search(new ActionEvent(searchButton, (Node) searchButton));
+        }
+
         searchTextField.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
@@ -128,11 +138,7 @@ public class SearchMenuController {
                     try {
                         search(new ActionEvent(searchButton, (Node) searchButton));
                     }
-                    catch(java.sql.SQLException e){}
-                    catch(java.lang.NoSuchMethodException e){}
-                    catch(java.lang.IllegalAccessException e){}
-                    catch(java.lang.InstantiationException e){}
-                    catch(java.io.IOException e){}
+                    catch(Exception e){}
                 }
             }
         });
@@ -151,14 +157,13 @@ public class SearchMenuController {
 
         pageControlsHBox.setVisible(false);
 
-        //enableAutomaticSearch();
-
         toggleView.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
             @Override
             public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
                 if(toggleView.getSelectedToggle() != null){
                     String selectedView = ((JFXRadioButton)toggleView.getSelectedToggle()).getText();
                     if(selectedView.equals("List View") && hasViewChanged){
+                        pageControlsHBox.setVisible(false);
                         isSearchInImageView = false;
                         pageControlsHBox.setVisible(false);
                         Result.setText("Showing " + alcoholDataList.size() + " search results.");
@@ -169,7 +174,7 @@ public class SearchMenuController {
                         hasViewChanged = true;
                         isSearchInImageView = true;
                         resultsMainGridPane.getChildren().remove(table);
-                        //    disableAutomaticSearch();
+                        //disableAutomaticSearch();
                         displayResultsInThumbnail();
                     }
                 }
@@ -190,11 +195,6 @@ public class SearchMenuController {
             row.setTooltip(new Tooltip("Double click to see more detail"));
             return row;
         });
-        //adds options
-        choiceBox.getItems().addAll("All", "Wine", "Beer", "Distilled", "Wine and Beer", "Wine and Distilled", "Beer and Distilled", "ID", "Name", "Brand Name", "Location", "Alcohol Content");
-        //sets default vaule
-        choiceBox.setValue("All");
-        search2();
     }
 
     /**
@@ -258,9 +258,25 @@ public class SearchMenuController {
 
         for (int i = imageResultPageNumber*resultsPerPage; i < generatedResultBound; i++) {
             final AlcoholData currentAlcoholData = alcoholDataList.get(i);
-            try {
-                InputStream inputStream = SearchMenuController.class.getClassLoader().getResourceAsStream("labels/" + String.valueOf(alcoholDataList.get(i).getAid()) + ".jfif");
+
+            // try getting form labels folder
+            InputStream inputStream = SearchMenuController.class.getClassLoader().getResourceAsStream("labels/" + String.valueOf(alcoholDataList.get(i).getAid()) + ".jfif");
+
+            if (inputStream == null) {
+                // if not try looking in output folder
+                inputStream = SearchMenuController.class.getClassLoader().getResourceAsStream("labels/" + String.valueOf(alcoholDataList.get(i).getAid()) + ".jfif");
+                SearchMenuController.class.getClassLoader().getResourceAsStream("labels/" + String.valueOf(alcoholDataList.get(i).getAid()) + ".jfif");
+                String path = null;
+                try {
+                    String imagePath = getPath() + "/" + alcoholDataList.get(i).getAid() + ".jpg";
+                    inputStream = new FileInputStream(imagePath);
+                } catch (UnsupportedEncodingException | FileNotFoundException e) {
+                    inputStream = null;
+                    e.printStackTrace();
+                }
+
                 if (inputStream == null) {
+                    // if image is not found in both folders set default images
                     int alcoholType = currentAlcoholData.getAlcoholType();
                     if (alcoholType == 1) {
                         inputStream = SearchMenuController.class.getClassLoader().getResourceAsStream("labels/beer_default.jfif");
@@ -274,64 +290,49 @@ public class SearchMenuController {
                 alcoholImageView = new ImageView();
 
                 alcoholImageView.setImage(alcoholImage);
-                foundImage = true;
 
-            }catch (Exception e){
-                foundImage = true;
-                try {
-                    if (foundImage == false) {
-                        alcoholImageView = new ImageView();
-                        String path = getPath();
-                        File file = new File(path + "/" + alcoholDataList.get(i).getAid() + ".jpg");
-                        javafx.scene.image.Image image1 = new javafx.scene.image.Image(file.toURI().toString());
-                        alcoholImageView.setImage(image1);
+                alcoholImageView.setFitWidth(260);
+                alcoholImageView.setFitHeight(260);
+
+                ImageViewPane imageViewPane = new ImageViewPane(alcoholImageView);
+
+                imageViewPane.setOnMouseEntered(new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent event) {
+                        int depth = 150;
+
+                        DropShadow borderGlow = new DropShadow();
+                        borderGlow.setOffsetY(0f);
+                        borderGlow.setOffsetX(0f);
+                        borderGlow.setColor(Color.web("#e74c3c"));
+                        borderGlow.setWidth(depth);
+                        borderGlow.setHeight(depth);
+
+                        imageViewPane.setEffect(borderGlow);
                     }
-                }catch (Exception e2){
+                });
 
+                imageViewPane.setOnMouseExited(new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent event) {
+                        imageViewPane.setEffect(null);
+                    }
+                });
+
+                imageViewPane.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent event) {
+                        screenUtil.pullUpAlcoholDetails(currentAlcoholData);
+                    }
+                });
+
+                alcoholLabelGridPane.add(imageViewPane, imageCol, imageRow);
+
+                imageCol++;
+                if (imageCol > 2) {
+                    imageCol = 0;
+                    imageRow++;
                 }
-            }
-
-            alcoholImageView.setFitWidth(260);
-            alcoholImageView.setFitHeight(260);
-
-            ImageViewPane imageViewPane = new ImageViewPane(alcoholImageView);
-
-            imageViewPane.setOnMouseEntered(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent event) {
-                    int depth = 150;
-
-                    DropShadow borderGlow= new DropShadow();
-                    borderGlow.setOffsetY(0f);
-                    borderGlow.setOffsetX(0f);
-                    borderGlow.setColor(Color.web("#e74c3c"));
-                    borderGlow.setWidth(depth);
-                    borderGlow.setHeight(depth);
-
-                    imageViewPane.setEffect(borderGlow);
-                }
-            });
-
-            imageViewPane.setOnMouseExited(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent event) {
-                    imageViewPane.setEffect(null);
-                }
-            });
-
-            imageViewPane.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent event) {
-                    screenUtil.pullUpAlcoholDetails(currentAlcoholData);
-                }
-            });
-
-            alcoholLabelGridPane.add(imageViewPane, imageCol, imageRow);
-
-            imageCol++;
-            if (imageCol > 2) {
-                imageCol = 0;
-                imageRow++;
             }
         }
 
@@ -361,10 +362,6 @@ public class SearchMenuController {
      * @throws IOException
      */
     public void search(ActionEvent event) throws SQLException, NoSuchMethodException, IllegalAccessException, InstantiationException, IOException{
-        search2();
-    }
-
-    public void search2() throws SQLException, NoSuchMethodException, IllegalAccessException, InstantiationException, IOException{
         imageResultPageNumber = 0;
         noOfPagesGenerated = 0;
         previousPageButton.setDisable(true);
@@ -386,9 +383,6 @@ public class SearchMenuController {
             displayResultsInThumbnail();
         }
     }
-
-
-
 
     //TODO add other spirits
 
@@ -453,7 +447,7 @@ public class SearchMenuController {
     public List<AlcoholData> searchByChoice() throws SQLException {
         choiceSearch = choiceBox.getValue();
         List<AlcoholData> adl = new ArrayList<>();
-        searchText = searchTextField.getText();
+        searchText = searchTextField.getText().replace('\'','/');
         if(searchText.trim().isEmpty()){
             adl = dbUtil.getAllAlcoholEntries();
         }else{

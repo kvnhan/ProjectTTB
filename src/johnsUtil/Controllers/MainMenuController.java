@@ -27,7 +27,10 @@ import javafx.util.Duration;
 import johnsUtil.Components.AutoCompleteComboBoxListener;
 import johnsUtil.Main;
 import johnsUtil.model.SharedResources.Account;
+import johnsUtil.model.SharedResources.Database;
 import johnsUtil.model.SharedResources.Screen;
+import sample.AlcoholData;
+import sample.DatabaseUtil;
 import sample.ScreenUtil;
 
 import java.awt.*;
@@ -83,6 +86,8 @@ public class MainMenuController implements Initializable{
     private final int HEIGHT = 800;
     private final int NUM_OF_IMGS = 7;
     private final int SLIDE_FREQ = 5;
+    private static List<AlcoholData> allAlcoholEntries = new ArrayList<>();
+    private DatabaseUtil databaseUtil = Database.getInstance();
 
     @FXML
     private void searchWithEnter(KeyEvent ke){
@@ -104,6 +109,11 @@ public class MainMenuController implements Initializable{
      * Initializes the main menu.
      */
     public void initialize(URL location, ResourceBundle resources) {
+        try {
+            allAlcoholEntries = databaseUtil.getAllAlcoholEntries();
+        } catch (SQLException e) {
+            System.out.println("Database error. No Autocomplete List Generated.");
+        }
         hasSearchBoxMoved = false;
         searchCombo.setEditable(true);
         searchCombo.setStyle("-fx-font: 27px \"Calibri\"; -fx-background-radius: 0 30 30 0; -fx-border-radius: 0 30 30 0;");
@@ -154,24 +164,6 @@ public class MainMenuController implements Initializable{
         } catch (IOException e) {
             e.printStackTrace();
         }
-        /*
-        searchTF.setOnKeyPressed(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent event) {
-                if (event.getCode() == KeyCode.ENTER) {
-                    System.out.println("Searched using enter");
-                    try {
-                        handleSearchButton(new ActionEvent(searchBtn, (Node) searchBtn));
-                    } catch (java.sql.SQLException e) {
-                    } catch (java.lang.NoSuchMethodException e) {
-                    } catch (java.lang.IllegalAccessException e) {
-                    } catch (java.lang.InstantiationException e) {
-                    } catch (java.io.IOException e) {
-                    }
-                }
-            }
-        });
-        */
     }
 
     /**
@@ -286,5 +278,9 @@ public class MainMenuController implements Initializable{
         });
 
         tt.play();
+    }
+
+    public static List<AlcoholData> getAllAlcoholEntries() {
+        return allAlcoholEntries;
     }
 }
