@@ -71,6 +71,7 @@ public class MainMenuController implements Initializable{
 
     JFXPopup loginPopup;
     JFXPopup registerPopup;
+    JFXPopup teamPopup;
 
     @FXML private ComboBox searchCombo;
 
@@ -147,6 +148,7 @@ public class MainMenuController implements Initializable{
         try {
             loginPopup = new JFXPopup(FXMLLoader.load(getClass().getResource("/johnsUtil/Views/Login.fxml")));
             registerPopup = new JFXPopup(FXMLLoader.load(getClass().getResource("/johnsUtil/Views/Register.fxml")));
+            teamPopup = new JFXPopup(FXMLLoader.load(getClass().getResource("/sample/About.fxml")));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -246,7 +248,13 @@ public class MainMenuController implements Initializable{
 
     @FXML
     public void handleTeamButton(ActionEvent e){
-        screenUtil.switchScene("About.fxml","About Our Team");
+       // screenUtil.switchScene("About.fxml","About Our Team");
+        if (!teamPopup.isShowing()) {
+            //Bounds rootBounds = mainPane.getScene().getRoot().getLayoutBounds();
+            teamPopup.show(dummy, JFXPopup.PopupVPosition.BOTTOM, JFXPopup.PopupHPosition.LEFT);
+            //(rootBounds.getWidth() - mainPane.getPrefWidth()) / 2 + rootBounds.getWidth()/5,
+            //(rootBounds.getHeight() - mainPane.getPrefHeight()) / 2);
+        }
     }
     @FXML
     public void handleAboutButton(ActionEvent e){
