@@ -826,7 +826,7 @@ public class dataUtilUpload {
 
         if(status.toUpperCase().equals("INCOMPLETE")){
             statusInInteger = 1;
-        }else if(status.toUpperCase().equals("ACCEPTED")){
+        }else if(status.toUpperCase().equals("APPROVED")){
             statusInInteger = 2;
         }else if(status.toUpperCase().equals("REJECTED")){
             statusInInteger = 3;

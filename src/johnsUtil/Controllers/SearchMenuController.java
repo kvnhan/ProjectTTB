@@ -55,7 +55,7 @@ public class SearchMenuController {
     private String searchText;
     private @FXML CheckBox isWineBox, isBeerBox, isDistilledBox;
     private @FXML TextField searchTextField;
-    private @FXML RadioButton normalSearchRadio, intersectSearchRadio, unionSearchRadio;
+    private @FXML JFXRadioButton normalSearchRadio, intersectSearchRadio, unionSearchRadio;
     private @FXML Button helpSearchButton;
     private @FXML Button searchButton, downloadButton;
     private @FXML Label Result;
@@ -89,6 +89,9 @@ public class SearchMenuController {
     private boolean isSearchInImageView = false;
     private boolean foundImage = false;
 
+    private @FXML JFXRadioButton listViewRadioButton;
+    private @FXML JFXRadioButton imageViewRadioButton;
+
 
     private javafx.scene.image.Image alcoholImage;
     private ImageView alcoholImageView;
@@ -107,6 +110,12 @@ public class SearchMenuController {
     @FXML
     public void initialize() throws SQLException, NoSuchMethodException, IllegalAccessException, InstantiationException, IOException{
         String searchTemp = "";
+
+        imageViewRadioButton.setSelectedColor(Color.web("#C0392B"));
+        listViewRadioButton.setSelectedColor(Color.web("#C0392B"));
+        normalSearchRadio.setSelectedColor(Color.web("#C0392B"));
+        intersectSearchRadio.setSelectedColor(Color.web("#C0392B"));
+        unionSearchRadio.setSelectedColor(Color.web("#C0392B"));
 
         if(Account.getInstance().getSearch().trim().length() > 0){
             searchTemp = Account.getInstance().getSearch();
@@ -153,6 +162,7 @@ public class SearchMenuController {
                     String selectedView = ((JFXRadioButton)toggleView.getSelectedToggle()).getText();
                     if(selectedView.equals("List View") && hasViewChanged){
                         isSearchInImageView = false;
+                        pageControlsHBox.setVisible(false);
                         Result.setText("Showing " + alcoholDataList.size() + " search results.");
                         resultsMainGridPane.getChildren().remove(imageScrollPane);
                         resultsMainGridPane.getChildren().add(table);

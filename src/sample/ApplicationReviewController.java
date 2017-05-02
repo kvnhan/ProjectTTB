@@ -148,10 +148,10 @@ public class ApplicationReviewController{
 
     @FXML
     /**
-     * Sets an Application status to "ACCEPTED" and adds comments to the Application.
+     * Sets an Application status to "APPROVED" and adds comments to the Application.
      */
     void setAccepted(ActionEvent event) throws SQLException{
-        dbUtil.decideApplicationAction("ACCEPTED", thisForm, commentsField);
+        dbUtil.decideApplicationAction("APPROVED", thisForm, commentsField);
         nextApplication();
     }
 
