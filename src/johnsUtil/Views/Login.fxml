@@ -18,7 +18,7 @@
    <center>
       <VBox alignment="TOP_CENTER" prefHeight="517.0" prefWidth="405.0" spacing="15.0" BorderPane.alignment="CENTER">
          <children>
-            <HBox alignment="TOP_RIGHT" prefHeight="45.0" prefWidth="423.0">
+            <HBox alignment="TOP_RIGHT" prefHeight="45.0" prefWidth="423.0" style="-fx-background-color: #E74C3C;">
                <children>
                   <JFXButton fx:id="close" accessibleText="BtnClose" onAction="#close" prefHeight="45.0" prefWidth="45.0" ripplerFill="#ee7474" text="X" />
                </children>
