@@ -662,6 +662,17 @@ public class DatabaseUtil {
         return searchForm(query);
     }
 
+    public ArrayList<ApplicationData> searchRejectedFormWithAid(int AID) throws SQLException{
+        String query = "SELECT * FROM FORM WHERE FORM.AID = " + AID + " AND STATUS = 'REJECTED'";
+
+        return searchForm(query);
+    }
+    public ArrayList<ApplicationData> searchAcceptedFormWithAid(int AID) throws SQLException{
+        String query = "SELECT * FROM FORM WHERE FORM.AID = " + AID + " AND STATUS = 'ACCEPTED'";
+
+        return searchForm(query);
+    }
+
     public ApplicationData searchFormWithRepID(int rep) throws SQLException{
         stmt = conn.createStatement();
         String query = "SELECT * FROM FORM WHERE FORM.REPID = " + rep;

@@ -8,6 +8,7 @@ public class DataPasser {
     private static AlcoholData alcData;
     private static ApplicationData applicationData;
     private static int isInvokedByManu;
+    private static int isInvokedByInbox;
     private static int isRevised;
     private static String ttbidID;
     private static int isInvokebyReviseMenu;
@@ -24,6 +25,7 @@ public class DataPasser {
     private static int disableMailingAndName;
     private static int disableAddress;
     private static int disableNet;
+
 
     public  int getDisableNet() {
         return disableNet;
@@ -65,7 +67,7 @@ public class DataPasser {
         this.disableAddress = disableAddress;
     }
 
-    public static String getTtbID() {
+    public  String getTtbID() {
         return ttbidID;
     }
 
