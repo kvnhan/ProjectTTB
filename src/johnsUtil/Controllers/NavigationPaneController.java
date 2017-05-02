@@ -11,6 +11,7 @@ import javafx.scene.Parent;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import johnsUtil.Main;
@@ -20,6 +21,7 @@ import sample.ScreenUtil;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 /**
@@ -61,6 +63,7 @@ public class NavigationPaneController implements Initializable {
 
 
     ScreenUtil work = new ScreenUtil();
+
     /**
      * Initializes the navigation screen.
      * @param location Location of alcohol image.
@@ -154,6 +157,17 @@ public class NavigationPaneController implements Initializable {
             }
         });
 
+        inboxBtn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                try {
+                    Parent scroll = FXMLLoader.load(getClass().getClassLoader().getResource("johnsUtil/Views/InboxManu.fxml"));
+                    getRoot().setCenter(scroll);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
         logoutBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -199,6 +213,17 @@ public class NavigationPaneController implements Initializable {
             }
         });
 
+        accountBtn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                try {
+                    Parent scroll = FXMLLoader.load(getClass().getClassLoader().getResource("johnsUtil/Views/AccountUI.fxml"));
+                    getRoot().setCenter(scroll);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
     private BorderPane getRoot(){
