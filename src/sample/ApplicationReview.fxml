@@ -292,7 +292,6 @@
                             <children>
                                 <Button fx:id="accept" layoutX="682.0" layoutY="67.0" mnemonicParsing="false" onAction="#setAccepted" prefHeight="25.0" prefWidth="83.0" text="Accept" />
                                 <Button fx:id="reject" layoutX="586.0" layoutY="67.0" mnemonicParsing="false" onAction="#setReject" prefHeight="25.0" prefWidth="83.0" text="Reject" />
-                                <Button fx:id="goBack" layoutX="20.0" layoutY="75.0" mnemonicParsing="false" onAction="#setGoBack" prefHeight="25.0" prefWidth="47.0" text="Back" />
                                 <Button fx:id="forwardApp" layoutX="240.0" layoutY="67.0" mnemonicParsing="false" onAction="#forwardApp" prefHeight="25.0" prefWidth="83.0" text="Forward to:" />
                                 <ChoiceBox fx:id="acctToChoose" layoutX="334.0" layoutY="67.0" prefWidth="150.0" />
                             </children>
