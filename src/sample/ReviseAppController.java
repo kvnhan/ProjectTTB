@@ -13,7 +13,7 @@ import javafx.scene.image.*;
 import javafx.scene.image.Image;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import johnsUtil.model.*;
+
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -689,7 +689,6 @@ public class ReviseAppController {
 
         try {
             Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("johnsUtil/Views/Home.fxml"));
-            su.createAlertBox("Notification", "Update is successful");
         }catch (Exception e){
             e.printStackTrace();
         }
