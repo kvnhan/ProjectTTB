@@ -20,6 +20,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
+<?import org.controlsfx.control.ToggleSwitch?>
 
 <BorderPane fx:id="root" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="johnsUtil.Controllers.SearchMenuController">
    <center>
@@ -110,6 +111,7 @@
                         <Insets right="20.0" />
                      </padding>
                       </VBox>
+                  <ToggleSwitch fx:id="onlyAvailableImageSwitch" prefHeight="97.0" prefWidth="181.0" text="Filter Available Images" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                   </children>
               </GridPane>
               <GridPane GridPane.columnIndex="2" GridPane.rowIndex="2">
