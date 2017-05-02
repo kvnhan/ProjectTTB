@@ -1,6 +1,8 @@
 package sample;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 
 import java.io.InputStream;
@@ -67,5 +69,9 @@ public class MegaHelpController {
         }
     }
 
-
+    @FXML
+    void handleClose(ActionEvent event) {
+        Node currentSource = (Node) event.getSource();
+        currentSource.getScene().getWindow().hide();
+    }
 }

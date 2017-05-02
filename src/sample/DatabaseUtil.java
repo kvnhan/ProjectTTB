@@ -1099,7 +1099,7 @@ public class DatabaseUtil {
                 String haveWork = "SELECT * FROM FORM WHERE GOVID = " + getAccountAid(account.getUsername());
                 rset = stmt.executeQuery(haveWork);
                 while (rset.next()) {
-                    if (rset.getString("STATUS").equals("ACCEPTED")) {
+                    if (rset.getString("STATUS").equals("APPROVED")) {
                         countAccepted++;
                         countWork++;
                     }

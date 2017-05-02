@@ -72,6 +72,7 @@ public class MainMenuController implements Initializable{
     JFXPopup loginPopup;
     JFXPopup registerPopup;
     JFXPopup teamPopup;
+    JFXPopup helpPopup;
 
     @FXML private ComboBox searchCombo;
 
@@ -149,6 +150,7 @@ public class MainMenuController implements Initializable{
             loginPopup = new JFXPopup(FXMLLoader.load(getClass().getResource("/johnsUtil/Views/Login.fxml")));
             registerPopup = new JFXPopup(FXMLLoader.load(getClass().getResource("/johnsUtil/Views/Register.fxml")));
             teamPopup = new JFXPopup(FXMLLoader.load(getClass().getResource("/sample/About.fxml")));
+            helpPopup = new JFXPopup(FXMLLoader.load(getClass().getResource("/sample/MegaHelp.fxml")));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -258,7 +260,13 @@ public class MainMenuController implements Initializable{
     }
     @FXML
     public void handleAboutButton(ActionEvent e){
-        screenUtil.switchScene("MegaHelp.fxml","Help Pages");
+        //screenUtil.switchScene("MegaHelp.fxml","Help Pages");
+        if (!helpPopup.isShowing()) {
+            //Bounds rootBounds = mainPane.getScene().getRoot().getLayoutBounds();
+            helpPopup.show(dummy, JFXPopup.PopupVPosition.BOTTOM, JFXPopup.PopupHPosition.LEFT);
+            //(rootBounds.getWidth() - mainPane.getPrefWidth()) / 2 + rootBounds.getWidth()/5,
+            //(rootBounds.getHeight() - mainPane.getPrefHeight()) / 2);
+        }
     }
 
     /**

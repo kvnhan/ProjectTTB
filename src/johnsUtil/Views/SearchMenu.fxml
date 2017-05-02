@@ -21,9 +21,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane fx:id="root" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="johnsUtil.Controllers.SearchMenuController">
+<BorderPane fx:id="root" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="johnsUtil.Controllers.SearchMenuController">
    <center>
-      <GridPane fx:id="gridPane" accessibleText="gridPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="675.0" prefWidth="1176.0" style="-fx-background-color: white;">
+      <GridPane fx:id="gridPane" accessibleText="gridPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="675.0" prefWidth="1176.0">
           <columnConstraints>
               <ColumnConstraints hgrow="NEVER" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="200.0" />
             <ColumnConstraints hgrow="NEVER" maxWidth="1.7976931348623157E308" minWidth="0.0" prefWidth="19.0" />
@@ -31,8 +31,8 @@
               <ColumnConstraints hgrow="NEVER" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="22.0" />
           </columnConstraints>
           <rowConstraints>
-              <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="35.0" vgrow="ALWAYS" />
-              <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="498.0" vgrow="ALWAYS" />
+              <RowConstraints maxHeight="40.0" minHeight="10.0" prefHeight="40.0" vgrow="ALWAYS" />
+              <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="530.0" vgrow="ALWAYS" />
               <RowConstraints maxHeight="1.7976931348623157E308" minHeight="0.0" prefHeight="102.0" vgrow="ALWAYS" />
           </rowConstraints>
           <children>
@@ -55,12 +55,12 @@
                               <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
                           </rowConstraints>
                           <children>
-                              <JFXRadioButton fx:id="ListView" selected="true" text="List View" GridPane.hgrow="SOMETIMES" GridPane.vgrow="ALWAYS">
+                              <JFXRadioButton fx:id="listViewRadioButton" selected="true" text="List View" GridPane.hgrow="SOMETIMES" GridPane.vgrow="ALWAYS">
                                   <toggleGroup>
                                       <ToggleGroup fx:id="toggleView" />
                                   </toggleGroup>
                               </JFXRadioButton>
-                              <JFXRadioButton fx:id="ImageView" text="Image View" toggleGroup="$toggleView" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS" />
+                              <JFXRadioButton fx:id="imageViewRadioButton" text="Image View" toggleGroup="$toggleView" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS" />
                           </children>
                       </GridPane>
                   </children>
@@ -71,7 +71,6 @@
                       <ColumnConstraints hgrow="ALWAYS" maxWidth="194.0" minWidth="0.0" prefWidth="194.0" />
                   </columnConstraints>
                   <rowConstraints>
-                      <RowConstraints maxHeight="112.0" minHeight="10.0" prefHeight="61.0" vgrow="NEVER" />
                       <RowConstraints maxHeight="112.0" minHeight="4.0" prefHeight="61.0" vgrow="NEVER" />
                       <RowConstraints maxHeight="230.0" minHeight="10.0" prefHeight="107.0" vgrow="NEVER" />
                       <RowConstraints maxHeight="290.0" minHeight="10.0" prefHeight="234.0" vgrow="NEVER" />
@@ -79,7 +78,7 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
                   </rowConstraints>
                   <children>
-                      <VBox prefHeight="102.0" prefWidth="198.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                      <VBox prefHeight="102.0" prefWidth="198.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                           <children>
                               <Label prefHeight="35.0" prefWidth="140.0" text="Submitted After:" />
                               <DatePicker fx:id="endDate" prefHeight="31.0" prefWidth="199.0" />
@@ -88,7 +87,7 @@
                         <Insets left="5.0" />
                      </GridPane.margin>
                       </VBox>
-                      <VBox prefHeight="52.0" prefWidth="227.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                      <VBox prefHeight="52.0" prefWidth="227.0" GridPane.columnIndex="1">
                           <children>
                               <Label prefHeight="35.0" prefWidth="140.0" text="Submitted Before:" />
                               <DatePicker fx:id="startDate" prefHeight="31.0" prefWidth="211.0" />
@@ -97,7 +96,7 @@
                         <Insets left="5.0" />
                      </GridPane.margin>
                       </VBox>
-                      <VBox prefWidth="70.0" spacing="30.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                      <VBox prefWidth="70.0" spacing="30.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                           <children>
                               <JFXRadioButton fx:id="normalSearchRadio" prefWidth="100.0" selected="true" text="Normal Search" wrapText="true">
                                   <toggleGroup>
@@ -134,7 +133,10 @@
                       <JFXRadioButton fx:id="tabDownload" text="Tab-Delimited" toggleGroup="$CSVGroup" GridPane.rowIndex="2" />
                       <JFXRadioButton fx:id="customDownload" prefHeight="17.0" prefWidth="154.0" text="Custom Delimitor:" toggleGroup="$CSVGroup" GridPane.rowIndex="3" />
                       <TextField fx:id="CustomDelimiter" promptText="Insert Delimiter Here" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                      <JFXButton fx:id="downloadButton" onAction="#download2" prefHeight="31.0" prefWidth="170.0" text="Download Results" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                      <JFXButton fx:id="downloadButton" onAction="#download2" prefHeight="31.0" prefWidth="170.0" style="-fx-background-color: #C0392B;" text="Download Results" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                     <font>
+                        <Font name="Calibri Light" size="15.0" />
+                     </font></JFXButton>
 
                   <HBox fx:id="pageControlsHBox" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2">
                      <children>
@@ -197,7 +199,7 @@
                <children>
                   <TextField fx:id="searchTextField" prefHeight="65.0" prefWidth="668.0" promptText="Find..." GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS" />
                   <JFXButton fx:id="searchButton" onAction="#search" prefHeight="48.0" prefWidth="104.0" style="-fx-background-color: #C0392B;" text="Search" textFill="#f5f4f4" GridPane.columnIndex="2" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS" />
-                  <JFXButton fx:id="helpSearchButton" onAction="#needHelp" prefHeight="25.0" prefWidth="77.0" text="Help" textFill="#f8f7f7" GridPane.columnIndex="2" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS" />
+                  <JFXButton fx:id="helpSearchButton" onAction="#needHelp" prefHeight="31.0" prefWidth="112.0" text="Help" textFill="#f8f7f7" GridPane.columnIndex="2" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS" />
                   <JFXComboBox fx:id="choiceBox" prefHeight="49.0" prefWidth="93.0" style="-fx-background-color: white;" GridPane.rowIndex="1" />
                </children>
             </GridPane>

@@ -6,50 +6,65 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.AboutController">
-   <left>
-      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="706.0" prefWidth="750.0" BorderPane.alignment="CENTER">
-         <children>
-            <Label layoutX="3.0" layoutY="-6.0" prefHeight="56.0" prefWidth="125.0" text="About:">
-               <font>
-                  <Font size="40.0" />
-               </font>
-            </Label>
-            <Separator layoutY="46.0" prefHeight="3.0" prefWidth="750.0" />
-            <Label layoutX="8.0" layoutY="46.0" prefHeight="70.0" prefWidth="731.0" text="We would like to thank the US Treasury’s Alcohol and Tobacco Tax and Trade Bureau, who provided us with the opportunity to work on this project. We would also like to thank their representative Assistant CIO, Greg Greely, for their time and input on our application." wrapText="true" />
-            <Label layoutX="10.0" layoutY="116.0" prefHeight="56.0" prefWidth="731.0" text="This project was organized by the Worcester Polytechnic Institute's Computer Science Department, CS 3733 Software Engineering Class, taught by Professor Wilson Wong." wrapText="true" />
-            <Label layoutX="11.0" layoutY="172.0" prefHeight="27.0" prefWidth="564.0" text="This Application was Implemented by CS 3733 Team A, whose members include:" />
-            <Label layoutX="12.0" layoutY="276.0" text="Project Manager - Elsa Luthi" />
-            <ImageView fx:id="elsaPic" fitHeight="78.0" fitWidth="78.0" layoutX="70.0" layoutY="199.0" pickOnBounds="true" preserveRatio="true" />
-            <Label layoutX="288.0" layoutY="276.0" text="Lead Engineer - Ari Goodman" />
-            <ImageView fx:id="ariPic" fitHeight="78.0" fitWidth="78.0" layoutX="342.0" layoutY="199.0" pickOnBounds="true" preserveRatio="true" />
-            <ImageView fx:id="jonPic" fitHeight="78.0" fitWidth="78.0" layoutX="70.0" layoutY="293.0" pickOnBounds="true" preserveRatio="true" />
-            <Label layoutX="4.0" layoutY="385.0" text="Assistant Lead Engineer - Jonathan A’Vant" />
-            <Label layoutX="3.0" layoutY="474.0" text="Assistant Lead Engineer - Christian Cedron" />
-            <Label layoutX="292.0" layoutY="476.0" text="Software Engineers - Adonay Resom" />
-            <ImageView fx:id="adonayPic" fitHeight="70.0" fitWidth="66.0" layoutX="357.0" layoutY="406.0" pickOnBounds="true" preserveRatio="true" />
-            <ImageView fx:id="jacobPic" fitHeight="70.0" fitWidth="78.0" layoutX="65.0" layoutY="502.0" pickOnBounds="true" preserveRatio="true" />
-            <ImageView fx:id="peterPic" fitHeight="70.0" fitWidth="66.0" layoutX="355.0" layoutY="495.0" pickOnBounds="true" preserveRatio="true" />
-            <ImageView fx:id="chrisPic" fitHeight="70.0" fitWidth="78.0" layoutX="70.0" layoutY="402.0" pickOnBounds="true" preserveRatio="true" />
-            <Label layoutX="505.0" layoutY="276.0" text="Product Owner- Sam Winter" />
-            <ImageView fx:id="samPic" fitHeight="78.0" fitWidth="78.0" layoutX="551.0" layoutY="199.0" pickOnBounds="true" preserveRatio="true" />
-            <ImageView fx:id="lucyPic" fitHeight="78.0" fitWidth="78.0" layoutX="561.0" layoutY="307.0" pickOnBounds="true" preserveRatio="true" />
-            <Label layoutX="482.0" layoutY="385.0" text="Documentation Analyst - Lucy Stuehrmann" />
-            <Label layoutX="287.0" layoutY="385.0" text="Test Engineer - Kien Nhan" />
-            <Label layoutX="3.0" layoutY="658.0" text="Team Coach: Trevor J. Valcourt" />
-            <ImageView fx:id="kienPic" fitHeight="78.0" fitWidth="78.0" layoutX="341.0" layoutY="307.0" pickOnBounds="true" preserveRatio="true" />
-            <Label layoutX="5.0" layoutY="575.0" text="Software Engineer - Jacob Remz" />
-            <Label layoutX="291.0" layoutY="575.0" text="Software Engineer - Peter Nolan" />
-         </children>
-      </AnchorPane>
-   </left>
-   <right>
-      <JFXButton fx:id="close" accessibleText="BtnClose" onAction="#handleClose" prefHeight="45.0" prefWidth="45.0" ripplerFill="BLACK" text="X">
+<BorderPane xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.AboutController">
+   <top>
+      <Pane prefHeight="45.0" prefWidth="750.0">
+      <JFXButton fx:id="close" accessibleText="BtnClose" layoutX="705.0" onAction="#handleClose" prefHeight="45.0" prefWidth="45.0" ripplerFill="#ee7474" text="X">
          <font>
             <Font size="20.0" />
          </font>
       </JFXButton>
-   </right>
+         <Label layoutX="7.0" layoutY="-6.0" prefHeight="56.0" prefWidth="125.0" text="About:">
+            <font>
+               <Font size="40.0" />
+            </font>
+         </Label>
+      </Pane>
+   </top>
+   <bottom>
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="706.0" prefWidth="750.0" BorderPane.alignment="CENTER">
+         <children>
+            <Separator prefHeight="8.0" prefWidth="750.0" />
+            <Label layoutX="10.0" layoutY="14.0" prefHeight="70.0" prefWidth="731.0" text="We would like to thank the US Treasury’s Alcohol and Tobacco Tax and Trade Bureau, who provided us with the opportunity to work on this project. We would also like to thank their representative Assistant CIO, Greg Greely, for their time and input on our application." wrapText="true" />
+            <Label layoutX="10.0" layoutY="84.0" prefHeight="56.0" prefWidth="731.0" text="This project was organized by the Worcester Polytechnic Institute's Computer Science Department, CS 3733 Software Engineering Class, taught by Professor Wilson Wong." wrapText="true" />
+            <Label layoutX="6.0" layoutY="140.0" prefHeight="27.0" prefWidth="564.0" text="This Application was Implemented by CS 3733 Team A, whose members include:" />
+            <Label layoutX="57.0" layoutY="254.0" text="Project Manager" />
+            <ImageView fx:id="elsaPic" fitHeight="78.0" fitWidth="78.0" layoutX="74.0" layoutY="176.0" pickOnBounds="true" preserveRatio="true" />
+            <Label layoutX="308.0" layoutY="254.0" text="Lead Engineer" />
+            <ImageView fx:id="ariPic" fitHeight="78.0" fitWidth="78.0" layoutX="317.0" layoutY="176.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="jonPic" fitHeight="78.0" fitWidth="78.0" layoutX="70.0" layoutY="297.0" pickOnBounds="true" preserveRatio="true" />
+            <Label layoutX="34.0" layoutY="375.0" text="Assistant Lead Engineer" />
+            <Label layoutX="402.0" layoutY="621.0" text="Software Engineer" />
+            <Label layoutX="523.0" layoutY="492.0" text="Assistant Lead Engineer" />
+            <ImageView fx:id="adonayPic" fitHeight="70.0" fitWidth="66.0" layoutX="568.0" layoutY="417.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="jacobPic" fitHeight="70.0" fitWidth="78.0" layoutX="70.0" layoutY="417.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="peterPic" fitHeight="70.0" fitWidth="66.0" layoutX="323.0" layoutY="417.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="chrisPic" fitHeight="70.0" fitWidth="78.0" layoutX="423.0" layoutY="551.0" pickOnBounds="true" preserveRatio="true" />
+            <Label layoutX="550.0" layoutY="254.0" text="Product Owner" />
+            <ImageView fx:id="samPic" fitHeight="78.0" fitWidth="78.0" layoutX="561.0" layoutY="176.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="lucyPic" fitHeight="78.0" fitWidth="78.0" layoutX="561.0" layoutY="297.0" pickOnBounds="true" preserveRatio="true" />
+            <Label layoutX="523.0" layoutY="375.0" text="Documentation Analyst" />
+            <Label layoutX="311.0" layoutY="375.0" text="Test Engineer" />
+            <Label layoutX="188.0" layoutY="621.0" text="Team Coach:" />
+            <ImageView fx:id="kienPic" fitHeight="78.0" fitWidth="78.0" layoutX="317.0" layoutY="297.0" pickOnBounds="true" preserveRatio="true" />
+            <Label layoutX="49.0" layoutY="492.0" text="Software Engineer" />
+            <Label layoutX="295.0" layoutY="492.0" text="Software Engineer" />
+            <Label layoutX="80.0" layoutY="276.0" text="Elsa Luthi" />
+            <Label layoutX="311.0" layoutY="276.0" text="Ari Goodman" />
+            <Label layoutX="562.0" layoutY="276.0" text="Sam Winter" />
+            <Label layoutX="59.0" layoutY="396.0" text="Jonathan A’Vant" />
+            <Label layoutX="321.0" layoutY="396.0" text="Kien Nhan" />
+            <Label layoutX="543.0" layoutY="396.0" text="Lucy Stuehrmann" />
+            <Label layoutX="552.0" layoutY="513.0" text="Adonay Resom" />
+            <Label layoutX="316.0" layoutY="513.0" text="Peter Nolan" />
+            <Label layoutX="65.0" layoutY="513.0" text="Jacob Remz" />
+            <Label layoutX="407.0" layoutY="642.0" text="Christian Cedron" />
+            <ImageView fx:id="TrevorPic" fitHeight="70.0" fitWidth="78.0" layoutX="191.0" layoutY="551.0" pickOnBounds="true" preserveRatio="true" />
+            <Label layoutX="173.0" layoutY="642.0" text="Trevor J. Valcourt" />
+         </children>
+      </AnchorPane>
+   </bottom>
 </BorderPane>

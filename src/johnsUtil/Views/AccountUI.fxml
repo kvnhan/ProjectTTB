@@ -2,7 +2,6 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -33,33 +32,72 @@
                         <RowConstraints maxHeight="322.0" minHeight="10.0" prefHeight="63.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                     <children>
-                  <Label fx:id="FullName" alignment="CENTER" contentDisplay="CENTER" prefHeight="63.0" prefWidth="280.0" text="Full Name" textAlignment="CENTER" GridPane.rowIndex="1" />
-                  <Label fx:id="Username" alignment="CENTER" contentDisplay="CENTER" prefHeight="72.0" prefWidth="280.0" text="Username" textAlignment="CENTER" GridPane.rowIndex="3" />
-                  <Label fx:id="PhoneNumber" alignment="CENTER" contentDisplay="CENTER" prefHeight="63.0" prefWidth="280.0" text="Phone Number" textAlignment="CENTER" GridPane.rowIndex="5" />
-                  <Label fx:id="Address" alignment="CENTER" contentDisplay="CENTER" prefHeight="63.0" prefWidth="365.0" text="Address" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                  <Label fx:id="EmailAddress" alignment="CENTER" contentDisplay="CENTER" prefHeight="90.0" prefWidth="422.0" text="Email Address" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-                  <Label fx:id="UserType" alignment="CENTER" contentDisplay="CENTER" layoutX="331.0" layoutY="156.0" prefHeight="96.0" prefWidth="429.0" text="User Type" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+                  <Label fx:id="FullName" alignment="CENTER" contentDisplay="CENTER" prefHeight="63.0" prefWidth="280.0" text="Full Name" textAlignment="CENTER" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="20.0" />
+                     </font></Label>
+                  <Label fx:id="Username" alignment="CENTER" contentDisplay="CENTER" prefHeight="72.0" prefWidth="280.0" text="Username" textAlignment="CENTER" GridPane.rowIndex="3">
+                     <font>
+                        <Font size="20.0" />
+                     </font></Label>
+                  <Label fx:id="PhoneNumber" alignment="CENTER" contentDisplay="CENTER" prefHeight="63.0" prefWidth="280.0" text="Phone Number" textAlignment="CENTER" GridPane.rowIndex="5">
+                     <font>
+                        <Font size="20.0" />
+                     </font></Label>
+                  <Label fx:id="Address" alignment="CENTER" contentDisplay="CENTER" prefHeight="63.0" prefWidth="365.0" text="Address" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="20.0" />
+                     </font></Label>
+                  <Label fx:id="EmailAddress" alignment="CENTER" contentDisplay="CENTER" prefHeight="90.0" prefWidth="422.0" text="Email Address" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                     <font>
+                        <Font size="20.0" />
+                     </font></Label>
+                  <Label fx:id="UserType" alignment="CENTER" contentDisplay="CENTER" layoutX="331.0" layoutY="156.0" prefHeight="96.0" prefWidth="429.0" text="User Type" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="5">
+                     <font>
+                        <Font size="20.0" />
+                     </font></Label>
+                  <Label prefHeight="72.0" prefWidth="346.0" text="Full Name:">
+                     <font>
+                        <Font size="20.0" />
+                     </font></Label>
+                  <Label text="Address:" GridPane.columnIndex="2">
+                     <font>
+                        <Font size="20.0" />
+                     </font></Label>
+                  <Label text="Username:" GridPane.rowIndex="2">
+                     <font>
+                        <Font size="20.0" />
+                     </font></Label>
+                  <Label text="Phone Number:" GridPane.rowIndex="4">
+                     <font>
+                        <Font size="20.0" />
+                     </font></Label>
+                  <Label text="Email Address:" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                     <font>
+                        <Font size="20.0" />
+                     </font></Label>
+                  <Label text="User Type:" GridPane.columnIndex="2" GridPane.rowIndex="4">
+                     <font>
+                        <Font size="20.0" />
+                     </font></Label>
                     </children>
+               <VBox.margin>
+                  <Insets top="125.0" />
+               </VBox.margin>
                 </GridPane>
-                <Label fx:id="errorText" prefHeight="35.0" prefWidth="611.0" textFill="RED">
-                    <font>
-                        <Font size="16.0" />
-                    </font>
-                </Label>
             </children>
         </VBox>
     </center>
     <left>
+        <VBox alignment="CENTER" prefHeight="421.0" prefWidth="286.0" BorderPane.alignment="CENTER" />
+    </left>
+    <right>
         <VBox alignment="CENTER" prefHeight="421.0" prefWidth="286.0" BorderPane.alignment="CENTER">
             <children>
-                <ImageView fx:id="icon" fitHeight="220.0" fitWidth="220.0" pickOnBounds="true" preserveRatio="true">
-                    <VBox.margin>
-                        <Insets bottom="15.0" top="15.0" />
-                    </VBox.margin>
-                </ImageView>
+                
             </children>
         </VBox>
-    </left>
+    </right>
     <top>
         <BorderPane prefHeight="84.0" prefWidth="943.0" style="-fx-background-color: #E74C3C;" BorderPane.alignment="CENTER">
             <left>

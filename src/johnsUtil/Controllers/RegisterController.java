@@ -100,12 +100,12 @@ public class RegisterController implements Initializable {
         try {
             if(userTF.getText().trim().equals("")){
                 userTF.setStyle("-fx-prompt-text-fill: red;");
-                userTF.setPromptText("Full Name *Required Field*");
+                userTF.setPromptText("Username *Required Field*");
                 havefields = false;
             }
             else if(userTF.getText().trim().length() > 15 || userTF.getText().trim().length() < 5){
                 userTF.setStyle("-fx-prompt-text-fill: red;");
-                userTF.setPromptText("Full Name *Must be 5 - 15 characters long*");
+                userTF.setPromptText("Username *Must be 5 - 15 characters long*");
                 havefields = false;
             }
             else if(Database.getInstance().contains("ACCOUNT","USERNAME",userTF.getText().trim())){
@@ -152,7 +152,6 @@ public class RegisterController implements Initializable {
         }
 
         if(havefields){
-            //TODO add other fields and verify usertype
             String userName = userTF.getText().trim();
             String pass = passTF.getText();
             String name = nameTF.getText().trim();
