@@ -6,3 +6,7 @@ out/
 Database/ProjectC/tmp/
 Database/
 derby.log
+!/Database/
+.idea/dataSources/
+.idea/inspectionProfiles/
+lib/
