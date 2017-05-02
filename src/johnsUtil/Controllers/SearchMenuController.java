@@ -105,6 +105,8 @@ public class SearchMenuController {
 
     private @FXML ToggleSwitch onlyAvailableImageSwitch;
 
+    int resultsWithAvailableImages;
+
     /**
      * Initializes the search menu.
      */
@@ -228,7 +230,13 @@ public class SearchMenuController {
         imageScrollPane.setFitToWidth(true);
         resultsMainGridPane.getChildren().add(imageScrollPane);
 
-        noOfPagesGenerated = (int)Math.ceil((double)alcoholDataList.size()/(double)resultsPerPage);
+        if(onlyAvailableImageSwitch.isSelected()){
+            noOfPagesGenerated = (int)Math.ceil((double)resultsWithAvailableImages/(double)resultsPerPage);
+            pageControlsHBox.setVisible(false);
+        }else{
+            noOfPagesGenerated = (int)Math.ceil((double)alcoholDataList.size()/(double)resultsPerPage);
+            pageControlsHBox.setVisible(alcoholDataList.size() > resultsPerPage);
+        }
 
         if(noOfPagesGenerated > 1){
             Result.setText("Showing " + resultsPerPage + " results per page. " + noOfPagesGenerated + " pages have been generated.");
@@ -236,14 +244,19 @@ public class SearchMenuController {
             Result.setText("Showing " + alcoholDataList.size() + " search results.");
         }
 
-        pageControlsHBox.setVisible(alcoholDataList.size() > resultsPerPage);
-
         int floor = noOfPagesGenerated-1;
+        int dataSize;
 
         if(floor*resultsPerPage >= (imageResultPageNumber+1)*resultsPerPage){
             generatedResultBound = (imageResultPageNumber+1)*resultsPerPage;
-        }else{
+        }else{//terf
             generatedResultBound = floor*resultsPerPage + (int) Math.round((((double)alcoholDataList.size()/(double)resultsPerPage)-floor)*resultsPerPage);
+        }
+
+        if (onlyAvailableImageSwitch.isSelected()) {
+            dataSize = resultsWithAvailableImages;
+        }else{
+            dataSize = generatedResultBound;
         }
 
         pageNoText.setText("Page " + (imageResultPageNumber + 1));
@@ -259,7 +272,8 @@ public class SearchMenuController {
 
         alcoholLabelGridPane.getColumnConstraints().addAll(col1, col2, col3);
 
-        for (int i = imageResultPageNumber*resultsPerPage; i < generatedResultBound; i++) {
+        for (int i = imageResultPageNumber*resultsPerPage; i < dataSize; i++) {
+
             boolean shouldAdd = true;
 
             final AlcoholData currentAlcoholData = alcoholDataList.get(i);
@@ -275,7 +289,7 @@ public class SearchMenuController {
                     String imagePath = path + alcoholDataList.get(i).getAid() + ".jpg";
                     System.out.println(getPath() + alcoholDataList.get(i).getAid() + ".jpg");
                     inputStream = new FileInputStream(imagePath);
-                } catch (UnsupportedEncodingException | FileNotFoundException e) {
+                } catch (UnsupportedEncodingException | java.io.FileNotFoundException e) {
                     inputStream = null;
                     e.printStackTrace();
                 }
@@ -347,6 +361,7 @@ public class SearchMenuController {
                 }
             }
         }
+        System.out.println("Available: " + resultsWithAvailableImages);
 
     }
 
@@ -376,8 +391,13 @@ public class SearchMenuController {
     public void search(ActionEvent event) throws SQLException, NoSuchMethodException, IllegalAccessException, InstantiationException, IOException{
         imageResultPageNumber = 0;
         noOfPagesGenerated = 0;
+        resultsWithAvailableImages = 0;
         previousPageButton.setDisable(true);
         nextPageButton.setDisable(false);
+
+        if(onlyAvailableImageSwitch.isSelected()){
+            resultsWithAvailableImages = noOfImagesAvailable(alcoholDataList);
+        }
 
         if(normalSearchRadio.isSelected()){
             searchDatabase();
@@ -857,4 +877,34 @@ public class SearchMenuController {
         return newDir;
     }
 
+    public int noOfImagesAvailable(List<AlcoholData> alcoholDataList){
+        int amount = 0;
+
+        for(int i = 0; i < alcoholDataList.size(); i++){
+            AlcoholData currentAlcoholData = alcoholDataList.get(i);
+            InputStream inputStream = SearchMenuController.class.getClassLoader().getResourceAsStream("labels/" + String.valueOf(alcoholDataList.get(i).getAid()) + ".jfif");
+
+            if (inputStream == null) {
+                // if not try looking in output folder
+                String path = null;
+                try {
+                    path = getPath();
+                    String imagePath = path + alcoholDataList.get(i).getAid() + ".jpg";
+                    System.out.println(getPath() + alcoholDataList.get(i).getAid() + ".jpg");
+                    inputStream = new FileInputStream(imagePath);
+                } catch (UnsupportedEncodingException | java.io.FileNotFoundException e) {
+                    inputStream = null;
+                    e.printStackTrace();
+                }
+
+                if (inputStream == null || path == null) {
+                }else{
+                    amount++;
+                }
+            }else{
+                amount++;
+            }
+        }
+        return amount;
+    }
 }
