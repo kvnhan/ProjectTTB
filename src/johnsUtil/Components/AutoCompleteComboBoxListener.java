@@ -6,6 +6,12 @@ import javafx.event.EventHandler;
 import javafx.scene.control.ComboBox;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import johnsUtil.Controllers.MainMenuController;
+import sample.AlcoholData;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Listens for changes to what is displayed by the application.
@@ -17,6 +23,9 @@ public class AutoCompleteComboBoxListener implements EventHandler<KeyEvent> {
     private boolean moveCaretToPos = false;
     private int caretPos;
     private ObservableList<String> list = FXCollections.observableArrayList();;
+    private ArrayList<String> suggestions = new ArrayList<>();
+    private int maxAlcoholUsedToGenerateList = 100;
+    private List<AlcoholData> allAlcoholEntries = MainMenuController.getAllAlcoholEntries();
 
     /**
      * Creates an instance of the AutoCompleteComboBoxListener class.
@@ -25,8 +34,7 @@ public class AutoCompleteComboBoxListener implements EventHandler<KeyEvent> {
     public AutoCompleteComboBoxListener(final ComboBox comboBox) {
         this.comboBox = comboBox;
 
-
-        String[] suggestions = {"Adonay","Jonathan","Kien","Jacob","Elsa","Ari","Lucy","Sam"};
+        createAutocompleteList();
 
         data = FXCollections.observableArrayList(suggestions);
 
@@ -106,4 +114,39 @@ public class AutoCompleteComboBoxListener implements EventHandler<KeyEvent> {
         moveCaretToPos = false;
     }
 
+    private void createAutocompleteList(){
+        for(int i = 0; i < maxAlcoholUsedToGenerateList; i++){
+            AlcoholData anAlcohol = allAlcoholEntries.get(i);
+
+            if(!(anAlcohol.getName() == null)){
+                if(!suggestions.contains(anAlcohol.getName()) && !(anAlcohol.getName().trim().isEmpty()) && !(anAlcohol.getName().equals("n/a"))){
+                    suggestions.add(anAlcohol.getName());
+                }
+            }
+
+            if(!(anAlcohol.getAppellation() == null)){
+                if(!suggestions.contains(anAlcohol.getAppellation()) && !(anAlcohol.getAppellation().trim().isEmpty()) && !(anAlcohol.getAppellation().equals("n/a"))){
+                suggestions.add(anAlcohol.getAppellation());
+            }
+
+            if(!(anAlcohol.getBrandName() == null)){
+                if(!suggestions.contains(anAlcohol.getBrandName()) && !(anAlcohol.getBrandName().trim().isEmpty()) && !(anAlcohol.getBrandName().equals("n/a"))){
+                    suggestions.add(anAlcohol.getBrandName());
+                }
+            }
+
+            if( !(anAlcohol.getGrapeVarietal() == null)){
+                if(!suggestions.contains(anAlcohol.getGrapeVarietal()) && !(anAlcohol.getGrapeVarietal().trim().isEmpty()) && !(anAlcohol.getGrapeVarietal().equals("n/a"))){
+                    suggestions.add(anAlcohol.getGrapeVarietal());
+                }
+            }
+
+            if(!(anAlcohol.getSourceOfProduct() == null)){
+                if(!suggestions.contains(anAlcohol.getSourceOfProduct()) && !(anAlcohol.getSourceOfProduct().trim().isEmpty()) &&  !(anAlcohol.getSourceOfProduct().equals("n/a"))){
+                    suggestions.add(anAlcohol.getSourceOfProduct());
+                }
+            }
+            }
+        }
+    }
 }
