@@ -1,9 +1,7 @@
 package sample;
 
 import com.jfoenix.controls.JFXComboBox;
-import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.controls.JFXRadioButton;
-import com.jfoenix.transitions.hamburger.HamburgerBackArrowBasicTransition;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -36,6 +34,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import johnsUtil.model.Database.DatabaseUtil;
 
 import static javafx.application.Application.launch;
 

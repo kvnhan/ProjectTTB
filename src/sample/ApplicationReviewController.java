@@ -7,6 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
+import johnsUtil.model.Database.DatabaseUtil;
 
 import java.io.File;
 import java.io.InputStream;
@@ -45,11 +46,11 @@ public class ApplicationReviewController{
     private ScreenUtil screenUtil = new ScreenUtil();
     private AccountsUtil accountsUtil = new AccountsUtil();
     private String username = accountsUtil.getUsername();
-    private int numberOfApps;
     private ApplicationData thisForm;
     List<ApplicationData> listForms = new ArrayList<ApplicationData>();
     private static int appReviewMode = 1; // 1 = view all forms, 2 = choose form highlighted in inbox then return, 3 choose form highlighted in inbox then go to next available form;
 
+    private int numberOfApps;
     private ArrayList<Account> acctsFound = new ArrayList<>();
     private ObservableList<String> acctsObservableList;
     private ArrayList<CheckBox> checkList = new ArrayList<>();
@@ -98,8 +99,9 @@ public class ApplicationReviewController{
         Appellation_Label.setText(String.valueOf(thisForm.getAssociatedAlcoholData().getAppellation()));
         Vintage_Label.setText(String.valueOf(thisForm.getAssociatedAlcoholData().getWineVintage()));
         Bottler_Label.setText(String.valueOf(thisForm.getAssociatedAlcoholData().getBottlersInfo()));
-        sourceOfProduct.setText(String.valueOf(thisForm.getAssociatedAlcoholData().getSourceOfProduct()));
-        typeOfProduct.setText(String.valueOf(thisForm.getAssociatedAlcoholData().getAlcoholType()));
+        //null pointer
+      //  sourceOfProduct.setText(String.valueOf(thisForm.getAssociatedAlcoholData().getSourceOfProduct()));
+      //  typeOfProduct.setText(String.valueOf(thisForm.getAssociatedAlcoholData().getAlcoholType()));
 
         pH_Label.setText(String.valueOf(thisForm.getAssociatedAlcoholData().getPhLevel()));
 
@@ -199,16 +201,16 @@ public class ApplicationReviewController{
      * Brings a worker to the next application in their inbox.
      */
     public void nextApplication(){
-
+        numberOfApps = listForms.size();
         if(appReviewMode == 1){
             if(numberOfApps <= 1){
-                screenUtil.switchScene("WorkFlow.fxml", "Inbox");
+                screenUtil.switchScene("InboxManu.fxml", "Application Review");
                 screenUtil.createAlertBox("No more assigned forms", "There are no more forms assigned to you.");
             }else{
-                screenUtil.switchScene("ApplicationReview.fxml","Application Review");
+                screenUtil.switchScene("InboxManu.fxml", "Application Review");
             }
         }else if(appReviewMode == 2){
-            screenUtil.switchScene("WorkFlow.fxml", "Inbox");
+            screenUtil.switchScene("InboxManu.fxml", "Inbox");
         }
     }
 

@@ -7,7 +7,6 @@ import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -17,7 +16,7 @@ import javafx.stage.Stage;
 import johnsUtil.model.SharedResources.Account;
 import johnsUtil.model.SharedResources.Database;
 import johnsUtil.model.SharedResources.Screen;
-import sample.DatabaseUtil;
+import johnsUtil.model.Database.DatabaseUtil;
 import sample.ScreenUtil;
 
 import javax.imageio.ImageIO;
@@ -29,7 +28,6 @@ import java.net.URL;
 import java.net.URLDecoder;
 import java.sql.SQLException;
 import java.util.Date;
-import java.util.ResourceBundle;
 
 /**
  * Controller for new label screen.

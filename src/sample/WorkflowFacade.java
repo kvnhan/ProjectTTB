@@ -1,7 +1,6 @@
 package sample;
 
-import java.sql.*;
-import java.util.ArrayList;
+import johnsUtil.model.Database.DatabaseUtil;
 
 
 /**
