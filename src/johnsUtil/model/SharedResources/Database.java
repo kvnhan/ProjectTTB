@@ -1,6 +1,6 @@
 package johnsUtil.model.SharedResources;
 
-import johnsUtil.model.Database.DatabaseUtil;
+import sample.DatabaseUtil;
 
 /**
  * Class containing database info.
