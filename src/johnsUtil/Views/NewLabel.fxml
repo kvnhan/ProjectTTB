@@ -21,38 +21,25 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<ScrollPane fitToWidth="true" hbarPolicy="ALWAYS" maxHeight="3300.0" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="810.0" prefWidth="1200.0" style="-fx-background-color: white;" vbarPolicy="ALWAYS" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="johnsUtil.Controllers.NewLabelController">
+<ScrollPane fitToWidth="true" hbarPolicy="ALWAYS" maxHeight="3300.0" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" style="-fx-background-color: white;" vbarPolicy="ALWAYS" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="johnsUtil.Controllers.NewLabelController">
     <content>
       <BorderPane style="-fx-background-color: white;">
          <center>
                 <GridPane prefHeight="3082.0" prefWidth="850.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
                     <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                     </columnConstraints>
                     <rowConstraints>
                         <RowConstraints maxHeight="130.0" minHeight="10.0" prefHeight="10.0" vgrow="ALWAYS" />
                         <RowConstraints maxHeight="200.0" minHeight="10.0" prefHeight="10.0" vgrow="ALWAYS" />
                         <RowConstraints maxHeight="158.0" minHeight="10.0" prefHeight="10.0" vgrow="ALWAYS" />
-                        <RowConstraints maxHeight="158.0" minHeight="10.0" prefHeight="10.0" vgrow="ALWAYS" />
+                        <RowConstraints maxHeight="-Infinity" minHeight="75.0" prefHeight="10.0" vgrow="ALWAYS" />
                         <RowConstraints maxHeight="80.0" minHeight="0.0" prefHeight="10.0" vgrow="ALWAYS" />
                         <RowConstraints maxHeight="70.0" minHeight="3.0" prefHeight="10.0" vgrow="ALWAYS" />
                         <RowConstraints maxHeight="70.0" minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
                         <RowConstraints maxHeight="70.0" minHeight="0.0" prefHeight="10.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="70.0" minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="70.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="80.0" minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="70.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="70.0" minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="70.0" minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="70.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="70.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints maxHeight="80.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="70.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="70.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="70.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="70.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="70.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="70.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints maxHeight="70.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints maxHeight="70.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints maxHeight="70.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -141,7 +128,7 @@
                                 </GridPane>
                             </children>
                         </Pane>
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3">
+                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                             <children>
                                 <Text layoutX="51.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type of Product">
                                     <font>
@@ -169,7 +156,7 @@
                                 </GridPane>
                             </children>
                         </Pane>
-                        <Pane prefHeight="105.0" prefWidth="1100.0" GridPane.rowIndex="4">
+                        <Pane prefHeight="105.0" prefWidth="1100.0" GridPane.rowIndex="3">
                             <children>
                                 <Text layoutX="51.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Manufacture Info">
                                     <font>
@@ -178,27 +165,27 @@
                                 </Text>
                             </children>
                         </Pane>
-                        <Pane prefHeight="10.0" prefWidth="1100.0" GridPane.rowIndex="5">
+                        <Pane prefHeight="10.0" prefWidth="1100.0" GridPane.rowIndex="4">
                             <children>
                                 <JFXTextField fx:id="RepID" labelFloat="true" layoutX="51.0" layoutY="30.0" prefHeight="29.0" prefWidth="275.0" promptText="RepID" />
                             </children>
                         </Pane>
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="6">
+                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="5">
                             <children>
                                 <JFXTextField fx:id="PlantReg" labelFloat="true" layoutX="51.0" layoutY="30.0" prefHeight="29.0" prefWidth="275.0" promptText="PermitID" />
                             </children>
                         </Pane>
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="7">
+                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="6">
                             <children>
                                 <JFXTextField fx:id="SerialNo" labelFloat="true" layoutX="51.0" layoutY="30.0" prefHeight="29.0" prefWidth="275.0" promptText="Serial Number" />
                             </children>
                         </Pane>
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="8">
+                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="7">
                             <children>
                                 <JFXTextField fx:id="Address" labelFloat="true" layoutX="51.0" layoutY="30.0" prefHeight="29.0" prefWidth="275.0" promptText="Plant Address" />
                             </children>
                         </Pane>
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="10">
+                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                             <children>
                                 <Text layoutX="51.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Applicant Info">
                                     <font>
@@ -207,27 +194,27 @@
                                 </Text>
                             </children>
                         </Pane>
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="11">
+                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                             <children>
                                 <JFXTextField fx:id="ApplicantName" labelFloat="true" layoutX="51.0" layoutY="30.0" prefHeight="29.0" prefWidth="275.0" promptText="Applicant Name" />
                             </children>
                         </Pane>
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="12">
+                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
                             <children>
                                 <JFXTextField fx:id="MailingAddress" labelFloat="true" layoutX="51.0" layoutY="30.0" prefHeight="29.0" prefWidth="275.0" promptText="Mailing Address" />
                             </children>
                         </Pane>
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="13">
+                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
                             <children>
                                 <JFXTextField fx:id="EmailAddress" labelFloat="true" layoutX="51.0" layoutY="30.0" prefHeight="29.0" prefWidth="275.0" promptText="Email Address" />
                             </children>
                         </Pane>
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="14">
+                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
                             <children>
                                 <JFXTextField fx:id="PhoneNumber" labelFloat="true" layoutX="51.0" layoutY="30.0" prefHeight="29.0" prefWidth="275.0" promptText="Phone Number" />
                             </children>
                         </Pane>
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="16">
+                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="8">
                             <children>
                                 <Text layoutX="51.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Alcohol Info">
                                     <font>
@@ -236,57 +223,57 @@
                                 </Text>
                             </children>
                         </Pane>
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="17">
+                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="9">
                             <children>
                                 <JFXTextField fx:id="BrandName" labelFloat="true" layoutX="51.0" layoutY="30.0" prefHeight="29.0" prefWidth="275.0" promptText="Brand Name" />
                             </children>
                         </Pane>
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="18">
+                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="10">
                             <children>
                                 <JFXTextField fx:id="Name" labelFloat="true" layoutX="51.0" layoutY="30.0" prefHeight="29.0" prefWidth="275.0" promptText="Fancy Name" />
                             </children>
                         </Pane>
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="19">
+                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="11">
                             <children>
                                 <JFXTextField fx:id="Formula" labelFloat="true" layoutX="51.0" layoutY="30.0" prefHeight="29.0" prefWidth="275.0" promptText="Formula" />
                             </children>
                         </Pane>
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="20">
+                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="12">
                             <children>
                                 <JFXTextField fx:id="alcoholContent" labelFloat="true" layoutX="51.0" layoutY="30.0" prefHeight="29.0" prefWidth="275.0" promptText="Alcohol Content" />
                             </children>
                         </Pane>
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="21">
+                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="13">
                             <children>
                                 <JFXTextField fx:id="netContentField" labelFloat="true" layoutX="51.0" layoutY="30.0" prefHeight="29.0" prefWidth="275.0" promptText="Net Content" />
                             </children>
                         </Pane>
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="23">
+                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="9">
                             <children>
                                 <JFXTextField fx:id="Appellation" labelFloat="true" layoutX="51.0" layoutY="30.0" prefHeight="29.0" prefWidth="275.0" promptText="Appellation" />
                             </children>
                         </Pane>
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="24">
+                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="10">
                             <children>
                                 <JFXTextField fx:id="grapeVarietal" labelFloat="true" layoutX="51.0" layoutY="30.0" prefHeight="29.0" prefWidth="275.0" promptText="Grape Varietal" />
                             </children>
                         </Pane>
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="25">
+                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="11">
                             <children>
                                 <JFXTextField fx:id="Vintage" labelFloat="true" layoutX="51.0" layoutY="30.0" prefHeight="29.0" prefWidth="275.0" promptText="Vintage Year" />
                             </children>
                         </Pane>
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="26">
+                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="12">
                             <children>
                                 <JFXTextField fx:id="pH" labelFloat="true" layoutX="51.0" layoutY="30.0" prefHeight="29.0" prefWidth="275.0" promptText="pH Level" />
                             </children>
                         </Pane>
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="27">
+                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="13">
                             <children>
                                 <JFXTextField fx:id="sulfiteField" labelFloat="true" layoutX="51.0" layoutY="30.0" prefHeight="29.0" prefWidth="275.0" promptText="Sufite Description" />
                             </children>
                         </Pane>
-                        <Pane prefHeight="185.0" prefWidth="1100.0" GridPane.rowIndex="29">
+                        <Pane prefHeight="185.0" prefWidth="1100.0" GridPane.rowIndex="15">
                             <children>
                                 <Text layoutX="51.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Label">
                                     <font>
@@ -297,12 +284,12 @@
                                 <JFXButton layoutX="282.0" layoutY="78.0" onAction="#chooseFile" style="-fx-background-color: C0392B;" text="Choose Image" textFill="WHITE" />
                             </children>
                         </Pane>
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="28">
+                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="14">
                             <children>
                                 <JFXTextField fx:id="bottlerField" labelFloat="true" layoutX="51.0" layoutY="30.0" prefHeight="29.0" prefWidth="275.0" promptText="Bottler's Name" />
                             </children>
                         </Pane>
-                        <Pane prefHeight="164.0" prefWidth="850.0" GridPane.rowIndex="31">
+                        <Pane prefHeight="164.0" prefWidth="850.0" GridPane.rowIndex="17">
                             <children>
                                 <JFXButton fx:id="Submit" layoutX="716.0" layoutY="20.0" onAction="#fillOutApplication" prefHeight="60.0" prefWidth="200.0" style="-fx-background-color: #C0392B;" text="Submit" textFill="WHITE" />
                                 <JFXButton fx:id="Cancel" layoutX="28.0" layoutY="20.0" onAction="#goBack" prefHeight="60.0" prefWidth="200.0" style="-fx-background-color: C0392B;" text="Cancel" textFill="WHITE" />
@@ -311,7 +298,7 @@
                         <Insets bottom="30.0" />
                      </GridPane.margin>
                         </Pane>
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="30">
+                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="16">
                             <children>
                                 <Text layoutX="51.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Additonal Information">
                                     <font>
@@ -321,7 +308,7 @@
                                 <TextArea fx:id="additionalInfoField" layoutX="315.0" layoutY="17.0" prefHeight="158.0" prefWidth="477.0" />
                             </children>
                         </Pane>
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="22">
+                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="14">
                             <children>
                                 <JFXTextField fx:id="originField" labelFloat="true" layoutX="51.0" layoutY="30.0" prefHeight="29.0" prefWidth="275.0" promptText="Origin Code" />
                             </children>
