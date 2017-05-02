@@ -2,7 +2,7 @@ package FormObserver;
 
 import com.jfoenix.controls.JFXTextField;
 import sample.ApplicationData;
-import sample.DatabaseUtil;
+import johnsUtil.model.Database.DatabaseUtil;
 
 /**
  * Class for impementation of observer pattern for an active form.
