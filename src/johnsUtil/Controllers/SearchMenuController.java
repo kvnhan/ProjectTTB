@@ -38,6 +38,7 @@ import javafx.stage.Stage;
 import johnsUtil.model.SharedResources.Account;
 import johnsUtil.model.SharedResources.Database;
 import johnsUtil.model.SharedResources.Screen;
+import org.controlsfx.control.ToggleSwitch;
 import sample.AlcoholData;
 import sample.DatabaseUtil;
 import johnsUtil.Components.ImageViewPane;
@@ -101,6 +102,8 @@ public class SearchMenuController {
     private @FXML ToggleButton previousPageButton;
     private @FXML Button nextPageButton;
     private @FXML Text pageNoText;
+
+    private @FXML ToggleSwitch onlyAvailableImageSwitch;
 
     /**
      * Initializes the search menu.
@@ -257,6 +260,8 @@ public class SearchMenuController {
         alcoholLabelGridPane.getColumnConstraints().addAll(col1, col2, col3);
 
         for (int i = imageResultPageNumber*resultsPerPage; i < generatedResultBound; i++) {
+            boolean shouldAdd = true;
+
             final AlcoholData currentAlcoholData = alcoholDataList.get(i);
 
             // try getting form labels folder
@@ -266,7 +271,8 @@ public class SearchMenuController {
                 // if not try looking in output folder
                 String path = null;
                 try {
-                    String imagePath = getPath() + alcoholDataList.get(i).getAid() + ".jpg";
+                    path = getPath();
+                    String imagePath = path + alcoholDataList.get(i).getAid() + ".jpg";
                     System.out.println(getPath() + alcoholDataList.get(i).getAid() + ".jpg");
                     inputStream = new FileInputStream(imagePath);
                 } catch (UnsupportedEncodingException | FileNotFoundException e) {
@@ -274,7 +280,11 @@ public class SearchMenuController {
                     e.printStackTrace();
                 }
 
-                if (inputStream == null) {
+                if (inputStream == null || path == null) {
+                    if(onlyAvailableImageSwitch.isSelected()){
+                        shouldAdd = false;
+                    }
+
                     // if image is not found in both folders set default images
                     int alcoholType = currentAlcoholData.getAlcoholType();
                     if (alcoholType == 1) {
@@ -287,52 +297,54 @@ public class SearchMenuController {
                 }
             }
 
-            alcoholImage = new javafx.scene.image.Image(inputStream);
-            alcoholImageView = new ImageView();
+            if(shouldAdd){
+                alcoholImage = new javafx.scene.image.Image(inputStream);
+                alcoholImageView = new ImageView();
 
-            alcoholImageView.setImage(alcoholImage);
+                alcoholImageView.setImage(alcoholImage);
 
-            alcoholImageView.setFitWidth(260);
-            alcoholImageView.setFitHeight(260);
+                alcoholImageView.setFitWidth(400);
+                alcoholImageView.setFitHeight(400);
 
-            ImageViewPane imageViewPane = new ImageViewPane(alcoholImageView);
+                ImageViewPane imageViewPane = new ImageViewPane(alcoholImageView);
 
-            imageViewPane.setOnMouseEntered(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent event) {
-                    int depth = 150;
+                imageViewPane.setOnMouseEntered(new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent event) {
+                        int depth = 150;
 
-                    DropShadow borderGlow = new DropShadow();
-                    borderGlow.setOffsetY(0f);
-                    borderGlow.setOffsetX(0f);
-                    borderGlow.setColor(Color.web("#e74c3c"));
-                    borderGlow.setWidth(depth);
-                    borderGlow.setHeight(depth);
+                        DropShadow borderGlow = new DropShadow();
+                        borderGlow.setOffsetY(0f);
+                        borderGlow.setOffsetX(0f);
+                        borderGlow.setColor(Color.web("#e74c3c"));
+                        borderGlow.setWidth(depth);
+                        borderGlow.setHeight(depth);
 
-                    imageViewPane.setEffect(borderGlow);
+                        imageViewPane.setEffect(borderGlow);
+                    }
+                });
+
+                imageViewPane.setOnMouseExited(new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent event) {
+                        imageViewPane.setEffect(null);
+                    }
+                });
+
+                imageViewPane.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent event) {
+                        screenUtil.pullUpAlcoholDetails(currentAlcoholData);
+                    }
+                });
+
+                alcoholLabelGridPane.add(imageViewPane, imageCol, imageRow);
+
+                imageCol++;
+                if (imageCol > 2) {
+                    imageCol = 0;
+                    imageRow++;
                 }
-            });
-
-            imageViewPane.setOnMouseExited(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent event) {
-                    imageViewPane.setEffect(null);
-                }
-            });
-
-            imageViewPane.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent event) {
-                    screenUtil.pullUpAlcoholDetails(currentAlcoholData);
-                }
-            });
-
-            alcoholLabelGridPane.add(imageViewPane, imageCol, imageRow);
-
-            imageCol++;
-            if (imageCol > 2) {
-                imageCol = 0;
-                imageRow++;
             }
         }
 
