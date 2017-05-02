@@ -1,13 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXHamburger?>
+<?import com.jfoenix.controls.JFXRadioButton?>
+<?import com.jfoenix.controls.JFXTextField?>
 <?import com.jfoenix.controls.JFXTreeView?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<BorderPane fx:id="borderPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="johnsUtil.Controllers.SupervisorController">
+<BorderPane fx:id="borderPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="johnsUtil.Controllers.SupervisorController">
    <center>
       <BorderPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" BorderPane.alignment="TOP_LEFT">
          <left>
@@ -31,6 +47,314 @@
                </children>
             </HBox>
          </top>
+         <center>
+            <ScrollPane fx:id="formView" hvalue="0.5" vvalue="0.07" BorderPane.alignment="TOP_CENTER">
+               <content>
+                    <BorderPane>
+                       <center>
+                          <GridPane disable="true" maxWidth="1000.0" prefHeight="2000.0" prefWidth="700.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+                             <columnConstraints>
+                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="495.0" minWidth="10.0" prefWidth="404.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="596.0" minWidth="10.0" prefWidth="596.0" />
+                             </columnConstraints>
+                             <rowConstraints>
+                                <RowConstraints maxHeight="130.0" minHeight="10.0" prefHeight="10.0" vgrow="ALWAYS" />
+                                <RowConstraints maxHeight="200.0" minHeight="10.0" prefHeight="10.0" vgrow="ALWAYS" />
+                                <RowConstraints maxHeight="158.0" minHeight="10.0" prefHeight="10.0" vgrow="ALWAYS" />
+                                <RowConstraints maxHeight="-Infinity" minHeight="75.0" prefHeight="10.0" vgrow="ALWAYS" />
+                                <RowConstraints maxHeight="80.0" minHeight="0.0" prefHeight="10.0" vgrow="ALWAYS" />
+                                <RowConstraints maxHeight="70.0" minHeight="3.0" prefHeight="10.0" vgrow="ALWAYS" />
+                                <RowConstraints maxHeight="70.0" minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
+                                <RowConstraints maxHeight="70.0" minHeight="0.0" prefHeight="10.0" vgrow="SOMETIMES" />
+                                <RowConstraints maxHeight="80.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                <RowConstraints maxHeight="70.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                <RowConstraints maxHeight="70.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                <RowConstraints maxHeight="70.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                <RowConstraints maxHeight="70.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                <RowConstraints maxHeight="70.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                <RowConstraints maxHeight="70.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                <RowConstraints maxHeight="300.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                <RowConstraints maxHeight="300.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                <RowConstraints maxHeight="70.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                             </rowConstraints>
+                             <children>
+                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="     Label Approval Form" wrappingWidth="415.6708984375">
+                                   <font>
+                                      <Font name="System Bold" size="36.0" />
+                                   </font>
+                                </Text>
+                                <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+                                   <children>
+                                      <Text layoutX="51.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type of Application">
+                                         <font>
+                                            <Font size="24.0" />
+                                         </font>
+                                      </Text>
+                                      <GridPane layoutX="51.0" layoutY="47.0" prefHeight="132.0" prefWidth="852.0">
+                                         <columnConstraints>
+                                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                         </columnConstraints>
+                                         <rowConstraints>
+                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                         </rowConstraints>
+                                         <children>
+                                            <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3">
+                                               <children>
+                                                  <TextField fx:id="ttbid" editable="false" layoutX="376.0" layoutY="1.0" prefHeight="31.0" prefWidth="184.0" />
+                                                  <Label layoutX="325.0" layoutY="6.0" prefHeight="21.0" prefWidth="51.0" text="TTBID" />
+                                               </children>
+                                            </Pane>
+                                            <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
+                                               <children>
+                                                  <TextField fx:id="capacity" layoutX="567.0" layoutY="-1.0" prefHeight="0.0" prefWidth="84.0" />
+                                                  <Label layoutX="662.0" layoutY="4.0" prefHeight="21.0" prefWidth="104.0" text="(Fill in Amount)" />
+                                               </children>
+                                            </Pane>
+                                            <Pane prefHeight="33.0" prefWidth="943.0" GridPane.rowIndex="1">
+                                               <children>
+                                                  <TextField fx:id="state" layoutX="507.0" layoutY="1.0" prefHeight="31.0" prefWidth="50.0" />
+                                                  <Label layoutX="422.0" layoutY="4.0" prefHeight="21.0" prefWidth="85.0" text="For sale in" />
+                                                  <Label layoutX="573.0" layoutY="4.0" prefHeight="21.0" prefWidth="173.0" text="(Fill in State Abbreviation)" />
+                                               </children>
+                                            </Pane>
+                                            <CheckBox fx:id="toa1" mnemonicParsing="false" text="Certificate of Label Approval" />
+                                            <CheckBox fx:id="toa2" mnemonicParsing="false" text="Certificate of Exemption from Label Approval" GridPane.rowIndex="1" />
+                                            <CheckBox fx:id="toa3" mnemonicParsing="false" text="Distinctive Liquor Bottle Approval Total Bottle Capacity Before Closure" GridPane.rowIndex="2" />
+                                            <CheckBox fx:id="toa4" mnemonicParsing="false" text="Resubmission After Rejecction" GridPane.rowIndex="3" />
+                                         </children>
+                                      </GridPane>
+                                   </children>
+                                </Pane>
+                                <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
+                                   <children>
+                                      <Text layoutX="51.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Source of Product">
+                                         <font>
+                                            <Font size="24.0" />
+                                         </font>
+                                      </Text>
+                                      <GridPane layoutX="51.0" layoutY="43.0" prefHeight="90.0" prefWidth="294.0">
+                                         <columnConstraints>
+                                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                         </columnConstraints>
+                                         <rowConstraints>
+                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                         </rowConstraints>
+                                         <children>
+                                            <Pane prefHeight="200.0" prefWidth="200.0" />
+                                            <JFXRadioButton fx:id="imp" layoutY="6.0" text="Imported">
+                                               <toggleGroup>
+                                                  <ToggleGroup fx:id="Source" />
+                                               </toggleGroup>
+                                            </JFXRadioButton>
+                                            <JFXRadioButton fx:id="dom" layoutY="6.0" text="Domestic" toggleGroup="$Source" GridPane.rowIndex="1" />
+                                         </children>
+                                      </GridPane>
+                                   </children>
+                                </Pane>
+                                <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                   <children>
+                                      <Text layoutX="51.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type of Product">
+                                         <font>
+                                            <Font size="24.0" />
+                                         </font>
+                                      </Text>
+                                      <GridPane layoutX="51.0" layoutY="40.0" prefHeight="90.0" prefWidth="294.0">
+                                         <columnConstraints>
+                                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                         </columnConstraints>
+                                         <rowConstraints>
+                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                         </rowConstraints>
+                                         <children>
+                                            <JFXRadioButton fx:id="beerCB" text="Beer">
+                                               <toggleGroup>
+                                                  <ToggleGroup fx:id="Type" />
+                                               </toggleGroup>
+                                            </JFXRadioButton>
+                                            <JFXRadioButton fx:id="wineCB" text="Wine" toggleGroup="$Type" GridPane.rowIndex="1" />
+                                            <JFXRadioButton fx:id="distilledCB" text="Distilled Spirits" toggleGroup="$Type" GridPane.rowIndex="2" />
+                                         </children>
+                                      </GridPane>
+                                   </children>
+                                </Pane>
+                                <Pane prefHeight="105.0" prefWidth="1100.0" GridPane.rowIndex="3">
+                                   <children>
+                                      <Text layoutX="51.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Manufacture Info">
+                                         <font>
+                                            <Font size="24.0" />
+                                         </font>
+                                      </Text>
+                                   </children>
+                                </Pane>
+                                <Pane prefHeight="10.0" prefWidth="1100.0" GridPane.rowIndex="4">
+                                   <children>
+                                      <JFXTextField fx:id="RepID" labelFloat="true" layoutX="51.0" layoutY="30.0" prefHeight="29.0" prefWidth="275.0" promptText="RepID" />
+                                   </children>
+                                </Pane>
+                                <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="5">
+                                   <children>
+                                      <JFXTextField fx:id="PlantReg" labelFloat="true" layoutX="51.0" layoutY="30.0" prefHeight="29.0" prefWidth="275.0" promptText="PermitID" />
+                                   </children>
+                                </Pane>
+                                <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="6">
+                                   <children>
+                                      <JFXTextField fx:id="SerialNo" labelFloat="true" layoutX="51.0" layoutY="30.0" prefHeight="29.0" prefWidth="275.0" promptText="Serial Number" />
+                                   </children>
+                                </Pane>
+                                <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="7">
+                                   <children>
+                                      <JFXTextField fx:id="Address" labelFloat="true" layoutX="51.0" layoutY="30.0" prefHeight="29.0" prefWidth="275.0" promptText="Plant Address" />
+                                   </children>
+                                </Pane>
+                                <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                   <children>
+                                      <Text layoutX="51.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Applicant Info">
+                                         <font>
+                                            <Font size="24.0" />
+                                         </font>
+                                      </Text>
+                                   </children>
+                                </Pane>
+                                <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                   <children>
+                                      <JFXTextField fx:id="ApplicantName" labelFloat="true" layoutX="51.0" layoutY="30.0" prefHeight="29.0" prefWidth="275.0" promptText="Applicant Name" />
+                                   </children>
+                                </Pane>
+                                <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                                   <children>
+                                      <JFXTextField fx:id="MailingAddress" labelFloat="true" layoutX="51.0" layoutY="30.0" prefHeight="29.0" prefWidth="275.0" promptText="Mailing Address" />
+                                   </children>
+                                </Pane>
+                                <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                                   <children>
+                                      <JFXTextField fx:id="EmailAddress" labelFloat="true" layoutX="51.0" layoutY="30.0" prefHeight="29.0" prefWidth="275.0" promptText="Email Address" />
+                                   </children>
+                                </Pane>
+                                <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
+                                   <children>
+                                      <JFXTextField fx:id="PhoneNumber" labelFloat="true" layoutX="51.0" layoutY="30.0" prefHeight="29.0" prefWidth="275.0" promptText="Phone Number" />
+                                   </children>
+                                </Pane>
+                                <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="8">
+                                   <children>
+                                      <Text layoutX="51.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Alcohol Info">
+                                         <font>
+                                            <Font size="24.0" />
+                                         </font>
+                                      </Text>
+                                   </children>
+                                </Pane>
+                                <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="9">
+                                   <children>
+                                      <JFXTextField fx:id="BrandName" labelFloat="true" layoutX="51.0" layoutY="30.0" prefHeight="29.0" prefWidth="275.0" promptText="Brand Name" />
+                                   </children>
+                                </Pane>
+                                <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="10">
+                                   <children>
+                                      <JFXTextField fx:id="Name" labelFloat="true" layoutX="51.0" layoutY="30.0" prefHeight="29.0" prefWidth="275.0" promptText="Fancy Name" />
+                                   </children>
+                                </Pane>
+                                <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="11">
+                                   <children>
+                                      <JFXTextField fx:id="Formula" labelFloat="true" layoutX="51.0" layoutY="30.0" prefHeight="29.0" prefWidth="275.0" promptText="Formula" />
+                                   </children>
+                                </Pane>
+                                <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="12">
+                                   <children>
+                                      <JFXTextField fx:id="alcoholContent" labelFloat="true" layoutX="51.0" layoutY="30.0" prefHeight="29.0" prefWidth="275.0" promptText="Alcohol Content" />
+                                   </children>
+                                </Pane>
+                                <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="13">
+                                   <children>
+                                      <JFXTextField fx:id="netContentField" labelFloat="true" layoutX="51.0" layoutY="30.0" prefHeight="29.0" prefWidth="275.0" promptText="Net Content" />
+                                   </children>
+                                </Pane>
+                                <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="9">
+                                   <children>
+                                      <JFXTextField fx:id="Appellation" labelFloat="true" layoutX="51.0" layoutY="30.0" prefHeight="29.0" prefWidth="275.0" promptText="Appellation" />
+                                   </children>
+                                </Pane>
+                                <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="10">
+                                   <children>
+                                      <JFXTextField fx:id="grapeVarietal" labelFloat="true" layoutX="51.0" layoutY="30.0" prefHeight="29.0" prefWidth="275.0" promptText="Grape Varietal" />
+                                   </children>
+                                </Pane>
+                                <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="11">
+                                   <children>
+                                      <JFXTextField fx:id="Vintage" labelFloat="true" layoutX="51.0" layoutY="30.0" prefHeight="29.0" prefWidth="275.0" promptText="Vintage Year" />
+                                   </children>
+                                </Pane>
+                                <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="12">
+                                   <children>
+                                      <JFXTextField fx:id="pH" labelFloat="true" layoutX="51.0" layoutY="30.0" prefHeight="29.0" prefWidth="275.0" promptText="pH Level" />
+                                   </children>
+                                </Pane>
+                                <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="13">
+                                   <children>
+                                      <JFXTextField fx:id="sulfiteField" labelFloat="true" layoutX="51.0" layoutY="30.0" prefHeight="29.0" prefWidth="275.0" promptText="Sufite Description" />
+                                   </children>
+                                </Pane>
+                                <Pane prefHeight="185.0" prefWidth="1100.0" GridPane.rowIndex="15">
+                                   <children>
+                                      <Text layoutX="51.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Label">
+                                         <font>
+                                            <Font size="24.0" />
+                                         </font>
+                                      </Text>
+                                      <ImageView fx:id="image" fitHeight="208.0" fitWidth="285.0" layoutX="460.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" />
+                                   </children>
+                                </Pane>
+                                <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="14">
+                                   <children>
+                                      <JFXTextField fx:id="bottlerField" labelFloat="true" layoutX="51.0" layoutY="30.0" prefHeight="29.0" prefWidth="275.0" promptText="Bottler's Name" />
+                                   </children>
+                                </Pane>
+                                <Pane prefHeight="164.0" prefWidth="404.0" GridPane.rowIndex="17">
+                                   <GridPane.margin>
+                                      <Insets bottom="50.0" />
+                                   </GridPane.margin>
+                                </Pane>
+                                <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="16">
+                                   <children>
+                                      <Text layoutX="51.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Additonal Information">
+                                         <font>
+                                            <Font size="24.0" />
+                                         </font>
+                                      </Text>
+                                      <TextArea fx:id="additionalInfoField" layoutX="315.0" layoutY="17.0" prefHeight="158.0" prefWidth="477.0" />
+                                   </children>
+                                </Pane>
+                                <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="14">
+                                   <children>
+                                      <JFXTextField fx:id="originField" labelFloat="true" layoutX="51.0" layoutY="30.0" prefHeight="29.0" prefWidth="275.0" promptText="Origin Code" />
+                                   </children>
+                                </Pane>
+                             </children>
+                             <effect>
+                                <DropShadow />
+                             </effect>
+                             <BorderPane.margin>
+                                <Insets left="100.0" right="80.0" top="15.0" />
+                             </BorderPane.margin>
+                          </GridPane>
+                       </center>
+                       <top>
+                          <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="1181.0" BorderPane.alignment="CENTER">
+                             <BorderPane.margin>
+                                <Insets />
+                             </BorderPane.margin>
+                          </HBox>
+                       </top>
+                    </BorderPane>
+               </content>
+            </ScrollPane>
+         </center>
       </BorderPane>
    </center>
 </BorderPane>

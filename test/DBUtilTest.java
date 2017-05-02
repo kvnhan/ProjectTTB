@@ -1,9 +1,6 @@
 import johnsUtil.model.SharedResources.Account;
-import johnsUtil.model.SharedResources.Database;
 import org.junit.Test;
-import sample.DatabaseUtil;
-
-import javax.xml.crypto.Data;
+import johnsUtil.model.Database.DatabaseUtil;
 
 import java.sql.SQLException;
 

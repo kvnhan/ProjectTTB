@@ -28,12 +28,11 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Callback;
 import johnsUtil.model.SharedResources.*;
+import johnsUtil.model.Database.DatabaseUtil;
 import sample.*;
 import sample.Account;
 
-import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;

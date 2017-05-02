@@ -1,4 +1,6 @@
 package sample;
+import johnsUtil.model.Database.DatabaseUtil;
+
 import java.sql.Date;
 import java.sql.SQLException;
 
